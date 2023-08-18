@@ -1,0 +1,72 @@
+# DeleteIPsFromAllowedList200Response
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Ips** | [**RemoveIps**](RemoveIps.md) |  | 
+**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
+
+## Methods
+
+### NewDeleteIPsFromAllowedList200Response
+
+`func NewDeleteIPsFromAllowedList200Response(ips RemoveIps, responseId string, ) *DeleteIPsFromAllowedList200Response`
+
+NewDeleteIPsFromAllowedList200Response instantiates a new DeleteIPsFromAllowedList200Response object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewDeleteIPsFromAllowedList200ResponseWithDefaults
+
+`func NewDeleteIPsFromAllowedList200ResponseWithDefaults() *DeleteIPsFromAllowedList200Response`
+
+NewDeleteIPsFromAllowedList200ResponseWithDefaults instantiates a new DeleteIPsFromAllowedList200Response object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetIps
+
+`func (o *DeleteIPsFromAllowedList200Response) GetIps() RemoveIps`
+
+GetIps returns the Ips field if non-nil, zero value otherwise.
+
+### GetIpsOk
+
+`func (o *DeleteIPsFromAllowedList200Response) GetIpsOk() (*RemoveIps, bool)`
+
+GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIps
+
+`func (o *DeleteIPsFromAllowedList200Response) SetIps(v RemoveIps)`
+
+SetIps sets Ips field to given value.
+
+
+### GetResponseId
+
+`func (o *DeleteIPsFromAllowedList200Response) GetResponseId() string`
+
+GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
+
+### GetResponseIdOk
+
+`func (o *DeleteIPsFromAllowedList200Response) GetResponseIdOk() (*string, bool)`
+
+GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseId
+
+`func (o *DeleteIPsFromAllowedList200Response) SetResponseId(v string)`
+
+SetResponseId sets ResponseId field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

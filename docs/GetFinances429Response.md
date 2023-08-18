@@ -1,0 +1,119 @@
+# GetFinances429Response
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**StatusCode** | **float32** | Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP. | 
+**Message** | Pointer to [**GetFinances429ResponseMessage**](GetFinances429ResponseMessage.md) |  | [optional] 
+**ErrorCode** | **string** | Краткое описание ошибки HTTP на основе статуса. | 
+**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
+
+## Methods
+
+### NewGetFinances429Response
+
+`func NewGetFinances429Response(statusCode float32, errorCode string, responseId string, ) *GetFinances429Response`
+
+NewGetFinances429Response instantiates a new GetFinances429Response object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewGetFinances429ResponseWithDefaults
+
+`func NewGetFinances429ResponseWithDefaults() *GetFinances429Response`
+
+NewGetFinances429ResponseWithDefaults instantiates a new GetFinances429Response object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetStatusCode
+
+`func (o *GetFinances429Response) GetStatusCode() float32`
+
+GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
+
+### GetStatusCodeOk
+
+`func (o *GetFinances429Response) GetStatusCodeOk() (*float32, bool)`
+
+GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatusCode
+
+`func (o *GetFinances429Response) SetStatusCode(v float32)`
+
+SetStatusCode sets StatusCode field to given value.
+
+
+### GetMessage
+
+`func (o *GetFinances429Response) GetMessage() GetFinances429ResponseMessage`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *GetFinances429Response) GetMessageOk() (*GetFinances429ResponseMessage, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *GetFinances429Response) SetMessage(v GetFinances429ResponseMessage)`
+
+SetMessage sets Message field to given value.
+
+### HasMessage
+
+`func (o *GetFinances429Response) HasMessage() bool`
+
+HasMessage returns a boolean if a field has been set.
+
+### GetErrorCode
+
+`func (o *GetFinances429Response) GetErrorCode() string`
+
+GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
+
+### GetErrorCodeOk
+
+`func (o *GetFinances429Response) GetErrorCodeOk() (*string, bool)`
+
+GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorCode
+
+`func (o *GetFinances429Response) SetErrorCode(v string)`
+
+SetErrorCode sets ErrorCode field to given value.
+
+
+### GetResponseId
+
+`func (o *GetFinances429Response) GetResponseId() string`
+
+GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
+
+### GetResponseIdOk
+
+`func (o *GetFinances429Response) GetResponseIdOk() (*string, bool)`
+
+GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseId
+
+`func (o *GetFinances429Response) SetResponseId(v string)`
+
+SetResponseId sets ResponseId field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

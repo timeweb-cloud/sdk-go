@@ -1,0 +1,93 @@
+# GetServerDiskBackups200Response
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Meta** | [**Meta**](Meta.md) |  | 
+**Backups** | [**[]ServerBackup**](ServerBackup.md) |  | 
+**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
+
+## Methods
+
+### NewGetServerDiskBackups200Response
+
+`func NewGetServerDiskBackups200Response(meta Meta, backups []ServerBackup, responseId string, ) *GetServerDiskBackups200Response`
+
+NewGetServerDiskBackups200Response instantiates a new GetServerDiskBackups200Response object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewGetServerDiskBackups200ResponseWithDefaults
+
+`func NewGetServerDiskBackups200ResponseWithDefaults() *GetServerDiskBackups200Response`
+
+NewGetServerDiskBackups200ResponseWithDefaults instantiates a new GetServerDiskBackups200Response object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetMeta
+
+`func (o *GetServerDiskBackups200Response) GetMeta() Meta`
+
+GetMeta returns the Meta field if non-nil, zero value otherwise.
+
+### GetMetaOk
+
+`func (o *GetServerDiskBackups200Response) GetMetaOk() (*Meta, bool)`
+
+GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMeta
+
+`func (o *GetServerDiskBackups200Response) SetMeta(v Meta)`
+
+SetMeta sets Meta field to given value.
+
+
+### GetBackups
+
+`func (o *GetServerDiskBackups200Response) GetBackups() []ServerBackup`
+
+GetBackups returns the Backups field if non-nil, zero value otherwise.
+
+### GetBackupsOk
+
+`func (o *GetServerDiskBackups200Response) GetBackupsOk() (*[]ServerBackup, bool)`
+
+GetBackupsOk returns a tuple with the Backups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackups
+
+`func (o *GetServerDiskBackups200Response) SetBackups(v []ServerBackup)`
+
+SetBackups sets Backups field to given value.
+
+
+### GetResponseId
+
+`func (o *GetServerDiskBackups200Response) GetResponseId() string`
+
+GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
+
+### GetResponseIdOk
+
+`func (o *GetServerDiskBackups200Response) GetResponseIdOk() (*string, bool)`
+
+GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseId
+
+`func (o *GetServerDiskBackups200Response) SetResponseId(v string)`
+
+SetResponseId sets ResponseId field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

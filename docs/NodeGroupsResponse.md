@@ -1,0 +1,98 @@
+# NodeGroupsResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
+**Meta** | [**Meta**](Meta.md) |  | 
+**NodeGroups** | [**[]NodeGroupOut**](NodeGroupOut.md) | Массив объектов Группа нод | 
+
+## Methods
+
+### NewNodeGroupsResponse
+
+`func NewNodeGroupsResponse(meta Meta, nodeGroups []NodeGroupOut, ) *NodeGroupsResponse`
+
+NewNodeGroupsResponse instantiates a new NodeGroupsResponse object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewNodeGroupsResponseWithDefaults
+
+`func NewNodeGroupsResponseWithDefaults() *NodeGroupsResponse`
+
+NewNodeGroupsResponseWithDefaults instantiates a new NodeGroupsResponse object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetResponseId
+
+`func (o *NodeGroupsResponse) GetResponseId() string`
+
+GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
+
+### GetResponseIdOk
+
+`func (o *NodeGroupsResponse) GetResponseIdOk() (*string, bool)`
+
+GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseId
+
+`func (o *NodeGroupsResponse) SetResponseId(v string)`
+
+SetResponseId sets ResponseId field to given value.
+
+### HasResponseId
+
+`func (o *NodeGroupsResponse) HasResponseId() bool`
+
+HasResponseId returns a boolean if a field has been set.
+
+### GetMeta
+
+`func (o *NodeGroupsResponse) GetMeta() Meta`
+
+GetMeta returns the Meta field if non-nil, zero value otherwise.
+
+### GetMetaOk
+
+`func (o *NodeGroupsResponse) GetMetaOk() (*Meta, bool)`
+
+GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMeta
+
+`func (o *NodeGroupsResponse) SetMeta(v Meta)`
+
+SetMeta sets Meta field to given value.
+
+
+### GetNodeGroups
+
+`func (o *NodeGroupsResponse) GetNodeGroups() []NodeGroupOut`
+
+GetNodeGroups returns the NodeGroups field if non-nil, zero value otherwise.
+
+### GetNodeGroupsOk
+
+`func (o *NodeGroupsResponse) GetNodeGroupsOk() (*[]NodeGroupOut, bool)`
+
+GetNodeGroupsOk returns a tuple with the NodeGroups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeGroups
+
+`func (o *NodeGroupsResponse) SetNodeGroups(v []NodeGroupOut)`
+
+SetNodeGroups sets NodeGroups field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
