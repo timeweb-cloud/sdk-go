@@ -22,19 +22,16 @@ var _ MappedNullable = &GetServerLogs200Response{}
 type GetServerLogs200Response struct {
 	Meta Meta `json:"meta"`
 	ServerLogs []ServerLog `json:"server_logs"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetServerLogs200Response instantiates a new GetServerLogs200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetServerLogs200Response(meta Meta, serverLogs []ServerLog, responseId string) *GetServerLogs200Response {
+func NewGetServerLogs200Response(meta Meta, serverLogs []ServerLog) *GetServerLogs200Response {
 	this := GetServerLogs200Response{}
 	this.Meta = meta
 	this.ServerLogs = serverLogs
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetServerLogs200Response) SetServerLogs(v []ServerLog) {
 	o.ServerLogs = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetServerLogs200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetServerLogs200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetServerLogs200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetServerLogs200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetServerLogs200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["server_logs"] = o.ServerLogs
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

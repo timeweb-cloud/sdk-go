@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateVPC201Response{}
 // CreateVPC201Response struct for CreateVPC201Response
 type CreateVPC201Response struct {
 	Vpc Vpc `json:"vpc"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateVPC201Response instantiates a new CreateVPC201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateVPC201Response(vpc Vpc, responseId string) *CreateVPC201Response {
+func NewCreateVPC201Response(vpc Vpc) *CreateVPC201Response {
 	this := CreateVPC201Response{}
 	this.Vpc = vpc
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateVPC201Response) SetVpc(v Vpc) {
 	o.Vpc = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateVPC201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateVPC201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateVPC201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateVPC201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateVPC201Response) MarshalJSON() ([]byte, error) {
 func (o CreateVPC201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["vpc"] = o.Vpc
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

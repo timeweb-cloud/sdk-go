@@ -22,19 +22,16 @@ var _ MappedNullable = &GetDomainDNSRecords200Response{}
 type GetDomainDNSRecords200Response struct {
 	Meta Meta `json:"meta"`
 	DnsRecords []DnsRecord `json:"dns_records"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetDomainDNSRecords200Response instantiates a new GetDomainDNSRecords200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDomainDNSRecords200Response(meta Meta, dnsRecords []DnsRecord, responseId string) *GetDomainDNSRecords200Response {
+func NewGetDomainDNSRecords200Response(meta Meta, dnsRecords []DnsRecord) *GetDomainDNSRecords200Response {
 	this := GetDomainDNSRecords200Response{}
 	this.Meta = meta
 	this.DnsRecords = dnsRecords
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetDomainDNSRecords200Response) SetDnsRecords(v []DnsRecord) {
 	o.DnsRecords = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetDomainDNSRecords200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetDomainDNSRecords200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetDomainDNSRecords200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetDomainDNSRecords200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetDomainDNSRecords200Response) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["dns_records"] = o.DnsRecords
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

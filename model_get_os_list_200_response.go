@@ -22,19 +22,16 @@ var _ MappedNullable = &GetOsList200Response{}
 type GetOsList200Response struct {
 	Meta Meta `json:"meta"`
 	ServersOs []ServersOs `json:"servers_os"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetOsList200Response instantiates a new GetOsList200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetOsList200Response(meta Meta, serversOs []ServersOs, responseId string) *GetOsList200Response {
+func NewGetOsList200Response(meta Meta, serversOs []ServersOs) *GetOsList200Response {
 	this := GetOsList200Response{}
 	this.Meta = meta
 	this.ServersOs = serversOs
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetOsList200Response) SetServersOs(v []ServersOs) {
 	o.ServersOs = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetOsList200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetOsList200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetOsList200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetOsList200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetOsList200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["servers_os"] = o.ServersOs
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

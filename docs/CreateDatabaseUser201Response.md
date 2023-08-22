@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Admin** | [**DatabaseAdmin**](DatabaseAdmin.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewCreateDatabaseUser201Response
 
-`func NewCreateDatabaseUser201Response(admin DatabaseAdmin, responseId string, ) *CreateDatabaseUser201Response`
+`func NewCreateDatabaseUser201Response(admin DatabaseAdmin, ) *CreateDatabaseUser201Response`
 
 NewCreateDatabaseUser201Response instantiates a new CreateDatabaseUser201Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *CreateDatabaseUser201Response) SetAdmin(v DatabaseAdmin)`
 
 SetAdmin sets Admin field to given value.
-
-
-### GetResponseId
-
-`func (o *CreateDatabaseUser201Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *CreateDatabaseUser201Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *CreateDatabaseUser201Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

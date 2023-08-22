@@ -21,18 +21,15 @@ var _ MappedNullable = &AddIPsToAllowedList201Response{}
 // AddIPsToAllowedList201Response struct for AddIPsToAllowedList201Response
 type AddIPsToAllowedList201Response struct {
 	Ips AddIps `json:"ips"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewAddIPsToAllowedList201Response instantiates a new AddIPsToAllowedList201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddIPsToAllowedList201Response(ips AddIps, responseId string) *AddIPsToAllowedList201Response {
+func NewAddIPsToAllowedList201Response(ips AddIps) *AddIPsToAllowedList201Response {
 	this := AddIPsToAllowedList201Response{}
 	this.Ips = ips
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *AddIPsToAllowedList201Response) SetIps(v AddIps) {
 	o.Ips = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *AddIPsToAllowedList201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *AddIPsToAllowedList201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *AddIPsToAllowedList201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o AddIPsToAllowedList201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o AddIPsToAllowedList201Response) MarshalJSON() ([]byte, error) {
 func (o AddIPsToAllowedList201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ips"] = o.Ips
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

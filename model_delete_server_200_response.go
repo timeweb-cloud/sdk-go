@@ -21,18 +21,15 @@ var _ MappedNullable = &DeleteServer200Response{}
 // DeleteServer200Response struct for DeleteServer200Response
 type DeleteServer200Response struct {
 	ServerDelete DeleteServiceResponse `json:"server_delete"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewDeleteServer200Response instantiates a new DeleteServer200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteServer200Response(serverDelete DeleteServiceResponse, responseId string) *DeleteServer200Response {
+func NewDeleteServer200Response(serverDelete DeleteServiceResponse) *DeleteServer200Response {
 	this := DeleteServer200Response{}
 	this.ServerDelete = serverDelete
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *DeleteServer200Response) SetServerDelete(v DeleteServiceResponse) {
 	o.ServerDelete = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *DeleteServer200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *DeleteServer200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *DeleteServer200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o DeleteServer200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o DeleteServer200Response) MarshalJSON() ([]byte, error) {
 func (o DeleteServer200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["server_delete"] = o.ServerDelete
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

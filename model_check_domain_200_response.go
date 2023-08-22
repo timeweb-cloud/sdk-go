@@ -22,18 +22,15 @@ var _ MappedNullable = &CheckDomain200Response{}
 type CheckDomain200Response struct {
 	// Это логическое значение, которое показывает, доступен ли домен для регистрации.
 	IsDomainAvailable bool `json:"is_domain_available"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCheckDomain200Response instantiates a new CheckDomain200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckDomain200Response(isDomainAvailable bool, responseId string) *CheckDomain200Response {
+func NewCheckDomain200Response(isDomainAvailable bool) *CheckDomain200Response {
 	this := CheckDomain200Response{}
 	this.IsDomainAvailable = isDomainAvailable
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -69,30 +66,6 @@ func (o *CheckDomain200Response) SetIsDomainAvailable(v bool) {
 	o.IsDomainAvailable = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CheckDomain200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CheckDomain200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CheckDomain200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CheckDomain200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -104,7 +77,6 @@ func (o CheckDomain200Response) MarshalJSON() ([]byte, error) {
 func (o CheckDomain200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["is_domain_available"] = o.IsDomainAvailable
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

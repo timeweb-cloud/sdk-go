@@ -22,19 +22,16 @@ var _ MappedNullable = &GetSoftware200Response{}
 type GetSoftware200Response struct {
 	Meta Meta `json:"meta"`
 	ServersSoftware []ServersSoftware `json:"servers_software"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetSoftware200Response instantiates a new GetSoftware200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSoftware200Response(meta Meta, serversSoftware []ServersSoftware, responseId string) *GetSoftware200Response {
+func NewGetSoftware200Response(meta Meta, serversSoftware []ServersSoftware) *GetSoftware200Response {
 	this := GetSoftware200Response{}
 	this.Meta = meta
 	this.ServersSoftware = serversSoftware
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetSoftware200Response) SetServersSoftware(v []ServersSoftware) {
 	o.ServersSoftware = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetSoftware200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetSoftware200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetSoftware200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetSoftware200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetSoftware200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["servers_software"] = o.ServersSoftware
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

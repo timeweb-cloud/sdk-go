@@ -22,18 +22,15 @@ var _ MappedNullable = &GetCountries200Response{}
 type GetCountries200Response struct {
 	// Список стран, приходит в виде объекта, где ключ - код страны в формате Alpha-2 ISO 3166-1, а значение - название страны в удобочитаемом формате.
 	Countries map[string]interface{} `json:"countries"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetCountries200Response instantiates a new GetCountries200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetCountries200Response(countries map[string]interface{}, responseId string) *GetCountries200Response {
+func NewGetCountries200Response(countries map[string]interface{}) *GetCountries200Response {
 	this := GetCountries200Response{}
 	this.Countries = countries
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -69,30 +66,6 @@ func (o *GetCountries200Response) SetCountries(v map[string]interface{}) {
 	o.Countries = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetCountries200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetCountries200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetCountries200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetCountries200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -104,7 +77,6 @@ func (o GetCountries200Response) MarshalJSON() ([]byte, error) {
 func (o GetCountries200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["countries"] = o.Countries
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

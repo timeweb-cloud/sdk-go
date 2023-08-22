@@ -28,7 +28,8 @@ type FirewallRuleOutAPI struct {
 	Protocol FirewallRuleProtocol `json:"protocol"`
 	// Порт или диапазон портов, в случае tcp или udp
 	Port *string `json:"port,omitempty"`
-	Cidr *Cidr `json:"cidr,omitempty"`
+	// Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv6
+	Cidr *string `json:"cidr,omitempty"`
 	// Идентификатор группы правил
 	GroupId string `json:"group_id"`
 }
@@ -184,9 +185,9 @@ func (o *FirewallRuleOutAPI) SetPort(v string) {
 }
 
 // GetCidr returns the Cidr field value if set, zero value otherwise.
-func (o *FirewallRuleOutAPI) GetCidr() Cidr {
+func (o *FirewallRuleOutAPI) GetCidr() string {
 	if o == nil || IsNil(o.Cidr) {
-		var ret Cidr
+		var ret string
 		return ret
 	}
 	return *o.Cidr
@@ -194,7 +195,7 @@ func (o *FirewallRuleOutAPI) GetCidr() Cidr {
 
 // GetCidrOk returns a tuple with the Cidr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetCidrOk() (*Cidr, bool) {
+func (o *FirewallRuleOutAPI) GetCidrOk() (*string, bool) {
 	if o == nil || IsNil(o.Cidr) {
 		return nil, false
 	}
@@ -210,8 +211,8 @@ func (o *FirewallRuleOutAPI) HasCidr() bool {
 	return false
 }
 
-// SetCidr gets a reference to the given Cidr and assigns it to the Cidr field.
-func (o *FirewallRuleOutAPI) SetCidr(v Cidr) {
+// SetCidr gets a reference to the given string and assigns it to the Cidr field.
+func (o *FirewallRuleOutAPI) SetCidr(v string) {
 	o.Cidr = &v
 }
 

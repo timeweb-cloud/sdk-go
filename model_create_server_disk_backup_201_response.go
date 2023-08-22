@@ -21,17 +21,14 @@ var _ MappedNullable = &CreateServerDiskBackup201Response{}
 // CreateServerDiskBackup201Response struct for CreateServerDiskBackup201Response
 type CreateServerDiskBackup201Response struct {
 	Backup *ServerBackup `json:"backup,omitempty"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateServerDiskBackup201Response instantiates a new CreateServerDiskBackup201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateServerDiskBackup201Response(responseId string) *CreateServerDiskBackup201Response {
+func NewCreateServerDiskBackup201Response() *CreateServerDiskBackup201Response {
 	this := CreateServerDiskBackup201Response{}
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -75,30 +72,6 @@ func (o *CreateServerDiskBackup201Response) SetBackup(v ServerBackup) {
 	o.Backup = &v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateServerDiskBackup201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateServerDiskBackup201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateServerDiskBackup201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateServerDiskBackup201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -112,7 +85,6 @@ func (o CreateServerDiskBackup201Response) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Backup) {
 		toSerialize["backup"] = o.Backup
 	}
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

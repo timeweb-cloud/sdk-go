@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Meta** | [**Meta**](Meta.md) |  | 
 **TopLevelDomains** | [**[]TopLevelDomain**](TopLevelDomain.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetTLDs200Response
 
-`func NewGetTLDs200Response(meta Meta, topLevelDomains []TopLevelDomain, responseId string, ) *GetTLDs200Response`
+`func NewGetTLDs200Response(meta Meta, topLevelDomains []TopLevelDomain, ) *GetTLDs200Response`
 
 NewGetTLDs200Response instantiates a new GetTLDs200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetTLDs200Response) SetTopLevelDomains(v []TopLevelDomain)`
 
 SetTopLevelDomains sets TopLevelDomains field to given value.
-
-
-### GetResponseId
-
-`func (o *GetTLDs200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetTLDs200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetTLDs200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

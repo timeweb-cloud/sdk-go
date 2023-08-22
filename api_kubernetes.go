@@ -35,7 +35,7 @@ func (r ApiCreateClusterRequest) ClusterIn(clusterIn ClusterIn) ApiCreateCluster
 	return r
 }
 
-func (r ApiCreateClusterRequest) Execute() (*CreateCluster201Response, *http.Response, error) {
+func (r ApiCreateClusterRequest) Execute() (*ClusterResponse, *http.Response, error) {
 	return r.ApiService.CreateClusterExecute(r)
 }
 
@@ -55,13 +55,13 @@ func (a *KubernetesAPIService) CreateCluster(ctx context.Context) ApiCreateClust
 }
 
 // Execute executes the request
-//  @return CreateCluster201Response
-func (a *KubernetesAPIService) CreateClusterExecute(r ApiCreateClusterRequest) (*CreateCluster201Response, *http.Response, error) {
+//  @return ClusterResponse
+func (a *KubernetesAPIService) CreateClusterExecute(r ApiCreateClusterRequest) (*ClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateCluster201Response
+		localVarReturnValue  *ClusterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.CreateCluster")
@@ -189,7 +189,7 @@ func (r ApiCreateClusterNodeGroupRequest) NodeGroupIn(nodeGroupIn NodeGroupIn) A
 	return r
 }
 
-func (r ApiCreateClusterNodeGroupRequest) Execute() (*CreateClusterNodeGroup201Response, *http.Response, error) {
+func (r ApiCreateClusterNodeGroupRequest) Execute() (*NodeGroupResponse, *http.Response, error) {
 	return r.ApiService.CreateClusterNodeGroupExecute(r)
 }
 
@@ -211,13 +211,13 @@ func (a *KubernetesAPIService) CreateClusterNodeGroup(ctx context.Context, clust
 }
 
 // Execute executes the request
-//  @return CreateClusterNodeGroup201Response
-func (a *KubernetesAPIService) CreateClusterNodeGroupExecute(r ApiCreateClusterNodeGroupRequest) (*CreateClusterNodeGroup201Response, *http.Response, error) {
+//  @return NodeGroupResponse
+func (a *KubernetesAPIService) CreateClusterNodeGroupExecute(r ApiCreateClusterNodeGroupRequest) (*NodeGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateClusterNodeGroup201Response
+		localVarReturnValue  *NodeGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.CreateClusterNodeGroup")
@@ -872,7 +872,7 @@ type ApiGetClusterRequest struct {
 	clusterId int32
 }
 
-func (r ApiGetClusterRequest) Execute() (*CreateCluster201Response, *http.Response, error) {
+func (r ApiGetClusterRequest) Execute() (*ClusterResponse, *http.Response, error) {
 	return r.ApiService.GetClusterExecute(r)
 }
 
@@ -894,13 +894,13 @@ func (a *KubernetesAPIService) GetCluster(ctx context.Context, clusterId int32) 
 }
 
 // Execute executes the request
-//  @return CreateCluster201Response
-func (a *KubernetesAPIService) GetClusterExecute(r ApiGetClusterRequest) (*CreateCluster201Response, *http.Response, error) {
+//  @return ClusterResponse
+func (a *KubernetesAPIService) GetClusterExecute(r ApiGetClusterRequest) (*ClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateCluster201Response
+		localVarReturnValue  *ClusterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetCluster")
@@ -1209,7 +1209,7 @@ type ApiGetClusterNodeGroupRequest struct {
 	groupId int32
 }
 
-func (r ApiGetClusterNodeGroupRequest) Execute() (*CreateClusterNodeGroup201Response, *http.Response, error) {
+func (r ApiGetClusterNodeGroupRequest) Execute() (*NodeGroupResponse, *http.Response, error) {
 	return r.ApiService.GetClusterNodeGroupExecute(r)
 }
 
@@ -1233,13 +1233,13 @@ func (a *KubernetesAPIService) GetClusterNodeGroup(ctx context.Context, clusterI
 }
 
 // Execute executes the request
-//  @return CreateClusterNodeGroup201Response
-func (a *KubernetesAPIService) GetClusterNodeGroupExecute(r ApiGetClusterNodeGroupRequest) (*CreateClusterNodeGroup201Response, *http.Response, error) {
+//  @return NodeGroupResponse
+func (a *KubernetesAPIService) GetClusterNodeGroupExecute(r ApiGetClusterNodeGroupRequest) (*NodeGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateClusterNodeGroup201Response
+		localVarReturnValue  *NodeGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetClusterNodeGroup")
@@ -1380,7 +1380,7 @@ type ApiGetClusterNodeGroupsRequest struct {
 	clusterId int32
 }
 
-func (r ApiGetClusterNodeGroupsRequest) Execute() (*GetClusterNodeGroups200Response, *http.Response, error) {
+func (r ApiGetClusterNodeGroupsRequest) Execute() (*NodeGroupsResponse, *http.Response, error) {
 	return r.ApiService.GetClusterNodeGroupsExecute(r)
 }
 
@@ -1402,13 +1402,13 @@ func (a *KubernetesAPIService) GetClusterNodeGroups(ctx context.Context, cluster
 }
 
 // Execute executes the request
-//  @return GetClusterNodeGroups200Response
-func (a *KubernetesAPIService) GetClusterNodeGroupsExecute(r ApiGetClusterNodeGroupsRequest) (*GetClusterNodeGroups200Response, *http.Response, error) {
+//  @return NodeGroupsResponse
+func (a *KubernetesAPIService) GetClusterNodeGroupsExecute(r ApiGetClusterNodeGroupsRequest) (*NodeGroupsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetClusterNodeGroups200Response
+		localVarReturnValue  *NodeGroupsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetClusterNodeGroups")
@@ -1548,7 +1548,7 @@ type ApiGetClusterNodesRequest struct {
 	clusterId int32
 }
 
-func (r ApiGetClusterNodesRequest) Execute() (*GetClusterNodesFromGroup200Response, *http.Response, error) {
+func (r ApiGetClusterNodesRequest) Execute() (*NodesResponse, *http.Response, error) {
 	return r.ApiService.GetClusterNodesExecute(r)
 }
 
@@ -1570,13 +1570,13 @@ func (a *KubernetesAPIService) GetClusterNodes(ctx context.Context, clusterId in
 }
 
 // Execute executes the request
-//  @return GetClusterNodesFromGroup200Response
-func (a *KubernetesAPIService) GetClusterNodesExecute(r ApiGetClusterNodesRequest) (*GetClusterNodesFromGroup200Response, *http.Response, error) {
+//  @return NodesResponse
+func (a *KubernetesAPIService) GetClusterNodesExecute(r ApiGetClusterNodesRequest) (*NodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetClusterNodesFromGroup200Response
+		localVarReturnValue  *NodesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetClusterNodes")
@@ -1731,7 +1731,7 @@ func (r ApiGetClusterNodesFromGroupRequest) Offset(offset int32) ApiGetClusterNo
 	return r
 }
 
-func (r ApiGetClusterNodesFromGroupRequest) Execute() (*GetClusterNodesFromGroup200Response, *http.Response, error) {
+func (r ApiGetClusterNodesFromGroupRequest) Execute() (*NodesResponse, *http.Response, error) {
 	return r.ApiService.GetClusterNodesFromGroupExecute(r)
 }
 
@@ -1755,13 +1755,13 @@ func (a *KubernetesAPIService) GetClusterNodesFromGroup(ctx context.Context, clu
 }
 
 // Execute executes the request
-//  @return GetClusterNodesFromGroup200Response
-func (a *KubernetesAPIService) GetClusterNodesFromGroupExecute(r ApiGetClusterNodesFromGroupRequest) (*GetClusterNodesFromGroup200Response, *http.Response, error) {
+//  @return NodesResponse
+func (a *KubernetesAPIService) GetClusterNodesFromGroupExecute(r ApiGetClusterNodesFromGroupRequest) (*NodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetClusterNodesFromGroup200Response
+		localVarReturnValue  *NodesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetClusterNodesFromGroup")
@@ -1908,7 +1908,7 @@ type ApiGetClusterResourcesRequest struct {
 	clusterId int32
 }
 
-func (r ApiGetClusterResourcesRequest) Execute() (*GetClusterResources200Response, *http.Response, error) {
+func (r ApiGetClusterResourcesRequest) Execute() (*ResourcesResponse, *http.Response, error) {
 	return r.ApiService.GetClusterResourcesExecute(r)
 }
 
@@ -1930,13 +1930,13 @@ func (a *KubernetesAPIService) GetClusterResources(ctx context.Context, clusterI
 }
 
 // Execute executes the request
-//  @return GetClusterResources200Response
-func (a *KubernetesAPIService) GetClusterResourcesExecute(r ApiGetClusterResourcesRequest) (*GetClusterResources200Response, *http.Response, error) {
+//  @return ResourcesResponse
+func (a *KubernetesAPIService) GetClusterResourcesExecute(r ApiGetClusterResourcesRequest) (*ResourcesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetClusterResources200Response
+		localVarReturnValue  *ResourcesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetClusterResources")
@@ -2089,7 +2089,7 @@ func (r ApiGetClustersRequest) Offset(offset int32) ApiGetClustersRequest {
 	return r
 }
 
-func (r ApiGetClustersRequest) Execute() (*GetClusters200Response, *http.Response, error) {
+func (r ApiGetClustersRequest) Execute() (*ClustersResponse, *http.Response, error) {
 	return r.ApiService.GetClustersExecute(r)
 }
 
@@ -2109,13 +2109,13 @@ func (a *KubernetesAPIService) GetClusters(ctx context.Context) ApiGetClustersRe
 }
 
 // Execute executes the request
-//  @return GetClusters200Response
-func (a *KubernetesAPIService) GetClustersExecute(r ApiGetClustersRequest) (*GetClusters200Response, *http.Response, error) {
+//  @return ClustersResponse
+func (a *KubernetesAPIService) GetClustersExecute(r ApiGetClustersRequest) (*ClustersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetClusters200Response
+		localVarReturnValue  *ClustersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetClusters")
@@ -2237,7 +2237,7 @@ type ApiGetK8SNetworkDriversRequest struct {
 	ApiService *KubernetesAPIService
 }
 
-func (r ApiGetK8SNetworkDriversRequest) Execute() (*GetK8SNetworkDrivers200Response, *http.Response, error) {
+func (r ApiGetK8SNetworkDriversRequest) Execute() (*NetworkDriversResponse, *http.Response, error) {
 	return r.ApiService.GetK8SNetworkDriversExecute(r)
 }
 
@@ -2257,13 +2257,13 @@ func (a *KubernetesAPIService) GetK8SNetworkDrivers(ctx context.Context) ApiGetK
 }
 
 // Execute executes the request
-//  @return GetK8SNetworkDrivers200Response
-func (a *KubernetesAPIService) GetK8SNetworkDriversExecute(r ApiGetK8SNetworkDriversRequest) (*GetK8SNetworkDrivers200Response, *http.Response, error) {
+//  @return NetworkDriversResponse
+func (a *KubernetesAPIService) GetK8SNetworkDriversExecute(r ApiGetK8SNetworkDriversRequest) (*NetworkDriversResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetK8SNetworkDrivers200Response
+		localVarReturnValue  *NetworkDriversResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetK8SNetworkDrivers")
@@ -2379,7 +2379,7 @@ type ApiGetK8SVersionsRequest struct {
 	ApiService *KubernetesAPIService
 }
 
-func (r ApiGetK8SVersionsRequest) Execute() (*GetK8SVersions200Response, *http.Response, error) {
+func (r ApiGetK8SVersionsRequest) Execute() (*K8SVersionsResponse, *http.Response, error) {
 	return r.ApiService.GetK8SVersionsExecute(r)
 }
 
@@ -2399,13 +2399,13 @@ func (a *KubernetesAPIService) GetK8SVersions(ctx context.Context) ApiGetK8SVers
 }
 
 // Execute executes the request
-//  @return GetK8SVersions200Response
-func (a *KubernetesAPIService) GetK8SVersionsExecute(r ApiGetK8SVersionsRequest) (*GetK8SVersions200Response, *http.Response, error) {
+//  @return K8SVersionsResponse
+func (a *KubernetesAPIService) GetK8SVersionsExecute(r ApiGetK8SVersionsRequest) (*K8SVersionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetK8SVersions200Response
+		localVarReturnValue  *K8SVersionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetK8SVersions")
@@ -2521,7 +2521,7 @@ type ApiGetKubernetesPresetsRequest struct {
 	ApiService *KubernetesAPIService
 }
 
-func (r ApiGetKubernetesPresetsRequest) Execute() (*GetKubernetesPresets200Response, *http.Response, error) {
+func (r ApiGetKubernetesPresetsRequest) Execute() (*PresetsResponse, *http.Response, error) {
 	return r.ApiService.GetKubernetesPresetsExecute(r)
 }
 
@@ -2541,13 +2541,13 @@ func (a *KubernetesAPIService) GetKubernetesPresets(ctx context.Context) ApiGetK
 }
 
 // Execute executes the request
-//  @return GetKubernetesPresets200Response
-func (a *KubernetesAPIService) GetKubernetesPresetsExecute(r ApiGetKubernetesPresetsRequest) (*GetKubernetesPresets200Response, *http.Response, error) {
+//  @return PresetsResponse
+func (a *KubernetesAPIService) GetKubernetesPresetsExecute(r ApiGetKubernetesPresetsRequest) (*PresetsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetKubernetesPresets200Response
+		localVarReturnValue  *PresetsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.GetKubernetesPresets")
@@ -2671,7 +2671,7 @@ func (r ApiIncreaseCountOfNodesInGroupRequest) NodeCount(nodeCount NodeCount) Ap
 	return r
 }
 
-func (r ApiIncreaseCountOfNodesInGroupRequest) Execute() (*GetClusterNodesFromGroup200Response, *http.Response, error) {
+func (r ApiIncreaseCountOfNodesInGroupRequest) Execute() (*NodesResponse, *http.Response, error) {
 	return r.ApiService.IncreaseCountOfNodesInGroupExecute(r)
 }
 
@@ -2695,13 +2695,13 @@ func (a *KubernetesAPIService) IncreaseCountOfNodesInGroup(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return GetClusterNodesFromGroup200Response
-func (a *KubernetesAPIService) IncreaseCountOfNodesInGroupExecute(r ApiIncreaseCountOfNodesInGroupRequest) (*GetClusterNodesFromGroup200Response, *http.Response, error) {
+//  @return NodesResponse
+func (a *KubernetesAPIService) IncreaseCountOfNodesInGroupExecute(r ApiIncreaseCountOfNodesInGroupRequest) (*NodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetClusterNodesFromGroup200Response
+		localVarReturnValue  *NodesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.IncreaseCountOfNodesInGroup")
@@ -3025,7 +3025,7 @@ func (r ApiUpdateClusterRequest) ClusterEdit(clusterEdit ClusterEdit) ApiUpdateC
 	return r
 }
 
-func (r ApiUpdateClusterRequest) Execute() (*CreateCluster201Response, *http.Response, error) {
+func (r ApiUpdateClusterRequest) Execute() (*ClusterResponse, *http.Response, error) {
 	return r.ApiService.UpdateClusterExecute(r)
 }
 
@@ -3047,13 +3047,13 @@ func (a *KubernetesAPIService) UpdateCluster(ctx context.Context, clusterId int3
 }
 
 // Execute executes the request
-//  @return CreateCluster201Response
-func (a *KubernetesAPIService) UpdateClusterExecute(r ApiUpdateClusterRequest) (*CreateCluster201Response, *http.Response, error) {
+//  @return ClusterResponse
+func (a *KubernetesAPIService) UpdateClusterExecute(r ApiUpdateClusterRequest) (*ClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateCluster201Response
+		localVarReturnValue  *ClusterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.UpdateCluster")

@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateDatabaseInstance201Response{}
 // CreateDatabaseInstance201Response struct for CreateDatabaseInstance201Response
 type CreateDatabaseInstance201Response struct {
 	Instance DatabaseInstance `json:"instance"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateDatabaseInstance201Response instantiates a new CreateDatabaseInstance201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDatabaseInstance201Response(instance DatabaseInstance, responseId string) *CreateDatabaseInstance201Response {
+func NewCreateDatabaseInstance201Response(instance DatabaseInstance) *CreateDatabaseInstance201Response {
 	this := CreateDatabaseInstance201Response{}
 	this.Instance = instance
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateDatabaseInstance201Response) SetInstance(v DatabaseInstance) {
 	o.Instance = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateDatabaseInstance201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateDatabaseInstance201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateDatabaseInstance201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateDatabaseInstance201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateDatabaseInstance201Response) MarshalJSON() ([]byte, error) {
 func (o CreateDatabaseInstance201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["instance"] = o.Instance
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

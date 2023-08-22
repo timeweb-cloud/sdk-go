@@ -35,7 +35,7 @@ func (r ApiCreateImageRequest) ImageInAPI(imageInAPI ImageInAPI) ApiCreateImageR
 	return r
 }
 
-func (r ApiCreateImageRequest) Execute() (*CreateImage201Response, *http.Response, error) {
+func (r ApiCreateImageRequest) Execute() (*ImageOutResponse, *http.Response, error) {
 	return r.ApiService.CreateImageExecute(r)
 }
 
@@ -62,13 +62,13 @@ func (a *ImagesAPIService) CreateImage(ctx context.Context) ApiCreateImageReques
 }
 
 // Execute executes the request
-//  @return CreateImage201Response
-func (a *ImagesAPIService) CreateImageExecute(r ApiCreateImageRequest) (*CreateImage201Response, *http.Response, error) {
+//  @return ImageOutResponse
+func (a *ImagesAPIService) CreateImageExecute(r ApiCreateImageRequest) (*ImageOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateImage201Response
+		localVarReturnValue  *ImageOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.CreateImage")
@@ -196,7 +196,7 @@ func (r ApiCreateImageDownloadUrlRequest) ImageUrlIn(imageUrlIn ImageUrlIn) ApiC
 	return r
 }
 
-func (r ApiCreateImageDownloadUrlRequest) Execute() (*CreateImageDownloadUrl201Response, *http.Response, error) {
+func (r ApiCreateImageDownloadUrlRequest) Execute() (*ImageDownloadResponse, *http.Response, error) {
 	return r.ApiService.CreateImageDownloadUrlExecute(r)
 }
 
@@ -218,13 +218,13 @@ func (a *ImagesAPIService) CreateImageDownloadUrl(ctx context.Context, imageId s
 }
 
 // Execute executes the request
-//  @return CreateImageDownloadUrl201Response
-func (a *ImagesAPIService) CreateImageDownloadUrlExecute(r ApiCreateImageDownloadUrlRequest) (*CreateImageDownloadUrl201Response, *http.Response, error) {
+//  @return ImageDownloadResponse
+func (a *ImagesAPIService) CreateImageDownloadUrlExecute(r ApiCreateImageDownloadUrlRequest) (*ImageDownloadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateImageDownloadUrl201Response
+		localVarReturnValue  *ImageDownloadResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.CreateImageDownloadUrl")
@@ -643,7 +643,7 @@ type ApiGetImageRequest struct {
 	imageId string
 }
 
-func (r ApiGetImageRequest) Execute() (*CreateImage201Response, *http.Response, error) {
+func (r ApiGetImageRequest) Execute() (*ImageOutResponse, *http.Response, error) {
 	return r.ApiService.GetImageExecute(r)
 }
 
@@ -665,13 +665,13 @@ func (a *ImagesAPIService) GetImage(ctx context.Context, imageId string) ApiGetI
 }
 
 // Execute executes the request
-//  @return CreateImage201Response
-func (a *ImagesAPIService) GetImageExecute(r ApiGetImageRequest) (*CreateImage201Response, *http.Response, error) {
+//  @return ImageOutResponse
+func (a *ImagesAPIService) GetImageExecute(r ApiGetImageRequest) (*ImageOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateImage201Response
+		localVarReturnValue  *ImageOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.GetImage")
@@ -801,7 +801,7 @@ type ApiGetImageDownloadURLRequest struct {
 	imageUrlId string
 }
 
-func (r ApiGetImageDownloadURLRequest) Execute() (*CreateImageDownloadUrl201Response, *http.Response, error) {
+func (r ApiGetImageDownloadURLRequest) Execute() (*ImageDownloadResponse, *http.Response, error) {
 	return r.ApiService.GetImageDownloadURLExecute(r)
 }
 
@@ -825,13 +825,13 @@ func (a *ImagesAPIService) GetImageDownloadURL(ctx context.Context, imageId stri
 }
 
 // Execute executes the request
-//  @return CreateImageDownloadUrl201Response
-func (a *ImagesAPIService) GetImageDownloadURLExecute(r ApiGetImageDownloadURLRequest) (*CreateImageDownloadUrl201Response, *http.Response, error) {
+//  @return ImageDownloadResponse
+func (a *ImagesAPIService) GetImageDownloadURLExecute(r ApiGetImageDownloadURLRequest) (*ImageDownloadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateImageDownloadUrl201Response
+		localVarReturnValue  *ImageDownloadResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.GetImageDownloadURL")
@@ -973,7 +973,7 @@ func (r ApiGetImageDownloadURLsRequest) Offset(offset int32) ApiGetImageDownload
 	return r
 }
 
-func (r ApiGetImageDownloadURLsRequest) Execute() (*GetImageDownloadURLs200Response, *http.Response, error) {
+func (r ApiGetImageDownloadURLsRequest) Execute() (*ImageDownloadsResponse, *http.Response, error) {
 	return r.ApiService.GetImageDownloadURLsExecute(r)
 }
 
@@ -995,13 +995,13 @@ func (a *ImagesAPIService) GetImageDownloadURLs(ctx context.Context, imageId str
 }
 
 // Execute executes the request
-//  @return GetImageDownloadURLs200Response
-func (a *ImagesAPIService) GetImageDownloadURLsExecute(r ApiGetImageDownloadURLsRequest) (*GetImageDownloadURLs200Response, *http.Response, error) {
+//  @return ImageDownloadsResponse
+func (a *ImagesAPIService) GetImageDownloadURLsExecute(r ApiGetImageDownloadURLsRequest) (*ImageDownloadsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetImageDownloadURLs200Response
+		localVarReturnValue  *ImageDownloadsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.GetImageDownloadURLs")
@@ -1147,7 +1147,7 @@ func (r ApiGetImagesRequest) Offset(offset int32) ApiGetImagesRequest {
 	return r
 }
 
-func (r ApiGetImagesRequest) Execute() (*GetImages200Response, *http.Response, error) {
+func (r ApiGetImagesRequest) Execute() (*ImagesOutResponse, *http.Response, error) {
 	return r.ApiService.GetImagesExecute(r)
 }
 
@@ -1167,13 +1167,13 @@ func (a *ImagesAPIService) GetImages(ctx context.Context) ApiGetImagesRequest {
 }
 
 // Execute executes the request
-//  @return GetImages200Response
-func (a *ImagesAPIService) GetImagesExecute(r ApiGetImagesRequest) (*GetImages200Response, *http.Response, error) {
+//  @return ImagesOutResponse
+func (a *ImagesAPIService) GetImagesExecute(r ApiGetImagesRequest) (*ImagesOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetImages200Response
+		localVarReturnValue  *ImagesOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.GetImages")
@@ -1302,7 +1302,7 @@ func (r ApiUpdateImageRequest) ImageUpdateAPI(imageUpdateAPI ImageUpdateAPI) Api
 	return r
 }
 
-func (r ApiUpdateImageRequest) Execute() (*CreateImage201Response, *http.Response, error) {
+func (r ApiUpdateImageRequest) Execute() (*ImageOutResponse, *http.Response, error) {
 	return r.ApiService.UpdateImageExecute(r)
 }
 
@@ -1324,13 +1324,13 @@ func (a *ImagesAPIService) UpdateImage(ctx context.Context, imageId string) ApiU
 }
 
 // Execute executes the request
-//  @return CreateImage201Response
-func (a *ImagesAPIService) UpdateImageExecute(r ApiUpdateImageRequest) (*CreateImage201Response, *http.Response, error) {
+//  @return ImageOutResponse
+func (a *ImagesAPIService) UpdateImageExecute(r ApiUpdateImageRequest) (*ImageOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateImage201Response
+		localVarReturnValue  *ImageOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.UpdateImage")
@@ -1470,7 +1470,7 @@ func (r ApiUploadImageRequest) ContentDisposition(contentDisposition string) Api
 	return r
 }
 
-func (r ApiUploadImageRequest) Execute() (*UploadImage200Response, *http.Response, error) {
+func (r ApiUploadImageRequest) Execute() (*UploadSuccessfulResponse, *http.Response, error) {
 	return r.ApiService.UploadImageExecute(r)
 }
 
@@ -1496,13 +1496,13 @@ func (a *ImagesAPIService) UploadImage(ctx context.Context, imageId string) ApiU
 }
 
 // Execute executes the request
-//  @return UploadImage200Response
-func (a *ImagesAPIService) UploadImageExecute(r ApiUploadImageRequest) (*UploadImage200Response, *http.Response, error) {
+//  @return UploadSuccessfulResponse
+func (a *ImagesAPIService) UploadImageExecute(r ApiUploadImageRequest) (*UploadSuccessfulResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UploadImage200Response
+		localVarReturnValue  *UploadSuccessfulResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagesAPIService.UploadImage")

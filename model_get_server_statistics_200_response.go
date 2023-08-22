@@ -20,26 +20,23 @@ var _ MappedNullable = &GetServerStatistics200Response{}
 
 // GetServerStatistics200Response struct for GetServerStatistics200Response
 type GetServerStatistics200Response struct {
-	Cpu []GetServerStatistics200ResponseAllOfCpuInner `json:"cpu"`
-	NetworkTraffic []GetServerStatistics200ResponseAllOfNetworkTrafficInner `json:"network_traffic"`
+	Cpu []GetServerStatistics200ResponseCpuInner `json:"cpu"`
+	NetworkTraffic []GetServerStatistics200ResponseNetworkTrafficInner `json:"network_traffic"`
 	// Статистика основного диска
-	Disk []GetServerStatistics200ResponseAllOfDiskInner `json:"disk"`
-	Ram []GetServerStatistics200ResponseAllOfRamInner `json:"ram"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
+	Disk []GetServerStatistics200ResponseDiskInner `json:"disk"`
+	Ram []GetServerStatistics200ResponseRamInner `json:"ram"`
 }
 
 // NewGetServerStatistics200Response instantiates a new GetServerStatistics200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetServerStatistics200Response(cpu []GetServerStatistics200ResponseAllOfCpuInner, networkTraffic []GetServerStatistics200ResponseAllOfNetworkTrafficInner, disk []GetServerStatistics200ResponseAllOfDiskInner, ram []GetServerStatistics200ResponseAllOfRamInner, responseId string) *GetServerStatistics200Response {
+func NewGetServerStatistics200Response(cpu []GetServerStatistics200ResponseCpuInner, networkTraffic []GetServerStatistics200ResponseNetworkTrafficInner, disk []GetServerStatistics200ResponseDiskInner, ram []GetServerStatistics200ResponseRamInner) *GetServerStatistics200Response {
 	this := GetServerStatistics200Response{}
 	this.Cpu = cpu
 	this.NetworkTraffic = networkTraffic
 	this.Disk = disk
 	this.Ram = ram
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -52,9 +49,9 @@ func NewGetServerStatistics200ResponseWithDefaults() *GetServerStatistics200Resp
 }
 
 // GetCpu returns the Cpu field value
-func (o *GetServerStatistics200Response) GetCpu() []GetServerStatistics200ResponseAllOfCpuInner {
+func (o *GetServerStatistics200Response) GetCpu() []GetServerStatistics200ResponseCpuInner {
 	if o == nil {
-		var ret []GetServerStatistics200ResponseAllOfCpuInner
+		var ret []GetServerStatistics200ResponseCpuInner
 		return ret
 	}
 
@@ -63,7 +60,7 @@ func (o *GetServerStatistics200Response) GetCpu() []GetServerStatistics200Respon
 
 // GetCpuOk returns a tuple with the Cpu field value
 // and a boolean to check if the value has been set.
-func (o *GetServerStatistics200Response) GetCpuOk() ([]GetServerStatistics200ResponseAllOfCpuInner, bool) {
+func (o *GetServerStatistics200Response) GetCpuOk() ([]GetServerStatistics200ResponseCpuInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,14 +68,14 @@ func (o *GetServerStatistics200Response) GetCpuOk() ([]GetServerStatistics200Res
 }
 
 // SetCpu sets field value
-func (o *GetServerStatistics200Response) SetCpu(v []GetServerStatistics200ResponseAllOfCpuInner) {
+func (o *GetServerStatistics200Response) SetCpu(v []GetServerStatistics200ResponseCpuInner) {
 	o.Cpu = v
 }
 
 // GetNetworkTraffic returns the NetworkTraffic field value
-func (o *GetServerStatistics200Response) GetNetworkTraffic() []GetServerStatistics200ResponseAllOfNetworkTrafficInner {
+func (o *GetServerStatistics200Response) GetNetworkTraffic() []GetServerStatistics200ResponseNetworkTrafficInner {
 	if o == nil {
-		var ret []GetServerStatistics200ResponseAllOfNetworkTrafficInner
+		var ret []GetServerStatistics200ResponseNetworkTrafficInner
 		return ret
 	}
 
@@ -87,7 +84,7 @@ func (o *GetServerStatistics200Response) GetNetworkTraffic() []GetServerStatisti
 
 // GetNetworkTrafficOk returns a tuple with the NetworkTraffic field value
 // and a boolean to check if the value has been set.
-func (o *GetServerStatistics200Response) GetNetworkTrafficOk() ([]GetServerStatistics200ResponseAllOfNetworkTrafficInner, bool) {
+func (o *GetServerStatistics200Response) GetNetworkTrafficOk() ([]GetServerStatistics200ResponseNetworkTrafficInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,14 +92,14 @@ func (o *GetServerStatistics200Response) GetNetworkTrafficOk() ([]GetServerStati
 }
 
 // SetNetworkTraffic sets field value
-func (o *GetServerStatistics200Response) SetNetworkTraffic(v []GetServerStatistics200ResponseAllOfNetworkTrafficInner) {
+func (o *GetServerStatistics200Response) SetNetworkTraffic(v []GetServerStatistics200ResponseNetworkTrafficInner) {
 	o.NetworkTraffic = v
 }
 
 // GetDisk returns the Disk field value
-func (o *GetServerStatistics200Response) GetDisk() []GetServerStatistics200ResponseAllOfDiskInner {
+func (o *GetServerStatistics200Response) GetDisk() []GetServerStatistics200ResponseDiskInner {
 	if o == nil {
-		var ret []GetServerStatistics200ResponseAllOfDiskInner
+		var ret []GetServerStatistics200ResponseDiskInner
 		return ret
 	}
 
@@ -111,7 +108,7 @@ func (o *GetServerStatistics200Response) GetDisk() []GetServerStatistics200Respo
 
 // GetDiskOk returns a tuple with the Disk field value
 // and a boolean to check if the value has been set.
-func (o *GetServerStatistics200Response) GetDiskOk() ([]GetServerStatistics200ResponseAllOfDiskInner, bool) {
+func (o *GetServerStatistics200Response) GetDiskOk() ([]GetServerStatistics200ResponseDiskInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -119,14 +116,14 @@ func (o *GetServerStatistics200Response) GetDiskOk() ([]GetServerStatistics200Re
 }
 
 // SetDisk sets field value
-func (o *GetServerStatistics200Response) SetDisk(v []GetServerStatistics200ResponseAllOfDiskInner) {
+func (o *GetServerStatistics200Response) SetDisk(v []GetServerStatistics200ResponseDiskInner) {
 	o.Disk = v
 }
 
 // GetRam returns the Ram field value
-func (o *GetServerStatistics200Response) GetRam() []GetServerStatistics200ResponseAllOfRamInner {
+func (o *GetServerStatistics200Response) GetRam() []GetServerStatistics200ResponseRamInner {
 	if o == nil {
-		var ret []GetServerStatistics200ResponseAllOfRamInner
+		var ret []GetServerStatistics200ResponseRamInner
 		return ret
 	}
 
@@ -135,7 +132,7 @@ func (o *GetServerStatistics200Response) GetRam() []GetServerStatistics200Respon
 
 // GetRamOk returns a tuple with the Ram field value
 // and a boolean to check if the value has been set.
-func (o *GetServerStatistics200Response) GetRamOk() ([]GetServerStatistics200ResponseAllOfRamInner, bool) {
+func (o *GetServerStatistics200Response) GetRamOk() ([]GetServerStatistics200ResponseRamInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -143,32 +140,8 @@ func (o *GetServerStatistics200Response) GetRamOk() ([]GetServerStatistics200Res
 }
 
 // SetRam sets field value
-func (o *GetServerStatistics200Response) SetRam(v []GetServerStatistics200ResponseAllOfRamInner) {
+func (o *GetServerStatistics200Response) SetRam(v []GetServerStatistics200ResponseRamInner) {
 	o.Ram = v
-}
-
-// GetResponseId returns the ResponseId field value
-func (o *GetServerStatistics200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetServerStatistics200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetServerStatistics200Response) SetResponseId(v string) {
-	o.ResponseId = v
 }
 
 func (o GetServerStatistics200Response) MarshalJSON() ([]byte, error) {
@@ -185,7 +158,6 @@ func (o GetServerStatistics200Response) ToMap() (map[string]interface{}, error) 
 	toSerialize["network_traffic"] = o.NetworkTraffic
 	toSerialize["disk"] = o.Disk
 	toSerialize["ram"] = o.Ram
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

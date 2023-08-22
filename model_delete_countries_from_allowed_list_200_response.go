@@ -21,18 +21,15 @@ var _ MappedNullable = &DeleteCountriesFromAllowedList200Response{}
 // DeleteCountriesFromAllowedList200Response struct for DeleteCountriesFromAllowedList200Response
 type DeleteCountriesFromAllowedList200Response struct {
 	Countries RemoveCountries `json:"countries"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewDeleteCountriesFromAllowedList200Response instantiates a new DeleteCountriesFromAllowedList200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteCountriesFromAllowedList200Response(countries RemoveCountries, responseId string) *DeleteCountriesFromAllowedList200Response {
+func NewDeleteCountriesFromAllowedList200Response(countries RemoveCountries) *DeleteCountriesFromAllowedList200Response {
 	this := DeleteCountriesFromAllowedList200Response{}
 	this.Countries = countries
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *DeleteCountriesFromAllowedList200Response) SetCountries(v RemoveCountri
 	o.Countries = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *DeleteCountriesFromAllowedList200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *DeleteCountriesFromAllowedList200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *DeleteCountriesFromAllowedList200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o DeleteCountriesFromAllowedList200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o DeleteCountriesFromAllowedList200Response) MarshalJSON() ([]byte, error)
 func (o DeleteCountriesFromAllowedList200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["countries"] = o.Countries
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

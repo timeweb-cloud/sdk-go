@@ -21,18 +21,15 @@ var _ MappedNullable = &GetStorageTransferStatus200Response{}
 // GetStorageTransferStatus200Response struct for GetStorageTransferStatus200Response
 type GetStorageTransferStatus200Response struct {
 	TransferStatus TransferStatus `json:"transfer_status"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetStorageTransferStatus200Response instantiates a new GetStorageTransferStatus200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStorageTransferStatus200Response(transferStatus TransferStatus, responseId string) *GetStorageTransferStatus200Response {
+func NewGetStorageTransferStatus200Response(transferStatus TransferStatus) *GetStorageTransferStatus200Response {
 	this := GetStorageTransferStatus200Response{}
 	this.TransferStatus = transferStatus
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *GetStorageTransferStatus200Response) SetTransferStatus(v TransferStatus
 	o.TransferStatus = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetStorageTransferStatus200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetStorageTransferStatus200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetStorageTransferStatus200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetStorageTransferStatus200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o GetStorageTransferStatus200Response) MarshalJSON() ([]byte, error) {
 func (o GetStorageTransferStatus200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["transfer_status"] = o.TransferStatus
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

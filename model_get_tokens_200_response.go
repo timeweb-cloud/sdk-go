@@ -22,19 +22,16 @@ var _ MappedNullable = &GetTokens200Response{}
 type GetTokens200Response struct {
 	Meta Meta `json:"meta"`
 	ApiKeys []ApiKey `json:"api_keys"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetTokens200Response instantiates a new GetTokens200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetTokens200Response(meta Meta, apiKeys []ApiKey, responseId string) *GetTokens200Response {
+func NewGetTokens200Response(meta Meta, apiKeys []ApiKey) *GetTokens200Response {
 	this := GetTokens200Response{}
 	this.Meta = meta
 	this.ApiKeys = apiKeys
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetTokens200Response) SetApiKeys(v []ApiKey) {
 	o.ApiKeys = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetTokens200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetTokens200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetTokens200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetTokens200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetTokens200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["api_keys"] = o.ApiKeys
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

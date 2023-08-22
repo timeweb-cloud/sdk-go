@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Meta** | [**Meta**](Meta.md) |  | 
 **DedicatedServers** | [**[]DedicatedServer**](DedicatedServer.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetDedicatedServers200Response
 
-`func NewGetDedicatedServers200Response(meta Meta, dedicatedServers []DedicatedServer, responseId string, ) *GetDedicatedServers200Response`
+`func NewGetDedicatedServers200Response(meta Meta, dedicatedServers []DedicatedServer, ) *GetDedicatedServers200Response`
 
 NewGetDedicatedServers200Response instantiates a new GetDedicatedServers200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetDedicatedServers200Response) SetDedicatedServers(v []DedicatedServer)`
 
 SetDedicatedServers sets DedicatedServers field to given value.
-
-
-### GetResponseId
-
-`func (o *GetDedicatedServers200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetDedicatedServers200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetDedicatedServers200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

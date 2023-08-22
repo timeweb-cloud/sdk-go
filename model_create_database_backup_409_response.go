@@ -22,7 +22,8 @@ var _ MappedNullable = &CreateDatabaseBackup409Response{}
 type CreateDatabaseBackup409Response struct {
 	// Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP.
 	StatusCode float32 `json:"status_code"`
-	Message *CreateDatabaseBackup409ResponseMessage `json:"message,omitempty"`
+	// Сообщение, предоставляющее дополнительную информацию об ошибке, в том числе сведения, помогающие устранить ее, когда это возможно.
+	Message *string `json:"message,omitempty"`
 	// Краткое описание ошибки HTTP на основе статуса.
 	ErrorCode string `json:"error_code"`
 	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
@@ -74,9 +75,9 @@ func (o *CreateDatabaseBackup409Response) SetStatusCode(v float32) {
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.
-func (o *CreateDatabaseBackup409Response) GetMessage() CreateDatabaseBackup409ResponseMessage {
+func (o *CreateDatabaseBackup409Response) GetMessage() string {
 	if o == nil || IsNil(o.Message) {
-		var ret CreateDatabaseBackup409ResponseMessage
+		var ret string
 		return ret
 	}
 	return *o.Message
@@ -84,7 +85,7 @@ func (o *CreateDatabaseBackup409Response) GetMessage() CreateDatabaseBackup409Re
 
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDatabaseBackup409Response) GetMessageOk() (*CreateDatabaseBackup409ResponseMessage, bool) {
+func (o *CreateDatabaseBackup409Response) GetMessageOk() (*string, bool) {
 	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
@@ -100,8 +101,8 @@ func (o *CreateDatabaseBackup409Response) HasMessage() bool {
 	return false
 }
 
-// SetMessage gets a reference to the given CreateDatabaseBackup409ResponseMessage and assigns it to the Message field.
-func (o *CreateDatabaseBackup409Response) SetMessage(v CreateDatabaseBackup409ResponseMessage) {
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *CreateDatabaseBackup409Response) SetMessage(v string) {
 	o.Message = &v
 }
 

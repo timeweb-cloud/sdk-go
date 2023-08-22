@@ -22,19 +22,16 @@ var _ MappedNullable = &GetBalancers200Response{}
 type GetBalancers200Response struct {
 	Meta Meta `json:"meta"`
 	Balancers []Balancer `json:"balancers"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetBalancers200Response instantiates a new GetBalancers200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetBalancers200Response(meta Meta, balancers []Balancer, responseId string) *GetBalancers200Response {
+func NewGetBalancers200Response(meta Meta, balancers []Balancer) *GetBalancers200Response {
 	this := GetBalancers200Response{}
 	this.Meta = meta
 	this.Balancers = balancers
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetBalancers200Response) SetBalancers(v []Balancer) {
 	o.Balancers = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetBalancers200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetBalancers200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetBalancers200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetBalancers200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetBalancers200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["balancers"] = o.Balancers
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

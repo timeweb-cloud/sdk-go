@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Request** | [**DomainRequest**](DomainRequest.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewCreateDomainRequest201Response
 
-`func NewCreateDomainRequest201Response(request DomainRequest, responseId string, ) *CreateDomainRequest201Response`
+`func NewCreateDomainRequest201Response(request DomainRequest, ) *CreateDomainRequest201Response`
 
 NewCreateDomainRequest201Response instantiates a new CreateDomainRequest201Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *CreateDomainRequest201Response) SetRequest(v DomainRequest)`
 
 SetRequest sets Request field to given value.
-
-
-### GetResponseId
-
-`func (o *CreateDomainRequest201Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *CreateDomainRequest201Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *CreateDomainRequest201Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

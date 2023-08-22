@@ -21,18 +21,15 @@ var _ MappedNullable = &GetServerDiskAutoBackupSettings200Response{}
 // GetServerDiskAutoBackupSettings200Response struct for GetServerDiskAutoBackupSettings200Response
 type GetServerDiskAutoBackupSettings200Response struct {
 	AutoBackupsSettings AutoBackup `json:"auto_backups_settings"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetServerDiskAutoBackupSettings200Response instantiates a new GetServerDiskAutoBackupSettings200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetServerDiskAutoBackupSettings200Response(autoBackupsSettings AutoBackup, responseId string) *GetServerDiskAutoBackupSettings200Response {
+func NewGetServerDiskAutoBackupSettings200Response(autoBackupsSettings AutoBackup) *GetServerDiskAutoBackupSettings200Response {
 	this := GetServerDiskAutoBackupSettings200Response{}
 	this.AutoBackupsSettings = autoBackupsSettings
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *GetServerDiskAutoBackupSettings200Response) SetAutoBackupsSettings(v Au
 	o.AutoBackupsSettings = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetServerDiskAutoBackupSettings200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetServerDiskAutoBackupSettings200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetServerDiskAutoBackupSettings200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetServerDiskAutoBackupSettings200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o GetServerDiskAutoBackupSettings200Response) MarshalJSON() ([]byte, error
 func (o GetServerDiskAutoBackupSettings200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["auto_backups_settings"] = o.AutoBackupsSettings
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

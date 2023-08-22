@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Project** | [**Project**](Project.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewCreateProject201Response
 
-`func NewCreateProject201Response(project Project, responseId string, ) *CreateProject201Response`
+`func NewCreateProject201Response(project Project, ) *CreateProject201Response`
 
 NewCreateProject201Response instantiates a new CreateProject201Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *CreateProject201Response) SetProject(v Project)`
 
 SetProject sets Project field to given value.
-
-
-### GetResponseId
-
-`func (o *CreateProject201Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *CreateProject201Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *CreateProject201Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

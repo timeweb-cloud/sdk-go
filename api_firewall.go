@@ -37,7 +37,7 @@ func (r ApiAddResourceToGroupRequest) ResourceType(resourceType ResourceType) Ap
 	return r
 }
 
-func (r ApiAddResourceToGroupRequest) Execute() (*AddResourceToGroup201Response, *http.Response, error) {
+func (r ApiAddResourceToGroupRequest) Execute() (*FirewallGroupResourceOutResponse, *http.Response, error) {
 	return r.ApiService.AddResourceToGroupExecute(r)
 }
 
@@ -61,13 +61,13 @@ func (a *FirewallAPIService) AddResourceToGroup(ctx context.Context, groupId str
 }
 
 // Execute executes the request
-//  @return AddResourceToGroup201Response
-func (a *FirewallAPIService) AddResourceToGroupExecute(r ApiAddResourceToGroupRequest) (*AddResourceToGroup201Response, *http.Response, error) {
+//  @return FirewallGroupResourceOutResponse
+func (a *FirewallAPIService) AddResourceToGroupExecute(r ApiAddResourceToGroupRequest) (*FirewallGroupResourceOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AddResourceToGroup201Response
+		localVarReturnValue  *FirewallGroupResourceOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.AddResourceToGroup")
@@ -194,7 +194,7 @@ func (r ApiCreateGroupRequest) FirewallGroupInAPI(firewallGroupInAPI FirewallGro
 	return r
 }
 
-func (r ApiCreateGroupRequest) Execute() (*CreateGroup201Response, *http.Response, error) {
+func (r ApiCreateGroupRequest) Execute() (*FirewallGroupOutResponse, *http.Response, error) {
 	return r.ApiService.CreateGroupExecute(r)
 }
 
@@ -214,13 +214,13 @@ func (a *FirewallAPIService) CreateGroup(ctx context.Context) ApiCreateGroupRequ
 }
 
 // Execute executes the request
-//  @return CreateGroup201Response
-func (a *FirewallAPIService) CreateGroupExecute(r ApiCreateGroupRequest) (*CreateGroup201Response, *http.Response, error) {
+//  @return FirewallGroupOutResponse
+func (a *FirewallAPIService) CreateGroupExecute(r ApiCreateGroupRequest) (*FirewallGroupOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateGroup201Response
+		localVarReturnValue  *FirewallGroupOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.CreateGroup")
@@ -348,7 +348,7 @@ func (r ApiCreateGroupRuleRequest) FirewallRuleInAPI(firewallRuleInAPI FirewallR
 	return r
 }
 
-func (r ApiCreateGroupRuleRequest) Execute() (*CreateGroupRule201Response, *http.Response, error) {
+func (r ApiCreateGroupRuleRequest) Execute() (*FirewallRuleOutResponse, *http.Response, error) {
 	return r.ApiService.CreateGroupRuleExecute(r)
 }
 
@@ -370,13 +370,13 @@ func (a *FirewallAPIService) CreateGroupRule(ctx context.Context, groupId string
 }
 
 // Execute executes the request
-//  @return CreateGroupRule201Response
-func (a *FirewallAPIService) CreateGroupRuleExecute(r ApiCreateGroupRuleRequest) (*CreateGroupRule201Response, *http.Response, error) {
+//  @return FirewallRuleOutResponse
+func (a *FirewallAPIService) CreateGroupRuleExecute(r ApiCreateGroupRuleRequest) (*FirewallRuleOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateGroupRule201Response
+		localVarReturnValue  *FirewallRuleOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.CreateGroupRule")
@@ -954,7 +954,7 @@ type ApiGetGroupRequest struct {
 	groupId string
 }
 
-func (r ApiGetGroupRequest) Execute() (*CreateGroup201Response, *http.Response, error) {
+func (r ApiGetGroupRequest) Execute() (*FirewallGroupOutResponse, *http.Response, error) {
 	return r.ApiService.GetGroupExecute(r)
 }
 
@@ -976,13 +976,13 @@ func (a *FirewallAPIService) GetGroup(ctx context.Context, groupId string) ApiGe
 }
 
 // Execute executes the request
-//  @return CreateGroup201Response
-func (a *FirewallAPIService) GetGroupExecute(r ApiGetGroupRequest) (*CreateGroup201Response, *http.Response, error) {
+//  @return FirewallGroupOutResponse
+func (a *FirewallAPIService) GetGroupExecute(r ApiGetGroupRequest) (*FirewallGroupOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateGroup201Response
+		localVarReturnValue  *FirewallGroupOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.GetGroup")
@@ -1125,7 +1125,7 @@ func (r ApiGetGroupResourcesRequest) Offset(offset int32) ApiGetGroupResourcesRe
 	return r
 }
 
-func (r ApiGetGroupResourcesRequest) Execute() (*GetGroupResources200Response, *http.Response, error) {
+func (r ApiGetGroupResourcesRequest) Execute() (*FirewallGroupResourcesOutResponse, *http.Response, error) {
 	return r.ApiService.GetGroupResourcesExecute(r)
 }
 
@@ -1147,13 +1147,13 @@ func (a *FirewallAPIService) GetGroupResources(ctx context.Context, groupId stri
 }
 
 // Execute executes the request
-//  @return GetGroupResources200Response
-func (a *FirewallAPIService) GetGroupResourcesExecute(r ApiGetGroupResourcesRequest) (*GetGroupResources200Response, *http.Response, error) {
+//  @return FirewallGroupResourcesOutResponse
+func (a *FirewallAPIService) GetGroupResourcesExecute(r ApiGetGroupResourcesRequest) (*FirewallGroupResourcesOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetGroupResources200Response
+		localVarReturnValue  *FirewallGroupResourcesOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.GetGroupResources")
@@ -1278,7 +1278,7 @@ type ApiGetGroupRuleRequest struct {
 	groupId string
 }
 
-func (r ApiGetGroupRuleRequest) Execute() (*CreateGroupRule201Response, *http.Response, error) {
+func (r ApiGetGroupRuleRequest) Execute() (*FirewallRuleOutResponse, *http.Response, error) {
 	return r.ApiService.GetGroupRuleExecute(r)
 }
 
@@ -1302,13 +1302,13 @@ func (a *FirewallAPIService) GetGroupRule(ctx context.Context, ruleId string, gr
 }
 
 // Execute executes the request
-//  @return CreateGroupRule201Response
-func (a *FirewallAPIService) GetGroupRuleExecute(r ApiGetGroupRuleRequest) (*CreateGroupRule201Response, *http.Response, error) {
+//  @return FirewallRuleOutResponse
+func (a *FirewallAPIService) GetGroupRuleExecute(r ApiGetGroupRuleRequest) (*FirewallRuleOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateGroupRule201Response
+		localVarReturnValue  *FirewallRuleOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.GetGroupRule")
@@ -1452,7 +1452,7 @@ func (r ApiGetGroupRulesRequest) Offset(offset int32) ApiGetGroupRulesRequest {
 	return r
 }
 
-func (r ApiGetGroupRulesRequest) Execute() (*GetGroupRules200Response, *http.Response, error) {
+func (r ApiGetGroupRulesRequest) Execute() (*FirewallRulesOutResponse, *http.Response, error) {
 	return r.ApiService.GetGroupRulesExecute(r)
 }
 
@@ -1474,13 +1474,13 @@ func (a *FirewallAPIService) GetGroupRules(ctx context.Context, groupId string) 
 }
 
 // Execute executes the request
-//  @return GetGroupRules200Response
-func (a *FirewallAPIService) GetGroupRulesExecute(r ApiGetGroupRulesRequest) (*GetGroupRules200Response, *http.Response, error) {
+//  @return FirewallRulesOutResponse
+func (a *FirewallAPIService) GetGroupRulesExecute(r ApiGetGroupRulesRequest) (*FirewallRulesOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetGroupRules200Response
+		localVarReturnValue  *FirewallRulesOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.GetGroupRules")
@@ -1617,7 +1617,7 @@ func (r ApiGetGroupsRequest) Offset(offset int32) ApiGetGroupsRequest {
 	return r
 }
 
-func (r ApiGetGroupsRequest) Execute() (*GetGroups200Response, *http.Response, error) {
+func (r ApiGetGroupsRequest) Execute() (*FirewallGroupsOutResponse, *http.Response, error) {
 	return r.ApiService.GetGroupsExecute(r)
 }
 
@@ -1637,13 +1637,13 @@ func (a *FirewallAPIService) GetGroups(ctx context.Context) ApiGetGroupsRequest 
 }
 
 // Execute executes the request
-//  @return GetGroups200Response
-func (a *FirewallAPIService) GetGroupsExecute(r ApiGetGroupsRequest) (*GetGroups200Response, *http.Response, error) {
+//  @return FirewallGroupsOutResponse
+func (a *FirewallAPIService) GetGroupsExecute(r ApiGetGroupsRequest) (*FirewallGroupsOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetGroups200Response
+		localVarReturnValue  *FirewallGroupsOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.GetGroups")
@@ -1781,7 +1781,7 @@ func (r ApiGetRulesForResourceRequest) Offset(offset int32) ApiGetRulesForResour
 	return r
 }
 
-func (r ApiGetRulesForResourceRequest) Execute() (*GetGroups200Response, *http.Response, error) {
+func (r ApiGetRulesForResourceRequest) Execute() (*FirewallGroupsOutResponse, *http.Response, error) {
 	return r.ApiService.GetRulesForResourceExecute(r)
 }
 
@@ -1805,13 +1805,13 @@ func (a *FirewallAPIService) GetRulesForResource(ctx context.Context, resourceId
 }
 
 // Execute executes the request
-//  @return GetGroups200Response
-func (a *FirewallAPIService) GetRulesForResourceExecute(r ApiGetRulesForResourceRequest) (*GetGroups200Response, *http.Response, error) {
+//  @return FirewallGroupsOutResponse
+func (a *FirewallAPIService) GetRulesForResourceExecute(r ApiGetRulesForResourceRequest) (*FirewallGroupsOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetGroups200Response
+		localVarReturnValue  *FirewallGroupsOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.GetRulesForResource")
@@ -1942,7 +1942,7 @@ func (r ApiUpdateGroupRequest) FirewallGroupInAPI(firewallGroupInAPI FirewallGro
 	return r
 }
 
-func (r ApiUpdateGroupRequest) Execute() (*CreateGroup201Response, *http.Response, error) {
+func (r ApiUpdateGroupRequest) Execute() (*FirewallGroupOutResponse, *http.Response, error) {
 	return r.ApiService.UpdateGroupExecute(r)
 }
 
@@ -1964,13 +1964,13 @@ func (a *FirewallAPIService) UpdateGroup(ctx context.Context, groupId string) Ap
 }
 
 // Execute executes the request
-//  @return CreateGroup201Response
-func (a *FirewallAPIService) UpdateGroupExecute(r ApiUpdateGroupRequest) (*CreateGroup201Response, *http.Response, error) {
+//  @return FirewallGroupOutResponse
+func (a *FirewallAPIService) UpdateGroupExecute(r ApiUpdateGroupRequest) (*FirewallGroupOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateGroup201Response
+		localVarReturnValue  *FirewallGroupOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.UpdateGroup")
@@ -2111,7 +2111,7 @@ func (r ApiUpdateGroupRuleRequest) FirewallRuleInAPI(firewallRuleInAPI FirewallR
 	return r
 }
 
-func (r ApiUpdateGroupRuleRequest) Execute() (*CreateGroupRule201Response, *http.Response, error) {
+func (r ApiUpdateGroupRuleRequest) Execute() (*FirewallRuleOutResponse, *http.Response, error) {
 	return r.ApiService.UpdateGroupRuleExecute(r)
 }
 
@@ -2135,13 +2135,13 @@ func (a *FirewallAPIService) UpdateGroupRule(ctx context.Context, groupId string
 }
 
 // Execute executes the request
-//  @return CreateGroupRule201Response
-func (a *FirewallAPIService) UpdateGroupRuleExecute(r ApiUpdateGroupRuleRequest) (*CreateGroupRule201Response, *http.Response, error) {
+//  @return FirewallRuleOutResponse
+func (a *FirewallAPIService) UpdateGroupRuleExecute(r ApiUpdateGroupRuleRequest) (*FirewallRuleOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateGroupRule201Response
+		localVarReturnValue  *FirewallRuleOutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirewallAPIService.UpdateGroupRule")

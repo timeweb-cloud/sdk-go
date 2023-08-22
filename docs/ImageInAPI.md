@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DiskId** | Pointer to **int32** | Идентификатор диска, для которого создается образ | [optional] 
 **UploadUrl** | Pointer to **string** | Cсылка для загрузки образа | [optional] 
 **Location** | Pointer to [**Location**](Location.md) |  | [optional] 
-**Os** | Pointer to [**OS**](OS.md) |  | [optional] [default to OTHER]
+**Os** | Pointer to [**OS**](OS.md) |  | [optional] 
 
 ## Methods
 

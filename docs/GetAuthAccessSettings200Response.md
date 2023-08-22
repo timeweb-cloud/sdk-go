@@ -6,14 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsIpRestrictionsEnabled** | **bool** | Это логическое значение, которое показывает, включено ли ограничение доступа по IP-адресу. | 
 **IsCountryRestrictionsEnabled** | **bool** | Это логическое значение, которое показывает, включено ли ограничение доступа по стране. | 
-**WhiteList** | [**GetAuthAccessSettings200ResponseAllOfWhiteList**](GetAuthAccessSettings200ResponseAllOfWhiteList.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
+**WhiteList** | [**GetAuthAccessSettings200ResponseWhiteList**](GetAuthAccessSettings200ResponseWhiteList.md) |  | 
 
 ## Methods
 
 ### NewGetAuthAccessSettings200Response
 
-`func NewGetAuthAccessSettings200Response(isIpRestrictionsEnabled bool, isCountryRestrictionsEnabled bool, whiteList GetAuthAccessSettings200ResponseAllOfWhiteList, responseId string, ) *GetAuthAccessSettings200Response`
+`func NewGetAuthAccessSettings200Response(isIpRestrictionsEnabled bool, isCountryRestrictionsEnabled bool, whiteList GetAuthAccessSettings200ResponseWhiteList, ) *GetAuthAccessSettings200Response`
 
 NewGetAuthAccessSettings200Response instantiates a new GetAuthAccessSettings200Response object
 This constructor will assign default values to properties that have it defined,
@@ -70,42 +69,22 @@ SetIsCountryRestrictionsEnabled sets IsCountryRestrictionsEnabled field to given
 
 ### GetWhiteList
 
-`func (o *GetAuthAccessSettings200Response) GetWhiteList() GetAuthAccessSettings200ResponseAllOfWhiteList`
+`func (o *GetAuthAccessSettings200Response) GetWhiteList() GetAuthAccessSettings200ResponseWhiteList`
 
 GetWhiteList returns the WhiteList field if non-nil, zero value otherwise.
 
 ### GetWhiteListOk
 
-`func (o *GetAuthAccessSettings200Response) GetWhiteListOk() (*GetAuthAccessSettings200ResponseAllOfWhiteList, bool)`
+`func (o *GetAuthAccessSettings200Response) GetWhiteListOk() (*GetAuthAccessSettings200ResponseWhiteList, bool)`
 
 GetWhiteListOk returns a tuple with the WhiteList field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWhiteList
 
-`func (o *GetAuthAccessSettings200Response) SetWhiteList(v GetAuthAccessSettings200ResponseAllOfWhiteList)`
+`func (o *GetAuthAccessSettings200Response) SetWhiteList(v GetAuthAccessSettings200ResponseWhiteList)`
 
 SetWhiteList sets WhiteList field to given value.
-
-
-### GetResponseId
-
-`func (o *GetAuthAccessSettings200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetAuthAccessSettings200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetAuthAccessSettings200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

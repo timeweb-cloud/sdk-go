@@ -652,11 +652,11 @@ func (a *DomainsAPIService) CreateDomainDNSRecordExecute(r ApiCreateDomainDNSRec
 type ApiCreateDomainRequestRequest struct {
 	ctx context.Context
 	ApiService *DomainsAPIService
-	createDomainRequestRequest *CreateDomainRequestRequest
+	register *Register
 }
 
-func (r ApiCreateDomainRequestRequest) CreateDomainRequestRequest(createDomainRequestRequest CreateDomainRequestRequest) ApiCreateDomainRequestRequest {
-	r.createDomainRequestRequest = &createDomainRequestRequest
+func (r ApiCreateDomainRequestRequest) Register(register Register) ApiCreateDomainRequestRequest {
+	r.register = &register
 	return r
 }
 
@@ -701,8 +701,8 @@ func (a *DomainsAPIService) CreateDomainRequestExecute(r ApiCreateDomainRequestR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createDomainRequestRequest == nil {
-		return localVarReturnValue, nil, reportError("createDomainRequestRequest is required and must be specified")
+	if r.register == nil {
+		return localVarReturnValue, nil, reportError("register is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -723,7 +723,7 @@ func (a *DomainsAPIService) CreateDomainRequestExecute(r ApiCreateDomainRequestR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createDomainRequestRequest
+	localVarPostBody = r.register
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -3310,11 +3310,11 @@ type ApiUpdateDomainRequestRequest struct {
 	ctx context.Context
 	ApiService *DomainsAPIService
 	requestId int32
-	updateDomainRequestRequest *UpdateDomainRequestRequest
+	use *Use
 }
 
-func (r ApiUpdateDomainRequestRequest) UpdateDomainRequestRequest(updateDomainRequestRequest UpdateDomainRequestRequest) ApiUpdateDomainRequestRequest {
-	r.updateDomainRequestRequest = &updateDomainRequestRequest
+func (r ApiUpdateDomainRequestRequest) Use(use Use) ApiUpdateDomainRequestRequest {
+	r.use = &use
 	return r
 }
 
@@ -3362,8 +3362,8 @@ func (a *DomainsAPIService) UpdateDomainRequestExecute(r ApiUpdateDomainRequestR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateDomainRequestRequest == nil {
-		return localVarReturnValue, nil, reportError("updateDomainRequestRequest is required and must be specified")
+	if r.use == nil {
+		return localVarReturnValue, nil, reportError("use is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3384,7 +3384,7 @@ func (a *DomainsAPIService) UpdateDomainRequestExecute(r ApiUpdateDomainRequestR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateDomainRequestRequest
+	localVarPostBody = r.use
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

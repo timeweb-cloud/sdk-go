@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Meta** | [**Meta**](Meta.md) |  | 
 **Vpcs** | [**[]Vpc**](Vpc.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetVPCs200Response
 
-`func NewGetVPCs200Response(meta Meta, vpcs []Vpc, responseId string, ) *GetVPCs200Response`
+`func NewGetVPCs200Response(meta Meta, vpcs []Vpc, ) *GetVPCs200Response`
 
 NewGetVPCs200Response instantiates a new GetVPCs200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetVPCs200Response) SetVpcs(v []Vpc)`
 
 SetVpcs sets Vpcs field to given value.
-
-
-### GetResponseId
-
-`func (o *GetVPCs200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetVPCs200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetVPCs200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

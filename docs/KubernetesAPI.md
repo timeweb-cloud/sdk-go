@@ -28,7 +28,7 @@ Method | HTTP request | Description
 
 ## CreateCluster
 
-> CreateCluster201Response CreateCluster(ctx).ClusterIn(clusterIn).Execute()
+> ClusterResponse CreateCluster(ctx).ClusterIn(clusterIn).Execute()
 
 Создание кластера
 
@@ -56,7 +56,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.CreateCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateCluster`: CreateCluster201Response
+    // response from `CreateCluster`: ClusterResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.CreateCluster`: %v\n", resp)
 }
 ```
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateCluster201Response**](CreateCluster201Response.md)
+[**ClusterResponse**](ClusterResponse.md)
 
 ### Authorization
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ## CreateClusterNodeGroup
 
-> CreateClusterNodeGroup201Response CreateClusterNodeGroup(ctx, clusterId).NodeGroupIn(nodeGroupIn).Execute()
+> NodeGroupResponse CreateClusterNodeGroup(ctx, clusterId).NodeGroupIn(nodeGroupIn).Execute()
 
 Создание группы нод
 
@@ -123,7 +123,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.CreateClusterNodeGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateClusterNodeGroup`: CreateClusterNodeGroup201Response
+    // response from `CreateClusterNodeGroup`: NodeGroupResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.CreateClusterNodeGroup`: %v\n", resp)
 }
 ```
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateClusterNodeGroup201Response**](CreateClusterNodeGroup201Response.md)
+[**NodeGroupResponse**](NodeGroupResponse.md)
 
 ### Authorization
 
@@ -382,7 +382,7 @@ Name | Type | Description  | Notes
 
 ## GetCluster
 
-> CreateCluster201Response GetCluster(ctx, clusterId).Execute()
+> ClusterResponse GetCluster(ctx, clusterId).Execute()
 
 Получение информации о кластере
 
@@ -410,7 +410,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetCluster`: CreateCluster201Response
+    // response from `GetCluster`: ClusterResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetCluster`: %v\n", resp)
 }
 ```
@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateCluster201Response**](CreateCluster201Response.md)
+[**ClusterResponse**](ClusterResponse.md)
 
 ### Authorization
 
@@ -522,7 +522,7 @@ Name | Type | Description  | Notes
 
 ## GetClusterNodeGroup
 
-> CreateClusterNodeGroup201Response GetClusterNodeGroup(ctx, clusterId, groupId).Execute()
+> NodeGroupResponse GetClusterNodeGroup(ctx, clusterId, groupId).Execute()
 
 Получение информации о группе нод
 
@@ -551,7 +551,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetClusterNodeGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetClusterNodeGroup`: CreateClusterNodeGroup201Response
+    // response from `GetClusterNodeGroup`: NodeGroupResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetClusterNodeGroup`: %v\n", resp)
 }
 ```
@@ -577,7 +577,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateClusterNodeGroup201Response**](CreateClusterNodeGroup201Response.md)
+[**NodeGroupResponse**](NodeGroupResponse.md)
 
 ### Authorization
 
@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 
 ## GetClusterNodeGroups
 
-> GetClusterNodeGroups200Response GetClusterNodeGroups(ctx, clusterId).Execute()
+> NodeGroupsResponse GetClusterNodeGroups(ctx, clusterId).Execute()
 
 Получение групп нод кластера
 
@@ -623,7 +623,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetClusterNodeGroups``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetClusterNodeGroups`: GetClusterNodeGroups200Response
+    // response from `GetClusterNodeGroups`: NodeGroupsResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetClusterNodeGroups`: %v\n", resp)
 }
 ```
@@ -647,7 +647,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetClusterNodeGroups200Response**](GetClusterNodeGroups200Response.md)
+[**NodeGroupsResponse**](NodeGroupsResponse.md)
 
 ### Authorization
 
@@ -665,7 +665,7 @@ Name | Type | Description  | Notes
 
 ## GetClusterNodes
 
-> GetClusterNodesFromGroup200Response GetClusterNodes(ctx, clusterId).Execute()
+> NodesResponse GetClusterNodes(ctx, clusterId).Execute()
 
 Получение списка нод
 
@@ -693,7 +693,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetClusterNodes``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetClusterNodes`: GetClusterNodesFromGroup200Response
+    // response from `GetClusterNodes`: NodesResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetClusterNodes`: %v\n", resp)
 }
 ```
@@ -717,7 +717,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetClusterNodesFromGroup200Response**](GetClusterNodesFromGroup200Response.md)
+[**NodesResponse**](NodesResponse.md)
 
 ### Authorization
 
@@ -735,7 +735,7 @@ Name | Type | Description  | Notes
 
 ## GetClusterNodesFromGroup
 
-> GetClusterNodesFromGroup200Response GetClusterNodesFromGroup(ctx, clusterId, groupId).Limit(limit).Offset(offset).Execute()
+> NodesResponse GetClusterNodesFromGroup(ctx, clusterId, groupId).Limit(limit).Offset(offset).Execute()
 
 Получение списка нод, принадлежащих группе
 
@@ -766,7 +766,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetClusterNodesFromGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetClusterNodesFromGroup`: GetClusterNodesFromGroup200Response
+    // response from `GetClusterNodesFromGroup`: NodesResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetClusterNodesFromGroup`: %v\n", resp)
 }
 ```
@@ -794,7 +794,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetClusterNodesFromGroup200Response**](GetClusterNodesFromGroup200Response.md)
+[**NodesResponse**](NodesResponse.md)
 
 ### Authorization
 
@@ -812,7 +812,7 @@ Name | Type | Description  | Notes
 
 ## GetClusterResources
 
-> GetClusterResources200Response GetClusterResources(ctx, clusterId).Execute()
+> ResourcesResponse GetClusterResources(ctx, clusterId).Execute()
 
 Получение ресурсов кластера
 
@@ -840,7 +840,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetClusterResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetClusterResources`: GetClusterResources200Response
+    // response from `GetClusterResources`: ResourcesResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetClusterResources`: %v\n", resp)
 }
 ```
@@ -864,7 +864,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetClusterResources200Response**](GetClusterResources200Response.md)
+[**ResourcesResponse**](ResourcesResponse.md)
 
 ### Authorization
 
@@ -882,7 +882,7 @@ Name | Type | Description  | Notes
 
 ## GetClusters
 
-> GetClusters200Response GetClusters(ctx).Limit(limit).Offset(offset).Execute()
+> ClustersResponse GetClusters(ctx).Limit(limit).Offset(offset).Execute()
 
 Получение списка кластеров
 
@@ -911,7 +911,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetClusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetClusters`: GetClusters200Response
+    // response from `GetClusters`: ClustersResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetClusters`: %v\n", resp)
 }
 ```
@@ -932,7 +932,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetClusters200Response**](GetClusters200Response.md)
+[**ClustersResponse**](ClustersResponse.md)
 
 ### Authorization
 
@@ -950,7 +950,7 @@ Name | Type | Description  | Notes
 
 ## GetK8SNetworkDrivers
 
-> GetK8SNetworkDrivers200Response GetK8SNetworkDrivers(ctx).Execute()
+> NetworkDriversResponse GetK8SNetworkDrivers(ctx).Execute()
 
 Получение списка сетевых драйверов k8s
 
@@ -977,7 +977,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetK8SNetworkDrivers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetK8SNetworkDrivers`: GetK8SNetworkDrivers200Response
+    // response from `GetK8SNetworkDrivers`: NetworkDriversResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetK8SNetworkDrivers`: %v\n", resp)
 }
 ```
@@ -993,7 +993,7 @@ Other parameters are passed through a pointer to a apiGetK8SNetworkDriversReques
 
 ### Return type
 
-[**GetK8SNetworkDrivers200Response**](GetK8SNetworkDrivers200Response.md)
+[**NetworkDriversResponse**](NetworkDriversResponse.md)
 
 ### Authorization
 
@@ -1011,7 +1011,7 @@ Other parameters are passed through a pointer to a apiGetK8SNetworkDriversReques
 
 ## GetK8SVersions
 
-> GetK8SVersions200Response GetK8SVersions(ctx).Execute()
+> K8SVersionsResponse GetK8SVersions(ctx).Execute()
 
 Получение списка версий k8s
 
@@ -1038,7 +1038,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetK8SVersions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetK8SVersions`: GetK8SVersions200Response
+    // response from `GetK8SVersions`: K8SVersionsResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetK8SVersions`: %v\n", resp)
 }
 ```
@@ -1054,7 +1054,7 @@ Other parameters are passed through a pointer to a apiGetK8SVersionsRequest stru
 
 ### Return type
 
-[**GetK8SVersions200Response**](GetK8SVersions200Response.md)
+[**K8SVersionsResponse**](K8SVersionsResponse.md)
 
 ### Authorization
 
@@ -1072,7 +1072,7 @@ Other parameters are passed through a pointer to a apiGetK8SVersionsRequest stru
 
 ## GetKubernetesPresets
 
-> GetKubernetesPresets200Response GetKubernetesPresets(ctx).Execute()
+> PresetsResponse GetKubernetesPresets(ctx).Execute()
 
 Получение списка тарифов
 
@@ -1099,7 +1099,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetKubernetesPresets``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKubernetesPresets`: GetKubernetesPresets200Response
+    // response from `GetKubernetesPresets`: PresetsResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetKubernetesPresets`: %v\n", resp)
 }
 ```
@@ -1115,7 +1115,7 @@ Other parameters are passed through a pointer to a apiGetKubernetesPresetsReques
 
 ### Return type
 
-[**GetKubernetesPresets200Response**](GetKubernetesPresets200Response.md)
+[**PresetsResponse**](PresetsResponse.md)
 
 ### Authorization
 
@@ -1133,7 +1133,7 @@ Other parameters are passed through a pointer to a apiGetKubernetesPresetsReques
 
 ## IncreaseCountOfNodesInGroup
 
-> GetClusterNodesFromGroup200Response IncreaseCountOfNodesInGroup(ctx, clusterId, groupId).NodeCount(nodeCount).Execute()
+> NodesResponse IncreaseCountOfNodesInGroup(ctx, clusterId, groupId).NodeCount(nodeCount).Execute()
 
 Увеличение количества нод в группе на указанное количество
 
@@ -1163,7 +1163,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.IncreaseCountOfNodesInGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `IncreaseCountOfNodesInGroup`: GetClusterNodesFromGroup200Response
+    // response from `IncreaseCountOfNodesInGroup`: NodesResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.IncreaseCountOfNodesInGroup`: %v\n", resp)
 }
 ```
@@ -1190,7 +1190,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetClusterNodesFromGroup200Response**](GetClusterNodesFromGroup200Response.md)
+[**NodesResponse**](NodesResponse.md)
 
 ### Authorization
 
@@ -1281,7 +1281,7 @@ Name | Type | Description  | Notes
 
 ## UpdateCluster
 
-> CreateCluster201Response UpdateCluster(ctx, clusterId).ClusterEdit(clusterEdit).Execute()
+> ClusterResponse UpdateCluster(ctx, clusterId).ClusterEdit(clusterEdit).Execute()
 
 Обновление информации о кластере
 
@@ -1310,7 +1310,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.UpdateCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateCluster`: CreateCluster201Response
+    // response from `UpdateCluster`: ClusterResponse
     fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.UpdateCluster`: %v\n", resp)
 }
 ```
@@ -1335,7 +1335,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateCluster201Response**](CreateCluster201Response.md)
+[**ClusterResponse**](ClusterResponse.md)
 
 ### Authorization
 

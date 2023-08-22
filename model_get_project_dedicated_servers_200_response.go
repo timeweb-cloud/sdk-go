@@ -22,19 +22,16 @@ var _ MappedNullable = &GetProjectDedicatedServers200Response{}
 type GetProjectDedicatedServers200Response struct {
 	DedicatedServers []DedicatedServer `json:"dedicated_servers"`
 	Meta Meta `json:"meta"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetProjectDedicatedServers200Response instantiates a new GetProjectDedicatedServers200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProjectDedicatedServers200Response(dedicatedServers []DedicatedServer, meta Meta, responseId string) *GetProjectDedicatedServers200Response {
+func NewGetProjectDedicatedServers200Response(dedicatedServers []DedicatedServer, meta Meta) *GetProjectDedicatedServers200Response {
 	this := GetProjectDedicatedServers200Response{}
 	this.DedicatedServers = dedicatedServers
 	this.Meta = meta
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetProjectDedicatedServers200Response) SetMeta(v Meta) {
 	o.Meta = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetProjectDedicatedServers200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetProjectDedicatedServers200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetProjectDedicatedServers200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetProjectDedicatedServers200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetProjectDedicatedServers200Response) ToMap() (map[string]interface{}, 
 	toSerialize := map[string]interface{}{}
 	toSerialize["dedicated_servers"] = o.DedicatedServers
 	toSerialize["meta"] = o.Meta
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

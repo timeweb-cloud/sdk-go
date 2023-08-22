@@ -21,15 +21,16 @@ var _ MappedNullable = &UpdateMailQuotaRequest{}
 // UpdateMailQuotaRequest struct for UpdateMailQuotaRequest
 type UpdateMailQuotaRequest struct {
 	// Общее количество места на почте (в Мб).
-	Total *float32 `json:"total,omitempty"`
+	Total float32 `json:"total"`
 }
 
 // NewUpdateMailQuotaRequest instantiates a new UpdateMailQuotaRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateMailQuotaRequest() *UpdateMailQuotaRequest {
+func NewUpdateMailQuotaRequest(total float32) *UpdateMailQuotaRequest {
 	this := UpdateMailQuotaRequest{}
+	this.Total = total
 	return &this
 }
 
@@ -41,36 +42,28 @@ func NewUpdateMailQuotaRequestWithDefaults() *UpdateMailQuotaRequest {
 	return &this
 }
 
-// GetTotal returns the Total field value if set, zero value otherwise.
+// GetTotal returns the Total field value
 func (o *UpdateMailQuotaRequest) GetTotal() float32 {
-	if o == nil || IsNil(o.Total) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Total
+
+	return o.Total
 }
 
-// GetTotalOk returns a tuple with the Total field value if set, nil otherwise
+// GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
 func (o *UpdateMailQuotaRequest) GetTotalOk() (*float32, bool) {
-	if o == nil || IsNil(o.Total) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Total, true
+	return &o.Total, true
 }
 
-// HasTotal returns a boolean if a field has been set.
-func (o *UpdateMailQuotaRequest) HasTotal() bool {
-	if o != nil && !IsNil(o.Total) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotal gets a reference to the given float32 and assigns it to the Total field.
+// SetTotal sets field value
 func (o *UpdateMailQuotaRequest) SetTotal(v float32) {
-	o.Total = &v
+	o.Total = v
 }
 
 func (o UpdateMailQuotaRequest) MarshalJSON() ([]byte, error) {
@@ -83,9 +76,7 @@ func (o UpdateMailQuotaRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateMailQuotaRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Total) {
-		toSerialize["total"] = o.Total
-	}
+	toSerialize["total"] = o.Total
 	return toSerialize, nil
 }
 

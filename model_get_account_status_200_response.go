@@ -21,18 +21,15 @@ var _ MappedNullable = &GetAccountStatus200Response{}
 // GetAccountStatus200Response struct for GetAccountStatus200Response
 type GetAccountStatus200Response struct {
 	Status Status `json:"status"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetAccountStatus200Response instantiates a new GetAccountStatus200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAccountStatus200Response(status Status, responseId string) *GetAccountStatus200Response {
+func NewGetAccountStatus200Response(status Status) *GetAccountStatus200Response {
 	this := GetAccountStatus200Response{}
 	this.Status = status
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *GetAccountStatus200Response) SetStatus(v Status) {
 	o.Status = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetAccountStatus200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetAccountStatus200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetAccountStatus200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetAccountStatus200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o GetAccountStatus200Response) MarshalJSON() ([]byte, error) {
 func (o GetAccountStatus200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

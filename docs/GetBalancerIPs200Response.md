@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Meta** | [**Meta**](Meta.md) |  | 
 **Ips** | **[]string** |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetBalancerIPs200Response
 
-`func NewGetBalancerIPs200Response(meta Meta, ips []string, responseId string, ) *GetBalancerIPs200Response`
+`func NewGetBalancerIPs200Response(meta Meta, ips []string, ) *GetBalancerIPs200Response`
 
 NewGetBalancerIPs200Response instantiates a new GetBalancerIPs200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetBalancerIPs200Response) SetIps(v []string)`
 
 SetIps sets Ips field to given value.
-
-
-### GetResponseId
-
-`func (o *GetBalancerIPs200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetBalancerIPs200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetBalancerIPs200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

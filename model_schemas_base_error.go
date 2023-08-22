@@ -22,7 +22,7 @@ var _ MappedNullable = &SchemasBaseError{}
 type SchemasBaseError struct {
 	StatusCode int32 `json:"status_code"`
 	ErrorCode string `json:"error_code"`
-	Message Message `json:"message"`
+	Message string `json:"message"`
 	ResponseId *string `json:"response_id,omitempty"`
 }
 
@@ -30,7 +30,7 @@ type SchemasBaseError struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSchemasBaseError(statusCode int32, errorCode string, message Message) *SchemasBaseError {
+func NewSchemasBaseError(statusCode int32, errorCode string, message string) *SchemasBaseError {
 	this := SchemasBaseError{}
 	this.StatusCode = statusCode
 	this.ErrorCode = errorCode
@@ -99,9 +99,9 @@ func (o *SchemasBaseError) SetErrorCode(v string) {
 }
 
 // GetMessage returns the Message field value
-func (o *SchemasBaseError) GetMessage() Message {
+func (o *SchemasBaseError) GetMessage() string {
 	if o == nil {
-		var ret Message
+		var ret string
 		return ret
 	}
 
@@ -110,7 +110,7 @@ func (o *SchemasBaseError) GetMessage() Message {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *SchemasBaseError) GetMessageOk() (*Message, bool) {
+func (o *SchemasBaseError) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,7 +118,7 @@ func (o *SchemasBaseError) GetMessageOk() (*Message, bool) {
 }
 
 // SetMessage sets field value
-func (o *SchemasBaseError) SetMessage(v Message) {
+func (o *SchemasBaseError) SetMessage(v string) {
 	o.Message = v
 }
 

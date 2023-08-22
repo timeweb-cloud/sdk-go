@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AutoReply** | Pointer to [**UpdateMailboxAutoReply**](UpdateMailboxAutoReply.md) |  | [optional] 
-**SpamFilter** | Pointer to [**UpdateMailboxSpamFilter**](UpdateMailboxSpamFilter.md) |  | [optional] 
-**ForwardingIncoming** | Pointer to [**UpdateMailboxForwardingIncoming**](UpdateMailboxForwardingIncoming.md) |  | [optional] 
-**ForwardingOutgoing** | Pointer to [**UpdateMailboxForwardingOutgoing**](UpdateMailboxForwardingOutgoing.md) |  | [optional] 
+**AutoReply** | Pointer to [**AutoReplyIsDisabled**](AutoReplyIsDisabled.md) |  | [optional] 
+**SpamFilter** | Pointer to [**SpamFilterIsDisabled**](SpamFilterIsDisabled.md) |  | [optional] 
+**ForwardingIncoming** | Pointer to [**ForwardingIncomingIsDisabled**](ForwardingIncomingIsDisabled.md) |  | [optional] 
+**ForwardingOutgoing** | Pointer to [**ForwardingOutgoingIsDisabled**](ForwardingOutgoingIsDisabled.md) |  | [optional] 
 **Comment** | Pointer to **string** | Комментарий к почтовому ящику | [optional] 
 **Password** | Pointer to **string** | Пароль почтового ящика | [optional] 
 
@@ -32,20 +32,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAutoReply
 
-`func (o *UpdateMailbox) GetAutoReply() UpdateMailboxAutoReply`
+`func (o *UpdateMailbox) GetAutoReply() AutoReplyIsDisabled`
 
 GetAutoReply returns the AutoReply field if non-nil, zero value otherwise.
 
 ### GetAutoReplyOk
 
-`func (o *UpdateMailbox) GetAutoReplyOk() (*UpdateMailboxAutoReply, bool)`
+`func (o *UpdateMailbox) GetAutoReplyOk() (*AutoReplyIsDisabled, bool)`
 
 GetAutoReplyOk returns a tuple with the AutoReply field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAutoReply
 
-`func (o *UpdateMailbox) SetAutoReply(v UpdateMailboxAutoReply)`
+`func (o *UpdateMailbox) SetAutoReply(v AutoReplyIsDisabled)`
 
 SetAutoReply sets AutoReply field to given value.
 
@@ -57,20 +57,20 @@ HasAutoReply returns a boolean if a field has been set.
 
 ### GetSpamFilter
 
-`func (o *UpdateMailbox) GetSpamFilter() UpdateMailboxSpamFilter`
+`func (o *UpdateMailbox) GetSpamFilter() SpamFilterIsDisabled`
 
 GetSpamFilter returns the SpamFilter field if non-nil, zero value otherwise.
 
 ### GetSpamFilterOk
 
-`func (o *UpdateMailbox) GetSpamFilterOk() (*UpdateMailboxSpamFilter, bool)`
+`func (o *UpdateMailbox) GetSpamFilterOk() (*SpamFilterIsDisabled, bool)`
 
 GetSpamFilterOk returns a tuple with the SpamFilter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpamFilter
 
-`func (o *UpdateMailbox) SetSpamFilter(v UpdateMailboxSpamFilter)`
+`func (o *UpdateMailbox) SetSpamFilter(v SpamFilterIsDisabled)`
 
 SetSpamFilter sets SpamFilter field to given value.
 
@@ -82,20 +82,20 @@ HasSpamFilter returns a boolean if a field has been set.
 
 ### GetForwardingIncoming
 
-`func (o *UpdateMailbox) GetForwardingIncoming() UpdateMailboxForwardingIncoming`
+`func (o *UpdateMailbox) GetForwardingIncoming() ForwardingIncomingIsDisabled`
 
 GetForwardingIncoming returns the ForwardingIncoming field if non-nil, zero value otherwise.
 
 ### GetForwardingIncomingOk
 
-`func (o *UpdateMailbox) GetForwardingIncomingOk() (*UpdateMailboxForwardingIncoming, bool)`
+`func (o *UpdateMailbox) GetForwardingIncomingOk() (*ForwardingIncomingIsDisabled, bool)`
 
 GetForwardingIncomingOk returns a tuple with the ForwardingIncoming field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetForwardingIncoming
 
-`func (o *UpdateMailbox) SetForwardingIncoming(v UpdateMailboxForwardingIncoming)`
+`func (o *UpdateMailbox) SetForwardingIncoming(v ForwardingIncomingIsDisabled)`
 
 SetForwardingIncoming sets ForwardingIncoming field to given value.
 
@@ -107,20 +107,20 @@ HasForwardingIncoming returns a boolean if a field has been set.
 
 ### GetForwardingOutgoing
 
-`func (o *UpdateMailbox) GetForwardingOutgoing() UpdateMailboxForwardingOutgoing`
+`func (o *UpdateMailbox) GetForwardingOutgoing() ForwardingOutgoingIsDisabled`
 
 GetForwardingOutgoing returns the ForwardingOutgoing field if non-nil, zero value otherwise.
 
 ### GetForwardingOutgoingOk
 
-`func (o *UpdateMailbox) GetForwardingOutgoingOk() (*UpdateMailboxForwardingOutgoing, bool)`
+`func (o *UpdateMailbox) GetForwardingOutgoingOk() (*ForwardingOutgoingIsDisabled, bool)`
 
 GetForwardingOutgoingOk returns a tuple with the ForwardingOutgoing field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetForwardingOutgoing
 
-`func (o *UpdateMailbox) SetForwardingOutgoing(v UpdateMailboxForwardingOutgoing)`
+`func (o *UpdateMailbox) SetForwardingOutgoing(v ForwardingOutgoingIsDisabled)`
 
 SetForwardingOutgoing sets ForwardingOutgoing field to given value.
 

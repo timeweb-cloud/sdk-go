@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateDatabaseCluster201Response{}
 // CreateDatabaseCluster201Response struct for CreateDatabaseCluster201Response
 type CreateDatabaseCluster201Response struct {
 	Db DatabaseCluster `json:"db"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateDatabaseCluster201Response instantiates a new CreateDatabaseCluster201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDatabaseCluster201Response(db DatabaseCluster, responseId string) *CreateDatabaseCluster201Response {
+func NewCreateDatabaseCluster201Response(db DatabaseCluster) *CreateDatabaseCluster201Response {
 	this := CreateDatabaseCluster201Response{}
 	this.Db = db
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateDatabaseCluster201Response) SetDb(v DatabaseCluster) {
 	o.Db = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateDatabaseCluster201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateDatabaseCluster201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateDatabaseCluster201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateDatabaseCluster201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateDatabaseCluster201Response) MarshalJSON() ([]byte, error) {
 func (o CreateDatabaseCluster201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["db"] = o.Db
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

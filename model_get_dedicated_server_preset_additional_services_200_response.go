@@ -22,19 +22,16 @@ var _ MappedNullable = &GetDedicatedServerPresetAdditionalServices200Response{}
 type GetDedicatedServerPresetAdditionalServices200Response struct {
 	Meta Meta `json:"meta"`
 	DedicatedServerAdditionalServices []DedicatedServerAdditionalService `json:"dedicated_server_additional_services"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetDedicatedServerPresetAdditionalServices200Response instantiates a new GetDedicatedServerPresetAdditionalServices200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDedicatedServerPresetAdditionalServices200Response(meta Meta, dedicatedServerAdditionalServices []DedicatedServerAdditionalService, responseId string) *GetDedicatedServerPresetAdditionalServices200Response {
+func NewGetDedicatedServerPresetAdditionalServices200Response(meta Meta, dedicatedServerAdditionalServices []DedicatedServerAdditionalService) *GetDedicatedServerPresetAdditionalServices200Response {
 	this := GetDedicatedServerPresetAdditionalServices200Response{}
 	this.Meta = meta
 	this.DedicatedServerAdditionalServices = dedicatedServerAdditionalServices
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetDedicatedServerPresetAdditionalServices200Response) SetDedicatedServ
 	o.DedicatedServerAdditionalServices = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetDedicatedServerPresetAdditionalServices200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetDedicatedServerPresetAdditionalServices200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetDedicatedServerPresetAdditionalServices200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetDedicatedServerPresetAdditionalServices200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetDedicatedServerPresetAdditionalServices200Response) ToMap() (map[stri
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["dedicated_server_additional_services"] = o.DedicatedServerAdditionalServices
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

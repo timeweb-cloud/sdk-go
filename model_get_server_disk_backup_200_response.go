@@ -21,18 +21,15 @@ var _ MappedNullable = &GetServerDiskBackup200Response{}
 // GetServerDiskBackup200Response struct for GetServerDiskBackup200Response
 type GetServerDiskBackup200Response struct {
 	Backup ServerBackup `json:"backup"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetServerDiskBackup200Response instantiates a new GetServerDiskBackup200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetServerDiskBackup200Response(backup ServerBackup, responseId string) *GetServerDiskBackup200Response {
+func NewGetServerDiskBackup200Response(backup ServerBackup) *GetServerDiskBackup200Response {
 	this := GetServerDiskBackup200Response{}
 	this.Backup = backup
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *GetServerDiskBackup200Response) SetBackup(v ServerBackup) {
 	o.Backup = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetServerDiskBackup200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetServerDiskBackup200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetServerDiskBackup200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetServerDiskBackup200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o GetServerDiskBackup200Response) MarshalJSON() ([]byte, error) {
 func (o GetServerDiskBackup200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["backup"] = o.Backup
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

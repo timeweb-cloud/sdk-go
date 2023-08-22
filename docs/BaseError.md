@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StatusCode** | **int32** |  | 
 **ErrorCode** | **string** |  | 
-**Message** | [**Message**](Message.md) |  | 
+**Message** | **string** |  | 
 **ResponseId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewBaseError
 
-`func NewBaseError(statusCode int32, errorCode string, message Message, ) *BaseError`
+`func NewBaseError(statusCode int32, errorCode string, message string, ) *BaseError`
 
 NewBaseError instantiates a new BaseError object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetErrorCode sets ErrorCode field to given value.
 
 ### GetMessage
 
-`func (o *BaseError) GetMessage() Message`
+`func (o *BaseError) GetMessage() string`
 
 GetMessage returns the Message field if non-nil, zero value otherwise.
 
 ### GetMessageOk
 
-`func (o *BaseError) GetMessageOk() (*Message, bool)`
+`func (o *BaseError) GetMessageOk() (*string, bool)`
 
 GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessage
 
-`func (o *BaseError) SetMessage(v Message)`
+`func (o *BaseError) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
 

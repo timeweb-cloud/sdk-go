@@ -21,18 +21,15 @@ var _ MappedNullable = &GetMailQuota200Response{}
 // GetMailQuota200Response struct for GetMailQuota200Response
 type GetMailQuota200Response struct {
 	Quota Quota `json:"quota"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetMailQuota200Response instantiates a new GetMailQuota200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetMailQuota200Response(quota Quota, responseId string) *GetMailQuota200Response {
+func NewGetMailQuota200Response(quota Quota) *GetMailQuota200Response {
 	this := GetMailQuota200Response{}
 	this.Quota = quota
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *GetMailQuota200Response) SetQuota(v Quota) {
 	o.Quota = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetMailQuota200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetMailQuota200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetMailQuota200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetMailQuota200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o GetMailQuota200Response) MarshalJSON() ([]byte, error) {
 func (o GetMailQuota200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["quota"] = o.Quota
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

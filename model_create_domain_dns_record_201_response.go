@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateDomainDNSRecord201Response{}
 // CreateDomainDNSRecord201Response struct for CreateDomainDNSRecord201Response
 type CreateDomainDNSRecord201Response struct {
 	DnsRecord DnsRecord `json:"dns_record"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateDomainDNSRecord201Response instantiates a new CreateDomainDNSRecord201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDomainDNSRecord201Response(dnsRecord DnsRecord, responseId string) *CreateDomainDNSRecord201Response {
+func NewCreateDomainDNSRecord201Response(dnsRecord DnsRecord) *CreateDomainDNSRecord201Response {
 	this := CreateDomainDNSRecord201Response{}
 	this.DnsRecord = dnsRecord
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateDomainDNSRecord201Response) SetDnsRecord(v DnsRecord) {
 	o.DnsRecord = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateDomainDNSRecord201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateDomainDNSRecord201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateDomainDNSRecord201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateDomainDNSRecord201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateDomainDNSRecord201Response) MarshalJSON() ([]byte, error) {
 func (o CreateDomainDNSRecord201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["dns_record"] = o.DnsRecord
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

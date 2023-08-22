@@ -22,19 +22,16 @@ var _ MappedNullable = &GetKeys200Response{}
 type GetKeys200Response struct {
 	Meta Meta `json:"meta"`
 	SshKeys []SshKey `json:"ssh-keys"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetKeys200Response instantiates a new GetKeys200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetKeys200Response(meta Meta, sshKeys []SshKey, responseId string) *GetKeys200Response {
+func NewGetKeys200Response(meta Meta, sshKeys []SshKey) *GetKeys200Response {
 	this := GetKeys200Response{}
 	this.Meta = meta
 	this.SshKeys = sshKeys
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetKeys200Response) SetSshKeys(v []SshKey) {
 	o.SshKeys = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetKeys200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetKeys200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetKeys200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetKeys200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetKeys200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["ssh-keys"] = o.SshKeys
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

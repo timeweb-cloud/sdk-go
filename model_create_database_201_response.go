@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateDatabase201Response{}
 // CreateDatabase201Response struct for CreateDatabase201Response
 type CreateDatabase201Response struct {
 	Db Db `json:"db"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateDatabase201Response instantiates a new CreateDatabase201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDatabase201Response(db Db, responseId string) *CreateDatabase201Response {
+func NewCreateDatabase201Response(db Db) *CreateDatabase201Response {
 	this := CreateDatabase201Response{}
 	this.Db = db
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateDatabase201Response) SetDb(v Db) {
 	o.Db = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateDatabase201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateDatabase201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateDatabase201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateDatabase201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateDatabase201Response) MarshalJSON() ([]byte, error) {
 func (o CreateDatabase201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["db"] = o.Db
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateDomainMailbox201Response{}
 // CreateDomainMailbox201Response struct for CreateDomainMailbox201Response
 type CreateDomainMailbox201Response struct {
 	Mailbox Mailbox `json:"mailbox"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateDomainMailbox201Response instantiates a new CreateDomainMailbox201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDomainMailbox201Response(mailbox Mailbox, responseId string) *CreateDomainMailbox201Response {
+func NewCreateDomainMailbox201Response(mailbox Mailbox) *CreateDomainMailbox201Response {
 	this := CreateDomainMailbox201Response{}
 	this.Mailbox = mailbox
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateDomainMailbox201Response) SetMailbox(v Mailbox) {
 	o.Mailbox = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateDomainMailbox201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateDomainMailbox201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateDomainMailbox201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateDomainMailbox201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateDomainMailbox201Response) MarshalJSON() ([]byte, error) {
 func (o CreateDomainMailbox201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["mailbox"] = o.Mailbox
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

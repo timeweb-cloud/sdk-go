@@ -22,19 +22,16 @@ var _ MappedNullable = &GetDomainNameServers200Response{}
 type GetDomainNameServers200Response struct {
 	Meta Meta `json:"meta"`
 	NameServers []DomainNameServer `json:"name_servers"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetDomainNameServers200Response instantiates a new GetDomainNameServers200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDomainNameServers200Response(meta Meta, nameServers []DomainNameServer, responseId string) *GetDomainNameServers200Response {
+func NewGetDomainNameServers200Response(meta Meta, nameServers []DomainNameServer) *GetDomainNameServers200Response {
 	this := GetDomainNameServers200Response{}
 	this.Meta = meta
 	this.NameServers = nameServers
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetDomainNameServers200Response) SetNameServers(v []DomainNameServer) {
 	o.NameServers = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetDomainNameServers200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetDomainNameServers200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetDomainNameServers200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetDomainNameServers200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetDomainNameServers200Response) ToMap() (map[string]interface{}, error)
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["name_servers"] = o.NameServers
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

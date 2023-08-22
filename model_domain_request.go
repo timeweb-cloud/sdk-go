@@ -50,7 +50,7 @@ type DomainRequest struct {
 	Period DomainPaymentPeriod `json:"period"`
 	// Идентификационный номер персоны для заявки на регистрацию.
 	PersonId float32 `json:"person_id"`
-	Prime NullableDomainPrimeType `json:"prime"`
+	Prime DomainPrimeType `json:"prime"`
 	// Количество дней до конца регистрации домена, за которые мы уведомим о необходимости продления.
 	SoonExpire float32 `json:"soon_expire"`
 	// Это значение используется для сортировки доменных зон в панели управления.
@@ -63,7 +63,7 @@ type DomainRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDomainRequest(accountId string, authCode NullableString, date time.Time, domainBundleId NullableString, errorCodeTransfer NullableString, fqdn string, groupId float32, id float32, isAntispamEnabled bool, isAutoprolongEnabled bool, isWhoisPrivacyEnabled bool, message NullableString, moneySource NullableString, period DomainPaymentPeriod, personId float32, prime NullableDomainPrimeType, soonExpire float32, sortOrder float32, type_ string) *DomainRequest {
+func NewDomainRequest(accountId string, authCode NullableString, date time.Time, domainBundleId NullableString, errorCodeTransfer NullableString, fqdn string, groupId float32, id float32, isAntispamEnabled bool, isAutoprolongEnabled bool, isWhoisPrivacyEnabled bool, message NullableString, moneySource NullableString, period DomainPaymentPeriod, personId float32, prime DomainPrimeType, soonExpire float32, sortOrder float32, type_ string) *DomainRequest {
 	this := DomainRequest{}
 	this.AccountId = accountId
 	this.AuthCode = authCode
@@ -466,29 +466,27 @@ func (o *DomainRequest) SetPersonId(v float32) {
 }
 
 // GetPrime returns the Prime field value
-// If the value is explicit nil, the zero value for DomainPrimeType will be returned
 func (o *DomainRequest) GetPrime() DomainPrimeType {
-	if o == nil || o.Prime.Get() == nil {
+	if o == nil {
 		var ret DomainPrimeType
 		return ret
 	}
 
-	return *o.Prime.Get()
+	return o.Prime
 }
 
 // GetPrimeOk returns a tuple with the Prime field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DomainRequest) GetPrimeOk() (*DomainPrimeType, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Prime.Get(), o.Prime.IsSet()
+	return &o.Prime, true
 }
 
 // SetPrime sets field value
 func (o *DomainRequest) SetPrime(v DomainPrimeType) {
-	o.Prime.Set(&v)
+	o.Prime = v
 }
 
 // GetSoonExpire returns the SoonExpire field value
@@ -588,7 +586,7 @@ func (o DomainRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["money_source"] = o.MoneySource.Get()
 	toSerialize["period"] = o.Period
 	toSerialize["person_id"] = o.PersonId
-	toSerialize["prime"] = o.Prime.Get()
+	toSerialize["prime"] = o.Prime
 	toSerialize["soon_expire"] = o.SoonExpire
 	toSerialize["sort_order"] = o.SortOrder
 	toSerialize["type"] = o.Type

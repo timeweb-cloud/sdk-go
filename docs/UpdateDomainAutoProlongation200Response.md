@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Domain** | [**Domain**](Domain.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewUpdateDomainAutoProlongation200Response
 
-`func NewUpdateDomainAutoProlongation200Response(domain Domain, responseId string, ) *UpdateDomainAutoProlongation200Response`
+`func NewUpdateDomainAutoProlongation200Response(domain Domain, ) *UpdateDomainAutoProlongation200Response`
 
 NewUpdateDomainAutoProlongation200Response instantiates a new UpdateDomainAutoProlongation200Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *UpdateDomainAutoProlongation200Response) SetDomain(v Domain)`
 
 SetDomain sets Domain field to given value.
-
-
-### GetResponseId
-
-`func (o *UpdateDomainAutoProlongation200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *UpdateDomainAutoProlongation200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *UpdateDomainAutoProlongation200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

@@ -26,7 +26,8 @@ type FirewallRuleInAPI struct {
 	// Порт или диапазон портов, в случае tcp или udp
 	Port *string `json:"port,omitempty"`
 	Protocol FirewallRuleProtocol `json:"protocol"`
-	Cidr *Cidr `json:"cidr,omitempty"`
+	// Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv6
+	Cidr *string `json:"cidr,omitempty"`
 }
 
 // NewFirewallRuleInAPI instantiates a new FirewallRuleInAPI object
@@ -161,9 +162,9 @@ func (o *FirewallRuleInAPI) SetProtocol(v FirewallRuleProtocol) {
 }
 
 // GetCidr returns the Cidr field value if set, zero value otherwise.
-func (o *FirewallRuleInAPI) GetCidr() Cidr {
+func (o *FirewallRuleInAPI) GetCidr() string {
 	if o == nil || IsNil(o.Cidr) {
-		var ret Cidr
+		var ret string
 		return ret
 	}
 	return *o.Cidr
@@ -171,7 +172,7 @@ func (o *FirewallRuleInAPI) GetCidr() Cidr {
 
 // GetCidrOk returns a tuple with the Cidr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FirewallRuleInAPI) GetCidrOk() (*Cidr, bool) {
+func (o *FirewallRuleInAPI) GetCidrOk() (*string, bool) {
 	if o == nil || IsNil(o.Cidr) {
 		return nil, false
 	}
@@ -187,8 +188,8 @@ func (o *FirewallRuleInAPI) HasCidr() bool {
 	return false
 }
 
-// SetCidr gets a reference to the given Cidr and assigns it to the Cidr field.
-func (o *FirewallRuleInAPI) SetCidr(v Cidr) {
+// SetCidr gets a reference to the given string and assigns it to the Cidr field.
+func (o *FirewallRuleInAPI) SetCidr(v string) {
 	o.Cidr = &v
 }
 

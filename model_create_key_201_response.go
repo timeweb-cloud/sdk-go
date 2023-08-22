@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateKey201Response{}
 // CreateKey201Response struct for CreateKey201Response
 type CreateKey201Response struct {
 	SshKey SshKey `json:"ssh-key"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateKey201Response instantiates a new CreateKey201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateKey201Response(sshKey SshKey, responseId string) *CreateKey201Response {
+func NewCreateKey201Response(sshKey SshKey) *CreateKey201Response {
 	this := CreateKey201Response{}
 	this.SshKey = sshKey
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateKey201Response) SetSshKey(v SshKey) {
 	o.SshKey = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateKey201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateKey201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateKey201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateKey201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateKey201Response) MarshalJSON() ([]byte, error) {
 func (o CreateKey201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ssh-key"] = o.SshKey
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

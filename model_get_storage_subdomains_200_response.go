@@ -22,19 +22,16 @@ var _ MappedNullable = &GetStorageSubdomains200Response{}
 type GetStorageSubdomains200Response struct {
 	Subdomains []S3Subdomain `json:"subdomains"`
 	Meta Meta `json:"meta"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetStorageSubdomains200Response instantiates a new GetStorageSubdomains200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStorageSubdomains200Response(subdomains []S3Subdomain, meta Meta, responseId string) *GetStorageSubdomains200Response {
+func NewGetStorageSubdomains200Response(subdomains []S3Subdomain, meta Meta) *GetStorageSubdomains200Response {
 	this := GetStorageSubdomains200Response{}
 	this.Subdomains = subdomains
 	this.Meta = meta
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetStorageSubdomains200Response) SetMeta(v Meta) {
 	o.Meta = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetStorageSubdomains200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetStorageSubdomains200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetStorageSubdomains200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetStorageSubdomains200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetStorageSubdomains200Response) ToMap() (map[string]interface{}, error)
 	toSerialize := map[string]interface{}{}
 	toSerialize["subdomains"] = o.Subdomains
 	toSerialize["meta"] = o.Meta
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

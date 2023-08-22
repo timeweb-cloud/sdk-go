@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Meta** | [**Meta**](Meta.md) |  | 
 **ServerPresets** | [**[]ServersPreset**](ServersPreset.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetServersPresets200Response
 
-`func NewGetServersPresets200Response(meta Meta, serverPresets []ServersPreset, responseId string, ) *GetServersPresets200Response`
+`func NewGetServersPresets200Response(meta Meta, serverPresets []ServersPreset, ) *GetServersPresets200Response`
 
 NewGetServersPresets200Response instantiates a new GetServersPresets200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetServersPresets200Response) SetServerPresets(v []ServersPreset)`
 
 SetServerPresets sets ServerPresets field to given value.
-
-
-### GetResponseId
-
-`func (o *GetServersPresets200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetServersPresets200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetServersPresets200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

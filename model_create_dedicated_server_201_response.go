@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateDedicatedServer201Response{}
 // CreateDedicatedServer201Response struct for CreateDedicatedServer201Response
 type CreateDedicatedServer201Response struct {
 	DedicatedServer DedicatedServer `json:"dedicated_server"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateDedicatedServer201Response instantiates a new CreateDedicatedServer201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDedicatedServer201Response(dedicatedServer DedicatedServer, responseId string) *CreateDedicatedServer201Response {
+func NewCreateDedicatedServer201Response(dedicatedServer DedicatedServer) *CreateDedicatedServer201Response {
 	this := CreateDedicatedServer201Response{}
 	this.DedicatedServer = dedicatedServer
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateDedicatedServer201Response) SetDedicatedServer(v DedicatedServer)
 	o.DedicatedServer = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateDedicatedServer201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateDedicatedServer201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateDedicatedServer201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateDedicatedServer201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateDedicatedServer201Response) MarshalJSON() ([]byte, error) {
 func (o CreateDedicatedServer201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["dedicated_server"] = o.DedicatedServer
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

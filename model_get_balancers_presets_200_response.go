@@ -22,19 +22,16 @@ var _ MappedNullable = &GetBalancersPresets200Response{}
 type GetBalancersPresets200Response struct {
 	Meta Meta `json:"meta"`
 	BalancersPresets []PresetsBalancer `json:"balancers_presets"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetBalancersPresets200Response instantiates a new GetBalancersPresets200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetBalancersPresets200Response(meta Meta, balancersPresets []PresetsBalancer, responseId string) *GetBalancersPresets200Response {
+func NewGetBalancersPresets200Response(meta Meta, balancersPresets []PresetsBalancer) *GetBalancersPresets200Response {
 	this := GetBalancersPresets200Response{}
 	this.Meta = meta
 	this.BalancersPresets = balancersPresets
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetBalancersPresets200Response) SetBalancersPresets(v []PresetsBalancer
 	o.BalancersPresets = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetBalancersPresets200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetBalancersPresets200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetBalancersPresets200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetBalancersPresets200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetBalancersPresets200Response) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["balancers_presets"] = o.BalancersPresets
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

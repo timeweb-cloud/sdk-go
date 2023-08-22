@@ -22,19 +22,16 @@ var _ MappedNullable = &GetProjectClusters200Response{}
 type GetProjectClusters200Response struct {
 	Clusters []Clusterk8s `json:"clusters"`
 	Meta Meta `json:"meta"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetProjectClusters200Response instantiates a new GetProjectClusters200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProjectClusters200Response(clusters []Clusterk8s, meta Meta, responseId string) *GetProjectClusters200Response {
+func NewGetProjectClusters200Response(clusters []Clusterk8s, meta Meta) *GetProjectClusters200Response {
 	this := GetProjectClusters200Response{}
 	this.Clusters = clusters
 	this.Meta = meta
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetProjectClusters200Response) SetMeta(v Meta) {
 	o.Meta = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetProjectClusters200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetProjectClusters200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetProjectClusters200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetProjectClusters200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetProjectClusters200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["clusters"] = o.Clusters
 	toSerialize["meta"] = o.Meta
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

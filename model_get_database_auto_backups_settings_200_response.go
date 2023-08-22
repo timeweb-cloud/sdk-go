@@ -22,19 +22,16 @@ var _ MappedNullable = &GetDatabaseAutoBackupsSettings200Response{}
 type GetDatabaseAutoBackupsSettings200Response struct {
 	Meta Meta `json:"meta"`
 	AutoBackupsSettings []AutoBackup `json:"auto_backups_settings"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetDatabaseAutoBackupsSettings200Response instantiates a new GetDatabaseAutoBackupsSettings200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDatabaseAutoBackupsSettings200Response(meta Meta, autoBackupsSettings []AutoBackup, responseId string) *GetDatabaseAutoBackupsSettings200Response {
+func NewGetDatabaseAutoBackupsSettings200Response(meta Meta, autoBackupsSettings []AutoBackup) *GetDatabaseAutoBackupsSettings200Response {
 	this := GetDatabaseAutoBackupsSettings200Response{}
 	this.Meta = meta
 	this.AutoBackupsSettings = autoBackupsSettings
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetDatabaseAutoBackupsSettings200Response) SetAutoBackupsSettings(v []A
 	o.AutoBackupsSettings = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetDatabaseAutoBackupsSettings200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetDatabaseAutoBackupsSettings200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetDatabaseAutoBackupsSettings200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetDatabaseAutoBackupsSettings200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetDatabaseAutoBackupsSettings200Response) ToMap() (map[string]interface
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["auto_backups_settings"] = o.AutoBackupsSettings
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

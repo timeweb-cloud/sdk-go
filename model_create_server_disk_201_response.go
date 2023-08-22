@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateServerDisk201Response{}
 // CreateServerDisk201Response struct for CreateServerDisk201Response
 type CreateServerDisk201Response struct {
 	ServerDisk ServerDisk `json:"server_disk"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateServerDisk201Response instantiates a new CreateServerDisk201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateServerDisk201Response(serverDisk ServerDisk, responseId string) *CreateServerDisk201Response {
+func NewCreateServerDisk201Response(serverDisk ServerDisk) *CreateServerDisk201Response {
 	this := CreateServerDisk201Response{}
 	this.ServerDisk = serverDisk
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateServerDisk201Response) SetServerDisk(v ServerDisk) {
 	o.ServerDisk = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateServerDisk201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateServerDisk201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateServerDisk201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateServerDisk201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateServerDisk201Response) MarshalJSON() ([]byte, error) {
 func (o CreateServerDisk201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["server_disk"] = o.ServerDisk
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

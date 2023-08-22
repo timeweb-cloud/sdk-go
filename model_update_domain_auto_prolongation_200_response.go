@@ -21,18 +21,15 @@ var _ MappedNullable = &UpdateDomainAutoProlongation200Response{}
 // UpdateDomainAutoProlongation200Response struct for UpdateDomainAutoProlongation200Response
 type UpdateDomainAutoProlongation200Response struct {
 	Domain Domain `json:"domain"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewUpdateDomainAutoProlongation200Response instantiates a new UpdateDomainAutoProlongation200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateDomainAutoProlongation200Response(domain Domain, responseId string) *UpdateDomainAutoProlongation200Response {
+func NewUpdateDomainAutoProlongation200Response(domain Domain) *UpdateDomainAutoProlongation200Response {
 	this := UpdateDomainAutoProlongation200Response{}
 	this.Domain = domain
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *UpdateDomainAutoProlongation200Response) SetDomain(v Domain) {
 	o.Domain = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *UpdateDomainAutoProlongation200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *UpdateDomainAutoProlongation200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *UpdateDomainAutoProlongation200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o UpdateDomainAutoProlongation200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o UpdateDomainAutoProlongation200Response) MarshalJSON() ([]byte, error) {
 func (o UpdateDomainAutoProlongation200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["domain"] = o.Domain
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

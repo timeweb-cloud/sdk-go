@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Nodes** | Pointer to **int32** | Количество нод | [optional] [default to 0]
-**Cores** | Pointer to [**Resource**](Resource.md) |  | [optional] [default to {"requested":0,"allocatable":0,"capacity":0,"used":0}]
-**Memory** | Pointer to [**Resource**](Resource.md) |  | [optional] [default to {"requested":0,"allocatable":0,"capacity":0,"used":0}]
-**Pods** | Pointer to [**Resource**](Resource.md) |  | [optional] [default to {"requested":0,"allocatable":0,"capacity":0,"used":0}]
+**Cores** | Pointer to [**Resource**](Resource.md) |  | [optional] 
+**Memory** | Pointer to [**Resource**](Resource.md) |  | [optional] 
+**Pods** | Pointer to [**Resource**](Resource.md) |  | [optional] 
 
 ## Methods
 

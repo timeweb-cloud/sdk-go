@@ -22,19 +22,16 @@ var _ MappedNullable = &GetServerDiskBackups200Response{}
 type GetServerDiskBackups200Response struct {
 	Meta Meta `json:"meta"`
 	Backups []ServerBackup `json:"backups"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetServerDiskBackups200Response instantiates a new GetServerDiskBackups200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetServerDiskBackups200Response(meta Meta, backups []ServerBackup, responseId string) *GetServerDiskBackups200Response {
+func NewGetServerDiskBackups200Response(meta Meta, backups []ServerBackup) *GetServerDiskBackups200Response {
 	this := GetServerDiskBackups200Response{}
 	this.Meta = meta
 	this.Backups = backups
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetServerDiskBackups200Response) SetBackups(v []ServerBackup) {
 	o.Backups = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetServerDiskBackups200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetServerDiskBackups200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetServerDiskBackups200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetServerDiskBackups200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetServerDiskBackups200Response) ToMap() (map[string]interface{}, error)
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["backups"] = o.Backups
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

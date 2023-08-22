@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateProject201Response{}
 // CreateProject201Response struct for CreateProject201Response
 type CreateProject201Response struct {
 	Project Project `json:"project"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateProject201Response instantiates a new CreateProject201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateProject201Response(project Project, responseId string) *CreateProject201Response {
+func NewCreateProject201Response(project Project) *CreateProject201Response {
 	this := CreateProject201Response{}
 	this.Project = project
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateProject201Response) SetProject(v Project) {
 	o.Project = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateProject201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateProject201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateProject201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateProject201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateProject201Response) MarshalJSON() ([]byte, error) {
 func (o CreateProject201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["project"] = o.Project
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

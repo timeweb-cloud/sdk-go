@@ -21,18 +21,15 @@ var _ MappedNullable = &UpdateToken200Response{}
 // UpdateToken200Response struct for UpdateToken200Response
 type UpdateToken200Response struct {
 	ApiKey ApiKey `json:"api_key"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewUpdateToken200Response instantiates a new UpdateToken200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateToken200Response(apiKey ApiKey, responseId string) *UpdateToken200Response {
+func NewUpdateToken200Response(apiKey ApiKey) *UpdateToken200Response {
 	this := UpdateToken200Response{}
 	this.ApiKey = apiKey
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *UpdateToken200Response) SetApiKey(v ApiKey) {
 	o.ApiKey = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *UpdateToken200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *UpdateToken200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *UpdateToken200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o UpdateToken200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o UpdateToken200Response) MarshalJSON() ([]byte, error) {
 func (o UpdateToken200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["api_key"] = o.ApiKey
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

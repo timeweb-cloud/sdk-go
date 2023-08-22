@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Meta** | [**Meta**](Meta.md) |  | 
 **ServerDisks** | [**[]ServerDisk**](ServerDisk.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetServerDisks200Response
 
-`func NewGetServerDisks200Response(meta Meta, serverDisks []ServerDisk, responseId string, ) *GetServerDisks200Response`
+`func NewGetServerDisks200Response(meta Meta, serverDisks []ServerDisk, ) *GetServerDisks200Response`
 
 NewGetServerDisks200Response instantiates a new GetServerDisks200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetServerDisks200Response) SetServerDisks(v []ServerDisk)`
 
 SetServerDisks sets ServerDisks field to given value.
-
-
-### GetResponseId
-
-`func (o *GetServerDisks200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetServerDisks200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetServerDisks200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

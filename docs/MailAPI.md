@@ -532,7 +532,7 @@ import (
 
 func main() {
     domain := "somedomain.ru" // string | Полное имя домена
-    updateDomainMailInfoRequest := *openapiclient.NewUpdateDomainMailInfoRequest() // UpdateDomainMailInfoRequest | 
+    updateDomainMailInfoRequest := *openapiclient.NewUpdateDomainMailInfoRequest("test@timeweb.ru") // UpdateDomainMailInfoRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -603,7 +603,7 @@ import (
 )
 
 func main() {
-    updateMailQuotaRequest := *openapiclient.NewUpdateMailQuotaRequest() // UpdateMailQuotaRequest | 
+    updateMailQuotaRequest := *openapiclient.NewUpdateMailQuotaRequest(float32(6144)) // UpdateMailQuotaRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

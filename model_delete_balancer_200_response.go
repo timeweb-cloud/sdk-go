@@ -21,18 +21,15 @@ var _ MappedNullable = &DeleteBalancer200Response{}
 // DeleteBalancer200Response struct for DeleteBalancer200Response
 type DeleteBalancer200Response struct {
 	BalancerDelete DeleteServiceResponse `json:"balancer_delete"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewDeleteBalancer200Response instantiates a new DeleteBalancer200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteBalancer200Response(balancerDelete DeleteServiceResponse, responseId string) *DeleteBalancer200Response {
+func NewDeleteBalancer200Response(balancerDelete DeleteServiceResponse) *DeleteBalancer200Response {
 	this := DeleteBalancer200Response{}
 	this.BalancerDelete = balancerDelete
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *DeleteBalancer200Response) SetBalancerDelete(v DeleteServiceResponse) {
 	o.BalancerDelete = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *DeleteBalancer200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *DeleteBalancer200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *DeleteBalancer200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o DeleteBalancer200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o DeleteBalancer200Response) MarshalJSON() ([]byte, error) {
 func (o DeleteBalancer200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["balancer_delete"] = o.BalancerDelete
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateBalancerRule200Response{}
 // CreateBalancerRule200Response struct for CreateBalancerRule200Response
 type CreateBalancerRule200Response struct {
 	Rule Rule `json:"rule"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateBalancerRule200Response instantiates a new CreateBalancerRule200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateBalancerRule200Response(rule Rule, responseId string) *CreateBalancerRule200Response {
+func NewCreateBalancerRule200Response(rule Rule) *CreateBalancerRule200Response {
 	this := CreateBalancerRule200Response{}
 	this.Rule = rule
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateBalancerRule200Response) SetRule(v Rule) {
 	o.Rule = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateBalancerRule200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateBalancerRule200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateBalancerRule200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateBalancerRule200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateBalancerRule200Response) MarshalJSON() ([]byte, error) {
 func (o CreateBalancerRule200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["rule"] = o.Rule
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

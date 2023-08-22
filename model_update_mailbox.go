@@ -20,10 +20,10 @@ var _ MappedNullable = &UpdateMailbox{}
 
 // UpdateMailbox Изменение почтового ящика
 type UpdateMailbox struct {
-	AutoReply *UpdateMailboxAutoReply `json:"auto_reply,omitempty"`
-	SpamFilter *UpdateMailboxSpamFilter `json:"spam_filter,omitempty"`
-	ForwardingIncoming *UpdateMailboxForwardingIncoming `json:"forwarding_incoming,omitempty"`
-	ForwardingOutgoing *UpdateMailboxForwardingOutgoing `json:"forwarding_outgoing,omitempty"`
+	AutoReply *AutoReplyIsDisabled `json:"auto_reply,omitempty"`
+	SpamFilter *SpamFilterIsDisabled `json:"spam_filter,omitempty"`
+	ForwardingIncoming *ForwardingIncomingIsDisabled `json:"forwarding_incoming,omitempty"`
+	ForwardingOutgoing *ForwardingOutgoingIsDisabled `json:"forwarding_outgoing,omitempty"`
 	// Комментарий к почтовому ящику
 	Comment *string `json:"comment,omitempty"`
 	// Пароль почтового ящика
@@ -48,9 +48,9 @@ func NewUpdateMailboxWithDefaults() *UpdateMailbox {
 }
 
 // GetAutoReply returns the AutoReply field value if set, zero value otherwise.
-func (o *UpdateMailbox) GetAutoReply() UpdateMailboxAutoReply {
+func (o *UpdateMailbox) GetAutoReply() AutoReplyIsDisabled {
 	if o == nil || IsNil(o.AutoReply) {
-		var ret UpdateMailboxAutoReply
+		var ret AutoReplyIsDisabled
 		return ret
 	}
 	return *o.AutoReply
@@ -58,7 +58,7 @@ func (o *UpdateMailbox) GetAutoReply() UpdateMailboxAutoReply {
 
 // GetAutoReplyOk returns a tuple with the AutoReply field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateMailbox) GetAutoReplyOk() (*UpdateMailboxAutoReply, bool) {
+func (o *UpdateMailbox) GetAutoReplyOk() (*AutoReplyIsDisabled, bool) {
 	if o == nil || IsNil(o.AutoReply) {
 		return nil, false
 	}
@@ -74,15 +74,15 @@ func (o *UpdateMailbox) HasAutoReply() bool {
 	return false
 }
 
-// SetAutoReply gets a reference to the given UpdateMailboxAutoReply and assigns it to the AutoReply field.
-func (o *UpdateMailbox) SetAutoReply(v UpdateMailboxAutoReply) {
+// SetAutoReply gets a reference to the given AutoReplyIsDisabled and assigns it to the AutoReply field.
+func (o *UpdateMailbox) SetAutoReply(v AutoReplyIsDisabled) {
 	o.AutoReply = &v
 }
 
 // GetSpamFilter returns the SpamFilter field value if set, zero value otherwise.
-func (o *UpdateMailbox) GetSpamFilter() UpdateMailboxSpamFilter {
+func (o *UpdateMailbox) GetSpamFilter() SpamFilterIsDisabled {
 	if o == nil || IsNil(o.SpamFilter) {
-		var ret UpdateMailboxSpamFilter
+		var ret SpamFilterIsDisabled
 		return ret
 	}
 	return *o.SpamFilter
@@ -90,7 +90,7 @@ func (o *UpdateMailbox) GetSpamFilter() UpdateMailboxSpamFilter {
 
 // GetSpamFilterOk returns a tuple with the SpamFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateMailbox) GetSpamFilterOk() (*UpdateMailboxSpamFilter, bool) {
+func (o *UpdateMailbox) GetSpamFilterOk() (*SpamFilterIsDisabled, bool) {
 	if o == nil || IsNil(o.SpamFilter) {
 		return nil, false
 	}
@@ -106,15 +106,15 @@ func (o *UpdateMailbox) HasSpamFilter() bool {
 	return false
 }
 
-// SetSpamFilter gets a reference to the given UpdateMailboxSpamFilter and assigns it to the SpamFilter field.
-func (o *UpdateMailbox) SetSpamFilter(v UpdateMailboxSpamFilter) {
+// SetSpamFilter gets a reference to the given SpamFilterIsDisabled and assigns it to the SpamFilter field.
+func (o *UpdateMailbox) SetSpamFilter(v SpamFilterIsDisabled) {
 	o.SpamFilter = &v
 }
 
 // GetForwardingIncoming returns the ForwardingIncoming field value if set, zero value otherwise.
-func (o *UpdateMailbox) GetForwardingIncoming() UpdateMailboxForwardingIncoming {
+func (o *UpdateMailbox) GetForwardingIncoming() ForwardingIncomingIsDisabled {
 	if o == nil || IsNil(o.ForwardingIncoming) {
-		var ret UpdateMailboxForwardingIncoming
+		var ret ForwardingIncomingIsDisabled
 		return ret
 	}
 	return *o.ForwardingIncoming
@@ -122,7 +122,7 @@ func (o *UpdateMailbox) GetForwardingIncoming() UpdateMailboxForwardingIncoming 
 
 // GetForwardingIncomingOk returns a tuple with the ForwardingIncoming field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateMailbox) GetForwardingIncomingOk() (*UpdateMailboxForwardingIncoming, bool) {
+func (o *UpdateMailbox) GetForwardingIncomingOk() (*ForwardingIncomingIsDisabled, bool) {
 	if o == nil || IsNil(o.ForwardingIncoming) {
 		return nil, false
 	}
@@ -138,15 +138,15 @@ func (o *UpdateMailbox) HasForwardingIncoming() bool {
 	return false
 }
 
-// SetForwardingIncoming gets a reference to the given UpdateMailboxForwardingIncoming and assigns it to the ForwardingIncoming field.
-func (o *UpdateMailbox) SetForwardingIncoming(v UpdateMailboxForwardingIncoming) {
+// SetForwardingIncoming gets a reference to the given ForwardingIncomingIsDisabled and assigns it to the ForwardingIncoming field.
+func (o *UpdateMailbox) SetForwardingIncoming(v ForwardingIncomingIsDisabled) {
 	o.ForwardingIncoming = &v
 }
 
 // GetForwardingOutgoing returns the ForwardingOutgoing field value if set, zero value otherwise.
-func (o *UpdateMailbox) GetForwardingOutgoing() UpdateMailboxForwardingOutgoing {
+func (o *UpdateMailbox) GetForwardingOutgoing() ForwardingOutgoingIsDisabled {
 	if o == nil || IsNil(o.ForwardingOutgoing) {
-		var ret UpdateMailboxForwardingOutgoing
+		var ret ForwardingOutgoingIsDisabled
 		return ret
 	}
 	return *o.ForwardingOutgoing
@@ -154,7 +154,7 @@ func (o *UpdateMailbox) GetForwardingOutgoing() UpdateMailboxForwardingOutgoing 
 
 // GetForwardingOutgoingOk returns a tuple with the ForwardingOutgoing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateMailbox) GetForwardingOutgoingOk() (*UpdateMailboxForwardingOutgoing, bool) {
+func (o *UpdateMailbox) GetForwardingOutgoingOk() (*ForwardingOutgoingIsDisabled, bool) {
 	if o == nil || IsNil(o.ForwardingOutgoing) {
 		return nil, false
 	}
@@ -170,8 +170,8 @@ func (o *UpdateMailbox) HasForwardingOutgoing() bool {
 	return false
 }
 
-// SetForwardingOutgoing gets a reference to the given UpdateMailboxForwardingOutgoing and assigns it to the ForwardingOutgoing field.
-func (o *UpdateMailbox) SetForwardingOutgoing(v UpdateMailboxForwardingOutgoing) {
+// SetForwardingOutgoing gets a reference to the given ForwardingOutgoingIsDisabled and assigns it to the ForwardingOutgoing field.
+func (o *UpdateMailbox) SetForwardingOutgoing(v ForwardingOutgoingIsDisabled) {
 	o.ForwardingOutgoing = &v
 }
 

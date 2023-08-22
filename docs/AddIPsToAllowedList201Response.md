@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Ips** | [**AddIps**](AddIps.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewAddIPsToAllowedList201Response
 
-`func NewAddIPsToAllowedList201Response(ips AddIps, responseId string, ) *AddIPsToAllowedList201Response`
+`func NewAddIPsToAllowedList201Response(ips AddIps, ) *AddIPsToAllowedList201Response`
 
 NewAddIPsToAllowedList201Response instantiates a new AddIPsToAllowedList201Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *AddIPsToAllowedList201Response) SetIps(v AddIps)`
 
 SetIps sets Ips field to given value.
-
-
-### GetResponseId
-
-`func (o *AddIPsToAllowedList201Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *AddIPsToAllowedList201Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *AddIPsToAllowedList201Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

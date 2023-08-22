@@ -22,18 +22,15 @@ var _ MappedNullable = &DeleteDatabaseCluster200Response{}
 type DeleteDatabaseCluster200Response struct {
 	// Хеш, который совместно с кодом авторизации надо будет отправить для удаления
 	Hash string `json:"hash"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewDeleteDatabaseCluster200Response instantiates a new DeleteDatabaseCluster200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteDatabaseCluster200Response(hash string, responseId string) *DeleteDatabaseCluster200Response {
+func NewDeleteDatabaseCluster200Response(hash string) *DeleteDatabaseCluster200Response {
 	this := DeleteDatabaseCluster200Response{}
 	this.Hash = hash
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -69,30 +66,6 @@ func (o *DeleteDatabaseCluster200Response) SetHash(v string) {
 	o.Hash = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *DeleteDatabaseCluster200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *DeleteDatabaseCluster200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *DeleteDatabaseCluster200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o DeleteDatabaseCluster200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -104,7 +77,6 @@ func (o DeleteDatabaseCluster200Response) MarshalJSON() ([]byte, error) {
 func (o DeleteDatabaseCluster200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["hash"] = o.Hash
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

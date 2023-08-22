@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Finances** | [**Finances**](Finances.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetFinances200Response
 
-`func NewGetFinances200Response(finances Finances, responseId string, ) *GetFinances200Response`
+`func NewGetFinances200Response(finances Finances, ) *GetFinances200Response`
 
 NewGetFinances200Response instantiates a new GetFinances200Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *GetFinances200Response) SetFinances(v Finances)`
 
 SetFinances sets Finances field to given value.
-
-
-### GetResponseId
-
-`func (o *GetFinances200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetFinances200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetFinances200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## CreateImage
 
-> CreateImage201Response CreateImage(ctx).ImageInAPI(imageInAPI).Execute()
+> ImageOutResponse CreateImage(ctx).ImageInAPI(imageInAPI).Execute()
 
 Создание образа
 
@@ -47,7 +47,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.CreateImage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateImage`: CreateImage201Response
+    // response from `CreateImage`: ImageOutResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.CreateImage`: %v\n", resp)
 }
 ```
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateImage201Response**](CreateImage201Response.md)
+[**ImageOutResponse**](ImageOutResponse.md)
 
 ### Authorization
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## CreateImageDownloadUrl
 
-> CreateImageDownloadUrl201Response CreateImageDownloadUrl(ctx, imageId).ImageUrlIn(imageUrlIn).Execute()
+> ImageDownloadResponse CreateImageDownloadUrl(ctx, imageId).ImageUrlIn(imageUrlIn).Execute()
 
 Создание ссылки на скачивание образа
 
@@ -114,7 +114,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.CreateImageDownloadUrl``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateImageDownloadUrl`: CreateImageDownloadUrl201Response
+    // response from `CreateImageDownloadUrl`: ImageDownloadResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.CreateImageDownloadUrl`: %v\n", resp)
 }
 ```
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateImageDownloadUrl201Response**](CreateImageDownloadUrl201Response.md)
+[**ImageDownloadResponse**](ImageDownloadResponse.md)
 
 ### Authorization
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 
 ## GetImage
 
-> CreateImage201Response GetImage(ctx, imageId).Execute()
+> ImageOutResponse GetImage(ctx, imageId).Execute()
 
 Получение информации о образе
 
@@ -324,7 +324,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.GetImage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetImage`: CreateImage201Response
+    // response from `GetImage`: ImageOutResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.GetImage`: %v\n", resp)
 }
 ```
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateImage201Response**](CreateImage201Response.md)
+[**ImageOutResponse**](ImageOutResponse.md)
 
 ### Authorization
 
@@ -366,7 +366,7 @@ Name | Type | Description  | Notes
 
 ## GetImageDownloadURL
 
-> CreateImageDownloadUrl201Response GetImageDownloadURL(ctx, imageId, imageUrlId).Execute()
+> ImageDownloadResponse GetImageDownloadURL(ctx, imageId, imageUrlId).Execute()
 
 Получение информации о ссылке на скачивание образа
 
@@ -395,7 +395,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.GetImageDownloadURL``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetImageDownloadURL`: CreateImageDownloadUrl201Response
+    // response from `GetImageDownloadURL`: ImageDownloadResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.GetImageDownloadURL`: %v\n", resp)
 }
 ```
@@ -421,7 +421,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateImageDownloadUrl201Response**](CreateImageDownloadUrl201Response.md)
+[**ImageDownloadResponse**](ImageDownloadResponse.md)
 
 ### Authorization
 
@@ -439,7 +439,7 @@ Name | Type | Description  | Notes
 
 ## GetImageDownloadURLs
 
-> GetImageDownloadURLs200Response GetImageDownloadURLs(ctx, imageId).Limit(limit).Offset(offset).Execute()
+> ImageDownloadsResponse GetImageDownloadURLs(ctx, imageId).Limit(limit).Offset(offset).Execute()
 
 Получение информации о ссылках на скачивание образов
 
@@ -469,7 +469,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.GetImageDownloadURLs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetImageDownloadURLs`: GetImageDownloadURLs200Response
+    // response from `GetImageDownloadURLs`: ImageDownloadsResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.GetImageDownloadURLs`: %v\n", resp)
 }
 ```
@@ -495,7 +495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetImageDownloadURLs200Response**](GetImageDownloadURLs200Response.md)
+[**ImageDownloadsResponse**](ImageDownloadsResponse.md)
 
 ### Authorization
 
@@ -513,7 +513,7 @@ Name | Type | Description  | Notes
 
 ## GetImages
 
-> GetImages200Response GetImages(ctx).Limit(limit).Offset(offset).Execute()
+> ImagesOutResponse GetImages(ctx).Limit(limit).Offset(offset).Execute()
 
 Получение списка образов
 
@@ -542,7 +542,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.GetImages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetImages`: GetImages200Response
+    // response from `GetImages`: ImagesOutResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.GetImages`: %v\n", resp)
 }
 ```
@@ -563,7 +563,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetImages200Response**](GetImages200Response.md)
+[**ImagesOutResponse**](ImagesOutResponse.md)
 
 ### Authorization
 
@@ -581,7 +581,7 @@ Name | Type | Description  | Notes
 
 ## UpdateImage
 
-> CreateImage201Response UpdateImage(ctx, imageId).ImageUpdateAPI(imageUpdateAPI).Execute()
+> ImageOutResponse UpdateImage(ctx, imageId).ImageUpdateAPI(imageUpdateAPI).Execute()
 
 Обновление информации о образе
 
@@ -610,7 +610,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.UpdateImage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateImage`: CreateImage201Response
+    // response from `UpdateImage`: ImageOutResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.UpdateImage`: %v\n", resp)
 }
 ```
@@ -635,7 +635,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateImage201Response**](CreateImage201Response.md)
+[**ImageOutResponse**](ImageOutResponse.md)
 
 ### Authorization
 
@@ -653,7 +653,7 @@ Name | Type | Description  | Notes
 
 ## UploadImage
 
-> UploadImage200Response UploadImage(ctx, imageId).ContentDisposition(contentDisposition).Execute()
+> UploadSuccessfulResponse UploadImage(ctx, imageId).ContentDisposition(contentDisposition).Execute()
 
 Загрузка образа
 
@@ -682,7 +682,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.UploadImage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UploadImage`: UploadImage200Response
+    // response from `UploadImage`: UploadSuccessfulResponse
     fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.UploadImage`: %v\n", resp)
 }
 ```
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UploadImage200Response**](UploadImage200Response.md)
+[**UploadSuccessfulResponse**](UploadSuccessfulResponse.md)
 
 ### Authorization
 

@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateBalancer200Response{}
 // CreateBalancer200Response struct for CreateBalancer200Response
 type CreateBalancer200Response struct {
 	Balancer Balancer `json:"balancer"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateBalancer200Response instantiates a new CreateBalancer200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateBalancer200Response(balancer Balancer, responseId string) *CreateBalancer200Response {
+func NewCreateBalancer200Response(balancer Balancer) *CreateBalancer200Response {
 	this := CreateBalancer200Response{}
 	this.Balancer = balancer
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateBalancer200Response) SetBalancer(v Balancer) {
 	o.Balancer = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateBalancer200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateBalancer200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateBalancer200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateBalancer200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateBalancer200Response) MarshalJSON() ([]byte, error) {
 func (o CreateBalancer200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["balancer"] = o.Balancer
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

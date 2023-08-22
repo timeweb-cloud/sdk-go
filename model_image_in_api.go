@@ -42,8 +42,6 @@ func NewImageInAPI() *ImageInAPI {
 	this.Name = &name
 	var description string = ""
 	this.Description = &description
-	var os OS = OTHER
-	this.Os = &os
 	return &this
 }
 
@@ -56,8 +54,6 @@ func NewImageInAPIWithDefaults() *ImageInAPI {
 	this.Name = &name
 	var description string = ""
 	this.Description = &description
-	var os OS = OTHER
-	this.Os = &os
 	return &this
 }
 

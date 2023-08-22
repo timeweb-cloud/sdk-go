@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **MoneySource** | **NullableString** | Источник (способ) оплаты заявки. | 
 **Period** | [**DomainPaymentPeriod**](DomainPaymentPeriod.md) |  | 
 **PersonId** | **float32** | Идентификационный номер персоны для заявки на регистрацию. | 
-**Prime** | [**NullableDomainPrimeType**](DomainPrimeType.md) |  | 
+**Prime** | [**DomainPrimeType**](DomainPrimeType.md) |  | 
 **SoonExpire** | **float32** | Количество дней до конца регистрации домена, за которые мы уведомим о необходимости продления. | 
 **SortOrder** | **float32** | Это значение используется для сортировки доменных зон в панели управления. | 
 **Type** | **string** | Тип заявки. | 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewDomainRequest
 
-`func NewDomainRequest(accountId string, authCode NullableString, date time.Time, domainBundleId NullableString, errorCodeTransfer NullableString, fqdn string, groupId float32, id float32, isAntispamEnabled bool, isAutoprolongEnabled bool, isWhoisPrivacyEnabled bool, message NullableString, moneySource NullableString, period DomainPaymentPeriod, personId float32, prime NullableDomainPrimeType, soonExpire float32, sortOrder float32, type_ string, ) *DomainRequest`
+`func NewDomainRequest(accountId string, authCode NullableString, date time.Time, domainBundleId NullableString, errorCodeTransfer NullableString, fqdn string, groupId float32, id float32, isAntispamEnabled bool, isAutoprolongEnabled bool, isWhoisPrivacyEnabled bool, message NullableString, moneySource NullableString, period DomainPaymentPeriod, personId float32, prime DomainPrimeType, soonExpire float32, sortOrder float32, type_ string, ) *DomainRequest`
 
 NewDomainRequest instantiates a new DomainRequest object
 This constructor will assign default values to properties that have it defined,
@@ -413,16 +413,6 @@ and a boolean to check if the value has been set.
 SetPrime sets Prime field to given value.
 
 
-### SetPrimeNil
-
-`func (o *DomainRequest) SetPrimeNil(b bool)`
-
- SetPrimeNil sets the value for Prime to be an explicit nil
-
-### UnsetPrime
-`func (o *DomainRequest) UnsetPrime()`
-
-UnsetPrime ensures that no value is present for Prime, not even an explicit nil
 ### GetSoonExpire
 
 `func (o *DomainRequest) GetSoonExpire() float32`

@@ -35,12 +35,6 @@ func NewResources() *Resources {
 	this := Resources{}
 	var nodes int32 = 0
 	this.Nodes = &nodes
-	var cores Resource = {"requested":0,"allocatable":0,"capacity":0,"used":0}
-	this.Cores = &cores
-	var memory Resource = {"requested":0,"allocatable":0,"capacity":0,"used":0}
-	this.Memory = &memory
-	var pods Resource = {"requested":0,"allocatable":0,"capacity":0,"used":0}
-	this.Pods = &pods
 	return &this
 }
 
@@ -51,12 +45,6 @@ func NewResourcesWithDefaults() *Resources {
 	this := Resources{}
 	var nodes int32 = 0
 	this.Nodes = &nodes
-	var cores Resource = {"requested":0,"allocatable":0,"capacity":0,"used":0}
-	this.Cores = &cores
-	var memory Resource = {"requested":0,"allocatable":0,"capacity":0,"used":0}
-	this.Memory = &memory
-	var pods Resource = {"requested":0,"allocatable":0,"capacity":0,"used":0}
-	this.Pods = &pods
 	return &this
 }
 

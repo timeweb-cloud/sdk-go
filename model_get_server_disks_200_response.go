@@ -22,19 +22,16 @@ var _ MappedNullable = &GetServerDisks200Response{}
 type GetServerDisks200Response struct {
 	Meta Meta `json:"meta"`
 	ServerDisks []ServerDisk `json:"server_disks"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetServerDisks200Response instantiates a new GetServerDisks200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetServerDisks200Response(meta Meta, serverDisks []ServerDisk, responseId string) *GetServerDisks200Response {
+func NewGetServerDisks200Response(meta Meta, serverDisks []ServerDisk) *GetServerDisks200Response {
 	this := GetServerDisks200Response{}
 	this.Meta = meta
 	this.ServerDisks = serverDisks
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetServerDisks200Response) SetServerDisks(v []ServerDisk) {
 	o.ServerDisks = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetServerDisks200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetServerDisks200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetServerDisks200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetServerDisks200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetServerDisks200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["server_disks"] = o.ServerDisks
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

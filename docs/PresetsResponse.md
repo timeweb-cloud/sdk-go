@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
 **Meta** | [**Meta**](Meta.md) |  | 
-**K8sPresets** | [**[]K8SPresetsInner**](K8SPresetsInner.md) | Массив тарифов k8s | 
+**K8sPresets** | [**[]WorkerPresetOutApi**](WorkerPresetOutApi.md) | Массив тарифов k8s | 
 
 ## Methods
 
 ### NewPresetsResponse
 
-`func NewPresetsResponse(meta Meta, k8sPresets []K8SPresetsInner, ) *PresetsResponse`
+`func NewPresetsResponse(meta Meta, k8sPresets []WorkerPresetOutApi, ) *PresetsResponse`
 
 NewPresetsResponse instantiates a new PresetsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetMeta sets Meta field to given value.
 
 ### GetK8sPresets
 
-`func (o *PresetsResponse) GetK8sPresets() []K8SPresetsInner`
+`func (o *PresetsResponse) GetK8sPresets() []WorkerPresetOutApi`
 
 GetK8sPresets returns the K8sPresets field if non-nil, zero value otherwise.
 
 ### GetK8sPresetsOk
 
-`func (o *PresetsResponse) GetK8sPresetsOk() (*[]K8SPresetsInner, bool)`
+`func (o *PresetsResponse) GetK8sPresetsOk() (*[]WorkerPresetOutApi, bool)`
 
 GetK8sPresetsOk returns a tuple with the K8sPresets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetK8sPresets
 
-`func (o *PresetsResponse) SetK8sPresets(v []K8SPresetsInner)`
+`func (o *PresetsResponse) SetK8sPresets(v []WorkerPresetOutApi)`
 
 SetK8sPresets sets K8sPresets field to given value.
 

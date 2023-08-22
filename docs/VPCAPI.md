@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## DeleteVPC
 
-> DeleteVPC204Response DeleteVPC(ctx, vpcId).Execute()
+> CreateVPC201Response DeleteVPC(ctx, vpcId).Execute()
 
 Удаление VPC по идентификатору сети
 
@@ -110,7 +110,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `VPCAPI.DeleteVPC``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeleteVPC`: DeleteVPC204Response
+    // response from `DeleteVPC`: CreateVPC201Response
     fmt.Fprintf(os.Stdout, "Response from `VPCAPI.DeleteVPC`: %v\n", resp)
 }
 ```
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DeleteVPC204Response**](DeleteVPC204Response.md)
+[**CreateVPC201Response**](CreateVPC201Response.md)
 
 ### Authorization
 

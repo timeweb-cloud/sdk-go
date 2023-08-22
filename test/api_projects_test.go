@@ -26,7 +26,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.AddBalancerToProject(context.Background(), projectId).Execute()
 
@@ -40,7 +40,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.AddClusterToProject(context.Background(), projectId).Execute()
 
@@ -54,7 +54,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.AddDatabaseToProject(context.Background(), projectId).Execute()
 
@@ -68,7 +68,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.AddDedicatedServerToProject(context.Background(), projectId).Execute()
 
@@ -82,7 +82,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.AddServerToProject(context.Background(), projectId).Execute()
 
@@ -96,7 +96,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.AddStorageToProject(context.Background(), projectId).Execute()
 
@@ -122,7 +122,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		httpRes, err := apiClient.ProjectsAPI.DeleteProject(context.Background(), projectId).Execute()
 
@@ -207,7 +207,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetAllProjectResources(context.Background(), projectId).Execute()
 
@@ -221,7 +221,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetProject(context.Background(), projectId).Execute()
 
@@ -235,7 +235,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetProjectBalancers(context.Background(), projectId).Execute()
 
@@ -249,7 +249,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetProjectClusters(context.Background(), projectId).Execute()
 
@@ -263,7 +263,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetProjectDatabases(context.Background(), projectId).Execute()
 
@@ -277,7 +277,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetProjectDedicatedServers(context.Background(), projectId).Execute()
 
@@ -291,7 +291,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetProjectServers(context.Background(), projectId).Execute()
 
@@ -305,7 +305,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.GetProjectStorages(context.Background(), projectId).Execute()
 
@@ -331,7 +331,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.TransferResourceToAnotherProject(context.Background(), projectId).Execute()
 
@@ -345,7 +345,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var projectId float32
+		var projectId int32
 
 		resp, httpRes, err := apiClient.ProjectsAPI.UpdateProject(context.Background(), projectId).Execute()
 

@@ -24,14 +24,14 @@ type PresetsResponse struct {
 	ResponseId *string `json:"response_id,omitempty"`
 	Meta Meta `json:"meta"`
 	// Массив тарифов k8s
-	K8sPresets []K8SPresetsInner `json:"k8s_presets"`
+	K8sPresets []WorkerPresetOutApi `json:"k8s_presets"`
 }
 
 // NewPresetsResponse instantiates a new PresetsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPresetsResponse(meta Meta, k8sPresets []K8SPresetsInner) *PresetsResponse {
+func NewPresetsResponse(meta Meta, k8sPresets []WorkerPresetOutApi) *PresetsResponse {
 	this := PresetsResponse{}
 	this.Meta = meta
 	this.K8sPresets = k8sPresets
@@ -103,9 +103,9 @@ func (o *PresetsResponse) SetMeta(v Meta) {
 }
 
 // GetK8sPresets returns the K8sPresets field value
-func (o *PresetsResponse) GetK8sPresets() []K8SPresetsInner {
+func (o *PresetsResponse) GetK8sPresets() []WorkerPresetOutApi {
 	if o == nil {
-		var ret []K8SPresetsInner
+		var ret []WorkerPresetOutApi
 		return ret
 	}
 
@@ -114,7 +114,7 @@ func (o *PresetsResponse) GetK8sPresets() []K8SPresetsInner {
 
 // GetK8sPresetsOk returns a tuple with the K8sPresets field value
 // and a boolean to check if the value has been set.
-func (o *PresetsResponse) GetK8sPresetsOk() ([]K8SPresetsInner, bool) {
+func (o *PresetsResponse) GetK8sPresetsOk() ([]WorkerPresetOutApi, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *PresetsResponse) GetK8sPresetsOk() ([]K8SPresetsInner, bool) {
 }
 
 // SetK8sPresets sets field value
-func (o *PresetsResponse) SetK8sPresets(v []K8SPresetsInner) {
+func (o *PresetsResponse) SetK8sPresets(v []WorkerPresetOutApi) {
 	o.K8sPresets = v
 }
 

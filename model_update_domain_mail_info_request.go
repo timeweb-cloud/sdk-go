@@ -21,15 +21,16 @@ var _ MappedNullable = &UpdateDomainMailInfoRequest{}
 // UpdateDomainMailInfoRequest struct for UpdateDomainMailInfoRequest
 type UpdateDomainMailInfoRequest struct {
 	// Адрес для сбора почты с ошибочных ящиков
-	Email *string `json:"email,omitempty"`
+	Email string `json:"email"`
 }
 
 // NewUpdateDomainMailInfoRequest instantiates a new UpdateDomainMailInfoRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateDomainMailInfoRequest() *UpdateDomainMailInfoRequest {
+func NewUpdateDomainMailInfoRequest(email string) *UpdateDomainMailInfoRequest {
 	this := UpdateDomainMailInfoRequest{}
+	this.Email = email
 	return &this
 }
 
@@ -41,36 +42,28 @@ func NewUpdateDomainMailInfoRequestWithDefaults() *UpdateDomainMailInfoRequest {
 	return &this
 }
 
-// GetEmail returns the Email field value if set, zero value otherwise.
+// GetEmail returns the Email field value
 func (o *UpdateDomainMailInfoRequest) GetEmail() string {
-	if o == nil || IsNil(o.Email) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Email
+
+	return o.Email
 }
 
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 func (o *UpdateDomainMailInfoRequest) GetEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.Email) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Email, true
+	return &o.Email, true
 }
 
-// HasEmail returns a boolean if a field has been set.
-func (o *UpdateDomainMailInfoRequest) HasEmail() bool {
-	if o != nil && !IsNil(o.Email) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given string and assigns it to the Email field.
+// SetEmail sets field value
 func (o *UpdateDomainMailInfoRequest) SetEmail(v string) {
-	o.Email = &v
+	o.Email = v
 }
 
 func (o UpdateDomainMailInfoRequest) MarshalJSON() ([]byte, error) {
@@ -83,9 +76,7 @@ func (o UpdateDomainMailInfoRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateDomainMailInfoRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Email) {
-		toSerialize["email"] = o.Email
-	}
+	toSerialize["email"] = o.Email
 	return toSerialize, nil
 }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | Pointer to [**URLType**](URLType.md) |  | [optional] [default to TIMEWEB]
+**Type** | Pointer to [**URLType**](URLType.md) |  | [optional] 
 **Filename** | Pointer to **string** | Имя файла для загрузки в облачное хранилище | [optional] 
 **Auth** | Pointer to [**ImageUrlAuth**](ImageUrlAuth.md) |  | [optional] 
 

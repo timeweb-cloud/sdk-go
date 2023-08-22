@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StatusCode** | **int32** |  | 
 **ErrorCode** | **string** |  | 
-**Message** | [**Message**](Message.md) |  | 
+**Message** | **string** |  | 
 **ResponseId** | Pointer to **string** |  | [optional] [default to "9c38a13d-ef14-45c7-a23a-1429f6a03824"]
 
 ## Methods
 
 ### NewSchemasBaseError
 
-`func NewSchemasBaseError(statusCode int32, errorCode string, message Message, ) *SchemasBaseError`
+`func NewSchemasBaseError(statusCode int32, errorCode string, message string, ) *SchemasBaseError`
 
 NewSchemasBaseError instantiates a new SchemasBaseError object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetErrorCode sets ErrorCode field to given value.
 
 ### GetMessage
 
-`func (o *SchemasBaseError) GetMessage() Message`
+`func (o *SchemasBaseError) GetMessage() string`
 
 GetMessage returns the Message field if non-nil, zero value otherwise.
 
 ### GetMessageOk
 
-`func (o *SchemasBaseError) GetMessageOk() (*Message, bool)`
+`func (o *SchemasBaseError) GetMessageOk() (*string, bool)`
 
 GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessage
 
-`func (o *SchemasBaseError) SetMessage(v Message)`
+`func (o *SchemasBaseError) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
 

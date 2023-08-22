@@ -32,8 +32,6 @@ type ImageUrlIn struct {
 // will change when the set of required properties is changed
 func NewImageUrlIn() *ImageUrlIn {
 	this := ImageUrlIn{}
-	var type_ URLType = TIMEWEB
-	this.Type = &type_
 	return &this
 }
 
@@ -42,8 +40,6 @@ func NewImageUrlIn() *ImageUrlIn {
 // but it doesn't guarantee that properties required by API are set
 func NewImageUrlInWithDefaults() *ImageUrlIn {
 	this := ImageUrlIn{}
-	var type_ URLType = TIMEWEB
-	this.Type = &type_
 	return &this
 }
 

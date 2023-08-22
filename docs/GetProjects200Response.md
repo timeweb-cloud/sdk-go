@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Projects** | [**[]Project**](Project.md) |  | 
 **Meta** | [**Meta**](Meta.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetProjects200Response
 
-`func NewGetProjects200Response(projects []Project, meta Meta, responseId string, ) *GetProjects200Response`
+`func NewGetProjects200Response(projects []Project, meta Meta, ) *GetProjects200Response`
 
 NewGetProjects200Response instantiates a new GetProjects200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetProjects200Response) SetMeta(v Meta)`
 
 SetMeta sets Meta field to given value.
-
-
-### GetResponseId
-
-`func (o *GetProjects200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetProjects200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetProjects200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

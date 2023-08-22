@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BalancerDelete** | [**DeleteServiceResponse**](DeleteServiceResponse.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewDeleteBalancer200Response
 
-`func NewDeleteBalancer200Response(balancerDelete DeleteServiceResponse, responseId string, ) *DeleteBalancer200Response`
+`func NewDeleteBalancer200Response(balancerDelete DeleteServiceResponse, ) *DeleteBalancer200Response`
 
 NewDeleteBalancer200Response instantiates a new DeleteBalancer200Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *DeleteBalancer200Response) SetBalancerDelete(v DeleteServiceResponse)`
 
 SetBalancerDelete sets BalancerDelete field to given value.
-
-
-### GetResponseId
-
-`func (o *DeleteBalancer200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *DeleteBalancer200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *DeleteBalancer200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

@@ -21,18 +21,15 @@ var _ MappedNullable = &CreateServer201Response{}
 // CreateServer201Response struct for CreateServer201Response
 type CreateServer201Response struct {
 	Server Vds `json:"server"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewCreateServer201Response instantiates a new CreateServer201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateServer201Response(server Vds, responseId string) *CreateServer201Response {
+func NewCreateServer201Response(server Vds) *CreateServer201Response {
 	this := CreateServer201Response{}
 	this.Server = server
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *CreateServer201Response) SetServer(v Vds) {
 	o.Server = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *CreateServer201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *CreateServer201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *CreateServer201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o CreateServer201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o CreateServer201Response) MarshalJSON() ([]byte, error) {
 func (o CreateServer201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["server"] = o.Server
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

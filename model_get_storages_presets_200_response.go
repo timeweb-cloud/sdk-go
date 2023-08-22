@@ -22,19 +22,16 @@ var _ MappedNullable = &GetStoragesPresets200Response{}
 type GetStoragesPresets200Response struct {
 	StoragesPresets []PresetsStorage `json:"storages_presets"`
 	Meta Meta `json:"meta"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetStoragesPresets200Response instantiates a new GetStoragesPresets200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStoragesPresets200Response(storagesPresets []PresetsStorage, meta Meta, responseId string) *GetStoragesPresets200Response {
+func NewGetStoragesPresets200Response(storagesPresets []PresetsStorage, meta Meta) *GetStoragesPresets200Response {
 	this := GetStoragesPresets200Response{}
 	this.StoragesPresets = storagesPresets
 	this.Meta = meta
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetStoragesPresets200Response) SetMeta(v Meta) {
 	o.Meta = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetStoragesPresets200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetStoragesPresets200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetStoragesPresets200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetStoragesPresets200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetStoragesPresets200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["storages_presets"] = o.StoragesPresets
 	toSerialize["meta"] = o.Meta
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

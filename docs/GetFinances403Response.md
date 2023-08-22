@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StatusCode** | **float32** | Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP. | 
-**Message** | Pointer to [**GetFinances403ResponseMessage**](GetFinances403ResponseMessage.md) |  | [optional] 
+**Message** | Pointer to **string** | Сообщение, предоставляющее дополнительную информацию об ошибке, в том числе сведения, помогающие устранить ее, когда это возможно. | [optional] 
 **ErrorCode** | **string** | Краткое описание ошибки HTTP на основе статуса. | 
 **ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
@@ -50,20 +50,20 @@ SetStatusCode sets StatusCode field to given value.
 
 ### GetMessage
 
-`func (o *GetFinances403Response) GetMessage() GetFinances403ResponseMessage`
+`func (o *GetFinances403Response) GetMessage() string`
 
 GetMessage returns the Message field if non-nil, zero value otherwise.
 
 ### GetMessageOk
 
-`func (o *GetFinances403Response) GetMessageOk() (*GetFinances403ResponseMessage, bool)`
+`func (o *GetFinances403Response) GetMessageOk() (*string, bool)`
 
 GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessage
 
-`func (o *GetFinances403Response) SetMessage(v GetFinances403ResponseMessage)`
+`func (o *GetFinances403Response) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
 

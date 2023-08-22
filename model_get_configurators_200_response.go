@@ -22,19 +22,16 @@ var _ MappedNullable = &GetConfigurators200Response{}
 type GetConfigurators200Response struct {
 	Meta Meta `json:"meta"`
 	ServerConfigurators []ServersConfigurator `json:"server_configurators"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetConfigurators200Response instantiates a new GetConfigurators200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetConfigurators200Response(meta Meta, serverConfigurators []ServersConfigurator, responseId string) *GetConfigurators200Response {
+func NewGetConfigurators200Response(meta Meta, serverConfigurators []ServersConfigurator) *GetConfigurators200Response {
 	this := GetConfigurators200Response{}
 	this.Meta = meta
 	this.ServerConfigurators = serverConfigurators
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetConfigurators200Response) SetServerConfigurators(v []ServersConfigur
 	o.ServerConfigurators = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetConfigurators200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetConfigurators200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetConfigurators200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetConfigurators200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetConfigurators200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["server_configurators"] = o.ServerConfigurators
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

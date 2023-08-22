@@ -5,13 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Server** | [**Vds**](Vds.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewCreateServer201Response
 
-`func NewCreateServer201Response(server Vds, responseId string, ) *CreateServer201Response`
+`func NewCreateServer201Response(server Vds, ) *CreateServer201Response`
 
 NewCreateServer201Response instantiates a new CreateServer201Response object
 This constructor will assign default values to properties that have it defined,
@@ -44,26 +43,6 @@ and a boolean to check if the value has been set.
 `func (o *CreateServer201Response) SetServer(v Vds)`
 
 SetServer sets Server field to given value.
-
-
-### GetResponseId
-
-`func (o *CreateServer201Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *CreateServer201Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *CreateServer201Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

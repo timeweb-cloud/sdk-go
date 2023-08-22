@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## AddResourceToGroup
 
-> AddResourceToGroup201Response AddResourceToGroup(ctx, groupId, resourceId).ResourceType(resourceType).Execute()
+> FirewallGroupResourceOutResponse AddResourceToGroup(ctx, groupId, resourceId).ResourceType(resourceType).Execute()
 
 Линковка ресурса в firewall group
 
@@ -44,7 +44,7 @@ import (
 func main() {
     groupId := "groupId_example" // string | Идентификатор группы правил
     resourceId := "resourceId_example" // string | Идентификатор ресурса
-    resourceType := openapiclient.ResourceType("server") // ResourceType |  (optional) (default to "server")
+    resourceType := openapiclient.ResourceType("server") // ResourceType |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,7 +53,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.AddResourceToGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AddResourceToGroup`: AddResourceToGroup201Response
+    // response from `AddResourceToGroup`: FirewallGroupResourceOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.AddResourceToGroup`: %v\n", resp)
 }
 ```
@@ -76,11 +76,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **resourceType** | [**ResourceType**](ResourceType.md) |  | [default to &quot;server&quot;]
+ **resourceType** | [**ResourceType**](ResourceType.md) |  | 
 
 ### Return type
 
-[**AddResourceToGroup201Response**](AddResourceToGroup201Response.md)
+[**FirewallGroupResourceOutResponse**](FirewallGroupResourceOutResponse.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 ## CreateGroup
 
-> CreateGroup201Response CreateGroup(ctx).FirewallGroupInAPI(firewallGroupInAPI).Execute()
+> FirewallGroupOutResponse CreateGroup(ctx).FirewallGroupInAPI(firewallGroupInAPI).Execute()
 
 Создание группы правил
 
@@ -126,7 +126,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.CreateGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateGroup`: CreateGroup201Response
+    // response from `CreateGroup`: FirewallGroupOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.CreateGroup`: %v\n", resp)
 }
 ```
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateGroup201Response**](CreateGroup201Response.md)
+[**FirewallGroupOutResponse**](FirewallGroupOutResponse.md)
 
 ### Authorization
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 
 ## CreateGroupRule
 
-> CreateGroupRule201Response CreateGroupRule(ctx, groupId).FirewallRuleInAPI(firewallRuleInAPI).Execute()
+> FirewallRuleOutResponse CreateGroupRule(ctx, groupId).FirewallRuleInAPI(firewallRuleInAPI).Execute()
 
 Создание firewall правила
 
@@ -193,7 +193,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.CreateGroupRule``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateGroupRule`: CreateGroupRule201Response
+    // response from `CreateGroupRule`: FirewallRuleOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.CreateGroupRule`: %v\n", resp)
 }
 ```
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateGroupRule201Response**](CreateGroupRule201Response.md)
+[**FirewallRuleOutResponse**](FirewallRuleOutResponse.md)
 
 ### Authorization
 
@@ -396,7 +396,7 @@ import (
 func main() {
     groupId := "groupId_example" // string | Идентификатор группы правил
     resourceId := "resourceId_example" // string | Идентификатор ресурса
-    resourceType := openapiclient.ResourceType("server") // ResourceType |  (optional) (default to "server")
+    resourceType := openapiclient.ResourceType("server") // ResourceType |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **resourceType** | [**ResourceType**](ResourceType.md) |  | [default to &quot;server&quot;]
+ **resourceType** | [**ResourceType**](ResourceType.md) |  | 
 
 ### Return type
 
@@ -448,7 +448,7 @@ Name | Type | Description  | Notes
 
 ## GetGroup
 
-> CreateGroup201Response GetGroup(ctx, groupId).Execute()
+> FirewallGroupOutResponse GetGroup(ctx, groupId).Execute()
 
 Получение информации о группе правил
 
@@ -476,7 +476,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetGroup`: CreateGroup201Response
+    // response from `GetGroup`: FirewallGroupOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetGroup`: %v\n", resp)
 }
 ```
@@ -500,7 +500,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateGroup201Response**](CreateGroup201Response.md)
+[**FirewallGroupOutResponse**](FirewallGroupOutResponse.md)
 
 ### Authorization
 
@@ -518,7 +518,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupResources
 
-> GetGroupResources200Response GetGroupResources(ctx, groupId).Limit(limit).Offset(offset).Execute()
+> FirewallGroupResourcesOutResponse GetGroupResources(ctx, groupId).Limit(limit).Offset(offset).Execute()
 
 Получение слинкованных ресурсов
 
@@ -548,7 +548,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetGroupResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetGroupResources`: GetGroupResources200Response
+    // response from `GetGroupResources`: FirewallGroupResourcesOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetGroupResources`: %v\n", resp)
 }
 ```
@@ -574,7 +574,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetGroupResources200Response**](GetGroupResources200Response.md)
+[**FirewallGroupResourcesOutResponse**](FirewallGroupResourcesOutResponse.md)
 
 ### Authorization
 
@@ -592,7 +592,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupRule
 
-> CreateGroupRule201Response GetGroupRule(ctx, ruleId, groupId).Execute()
+> FirewallRuleOutResponse GetGroupRule(ctx, ruleId, groupId).Execute()
 
 Получение информации о правиле
 
@@ -621,7 +621,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetGroupRule``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetGroupRule`: CreateGroupRule201Response
+    // response from `GetGroupRule`: FirewallRuleOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetGroupRule`: %v\n", resp)
 }
 ```
@@ -647,7 +647,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateGroupRule201Response**](CreateGroupRule201Response.md)
+[**FirewallRuleOutResponse**](FirewallRuleOutResponse.md)
 
 ### Authorization
 
@@ -665,7 +665,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupRules
 
-> GetGroupRules200Response GetGroupRules(ctx, groupId).Limit(limit).Offset(offset).Execute()
+> FirewallRulesOutResponse GetGroupRules(ctx, groupId).Limit(limit).Offset(offset).Execute()
 
 Получение списка правил
 
@@ -695,7 +695,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetGroupRules``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetGroupRules`: GetGroupRules200Response
+    // response from `GetGroupRules`: FirewallRulesOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetGroupRules`: %v\n", resp)
 }
 ```
@@ -721,7 +721,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetGroupRules200Response**](GetGroupRules200Response.md)
+[**FirewallRulesOutResponse**](FirewallRulesOutResponse.md)
 
 ### Authorization
 
@@ -739,7 +739,7 @@ Name | Type | Description  | Notes
 
 ## GetGroups
 
-> GetGroups200Response GetGroups(ctx).Limit(limit).Offset(offset).Execute()
+> FirewallGroupsOutResponse GetGroups(ctx).Limit(limit).Offset(offset).Execute()
 
 Получение групп правил
 
@@ -768,7 +768,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetGroups``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetGroups`: GetGroups200Response
+    // response from `GetGroups`: FirewallGroupsOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetGroups`: %v\n", resp)
 }
 ```
@@ -789,7 +789,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetGroups200Response**](GetGroups200Response.md)
+[**FirewallGroupsOutResponse**](FirewallGroupsOutResponse.md)
 
 ### Authorization
 
@@ -807,7 +807,7 @@ Name | Type | Description  | Notes
 
 ## GetRulesForResource
 
-> GetGroups200Response GetRulesForResource(ctx, resourceId, resourceType).Limit(limit).Offset(offset).Execute()
+> FirewallGroupsOutResponse GetRulesForResource(ctx, resourceId, resourceType).Limit(limit).Offset(offset).Execute()
 
 Получение групп правил для ресурса
 
@@ -838,7 +838,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetRulesForResource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetRulesForResource`: GetGroups200Response
+    // response from `GetRulesForResource`: FirewallGroupsOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetRulesForResource`: %v\n", resp)
 }
 ```
@@ -866,7 +866,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetGroups200Response**](GetGroups200Response.md)
+[**FirewallGroupsOutResponse**](FirewallGroupsOutResponse.md)
 
 ### Authorization
 
@@ -884,7 +884,7 @@ Name | Type | Description  | Notes
 
 ## UpdateGroup
 
-> CreateGroup201Response UpdateGroup(ctx, groupId).FirewallGroupInAPI(firewallGroupInAPI).Execute()
+> FirewallGroupOutResponse UpdateGroup(ctx, groupId).FirewallGroupInAPI(firewallGroupInAPI).Execute()
 
 Обновление группы правил
 
@@ -913,7 +913,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.UpdateGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateGroup`: CreateGroup201Response
+    // response from `UpdateGroup`: FirewallGroupOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.UpdateGroup`: %v\n", resp)
 }
 ```
@@ -938,7 +938,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateGroup201Response**](CreateGroup201Response.md)
+[**FirewallGroupOutResponse**](FirewallGroupOutResponse.md)
 
 ### Authorization
 
@@ -956,7 +956,7 @@ Name | Type | Description  | Notes
 
 ## UpdateGroupRule
 
-> CreateGroupRule201Response UpdateGroupRule(ctx, groupId, ruleId).FirewallRuleInAPI(firewallRuleInAPI).Execute()
+> FirewallRuleOutResponse UpdateGroupRule(ctx, groupId, ruleId).FirewallRuleInAPI(firewallRuleInAPI).Execute()
 
 Обновление firewall правила
 
@@ -986,7 +986,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.UpdateGroupRule``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateGroupRule`: CreateGroupRule201Response
+    // response from `UpdateGroupRule`: FirewallRuleOutResponse
     fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.UpdateGroupRule`: %v\n", resp)
 }
 ```
@@ -1013,7 +1013,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateGroupRule201Response**](CreateGroupRule201Response.md)
+[**FirewallRuleOutResponse**](FirewallRuleOutResponse.md)
 
 ### Authorization
 

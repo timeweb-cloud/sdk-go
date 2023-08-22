@@ -22,19 +22,16 @@ var _ MappedNullable = &GetTLDs200Response{}
 type GetTLDs200Response struct {
 	Meta Meta `json:"meta"`
 	TopLevelDomains []TopLevelDomain `json:"top_level_domains"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetTLDs200Response instantiates a new GetTLDs200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetTLDs200Response(meta Meta, topLevelDomains []TopLevelDomain, responseId string) *GetTLDs200Response {
+func NewGetTLDs200Response(meta Meta, topLevelDomains []TopLevelDomain) *GetTLDs200Response {
 	this := GetTLDs200Response{}
 	this.Meta = meta
 	this.TopLevelDomains = topLevelDomains
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetTLDs200Response) SetTopLevelDomains(v []TopLevelDomain) {
 	o.TopLevelDomains = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetTLDs200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetTLDs200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetTLDs200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetTLDs200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetTLDs200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["top_level_domains"] = o.TopLevelDomains
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

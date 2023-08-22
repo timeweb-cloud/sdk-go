@@ -22,7 +22,8 @@ var _ MappedNullable = &GetFinances401Response{}
 type GetFinances401Response struct {
 	// Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP.
 	StatusCode float32 `json:"status_code"`
-	Message *GetFinances401ResponseMessage `json:"message,omitempty"`
+	// Сообщение, предоставляющее дополнительную информацию об ошибке, в том числе сведения, помогающие устранить ее, когда это возможно.
+	Message *string `json:"message,omitempty"`
 	// Краткое описание ошибки HTTP на основе статуса.
 	ErrorCode string `json:"error_code"`
 	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
@@ -74,9 +75,9 @@ func (o *GetFinances401Response) SetStatusCode(v float32) {
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.
-func (o *GetFinances401Response) GetMessage() GetFinances401ResponseMessage {
+func (o *GetFinances401Response) GetMessage() string {
 	if o == nil || IsNil(o.Message) {
-		var ret GetFinances401ResponseMessage
+		var ret string
 		return ret
 	}
 	return *o.Message
@@ -84,7 +85,7 @@ func (o *GetFinances401Response) GetMessage() GetFinances401ResponseMessage {
 
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetFinances401Response) GetMessageOk() (*GetFinances401ResponseMessage, bool) {
+func (o *GetFinances401Response) GetMessageOk() (*string, bool) {
 	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
@@ -100,8 +101,8 @@ func (o *GetFinances401Response) HasMessage() bool {
 	return false
 }
 
-// SetMessage gets a reference to the given GetFinances401ResponseMessage and assigns it to the Message field.
-func (o *GetFinances401Response) SetMessage(v GetFinances401ResponseMessage) {
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *GetFinances401Response) SetMessage(v string) {
 	o.Message = &v
 }
 

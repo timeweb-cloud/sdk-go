@@ -22,19 +22,16 @@ var _ MappedNullable = &GetVPCPorts200Response{}
 type GetVPCPorts200Response struct {
 	Meta Meta `json:"meta"`
 	VpcPorts []VpcPort `json:"vpc_ports"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewGetVPCPorts200Response instantiates a new GetVPCPorts200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetVPCPorts200Response(meta Meta, vpcPorts []VpcPort, responseId string) *GetVPCPorts200Response {
+func NewGetVPCPorts200Response(meta Meta, vpcPorts []VpcPort) *GetVPCPorts200Response {
 	this := GetVPCPorts200Response{}
 	this.Meta = meta
 	this.VpcPorts = vpcPorts
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -94,30 +91,6 @@ func (o *GetVPCPorts200Response) SetVpcPorts(v []VpcPort) {
 	o.VpcPorts = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *GetVPCPorts200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetVPCPorts200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetVPCPorts200Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o GetVPCPorts200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -130,7 +103,6 @@ func (o GetVPCPorts200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["meta"] = o.Meta
 	toSerialize["vpc_ports"] = o.VpcPorts
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Meta** | [**Meta**](Meta.md) |  | 
 **BalancersPresets** | [**[]PresetsBalancer**](PresetsBalancer.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetBalancersPresets200Response
 
-`func NewGetBalancersPresets200Response(meta Meta, balancersPresets []PresetsBalancer, responseId string, ) *GetBalancersPresets200Response`
+`func NewGetBalancersPresets200Response(meta Meta, balancersPresets []PresetsBalancer, ) *GetBalancersPresets200Response`
 
 NewGetBalancersPresets200Response instantiates a new GetBalancersPresets200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetBalancersPresets200Response) SetBalancersPresets(v []PresetsBalancer)`
 
 SetBalancersPresets sets BalancersPresets field to given value.
-
-
-### GetResponseId
-
-`func (o *GetBalancersPresets200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetBalancersPresets200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetBalancersPresets200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

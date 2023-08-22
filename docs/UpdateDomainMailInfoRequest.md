@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Email** | Pointer to **string** | Адрес для сбора почты с ошибочных ящиков | [optional] 
+**Email** | **string** | Адрес для сбора почты с ошибочных ящиков | 
 
 ## Methods
 
 ### NewUpdateDomainMailInfoRequest
 
-`func NewUpdateDomainMailInfoRequest() *UpdateDomainMailInfoRequest`
+`func NewUpdateDomainMailInfoRequest(email string, ) *UpdateDomainMailInfoRequest`
 
 NewUpdateDomainMailInfoRequest instantiates a new UpdateDomainMailInfoRequest object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetEmail sets Email field to given value.
 
-### HasEmail
-
-`func (o *UpdateDomainMailInfoRequest) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -27,7 +27,7 @@ type ProjectsAPIService service
 type ApiAddBalancerToProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	addBalancerToProjectRequest *AddBalancerToProjectRequest
 }
 
@@ -51,7 +51,7 @@ AddBalancerToProject Добавление балансировщика в про
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddBalancerToProjectRequest
 */
-func (a *ProjectsAPIService) AddBalancerToProject(ctx context.Context, projectId float32) ApiAddBalancerToProjectRequest {
+func (a *ProjectsAPIService) AddBalancerToProject(ctx context.Context, projectId int32) ApiAddBalancerToProjectRequest {
 	return ApiAddBalancerToProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -200,7 +200,7 @@ func (a *ProjectsAPIService) AddBalancerToProjectExecute(r ApiAddBalancerToProje
 type ApiAddClusterToProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	addClusterToProjectRequest *AddClusterToProjectRequest
 }
 
@@ -224,7 +224,7 @@ AddClusterToProject Добавление кластера в проект
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddClusterToProjectRequest
 */
-func (a *ProjectsAPIService) AddClusterToProject(ctx context.Context, projectId float32) ApiAddClusterToProjectRequest {
+func (a *ProjectsAPIService) AddClusterToProject(ctx context.Context, projectId int32) ApiAddClusterToProjectRequest {
 	return ApiAddClusterToProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -373,7 +373,7 @@ func (a *ProjectsAPIService) AddClusterToProjectExecute(r ApiAddClusterToProject
 type ApiAddDatabaseToProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	addDatabaseToProjectRequest *AddDatabaseToProjectRequest
 }
 
@@ -397,7 +397,7 @@ AddDatabaseToProject Добавление базы данных в проект
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddDatabaseToProjectRequest
 */
-func (a *ProjectsAPIService) AddDatabaseToProject(ctx context.Context, projectId float32) ApiAddDatabaseToProjectRequest {
+func (a *ProjectsAPIService) AddDatabaseToProject(ctx context.Context, projectId int32) ApiAddDatabaseToProjectRequest {
 	return ApiAddDatabaseToProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -546,7 +546,7 @@ func (a *ProjectsAPIService) AddDatabaseToProjectExecute(r ApiAddDatabaseToProje
 type ApiAddDedicatedServerToProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	addDedicatedServerToProjectRequest *AddDedicatedServerToProjectRequest
 }
 
@@ -570,7 +570,7 @@ AddDedicatedServerToProject Добавление выделенного серв
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddDedicatedServerToProjectRequest
 */
-func (a *ProjectsAPIService) AddDedicatedServerToProject(ctx context.Context, projectId float32) ApiAddDedicatedServerToProjectRequest {
+func (a *ProjectsAPIService) AddDedicatedServerToProject(ctx context.Context, projectId int32) ApiAddDedicatedServerToProjectRequest {
 	return ApiAddDedicatedServerToProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -719,7 +719,7 @@ func (a *ProjectsAPIService) AddDedicatedServerToProjectExecute(r ApiAddDedicate
 type ApiAddServerToProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	addServerToProjectRequest *AddServerToProjectRequest
 }
 
@@ -743,7 +743,7 @@ AddServerToProject Добавление сервера в проект
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddServerToProjectRequest
 */
-func (a *ProjectsAPIService) AddServerToProject(ctx context.Context, projectId float32) ApiAddServerToProjectRequest {
+func (a *ProjectsAPIService) AddServerToProject(ctx context.Context, projectId int32) ApiAddServerToProjectRequest {
 	return ApiAddServerToProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -892,7 +892,7 @@ func (a *ProjectsAPIService) AddServerToProjectExecute(r ApiAddServerToProjectRe
 type ApiAddStorageToProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	addStorageToProjectRequest *AddStorageToProjectRequest
 }
 
@@ -916,7 +916,7 @@ AddStorageToProject Добавление хранилища в проект
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddStorageToProjectRequest
 */
-func (a *ProjectsAPIService) AddStorageToProject(ctx context.Context, projectId float32) ApiAddStorageToProjectRequest {
+func (a *ProjectsAPIService) AddStorageToProject(ctx context.Context, projectId int32) ApiAddStorageToProjectRequest {
 	return ApiAddStorageToProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1220,7 +1220,7 @@ func (a *ProjectsAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*C
 type ApiDeleteProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiDeleteProjectRequest) Execute() (*http.Response, error) {
@@ -1236,7 +1236,7 @@ DeleteProject Удаление проекта
  @param projectId Уникальный идентификатор проекта.
  @return ApiDeleteProjectRequest
 */
-func (a *ProjectsAPIService) DeleteProject(ctx context.Context, projectId float32) ApiDeleteProjectRequest {
+func (a *ProjectsAPIService) DeleteProject(ctx context.Context, projectId int32) ApiDeleteProjectRequest {
 	return ApiDeleteProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2287,7 +2287,7 @@ func (a *ProjectsAPIService) GetAccountStoragesExecute(r ApiGetAccountStoragesRe
 type ApiGetAllProjectResourcesRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetAllProjectResourcesRequest) Execute() (*GetAllProjectResources200Response, *http.Response, error) {
@@ -2303,7 +2303,7 @@ GetAllProjectResources Получение всех ресурсов проект
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetAllProjectResourcesRequest
 */
-func (a *ProjectsAPIService) GetAllProjectResources(ctx context.Context, projectId float32) ApiGetAllProjectResourcesRequest {
+func (a *ProjectsAPIService) GetAllProjectResources(ctx context.Context, projectId int32) ApiGetAllProjectResourcesRequest {
 	return ApiGetAllProjectResourcesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2447,7 +2447,7 @@ func (a *ProjectsAPIService) GetAllProjectResourcesExecute(r ApiGetAllProjectRes
 type ApiGetProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetProjectRequest) Execute() (*CreateProject201Response, *http.Response, error) {
@@ -2463,7 +2463,7 @@ GetProject Получение проекта по идентификатору
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectRequest
 */
-func (a *ProjectsAPIService) GetProject(ctx context.Context, projectId float32) ApiGetProjectRequest {
+func (a *ProjectsAPIService) GetProject(ctx context.Context, projectId int32) ApiGetProjectRequest {
 	return ApiGetProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2607,7 +2607,7 @@ func (a *ProjectsAPIService) GetProjectExecute(r ApiGetProjectRequest) (*CreateP
 type ApiGetProjectBalancersRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetProjectBalancersRequest) Execute() (*GetProjectBalancers200Response, *http.Response, error) {
@@ -2623,7 +2623,7 @@ GetProjectBalancers Получение списка балансировщико
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectBalancersRequest
 */
-func (a *ProjectsAPIService) GetProjectBalancers(ctx context.Context, projectId float32) ApiGetProjectBalancersRequest {
+func (a *ProjectsAPIService) GetProjectBalancers(ctx context.Context, projectId int32) ApiGetProjectBalancersRequest {
 	return ApiGetProjectBalancersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2767,7 +2767,7 @@ func (a *ProjectsAPIService) GetProjectBalancersExecute(r ApiGetProjectBalancers
 type ApiGetProjectClustersRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetProjectClustersRequest) Execute() (*GetProjectClusters200Response, *http.Response, error) {
@@ -2783,7 +2783,7 @@ GetProjectClusters Получение списка кластеров проек
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectClustersRequest
 */
-func (a *ProjectsAPIService) GetProjectClusters(ctx context.Context, projectId float32) ApiGetProjectClustersRequest {
+func (a *ProjectsAPIService) GetProjectClusters(ctx context.Context, projectId int32) ApiGetProjectClustersRequest {
 	return ApiGetProjectClustersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2927,7 +2927,7 @@ func (a *ProjectsAPIService) GetProjectClustersExecute(r ApiGetProjectClustersRe
 type ApiGetProjectDatabasesRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetProjectDatabasesRequest) Execute() (*GetProjectDatabases200Response, *http.Response, error) {
@@ -2943,7 +2943,7 @@ GetProjectDatabases Получение списка баз данных прое
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectDatabasesRequest
 */
-func (a *ProjectsAPIService) GetProjectDatabases(ctx context.Context, projectId float32) ApiGetProjectDatabasesRequest {
+func (a *ProjectsAPIService) GetProjectDatabases(ctx context.Context, projectId int32) ApiGetProjectDatabasesRequest {
 	return ApiGetProjectDatabasesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3087,7 +3087,7 @@ func (a *ProjectsAPIService) GetProjectDatabasesExecute(r ApiGetProjectDatabases
 type ApiGetProjectDedicatedServersRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetProjectDedicatedServersRequest) Execute() (*GetProjectDedicatedServers200Response, *http.Response, error) {
@@ -3103,7 +3103,7 @@ GetProjectDedicatedServers Получение списка выделенных 
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectDedicatedServersRequest
 */
-func (a *ProjectsAPIService) GetProjectDedicatedServers(ctx context.Context, projectId float32) ApiGetProjectDedicatedServersRequest {
+func (a *ProjectsAPIService) GetProjectDedicatedServers(ctx context.Context, projectId int32) ApiGetProjectDedicatedServersRequest {
 	return ApiGetProjectDedicatedServersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3247,7 +3247,7 @@ func (a *ProjectsAPIService) GetProjectDedicatedServersExecute(r ApiGetProjectDe
 type ApiGetProjectServersRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetProjectServersRequest) Execute() (*GetProjectServers200Response, *http.Response, error) {
@@ -3263,7 +3263,7 @@ GetProjectServers Получение списка серверов проект�
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectServersRequest
 */
-func (a *ProjectsAPIService) GetProjectServers(ctx context.Context, projectId float32) ApiGetProjectServersRequest {
+func (a *ProjectsAPIService) GetProjectServers(ctx context.Context, projectId int32) ApiGetProjectServersRequest {
 	return ApiGetProjectServersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3407,7 +3407,7 @@ func (a *ProjectsAPIService) GetProjectServersExecute(r ApiGetProjectServersRequ
 type ApiGetProjectStoragesRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 }
 
 func (r ApiGetProjectStoragesRequest) Execute() (*GetProjectStorages200Response, *http.Response, error) {
@@ -3423,7 +3423,7 @@ GetProjectStorages Получение списка хранилищ проект
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectStoragesRequest
 */
-func (a *ProjectsAPIService) GetProjectStorages(ctx context.Context, projectId float32) ApiGetProjectStoragesRequest {
+func (a *ProjectsAPIService) GetProjectStorages(ctx context.Context, projectId int32) ApiGetProjectStoragesRequest {
 	return ApiGetProjectStoragesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3711,7 +3711,7 @@ func (a *ProjectsAPIService) GetProjectsExecute(r ApiGetProjectsRequest) (*GetPr
 type ApiTransferResourceToAnotherProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	resourceTransfer *ResourceTransfer
 }
 
@@ -3734,7 +3734,7 @@ TransferResourceToAnotherProject Перенести ресурс в другой
  @param projectId Уникальный идентификатор проекта.
  @return ApiTransferResourceToAnotherProjectRequest
 */
-func (a *ProjectsAPIService) TransferResourceToAnotherProject(ctx context.Context, projectId float32) ApiTransferResourceToAnotherProjectRequest {
+func (a *ProjectsAPIService) TransferResourceToAnotherProject(ctx context.Context, projectId int32) ApiTransferResourceToAnotherProjectRequest {
 	return ApiTransferResourceToAnotherProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3894,7 +3894,7 @@ func (a *ProjectsAPIService) TransferResourceToAnotherProjectExecute(r ApiTransf
 type ApiUpdateProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	projectId float32
+	projectId int32
 	updateProject *UpdateProject
 }
 
@@ -3916,7 +3916,7 @@ UpdateProject Изменение проекта
  @param projectId Уникальный идентификатор проекта.
  @return ApiUpdateProjectRequest
 */
-func (a *ProjectsAPIService) UpdateProject(ctx context.Context, projectId float32) ApiUpdateProjectRequest {
+func (a *ProjectsAPIService) UpdateProject(ctx context.Context, projectId int32) ApiUpdateProjectRequest {
 	return ApiUpdateProjectRequest{
 		ApiService: a,
 		ctx: ctx,

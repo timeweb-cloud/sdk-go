@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 ## CreateDomainRequest
 
-> CreateDomainRequest201Response CreateDomainRequest(ctx).CreateDomainRequestRequest(createDomainRequestRequest).Execute()
+> CreateDomainRequest201Response CreateDomainRequest(ctx).Register(register).Execute()
 
 Создание заявки на регистрацию/продление/трансфер домена
 
@@ -332,11 +332,11 @@ import (
 )
 
 func main() {
-    createDomainRequestRequest := openapiclient.createDomainRequest_request{Prolong: openapiclient.NewProlong("prolong", "somedomain.ru")} // CreateDomainRequestRequest | 
+    register := *openapiclient.NewRegister("register", "somedomain.ru", float32(123)) // Register | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DomainsAPI.CreateDomainRequest(context.Background()).CreateDomainRequestRequest(createDomainRequestRequest).Execute()
+    resp, r, err := apiClient.DomainsAPI.CreateDomainRequest(context.Background()).Register(register).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.CreateDomainRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -357,7 +357,7 @@ Other parameters are passed through a pointer to a apiCreateDomainRequestRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createDomainRequestRequest** | [**CreateDomainRequestRequest**](CreateDomainRequestRequest.md) |  | 
+ **register** | [**Register**](Register.md) |  | 
 
 ### Return type
 
@@ -1446,7 +1446,7 @@ Name | Type | Description  | Notes
 
 ## UpdateDomainRequest
 
-> CreateDomainRequest201Response UpdateDomainRequest(ctx, requestId).UpdateDomainRequestRequest(updateDomainRequestRequest).Execute()
+> CreateDomainRequest201Response UpdateDomainRequest(ctx, requestId).Use(use).Execute()
 
 Оплата/обновление заявки на регистрацию/продление/трансфер домена
 
@@ -1466,11 +1466,11 @@ import (
 
 func main() {
     requestId := int32(123) // int32 | Идентификатор заявки на регистрацию/продление/трансфер домена.
-    updateDomainRequestRequest := openapiclient.updateDomainRequest_request{Bonus: openapiclient.NewBonus("bonus", float32(123))} // UpdateDomainRequestRequest | 
+    use := *openapiclient.NewUse("use") // Use | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DomainsAPI.UpdateDomainRequest(context.Background(), requestId).UpdateDomainRequestRequest(updateDomainRequestRequest).Execute()
+    resp, r, err := apiClient.DomainsAPI.UpdateDomainRequest(context.Background(), requestId).Use(use).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.UpdateDomainRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1496,7 +1496,7 @@ Other parameters are passed through a pointer to a apiUpdateDomainRequestRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateDomainRequestRequest** | [**UpdateDomainRequestRequest**](UpdateDomainRequestRequest.md) |  | 
+ **use** | [**Use**](Use.md) |  | 
 
 ### Return type
 

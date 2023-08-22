@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Direction** | [**FirewallRuleDirection**](FirewallRuleDirection.md) |  | 
 **Port** | Pointer to **string** | Порт или диапазон портов, в случае tcp или udp | [optional] 
 **Protocol** | [**FirewallRuleProtocol**](FirewallRuleProtocol.md) |  | 
-**Cidr** | Pointer to [**Cidr**](Cidr.md) |  | [optional] 
+**Cidr** | Pointer to **string** | Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv6 | [optional] 
 
 ## Methods
 
@@ -121,20 +121,20 @@ SetProtocol sets Protocol field to given value.
 
 ### GetCidr
 
-`func (o *FirewallRuleInAPI) GetCidr() Cidr`
+`func (o *FirewallRuleInAPI) GetCidr() string`
 
 GetCidr returns the Cidr field if non-nil, zero value otherwise.
 
 ### GetCidrOk
 
-`func (o *FirewallRuleInAPI) GetCidrOk() (*Cidr, bool)`
+`func (o *FirewallRuleInAPI) GetCidrOk() (*string, bool)`
 
 GetCidrOk returns a tuple with the Cidr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCidr
 
-`func (o *FirewallRuleInAPI) SetCidr(v Cidr)`
+`func (o *FirewallRuleInAPI) SetCidr(v string)`
 
 SetCidr sets Cidr field to given value.
 

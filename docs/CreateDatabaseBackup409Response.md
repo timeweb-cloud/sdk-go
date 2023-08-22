@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StatusCode** | **float32** | Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP. | 
-**Message** | Pointer to [**CreateDatabaseBackup409ResponseMessage**](CreateDatabaseBackup409ResponseMessage.md) |  | [optional] 
+**Message** | Pointer to **string** | Сообщение, предоставляющее дополнительную информацию об ошибке, в том числе сведения, помогающие устранить ее, когда это возможно. | [optional] 
 **ErrorCode** | **string** | Краткое описание ошибки HTTP на основе статуса. | 
 **ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
@@ -50,20 +50,20 @@ SetStatusCode sets StatusCode field to given value.
 
 ### GetMessage
 
-`func (o *CreateDatabaseBackup409Response) GetMessage() CreateDatabaseBackup409ResponseMessage`
+`func (o *CreateDatabaseBackup409Response) GetMessage() string`
 
 GetMessage returns the Message field if non-nil, zero value otherwise.
 
 ### GetMessageOk
 
-`func (o *CreateDatabaseBackup409Response) GetMessageOk() (*CreateDatabaseBackup409ResponseMessage, bool)`
+`func (o *CreateDatabaseBackup409Response) GetMessageOk() (*string, bool)`
 
 GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessage
 
-`func (o *CreateDatabaseBackup409Response) SetMessage(v CreateDatabaseBackup409ResponseMessage)`
+`func (o *CreateDatabaseBackup409Response) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
 

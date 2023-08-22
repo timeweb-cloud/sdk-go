@@ -21,18 +21,15 @@ var _ MappedNullable = &AddServerIP201Response{}
 // AddServerIP201Response struct for AddServerIP201Response
 type AddServerIP201Response struct {
 	ServerIp ServerIp `json:"server_ip"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
 }
 
 // NewAddServerIP201Response instantiates a new AddServerIP201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddServerIP201Response(serverIp ServerIp, responseId string) *AddServerIP201Response {
+func NewAddServerIP201Response(serverIp ServerIp) *AddServerIP201Response {
 	this := AddServerIP201Response{}
 	this.ServerIp = serverIp
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -68,30 +65,6 @@ func (o *AddServerIP201Response) SetServerIp(v ServerIp) {
 	o.ServerIp = v
 }
 
-// GetResponseId returns the ResponseId field value
-func (o *AddServerIP201Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *AddServerIP201Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *AddServerIP201Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
 func (o AddServerIP201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -103,7 +76,6 @@ func (o AddServerIP201Response) MarshalJSON() ([]byte, error) {
 func (o AddServerIP201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["server_ip"] = o.ServerIp
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 

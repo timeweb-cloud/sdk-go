@@ -6,13 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Balancers** | [**[]Balancer**](Balancer.md) |  | 
 **Meta** | [**Meta**](Meta.md) |  | 
-**ResponseId** | **string** | Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему. | 
 
 ## Methods
 
 ### NewGetProjectBalancers200Response
 
-`func NewGetProjectBalancers200Response(balancers []Balancer, meta Meta, responseId string, ) *GetProjectBalancers200Response`
+`func NewGetProjectBalancers200Response(balancers []Balancer, meta Meta, ) *GetProjectBalancers200Response`
 
 NewGetProjectBalancers200Response instantiates a new GetProjectBalancers200Response object
 This constructor will assign default values to properties that have it defined,
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *GetProjectBalancers200Response) SetMeta(v Meta)`
 
 SetMeta sets Meta field to given value.
-
-
-### GetResponseId
-
-`func (o *GetProjectBalancers200Response) GetResponseId() string`
-
-GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
-
-### GetResponseIdOk
-
-`func (o *GetProjectBalancers200Response) GetResponseIdOk() (*string, bool)`
-
-GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResponseId
-
-`func (o *GetProjectBalancers200Response) SetResponseId(v string)`
-
-SetResponseId sets ResponseId field to given value.
 
 
 

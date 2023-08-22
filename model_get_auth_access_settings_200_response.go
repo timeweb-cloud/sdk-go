@@ -24,21 +24,18 @@ type GetAuthAccessSettings200Response struct {
 	IsIpRestrictionsEnabled bool `json:"is_ip_restrictions_enabled"`
 	// Это логическое значение, которое показывает, включено ли ограничение доступа по стране.
 	IsCountryRestrictionsEnabled bool `json:"is_country_restrictions_enabled"`
-	WhiteList GetAuthAccessSettings200ResponseAllOfWhiteList `json:"white_list"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
+	WhiteList GetAuthAccessSettings200ResponseWhiteList `json:"white_list"`
 }
 
 // NewGetAuthAccessSettings200Response instantiates a new GetAuthAccessSettings200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAuthAccessSettings200Response(isIpRestrictionsEnabled bool, isCountryRestrictionsEnabled bool, whiteList GetAuthAccessSettings200ResponseAllOfWhiteList, responseId string) *GetAuthAccessSettings200Response {
+func NewGetAuthAccessSettings200Response(isIpRestrictionsEnabled bool, isCountryRestrictionsEnabled bool, whiteList GetAuthAccessSettings200ResponseWhiteList) *GetAuthAccessSettings200Response {
 	this := GetAuthAccessSettings200Response{}
 	this.IsIpRestrictionsEnabled = isIpRestrictionsEnabled
 	this.IsCountryRestrictionsEnabled = isCountryRestrictionsEnabled
 	this.WhiteList = whiteList
-	this.ResponseId = responseId
 	return &this
 }
 
@@ -99,9 +96,9 @@ func (o *GetAuthAccessSettings200Response) SetIsCountryRestrictionsEnabled(v boo
 }
 
 // GetWhiteList returns the WhiteList field value
-func (o *GetAuthAccessSettings200Response) GetWhiteList() GetAuthAccessSettings200ResponseAllOfWhiteList {
+func (o *GetAuthAccessSettings200Response) GetWhiteList() GetAuthAccessSettings200ResponseWhiteList {
 	if o == nil {
-		var ret GetAuthAccessSettings200ResponseAllOfWhiteList
+		var ret GetAuthAccessSettings200ResponseWhiteList
 		return ret
 	}
 
@@ -110,7 +107,7 @@ func (o *GetAuthAccessSettings200Response) GetWhiteList() GetAuthAccessSettings2
 
 // GetWhiteListOk returns a tuple with the WhiteList field value
 // and a boolean to check if the value has been set.
-func (o *GetAuthAccessSettings200Response) GetWhiteListOk() (*GetAuthAccessSettings200ResponseAllOfWhiteList, bool) {
+func (o *GetAuthAccessSettings200Response) GetWhiteListOk() (*GetAuthAccessSettings200ResponseWhiteList, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,32 +115,8 @@ func (o *GetAuthAccessSettings200Response) GetWhiteListOk() (*GetAuthAccessSetti
 }
 
 // SetWhiteList sets field value
-func (o *GetAuthAccessSettings200Response) SetWhiteList(v GetAuthAccessSettings200ResponseAllOfWhiteList) {
+func (o *GetAuthAccessSettings200Response) SetWhiteList(v GetAuthAccessSettings200ResponseWhiteList) {
 	o.WhiteList = v
-}
-
-// GetResponseId returns the ResponseId field value
-func (o *GetAuthAccessSettings200Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetAuthAccessSettings200Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetAuthAccessSettings200Response) SetResponseId(v string) {
-	o.ResponseId = v
 }
 
 func (o GetAuthAccessSettings200Response) MarshalJSON() ([]byte, error) {
@@ -159,7 +132,6 @@ func (o GetAuthAccessSettings200Response) ToMap() (map[string]interface{}, error
 	toSerialize["is_ip_restrictions_enabled"] = o.IsIpRestrictionsEnabled
 	toSerialize["is_country_restrictions_enabled"] = o.IsCountryRestrictionsEnabled
 	toSerialize["white_list"] = o.WhiteList
-	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 
