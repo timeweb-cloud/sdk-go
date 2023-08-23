@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **StatusCode** | **int32** |  | 
 **ErrorCode** | **string** |  | 
 **Message** | **string** |  | 
-**ResponseId** | Pointer to **string** |  | [optional] [default to "9c38a13d-ef14-45c7-a23a-1429f6a03824"]
+**ResponseId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 

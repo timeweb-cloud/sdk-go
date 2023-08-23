@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the Register type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Register{}
+// checks if the DomainRegister type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DomainRegister{}
 
-// Register Заявка на регистрацию домена
-type Register struct {
+// DomainRegister Заявка на регистрацию домена
+type DomainRegister struct {
 	// Тип создаваемой заявки.
 	Action string `json:"action"`
 	// Полное имя домена.
@@ -29,34 +29,34 @@ type Register struct {
 	// Это логическое значение, которое показывает, включено ли скрытие данных администратора домена для whois. Опция недоступна для доменов в зонах .ru и .рф.
 	IsWhoisPrivacyEnabled *bool `json:"is_whois_privacy_enabled,omitempty"`
 	// Name-серверы для регистрации домена. Если не передавать этот параметр, будут использованы наши стандартные name-серверы. Нужно указать как минимум 2 name-сервера.
-	Ns []RegisterNsInner `json:"ns,omitempty"`
+	Ns []DomainRegisterNsInner `json:"ns,omitempty"`
 	Period *DomainPaymentPeriod `json:"period,omitempty"`
 	// Идентификатор администратора, на которого регистрируется домен.
 	PersonId float32 `json:"person_id"`
 }
 
-// NewRegister instantiates a new Register object
+// NewDomainRegister instantiates a new DomainRegister object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegister(action string, fqdn string, personId float32) *Register {
-	this := Register{}
+func NewDomainRegister(action string, fqdn string, personId float32) *DomainRegister {
+	this := DomainRegister{}
 	this.Action = action
 	this.Fqdn = fqdn
 	this.PersonId = personId
 	return &this
 }
 
-// NewRegisterWithDefaults instantiates a new Register object
+// NewDomainRegisterWithDefaults instantiates a new DomainRegister object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRegisterWithDefaults() *Register {
-	this := Register{}
+func NewDomainRegisterWithDefaults() *DomainRegister {
+	this := DomainRegister{}
 	return &this
 }
 
 // GetAction returns the Action field value
-func (o *Register) GetAction() string {
+func (o *DomainRegister) GetAction() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -67,7 +67,7 @@ func (o *Register) GetAction() string {
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *Register) GetActionOk() (*string, bool) {
+func (o *DomainRegister) GetActionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,12 +75,12 @@ func (o *Register) GetActionOk() (*string, bool) {
 }
 
 // SetAction sets field value
-func (o *Register) SetAction(v string) {
+func (o *DomainRegister) SetAction(v string) {
 	o.Action = v
 }
 
 // GetFqdn returns the Fqdn field value
-func (o *Register) GetFqdn() string {
+func (o *DomainRegister) GetFqdn() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -91,7 +91,7 @@ func (o *Register) GetFqdn() string {
 
 // GetFqdnOk returns a tuple with the Fqdn field value
 // and a boolean to check if the value has been set.
-func (o *Register) GetFqdnOk() (*string, bool) {
+func (o *DomainRegister) GetFqdnOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,12 +99,12 @@ func (o *Register) GetFqdnOk() (*string, bool) {
 }
 
 // SetFqdn sets field value
-func (o *Register) SetFqdn(v string) {
+func (o *DomainRegister) SetFqdn(v string) {
 	o.Fqdn = v
 }
 
 // GetIsAutoprolongEnabled returns the IsAutoprolongEnabled field value if set, zero value otherwise.
-func (o *Register) GetIsAutoprolongEnabled() bool {
+func (o *DomainRegister) GetIsAutoprolongEnabled() bool {
 	if o == nil || IsNil(o.IsAutoprolongEnabled) {
 		var ret bool
 		return ret
@@ -114,7 +114,7 @@ func (o *Register) GetIsAutoprolongEnabled() bool {
 
 // GetIsAutoprolongEnabledOk returns a tuple with the IsAutoprolongEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Register) GetIsAutoprolongEnabledOk() (*bool, bool) {
+func (o *DomainRegister) GetIsAutoprolongEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsAutoprolongEnabled) {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *Register) GetIsAutoprolongEnabledOk() (*bool, bool) {
 }
 
 // HasIsAutoprolongEnabled returns a boolean if a field has been set.
-func (o *Register) HasIsAutoprolongEnabled() bool {
+func (o *DomainRegister) HasIsAutoprolongEnabled() bool {
 	if o != nil && !IsNil(o.IsAutoprolongEnabled) {
 		return true
 	}
@@ -131,12 +131,12 @@ func (o *Register) HasIsAutoprolongEnabled() bool {
 }
 
 // SetIsAutoprolongEnabled gets a reference to the given bool and assigns it to the IsAutoprolongEnabled field.
-func (o *Register) SetIsAutoprolongEnabled(v bool) {
+func (o *DomainRegister) SetIsAutoprolongEnabled(v bool) {
 	o.IsAutoprolongEnabled = &v
 }
 
 // GetIsWhoisPrivacyEnabled returns the IsWhoisPrivacyEnabled field value if set, zero value otherwise.
-func (o *Register) GetIsWhoisPrivacyEnabled() bool {
+func (o *DomainRegister) GetIsWhoisPrivacyEnabled() bool {
 	if o == nil || IsNil(o.IsWhoisPrivacyEnabled) {
 		var ret bool
 		return ret
@@ -146,7 +146,7 @@ func (o *Register) GetIsWhoisPrivacyEnabled() bool {
 
 // GetIsWhoisPrivacyEnabledOk returns a tuple with the IsWhoisPrivacyEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Register) GetIsWhoisPrivacyEnabledOk() (*bool, bool) {
+func (o *DomainRegister) GetIsWhoisPrivacyEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsWhoisPrivacyEnabled) {
 		return nil, false
 	}
@@ -154,7 +154,7 @@ func (o *Register) GetIsWhoisPrivacyEnabledOk() (*bool, bool) {
 }
 
 // HasIsWhoisPrivacyEnabled returns a boolean if a field has been set.
-func (o *Register) HasIsWhoisPrivacyEnabled() bool {
+func (o *DomainRegister) HasIsWhoisPrivacyEnabled() bool {
 	if o != nil && !IsNil(o.IsWhoisPrivacyEnabled) {
 		return true
 	}
@@ -163,14 +163,14 @@ func (o *Register) HasIsWhoisPrivacyEnabled() bool {
 }
 
 // SetIsWhoisPrivacyEnabled gets a reference to the given bool and assigns it to the IsWhoisPrivacyEnabled field.
-func (o *Register) SetIsWhoisPrivacyEnabled(v bool) {
+func (o *DomainRegister) SetIsWhoisPrivacyEnabled(v bool) {
 	o.IsWhoisPrivacyEnabled = &v
 }
 
 // GetNs returns the Ns field value if set, zero value otherwise.
-func (o *Register) GetNs() []RegisterNsInner {
+func (o *DomainRegister) GetNs() []DomainRegisterNsInner {
 	if o == nil || IsNil(o.Ns) {
-		var ret []RegisterNsInner
+		var ret []DomainRegisterNsInner
 		return ret
 	}
 	return o.Ns
@@ -178,7 +178,7 @@ func (o *Register) GetNs() []RegisterNsInner {
 
 // GetNsOk returns a tuple with the Ns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Register) GetNsOk() ([]RegisterNsInner, bool) {
+func (o *DomainRegister) GetNsOk() ([]DomainRegisterNsInner, bool) {
 	if o == nil || IsNil(o.Ns) {
 		return nil, false
 	}
@@ -186,7 +186,7 @@ func (o *Register) GetNsOk() ([]RegisterNsInner, bool) {
 }
 
 // HasNs returns a boolean if a field has been set.
-func (o *Register) HasNs() bool {
+func (o *DomainRegister) HasNs() bool {
 	if o != nil && !IsNil(o.Ns) {
 		return true
 	}
@@ -194,13 +194,13 @@ func (o *Register) HasNs() bool {
 	return false
 }
 
-// SetNs gets a reference to the given []RegisterNsInner and assigns it to the Ns field.
-func (o *Register) SetNs(v []RegisterNsInner) {
+// SetNs gets a reference to the given []DomainRegisterNsInner and assigns it to the Ns field.
+func (o *DomainRegister) SetNs(v []DomainRegisterNsInner) {
 	o.Ns = v
 }
 
 // GetPeriod returns the Period field value if set, zero value otherwise.
-func (o *Register) GetPeriod() DomainPaymentPeriod {
+func (o *DomainRegister) GetPeriod() DomainPaymentPeriod {
 	if o == nil || IsNil(o.Period) {
 		var ret DomainPaymentPeriod
 		return ret
@@ -210,7 +210,7 @@ func (o *Register) GetPeriod() DomainPaymentPeriod {
 
 // GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Register) GetPeriodOk() (*DomainPaymentPeriod, bool) {
+func (o *DomainRegister) GetPeriodOk() (*DomainPaymentPeriod, bool) {
 	if o == nil || IsNil(o.Period) {
 		return nil, false
 	}
@@ -218,7 +218,7 @@ func (o *Register) GetPeriodOk() (*DomainPaymentPeriod, bool) {
 }
 
 // HasPeriod returns a boolean if a field has been set.
-func (o *Register) HasPeriod() bool {
+func (o *DomainRegister) HasPeriod() bool {
 	if o != nil && !IsNil(o.Period) {
 		return true
 	}
@@ -227,12 +227,12 @@ func (o *Register) HasPeriod() bool {
 }
 
 // SetPeriod gets a reference to the given DomainPaymentPeriod and assigns it to the Period field.
-func (o *Register) SetPeriod(v DomainPaymentPeriod) {
+func (o *DomainRegister) SetPeriod(v DomainPaymentPeriod) {
 	o.Period = &v
 }
 
 // GetPersonId returns the PersonId field value
-func (o *Register) GetPersonId() float32 {
+func (o *DomainRegister) GetPersonId() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -243,7 +243,7 @@ func (o *Register) GetPersonId() float32 {
 
 // GetPersonIdOk returns a tuple with the PersonId field value
 // and a boolean to check if the value has been set.
-func (o *Register) GetPersonIdOk() (*float32, bool) {
+func (o *DomainRegister) GetPersonIdOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -251,11 +251,11 @@ func (o *Register) GetPersonIdOk() (*float32, bool) {
 }
 
 // SetPersonId sets field value
-func (o *Register) SetPersonId(v float32) {
+func (o *DomainRegister) SetPersonId(v float32) {
 	o.PersonId = v
 }
 
-func (o Register) MarshalJSON() ([]byte, error) {
+func (o DomainRegister) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -263,7 +263,7 @@ func (o Register) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Register) ToMap() (map[string]interface{}, error) {
+func (o DomainRegister) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
 	toSerialize["fqdn"] = o.Fqdn
@@ -283,38 +283,38 @@ func (o Register) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableRegister struct {
-	value *Register
+type NullableDomainRegister struct {
+	value *DomainRegister
 	isSet bool
 }
 
-func (v NullableRegister) Get() *Register {
+func (v NullableDomainRegister) Get() *DomainRegister {
 	return v.value
 }
 
-func (v *NullableRegister) Set(val *Register) {
+func (v *NullableDomainRegister) Set(val *DomainRegister) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRegister) IsSet() bool {
+func (v NullableDomainRegister) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRegister) Unset() {
+func (v *NullableDomainRegister) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRegister(val *Register) *NullableRegister {
-	return &NullableRegister{value: val, isSet: true}
+func NewNullableDomainRegister(val *DomainRegister) *NullableDomainRegister {
+	return &NullableDomainRegister{value: val, isSet: true}
 }
 
-func (v NullableRegister) MarshalJSON() ([]byte, error) {
+func (v NullableDomainRegister) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRegister) UnmarshalJSON(src []byte) error {
+func (v *NullableDomainRegister) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

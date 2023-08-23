@@ -652,11 +652,11 @@ func (a *DomainsAPIService) CreateDomainDNSRecordExecute(r ApiCreateDomainDNSRec
 type ApiCreateDomainRequestRequest struct {
 	ctx context.Context
 	ApiService *DomainsAPIService
-	register *Register
+	domainRegister *DomainRegister
 }
 
-func (r ApiCreateDomainRequestRequest) Register(register Register) ApiCreateDomainRequestRequest {
-	r.register = &register
+func (r ApiCreateDomainRequestRequest) DomainRegister(domainRegister DomainRegister) ApiCreateDomainRequestRequest {
+	r.domainRegister = &domainRegister
 	return r
 }
 
@@ -701,8 +701,8 @@ func (a *DomainsAPIService) CreateDomainRequestExecute(r ApiCreateDomainRequestR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.register == nil {
-		return localVarReturnValue, nil, reportError("register is required and must be specified")
+	if r.domainRegister == nil {
+		return localVarReturnValue, nil, reportError("domainRegister is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -723,7 +723,7 @@ func (a *DomainsAPIService) CreateDomainRequestExecute(r ApiCreateDomainRequestR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.register
+	localVarPostBody = r.domainRegister
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

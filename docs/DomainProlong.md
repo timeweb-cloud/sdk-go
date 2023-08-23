@@ -1,4 +1,4 @@
-# Prolong
+# DomainProlong
 
 ## Properties
 
@@ -15,210 +15,210 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewProlong
+### NewDomainProlong
 
-`func NewProlong(action string, fqdn string, ) *Prolong`
+`func NewDomainProlong(action string, fqdn string, ) *DomainProlong`
 
-NewProlong instantiates a new Prolong object
+NewDomainProlong instantiates a new DomainProlong object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewProlongWithDefaults
+### NewDomainProlongWithDefaults
 
-`func NewProlongWithDefaults() *Prolong`
+`func NewDomainProlongWithDefaults() *DomainProlong`
 
-NewProlongWithDefaults instantiates a new Prolong object
+NewDomainProlongWithDefaults instantiates a new DomainProlong object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAction
 
-`func (o *Prolong) GetAction() string`
+`func (o *DomainProlong) GetAction() string`
 
 GetAction returns the Action field if non-nil, zero value otherwise.
 
 ### GetActionOk
 
-`func (o *Prolong) GetActionOk() (*string, bool)`
+`func (o *DomainProlong) GetActionOk() (*string, bool)`
 
 GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAction
 
-`func (o *Prolong) SetAction(v string)`
+`func (o *DomainProlong) SetAction(v string)`
 
 SetAction sets Action field to given value.
 
 
 ### GetFqdn
 
-`func (o *Prolong) GetFqdn() string`
+`func (o *DomainProlong) GetFqdn() string`
 
 GetFqdn returns the Fqdn field if non-nil, zero value otherwise.
 
 ### GetFqdnOk
 
-`func (o *Prolong) GetFqdnOk() (*string, bool)`
+`func (o *DomainProlong) GetFqdnOk() (*string, bool)`
 
 GetFqdnOk returns a tuple with the Fqdn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFqdn
 
-`func (o *Prolong) SetFqdn(v string)`
+`func (o *DomainProlong) SetFqdn(v string)`
 
 SetFqdn sets Fqdn field to given value.
 
 
 ### GetIsAntispamEnabled
 
-`func (o *Prolong) GetIsAntispamEnabled() bool`
+`func (o *DomainProlong) GetIsAntispamEnabled() bool`
 
 GetIsAntispamEnabled returns the IsAntispamEnabled field if non-nil, zero value otherwise.
 
 ### GetIsAntispamEnabledOk
 
-`func (o *Prolong) GetIsAntispamEnabledOk() (*bool, bool)`
+`func (o *DomainProlong) GetIsAntispamEnabledOk() (*bool, bool)`
 
 GetIsAntispamEnabledOk returns a tuple with the IsAntispamEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsAntispamEnabled
 
-`func (o *Prolong) SetIsAntispamEnabled(v bool)`
+`func (o *DomainProlong) SetIsAntispamEnabled(v bool)`
 
 SetIsAntispamEnabled sets IsAntispamEnabled field to given value.
 
 ### HasIsAntispamEnabled
 
-`func (o *Prolong) HasIsAntispamEnabled() bool`
+`func (o *DomainProlong) HasIsAntispamEnabled() bool`
 
 HasIsAntispamEnabled returns a boolean if a field has been set.
 
 ### GetIsAutoprolongEnabled
 
-`func (o *Prolong) GetIsAutoprolongEnabled() bool`
+`func (o *DomainProlong) GetIsAutoprolongEnabled() bool`
 
 GetIsAutoprolongEnabled returns the IsAutoprolongEnabled field if non-nil, zero value otherwise.
 
 ### GetIsAutoprolongEnabledOk
 
-`func (o *Prolong) GetIsAutoprolongEnabledOk() (*bool, bool)`
+`func (o *DomainProlong) GetIsAutoprolongEnabledOk() (*bool, bool)`
 
 GetIsAutoprolongEnabledOk returns a tuple with the IsAutoprolongEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsAutoprolongEnabled
 
-`func (o *Prolong) SetIsAutoprolongEnabled(v bool)`
+`func (o *DomainProlong) SetIsAutoprolongEnabled(v bool)`
 
 SetIsAutoprolongEnabled sets IsAutoprolongEnabled field to given value.
 
 ### HasIsAutoprolongEnabled
 
-`func (o *Prolong) HasIsAutoprolongEnabled() bool`
+`func (o *DomainProlong) HasIsAutoprolongEnabled() bool`
 
 HasIsAutoprolongEnabled returns a boolean if a field has been set.
 
 ### GetIsWhoisPrivacyEnabled
 
-`func (o *Prolong) GetIsWhoisPrivacyEnabled() bool`
+`func (o *DomainProlong) GetIsWhoisPrivacyEnabled() bool`
 
 GetIsWhoisPrivacyEnabled returns the IsWhoisPrivacyEnabled field if non-nil, zero value otherwise.
 
 ### GetIsWhoisPrivacyEnabledOk
 
-`func (o *Prolong) GetIsWhoisPrivacyEnabledOk() (*bool, bool)`
+`func (o *DomainProlong) GetIsWhoisPrivacyEnabledOk() (*bool, bool)`
 
 GetIsWhoisPrivacyEnabledOk returns a tuple with the IsWhoisPrivacyEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsWhoisPrivacyEnabled
 
-`func (o *Prolong) SetIsWhoisPrivacyEnabled(v bool)`
+`func (o *DomainProlong) SetIsWhoisPrivacyEnabled(v bool)`
 
 SetIsWhoisPrivacyEnabled sets IsWhoisPrivacyEnabled field to given value.
 
 ### HasIsWhoisPrivacyEnabled
 
-`func (o *Prolong) HasIsWhoisPrivacyEnabled() bool`
+`func (o *DomainProlong) HasIsWhoisPrivacyEnabled() bool`
 
 HasIsWhoisPrivacyEnabled returns a boolean if a field has been set.
 
 ### GetPeriod
 
-`func (o *Prolong) GetPeriod() DomainPaymentPeriod`
+`func (o *DomainProlong) GetPeriod() DomainPaymentPeriod`
 
 GetPeriod returns the Period field if non-nil, zero value otherwise.
 
 ### GetPeriodOk
 
-`func (o *Prolong) GetPeriodOk() (*DomainPaymentPeriod, bool)`
+`func (o *DomainProlong) GetPeriodOk() (*DomainPaymentPeriod, bool)`
 
 GetPeriodOk returns a tuple with the Period field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPeriod
 
-`func (o *Prolong) SetPeriod(v DomainPaymentPeriod)`
+`func (o *DomainProlong) SetPeriod(v DomainPaymentPeriod)`
 
 SetPeriod sets Period field to given value.
 
 ### HasPeriod
 
-`func (o *Prolong) HasPeriod() bool`
+`func (o *DomainProlong) HasPeriod() bool`
 
 HasPeriod returns a boolean if a field has been set.
 
 ### GetPersonId
 
-`func (o *Prolong) GetPersonId() float32`
+`func (o *DomainProlong) GetPersonId() float32`
 
 GetPersonId returns the PersonId field if non-nil, zero value otherwise.
 
 ### GetPersonIdOk
 
-`func (o *Prolong) GetPersonIdOk() (*float32, bool)`
+`func (o *DomainProlong) GetPersonIdOk() (*float32, bool)`
 
 GetPersonIdOk returns a tuple with the PersonId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPersonId
 
-`func (o *Prolong) SetPersonId(v float32)`
+`func (o *DomainProlong) SetPersonId(v float32)`
 
 SetPersonId sets PersonId field to given value.
 
 ### HasPersonId
 
-`func (o *Prolong) HasPersonId() bool`
+`func (o *DomainProlong) HasPersonId() bool`
 
 HasPersonId returns a boolean if a field has been set.
 
 ### GetPrime
 
-`func (o *Prolong) GetPrime() DomainPrimeType`
+`func (o *DomainProlong) GetPrime() DomainPrimeType`
 
 GetPrime returns the Prime field if non-nil, zero value otherwise.
 
 ### GetPrimeOk
 
-`func (o *Prolong) GetPrimeOk() (*DomainPrimeType, bool)`
+`func (o *DomainProlong) GetPrimeOk() (*DomainPrimeType, bool)`
 
 GetPrimeOk returns a tuple with the Prime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrime
 
-`func (o *Prolong) SetPrime(v DomainPrimeType)`
+`func (o *DomainProlong) SetPrime(v DomainPrimeType)`
 
 SetPrime sets Prime field to given value.
 
 ### HasPrime
 
-`func (o *Prolong) HasPrime() bool`
+`func (o *DomainProlong) HasPrime() bool`
 
 HasPrime returns a boolean if a field has been set.
 

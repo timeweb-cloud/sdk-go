@@ -146,7 +146,11 @@ docs/DomainNameServer.md
 docs/DomainNameServerItemsInner.md
 docs/DomainPaymentPeriod.md
 docs/DomainPrimeType.md
+docs/DomainProlong.md
+docs/DomainRegister.md
+docs/DomainRegisterNsInner.md
 docs/DomainRequest.md
+docs/DomainTransfer.md
 docs/DomainsAPI.md
 docs/EditApiKey.md
 docs/Finances.md
@@ -287,11 +291,8 @@ docs/PresetsStorage.md
 docs/Project.md
 docs/ProjectResource.md
 docs/ProjectsAPI.md
-docs/Prolong.md
 docs/Quota.md
 docs/RefreshApiKey.md
-docs/Register.md
-docs/RegisterNsInner.md
 docs/RemoveCountries.md
 docs/RemoveIps.md
 docs/RenameStorageFileRequest.md
@@ -329,7 +330,6 @@ docs/StatusCompanyInfo.md
 docs/Subdomain.md
 docs/TopLevelDomain.md
 docs/TopLevelDomainAllowedBuyPeriodsInner.md
-docs/Transfer.md
 docs/TransferStatus.md
 docs/TransferStatusErrorsInner.md
 docs/TransferStorageRequest.md
@@ -506,7 +506,11 @@ model_domain_name_server.go
 model_domain_name_server_items_inner.go
 model_domain_payment_period.go
 model_domain_prime_type.go
+model_domain_prolong.go
+model_domain_register.go
+model_domain_register_ns_inner.go
 model_domain_request.go
+model_domain_transfer.go
 model_edit_api_key.go
 model_finances.go
 model_firewall_group_in_api.go
@@ -641,11 +645,8 @@ model_presets_response.go
 model_presets_storage.go
 model_project.go
 model_project_resource.go
-model_prolong.go
 model_quota.go
 model_refresh_api_key.go
-model_register.go
-model_register_ns_inner.go
 model_remove_countries.go
 model_remove_ips.go
 model_rename_storage_file_request.go
@@ -680,7 +681,6 @@ model_status_company_info.go
 model_subdomain.go
 model_top_level_domain.go
 model_top_level_domain_allowed_buy_periods_inner.go
-model_transfer.go
 model_transfer_status.go
 model_transfer_status_errors_inner.go
 model_transfer_storage_request.go

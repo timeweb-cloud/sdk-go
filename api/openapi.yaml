@@ -32212,7 +32212,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/register'
+              $ref: '#/components/schemas/domain-register'
         required: true
       responses:
         "201":
@@ -36098,6 +36098,7 @@ components:
           title: Message
           type: string
         response_id:
+          example: 9c38a13d-ef14-45c7-a23a-1429f6a03824
           title: Response Id
           type: string
       required:
@@ -36121,12 +36122,10 @@ components:
         disk_id: 123
       properties:
         name:
-          default: ""
           description: Имя образа
           title: Name
           type: string
         description:
-          default: ""
           description: Описание образа
           title: Description
           type: string
@@ -36456,6 +36455,26 @@ components:
       - groups
       - meta
       title: FirewallGroupsOutResponse
+      type: object
+    schemas-BaseError:
+      properties:
+        status_code:
+          title: Status Code
+          type: integer
+        error_code:
+          title: Error Code
+          type: string
+        message:
+          title: Message
+          type: string
+        response_id:
+          title: Response Id
+          type: string
+      required:
+      - error_code
+      - message
+      - status_code
+      title: BaseError
       type: object
     FirewallGroupInAPI:
       example:
@@ -38739,27 +38758,6 @@ components:
       - meta
       title: ClustersResponse
       type: object
-    schemas-BaseError:
-      properties:
-        status_code:
-          title: Status Code
-          type: integer
-        error_code:
-          title: Error Code
-          type: string
-        message:
-          title: Message
-          type: string
-        response_id:
-          default: 9c38a13d-ef14-45c7-a23a-1429f6a03824
-          title: Response Id
-          type: string
-      required:
-      - error_code
-      - message
-      - status_code
-      title: BaseError
-      type: object
     NodeGroupIn:
       example:
         name: Новая группа нод
@@ -38804,7 +38802,6 @@ components:
           title: Name
           type: string
         description:
-          default: ""
           description: Описание кластера
           title: Description
           type: string
@@ -38830,10 +38827,6 @@ components:
           title: Preset Id
           type: integer
         worker_groups:
-          default:
-          - name: default
-            preset_id: 399
-            node_count: 1
           description: Группы воркеров в кластере
           items:
             $ref: '#/components/schemas/NodeGroupIn'
@@ -41742,7 +41735,7 @@ components:
       - sort_order
       - type
       type: object
-    register:
+    domain-register:
       description: Заявка на регистрацию домена
       properties:
         action:
@@ -41771,7 +41764,7 @@ components:
             от параметр, будут использованы наши стандартные name-серверы. Нужно у\
             казать как минимум 2 name-сервера."
           items:
-            $ref: '#/components/schemas/register_ns_inner'
+            $ref: '#/components/schemas/domain_register_ns_inner'
           type: array
         period:
           $ref: '#/components/schemas/domain-payment-period'
@@ -41786,7 +41779,7 @@ components:
       - person_id
       title: Заявка на регистрацию домена
       type: object
-    prolong:
+    domain-prolong:
       description: Заявка на продление домена
       properties:
         action:
@@ -41829,7 +41822,7 @@ components:
       - fqdn
       title: Заявка на продление домена
       type: object
-    transfer:
+    domain-transfer:
       description: Заявка на перенос домена
       properties:
         action:
@@ -47847,7 +47840,7 @@ components:
       required:
       - host
       type: object
-    register_ns_inner:
+    domain_register_ns_inner:
       properties:
         host:
           description: Хост name-сервера.

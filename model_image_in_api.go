@@ -38,10 +38,6 @@ type ImageInAPI struct {
 // will change when the set of required properties is changed
 func NewImageInAPI() *ImageInAPI {
 	this := ImageInAPI{}
-	var name string = ""
-	this.Name = &name
-	var description string = ""
-	this.Description = &description
 	return &this
 }
 
@@ -50,10 +46,6 @@ func NewImageInAPI() *ImageInAPI {
 // but it doesn't guarantee that properties required by API are set
 func NewImageInAPIWithDefaults() *ImageInAPI {
 	this := ImageInAPI{}
-	var name string = ""
-	this.Name = &name
-	var description string = ""
-	this.Description = &description
 	return &this
 }
 

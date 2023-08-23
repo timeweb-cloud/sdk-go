@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Название кластера | 
-**Description** | Pointer to **string** | Описание кластера | [optional] [default to ""]
+**Description** | Pointer to **string** | Описание кластера | [optional] 
 **Ha** | **bool** | Описание появится позднее | 
 **K8sVersion** | **string** | Версия Kubernetes | 
 **NetworkDriver** | **string** | Тип используемого сетевого драйвера в кластере | 
 **Ingress** | **bool** | Логическое значение, которое показывает, использовать ли Ingress в кластере | 
 **PresetId** | **int32** | Идентификатор тарифа мастер-ноды | 
-**WorkerGroups** | Pointer to [**[]NodeGroupIn**](NodeGroupIn.md) | Группы воркеров в кластере | [optional] [default to [{"name":"default","preset_id":399,"node_count":1}]]
+**WorkerGroups** | Pointer to [**[]NodeGroupIn**](NodeGroupIn.md) | Группы воркеров в кластере | [optional] 
 
 ## Methods
 

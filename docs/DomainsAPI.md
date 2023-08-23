@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 ## CreateDomainRequest
 
-> CreateDomainRequest201Response CreateDomainRequest(ctx).Register(register).Execute()
+> CreateDomainRequest201Response CreateDomainRequest(ctx).DomainRegister(domainRegister).Execute()
 
 Создание заявки на регистрацию/продление/трансфер домена
 
@@ -332,11 +332,11 @@ import (
 )
 
 func main() {
-    register := *openapiclient.NewRegister("register", "somedomain.ru", float32(123)) // Register | 
+    domainRegister := *openapiclient.NewDomainRegister("register", "somedomain.ru", float32(123)) // DomainRegister | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DomainsAPI.CreateDomainRequest(context.Background()).Register(register).Execute()
+    resp, r, err := apiClient.DomainsAPI.CreateDomainRequest(context.Background()).DomainRegister(domainRegister).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.CreateDomainRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -357,7 +357,7 @@ Other parameters are passed through a pointer to a apiCreateDomainRequestRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **register** | [**Register**](Register.md) |  | 
+ **domainRegister** | [**DomainRegister**](DomainRegister.md) |  | 
 
 ### Return type
 

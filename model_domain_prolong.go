@@ -15,85 +15,287 @@ import (
 	"encoding/json"
 )
 
-// checks if the RegisterNsInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RegisterNsInner{}
+// checks if the DomainProlong type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DomainProlong{}
 
-// RegisterNsInner struct for RegisterNsInner
-type RegisterNsInner struct {
-	// Хост name-сервера.
-	Host string `json:"host"`
-	// Список IP-адресов name-сервера
-	Ips []string `json:"ips"`
+// DomainProlong Заявка на продление домена
+type DomainProlong struct {
+	// Тип создаваемой заявки.
+	Action string `json:"action"`
+	// Полное имя домена.
+	Fqdn string `json:"fqdn"`
+	// Это логическое значение, которое показывает включена ли услуга \"Антиспам\" для домена
+	IsAntispamEnabled *bool `json:"is_antispam_enabled,omitempty"`
+	// Это логическое значение, которое показывает, включено ли автопродление домена.
+	IsAutoprolongEnabled *bool `json:"is_autoprolong_enabled,omitempty"`
+	// Это логическое значение, которое показывает, включено ли скрытие данных администратора домена для whois. Опция недоступна для доменов в зонах .ru и .рф.
+	IsWhoisPrivacyEnabled *bool `json:"is_whois_privacy_enabled,omitempty"`
+	Period *DomainPaymentPeriod `json:"period,omitempty"`
+	// Идентификатор администратора, на которого зарегистрирован домен.
+	PersonId *float32 `json:"person_id,omitempty"`
+	Prime *DomainPrimeType `json:"prime,omitempty"`
 }
 
-// NewRegisterNsInner instantiates a new RegisterNsInner object
+// NewDomainProlong instantiates a new DomainProlong object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegisterNsInner(host string, ips []string) *RegisterNsInner {
-	this := RegisterNsInner{}
-	this.Host = host
-	this.Ips = ips
+func NewDomainProlong(action string, fqdn string) *DomainProlong {
+	this := DomainProlong{}
+	this.Action = action
+	this.Fqdn = fqdn
 	return &this
 }
 
-// NewRegisterNsInnerWithDefaults instantiates a new RegisterNsInner object
+// NewDomainProlongWithDefaults instantiates a new DomainProlong object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRegisterNsInnerWithDefaults() *RegisterNsInner {
-	this := RegisterNsInner{}
+func NewDomainProlongWithDefaults() *DomainProlong {
+	this := DomainProlong{}
 	return &this
 }
 
-// GetHost returns the Host field value
-func (o *RegisterNsInner) GetHost() string {
+// GetAction returns the Action field value
+func (o *DomainProlong) GetAction() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Host
+	return o.Action
 }
 
-// GetHostOk returns a tuple with the Host field value
+// GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *RegisterNsInner) GetHostOk() (*string, bool) {
+func (o *DomainProlong) GetActionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Host, true
+	return &o.Action, true
 }
 
-// SetHost sets field value
-func (o *RegisterNsInner) SetHost(v string) {
-	o.Host = v
+// SetAction sets field value
+func (o *DomainProlong) SetAction(v string) {
+	o.Action = v
 }
 
-// GetIps returns the Ips field value
-func (o *RegisterNsInner) GetIps() []string {
+// GetFqdn returns the Fqdn field value
+func (o *DomainProlong) GetFqdn() string {
 	if o == nil {
-		var ret []string
+		var ret string
 		return ret
 	}
 
-	return o.Ips
+	return o.Fqdn
 }
 
-// GetIpsOk returns a tuple with the Ips field value
+// GetFqdnOk returns a tuple with the Fqdn field value
 // and a boolean to check if the value has been set.
-func (o *RegisterNsInner) GetIpsOk() ([]string, bool) {
+func (o *DomainProlong) GetFqdnOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Ips, true
+	return &o.Fqdn, true
 }
 
-// SetIps sets field value
-func (o *RegisterNsInner) SetIps(v []string) {
-	o.Ips = v
+// SetFqdn sets field value
+func (o *DomainProlong) SetFqdn(v string) {
+	o.Fqdn = v
 }
 
-func (o RegisterNsInner) MarshalJSON() ([]byte, error) {
+// GetIsAntispamEnabled returns the IsAntispamEnabled field value if set, zero value otherwise.
+func (o *DomainProlong) GetIsAntispamEnabled() bool {
+	if o == nil || IsNil(o.IsAntispamEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsAntispamEnabled
+}
+
+// GetIsAntispamEnabledOk returns a tuple with the IsAntispamEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainProlong) GetIsAntispamEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsAntispamEnabled) {
+		return nil, false
+	}
+	return o.IsAntispamEnabled, true
+}
+
+// HasIsAntispamEnabled returns a boolean if a field has been set.
+func (o *DomainProlong) HasIsAntispamEnabled() bool {
+	if o != nil && !IsNil(o.IsAntispamEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAntispamEnabled gets a reference to the given bool and assigns it to the IsAntispamEnabled field.
+func (o *DomainProlong) SetIsAntispamEnabled(v bool) {
+	o.IsAntispamEnabled = &v
+}
+
+// GetIsAutoprolongEnabled returns the IsAutoprolongEnabled field value if set, zero value otherwise.
+func (o *DomainProlong) GetIsAutoprolongEnabled() bool {
+	if o == nil || IsNil(o.IsAutoprolongEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsAutoprolongEnabled
+}
+
+// GetIsAutoprolongEnabledOk returns a tuple with the IsAutoprolongEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainProlong) GetIsAutoprolongEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsAutoprolongEnabled) {
+		return nil, false
+	}
+	return o.IsAutoprolongEnabled, true
+}
+
+// HasIsAutoprolongEnabled returns a boolean if a field has been set.
+func (o *DomainProlong) HasIsAutoprolongEnabled() bool {
+	if o != nil && !IsNil(o.IsAutoprolongEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAutoprolongEnabled gets a reference to the given bool and assigns it to the IsAutoprolongEnabled field.
+func (o *DomainProlong) SetIsAutoprolongEnabled(v bool) {
+	o.IsAutoprolongEnabled = &v
+}
+
+// GetIsWhoisPrivacyEnabled returns the IsWhoisPrivacyEnabled field value if set, zero value otherwise.
+func (o *DomainProlong) GetIsWhoisPrivacyEnabled() bool {
+	if o == nil || IsNil(o.IsWhoisPrivacyEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsWhoisPrivacyEnabled
+}
+
+// GetIsWhoisPrivacyEnabledOk returns a tuple with the IsWhoisPrivacyEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainProlong) GetIsWhoisPrivacyEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsWhoisPrivacyEnabled) {
+		return nil, false
+	}
+	return o.IsWhoisPrivacyEnabled, true
+}
+
+// HasIsWhoisPrivacyEnabled returns a boolean if a field has been set.
+func (o *DomainProlong) HasIsWhoisPrivacyEnabled() bool {
+	if o != nil && !IsNil(o.IsWhoisPrivacyEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsWhoisPrivacyEnabled gets a reference to the given bool and assigns it to the IsWhoisPrivacyEnabled field.
+func (o *DomainProlong) SetIsWhoisPrivacyEnabled(v bool) {
+	o.IsWhoisPrivacyEnabled = &v
+}
+
+// GetPeriod returns the Period field value if set, zero value otherwise.
+func (o *DomainProlong) GetPeriod() DomainPaymentPeriod {
+	if o == nil || IsNil(o.Period) {
+		var ret DomainPaymentPeriod
+		return ret
+	}
+	return *o.Period
+}
+
+// GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainProlong) GetPeriodOk() (*DomainPaymentPeriod, bool) {
+	if o == nil || IsNil(o.Period) {
+		return nil, false
+	}
+	return o.Period, true
+}
+
+// HasPeriod returns a boolean if a field has been set.
+func (o *DomainProlong) HasPeriod() bool {
+	if o != nil && !IsNil(o.Period) {
+		return true
+	}
+
+	return false
+}
+
+// SetPeriod gets a reference to the given DomainPaymentPeriod and assigns it to the Period field.
+func (o *DomainProlong) SetPeriod(v DomainPaymentPeriod) {
+	o.Period = &v
+}
+
+// GetPersonId returns the PersonId field value if set, zero value otherwise.
+func (o *DomainProlong) GetPersonId() float32 {
+	if o == nil || IsNil(o.PersonId) {
+		var ret float32
+		return ret
+	}
+	return *o.PersonId
+}
+
+// GetPersonIdOk returns a tuple with the PersonId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainProlong) GetPersonIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.PersonId) {
+		return nil, false
+	}
+	return o.PersonId, true
+}
+
+// HasPersonId returns a boolean if a field has been set.
+func (o *DomainProlong) HasPersonId() bool {
+	if o != nil && !IsNil(o.PersonId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPersonId gets a reference to the given float32 and assigns it to the PersonId field.
+func (o *DomainProlong) SetPersonId(v float32) {
+	o.PersonId = &v
+}
+
+// GetPrime returns the Prime field value if set, zero value otherwise.
+func (o *DomainProlong) GetPrime() DomainPrimeType {
+	if o == nil || IsNil(o.Prime) {
+		var ret DomainPrimeType
+		return ret
+	}
+	return *o.Prime
+}
+
+// GetPrimeOk returns a tuple with the Prime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainProlong) GetPrimeOk() (*DomainPrimeType, bool) {
+	if o == nil || IsNil(o.Prime) {
+		return nil, false
+	}
+	return o.Prime, true
+}
+
+// HasPrime returns a boolean if a field has been set.
+func (o *DomainProlong) HasPrime() bool {
+	if o != nil && !IsNil(o.Prime) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrime gets a reference to the given DomainPrimeType and assigns it to the Prime field.
+func (o *DomainProlong) SetPrime(v DomainPrimeType) {
+	o.Prime = &v
+}
+
+func (o DomainProlong) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -101,45 +303,63 @@ func (o RegisterNsInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RegisterNsInner) ToMap() (map[string]interface{}, error) {
+func (o DomainProlong) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["host"] = o.Host
-	toSerialize["ips"] = o.Ips
+	toSerialize["action"] = o.Action
+	toSerialize["fqdn"] = o.Fqdn
+	if !IsNil(o.IsAntispamEnabled) {
+		toSerialize["is_antispam_enabled"] = o.IsAntispamEnabled
+	}
+	if !IsNil(o.IsAutoprolongEnabled) {
+		toSerialize["is_autoprolong_enabled"] = o.IsAutoprolongEnabled
+	}
+	if !IsNil(o.IsWhoisPrivacyEnabled) {
+		toSerialize["is_whois_privacy_enabled"] = o.IsWhoisPrivacyEnabled
+	}
+	if !IsNil(o.Period) {
+		toSerialize["period"] = o.Period
+	}
+	if !IsNil(o.PersonId) {
+		toSerialize["person_id"] = o.PersonId
+	}
+	if !IsNil(o.Prime) {
+		toSerialize["prime"] = o.Prime
+	}
 	return toSerialize, nil
 }
 
-type NullableRegisterNsInner struct {
-	value *RegisterNsInner
+type NullableDomainProlong struct {
+	value *DomainProlong
 	isSet bool
 }
 
-func (v NullableRegisterNsInner) Get() *RegisterNsInner {
+func (v NullableDomainProlong) Get() *DomainProlong {
 	return v.value
 }
 
-func (v *NullableRegisterNsInner) Set(val *RegisterNsInner) {
+func (v *NullableDomainProlong) Set(val *DomainProlong) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRegisterNsInner) IsSet() bool {
+func (v NullableDomainProlong) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRegisterNsInner) Unset() {
+func (v *NullableDomainProlong) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRegisterNsInner(val *RegisterNsInner) *NullableRegisterNsInner {
-	return &NullableRegisterNsInner{value: val, isSet: true}
+func NewNullableDomainProlong(val *DomainProlong) *NullableDomainProlong {
+	return &NullableDomainProlong{value: val, isSet: true}
 }
 
-func (v NullableRegisterNsInner) MarshalJSON() ([]byte, error) {
+func (v NullableDomainProlong) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRegisterNsInner) UnmarshalJSON(src []byte) error {
+func (v *NullableDomainProlong) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

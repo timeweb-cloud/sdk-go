@@ -35,8 +35,6 @@ func NewSchemasBaseError(statusCode int32, errorCode string, message string) *Sc
 	this.StatusCode = statusCode
 	this.ErrorCode = errorCode
 	this.Message = message
-	var responseId string = "9c38a13d-ef14-45c7-a23a-1429f6a03824"
-	this.ResponseId = &responseId
 	return &this
 }
 
@@ -45,8 +43,6 @@ func NewSchemasBaseError(statusCode int32, errorCode string, message string) *Sc
 // but it doesn't guarantee that properties required by API are set
 func NewSchemasBaseErrorWithDefaults() *SchemasBaseError {
 	this := SchemasBaseError{}
-	var responseId string = "9c38a13d-ef14-45c7-a23a-1429f6a03824"
-	this.ResponseId = &responseId
 	return &this
 }
 

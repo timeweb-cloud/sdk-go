@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | Имя образа | [optional] [default to ""]
-**Description** | Pointer to **string** | Описание образа | [optional] [default to ""]
+**Name** | Pointer to **string** | Имя образа | [optional] 
+**Description** | Pointer to **string** | Описание образа | [optional] 
 **DiskId** | Pointer to **int32** | Идентификатор диска, для которого создается образ | [optional] 
 **UploadUrl** | Pointer to **string** | Cсылка для загрузки образа | [optional] 
 **Location** | Pointer to [**Location**](Location.md) |  | [optional] 

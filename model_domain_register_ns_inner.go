@@ -15,112 +15,85 @@ import (
 	"encoding/json"
 )
 
-// checks if the Transfer type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Transfer{}
+// checks if the DomainRegisterNsInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DomainRegisterNsInner{}
 
-// Transfer Заявка на перенос домена
-type Transfer struct {
-	// Тип создаваемой заявки.
-	Action string `json:"action"`
-	// Код авторизации для переноса домена.
-	AuthCode string `json:"auth_code"`
-	// Полное имя домена.
-	Fqdn string `json:"fqdn"`
+// DomainRegisterNsInner struct for DomainRegisterNsInner
+type DomainRegisterNsInner struct {
+	// Хост name-сервера.
+	Host string `json:"host"`
+	// Список IP-адресов name-сервера
+	Ips []string `json:"ips"`
 }
 
-// NewTransfer instantiates a new Transfer object
+// NewDomainRegisterNsInner instantiates a new DomainRegisterNsInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransfer(action string, authCode string, fqdn string) *Transfer {
-	this := Transfer{}
-	this.Action = action
-	this.AuthCode = authCode
-	this.Fqdn = fqdn
+func NewDomainRegisterNsInner(host string, ips []string) *DomainRegisterNsInner {
+	this := DomainRegisterNsInner{}
+	this.Host = host
+	this.Ips = ips
 	return &this
 }
 
-// NewTransferWithDefaults instantiates a new Transfer object
+// NewDomainRegisterNsInnerWithDefaults instantiates a new DomainRegisterNsInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransferWithDefaults() *Transfer {
-	this := Transfer{}
+func NewDomainRegisterNsInnerWithDefaults() *DomainRegisterNsInner {
+	this := DomainRegisterNsInner{}
 	return &this
 }
 
-// GetAction returns the Action field value
-func (o *Transfer) GetAction() string {
+// GetHost returns the Host field value
+func (o *DomainRegisterNsInner) GetHost() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Action
+	return o.Host
 }
 
-// GetActionOk returns a tuple with the Action field value
+// GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
-func (o *Transfer) GetActionOk() (*string, bool) {
+func (o *DomainRegisterNsInner) GetHostOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Action, true
+	return &o.Host, true
 }
 
-// SetAction sets field value
-func (o *Transfer) SetAction(v string) {
-	o.Action = v
+// SetHost sets field value
+func (o *DomainRegisterNsInner) SetHost(v string) {
+	o.Host = v
 }
 
-// GetAuthCode returns the AuthCode field value
-func (o *Transfer) GetAuthCode() string {
+// GetIps returns the Ips field value
+func (o *DomainRegisterNsInner) GetIps() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
-	return o.AuthCode
+	return o.Ips
 }
 
-// GetAuthCodeOk returns a tuple with the AuthCode field value
+// GetIpsOk returns a tuple with the Ips field value
 // and a boolean to check if the value has been set.
-func (o *Transfer) GetAuthCodeOk() (*string, bool) {
+func (o *DomainRegisterNsInner) GetIpsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AuthCode, true
+	return o.Ips, true
 }
 
-// SetAuthCode sets field value
-func (o *Transfer) SetAuthCode(v string) {
-	o.AuthCode = v
+// SetIps sets field value
+func (o *DomainRegisterNsInner) SetIps(v []string) {
+	o.Ips = v
 }
 
-// GetFqdn returns the Fqdn field value
-func (o *Transfer) GetFqdn() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Fqdn
-}
-
-// GetFqdnOk returns a tuple with the Fqdn field value
-// and a boolean to check if the value has been set.
-func (o *Transfer) GetFqdnOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Fqdn, true
-}
-
-// SetFqdn sets field value
-func (o *Transfer) SetFqdn(v string) {
-	o.Fqdn = v
-}
-
-func (o Transfer) MarshalJSON() ([]byte, error) {
+func (o DomainRegisterNsInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -128,46 +101,45 @@ func (o Transfer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Transfer) ToMap() (map[string]interface{}, error) {
+func (o DomainRegisterNsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["action"] = o.Action
-	toSerialize["auth_code"] = o.AuthCode
-	toSerialize["fqdn"] = o.Fqdn
+	toSerialize["host"] = o.Host
+	toSerialize["ips"] = o.Ips
 	return toSerialize, nil
 }
 
-type NullableTransfer struct {
-	value *Transfer
+type NullableDomainRegisterNsInner struct {
+	value *DomainRegisterNsInner
 	isSet bool
 }
 
-func (v NullableTransfer) Get() *Transfer {
+func (v NullableDomainRegisterNsInner) Get() *DomainRegisterNsInner {
 	return v.value
 }
 
-func (v *NullableTransfer) Set(val *Transfer) {
+func (v *NullableDomainRegisterNsInner) Set(val *DomainRegisterNsInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransfer) IsSet() bool {
+func (v NullableDomainRegisterNsInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransfer) Unset() {
+func (v *NullableDomainRegisterNsInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransfer(val *Transfer) *NullableTransfer {
-	return &NullableTransfer{value: val, isSet: true}
+func NewNullableDomainRegisterNsInner(val *DomainRegisterNsInner) *NullableDomainRegisterNsInner {
+	return &NullableDomainRegisterNsInner{value: val, isSet: true}
 }
 
-func (v NullableTransfer) MarshalJSON() ([]byte, error) {
+func (v NullableDomainRegisterNsInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransfer) UnmarshalJSON(src []byte) error {
+func (v *NullableDomainRegisterNsInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

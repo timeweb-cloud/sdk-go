@@ -1,4 +1,4 @@
-# RegisterNsInner
+# DomainRegisterNsInner
 
 ## Properties
 
@@ -9,59 +9,59 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewRegisterNsInner
+### NewDomainRegisterNsInner
 
-`func NewRegisterNsInner(host string, ips []string, ) *RegisterNsInner`
+`func NewDomainRegisterNsInner(host string, ips []string, ) *DomainRegisterNsInner`
 
-NewRegisterNsInner instantiates a new RegisterNsInner object
+NewDomainRegisterNsInner instantiates a new DomainRegisterNsInner object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRegisterNsInnerWithDefaults
+### NewDomainRegisterNsInnerWithDefaults
 
-`func NewRegisterNsInnerWithDefaults() *RegisterNsInner`
+`func NewDomainRegisterNsInnerWithDefaults() *DomainRegisterNsInner`
 
-NewRegisterNsInnerWithDefaults instantiates a new RegisterNsInner object
+NewDomainRegisterNsInnerWithDefaults instantiates a new DomainRegisterNsInner object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetHost
 
-`func (o *RegisterNsInner) GetHost() string`
+`func (o *DomainRegisterNsInner) GetHost() string`
 
 GetHost returns the Host field if non-nil, zero value otherwise.
 
 ### GetHostOk
 
-`func (o *RegisterNsInner) GetHostOk() (*string, bool)`
+`func (o *DomainRegisterNsInner) GetHostOk() (*string, bool)`
 
 GetHostOk returns a tuple with the Host field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHost
 
-`func (o *RegisterNsInner) SetHost(v string)`
+`func (o *DomainRegisterNsInner) SetHost(v string)`
 
 SetHost sets Host field to given value.
 
 
 ### GetIps
 
-`func (o *RegisterNsInner) GetIps() []string`
+`func (o *DomainRegisterNsInner) GetIps() []string`
 
 GetIps returns the Ips field if non-nil, zero value otherwise.
 
 ### GetIpsOk
 
-`func (o *RegisterNsInner) GetIpsOk() (*[]string, bool)`
+`func (o *DomainRegisterNsInner) GetIpsOk() (*[]string, bool)`
 
 GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIps
 
-`func (o *RegisterNsInner) SetIps(v []string)`
+`func (o *DomainRegisterNsInner) SetIps(v []string)`
 
 SetIps sets Ips field to given value.
 

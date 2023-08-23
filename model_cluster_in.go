@@ -45,8 +45,6 @@ type ClusterIn struct {
 func NewClusterIn(name string, ha bool, k8sVersion string, networkDriver string, ingress bool, presetId int32) *ClusterIn {
 	this := ClusterIn{}
 	this.Name = name
-	var description string = ""
-	this.Description = &description
 	this.Ha = ha
 	this.K8sVersion = k8sVersion
 	this.NetworkDriver = networkDriver
@@ -60,8 +58,6 @@ func NewClusterIn(name string, ha bool, k8sVersion string, networkDriver string,
 // but it doesn't guarantee that properties required by API are set
 func NewClusterInWithDefaults() *ClusterIn {
 	this := ClusterIn{}
-	var description string = ""
-	this.Description = &description
 	return &this
 }
 

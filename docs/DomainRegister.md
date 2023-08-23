@@ -1,4 +1,4 @@
-# Register
+# DomainRegister
 
 ## Properties
 
@@ -8,185 +8,185 @@ Name | Type | Description | Notes
 **Fqdn** | **string** | Полное имя домена. | 
 **IsAutoprolongEnabled** | Pointer to **bool** | Это логическое значение, которое показывает, включено ли автопродление домена. | [optional] 
 **IsWhoisPrivacyEnabled** | Pointer to **bool** | Это логическое значение, которое показывает, включено ли скрытие данных администратора домена для whois. Опция недоступна для доменов в зонах .ru и .рф. | [optional] 
-**Ns** | Pointer to [**[]RegisterNsInner**](RegisterNsInner.md) | Name-серверы для регистрации домена. Если не передавать этот параметр, будут использованы наши стандартные name-серверы. Нужно указать как минимум 2 name-сервера. | [optional] 
+**Ns** | Pointer to [**[]DomainRegisterNsInner**](DomainRegisterNsInner.md) | Name-серверы для регистрации домена. Если не передавать этот параметр, будут использованы наши стандартные name-серверы. Нужно указать как минимум 2 name-сервера. | [optional] 
 **Period** | Pointer to [**DomainPaymentPeriod**](DomainPaymentPeriod.md) |  | [optional] 
 **PersonId** | **float32** | Идентификатор администратора, на которого регистрируется домен. | 
 
 ## Methods
 
-### NewRegister
+### NewDomainRegister
 
-`func NewRegister(action string, fqdn string, personId float32, ) *Register`
+`func NewDomainRegister(action string, fqdn string, personId float32, ) *DomainRegister`
 
-NewRegister instantiates a new Register object
+NewDomainRegister instantiates a new DomainRegister object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRegisterWithDefaults
+### NewDomainRegisterWithDefaults
 
-`func NewRegisterWithDefaults() *Register`
+`func NewDomainRegisterWithDefaults() *DomainRegister`
 
-NewRegisterWithDefaults instantiates a new Register object
+NewDomainRegisterWithDefaults instantiates a new DomainRegister object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAction
 
-`func (o *Register) GetAction() string`
+`func (o *DomainRegister) GetAction() string`
 
 GetAction returns the Action field if non-nil, zero value otherwise.
 
 ### GetActionOk
 
-`func (o *Register) GetActionOk() (*string, bool)`
+`func (o *DomainRegister) GetActionOk() (*string, bool)`
 
 GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAction
 
-`func (o *Register) SetAction(v string)`
+`func (o *DomainRegister) SetAction(v string)`
 
 SetAction sets Action field to given value.
 
 
 ### GetFqdn
 
-`func (o *Register) GetFqdn() string`
+`func (o *DomainRegister) GetFqdn() string`
 
 GetFqdn returns the Fqdn field if non-nil, zero value otherwise.
 
 ### GetFqdnOk
 
-`func (o *Register) GetFqdnOk() (*string, bool)`
+`func (o *DomainRegister) GetFqdnOk() (*string, bool)`
 
 GetFqdnOk returns a tuple with the Fqdn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFqdn
 
-`func (o *Register) SetFqdn(v string)`
+`func (o *DomainRegister) SetFqdn(v string)`
 
 SetFqdn sets Fqdn field to given value.
 
 
 ### GetIsAutoprolongEnabled
 
-`func (o *Register) GetIsAutoprolongEnabled() bool`
+`func (o *DomainRegister) GetIsAutoprolongEnabled() bool`
 
 GetIsAutoprolongEnabled returns the IsAutoprolongEnabled field if non-nil, zero value otherwise.
 
 ### GetIsAutoprolongEnabledOk
 
-`func (o *Register) GetIsAutoprolongEnabledOk() (*bool, bool)`
+`func (o *DomainRegister) GetIsAutoprolongEnabledOk() (*bool, bool)`
 
 GetIsAutoprolongEnabledOk returns a tuple with the IsAutoprolongEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsAutoprolongEnabled
 
-`func (o *Register) SetIsAutoprolongEnabled(v bool)`
+`func (o *DomainRegister) SetIsAutoprolongEnabled(v bool)`
 
 SetIsAutoprolongEnabled sets IsAutoprolongEnabled field to given value.
 
 ### HasIsAutoprolongEnabled
 
-`func (o *Register) HasIsAutoprolongEnabled() bool`
+`func (o *DomainRegister) HasIsAutoprolongEnabled() bool`
 
 HasIsAutoprolongEnabled returns a boolean if a field has been set.
 
 ### GetIsWhoisPrivacyEnabled
 
-`func (o *Register) GetIsWhoisPrivacyEnabled() bool`
+`func (o *DomainRegister) GetIsWhoisPrivacyEnabled() bool`
 
 GetIsWhoisPrivacyEnabled returns the IsWhoisPrivacyEnabled field if non-nil, zero value otherwise.
 
 ### GetIsWhoisPrivacyEnabledOk
 
-`func (o *Register) GetIsWhoisPrivacyEnabledOk() (*bool, bool)`
+`func (o *DomainRegister) GetIsWhoisPrivacyEnabledOk() (*bool, bool)`
 
 GetIsWhoisPrivacyEnabledOk returns a tuple with the IsWhoisPrivacyEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsWhoisPrivacyEnabled
 
-`func (o *Register) SetIsWhoisPrivacyEnabled(v bool)`
+`func (o *DomainRegister) SetIsWhoisPrivacyEnabled(v bool)`
 
 SetIsWhoisPrivacyEnabled sets IsWhoisPrivacyEnabled field to given value.
 
 ### HasIsWhoisPrivacyEnabled
 
-`func (o *Register) HasIsWhoisPrivacyEnabled() bool`
+`func (o *DomainRegister) HasIsWhoisPrivacyEnabled() bool`
 
 HasIsWhoisPrivacyEnabled returns a boolean if a field has been set.
 
 ### GetNs
 
-`func (o *Register) GetNs() []RegisterNsInner`
+`func (o *DomainRegister) GetNs() []DomainRegisterNsInner`
 
 GetNs returns the Ns field if non-nil, zero value otherwise.
 
 ### GetNsOk
 
-`func (o *Register) GetNsOk() (*[]RegisterNsInner, bool)`
+`func (o *DomainRegister) GetNsOk() (*[]DomainRegisterNsInner, bool)`
 
 GetNsOk returns a tuple with the Ns field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNs
 
-`func (o *Register) SetNs(v []RegisterNsInner)`
+`func (o *DomainRegister) SetNs(v []DomainRegisterNsInner)`
 
 SetNs sets Ns field to given value.
 
 ### HasNs
 
-`func (o *Register) HasNs() bool`
+`func (o *DomainRegister) HasNs() bool`
 
 HasNs returns a boolean if a field has been set.
 
 ### GetPeriod
 
-`func (o *Register) GetPeriod() DomainPaymentPeriod`
+`func (o *DomainRegister) GetPeriod() DomainPaymentPeriod`
 
 GetPeriod returns the Period field if non-nil, zero value otherwise.
 
 ### GetPeriodOk
 
-`func (o *Register) GetPeriodOk() (*DomainPaymentPeriod, bool)`
+`func (o *DomainRegister) GetPeriodOk() (*DomainPaymentPeriod, bool)`
 
 GetPeriodOk returns a tuple with the Period field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPeriod
 
-`func (o *Register) SetPeriod(v DomainPaymentPeriod)`
+`func (o *DomainRegister) SetPeriod(v DomainPaymentPeriod)`
 
 SetPeriod sets Period field to given value.
 
 ### HasPeriod
 
-`func (o *Register) HasPeriod() bool`
+`func (o *DomainRegister) HasPeriod() bool`
 
 HasPeriod returns a boolean if a field has been set.
 
 ### GetPersonId
 
-`func (o *Register) GetPersonId() float32`
+`func (o *DomainRegister) GetPersonId() float32`
 
 GetPersonId returns the PersonId field if non-nil, zero value otherwise.
 
 ### GetPersonIdOk
 
-`func (o *Register) GetPersonIdOk() (*float32, bool)`
+`func (o *DomainRegister) GetPersonIdOk() (*float32, bool)`
 
 GetPersonIdOk returns a tuple with the PersonId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPersonId
 
-`func (o *Register) SetPersonId(v float32)`
+`func (o *DomainRegister) SetPersonId(v float32)`
 
 SetPersonId sets PersonId field to given value.
 
