@@ -119,7 +119,7 @@ info:
     ся в пути запроса, например, запрос `/api/v1/servers` указывает, что этот мето\
     д имеет версию 1."
   title: Timeweb Cloud API
-  version: ""
+  version: 1.0.0
 servers:
 - url: https://api.timeweb.cloud
 security:
