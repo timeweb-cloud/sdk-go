@@ -37124,10 +37124,6 @@ components:
           description: Порог количества успешных ответов.
           example: 2
           type: number
-        preset_id:
-          description: Идентификатор тарифа.
-          example: 5
-          type: number
       type: object
     create-rule:
       properties:

@@ -46,8 +46,6 @@ type UpdateBalancer struct {
 	Fall *float32 `json:"fall,omitempty"`
 	// Порог количества успешных ответов.
 	Rise *float32 `json:"rise,omitempty"`
-	// Идентификатор тарифа.
-	PresetId *float32 `json:"preset_id,omitempty"`
 }
 
 // NewUpdateBalancer instantiates a new UpdateBalancer object
@@ -483,38 +481,6 @@ func (o *UpdateBalancer) SetRise(v float32) {
 	o.Rise = &v
 }
 
-// GetPresetId returns the PresetId field value if set, zero value otherwise.
-func (o *UpdateBalancer) GetPresetId() float32 {
-	if o == nil || IsNil(o.PresetId) {
-		var ret float32
-		return ret
-	}
-	return *o.PresetId
-}
-
-// GetPresetIdOk returns a tuple with the PresetId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateBalancer) GetPresetIdOk() (*float32, bool) {
-	if o == nil || IsNil(o.PresetId) {
-		return nil, false
-	}
-	return o.PresetId, true
-}
-
-// HasPresetId returns a boolean if a field has been set.
-func (o *UpdateBalancer) HasPresetId() bool {
-	if o != nil && !IsNil(o.PresetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPresetId gets a reference to the given float32 and assigns it to the PresetId field.
-func (o *UpdateBalancer) SetPresetId(v float32) {
-	o.PresetId = &v
-}
-
 func (o UpdateBalancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -563,9 +529,6 @@ func (o UpdateBalancer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Rise) {
 		toSerialize["rise"] = o.Rise
-	}
-	if !IsNil(o.PresetId) {
-		toSerialize["preset_id"] = o.PresetId
 	}
 	return toSerialize, nil
 }
