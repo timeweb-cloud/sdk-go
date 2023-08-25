@@ -373,6 +373,7 @@ docs/Use.md
 docs/VPCAPI.md
 docs/Vds.md
 docs/VdsDisksInner.md
+docs/VdsImage.md
 docs/VdsNetworksInner.md
 docs/VdsNetworksInnerIpsInner.md
 docs/VdsOs.md
@@ -723,6 +724,7 @@ model_url_type.go
 model_use.go
 model_vds.go
 model_vds_disks_inner.go
+model_vds_image.go
 model_vds_networks_inner.go
 model_vds_networks_inner_ips_inner.go
 model_vds_os.go

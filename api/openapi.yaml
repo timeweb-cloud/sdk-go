@@ -39399,6 +39399,10 @@ components:
     vds:
       description: Сервер
       example:
+        image:
+          name: image_name
+          is_custom: true
+          id: 550e8400-e29b-41d4-a716-446655440000
         os:
           name: bitrix
           id: 1
@@ -39584,6 +39588,8 @@ components:
           example: password
           nullable: true
           type: string
+        image:
+          $ref: '#/components/schemas/vds_image'
         networks:
           description: Список сетей диска.
           items:
@@ -39599,6 +39605,7 @@ components:
       - created_at
       - disks
       - id
+      - image
       - is_ddos_guard
       - location
       - name
@@ -43596,7 +43603,11 @@ components:
     getServers_200_response:
       example:
         servers:
-        - os:
+        - image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          os:
             name: bitrix
             id: 1
             version: "18.04"
@@ -43664,7 +43675,11 @@ components:
           root_pass: password
           status: "on"
           ram: 2048
-        - os:
+        - image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          os:
             name: bitrix
             id: 1
             version: "18.04"
@@ -43748,6 +43763,10 @@ components:
     createServer_201_response:
       example:
         server:
+          image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
           os:
             name: bitrix
             id: 1
@@ -44739,7 +44758,11 @@ components:
     getProjectServers_200_response:
       example:
         servers:
-        - os:
+        - image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          os:
             name: bitrix
             id: 1
             version: "18.04"
@@ -44807,7 +44830,11 @@ components:
           root_pass: password
           status: "on"
           ram: 2048
-        - os:
+        - image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          os:
             name: bitrix
             id: 1
             version: "18.04"
@@ -45199,7 +45226,11 @@ components:
           hash_type: caching_sha2
           status: started
         servers:
-        - os:
+        - image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          os:
             name: bitrix
             id: 1
             version: "18.04"
@@ -45267,7 +45298,11 @@ components:
           root_pass: password
           status: "on"
           ram: 2048
-        - os:
+        - image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          os:
             name: bitrix
             id: 1
             version: "18.04"
@@ -47347,6 +47382,31 @@ components:
       - system_name
       - type
       - used
+    vds_image:
+      description: Образ сервера.
+      example:
+        name: image_name
+        is_custom: true
+        id: 550e8400-e29b-41d4-a716-446655440000
+      nullable: true
+      properties:
+        id:
+          description: Уникальный идентификатор образа сервера.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        name:
+          description: Название образа сервера.
+          example: image_name
+          type: string
+        is_custom:
+          description: Является ли образ кастомным.
+          example: true
+          type: boolean
+      required:
+      - id
+      - is_custom
+      - name
+      type: object
     vds_networks_inner_ips_inner:
       example:
         ip: 0.0.0.0

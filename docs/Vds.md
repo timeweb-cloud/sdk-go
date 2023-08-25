@@ -24,13 +24,14 @@ Name | Type | Description | Notes
 **AvatarId** | **NullableString** | Уникальный идентификатор аватара сервера. Описание методов работы с аватарами появится позднее. | 
 **VncPass** | **string** | Пароль от VNC. | 
 **RootPass** | **NullableString** | Пароль root сервера или пароль Администратора для серверов Windows. | 
+**Image** | [**NullableVdsImage**](VdsImage.md) |  | 
 **Networks** | [**[]VdsNetworksInner**](VdsNetworksInner.md) | Список сетей диска. | 
 
 ## Methods
 
 ### NewVds
 
-`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, networks []VdsNetworksInner, ) *Vds`
+`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, ) *Vds`
 
 NewVds instantiates a new Vds object
 This constructor will assign default values to properties that have it defined,
@@ -505,6 +506,36 @@ SetRootPass sets RootPass field to given value.
 `func (o *Vds) UnsetRootPass()`
 
 UnsetRootPass ensures that no value is present for RootPass, not even an explicit nil
+### GetImage
+
+`func (o *Vds) GetImage() VdsImage`
+
+GetImage returns the Image field if non-nil, zero value otherwise.
+
+### GetImageOk
+
+`func (o *Vds) GetImageOk() (*VdsImage, bool)`
+
+GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImage
+
+`func (o *Vds) SetImage(v VdsImage)`
+
+SetImage sets Image field to given value.
+
+
+### SetImageNil
+
+`func (o *Vds) SetImageNil(b bool)`
+
+ SetImageNil sets the value for Image to be an explicit nil
+
+### UnsetImage
+`func (o *Vds) UnsetImage()`
+
+UnsetImage ensures that no value is present for Image, not even an explicit nil
 ### GetNetworks
 
 `func (o *Vds) GetNetworks() []VdsNetworksInner`

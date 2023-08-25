@@ -795,6 +795,7 @@ Class | Method | HTTP request | Description
  - [Use](docs/Use.md)
  - [Vds](docs/Vds.md)
  - [VdsDisksInner](docs/VdsDisksInner.md)
+ - [VdsImage](docs/VdsImage.md)
  - [VdsNetworksInner](docs/VdsNetworksInner.md)
  - [VdsNetworksInnerIpsInner](docs/VdsNetworksInnerIpsInner.md)
  - [VdsOs](docs/VdsOs.md)
