@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **AvatarId** | Pointer to **string** | Уникальный идентификатор аватара сервера. Описание методов работы с аватарами появится позднее. | [optional] 
 **Comment** | Pointer to **string** | Комментарий к облачному серверу. Максимальная длина — 255 символов. | [optional] 
 **ImageId** | Pointer to **string** | Уникальный идентификатор образа, который будет установлен на облачный сервер. Нельзя передавать вместе с &#x60;os_id&#x60;. | [optional] 
+**CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
 
 ## Methods
 
@@ -257,6 +258,31 @@ SetImageId sets ImageId field to given value.
 `func (o *UpdateServer) HasImageId() bool`
 
 HasImageId returns a boolean if a field has been set.
+
+### GetCloudInit
+
+`func (o *UpdateServer) GetCloudInit() string`
+
+GetCloudInit returns the CloudInit field if non-nil, zero value otherwise.
+
+### GetCloudInitOk
+
+`func (o *UpdateServer) GetCloudInitOk() (*string, bool)`
+
+GetCloudInitOk returns a tuple with the CloudInit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudInit
+
+`func (o *UpdateServer) SetCloudInit(v string)`
+
+SetCloudInit sets CloudInit field to given value.
+
+### HasCloudInit
+
+`func (o *UpdateServer) HasCloudInit() bool`
+
+HasCloudInit returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

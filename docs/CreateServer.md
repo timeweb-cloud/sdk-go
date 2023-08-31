@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **SshKeysIds** | Pointer to **[]float32** | Список SSH-ключей. | [optional] 
 **IsLocalNetwork** | Pointer to **bool** | Локальная сеть. | [optional] 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
+**CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
 
 ## Methods
 
@@ -346,6 +347,31 @@ SetNetwork sets Network field to given value.
 `func (o *CreateServer) HasNetwork() bool`
 
 HasNetwork returns a boolean if a field has been set.
+
+### GetCloudInit
+
+`func (o *CreateServer) GetCloudInit() string`
+
+GetCloudInit returns the CloudInit field if non-nil, zero value otherwise.
+
+### GetCloudInitOk
+
+`func (o *CreateServer) GetCloudInitOk() (*string, bool)`
+
+GetCloudInitOk returns a tuple with the CloudInit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudInit
+
+`func (o *CreateServer) SetCloudInit(v string)`
+
+SetCloudInit sets CloudInit field to given value.
+
+### HasCloudInit
+
+`func (o *CreateServer) HasCloudInit() bool`
+
+HasCloudInit returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

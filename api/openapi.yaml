@@ -39429,6 +39429,7 @@ components:
           status: done
         created_at: 2021-02-25T11:04:15Z
         cpu: 16
+        cloud_init: '#cloud-config'
         start_at: 2022-10-25T15:15:45Z
         networks:
         - bandwidth: 200
@@ -39595,9 +39596,15 @@ components:
           items:
             $ref: '#/components/schemas/vds_networks_inner'
           type: array
+        cloud_init:
+          description: Cloud-init скрипт
+          example: '#cloud-config'
+          nullable: true
+          type: string
       required:
       - avatar_id
       - boot_mode
+      - cloud_init
       - comment
       - configurator_id
       - cpu
@@ -39682,6 +39689,10 @@ components:
           type: boolean
         network:
           $ref: '#/components/schemas/network'
+        cloud_init:
+          description: Cloud-init скрипт
+          example: '#cloud-config'
+          type: string
       required:
       - bandwidth
       - is_ddos_guard
@@ -39729,6 +39740,10 @@ components:
           description: "Уникальный идентификатор образа, который будет установлен\
             \ на облачный сервер. Нельзя передавать вместе с `os_id`."
           format: uuid
+          type: string
+        cloud_init:
+          description: Cloud-init скрипт
+          example: '#cloud-config'
           type: string
     servers-os:
       example:
@@ -43633,6 +43648,7 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           cpu: 16
+          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -43705,6 +43721,7 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           cpu: 16
+          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -43793,6 +43810,7 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           cpu: 16
+          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -44788,6 +44806,7 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           cpu: 16
+          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -44860,6 +44879,7 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           cpu: 16
+          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -45256,6 +45276,7 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           cpu: 16
+          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -45328,6 +45349,7 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           cpu: 16
+          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200

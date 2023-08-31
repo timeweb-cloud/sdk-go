@@ -62,13 +62,15 @@ type Vds struct {
 	Image NullableVdsImage `json:"image"`
 	// Список сетей диска.
 	Networks []VdsNetworksInner `json:"networks"`
+	// Cloud-init скрипт
+	CloudInit NullableString `json:"cloud_init"`
 }
 
 // NewVds instantiates a new Vds object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner) *Vds {
+func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString) *Vds {
 	this := Vds{}
 	this.Id = id
 	this.Name = name
@@ -92,6 +94,7 @@ func NewVds(id float32, name string, comment string, createdAt string, os VdsOs,
 	this.RootPass = rootPass
 	this.Image = image
 	this.Networks = networks
+	this.CloudInit = cloudInit
 	return &this
 }
 
@@ -645,6 +648,32 @@ func (o *Vds) SetNetworks(v []VdsNetworksInner) {
 	o.Networks = v
 }
 
+// GetCloudInit returns the CloudInit field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Vds) GetCloudInit() string {
+	if o == nil || o.CloudInit.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.CloudInit.Get()
+}
+
+// GetCloudInitOk returns a tuple with the CloudInit field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Vds) GetCloudInitOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CloudInit.Get(), o.CloudInit.IsSet()
+}
+
+// SetCloudInit sets field value
+func (o *Vds) SetCloudInit(v string) {
+	o.CloudInit.Set(&v)
+}
+
 func (o Vds) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -677,6 +706,7 @@ func (o Vds) ToMap() (map[string]interface{}, error) {
 	toSerialize["root_pass"] = o.RootPass.Get()
 	toSerialize["image"] = o.Image.Get()
 	toSerialize["networks"] = o.Networks
+	toSerialize["cloud_init"] = o.CloudInit.Get()
 	return toSerialize, nil
 }
 

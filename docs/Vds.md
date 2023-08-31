@@ -26,12 +26,13 @@ Name | Type | Description | Notes
 **RootPass** | **NullableString** | Пароль root сервера или пароль Администратора для серверов Windows. | 
 **Image** | [**NullableVdsImage**](VdsImage.md) |  | 
 **Networks** | [**[]VdsNetworksInner**](VdsNetworksInner.md) | Список сетей диска. | 
+**CloudInit** | **NullableString** | Cloud-init скрипт | 
 
 ## Methods
 
 ### NewVds
 
-`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, ) *Vds`
+`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, ) *Vds`
 
 NewVds instantiates a new Vds object
 This constructor will assign default values to properties that have it defined,
@@ -556,6 +557,36 @@ and a boolean to check if the value has been set.
 SetNetworks sets Networks field to given value.
 
 
+### GetCloudInit
+
+`func (o *Vds) GetCloudInit() string`
+
+GetCloudInit returns the CloudInit field if non-nil, zero value otherwise.
+
+### GetCloudInitOk
+
+`func (o *Vds) GetCloudInitOk() (*string, bool)`
+
+GetCloudInitOk returns a tuple with the CloudInit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudInit
+
+`func (o *Vds) SetCloudInit(v string)`
+
+SetCloudInit sets CloudInit field to given value.
+
+
+### SetCloudInitNil
+
+`func (o *Vds) SetCloudInitNil(b bool)`
+
+ SetCloudInitNil sets the value for CloudInit to be an explicit nil
+
+### UnsetCloudInit
+`func (o *Vds) UnsetCloudInit()`
+
+UnsetCloudInit ensures that no value is present for CloudInit, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

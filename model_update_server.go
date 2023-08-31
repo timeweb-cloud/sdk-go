@@ -37,6 +37,8 @@ type UpdateServer struct {
 	Comment *string `json:"comment,omitempty"`
 	// Уникальный идентификатор образа, который будет установлен на облачный сервер. Нельзя передавать вместе с `os_id`.
 	ImageId *string `json:"image_id,omitempty"`
+	// Cloud-init скрипт
+	CloudInit *string `json:"cloud_init,omitempty"`
 }
 
 // NewUpdateServer instantiates a new UpdateServer object
@@ -344,6 +346,38 @@ func (o *UpdateServer) SetImageId(v string) {
 	o.ImageId = &v
 }
 
+// GetCloudInit returns the CloudInit field value if set, zero value otherwise.
+func (o *UpdateServer) GetCloudInit() string {
+	if o == nil || IsNil(o.CloudInit) {
+		var ret string
+		return ret
+	}
+	return *o.CloudInit
+}
+
+// GetCloudInitOk returns a tuple with the CloudInit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateServer) GetCloudInitOk() (*string, bool) {
+	if o == nil || IsNil(o.CloudInit) {
+		return nil, false
+	}
+	return o.CloudInit, true
+}
+
+// HasCloudInit returns a boolean if a field has been set.
+func (o *UpdateServer) HasCloudInit() bool {
+	if o != nil && !IsNil(o.CloudInit) {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudInit gets a reference to the given string and assigns it to the CloudInit field.
+func (o *UpdateServer) SetCloudInit(v string) {
+	o.CloudInit = &v
+}
+
 func (o UpdateServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -380,6 +414,9 @@ func (o UpdateServer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ImageId) {
 		toSerialize["image_id"] = o.ImageId
+	}
+	if !IsNil(o.CloudInit) {
+		toSerialize["cloud_init"] = o.CloudInit
 	}
 	return toSerialize, nil
 }

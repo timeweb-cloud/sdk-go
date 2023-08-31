@@ -45,6 +45,8 @@ type CreateServer struct {
 	// Deprecated
 	IsLocalNetwork *bool `json:"is_local_network,omitempty"`
 	Network *Network `json:"network,omitempty"`
+	// Cloud-init скрипт
+	CloudInit *string `json:"cloud_init,omitempty"`
 }
 
 // NewCreateServer instantiates a new CreateServer object
@@ -462,6 +464,38 @@ func (o *CreateServer) SetNetwork(v Network) {
 	o.Network = &v
 }
 
+// GetCloudInit returns the CloudInit field value if set, zero value otherwise.
+func (o *CreateServer) GetCloudInit() string {
+	if o == nil || IsNil(o.CloudInit) {
+		var ret string
+		return ret
+	}
+	return *o.CloudInit
+}
+
+// GetCloudInitOk returns a tuple with the CloudInit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateServer) GetCloudInitOk() (*string, bool) {
+	if o == nil || IsNil(o.CloudInit) {
+		return nil, false
+	}
+	return o.CloudInit, true
+}
+
+// HasCloudInit returns a boolean if a field has been set.
+func (o *CreateServer) HasCloudInit() bool {
+	if o != nil && !IsNil(o.CloudInit) {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudInit gets a reference to the given string and assigns it to the CloudInit field.
+func (o *CreateServer) SetCloudInit(v string) {
+	o.CloudInit = &v
+}
+
 func (o CreateServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -504,6 +538,9 @@ func (o CreateServer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
+	}
+	if !IsNil(o.CloudInit) {
+		toSerialize["cloud_init"] = o.CloudInit
 	}
 	return toSerialize, nil
 }
