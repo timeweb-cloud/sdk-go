@@ -580,7 +580,9 @@ func (r ApiCreateDatabaseInstanceRequest) Execute() (*CreateDatabaseInstance201R
 /*
 CreateDatabaseInstance Создание инстанса базы данных
 
-Чтобы создать инстанс базы данных, отправьте POST-запрос на `/api/v1/databases/{db_cluster_id}/instances`.
+Чтобы создать инстанс базы данных, отправьте POST-запрос на `/api/v1/databases/{db_cluster_id}/instances`.\
+ 
+ Существующие пользователи не будут иметь доступа к новой базе данных после создания. Вы можете изменить привилегии для пользователя через <a href='#tag/Bazy-dannyh/operation/updateDatabaseUser'>метод изменения пользователя</a> 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dbClusterId Идентификатор кластера базы данных

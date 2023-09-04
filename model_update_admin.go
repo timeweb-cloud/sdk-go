@@ -26,6 +26,8 @@ type UpdateAdmin struct {
 	Privileges []string `json:"privileges,omitempty"`
 	// Описание пользователя базы данных
 	Description *string `json:"description,omitempty"`
+	// Уникальный идентификатор инстанса базы данных для приминения привилегий. В данных момент поле доступно только для кластеров MySQL. Если поле не передано, то привилегии будут применены ко всем инстансам
+	InstanceId *float32 `json:"instance_id,omitempty"`
 }
 
 // NewUpdateAdmin instantiates a new UpdateAdmin object
@@ -141,6 +143,38 @@ func (o *UpdateAdmin) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetInstanceId returns the InstanceId field value if set, zero value otherwise.
+func (o *UpdateAdmin) GetInstanceId() float32 {
+	if o == nil || IsNil(o.InstanceId) {
+		var ret float32
+		return ret
+	}
+	return *o.InstanceId
+}
+
+// GetInstanceIdOk returns a tuple with the InstanceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAdmin) GetInstanceIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.InstanceId) {
+		return nil, false
+	}
+	return o.InstanceId, true
+}
+
+// HasInstanceId returns a boolean if a field has been set.
+func (o *UpdateAdmin) HasInstanceId() bool {
+	if o != nil && !IsNil(o.InstanceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstanceId gets a reference to the given float32 and assigns it to the InstanceId field.
+func (o *UpdateAdmin) SetInstanceId(v float32) {
+	o.InstanceId = &v
+}
+
 func (o UpdateAdmin) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -159,6 +193,9 @@ func (o UpdateAdmin) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.InstanceId) {
+		toSerialize["instance_id"] = o.InstanceId
 	}
 	return toSerialize, nil
 }

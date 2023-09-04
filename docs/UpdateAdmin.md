@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Password** | Pointer to **string** | Пароль пользователя базы данных | [optional] 
 **Privileges** | Pointer to **[]string** | Список привилегий пользователя базы данных | [optional] 
 **Description** | Pointer to **string** | Описание пользователя базы данных | [optional] 
+**InstanceId** | Pointer to **float32** | Уникальный идентификатор инстанса базы данных для приминения привилегий. В данных момент поле доступно только для кластеров MySQL. Если поле не передано, то привилегии будут применены ко всем инстансам | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetDescription sets Description field to given value.
 `func (o *UpdateAdmin) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetInstanceId
+
+`func (o *UpdateAdmin) GetInstanceId() float32`
+
+GetInstanceId returns the InstanceId field if non-nil, zero value otherwise.
+
+### GetInstanceIdOk
+
+`func (o *UpdateAdmin) GetInstanceIdOk() (*float32, bool)`
+
+GetInstanceIdOk returns a tuple with the InstanceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstanceId
+
+`func (o *UpdateAdmin) SetInstanceId(v float32)`
+
+SetInstanceId sets InstanceId field to given value.
+
+### HasInstanceId
+
+`func (o *UpdateAdmin) HasInstanceId() bool`
+
+HasInstanceId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

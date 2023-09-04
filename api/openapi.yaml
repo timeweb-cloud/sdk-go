@@ -8313,7 +8313,11 @@ paths:
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
     post:
-      description: "Чтобы создать инстанс базы данных, отправьте POST-запрос на `/api/v1/databases/{db_cluster_id}/instances`."
+      description: "Чтобы создать инстанс базы данных, отправьте POST-запрос на `/api/v1/databases/{db_cluster_id}/instances`.\\\
+        \n \n Существующие пользователи не будут иметь доступа к новой базе данных\
+        \ после создания. Вы можете изменить привилегии для пользователя через <a\
+        \ href='#tag/Bazy-dannyh/operation/updateDatabaseUser'>метод изменения пол\
+        ьзователя</a> "
       operationId: createDatabaseInstance
       parameters:
       - description: Идентификатор кластера базы данных
@@ -37702,6 +37706,13 @@ components:
           description: Хост пользователя
           example: '%'
           type: string
+        instance_id:
+          description: "Уникальный идентификатор инстанса базы данных для приминен\
+            ия привилегий. В данных момент поле доступно только для кластеров MySQL.\
+            \ Если поле не передано, то привилегии будут применены ко всем инстанс\
+            ам"
+          example: 1476
+          type: number
         privileges:
           description: Список привилегий пользователя базы данных
           items:
@@ -37777,6 +37788,13 @@ components:
           description: Описание пользователя базы данных
           example: description
           type: string
+        instance_id:
+          description: "Уникальный идентификатор инстанса базы данных для приминен\
+            ия привилегий. В данных момент поле доступно только для кластеров MySQL.\
+            \ Если поле не передано, то привилегии будут применены ко всем инстанс\
+            ам"
+          example: 1476
+          type: number
       type: object
     database-instance:
       description: База данных
