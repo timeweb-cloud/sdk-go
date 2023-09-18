@@ -26632,7 +26632,7 @@ paths:
               $ref: '#/components/schemas/addStorageSubdomainCertificate_request'
         required: true
       responses:
-        "200":
+        "204":
           description: Сертификат добавлен
         "400":
           content:
