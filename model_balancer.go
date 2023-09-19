@@ -62,13 +62,15 @@ type Balancer struct {
 	Rules []Rule `json:"rules"`
 	// Список IP-адресов, привязанных к балансировщику
 	Ips []string `json:"ips"`
+	// Географическое расположение балансировщика
+	Location string `json:"location"`
 }
 
 // NewBalancer instantiates a new Balancer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string) *Balancer {
+func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string) *Balancer {
 	this := Balancer{}
 	this.Id = id
 	this.Algo = algo
@@ -91,6 +93,7 @@ func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, int
 	this.IsUseProxy = isUseProxy
 	this.Rules = rules
 	this.Ips = ips
+	this.Location = location
 	return &this
 }
 
@@ -610,6 +613,30 @@ func (o *Balancer) SetIps(v []string) {
 	o.Ips = v
 }
 
+// GetLocation returns the Location field value
+func (o *Balancer) GetLocation() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetLocationOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Location, true
+}
+
+// SetLocation sets field value
+func (o *Balancer) SetLocation(v string) {
+	o.Location = v
+}
+
 func (o Balancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -641,6 +668,7 @@ func (o Balancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_use_proxy"] = o.IsUseProxy
 	toSerialize["rules"] = o.Rules
 	toSerialize["ips"] = o.Ips
+	toSerialize["location"] = o.Location
 	return toSerialize, nil
 }
 

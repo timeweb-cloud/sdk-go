@@ -36809,6 +36809,7 @@ components:
         name: Cute Quail
         is_use_proxy: true
         is_ssl: true
+        location: ru-1
         id: 1
         is_keepalive: true
         rise: 2
@@ -36926,6 +36927,13 @@ components:
           items:
             type: string
           type: array
+        location:
+          description: Географическое расположение балансировщика
+          enum:
+          - ru-1
+          - pl-1
+          example: ru-1
+          type: string
       required:
       - algo
       - created_at
@@ -36939,6 +36947,7 @@ components:
       - is_sticky
       - is_use_proxy
       - local_ip
+      - location
       - name
       - path
       - port
@@ -42597,6 +42606,7 @@ components:
           name: Cute Quail
           is_use_proxy: true
           is_ssl: true
+          location: ru-1
           id: 1
           is_keepalive: true
           rise: 2
@@ -42628,6 +42638,7 @@ components:
           name: Cute Quail
           is_use_proxy: true
           is_ssl: true
+          location: ru-1
           id: 1
           is_keepalive: true
           rise: 2
@@ -42675,6 +42686,7 @@ components:
           name: Cute Quail
           is_use_proxy: true
           is_ssl: true
+          location: ru-1
           id: 1
           is_keepalive: true
           rise: 2
@@ -44611,6 +44623,7 @@ components:
           name: Cute Quail
           is_use_proxy: true
           is_ssl: true
+          location: ru-1
           id: 1
           is_keepalive: true
           rise: 2
@@ -44642,6 +44655,7 @@ components:
           name: Cute Quail
           is_use_proxy: true
           is_ssl: true
+          location: ru-1
           id: 1
           is_keepalive: true
           rise: 2
@@ -45437,6 +45451,7 @@ components:
           name: Cute Quail
           is_use_proxy: true
           is_ssl: true
+          location: ru-1
           id: 1
           is_keepalive: true
           rise: 2
@@ -45468,6 +45483,7 @@ components:
           name: Cute Quail
           is_use_proxy: true
           is_ssl: true
+          location: ru-1
           id: 1
           is_keepalive: true
           rise: 2

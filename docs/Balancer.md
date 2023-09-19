@@ -25,12 +25,13 @@ Name | Type | Description | Notes
 **IsUseProxy** | **bool** | Это логическое значение, которое показывает, выступает ли балансировщик в качестве прокси. | 
 **Rules** | [**[]Rule**](Rule.md) |  | 
 **Ips** | **[]string** | Список IP-адресов, привязанных к балансировщику | 
+**Location** | **string** | Географическое расположение балансировщика | 
 
 ## Methods
 
 ### NewBalancer
 
-`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, ) *Balancer`
+`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, ) *Balancer`
 
 NewBalancer instantiates a new Balancer object
 This constructor will assign default values to properties that have it defined,
@@ -483,6 +484,26 @@ and a boolean to check if the value has been set.
 `func (o *Balancer) SetIps(v []string)`
 
 SetIps sets Ips field to given value.
+
+
+### GetLocation
+
+`func (o *Balancer) GetLocation() string`
+
+GetLocation returns the Location field if non-nil, zero value otherwise.
+
+### GetLocationOk
+
+`func (o *Balancer) GetLocationOk() (*string, bool)`
+
+GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocation
+
+`func (o *Balancer) SetLocation(v string)`
+
+SetLocation sets Location field to given value.
 
 
 
