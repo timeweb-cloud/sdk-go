@@ -16067,7 +16067,8 @@ paths:
           minimum: 1
           type: integer
         style: simple
-      - description: Дата начала сбора статистики
+      - description: "Дата начала сбора статистики. Строка в формате ISO 8061, зак\
+          одированная в ASCII, пример: `2023-05-25%202023-05-25T14%3A35%3A38`"
         explode: true
         in: query
         name: date_from
@@ -16075,7 +16076,8 @@ paths:
         schema:
           type: string
         style: form
-      - description: Дата окончания сбора статистики
+      - description: "Дата окончания сбора статистики. Строка в формате ISO 8061,\
+          \ закодированная в ASCII, пример: `2023-05-26%202023-05-25T14%3A35%3A38`"
         explode: true
         in: query
         name: date_to
