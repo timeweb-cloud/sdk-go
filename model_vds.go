@@ -64,13 +64,15 @@ type Vds struct {
 	Networks []VdsNetworksInner `json:"networks"`
 	// Cloud-init скрипт
 	CloudInit NullableString `json:"cloud_init"`
+	// Включен ли QEMU-agent на сервере
+	QemuAgent bool `json:"qemu_agent"`
 }
 
 // NewVds instantiates a new Vds object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString) *Vds {
+func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, qemuAgent bool) *Vds {
 	this := Vds{}
 	this.Id = id
 	this.Name = name
@@ -95,6 +97,7 @@ func NewVds(id float32, name string, comment string, createdAt string, os VdsOs,
 	this.Image = image
 	this.Networks = networks
 	this.CloudInit = cloudInit
+	this.QemuAgent = qemuAgent
 	return &this
 }
 
@@ -674,6 +677,30 @@ func (o *Vds) SetCloudInit(v string) {
 	o.CloudInit.Set(&v)
 }
 
+// GetQemuAgent returns the QemuAgent field value
+func (o *Vds) GetQemuAgent() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.QemuAgent
+}
+
+// GetQemuAgentOk returns a tuple with the QemuAgent field value
+// and a boolean to check if the value has been set.
+func (o *Vds) GetQemuAgentOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.QemuAgent, true
+}
+
+// SetQemuAgent sets field value
+func (o *Vds) SetQemuAgent(v bool) {
+	o.QemuAgent = v
+}
+
 func (o Vds) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -707,6 +734,7 @@ func (o Vds) ToMap() (map[string]interface{}, error) {
 	toSerialize["image"] = o.Image.Get()
 	toSerialize["networks"] = o.Networks
 	toSerialize["cloud_init"] = o.CloudInit.Get()
+	toSerialize["qemu_agent"] = o.QemuAgent
 	return toSerialize, nil
 }
 

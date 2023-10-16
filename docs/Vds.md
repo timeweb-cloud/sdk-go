@@ -27,12 +27,13 @@ Name | Type | Description | Notes
 **Image** | [**NullableVdsImage**](VdsImage.md) |  | 
 **Networks** | [**[]VdsNetworksInner**](VdsNetworksInner.md) | Список сетей диска. | 
 **CloudInit** | **NullableString** | Cloud-init скрипт | 
+**QemuAgent** | **bool** | Включен ли QEMU-agent на сервере | 
 
 ## Methods
 
 ### NewVds
 
-`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, ) *Vds`
+`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, qemuAgent bool, ) *Vds`
 
 NewVds instantiates a new Vds object
 This constructor will assign default values to properties that have it defined,
@@ -587,6 +588,26 @@ SetCloudInit sets CloudInit field to given value.
 `func (o *Vds) UnsetCloudInit()`
 
 UnsetCloudInit ensures that no value is present for CloudInit, not even an explicit nil
+### GetQemuAgent
+
+`func (o *Vds) GetQemuAgent() bool`
+
+GetQemuAgent returns the QemuAgent field if non-nil, zero value otherwise.
+
+### GetQemuAgentOk
+
+`func (o *Vds) GetQemuAgentOk() (*bool, bool)`
+
+GetQemuAgentOk returns a tuple with the QemuAgent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQemuAgent
+
+`func (o *Vds) SetQemuAgent(v bool)`
+
+SetQemuAgent sets QemuAgent field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
