@@ -37046,6 +37046,7 @@ components:
           example: network-1234567890
           type: string
         ip:
+          deprecated: true
           description: IP-адрес в сети.
           example: 192.168.0.0
           type: string

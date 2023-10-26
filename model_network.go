@@ -23,6 +23,7 @@ type Network struct {
 	// Уникальный идентификатор сети.
 	Id string `json:"id"`
 	// IP-адрес в сети.
+	// Deprecated
 	Ip *string `json:"ip,omitempty"`
 }
 
@@ -69,6 +70,7 @@ func (o *Network) SetId(v string) {
 }
 
 // GetIp returns the Ip field value if set, zero value otherwise.
+// Deprecated
 func (o *Network) GetIp() string {
 	if o == nil || IsNil(o.Ip) {
 		var ret string
@@ -79,6 +81,7 @@ func (o *Network) GetIp() string {
 
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Network) GetIpOk() (*string, bool) {
 	if o == nil || IsNil(o.Ip) {
 		return nil, false
@@ -96,6 +99,7 @@ func (o *Network) HasIp() bool {
 }
 
 // SetIp gets a reference to the given string and assigns it to the Ip field.
+// Deprecated
 func (o *Network) SetIp(v string) {
 	o.Ip = &v
 }
