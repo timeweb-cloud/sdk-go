@@ -8389,7 +8389,7 @@ paths:
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
             -d '{
             "name": "default_name",
-            "description": "description",
+            "description": "description"
           }' "https://api.timeweb.cloud/api/v1/databases/1/instances"
       - lang: JavaScript
         source: |
@@ -8399,7 +8399,11 @@ paths:
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
               },
-              body: '{\n  "name": "default_name",\n  "description": "description",\n}'
+              // body: '{\n  "name": "default_name",\n  "description": "description"\n}',
+              body: JSON.stringify({
+                  'name': 'default_name',
+                  'description': 'description'
+              })
           });
       - lang: Node
         source: |
@@ -8407,7 +8411,11 @@ paths:
 
           const response = await axios.post(
               'https://api.timeweb.cloud/api/v1/databases/1/instances',
-              '{\n  "name": "default_name",\n  "description": "description",\n}',
+              // '{\n  "name": "default_name",\n  "description": "description"\n}',
+              {
+                  'name': 'default_name',
+                  'description': 'description'
+              },
               {
                   headers: {
                       'Content-Type': 'application/json',
@@ -8425,9 +8433,17 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          data = '{\n  "name": "default_name",\n  "description": "description",\n}'
+          json_data = {
+              'name': 'default_name',
+              'description': 'description',
+          }
 
-          response = requests.post('https://api.timeweb.cloud/api/v1/databases/1/instances', headers=headers, data=data)
+          response = requests.post('https://api.timeweb.cloud/api/v1/databases/1/instances', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "name": "default_name",\n  "description": "description"\n}'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/databases/1/instances', headers=headers, data=data)
       - lang: PHP
         source: |
           <?php
@@ -8439,7 +8455,7 @@ paths:
               'Content-Type: application/json',
               'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
           ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"name\": \"default_name\",\n  \"description\": \"description\",\n}");
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"name\": \"default_name\",\n  \"description\": \"description\"\n}");
 
           $response = curl_exec($ch);
 
@@ -8448,7 +8464,7 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
           \tvar data = strings.NewReader(`{\n  \"name\": \"default_name\",\n  \"description\"\
-          : \"description\",\n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/databases/1/instances\"\
+          : \"description\"\n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/databases/1/instances\"\
           , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -8467,7 +8483,7 @@ paths:
           Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
           \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
           \t\twriter.write(\"{\\n  \\\"name\\\": \\\"default_name\\\",\\n  \\\"description\\\
-          \": \\\"description\\\",\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \": \\\"description\\\"\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
           \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
           \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
@@ -8830,7 +8846,7 @@ paths:
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
             -d '{
             "name": "default_name",
-            "description": "description",
+            "description": "description"
           }' "https://api.timeweb.cloud/api/v1/databases/1/instances/2"
       - lang: JavaScript
         source: |
@@ -8840,7 +8856,11 @@ paths:
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
               },
-              body: '{\n  "name": "default_name",\n  "description": "description",\n}'
+              // body: '{\n  "name": "default_name",\n  "description": "description"\n}',
+              body: JSON.stringify({
+                  'name': 'default_name',
+                  'description': 'description'
+              })
           });
       - lang: Node
         source: |
@@ -8848,7 +8868,11 @@ paths:
 
           const response = await axios.patch(
               'https://api.timeweb.cloud/api/v1/databases/1/instances/2',
-              '{\n  "name": "default_name",\n  "description": "description",\n}',
+              // '{\n  "name": "default_name",\n  "description": "description"\n}',
+              {
+                  'name': 'default_name',
+                  'description': 'description'
+              },
               {
                   headers: {
                       'Content-Type': 'application/json',
@@ -8866,9 +8890,17 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          data = '{\n  "name": "default_name",\n  "description": "description",\n}'
+          json_data = {
+              'name': 'default_name',
+              'description': 'description',
+          }
 
-          response = requests.patch('https://api.timeweb.cloud/api/v1/databases/1/instances/2', headers=headers, data=data)
+          response = requests.patch('https://api.timeweb.cloud/api/v1/databases/1/instances/2', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "name": "default_name",\n  "description": "description"\n}'
+          #response = requests.patch('https://api.timeweb.cloud/api/v1/databases/1/instances/2', headers=headers, data=data)
       - lang: PHP
         source: |
           <?php
@@ -8880,7 +8912,7 @@ paths:
               'Content-Type: application/json',
               'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
           ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"name\": \"default_name\",\n  \"description\": \"description\",\n}");
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"name\": \"default_name\",\n  \"description\": \"description\"\n}");
 
           $response = curl_exec($ch);
 
@@ -8889,7 +8921,7 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
           \tvar data = strings.NewReader(`{\n  \"name\": \"default_name\",\n  \"description\"\
-          : \"description\",\n}`)\n\treq, err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/databases/1/instances/2\"\
+          : \"description\"\n}`)\n\treq, err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/databases/1/instances/2\"\
           , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -8908,7 +8940,7 @@ paths:
           Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
           \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
           \t\twriter.write(\"{\\n  \\\"name\\\": \\\"default_name\\\",\\n  \\\"description\\\
-          \": \\\"description\\\",\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \": \\\"description\\\"\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
           \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
           \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
@@ -15654,7 +15686,7 @@ paths:
             "bandwidth": 200,
             "comment": "comment",
             "name": "name",
-            "preset_id": 122,
+            "preset_id": 122
           }' "https://api.timeweb.cloud/api/v1/servers/123"
       - lang: JavaScript
         source: |
@@ -15664,7 +15696,14 @@ paths:
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
               },
-              body: '{\n  "os_id": 65,\n  "bandwidth": 200,\n  "comment": "comment",\n  "name": "name",\n  "preset_id": 122,\n}'
+              // body: '{\n  "os_id": 65,\n  "bandwidth": 200,\n  "comment": "comment",\n  "name": "name",\n  "preset_id": 122\n}',
+              body: JSON.stringify({
+                  'os_id': 65,
+                  'bandwidth': 200,
+                  'comment': 'comment',
+                  'name': 'name',
+                  'preset_id': 122
+              })
           });
       - lang: Node
         source: |
@@ -15672,7 +15711,14 @@ paths:
 
           const response = await axios.patch(
               'https://api.timeweb.cloud/api/v1/servers/123',
-              '{\n  "os_id": 65,\n  "bandwidth": 200,\n  "comment": "comment",\n  "name": "name",\n  "preset_id": 122,\n}',
+              // '{\n  "os_id": 65,\n  "bandwidth": 200,\n  "comment": "comment",\n  "name": "name",\n  "preset_id": 122\n}',
+              {
+                  'os_id': 65,
+                  'bandwidth': 200,
+                  'comment': 'comment',
+                  'name': 'name',
+                  'preset_id': 122
+              },
               {
                   headers: {
                       'Content-Type': 'application/json',
@@ -15690,9 +15736,20 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          data = '{\n  "os_id": 65,\n  "bandwidth": 200,\n  "comment": "comment",\n  "name": "name",\n  "preset_id": 122,\n}'
+          json_data = {
+              'os_id': 65,
+              'bandwidth': 200,
+              'comment': 'comment',
+              'name': 'name',
+              'preset_id': 122,
+          }
 
-          response = requests.patch('https://api.timeweb.cloud/api/v1/servers/123', headers=headers, data=data)
+          response = requests.patch('https://api.timeweb.cloud/api/v1/servers/123', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "os_id": 65,\n  "bandwidth": 200,\n  "comment": "comment",\n  "name": "name",\n  "preset_id": 122\n}'
+          #response = requests.patch('https://api.timeweb.cloud/api/v1/servers/123', headers=headers, data=data)
       - lang: PHP
         source: |
           <?php
@@ -15704,7 +15761,7 @@ paths:
               'Content-Type: application/json',
               'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
           ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"os_id\": 65,\n  \"bandwidth\": 200,\n  \"comment\": \"comment\",\n  \"name\": \"name\",\n  \"preset_id\": 122,\n}");
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"os_id\": 65,\n  \"bandwidth\": 200,\n  \"comment\": \"comment\",\n  \"name\": \"name\",\n  \"preset_id\": 122\n}");
 
           $response = curl_exec($ch);
 
@@ -15713,7 +15770,7 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
           \tvar data = strings.NewReader(`{\n  \"os_id\": 65,\n  \"bandwidth\": 200,\n\
-          \  \"comment\": \"comment\",\n  \"name\": \"name\",\n  \"preset_id\": 122,\n\
+          \  \"comment\": \"comment\",\n  \"name\": \"name\",\n  \"preset_id\": 122\n\
           }`)\n\treq, err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/servers/123\"\
           , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
@@ -15734,7 +15791,7 @@ paths:
           \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
           {\\n  \\\"os_id\\\": 65,\\n  \\\"bandwidth\\\": 200,\\n  \\\"comment\\\"\
           : \\\"comment\\\",\\n  \\\"name\\\": \\\"name\\\",\\n  \\\"preset_id\\\"\
-          : 122,\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          : 122\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
           \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
           \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
@@ -15818,7 +15875,7 @@ paths:
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
             -d '{
-            "action": "shutdown",
+            "action": "shutdown"
           }' "https://api.timeweb.cloud/api/v1/servers/123/action"
       - lang: JavaScript
         source: |
@@ -15828,7 +15885,10 @@ paths:
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
               },
-              body: '{\n  "action": "shutdown",\n}'
+              // body: '{\n  "action": "shutdown"\n}',
+              body: JSON.stringify({
+                  'action': 'shutdown'
+              })
           });
       - lang: Node
         source: |
@@ -15836,7 +15896,10 @@ paths:
 
           const response = await axios.post(
               'https://api.timeweb.cloud/api/v1/servers/123/action',
-              '{\n  "action": "shutdown",\n}',
+              // '{\n  "action": "shutdown"\n}',
+              {
+                  'action': 'shutdown'
+              },
               {
                   headers: {
                       'Content-Type': 'application/json',
@@ -15854,9 +15917,16 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          data = '{\n  "action": "shutdown",\n}'
+          json_data = {
+              'action': 'shutdown',
+          }
 
-          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/action', headers=headers, data=data)
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/action', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "action": "shutdown"\n}'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/action', headers=headers, data=data)
       - lang: PHP
         source: |
           <?php
@@ -15868,7 +15938,7 @@ paths:
               'Content-Type: application/json',
               'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
           ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"action\": \"shutdown\",\n}");
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"action\": \"shutdown\"\n}");
 
           $response = curl_exec($ch);
 
@@ -15876,8 +15946,8 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{\n  \"action\": \"shutdown\",\n}`)\n\t\
-          req, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/action\"\
+          \tvar data = strings.NewReader(`{\n  \"action\": \"shutdown\"\n}`)\n\treq,\
+          \ err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/action\"\
           , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -15895,8 +15965,8 @@ paths:
           );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
           TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
           \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
-          {\\n  \\\"action\\\": \\\"shutdown\\\",\\n}\");\n\t\twriter.flush();\n\t\
-          \twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
+          {\\n  \\\"action\\\": \\\"shutdown\\\"\\n}\");\n\t\twriter.flush();\n\t\t\
+          writer.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
           \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
@@ -15969,7 +16039,7 @@ paths:
           curl -X POST \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -d '{}' "https://api.timeweb.cloud/api/v1/servers/123/clone"
+           "https://api.timeweb.cloud/api/v1/servers/123/clone"
       - lang: JavaScript
         source: |
           fetch('https://api.timeweb.cloud/api/v1/servers/123/clone', {
@@ -15977,8 +16047,7 @@ paths:
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              body: JSON.stringify({})
+              }
           });
       - lang: Node
         source: |
@@ -15986,7 +16055,7 @@ paths:
 
           const response = await axios.post(
               'https://api.timeweb.cloud/api/v1/servers/123/clone',
-              {},
+              '',
               {
                   headers: {
                       'Content-Type': 'application/json',
@@ -16000,14 +16069,11 @@ paths:
           import requests
 
           headers = {
-              # Already added when you pass json=
-              # 'Content-Type': 'application/json',
+              'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          json_data = {}
-
-          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/clone', headers=headers, json=json_data)
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/clone', headers=headers)
       - lang: PHP
         source: |
           <?php
@@ -16019,34 +16085,29 @@ paths:
               'Content-Type: application/json',
               'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
           ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, '{}');
 
           $response = curl_exec($ch);
 
           curl_close($ch);
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{}`)\n\treq, err := http.NewRequest(\"POST\"\
-          , \"https://api.timeweb.cloud/api/v1/servers/123/clone\", data)\n\tif err\
-          \ != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\",\
-          \ \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
-          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/clone\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
           \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
           bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
           \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
       - lang: Java
         source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
-          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
-          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
-          \ URL(\"https://api.timeweb.cloud/api/v1/servers/123/clone\");\n\t\tHttpURLConnection\
-          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
-          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
-          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
-          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
-          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
-          {}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/clone\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
           \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
           \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
@@ -34395,8 +34456,7 @@ paths:
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
             -d '{
-            "body": ""ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru"
-          ",
+            "body": "ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru",
             "is_default": false,
             "name": "test"
           }' "https://api.timeweb.cloud/api/v1/ssh-keys"
@@ -34408,7 +34468,12 @@ paths:
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
               },
-              body: '{\n  "body": ""ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru"\n",\n  "is_default": false,\n  "name": "test"\n}'
+              // body: '{\n  "body": "ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru",\n  "is_default": false,\n  "name": "test"\n}',
+              body: JSON.stringify({
+                  'body': 'ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru',
+                  'is_default': false,
+                  'name': 'test'
+              })
           });
       - lang: Node
         source: |
@@ -34416,7 +34481,12 @@ paths:
 
           const response = await axios.post(
               'https://api.timeweb.cloud/api/v1/ssh-keys',
-              '{\n  "body": ""ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru"\n",\n  "is_default": false,\n  "name": "test"\n}',
+              // '{\n  "body": "ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru",\n  "is_default": false,\n  "name": "test"\n}',
+              {
+                  'body': 'ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru',
+                  'is_default': false,
+                  'name': 'test'
+              },
               {
                   headers: {
                       'Content-Type': 'application/json',
@@ -34434,9 +34504,18 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          data = '{\n  "body": ""ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru"\n",\n  "is_default": false,\n  "name": "test"\n}'
+          json_data = {
+              'body': 'ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru',
+              'is_default': False,
+              'name': 'test',
+          }
 
-          response = requests.post('https://api.timeweb.cloud/api/v1/ssh-keys', headers=headers, data=data)
+          response = requests.post('https://api.timeweb.cloud/api/v1/ssh-keys', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "body": "ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru",\n  "is_default": false,\n  "name": "test"\n}'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/ssh-keys', headers=headers, data=data)
       - lang: PHP
         source: |
           <?php
@@ -34448,7 +34527,7 @@ paths:
               'Content-Type: application/json',
               'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
           ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"body\": \"\"ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru\"\n\",\n  \"is_default\": false,\n  \"name\": \"test\"\n}");
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"body\": \"ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw== test@MBP-test.office.timeweb.ru\",\n  \"is_default\": false,\n  \"name\": \"test\"\n}");
 
           $response = curl_exec($ch);
 
@@ -34456,9 +34535,9 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{\n  \"body\": \"\"ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw==\
-          \ test@MBP-test.office.timeweb.ru\"\n\",\n  \"is_default\": false,\n  \"\
-          name\": \"test\"\n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/ssh-keys\"\
+          \tvar data = strings.NewReader(`{\n  \"body\": \"ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw==\
+          \ test@MBP-test.office.timeweb.ru\",\n  \"is_default\": false,\n  \"name\"\
+          : \"test\"\n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/ssh-keys\"\
           , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -34476,8 +34555,8 @@ paths:
           );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
           TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
           \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
-          {\\n  \\\"body\\\": \\\"\\\"ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw==\
-          \ test@MBP-test.office.timeweb.ru\\\"\\n\\\",\\n  \\\"is_default\\\": false,\\\
+          {\\n  \\\"body\\\": \\\"ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw==\
+          \ test@MBP-test.office.timeweb.ru\\\",\\n  \\\"is_default\\\": false,\\\
           n  \\\"name\\\": \\\"test\\\"\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
           \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
           \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
