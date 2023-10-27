@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | Тип IP-адреса сети | 
-**Ip** | **string** | IP-адрес сети | 
-**Ptr** | Pointer to **string** | Запись имени узла | [optional] 
+**Ip** | **string** | IP-адрес сети. | 
+**Ptr** | Pointer to **string** | Запись имени узла. | [optional] 
 **IsMain** | **bool** | Является ли сеть основной. | 
 
 ## Methods

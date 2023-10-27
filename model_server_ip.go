@@ -20,11 +20,11 @@ var _ MappedNullable = &ServerIp{}
 
 // ServerIp IP-адрес сервера
 type ServerIp struct {
-	// Тип IP-адреса сети
+	// Тип IP-адреса сети.
 	Type string `json:"type"`
-	// IP-адрес сети
+	// IP-адрес сети.
 	Ip string `json:"ip"`
-	// Запись имени узла
+	// Запись имени узла.
 	Ptr string `json:"ptr"`
 	// Является ли сеть основной.
 	IsMain bool `json:"is_main"`

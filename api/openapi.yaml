@@ -38006,7 +38006,7 @@ components:
           example: 2021-02-25T11:04:15Z
           type: string
         account_id:
-          description: Идентификатор пользователя
+          description: Идентификатор пользователя.
           example: cp78562
           type: string
         login:
@@ -39707,12 +39707,12 @@ components:
             $ref: '#/components/schemas/vds_networks_inner'
           type: array
         cloud_init:
-          description: Cloud-init скрипт
+          description: Cloud-init скрипт.
           example: '#cloud-config'
           nullable: true
           type: string
         is_qemu_agent:
-          description: Включен ли QEMU-agent на сервере
+          description: Включен ли QEMU-agent на сервере.
           example: true
           type: boolean
       required:
@@ -40100,18 +40100,18 @@ components:
         ptr: ptr
       properties:
         type:
-          description: Тип IP-адреса сети
+          description: Тип IP-адреса сети.
           enum:
           - ipv4
           - ipv6
           example: ipv4
           type: string
         ip:
-          description: IP-адрес сети
+          description: IP-адрес сети.
           example: 0.0.0.0
           type: string
         ptr:
-          description: Запись имени узла
+          description: Запись имени узла.
           example: ptr
           type: string
         is_main:
@@ -40136,12 +40136,12 @@ components:
           example: 1
           type: number
         logged_at:
-          description: Дата лога
+          description: Дата лога.
           example: 2022-10-25T15:15:45Z
           format: date-time
           type: string
         event:
-          description: Событие сервера
+          description: Событие сервера.
           example: install
           type: string
       required:
@@ -47466,18 +47466,18 @@ components:
       - version
       type: object
     vds_software:
-      description: ПО из маркетплейса
+      description: ПО из маркетплейса.
       example:
         name: name
         id: 1
       nullable: true
       properties:
         id:
-          description: Уникальный идентификатор ПО из маркетплейса
+          description: Уникальный идентификатор ПО из маркетплейса.
           example: 1
           type: number
         name:
-          description: Название ПО из маркетплейса
+          description: Название ПО из маркетплейса.
           example: name
           type: string
       type: object
@@ -47573,11 +47573,11 @@ components:
           example: ipv4
           type: string
         ip:
-          description: IP-адрес сети
+          description: IP-адрес сети.
           example: 0.0.0.0
           type: string
         ptr:
-          description: Запись имени узла
+          description: Запись имени узла.
           example: ptr
           type: string
         is_main:
@@ -47631,7 +47631,7 @@ components:
           nullable: true
           type: array
         is_ddos_guard:
-          description: Подключена ли DDoS-защита. Только для публичных сетей
+          description: Подключена ли DDoS-защита. Только для публичных сетей.
           example: false
           type: boolean
       required:

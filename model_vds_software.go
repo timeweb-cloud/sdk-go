@@ -18,11 +18,11 @@ import (
 // checks if the VdsSoftware type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VdsSoftware{}
 
-// VdsSoftware ПО из маркетплейса
+// VdsSoftware ПО из маркетплейса.
 type VdsSoftware struct {
-	// Уникальный идентификатор ПО из маркетплейса
+	// Уникальный идентификатор ПО из маркетплейса.
 	Id *float32 `json:"id,omitempty"`
-	// Название ПО из маркетплейса
+	// Название ПО из маркетплейса.
 	Name *string `json:"name,omitempty"`
 }
 

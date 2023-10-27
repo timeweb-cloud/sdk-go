@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **float32** | Уникальный идентификатор ПО из маркетплейса | [optional] 
-**Name** | Pointer to **string** | Название ПО из маркетплейса | [optional] 
+**Id** | Pointer to **float32** | Уникальный идентификатор ПО из маркетплейса. | [optional] 
+**Name** | Pointer to **string** | Название ПО из маркетплейса. | [optional] 
 
 ## Methods
 

@@ -28,7 +28,7 @@ type VdsNetworksInner struct {
 	Bandwidth NullableFloat32 `json:"bandwidth,omitempty"`
 	// Список IP-адресов сети.
 	Ips []VdsNetworksInnerIpsInner `json:"ips"`
-	// Подключена ли DDoS-защита. Только для публичных сетей
+	// Подключена ли DDoS-защита. Только для публичных сетей.
 	IsDdosGuard *bool `json:"is_ddos_guard,omitempty"`
 }
 

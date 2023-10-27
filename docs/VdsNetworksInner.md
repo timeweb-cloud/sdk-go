@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **NatMode** | Pointer to **string** | Тип преобразования сетевых адресов. | [optional] 
 **Bandwidth** | Pointer to **NullableFloat32** | Пропускная способность сети. | [optional] 
 **Ips** | [**[]VdsNetworksInnerIpsInner**](VdsNetworksInnerIpsInner.md) | Список IP-адресов сети. | 
-**IsDdosGuard** | Pointer to **bool** | Подключена ли DDoS-защита. Только для публичных сетей | [optional] 
+**IsDdosGuard** | Pointer to **bool** | Подключена ли DDoS-защита. Только для публичных сетей. | [optional] 
 
 ## Methods
 

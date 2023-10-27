@@ -26,8 +26,8 @@ Name | Type | Description | Notes
 **RootPass** | **NullableString** | Пароль root сервера или пароль Администратора для серверов Windows. | 
 **Image** | [**NullableVdsImage**](VdsImage.md) |  | 
 **Networks** | [**[]VdsNetworksInner**](VdsNetworksInner.md) | Список сетей диска. | 
-**CloudInit** | **NullableString** | Cloud-init скрипт | 
-**IsQemuAgent** | Pointer to **bool** | Включен ли QEMU-agent на сервере | [optional] 
+**CloudInit** | **NullableString** | Cloud-init скрипт. | 
+**IsQemuAgent** | Pointer to **bool** | Включен ли QEMU-agent на сервере. | [optional] 
 
 ## Methods
 

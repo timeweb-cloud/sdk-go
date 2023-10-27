@@ -22,9 +22,9 @@ var _ MappedNullable = &VdsNetworksInnerIpsInner{}
 type VdsNetworksInnerIpsInner struct {
 	// Тип IP-адреса сети
 	Type string `json:"type"`
-	// IP-адрес сети
+	// IP-адрес сети.
 	Ip string `json:"ip"`
-	// Запись имени узла
+	// Запись имени узла.
 	Ptr *string `json:"ptr,omitempty"`
 	// Является ли сеть основной.
 	IsMain bool `json:"is_main"`

@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **float32** | Уникальный идентификатор диска. | 
-**LoggedAt** | **time.Time** | Дата лога | 
-**Event** | **string** | Событие сервера | 
+**LoggedAt** | **time.Time** | Дата лога. | 
+**Event** | **string** | Событие сервера. | 
 
 ## Methods
 

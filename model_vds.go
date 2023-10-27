@@ -62,9 +62,9 @@ type Vds struct {
 	Image NullableVdsImage `json:"image"`
 	// Список сетей диска.
 	Networks []VdsNetworksInner `json:"networks"`
-	// Cloud-init скрипт
+	// Cloud-init скрипт.
 	CloudInit NullableString `json:"cloud_init"`
-	// Включен ли QEMU-agent на сервере
+	// Включен ли QEMU-agent на сервере.
 	IsQemuAgent *bool `json:"is_qemu_agent,omitempty"`
 }
 

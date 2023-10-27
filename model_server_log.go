@@ -23,9 +23,9 @@ var _ MappedNullable = &ServerLog{}
 type ServerLog struct {
 	// Уникальный идентификатор диска.
 	Id float32 `json:"id"`
-	// Дата лога
+	// Дата лога.
 	LoggedAt time.Time `json:"logged_at"`
-	// Событие сервера
+	// Событие сервера.
 	Event string `json:"event"`
 }
 
