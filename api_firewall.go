@@ -187,10 +187,17 @@ type ApiCreateGroupRequest struct {
 	ctx context.Context
 	ApiService *FirewallAPIService
 	firewallGroupInAPI *FirewallGroupInAPI
+	policy *string
 }
 
 func (r ApiCreateGroupRequest) FirewallGroupInAPI(firewallGroupInAPI FirewallGroupInAPI) ApiCreateGroupRequest {
 	r.firewallGroupInAPI = &firewallGroupInAPI
+	return r
+}
+
+// Тип группы правил
+func (r ApiCreateGroupRequest) Policy(policy string) ApiCreateGroupRequest {
+	r.policy = &policy
 	return r
 }
 
@@ -237,6 +244,9 @@ func (a *FirewallAPIService) CreateGroupExecute(r ApiCreateGroupRequest) (*Firew
 		return localVarReturnValue, nil, reportError("firewallGroupInAPI is required and must be specified")
 	}
 
+	if r.policy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "policy", r.policy, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

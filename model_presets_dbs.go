@@ -32,8 +32,7 @@ type PresetsDbs struct {
 	Ram *float32 `json:"ram,omitempty"`
 	// Описание диска тарифа.
 	Disk *float32 `json:"disk,omitempty"`
-	// Тип тарифа базы данных
-	Type *string `json:"type,omitempty"`
+	Type *DbType `json:"type,omitempty"`
 	// Стоимость тарифа базы данных
 	Price *float32 `json:"price,omitempty"`
 	// Географическое расположение тарифа.
@@ -250,9 +249,9 @@ func (o *PresetsDbs) SetDisk(v float32) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *PresetsDbs) GetType() string {
+func (o *PresetsDbs) GetType() DbType {
 	if o == nil || IsNil(o.Type) {
-		var ret string
+		var ret DbType
 		return ret
 	}
 	return *o.Type
@@ -260,7 +259,7 @@ func (o *PresetsDbs) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PresetsDbs) GetTypeOk() (*string, bool) {
+func (o *PresetsDbs) GetTypeOk() (*DbType, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -276,8 +275,8 @@ func (o *PresetsDbs) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *PresetsDbs) SetType(v string) {
+// SetType gets a reference to the given DbType and assigns it to the Type field.
+func (o *PresetsDbs) SetType(v DbType) {
 	o.Type = &v
 }
 

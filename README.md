@@ -323,6 +323,13 @@ Class | Method | HTTP request | Description
 *FirewallAPI* | [**GetRulesForResource**](docs/FirewallAPI.md#getrulesforresource) | **Get** /api/v1/firewall/service/{resource_type}/{resource_id} | Получение групп правил для ресурса
 *FirewallAPI* | [**UpdateGroup**](docs/FirewallAPI.md#updategroup) | **Patch** /api/v1/firewall/groups/{group_id} | Обновление группы правил
 *FirewallAPI* | [**UpdateGroupRule**](docs/FirewallAPI.md#updategrouprule) | **Patch** /api/v1/firewall/groups/{group_id}/rules/{rule_id} | Обновление firewall правила
+*FloatingIPAPI* | [**BindFloatingIp**](docs/FloatingIPAPI.md#bindfloatingip) | **Post** /api/v1/floating-ips/{floating_ip_id}/bind | Привязать IP к сервису
+*FloatingIPAPI* | [**CreateFloatingIp**](docs/FloatingIPAPI.md#createfloatingip) | **Post** /api/v1/floating-ips | Создание плавающего IP
+*FloatingIPAPI* | [**DeleteFloatingIP**](docs/FloatingIPAPI.md#deletefloatingip) | **Delete** /api/v1/floating-ips/{floating_ip_id} | Удаление плавающего IP по идентификатору
+*FloatingIPAPI* | [**GetFloatingIp**](docs/FloatingIPAPI.md#getfloatingip) | **Get** /api/v1/floating-ips/{floating_ip_id} | Получение плавающего IP
+*FloatingIPAPI* | [**GetFloatingIps**](docs/FloatingIPAPI.md#getfloatingips) | **Get** /api/v1/floating-ips | Получение списка плавающих IP
+*FloatingIPAPI* | [**UnbindFloatingIp**](docs/FloatingIPAPI.md#unbindfloatingip) | **Post** /api/v1/floating-ips/{floating_ip_id}/unbind | Отвязать IP от сервиса
+*FloatingIPAPI* | [**UpdateFloatingIP**](docs/FloatingIPAPI.md#updatefloatingip) | **Patch** /api/v1/floating-ips/{floating_ip_id} | Изменение плавающего IP по идентификатору
 *ImagesAPI* | [**CreateImage**](docs/ImagesAPI.md#createimage) | **Post** /api/v1/images | Создание образа
 *ImagesAPI* | [**CreateImageDownloadUrl**](docs/ImagesAPI.md#createimagedownloadurl) | **Post** /api/v1/images/{image_id}/download-url | Создание ссылки на скачивание образа
 *ImagesAPI* | [**DeleteImage**](docs/ImagesAPI.md#deleteimage) | **Delete** /api/v1/images/{image_id} | Удаление образа
@@ -483,9 +490,11 @@ Class | Method | HTTP request | Description
  - [AutoBackup](docs/AutoBackup.md)
  - [AutoReplyIsDisabled](docs/AutoReplyIsDisabled.md)
  - [AutoReplyIsEnabled](docs/AutoReplyIsEnabled.md)
+ - [AvailabilityZone](docs/AvailabilityZone.md)
  - [Backup](docs/Backup.md)
  - [Balancer](docs/Balancer.md)
  - [BaseError](docs/BaseError.md)
+ - [BindFloatingIp](docs/BindFloatingIp.md)
  - [Bonus](docs/Bonus.md)
  - [Bucket](docs/Bucket.md)
  - [BucketDiskStats](docs/BucketDiskStats.md)
@@ -521,6 +530,8 @@ Class | Method | HTTP request | Description
  - [CreateDomainMailbox201Response](docs/CreateDomainMailbox201Response.md)
  - [CreateDomainMailboxRequest](docs/CreateDomainMailboxRequest.md)
  - [CreateDomainRequest201Response](docs/CreateDomainRequest201Response.md)
+ - [CreateFloatingIp](docs/CreateFloatingIp.md)
+ - [CreateFloatingIp201Response](docs/CreateFloatingIp201Response.md)
  - [CreateFolderInStorageRequest](docs/CreateFolderInStorageRequest.md)
  - [CreateInstance](docs/CreateInstance.md)
  - [CreateKey201Response](docs/CreateKey201Response.md)
@@ -550,6 +561,7 @@ Class | Method | HTTP request | Description
  - [DatabaseInstance](docs/DatabaseInstance.md)
  - [Db](docs/Db.md)
  - [DbDiskStats](docs/DbDiskStats.md)
+ - [DbType](docs/DbType.md)
  - [DedicatedServer](docs/DedicatedServer.md)
  - [DedicatedServerAdditionalService](docs/DedicatedServerAdditionalService.md)
  - [DedicatedServerPreset](docs/DedicatedServerPreset.md)
@@ -598,6 +610,7 @@ Class | Method | HTTP request | Description
  - [FirewallRuleOutResponse](docs/FirewallRuleOutResponse.md)
  - [FirewallRuleProtocol](docs/FirewallRuleProtocol.md)
  - [FirewallRulesOutResponse](docs/FirewallRulesOutResponse.md)
+ - [FloatingIp](docs/FloatingIp.md)
  - [ForwardingIncomingIsDisabled](docs/ForwardingIncomingIsDisabled.md)
  - [ForwardingIncomingIsEnabled](docs/ForwardingIncomingIsEnabled.md)
  - [ForwardingOutgoingIsDisabled](docs/ForwardingOutgoingIsDisabled.md)
@@ -636,6 +649,7 @@ Class | Method | HTTP request | Description
  - [GetFinances404Response](docs/GetFinances404Response.md)
  - [GetFinances429Response](docs/GetFinances429Response.md)
  - [GetFinances500Response](docs/GetFinances500Response.md)
+ - [GetFloatingIps200Response](docs/GetFloatingIps200Response.md)
  - [GetKey200Response](docs/GetKey200Response.md)
  - [GetKeys200Response](docs/GetKeys200Response.md)
  - [GetMailQuota200Response](docs/GetMailQuota200Response.md)
@@ -711,6 +725,7 @@ Class | Method | HTTP request | Description
  - [OS](docs/OS.md)
  - [PerformActionOnBackupRequest](docs/PerformActionOnBackupRequest.md)
  - [PerformActionOnServerRequest](docs/PerformActionOnServerRequest.md)
+ - [Policy](docs/Policy.md)
  - [PresetsBalancer](docs/PresetsBalancer.md)
  - [PresetsDbs](docs/PresetsDbs.md)
  - [PresetsResponse](docs/PresetsResponse.md)
@@ -768,6 +783,7 @@ Class | Method | HTTP request | Description
  - [UpdateDomainMailInfoRequest](docs/UpdateDomainMailInfoRequest.md)
  - [UpdateDomainNameServers](docs/UpdateDomainNameServers.md)
  - [UpdateDomainNameServersNameServersInner](docs/UpdateDomainNameServersNameServersInner.md)
+ - [UpdateFloatingIp](docs/UpdateFloatingIp.md)
  - [UpdateInstance](docs/UpdateInstance.md)
  - [UpdateKeyRequest](docs/UpdateKeyRequest.md)
  - [UpdateMailQuotaRequest](docs/UpdateMailQuotaRequest.md)

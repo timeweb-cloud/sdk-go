@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 ## CreateGroup
 
-> FirewallGroupOutResponse CreateGroup(ctx).FirewallGroupInAPI(firewallGroupInAPI).Execute()
+> FirewallGroupOutResponse CreateGroup(ctx).FirewallGroupInAPI(firewallGroupInAPI).Policy(policy).Execute()
 
 Создание группы правил
 
@@ -118,10 +118,11 @@ import (
 
 func main() {
     firewallGroupInAPI := *openapiclient.NewFirewallGroupInAPI("Name_example") // FirewallGroupInAPI | 
+    policy := "policy_example" // string | Тип группы правил (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FirewallAPI.CreateGroup(context.Background()).FirewallGroupInAPI(firewallGroupInAPI).Execute()
+    resp, r, err := apiClient.FirewallAPI.CreateGroup(context.Background()).FirewallGroupInAPI(firewallGroupInAPI).Policy(policy).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.CreateGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -143,6 +144,7 @@ Other parameters are passed through a pointer to a apiCreateGroupRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **firewallGroupInAPI** | [**FirewallGroupInAPI**](FirewallGroupInAPI.md) |  | 
+ **policy** | **string** | Тип группы правил | 
 
 ### Return type
 

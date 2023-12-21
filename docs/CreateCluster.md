@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Название кластера базы данных. | 
-**Type** | **string** | Тип базы данных. | 
+**Type** | [**DbType**](DbType.md) |  | 
 **Admin** | Pointer to [**CreateClusterAdmin**](CreateClusterAdmin.md) |  | [optional] 
 **Instance** | Pointer to [**CreateClusterInstance**](CreateClusterInstance.md) |  | [optional] 
 **HashType** | Pointer to **string** | Тип хеширования базы данных (mysql5 | mysql | postgres). | [optional] 
@@ -13,12 +13,13 @@ Name | Type | Description | Notes
 **ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
 **Description** | Pointer to **string** | Описание кластера базы данных | [optional] 
+**AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 
 ## Methods
 
 ### NewCreateCluster
 
-`func NewCreateCluster(name string, type_ string, presetId int32, ) *CreateCluster`
+`func NewCreateCluster(name string, type_ DbType, presetId int32, ) *CreateCluster`
 
 NewCreateCluster instantiates a new CreateCluster object
 This constructor will assign default values to properties that have it defined,
@@ -55,20 +56,20 @@ SetName sets Name field to given value.
 
 ### GetType
 
-`func (o *CreateCluster) GetType() string`
+`func (o *CreateCluster) GetType() DbType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *CreateCluster) GetTypeOk() (*string, bool)`
+`func (o *CreateCluster) GetTypeOk() (*DbType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *CreateCluster) SetType(v string)`
+`func (o *CreateCluster) SetType(v DbType)`
 
 SetType sets Type field to given value.
 
@@ -242,6 +243,31 @@ SetDescription sets Description field to given value.
 `func (o *CreateCluster) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetAvailabilityZone
+
+`func (o *CreateCluster) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *CreateCluster) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *CreateCluster) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
+### HasAvailabilityZone
+
+`func (o *CreateCluster) HasAvailabilityZone() bool`
+
+HasAvailabilityZone returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

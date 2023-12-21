@@ -49,6 +49,7 @@ type CreateBalancer struct {
 	// Идентификатор тарифа.
 	PresetId float32 `json:"preset_id"`
 	Network *Network `json:"network,omitempty"`
+	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 }
 
 // NewCreateBalancer instantiates a new CreateBalancer object
@@ -450,6 +451,38 @@ func (o *CreateBalancer) SetNetwork(v Network) {
 	o.Network = &v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value if set, zero value otherwise.
+func (o *CreateBalancer) GetAvailabilityZone() AvailabilityZone {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		var ret AvailabilityZone
+		return ret
+	}
+	return *o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		return nil, false
+	}
+	return o.AvailabilityZone, true
+}
+
+// HasAvailabilityZone returns a boolean if a field has been set.
+func (o *CreateBalancer) HasAvailabilityZone() bool {
+	if o != nil && !IsNil(o.AvailabilityZone) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailabilityZone gets a reference to the given AvailabilityZone and assigns it to the AvailabilityZone field.
+func (o *CreateBalancer) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = &v
+}
+
 func (o CreateBalancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -476,6 +509,9 @@ func (o CreateBalancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["preset_id"] = o.PresetId
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
+	}
+	if !IsNil(o.AvailabilityZone) {
+		toSerialize["availability_zone"] = o.AvailabilityZone
 	}
 	return toSerialize, nil
 }

@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **Location** | **string** | Локация сети. | 
 **CreatedAt** | **time.Time** | Дата создания сети. | 
 **Description** | Pointer to **string** | Описание. | [optional] 
+**AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods
 
 ### NewVpc
 
-`func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, ) *Vpc`
+`func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, availabilityZone AvailabilityZone, ) *Vpc`
 
 NewVpc instantiates a new Vpc object
 This constructor will assign default values to properties that have it defined,
@@ -154,6 +155,26 @@ SetDescription sets Description field to given value.
 `func (o *Vpc) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetAvailabilityZone
+
+`func (o *Vpc) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *Vpc) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *Vpc) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

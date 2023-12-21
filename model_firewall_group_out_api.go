@@ -31,19 +31,21 @@ type FirewallGroupOutAPI struct {
 	Name string `json:"name"`
 	// Описание группы правил
 	Description string `json:"description"`
+	Policy Policy `json:"policy"`
 }
 
 // NewFirewallGroupOutAPI instantiates a new FirewallGroupOutAPI object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFirewallGroupOutAPI(id string, createdAt time.Time, updatedAt time.Time, name string, description string) *FirewallGroupOutAPI {
+func NewFirewallGroupOutAPI(id string, createdAt time.Time, updatedAt time.Time, name string, description string, policy Policy) *FirewallGroupOutAPI {
 	this := FirewallGroupOutAPI{}
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.Name = name
 	this.Description = description
+	this.Policy = policy
 	return &this
 }
 
@@ -175,6 +177,30 @@ func (o *FirewallGroupOutAPI) SetDescription(v string) {
 	o.Description = v
 }
 
+// GetPolicy returns the Policy field value
+func (o *FirewallGroupOutAPI) GetPolicy() Policy {
+	if o == nil {
+		var ret Policy
+		return ret
+	}
+
+	return o.Policy
+}
+
+// GetPolicyOk returns a tuple with the Policy field value
+// and a boolean to check if the value has been set.
+func (o *FirewallGroupOutAPI) GetPolicyOk() (*Policy, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Policy, true
+}
+
+// SetPolicy sets field value
+func (o *FirewallGroupOutAPI) SetPolicy(v Policy) {
+	o.Policy = v
+}
+
 func (o FirewallGroupOutAPI) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -190,6 +216,7 @@ func (o FirewallGroupOutAPI) ToMap() (map[string]interface{}, error) {
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
+	toSerialize["policy"] = o.Policy
 	return toSerialize, nil
 }
 

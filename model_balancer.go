@@ -64,13 +64,14 @@ type Balancer struct {
 	Ips []string `json:"ips"`
 	// Географическое расположение балансировщика
 	Location string `json:"location"`
+	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 }
 
 // NewBalancer instantiates a new Balancer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string) *Balancer {
+func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone) *Balancer {
 	this := Balancer{}
 	this.Id = id
 	this.Algo = algo
@@ -94,6 +95,7 @@ func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, int
 	this.Rules = rules
 	this.Ips = ips
 	this.Location = location
+	this.AvailabilityZone = availabilityZone
 	return &this
 }
 
@@ -637,6 +639,30 @@ func (o *Balancer) SetLocation(v string) {
 	o.Location = v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value
+func (o *Balancer) GetAvailabilityZone() AvailabilityZone {
+	if o == nil {
+		var ret AvailabilityZone
+		return ret
+	}
+
+	return o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AvailabilityZone, true
+}
+
+// SetAvailabilityZone sets field value
+func (o *Balancer) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = v
+}
+
 func (o Balancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -669,6 +695,7 @@ func (o Balancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["rules"] = o.Rules
 	toSerialize["ips"] = o.Ips
 	toSerialize["location"] = o.Location
+	toSerialize["availability_zone"] = o.AvailabilityZone
 	return toSerialize, nil
 }
 

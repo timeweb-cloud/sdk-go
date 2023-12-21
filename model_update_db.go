@@ -27,7 +27,7 @@ type UpdateDb struct {
 	// Идентификатор тарифа.
 	PresetId *int32 `json:"preset_id,omitempty"`
 	ConfigParameters *ConfigParameters `json:"config_parameters,omitempty"`
-	// Использовать или нет внешний ip.
+	// Использовать или нет внешний IP.
 	IsExternalIp *bool `json:"is_external_ip,omitempty"`
 }
 

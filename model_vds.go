@@ -43,7 +43,7 @@ type Vds struct {
 	Status string `json:"status"`
 	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был запущен сервер.
 	StartAt NullableTime `json:"start_at"`
-	// Это логическое значение, которое показывает, включена ли защита от DDOS у данного сервера.
+	// Это логическое значение, которое показывает, включена ли защита от DDoS у данного сервера.
 	IsDdosGuard bool `json:"is_ddos_guard"`
 	// Количество ядер процессора сервера.
 	Cpu float32 `json:"cpu"`
@@ -66,13 +66,14 @@ type Vds struct {
 	CloudInit NullableString `json:"cloud_init"`
 	// Включен ли QEMU-agent на сервере.
 	IsQemuAgent *bool `json:"is_qemu_agent,omitempty"`
+	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 }
 
 // NewVds instantiates a new Vds object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString) *Vds {
+func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, availabilityZone AvailabilityZone) *Vds {
 	this := Vds{}
 	this.Id = id
 	this.Name = name
@@ -97,6 +98,7 @@ func NewVds(id float32, name string, comment string, createdAt string, os VdsOs,
 	this.Image = image
 	this.Networks = networks
 	this.CloudInit = cloudInit
+	this.AvailabilityZone = availabilityZone
 	return &this
 }
 
@@ -708,6 +710,30 @@ func (o *Vds) SetIsQemuAgent(v bool) {
 	o.IsQemuAgent = &v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value
+func (o *Vds) GetAvailabilityZone() AvailabilityZone {
+	if o == nil {
+		var ret AvailabilityZone
+		return ret
+	}
+
+	return o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value
+// and a boolean to check if the value has been set.
+func (o *Vds) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AvailabilityZone, true
+}
+
+// SetAvailabilityZone sets field value
+func (o *Vds) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = v
+}
+
 func (o Vds) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -744,6 +770,7 @@ func (o Vds) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsQemuAgent) {
 		toSerialize["is_qemu_agent"] = o.IsQemuAgent
 	}
+	toSerialize["availability_zone"] = o.AvailabilityZone
 	return toSerialize, nil
 }
 

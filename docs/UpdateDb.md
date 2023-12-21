@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Название базы данных. | [optional] 
 **PresetId** | Pointer to **int32** | Идентификатор тарифа. | [optional] 
 **ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
-**IsExternalIp** | Pointer to **bool** | Использовать или нет внешний ip. | [optional] 
+**IsExternalIp** | Pointer to **bool** | Использовать или нет внешний IP. | [optional] 
 
 ## Methods
 

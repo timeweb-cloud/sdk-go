@@ -15,387 +15,85 @@ import (
 	"encoding/json"
 )
 
-// checks if the DatabaseCluster type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DatabaseCluster{}
+// checks if the BindFloatingIp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BindFloatingIp{}
 
-// DatabaseCluster Кластер базы данных
-type DatabaseCluster struct {
-	// Уникальный идентификатор для каждого экземпляра базы данных. Автоматически генерируется при создании.
-	Id float32 `json:"id"`
-	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана база данных.
-	CreatedAt string `json:"created_at"`
-	// Локация сервера.
-	Location NullableString `json:"location"`
-	// Название кластера базы данных.
-	Name string `json:"name"`
-	// Список сетей кластера базы данных.
-	Networks []DatabaseClusterNetworksInner `json:"networks"`
-	Type DbType `json:"type"`
-	// Тип хеширования кластера базы данных (mysql5 | mysql | postgres).
-	HashType NullableString `json:"hash_type"`
-	// Порт
-	Port NullableInt32 `json:"port"`
-	// Текущий статус кластера базы данных.
-	Status string `json:"status"`
-	// Идентификатор тарифа.
-	PresetId int32 `json:"preset_id"`
-	DiskStats NullableDatabaseClusterDiskStats `json:"disk_stats"`
-	ConfigParameters ConfigParameters `json:"config_parameters"`
-	// Доступность публичного IP-адреса
-	IsEnabledPublicNetwork bool `json:"is_enabled_public_network"`
+// BindFloatingIp struct for BindFloatingIp
+type BindFloatingIp struct {
+	// Тип ресурса.
+	ResourceType string `json:"resource_type"`
+	// Id ресурса.
+	ResourceId float32 `json:"resource_id"`
 }
 
-// NewDatabaseCluster instantiates a new DatabaseCluster object
+// NewBindFloatingIp instantiates a new BindFloatingIp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool) *DatabaseCluster {
-	this := DatabaseCluster{}
-	this.Id = id
-	this.CreatedAt = createdAt
-	this.Location = location
-	this.Name = name
-	this.Networks = networks
-	this.Type = type_
-	this.HashType = hashType
-	this.Port = port
-	this.Status = status
-	this.PresetId = presetId
-	this.DiskStats = diskStats
-	this.ConfigParameters = configParameters
-	this.IsEnabledPublicNetwork = isEnabledPublicNetwork
+func NewBindFloatingIp(resourceType string, resourceId float32) *BindFloatingIp {
+	this := BindFloatingIp{}
+	this.ResourceType = resourceType
+	this.ResourceId = resourceId
 	return &this
 }
 
-// NewDatabaseClusterWithDefaults instantiates a new DatabaseCluster object
+// NewBindFloatingIpWithDefaults instantiates a new BindFloatingIp object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDatabaseClusterWithDefaults() *DatabaseCluster {
-	this := DatabaseCluster{}
+func NewBindFloatingIpWithDefaults() *BindFloatingIp {
+	this := BindFloatingIp{}
 	return &this
 }
 
-// GetId returns the Id field value
-func (o *DatabaseCluster) GetId() float32 {
+// GetResourceType returns the ResourceType field value
+func (o *BindFloatingIp) GetResourceType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceType
+}
+
+// GetResourceTypeOk returns a tuple with the ResourceType field value
+// and a boolean to check if the value has been set.
+func (o *BindFloatingIp) GetResourceTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceType, true
+}
+
+// SetResourceType sets field value
+func (o *BindFloatingIp) SetResourceType(v string) {
+	o.ResourceType = v
+}
+
+// GetResourceId returns the ResourceId field value
+func (o *BindFloatingIp) GetResourceId() float32 {
 	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return o.Id
+	return o.ResourceId
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetIdOk() (*float32, bool) {
+func (o *BindFloatingIp) GetResourceIdOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Id, true
+	return &o.ResourceId, true
 }
 
-// SetId sets field value
-func (o *DatabaseCluster) SetId(v float32) {
-	o.Id = v
+// SetResourceId sets field value
+func (o *BindFloatingIp) SetResourceId(v float32) {
+	o.ResourceId = v
 }
 
-// GetCreatedAt returns the CreatedAt field value
-func (o *DatabaseCluster) GetCreatedAt() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetCreatedAtOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *DatabaseCluster) SetCreatedAt(v string) {
-	o.CreatedAt = v
-}
-
-// GetLocation returns the Location field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *DatabaseCluster) GetLocation() string {
-	if o == nil || o.Location.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.Location.Get()
-}
-
-// GetLocationOk returns a tuple with the Location field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DatabaseCluster) GetLocationOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Location.Get(), o.Location.IsSet()
-}
-
-// SetLocation sets field value
-func (o *DatabaseCluster) SetLocation(v string) {
-	o.Location.Set(&v)
-}
-
-// GetName returns the Name field value
-func (o *DatabaseCluster) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *DatabaseCluster) SetName(v string) {
-	o.Name = v
-}
-
-// GetNetworks returns the Networks field value
-func (o *DatabaseCluster) GetNetworks() []DatabaseClusterNetworksInner {
-	if o == nil {
-		var ret []DatabaseClusterNetworksInner
-		return ret
-	}
-
-	return o.Networks
-}
-
-// GetNetworksOk returns a tuple with the Networks field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetNetworksOk() ([]DatabaseClusterNetworksInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Networks, true
-}
-
-// SetNetworks sets field value
-func (o *DatabaseCluster) SetNetworks(v []DatabaseClusterNetworksInner) {
-	o.Networks = v
-}
-
-// GetType returns the Type field value
-func (o *DatabaseCluster) GetType() DbType {
-	if o == nil {
-		var ret DbType
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetTypeOk() (*DbType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *DatabaseCluster) SetType(v DbType) {
-	o.Type = v
-}
-
-// GetHashType returns the HashType field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *DatabaseCluster) GetHashType() string {
-	if o == nil || o.HashType.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.HashType.Get()
-}
-
-// GetHashTypeOk returns a tuple with the HashType field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DatabaseCluster) GetHashTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.HashType.Get(), o.HashType.IsSet()
-}
-
-// SetHashType sets field value
-func (o *DatabaseCluster) SetHashType(v string) {
-	o.HashType.Set(&v)
-}
-
-// GetPort returns the Port field value
-// If the value is explicit nil, the zero value for int32 will be returned
-func (o *DatabaseCluster) GetPort() int32 {
-	if o == nil || o.Port.Get() == nil {
-		var ret int32
-		return ret
-	}
-
-	return *o.Port.Get()
-}
-
-// GetPortOk returns a tuple with the Port field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DatabaseCluster) GetPortOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Port.Get(), o.Port.IsSet()
-}
-
-// SetPort sets field value
-func (o *DatabaseCluster) SetPort(v int32) {
-	o.Port.Set(&v)
-}
-
-// GetStatus returns the Status field value
-func (o *DatabaseCluster) GetStatus() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetStatusOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Status, true
-}
-
-// SetStatus sets field value
-func (o *DatabaseCluster) SetStatus(v string) {
-	o.Status = v
-}
-
-// GetPresetId returns the PresetId field value
-func (o *DatabaseCluster) GetPresetId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.PresetId
-}
-
-// GetPresetIdOk returns a tuple with the PresetId field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetPresetIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PresetId, true
-}
-
-// SetPresetId sets field value
-func (o *DatabaseCluster) SetPresetId(v int32) {
-	o.PresetId = v
-}
-
-// GetDiskStats returns the DiskStats field value
-// If the value is explicit nil, the zero value for DatabaseClusterDiskStats will be returned
-func (o *DatabaseCluster) GetDiskStats() DatabaseClusterDiskStats {
-	if o == nil || o.DiskStats.Get() == nil {
-		var ret DatabaseClusterDiskStats
-		return ret
-	}
-
-	return *o.DiskStats.Get()
-}
-
-// GetDiskStatsOk returns a tuple with the DiskStats field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DatabaseCluster) GetDiskStatsOk() (*DatabaseClusterDiskStats, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.DiskStats.Get(), o.DiskStats.IsSet()
-}
-
-// SetDiskStats sets field value
-func (o *DatabaseCluster) SetDiskStats(v DatabaseClusterDiskStats) {
-	o.DiskStats.Set(&v)
-}
-
-// GetConfigParameters returns the ConfigParameters field value
-func (o *DatabaseCluster) GetConfigParameters() ConfigParameters {
-	if o == nil {
-		var ret ConfigParameters
-		return ret
-	}
-
-	return o.ConfigParameters
-}
-
-// GetConfigParametersOk returns a tuple with the ConfigParameters field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetConfigParametersOk() (*ConfigParameters, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ConfigParameters, true
-}
-
-// SetConfigParameters sets field value
-func (o *DatabaseCluster) SetConfigParameters(v ConfigParameters) {
-	o.ConfigParameters = v
-}
-
-// GetIsEnabledPublicNetwork returns the IsEnabledPublicNetwork field value
-func (o *DatabaseCluster) GetIsEnabledPublicNetwork() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsEnabledPublicNetwork
-}
-
-// GetIsEnabledPublicNetworkOk returns a tuple with the IsEnabledPublicNetwork field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetIsEnabledPublicNetworkOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsEnabledPublicNetwork, true
-}
-
-// SetIsEnabledPublicNetwork sets field value
-func (o *DatabaseCluster) SetIsEnabledPublicNetwork(v bool) {
-	o.IsEnabledPublicNetwork = v
-}
-
-func (o DatabaseCluster) MarshalJSON() ([]byte, error) {
+func (o BindFloatingIp) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -403,56 +101,45 @@ func (o DatabaseCluster) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DatabaseCluster) ToMap() (map[string]interface{}, error) {
+func (o BindFloatingIp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["created_at"] = o.CreatedAt
-	toSerialize["location"] = o.Location.Get()
-	toSerialize["name"] = o.Name
-	toSerialize["networks"] = o.Networks
-	toSerialize["type"] = o.Type
-	toSerialize["hash_type"] = o.HashType.Get()
-	toSerialize["port"] = o.Port.Get()
-	toSerialize["status"] = o.Status
-	toSerialize["preset_id"] = o.PresetId
-	toSerialize["disk_stats"] = o.DiskStats.Get()
-	toSerialize["config_parameters"] = o.ConfigParameters
-	toSerialize["is_enabled_public_network"] = o.IsEnabledPublicNetwork
+	toSerialize["resource_type"] = o.ResourceType
+	toSerialize["resource_id"] = o.ResourceId
 	return toSerialize, nil
 }
 
-type NullableDatabaseCluster struct {
-	value *DatabaseCluster
+type NullableBindFloatingIp struct {
+	value *BindFloatingIp
 	isSet bool
 }
 
-func (v NullableDatabaseCluster) Get() *DatabaseCluster {
+func (v NullableBindFloatingIp) Get() *BindFloatingIp {
 	return v.value
 }
 
-func (v *NullableDatabaseCluster) Set(val *DatabaseCluster) {
+func (v *NullableBindFloatingIp) Set(val *BindFloatingIp) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDatabaseCluster) IsSet() bool {
+func (v NullableBindFloatingIp) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDatabaseCluster) Unset() {
+func (v *NullableBindFloatingIp) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDatabaseCluster(val *DatabaseCluster) *NullableDatabaseCluster {
-	return &NullableDatabaseCluster{value: val, isSet: true}
+func NewNullableBindFloatingIp(val *BindFloatingIp) *NullableBindFloatingIp {
+	return &NullableBindFloatingIp{value: val, isSet: true}
 }
 
-func (v NullableDatabaseCluster) MarshalJSON() ([]byte, error) {
+func (v NullableBindFloatingIp) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDatabaseCluster) UnmarshalJSON(src []byte) error {
+func (v *NullableBindFloatingIp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

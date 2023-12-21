@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Уникальный идентификатор сети. | 
+**FloatingIp** | Pointer to **string** | Плавающий IP-адрес | [optional] 
 **Ip** | Pointer to **string** | IP-адрес в сети. | [optional] 
 
 ## Methods
@@ -45,6 +46,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetFloatingIp
+
+`func (o *Network) GetFloatingIp() string`
+
+GetFloatingIp returns the FloatingIp field if non-nil, zero value otherwise.
+
+### GetFloatingIpOk
+
+`func (o *Network) GetFloatingIpOk() (*string, bool)`
+
+GetFloatingIpOk returns a tuple with the FloatingIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFloatingIp
+
+`func (o *Network) SetFloatingIp(v string)`
+
+SetFloatingIp sets FloatingIp field to given value.
+
+### HasFloatingIp
+
+`func (o *Network) HasFloatingIp() bool`
+
+HasFloatingIp returns a boolean if a field has been set.
 
 ### GetIp
 

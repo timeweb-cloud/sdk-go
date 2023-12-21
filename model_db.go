@@ -36,8 +36,7 @@ type Db struct {
 	Name string `json:"name"`
 	// Хост.
 	Host NullableString `json:"host"`
-	// Тип базы данных.
-	Type string `json:"type"`
+	Type DbType `json:"type"`
 	// Тип хеширования базы данных (mysql5 | mysql | postgres).
 	HashType NullableString `json:"hash_type"`
 	// Порт
@@ -54,13 +53,14 @@ type Db struct {
 	ConfigParameters ConfigParameters `json:"config_parameters"`
 	// Это логическое значение, которое показывает, доступна ли база данных только по локальному IP адресу.
 	IsOnlyLocalIpAccess bool `json:"is_only_local_ip_access"`
+	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 }
 
 // NewDb instantiates a new Db object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ string, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters ConfigParameters, isOnlyLocalIpAccess bool) *Db {
+func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ DbType, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters ConfigParameters, isOnlyLocalIpAccess bool, availabilityZone AvailabilityZone) *Db {
 	this := Db{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -79,6 +79,7 @@ func NewDb(id float32, createdAt string, accountId string, login string, passwor
 	this.DiskStats = diskStats
 	this.ConfigParameters = configParameters
 	this.IsOnlyLocalIpAccess = isOnlyLocalIpAccess
+	this.AvailabilityZone = availabilityZone
 	return &this
 }
 
@@ -293,9 +294,9 @@ func (o *Db) SetHost(v string) {
 }
 
 // GetType returns the Type field value
-func (o *Db) GetType() string {
+func (o *Db) GetType() DbType {
 	if o == nil {
-		var ret string
+		var ret DbType
 		return ret
 	}
 
@@ -304,7 +305,7 @@ func (o *Db) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *Db) GetTypeOk() (*string, bool) {
+func (o *Db) GetTypeOk() (*DbType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -312,7 +313,7 @@ func (o *Db) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *Db) SetType(v string) {
+func (o *Db) SetType(v DbType) {
 	o.Type = v
 }
 
@@ -540,6 +541,30 @@ func (o *Db) SetIsOnlyLocalIpAccess(v bool) {
 	o.IsOnlyLocalIpAccess = v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value
+func (o *Db) GetAvailabilityZone() AvailabilityZone {
+	if o == nil {
+		var ret AvailabilityZone
+		return ret
+	}
+
+	return o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value
+// and a boolean to check if the value has been set.
+func (o *Db) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AvailabilityZone, true
+}
+
+// SetAvailabilityZone sets field value
+func (o *Db) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = v
+}
+
 func (o Db) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -570,6 +595,7 @@ func (o Db) ToMap() (map[string]interface{}, error) {
 	toSerialize["disk_stats"] = o.DiskStats.Get()
 	toSerialize["config_parameters"] = o.ConfigParameters
 	toSerialize["is_only_local_ip_access"] = o.IsOnlyLocalIpAccess
+	toSerialize["availability_zone"] = o.AvailabilityZone
 	return toSerialize, nil
 }
 

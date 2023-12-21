@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Login** | Pointer to **string** | Логин для подключения к базе данных. | [optional] 
 **Password** | **string** | Пароль для подключения к базе данных. | 
 **Name** | **string** | Название базы данных. | 
-**Type** | **string** | Тип базы данных. | 
+**Type** | [**DbType**](DbType.md) |  | 
 **HashType** | Pointer to **string** | Тип хеширования базы данных (mysql5 | mysql | postgres). | [optional] 
 **PresetId** | **int32** | Идентификатор тарифа. | 
 **ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewCreateDb
 
-`func NewCreateDb(password string, name string, type_ string, presetId int32, ) *CreateDb`
+`func NewCreateDb(password string, name string, type_ DbType, presetId int32, ) *CreateDb`
 
 NewCreateDb instantiates a new CreateDb object
 This constructor will assign default values to properties that have it defined,
@@ -99,20 +99,20 @@ SetName sets Name field to given value.
 
 ### GetType
 
-`func (o *CreateDb) GetType() string`
+`func (o *CreateDb) GetType() DbType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *CreateDb) GetTypeOk() (*string, bool)`
+`func (o *CreateDb) GetTypeOk() (*DbType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *CreateDb) SetType(v string)`
+`func (o *CreateDb) SetType(v DbType)`
 
 SetType sets Type field to given value.
 

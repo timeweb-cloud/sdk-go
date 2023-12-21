@@ -22,8 +22,7 @@ var _ MappedNullable = &CreateCluster{}
 type CreateCluster struct {
 	// Название кластера базы данных.
 	Name string `json:"name"`
-	// Тип базы данных.
-	Type string `json:"type"`
+	Type DbType `json:"type"`
 	Admin *CreateClusterAdmin `json:"admin,omitempty"`
 	Instance *CreateClusterInstance `json:"instance,omitempty"`
 	// Тип хеширования базы данных (mysql5 | mysql | postgres).
@@ -34,13 +33,14 @@ type CreateCluster struct {
 	Network *Network `json:"network,omitempty"`
 	// Описание кластера базы данных
 	Description *string `json:"description,omitempty"`
+	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 }
 
 // NewCreateCluster instantiates a new CreateCluster object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCluster(name string, type_ string, presetId int32) *CreateCluster {
+func NewCreateCluster(name string, type_ DbType, presetId int32) *CreateCluster {
 	this := CreateCluster{}
 	this.Name = name
 	this.Type = type_
@@ -81,9 +81,9 @@ func (o *CreateCluster) SetName(v string) {
 }
 
 // GetType returns the Type field value
-func (o *CreateCluster) GetType() string {
+func (o *CreateCluster) GetType() DbType {
 	if o == nil {
-		var ret string
+		var ret DbType
 		return ret
 	}
 
@@ -92,7 +92,7 @@ func (o *CreateCluster) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateCluster) GetTypeOk() (*string, bool) {
+func (o *CreateCluster) GetTypeOk() (*DbType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *CreateCluster) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *CreateCluster) SetType(v string) {
+func (o *CreateCluster) SetType(v DbType) {
 	o.Type = v
 }
 
@@ -320,6 +320,38 @@ func (o *CreateCluster) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value if set, zero value otherwise.
+func (o *CreateCluster) GetAvailabilityZone() AvailabilityZone {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		var ret AvailabilityZone
+		return ret
+	}
+	return *o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		return nil, false
+	}
+	return o.AvailabilityZone, true
+}
+
+// HasAvailabilityZone returns a boolean if a field has been set.
+func (o *CreateCluster) HasAvailabilityZone() bool {
+	if o != nil && !IsNil(o.AvailabilityZone) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailabilityZone gets a reference to the given AvailabilityZone and assigns it to the AvailabilityZone field.
+func (o *CreateCluster) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = &v
+}
+
 func (o CreateCluster) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -350,6 +382,9 @@ func (o CreateCluster) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.AvailabilityZone) {
+		toSerialize["availability_zone"] = o.AvailabilityZone
 	}
 	return toSerialize, nil
 }

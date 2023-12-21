@@ -22,6 +22,8 @@ var _ MappedNullable = &Network{}
 type Network struct {
 	// Уникальный идентификатор сети.
 	Id string `json:"id"`
+	// Плавающий IP-адрес
+	FloatingIp *string `json:"floating_ip,omitempty"`
 	// IP-адрес в сети.
 	// Deprecated
 	Ip *string `json:"ip,omitempty"`
@@ -67,6 +69,38 @@ func (o *Network) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *Network) SetId(v string) {
 	o.Id = v
+}
+
+// GetFloatingIp returns the FloatingIp field value if set, zero value otherwise.
+func (o *Network) GetFloatingIp() string {
+	if o == nil || IsNil(o.FloatingIp) {
+		var ret string
+		return ret
+	}
+	return *o.FloatingIp
+}
+
+// GetFloatingIpOk returns a tuple with the FloatingIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Network) GetFloatingIpOk() (*string, bool) {
+	if o == nil || IsNil(o.FloatingIp) {
+		return nil, false
+	}
+	return o.FloatingIp, true
+}
+
+// HasFloatingIp returns a boolean if a field has been set.
+func (o *Network) HasFloatingIp() bool {
+	if o != nil && !IsNil(o.FloatingIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetFloatingIp gets a reference to the given string and assigns it to the FloatingIp field.
+func (o *Network) SetFloatingIp(v string) {
+	o.FloatingIp = &v
 }
 
 // GetIp returns the Ip field value if set, zero value otherwise.
@@ -115,6 +149,9 @@ func (o Network) MarshalJSON() ([]byte, error) {
 func (o Network) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.FloatingIp) {
+		toSerialize["floating_ip"] = o.FloatingIp
+	}
 	if !IsNil(o.Ip) {
 		toSerialize["ip"] = o.Ip
 	}

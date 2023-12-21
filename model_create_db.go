@@ -26,8 +26,7 @@ type CreateDb struct {
 	Password string `json:"password"`
 	// Название базы данных.
 	Name string `json:"name"`
-	// Тип базы данных.
-	Type string `json:"type"`
+	Type DbType `json:"type"`
 	// Тип хеширования базы данных (mysql5 | mysql | postgres).
 	HashType *string `json:"hash_type,omitempty"`
 	// Идентификатор тарифа.
@@ -40,7 +39,7 @@ type CreateDb struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDb(password string, name string, type_ string, presetId int32) *CreateDb {
+func NewCreateDb(password string, name string, type_ DbType, presetId int32) *CreateDb {
 	this := CreateDb{}
 	this.Password = password
 	this.Name = name
@@ -138,9 +137,9 @@ func (o *CreateDb) SetName(v string) {
 }
 
 // GetType returns the Type field value
-func (o *CreateDb) GetType() string {
+func (o *CreateDb) GetType() DbType {
 	if o == nil {
-		var ret string
+		var ret DbType
 		return ret
 	}
 
@@ -149,7 +148,7 @@ func (o *CreateDb) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDb) GetTypeOk() (*string, bool) {
+func (o *CreateDb) GetTypeOk() (*DbType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,7 +156,7 @@ func (o *CreateDb) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *CreateDb) SetType(v string) {
+func (o *CreateDb) SetType(v DbType) {
 	o.Type = v
 }
 

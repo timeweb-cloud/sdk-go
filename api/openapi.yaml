@@ -173,10 +173,10 @@ tags:
     <br><br> Подробнее о сервисе почты – в нашей <a href='https://timeweb.cloud/docs/mail'
     target='_blank'>базе знаний</a>.
   name: Mail
-- description: Firewall позволяет фильтровать трафик по заранее установленным правилам.
-    Вы можете создать несколько групп правил и подключить их на один или несколько
-    облачных серверов.
-  name: Firewall
+- description: "Плавающий IP - это статический внешний IP-адрес, который вы можете\
+    \ переносить между сервисами внутри одной зоны доступности: облачными серверам\
+    и, базами данных и балансировщиками нагрузки."
+  name: Floating IP
 - description: "Проекты позволяют организовать ваши ресурсы в группы, соответствую\
     щие вашему стилю работы. Вы можете группировать ресурсы (например, облачные и\
     \ выделенные серверы, балансировщики нагрузки, базы данных и т.д.) таким образ\
@@ -185,6 +185,10 @@ tags:
 - description: "Токены API — это JWT-токены, с помощью которых вы можете получить\
     \ доступ к управлению вашей облачной инфраструктурой через API."
   name: API keys
+- description: Firewall позволяет фильтровать трафик по заранее установленным правилам.
+    Вы можете создать несколько групп правил и подключить их на один или несколько
+    облачных серверов.
+  name: Firewall
 - description: "Kubernetes — программное обеспечение с открытым исходным кодом, пр\
     едназначенное для автоматизированного управления контейнерными приложениями. Kubernetes\
     \ обеспечит автоматическое развертывание, масштабирование, распределение нагру\
@@ -2573,7 +2577,18 @@ paths:
     post:
       description: "Чтобы создать группу правил, отправьте POST запрос на `/api/v1/firewall/groups`"
       operationId: createGroup
-      parameters: []
+      parameters:
+      - description: Тип группы правил
+        explode: true
+        in: query
+        name: policy
+        required: false
+        schema:
+          enum:
+          - DROP
+          - ACCEPT
+          type: string
+        style: form
       requestBody:
         content:
           application/json:
@@ -35315,6 +35330,1020 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/floating-ips:
+    get:
+      description: "Чтобы получить список плавающих IP, отправьте GET-запрос на `/api/v1/floating-ips`."
+      operationId: getFloatingIps
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFloatingIps_200_response'
+          description: Объект JSON c ключом `ips`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка плавающих IP
+      tags:
+      - Floating IP
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/floating-ips"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/floating-ips', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/floating-ips', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/floating-ips', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/floating-ips');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/floating-ips\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/floating-ips\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: "Чтобы создать создать плавающий IP, отправьте POST-запрос в `/api/v1/floating-ip`,\
+        \ задав необходимые атрибуты."
+      operationId: createFloatingIp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-floating-ip'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createFloatingIp_201_response'
+          description: Объект JSON c ключом `ip`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание плавающего IP
+      tags:
+      - Floating IP
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "description": "Описание для примера"
+          }' "https://api.timeweb.cloud/api/v1/floating-ips"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/floating-ips', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "description": "Описание для примера"\n}',
+              body: JSON.stringify({
+                  'description': '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0434\u043B\u044F \u043F\u0440\u0438\u043C\u0435\u0440\u0430'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/floating-ips',
+              // '{\n  "description": "Описание для примера"\n}',
+              {
+                  'description': '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0434\u043B\u044F \u043F\u0440\u0438\u043C\u0435\u0440\u0430'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'description': 'Описание для примера',
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/floating-ips', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "description": "Описание для примера"\n}'.encode()
+          #response = requests.post('https://api.timeweb.cloud/api/v1/floating-ips', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/floating-ips');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"description\": \"Описание для примера\"\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"description\": \"Описание для при\
+          мера\"\n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/floating-ips\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/floating-ips\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n  \\\"description\\\": \\\"Описание для примера\\\"\\n}\");\n\t\twriter.flush();\n\
+          \t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
+          \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/floating-ips/{floating_ip_id}:
+    delete:
+      description: "Чтобы удалить плавающий IP, отправьте DELETE-запрос на `/api/v1/floating-ips/{floating_ip_id}`"
+      operationId: deleteFloatingIP
+      parameters:
+      - description: Идентификатор плавающего IP
+        explode: false
+        in: path
+        name: floating_ip_id
+        required: true
+        schema:
+          description: Идентификатор плавающего IP
+          example: 87fa289f-1513-4c4d-8d49-5707f411f14b
+          type: string
+        style: simple
+      responses:
+        "201":
+          description: Плавающий IP успешно удален
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление плавающего IP по идентификатору
+      tags:
+      - Floating IP
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: "Чтобы отобразить информацию об отдельном плавающем IP, отправь\
+        те запрос GET на `api/v1/floating-ips/{floating_ip_id}`."
+      operationId: getFloatingIp
+      parameters:
+      - description: Идентификатор плавающего IP
+        explode: false
+        in: path
+        name: floating_ip_id
+        required: true
+        schema:
+          description: Идентификатор плавающего IP
+          example: 87fa289f-1513-4c4d-8d49-5707f411f14b
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createFloatingIp_201_response'
+          description: Ответ будет представлять собой объект JSON с ключом `ip`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение плавающего IP
+      tags:
+      - Floating IP
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/floating-ip/87fa289f-1513-4c4d-8d49-5707f411f14b"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/floating-ip/87fa289f-1513-4c4d-8d49-5707f411f14b', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/floating-ip/87fa289f-1513-4c4d-8d49-5707f411f14b', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/floating-ip/87fa289f-1513-4c4d-8d49-5707f411f14b', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/floating-ip/87fa289f-1513-4c4d-8d49-5707f411f14b');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/floating-ip/87fa289f-1513-4c4d-8d49-5707f411f14b\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/floating-ip/87fa289f-1513-4c4d-8d49-5707f411f14b\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    patch:
+      description: "Чтобы изменить плавающий IP, отправьте PATCH-запрос на `/api/v1/floating-ips/{floating_ip_id}`"
+      operationId: updateFloatingIP
+      parameters:
+      - description: Идентификатор плавающего IP
+        explode: false
+        in: path
+        name: floating_ip_id
+        required: true
+        schema:
+          description: Идентификатор плавающего IP
+          example: 87fa289f-1513-4c4d-8d49-5707f411f14b
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update-floating-ip'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createFloatingIp_201_response'
+          description: Объект JSON c ключом `ip`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Изменение плавающего IP по идентификатору
+      tags:
+      - Floating IP
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: "curl -X PATCH \\\n  -H \"Content-Type: application/json\" \\\n  -H\
+          \ \"Authorization: Bearer $TIMEWEB_CLOUD_TOKEN\" \\\n  -d '{\n  \"description\"\
+          : \"Плавающий IP для примера\" \n}' \"https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af\""
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "description": "Плавающий IP для примера" \n}',
+              body: JSON.stringify({
+                  'description': '\u041F\u043B\u0430\u0432\u0430\u044E\u0449\u0438\u0439 IP \u0434\u043B\u044F \u043F\u0440\u0438\u043C\u0435\u0440\u0430'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af',
+              // '{\n  "description": "Плавающий IP для примера" \n}',
+              {
+                  'description': '\u041F\u043B\u0430\u0432\u0430\u044E\u0449\u0438\u0439 IP \u0434\u043B\u044F \u043F\u0440\u0438\u043C\u0435\u0440\u0430'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'description': 'Плавающий IP для примера',
+          }
+
+          response = requests.patch(
+              'https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af',
+              headers=headers,
+              json=json_data,
+          )
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "description": "Плавающий IP для примера" \n}'.encode()
+          #response = requests.patch(
+          #    'https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af',
+          #    headers=headers,
+          #    data=data,
+          #)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"description\": \"Плавающий IP для примера\" \n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"description\": \"Плавающий IP для\
+          \ примера\" \n}`)\n\treq, err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/floating-ips/4df0e781-cafb-4419-9636-ce5fc93591af\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\n  \\\"description\\\": \\\"Плавающий IP для приме\
+          ра\\\" \\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/floating-ips/{floating_ip_id}/bind:
+    post:
+      description: "Чтобы привязать IP к сервису, отправьте POST-запрос на `/api/v1/floating-ip/{floating_ip_id}/bind`."
+      operationId: bindFloatingIp
+      parameters:
+      - description: Идентификатор плавающего IP
+        explode: false
+        in: path
+        name: floating_ip_id
+        required: true
+        schema:
+          description: Идентификатор плавающего IP
+          example: 87fa289f-1513-4c4d-8d49-5707f411f14b
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bind-floating-ip'
+        required: true
+      responses:
+        "204":
+          description: Плавающий IP успешно привязан
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Привязать IP к сервису
+      tags:
+      - Floating IP
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/bind"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/bind', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/bind',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/bind', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/bind');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/bind\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/bind\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/floating-ips/{floating_ip_id}/unbind:
+    post:
+      description: "Чтобы отвязать IP от сервиса, отправьте POST-запрос на `/api/v1/floating-ip/{floating_ip_id}/unbind`."
+      operationId: unbindFloatingIp
+      parameters:
+      - description: Идентификатор плавающего IP
+        explode: false
+        in: path
+        name: floating_ip_id
+        required: true
+        schema:
+          description: Идентификатор плавающего IP
+          example: 87fa289f-1513-4c4d-8d49-5707f411f14b
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Плавающий IP успешно отвязан
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Отвязать IP от сервиса
+      tags:
+      - Floating IP
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/unbind"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/unbind', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/unbind',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/unbind', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/unbind');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/unbind\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/floating-ip/{floating_ip_id}/unbind\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
 components:
   parameters:
     limit:
@@ -35741,6 +36770,17 @@ components:
         example: 1051
         minimum: 1
         type: integer
+      style: simple
+    floating-ip-id:
+      description: Идентификатор плавающего IP
+      explode: false
+      in: path
+      name: floating_ip_id
+      required: true
+      schema:
+        description: Идентификатор плавающего IP
+        example: 87fa289f-1513-4c4d-8d49-5707f411f14b
+        type: string
       style: simple
   responses:
     "400":
@@ -36469,6 +37509,13 @@ components:
       - download
       title: ImageDownloadResponse
       type: object
+    Policy:
+      description: An enumeration.
+      enum:
+      - ACCEPT
+      - DROP
+      title: policy
+      type: string
     FirewallGroupOutAPI:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -36476,6 +37523,7 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         description: description
         id: id
+        policy: null
       properties:
         id:
           description: Идентификатор группы правил
@@ -36499,11 +37547,14 @@ components:
           description: Описание группы правил
           title: Description
           type: string
+        policy:
+          $ref: '#/components/schemas/Policy'
       required:
       - created_at
       - description
       - id
       - name
+      - policy
       - updated_at
       title: FirewallGroupOutAPI
       type: object
@@ -36518,11 +37569,13 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           id: id
+          policy: null
         - updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           id: id
+          policy: null
       properties:
         response_id:
           description: Идентификатор запроса
@@ -36587,6 +37640,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           id: id
+          policy: null
       properties:
         response_id:
           description: Идентификатор запроса
@@ -36861,9 +37915,23 @@ components:
       - server_port
       - server_proto
       type: object
+    availability-zone:
+      description: Зона доступности.
+      enum:
+      - spb-1
+      - spb-2
+      - spb-3
+      - spb-4
+      - nsk-1
+      - ams-1
+      - gdn-1
+      - ala-1
+      example: spb-1
+      type: string
     balancer:
       description: Балансировщик
       example:
+        availability_zone: spb-1
         inter: 10
         ip: 1.1.1.1
         is_sticky: true
@@ -37015,8 +38083,11 @@ components:
           - pl-1
           example: ru-1
           type: string
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
       - algo
+      - availability_zone
       - created_at
       - fall
       - id
@@ -37044,6 +38115,10 @@ components:
         id:
           description: Уникальный идентификатор сети.
           example: network-1234567890
+          type: string
+        floating_ip:
+          description: Плавающий IP-адрес
+          example: 192.168.0.0
           type: string
         ip:
           deprecated: true
@@ -37125,6 +38200,8 @@ components:
           type: number
         network:
           $ref: '#/components/schemas/network'
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
       - algo
       - fall
@@ -37346,6 +38423,21 @@ components:
       - replica_count
       - request_per_second
       type: object
+    db-type:
+      description: Тип базы данных.
+      enum:
+      - mysql
+      - mysql5
+      - postgres
+      - postgres14
+      - postgres15
+      - redis
+      - mongodb
+      - opensearch
+      - kafka
+      - rabbitmq
+      example: mysql
+      type: string
     config-parameters:
       example:
         innodb_io_capacity: "200"
@@ -37428,73 +38520,81 @@ components:
           type: string
         autovacuum_analyze_scale_factor:
           description: "Доля измененных или удаленных записей в таблице, при котор\
-            ой процесс автоочистки выполнит команду `ANALYZE` (`postgres`)."
+            ой процесс автоочистки выполнит команду `ANALYZE` (`postgres` | `postgres14`|\
+            \ `postgres15`)."
           example: "0.0001"
           type: string
         bgwriter_delay:
-          description: Задержка между запусками процесса фоновой записи (`postgres`).
+          description: Задержка между запусками процесса фоновой записи (`postgres`
+            | `postgres14`| `postgres15`).
           example: "200"
           type: string
         bgwriter_lru_maxpages:
-          description: Максимальное число элементов буферного кеша (`postgres`).
+          description: Максимальное число элементов буферного кеша (`postgres` | `postgres14`|
+            `postgres15`).
           example: "100"
           type: string
         deadlock_timeout:
           description: "Время ожидания, по истечении которого будет выполняться пр\
-            оверка состояния перекрестной блокировки (`postgres`)."
+            оверка состояния перекрестной блокировки (`postgres` | `postgres14`| `postgres15`)."
           example: "100"
           type: string
         gin_pending_list_limit:
-          description: Максимальный размер очереди записей индекса `GIN` (`postgres`).
+          description: Максимальный размер очереди записей индекса `GIN` (`postgres`
+            | `postgres14`| `postgres15`).
           example: "4194304"
           type: string
         idle_in_transaction_session_timeout:
           description: "Время простоя открытой транзакции, при превышении которого\
-            \ будет завершена сессия с этой транзакцией (`postgres`)."
+            \ будет завершена сессия с этой транзакцией (`postgres` | `postgres14`|\
+            \ `postgres15`)."
           example: "0"
           type: string
         idle_session_timeout:
           description: "Время простоя не открытой транзакции, при превышении котор\
-            ого будет завершена сессия с этой транзакцией (`postgres`)."
+            ого будет завершена сессия с этой транзакцией (`postgres` | `postgres14`|\
+            \ `postgres15`)."
           example: "0"
           type: string
         join_collapse_limit:
           description: "Значение количества элементов в списке `FROM` при превышен\
             ии которого, планировщик будет переносить в список явные инструкции `JOIN`\
-            \ (`postgres`)."
+            \ (`postgres` | `postgres14`| `postgres15`)."
           example: "8"
           type: string
         lock_timeout:
-          description: Время ожидания освобождения блокировки (`postgres`).
+          description: Время ожидания освобождения блокировки (`postgres` | `postgres14`|
+            `postgres15`).
           example: "0"
           type: string
         max_prepared_transactions:
           description: "Максимальное число транзакций, которые могут одновременно\
-            \ находиться в подготовленном состоянии (`postgres`)."
+            \ находиться в подготовленном состоянии (`postgres` | `postgres14`| `postgres15`)."
           example: "0"
           type: string
         max_connections:
-          description: Допустимое количество соединений (`postgres` | `mysql`).
+          description: Допустимое количество соединений (`postgres` | `postgres14`|
+            `postgres15` | `mysql`).
           example: "1"
           type: string
         shared_buffers:
           description: "Устанавливает количество буферов общей памяти, используемы\
-            х сервером (`postgres`)."
+            х сервером (`postgres` | `postgres14`| `postgres15`)."
           example: "128"
           type: string
         wal_buffers:
           description: Устанавливает количество буферов дисковых страниц в общей памяти
-            для WAL (`postgres`).
+            для WAL (`postgres` | `postgres14`| `postgres15`).
           example: "16"
           type: string
         temp_buffers:
           description: "Устанавливает максимальное количество временных буферов, и\
-            спользуемых каждой сессией (`postgres`)."
+            спользуемых каждой сессией (`postgres` | `postgres14`| `postgres15`)."
           example: "8"
           type: string
         work_mem:
           description: "Устанавливает максимальное количество памяти, используемое\
-            \ для рабочих пространств запросов (`postgres`)."
+            \ для рабочих пространств запросов (`postgres` | `postgres14`| `postgres15`)."
           example: "4"
           type: string
         sql_mode:
@@ -37600,15 +38700,7 @@ components:
             $ref: '#/components/schemas/database_cluster_networks_inner'
           type: array
         type:
-          description: Тип кластера базы данных.
-          enum:
-          - mysql
-          - mysql5
-          - postgres
-          - redis
-          - mongodb
-          example: mysql
-          type: string
+          $ref: '#/components/schemas/db-type'
         hash_type:
           description: Тип хеширования кластера базы данных (mysql5 | mysql | postgres).
           enum:
@@ -37666,15 +38758,7 @@ components:
           example: default_db
           type: string
         type:
-          description: Тип базы данных.
-          enum:
-          - mysql
-          - mysql5
-          - postgres
-          - redis
-          - mongodb
-          example: mysql
-          type: string
+          $ref: '#/components/schemas/db-type'
         admin:
           $ref: '#/components/schemas/create_cluster_admin'
         instance:
@@ -37698,6 +38782,8 @@ components:
           description: Описание кластера базы данных
           example: description
           type: string
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
       - name
       - password
@@ -37945,6 +39031,7 @@ components:
     db:
       description: База данных
       example:
+        availability_zone: spb-1
         config_parameters:
           innodb_io_capacity: "200"
           shared_buffers: "128"
@@ -38036,15 +39123,7 @@ components:
           nullable: true
           type: string
         type:
-          description: Тип базы данных.
-          enum:
-          - mysql
-          - mysql5
-          - postgres
-          - redis
-          - mongodb
-          example: mysql
-          type: string
+          $ref: '#/components/schemas/db-type'
         hash_type:
           description: Тип хеширования базы данных (mysql5 | mysql | postgres).
           enum:
@@ -38092,8 +39171,11 @@ components:
             аза данных только по локальному IP адресу."
           example: false
           type: boolean
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
       - account_id
+      - availability_zone
       - config_parameters
       - created_at
       - disk_stats
@@ -38126,15 +39208,7 @@ components:
           example: default_db
           type: string
         type:
-          description: Тип базы данных.
-          enum:
-          - mysql
-          - mysql5
-          - postgres
-          - redis
-          - mongodb
-          example: mysql
-          type: string
+          $ref: '#/components/schemas/db-type'
         hash_type:
           description: Тип хеширования базы данных (mysql5 | mysql | postgres).
           enum:
@@ -38174,7 +39248,7 @@ components:
         config_parameters:
           $ref: '#/components/schemas/config-parameters'
         is_external_ip:
-          description: Использовать или нет внешний ip.
+          description: Использовать или нет внешний IP.
           example: true
           type: boolean
       type: object
@@ -38329,15 +39403,7 @@ components:
           example: 30
           type: number
         type:
-          description: Тип тарифа базы данных
-          enum:
-          - mysql
-          - mysql5
-          - postgres
-          - redis
-          - mongodb
-          example: mysql
-          type: string
+          $ref: '#/components/schemas/db-type'
         price:
           description: Стоимость тарифа базы данных
           example: 100
@@ -39508,14 +40574,6 @@ components:
     vds:
       description: Сервер
       example:
-        image:
-          name: image_name
-          is_custom: true
-          id: 550e8400-e29b-41d4-a716-446655440000
-        os:
-          name: bitrix
-          id: 1
-          version: "18.04"
         software:
           name: name
           id: 1
@@ -39536,10 +40594,7 @@ components:
           used: 5120
           type: nvme
           status: done
-        is_qemu_agent: true
         created_at: 2021-02-25T11:04:15Z
-        cpu: 16
-        cloud_init: '#cloud-config'
         start_at: 2022-10-25T15:15:45Z
         networks:
         - bandwidth: 200
@@ -39568,20 +40623,32 @@ components:
             type: ipv4
             ptr: ptr
           is_ddos_guard: false
+        boot_mode: std
+        configurator_id: 11
+        id: 1
+        is_ddos_guard: false
+        root_pass: password
+        ram: 2048
+        image:
+          name: image_name
+          is_custom: true
+          id: 550e8400-e29b-41d4-a716-446655440000
+        availability_zone: spb-1
+        os:
+          name: bitrix
+          id: 1
+          version: "18.04"
+        is_qemu_agent: true
+        cpu: 16
+        cloud_init: '#cloud-config'
         avatar_id: avatar
         vnc_pass: password
         preset_id: 11
         name: Cute Quail
-        boot_mode: std
         comment: Development Server
         location: ru-1
-        configurator_id: 11
-        id: 1
         cpu_frequency: "3.3"
-        is_ddos_guard: false
-        root_pass: password
         status: "on"
-        ram: 2048
       properties:
         id:
           description: Уникальный идентификатор для каждого экземпляра сервера. Автоматически
@@ -39663,7 +40730,7 @@ components:
           type: string
         is_ddos_guard:
           description: "Это логическое значение, которое показывает, включена ли з\
-            ащита от DDOS у данного сервера."
+            ащита от DDoS у данного сервера."
           example: false
           type: boolean
         cpu:
@@ -39715,7 +40782,10 @@ components:
           description: Включен ли QEMU-agent на сервере.
           example: true
           type: boolean
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
+      - availability_zone
       - avatar_id
       - boot_mode
       - cloud_init
@@ -39808,6 +40878,8 @@ components:
           description: Cloud-init скрипт
           example: '#cloud-config'
           type: string
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
       - bandwidth
       - is_ddos_guard
@@ -42196,6 +43268,7 @@ components:
       type: object
     vpc:
       example:
+        availability_zone: spb-1
         subnet_v4: 192.168.0.0/24
         name: Общая сеть
         created_at: 2023-02-06T17:33:13Z
@@ -42231,7 +43304,10 @@ components:
           description: Описание.
           example: Сеть для примера
           type: string
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
+      - availability_zone
       - created_at
       - id
       - location
@@ -42258,6 +43334,8 @@ components:
           description: Описание.
           example: Сеть для примера
           type: string
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
       required:
       - location
       - name
@@ -42396,6 +43474,96 @@ components:
       - is_enabled
       - name
       - used_by
+    floating-ip:
+      example:
+        availability_zone: spb-1
+        ip: 82.97.244.202
+        resource_type: server
+        resource_id: 24569
+        comment: Комментарий
+        id: 4df0e781-cafb-4419-9636-ce5fc93591af
+        is_ddos_guard: true
+        ptr: ptr
+      properties:
+        id:
+          description: Идентификатор IP.
+          example: 4df0e781-cafb-4419-9636-ce5fc93591af
+          type: string
+        ip:
+          description: IP-адрес
+          example: 82.97.244.202
+          type: string
+        is_ddos_guard:
+          description: "Это логическое значение, которое показывает, включена ли з\
+            ащита от DDoS."
+          example: true
+          type: boolean
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
+        resource_type:
+          description: Тип ресурса.
+          enum:
+          - server
+          - balancer
+          - database
+          example: server
+          type: string
+        resource_id:
+          description: Id ресурса.
+          example: 24569
+          type: number
+        comment:
+          description: Комментарий
+          example: Комментарий
+          type: string
+        ptr:
+          description: Запись имени узла.
+          example: ptr
+          type: string
+      required:
+      - availability_zone
+      - id
+      - ip
+      - is_ddos_guard
+    create-floating-ip:
+      properties:
+        is_ddos_guard:
+          description: "Это логическое значение, которое показывает, включена ли з\
+            ащита от DDoS."
+          example: true
+          type: boolean
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
+      required:
+      - availability_zone
+      - is_ddos_guard
+    update-floating-ip:
+      properties:
+        comment:
+          description: Комментарий
+          example: Комментарий
+          type: string
+        ptr:
+          description: Запись имени узла.
+          example: ptr
+          type: string
+    bind-floating-ip:
+      properties:
+        resource_type:
+          description: Тип ресурса.
+          enum:
+          - server
+          - balancer
+          - database
+          example: server
+          type: string
+        resource_id:
+          description: Id ресурса.
+          example: 24569
+          type: number
+      required:
+      - resource_id
+      - resource_type
     getFinances_200_response:
       example:
         finances:
@@ -42668,7 +43836,8 @@ components:
     getBalancers_200_response:
       example:
         balancers:
-        - inter: 10
+        - availability_zone: spb-1
+          inter: 10
           ip: 1.1.1.1
           is_sticky: true
           created_at: 2022-10-25T15:15:45Z
@@ -42700,7 +43869,8 @@ components:
           rise: 2
           algo: roundrobin
           status: started
-        - inter: 10
+        - availability_zone: spb-1
+          inter: 10
           ip: 1.1.1.1
           is_sticky: true
           created_at: 2022-10-25T15:15:45Z
@@ -42748,6 +43918,7 @@ components:
     createBalancer_200_response:
       example:
         balancer:
+          availability_zone: spb-1
           inter: 10
           ip: 1.1.1.1
           is_sticky: true
@@ -43208,7 +44379,8 @@ components:
     getDatabases_200_response:
       example:
         dbs:
-        - config_parameters:
+        - availability_zone: spb-1
+          config_parameters:
             innodb_io_capacity: "200"
             shared_buffers: "128"
             join_collapse_limit: "8"
@@ -43256,7 +44428,8 @@ components:
           id: 1
           hash_type: caching_sha2
           status: started
-        - config_parameters:
+        - availability_zone: spb-1
+          config_parameters:
             innodb_io_capacity: "200"
             shared_buffers: "128"
             join_collapse_limit: "8"
@@ -43320,6 +44493,7 @@ components:
     createDatabase_201_response:
       example:
         db:
+          availability_zone: spb-1
           config_parameters:
             innodb_io_capacity: "200"
             shared_buffers: "128"
@@ -43736,15 +44910,7 @@ components:
     getServers_200_response:
       example:
         servers:
-        - image:
-            name: image_name
-            is_custom: true
-            id: 550e8400-e29b-41d4-a716-446655440000
-          os:
-            name: bitrix
-            id: 1
-            version: "18.04"
-          software:
+        - software:
             name: name
             id: 1
           disks:
@@ -43764,10 +44930,7 @@ components:
             used: 5120
             type: nvme
             status: done
-          is_qemu_agent: true
           created_at: 2021-02-25T11:04:15Z
-          cpu: 16
-          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -43796,29 +44959,33 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          avatar_id: avatar
-          vnc_pass: password
-          preset_id: 11
-          name: Cute Quail
           boot_mode: std
-          comment: Development Server
-          location: ru-1
           configurator_id: 11
           id: 1
-          cpu_frequency: "3.3"
           is_ddos_guard: false
           root_pass: password
-          status: "on"
           ram: 2048
-        - image:
+          image:
             name: image_name
             is_custom: true
             id: 550e8400-e29b-41d4-a716-446655440000
+          availability_zone: spb-1
           os:
             name: bitrix
             id: 1
             version: "18.04"
-          software:
+          is_qemu_agent: true
+          cpu: 16
+          cloud_init: '#cloud-config'
+          avatar_id: avatar
+          vnc_pass: password
+          preset_id: 11
+          name: Cute Quail
+          comment: Development Server
+          location: ru-1
+          cpu_frequency: "3.3"
+          status: "on"
+        - software:
             name: name
             id: 1
           disks:
@@ -43838,10 +45005,7 @@ components:
             used: 5120
             type: nvme
             status: done
-          is_qemu_agent: true
           created_at: 2021-02-25T11:04:15Z
-          cpu: 16
-          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -43870,20 +45034,32 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
+          boot_mode: std
+          configurator_id: 11
+          id: 1
+          is_ddos_guard: false
+          root_pass: password
+          ram: 2048
+          image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          availability_zone: spb-1
+          os:
+            name: bitrix
+            id: 1
+            version: "18.04"
+          is_qemu_agent: true
+          cpu: 16
+          cloud_init: '#cloud-config'
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
           name: Cute Quail
-          boot_mode: std
           comment: Development Server
           location: ru-1
-          configurator_id: 11
-          id: 1
           cpu_frequency: "3.3"
-          is_ddos_guard: false
-          root_pass: password
           status: "on"
-          ram: 2048
         meta:
           total: 10
       properties:
@@ -43900,14 +45076,6 @@ components:
     createServer_201_response:
       example:
         server:
-          image:
-            name: image_name
-            is_custom: true
-            id: 550e8400-e29b-41d4-a716-446655440000
-          os:
-            name: bitrix
-            id: 1
-            version: "18.04"
           software:
             name: name
             id: 1
@@ -43928,10 +45096,7 @@ components:
             used: 5120
             type: nvme
             status: done
-          is_qemu_agent: true
           created_at: 2021-02-25T11:04:15Z
-          cpu: 16
-          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -43960,20 +45125,32 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
+          boot_mode: std
+          configurator_id: 11
+          id: 1
+          is_ddos_guard: false
+          root_pass: password
+          ram: 2048
+          image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          availability_zone: spb-1
+          os:
+            name: bitrix
+            id: 1
+            version: "18.04"
+          is_qemu_agent: true
+          cpu: 16
+          cloud_init: '#cloud-config'
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
           name: Cute Quail
-          boot_mode: std
           comment: Development Server
           location: ru-1
-          configurator_id: 11
-          id: 1
           cpu_frequency: "3.3"
-          is_ddos_guard: false
-          root_pass: password
           status: "on"
-          ram: 2048
       properties:
         server:
           $ref: '#/components/schemas/vds'
@@ -44688,7 +45865,8 @@ components:
     getProjectBalancers_200_response:
       example:
         balancers:
-        - inter: 10
+        - availability_zone: spb-1
+          inter: 10
           ip: 1.1.1.1
           is_sticky: true
           created_at: 2022-10-25T15:15:45Z
@@ -44720,7 +45898,8 @@ components:
           rise: 2
           algo: roundrobin
           status: started
-        - inter: 10
+        - availability_zone: spb-1
+          inter: 10
           ip: 1.1.1.1
           is_sticky: true
           created_at: 2022-10-25T15:15:45Z
@@ -44899,15 +46078,7 @@ components:
     getProjectServers_200_response:
       example:
         servers:
-        - image:
-            name: image_name
-            is_custom: true
-            id: 550e8400-e29b-41d4-a716-446655440000
-          os:
-            name: bitrix
-            id: 1
-            version: "18.04"
-          software:
+        - software:
             name: name
             id: 1
           disks:
@@ -44927,10 +46098,7 @@ components:
             used: 5120
             type: nvme
             status: done
-          is_qemu_agent: true
           created_at: 2021-02-25T11:04:15Z
-          cpu: 16
-          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -44959,29 +46127,33 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          avatar_id: avatar
-          vnc_pass: password
-          preset_id: 11
-          name: Cute Quail
           boot_mode: std
-          comment: Development Server
-          location: ru-1
           configurator_id: 11
           id: 1
-          cpu_frequency: "3.3"
           is_ddos_guard: false
           root_pass: password
-          status: "on"
           ram: 2048
-        - image:
+          image:
             name: image_name
             is_custom: true
             id: 550e8400-e29b-41d4-a716-446655440000
+          availability_zone: spb-1
           os:
             name: bitrix
             id: 1
             version: "18.04"
-          software:
+          is_qemu_agent: true
+          cpu: 16
+          cloud_init: '#cloud-config'
+          avatar_id: avatar
+          vnc_pass: password
+          preset_id: 11
+          name: Cute Quail
+          comment: Development Server
+          location: ru-1
+          cpu_frequency: "3.3"
+          status: "on"
+        - software:
             name: name
             id: 1
           disks:
@@ -45001,10 +46173,7 @@ components:
             used: 5120
             type: nvme
             status: done
-          is_qemu_agent: true
           created_at: 2021-02-25T11:04:15Z
-          cpu: 16
-          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -45033,20 +46202,32 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
+          boot_mode: std
+          configurator_id: 11
+          id: 1
+          is_ddos_guard: false
+          root_pass: password
+          ram: 2048
+          image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          availability_zone: spb-1
+          os:
+            name: bitrix
+            id: 1
+            version: "18.04"
+          is_qemu_agent: true
+          cpu: 16
+          cloud_init: '#cloud-config'
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
           name: Cute Quail
-          boot_mode: std
           comment: Development Server
           location: ru-1
-          configurator_id: 11
-          id: 1
           cpu_frequency: "3.3"
-          is_ddos_guard: false
-          root_pass: password
           status: "on"
-          ram: 2048
         meta:
           total: 10
       properties:
@@ -45072,7 +46253,8 @@ components:
     getProjectDatabases_200_response:
       example:
         databases:
-        - config_parameters:
+        - availability_zone: spb-1
+          config_parameters:
             innodb_io_capacity: "200"
             shared_buffers: "128"
             join_collapse_limit: "8"
@@ -45120,7 +46302,8 @@ components:
           id: 1
           hash_type: caching_sha2
           status: started
-        - config_parameters:
+        - availability_zone: spb-1
+          config_parameters:
             innodb_io_capacity: "200"
             shared_buffers: "128"
             join_collapse_limit: "8"
@@ -45274,7 +46457,8 @@ components:
     getAllProjectResources_200_response:
       example:
         databases:
-        - config_parameters:
+        - availability_zone: spb-1
+          config_parameters:
             innodb_io_capacity: "200"
             shared_buffers: "128"
             join_collapse_limit: "8"
@@ -45322,7 +46506,8 @@ components:
           id: 1
           hash_type: caching_sha2
           status: started
-        - config_parameters:
+        - availability_zone: spb-1
+          config_parameters:
             innodb_io_capacity: "200"
             shared_buffers: "128"
             join_collapse_limit: "8"
@@ -45371,15 +46556,7 @@ components:
           hash_type: caching_sha2
           status: started
         servers:
-        - image:
-            name: image_name
-            is_custom: true
-            id: 550e8400-e29b-41d4-a716-446655440000
-          os:
-            name: bitrix
-            id: 1
-            version: "18.04"
-          software:
+        - software:
             name: name
             id: 1
           disks:
@@ -45399,10 +46576,7 @@ components:
             used: 5120
             type: nvme
             status: done
-          is_qemu_agent: true
           created_at: 2021-02-25T11:04:15Z
-          cpu: 16
-          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -45431,29 +46605,33 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          avatar_id: avatar
-          vnc_pass: password
-          preset_id: 11
-          name: Cute Quail
           boot_mode: std
-          comment: Development Server
-          location: ru-1
           configurator_id: 11
           id: 1
-          cpu_frequency: "3.3"
           is_ddos_guard: false
           root_pass: password
-          status: "on"
           ram: 2048
-        - image:
+          image:
             name: image_name
             is_custom: true
             id: 550e8400-e29b-41d4-a716-446655440000
+          availability_zone: spb-1
           os:
             name: bitrix
             id: 1
             version: "18.04"
-          software:
+          is_qemu_agent: true
+          cpu: 16
+          cloud_init: '#cloud-config'
+          avatar_id: avatar
+          vnc_pass: password
+          preset_id: 11
+          name: Cute Quail
+          comment: Development Server
+          location: ru-1
+          cpu_frequency: "3.3"
+          status: "on"
+        - software:
             name: name
             id: 1
           disks:
@@ -45473,10 +46651,7 @@ components:
             used: 5120
             type: nvme
             status: done
-          is_qemu_agent: true
           created_at: 2021-02-25T11:04:15Z
-          cpu: 16
-          cloud_init: '#cloud-config'
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
@@ -45505,22 +46680,35 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
+          boot_mode: std
+          configurator_id: 11
+          id: 1
+          is_ddos_guard: false
+          root_pass: password
+          ram: 2048
+          image:
+            name: image_name
+            is_custom: true
+            id: 550e8400-e29b-41d4-a716-446655440000
+          availability_zone: spb-1
+          os:
+            name: bitrix
+            id: 1
+            version: "18.04"
+          is_qemu_agent: true
+          cpu: 16
+          cloud_init: '#cloud-config'
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
           name: Cute Quail
-          boot_mode: std
           comment: Development Server
           location: ru-1
-          configurator_id: 11
-          id: 1
           cpu_frequency: "3.3"
-          is_ddos_guard: false
-          root_pass: password
           status: "on"
-          ram: 2048
         balancers:
-        - inter: 10
+        - availability_zone: spb-1
+          inter: 10
           ip: 1.1.1.1
           is_sticky: true
           created_at: 2022-10-25T15:15:45Z
@@ -45552,7 +46740,8 @@ components:
           rise: 2
           algo: roundrobin
           status: started
-        - inter: 10
+        - availability_zone: spb-1
+          inter: 10
           ip: 1.1.1.1
           is_sticky: true
           created_at: 2022-10-25T15:15:45Z
@@ -46914,13 +48103,15 @@ components:
         meta:
           total: 10
         vpcs:
-        - subnet_v4: 192.168.0.0/24
+        - availability_zone: spb-1
+          subnet_v4: 192.168.0.0/24
           name: Общая сеть
           created_at: 2023-02-06T17:33:13Z
           description: Сеть для примера
           location: ru-1
           id: network-1234567890
-        - subnet_v4: 192.168.0.0/24
+        - availability_zone: spb-1
+          subnet_v4: 192.168.0.0/24
           name: Общая сеть
           created_at: 2023-02-06T17:33:13Z
           description: Сеть для примера
@@ -46940,6 +48131,7 @@ components:
     createVPC_201_response:
       example:
         vpc:
+          availability_zone: spb-1
           subnet_v4: 192.168.0.0/24
           name: Общая сеть
           created_at: 2023-02-06T17:33:13Z
@@ -47141,6 +48333,55 @@ components:
           type: array
       required:
       - ssh_key_ids
+      type: object
+    getFloatingIps_200_response:
+      example:
+        meta:
+          total: 10
+        ips:
+        - availability_zone: spb-1
+          ip: 82.97.244.202
+          resource_type: server
+          resource_id: 24569
+          comment: Комментарий
+          id: 4df0e781-cafb-4419-9636-ce5fc93591af
+          is_ddos_guard: true
+          ptr: ptr
+        - availability_zone: spb-1
+          ip: 82.97.244.202
+          resource_type: server
+          resource_id: 24569
+          comment: Комментарий
+          id: 4df0e781-cafb-4419-9636-ce5fc93591af
+          is_ddos_guard: true
+          ptr: ptr
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        ips:
+          items:
+            $ref: '#/components/schemas/floating-ip'
+          type: array
+      required:
+      - ips
+      - meta
+      type: object
+    createFloatingIp_201_response:
+      example:
+        ip:
+          availability_zone: spb-1
+          ip: 82.97.244.202
+          resource_type: server
+          resource_id: 24569
+          comment: Комментарий
+          id: 4df0e781-cafb-4419-9636-ce5fc93591af
+          is_ddos_guard: true
+          ptr: ptr
+      properties:
+        ip:
+          $ref: '#/components/schemas/floating-ip'
+      required:
+      - ip
       type: object
     status_company_info:
       description: Информация о компании.

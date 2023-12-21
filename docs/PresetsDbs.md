@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Cpu** | Pointer to **float32** | Описание процессора тарифа. | [optional] 
 **Ram** | Pointer to **float32** | Описание ОЗУ тарифа. | [optional] 
 **Disk** | Pointer to **float32** | Описание диска тарифа. | [optional] 
-**Type** | Pointer to **string** | Тип тарифа базы данных | [optional] 
+**Type** | Pointer to [**DbType**](DbType.md) |  | [optional] 
 **Price** | Pointer to **float32** | Стоимость тарифа базы данных | [optional] 
 **Location** | Pointer to **string** | Географическое расположение тарифа. | [optional] 
 
@@ -185,20 +185,20 @@ HasDisk returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *PresetsDbs) GetType() string`
+`func (o *PresetsDbs) GetType() DbType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *PresetsDbs) GetTypeOk() (*string, bool)`
+`func (o *PresetsDbs) GetTypeOk() (*DbType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *PresetsDbs) SetType(v string)`
+`func (o *PresetsDbs) SetType(v DbType)`
 
 SetType sets Type field to given value.
 

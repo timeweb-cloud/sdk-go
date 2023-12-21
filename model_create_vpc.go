@@ -28,6 +28,7 @@ type CreateVpc struct {
 	Location string `json:"location"`
 	// Описание.
 	Description *string `json:"description,omitempty"`
+	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 }
 
 // NewCreateVpc instantiates a new CreateVpc object
@@ -154,6 +155,38 @@ func (o *CreateVpc) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value if set, zero value otherwise.
+func (o *CreateVpc) GetAvailabilityZone() AvailabilityZone {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		var ret AvailabilityZone
+		return ret
+	}
+	return *o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateVpc) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		return nil, false
+	}
+	return o.AvailabilityZone, true
+}
+
+// HasAvailabilityZone returns a boolean if a field has been set.
+func (o *CreateVpc) HasAvailabilityZone() bool {
+	if o != nil && !IsNil(o.AvailabilityZone) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailabilityZone gets a reference to the given AvailabilityZone and assigns it to the AvailabilityZone field.
+func (o *CreateVpc) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = &v
+}
+
 func (o CreateVpc) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -169,6 +202,9 @@ func (o CreateVpc) ToMap() (map[string]interface{}, error) {
 	toSerialize["location"] = o.Location
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.AvailabilityZone) {
+		toSerialize["availability_zone"] = o.AvailabilityZone
 	}
 	return toSerialize, nil
 }

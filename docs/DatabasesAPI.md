@@ -56,7 +56,7 @@ import (
 )
 
 func main() {
-    createDb := *openapiclient.NewCreateDb("password", "default_db", "mysql", int32(5)) // CreateDb | 
+    createDb := *openapiclient.NewCreateDb("password", "default_db", openapiclient.db-type("mysql"), int32(5)) // CreateDb | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -192,7 +192,7 @@ import (
 )
 
 func main() {
-    createCluster := *openapiclient.NewCreateCluster("default_db", "mysql", int32(5)) // CreateCluster | 
+    createCluster := *openapiclient.NewCreateCluster("default_db", openapiclient.db-type("mysql"), int32(5)) // CreateCluster | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

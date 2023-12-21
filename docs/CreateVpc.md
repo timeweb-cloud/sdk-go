@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **SubnetV4** | **string** | Маска подсети. | 
 **Location** | **string** | Локация сети. | 
 **Description** | Pointer to **string** | Описание. | [optional] 
+**AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 
 ## Methods
 
@@ -112,6 +113,31 @@ SetDescription sets Description field to given value.
 `func (o *CreateVpc) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetAvailabilityZone
+
+`func (o *CreateVpc) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *CreateVpc) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *CreateVpc) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
+### HasAvailabilityZone
+
+`func (o *CreateVpc) HasAvailabilityZone() bool`
+
+HasAvailabilityZone returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

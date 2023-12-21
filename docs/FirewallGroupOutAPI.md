@@ -9,12 +9,13 @@ Name | Type | Description | Notes
 **UpdatedAt** | **time.Time** | Дата и время последнего обновления | 
 **Name** | **string** | Имя группы правил | 
 **Description** | **string** | Описание группы правил | 
+**Policy** | [**Policy**](Policy.md) |  | 
 
 ## Methods
 
 ### NewFirewallGroupOutAPI
 
-`func NewFirewallGroupOutAPI(id string, createdAt time.Time, updatedAt time.Time, name string, description string, ) *FirewallGroupOutAPI`
+`func NewFirewallGroupOutAPI(id string, createdAt time.Time, updatedAt time.Time, name string, description string, policy Policy, ) *FirewallGroupOutAPI`
 
 NewFirewallGroupOutAPI instantiates a new FirewallGroupOutAPI object
 This constructor will assign default values to properties that have it defined,
@@ -127,6 +128,26 @@ and a boolean to check if the value has been set.
 `func (o *FirewallGroupOutAPI) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
+
+
+### GetPolicy
+
+`func (o *FirewallGroupOutAPI) GetPolicy() Policy`
+
+GetPolicy returns the Policy field if non-nil, zero value otherwise.
+
+### GetPolicyOk
+
+`func (o *FirewallGroupOutAPI) GetPolicyOk() (*Policy, bool)`
+
+GetPolicyOk returns a tuple with the Policy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicy
+
+`func (o *FirewallGroupOutAPI) SetPolicy(v Policy)`
+
+SetPolicy sets Policy field to given value.
 
 
 

@@ -40,35 +40,35 @@ type ConfigParameters struct {
 	MaxAllowedPacket *string `json:"max_allowed_packet,omitempty"`
 	// Максимальный размер пользовательских MEMORY-таблиц (`mysql5` | `mysql`).
 	MaxHeapTableSize *string `json:"max_heap_table_size,omitempty"`
-	// Доля измененных или удаленных записей в таблице, при которой процесс автоочистки выполнит команду `ANALYZE` (`postgres`).
+	// Доля измененных или удаленных записей в таблице, при которой процесс автоочистки выполнит команду `ANALYZE` (`postgres` | `postgres14`| `postgres15`).
 	AutovacuumAnalyzeScaleFactor *string `json:"autovacuum_analyze_scale_factor,omitempty"`
-	// Задержка между запусками процесса фоновой записи (`postgres`).
+	// Задержка между запусками процесса фоновой записи (`postgres` | `postgres14`| `postgres15`).
 	BgwriterDelay *string `json:"bgwriter_delay,omitempty"`
-	// Максимальное число элементов буферного кеша (`postgres`).
+	// Максимальное число элементов буферного кеша (`postgres` | `postgres14`| `postgres15`).
 	BgwriterLruMaxpages *string `json:"bgwriter_lru_maxpages,omitempty"`
-	// Время ожидания, по истечении которого будет выполняться проверка состояния перекрестной блокировки (`postgres`).
+	// Время ожидания, по истечении которого будет выполняться проверка состояния перекрестной блокировки (`postgres` | `postgres14`| `postgres15`).
 	DeadlockTimeout *string `json:"deadlock_timeout,omitempty"`
-	// Максимальный размер очереди записей индекса `GIN` (`postgres`).
+	// Максимальный размер очереди записей индекса `GIN` (`postgres` | `postgres14`| `postgres15`).
 	GinPendingListLimit *string `json:"gin_pending_list_limit,omitempty"`
-	// Время простоя открытой транзакции, при превышении которого будет завершена сессия с этой транзакцией (`postgres`).
+	// Время простоя открытой транзакции, при превышении которого будет завершена сессия с этой транзакцией (`postgres` | `postgres14`| `postgres15`).
 	IdleInTransactionSessionTimeout *string `json:"idle_in_transaction_session_timeout,omitempty"`
-	// Время простоя не открытой транзакции, при превышении которого будет завершена сессия с этой транзакцией (`postgres`).
+	// Время простоя не открытой транзакции, при превышении которого будет завершена сессия с этой транзакцией (`postgres` | `postgres14`| `postgres15`).
 	IdleSessionTimeout *string `json:"idle_session_timeout,omitempty"`
-	// Значение количества элементов в списке `FROM` при превышении которого, планировщик будет переносить в список явные инструкции `JOIN` (`postgres`).
+	// Значение количества элементов в списке `FROM` при превышении которого, планировщик будет переносить в список явные инструкции `JOIN` (`postgres` | `postgres14`| `postgres15`).
 	JoinCollapseLimit *string `json:"join_collapse_limit,omitempty"`
-	// Время ожидания освобождения блокировки (`postgres`).
+	// Время ожидания освобождения блокировки (`postgres` | `postgres14`| `postgres15`).
 	LockTimeout *string `json:"lock_timeout,omitempty"`
-	// Максимальное число транзакций, которые могут одновременно находиться в подготовленном состоянии (`postgres`).
+	// Максимальное число транзакций, которые могут одновременно находиться в подготовленном состоянии (`postgres` | `postgres14`| `postgres15`).
 	MaxPreparedTransactions *string `json:"max_prepared_transactions,omitempty"`
-	// Допустимое количество соединений (`postgres` | `mysql`).
+	// Допустимое количество соединений (`postgres` | `postgres14`| `postgres15` | `mysql`).
 	MaxConnections *string `json:"max_connections,omitempty"`
-	// Устанавливает количество буферов общей памяти, используемых сервером (`postgres`).
+	// Устанавливает количество буферов общей памяти, используемых сервером (`postgres` | `postgres14`| `postgres15`).
 	SharedBuffers *string `json:"shared_buffers,omitempty"`
-	// Устанавливает количество буферов дисковых страниц в общей памяти для WAL (`postgres`).
+	// Устанавливает количество буферов дисковых страниц в общей памяти для WAL (`postgres` | `postgres14`| `postgres15`).
 	WalBuffers *string `json:"wal_buffers,omitempty"`
-	// Устанавливает максимальное количество временных буферов, используемых каждой сессией (`postgres`).
+	// Устанавливает максимальное количество временных буферов, используемых каждой сессией (`postgres` | `postgres14`| `postgres15`).
 	TempBuffers *string `json:"temp_buffers,omitempty"`
-	// Устанавливает максимальное количество памяти, используемое для рабочих пространств запросов (`postgres`).
+	// Устанавливает максимальное количество памяти, используемое для рабочих пространств запросов (`postgres` | `postgres14`| `postgres15`).
 	WorkMem *string `json:"work_mem,omitempty"`
 	// Устанавливает режим SQL. Можно задать несколько режимов, разделяя их запятой. (`mysql`).
 	SqlMode *string `json:"sql_mode,omitempty"`

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Password** | **string** | Пароль для подключения к базе данных. | 
 **Name** | **string** | Название базы данных. | 
 **Host** | **NullableString** | Хост. | 
-**Type** | **string** | Тип базы данных. | 
+**Type** | [**DbType**](DbType.md) |  | 
 **HashType** | **NullableString** | Тип хеширования базы данных (mysql5 | mysql | postgres). | 
 **Port** | **int32** | Порт | 
 **Ip** | **NullableString** | IP-адрес сетевого интерфейса IPv4. | 
@@ -22,12 +22,13 @@ Name | Type | Description | Notes
 **DiskStats** | [**NullableDbDiskStats**](DbDiskStats.md) |  | 
 **ConfigParameters** | [**ConfigParameters**](ConfigParameters.md) |  | 
 **IsOnlyLocalIpAccess** | **bool** | Это логическое значение, которое показывает, доступна ли база данных только по локальному IP адресу. | 
+**AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods
 
 ### NewDb
 
-`func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ string, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters ConfigParameters, isOnlyLocalIpAccess bool, ) *Db`
+`func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ DbType, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters ConfigParameters, isOnlyLocalIpAccess bool, availabilityZone AvailabilityZone, ) *Db`
 
 NewDb instantiates a new Db object
 This constructor will assign default values to properties that have it defined,
@@ -219,20 +220,20 @@ SetHost sets Host field to given value.
 UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetType
 
-`func (o *Db) GetType() string`
+`func (o *Db) GetType() DbType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *Db) GetTypeOk() (*string, bool)`
+`func (o *Db) GetTypeOk() (*DbType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *Db) SetType(v string)`
+`func (o *Db) SetType(v DbType)`
 
 SetType sets Type field to given value.
 
@@ -455,6 +456,26 @@ and a boolean to check if the value has been set.
 `func (o *Db) SetIsOnlyLocalIpAccess(v bool)`
 
 SetIsOnlyLocalIpAccess sets IsOnlyLocalIpAccess field to given value.
+
+
+### GetAvailabilityZone
+
+`func (o *Db) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *Db) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *Db) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
 
 
 

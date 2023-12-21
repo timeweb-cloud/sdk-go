@@ -64,6 +64,8 @@ type APIClient struct {
 
 	FirewallAPI *FirewallAPIService
 
+	FloatingIPAPI *FloatingIPAPIService
+
 	ImagesAPI *ImagesAPIService
 
 	KubernetesAPI *KubernetesAPIService
@@ -104,6 +106,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DedicatedServersAPI = (*DedicatedServersAPIService)(&c.common)
 	c.DomainsAPI = (*DomainsAPIService)(&c.common)
 	c.FirewallAPI = (*FirewallAPIService)(&c.common)
+	c.FloatingIPAPI = (*FloatingIPAPIService)(&c.common)
 	c.ImagesAPI = (*ImagesAPIService)(&c.common)
 	c.KubernetesAPI = (*KubernetesAPIService)(&c.common)
 	c.MailAPI = (*MailAPIService)(&c.common)

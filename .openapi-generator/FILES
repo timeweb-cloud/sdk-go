@@ -10,6 +10,7 @@ api_databases.go
 api_dedicated_servers.go
 api_domains.go
 api_firewall.go
+api_floating_ip.go
 api_images.go
 api_kubernetes.go
 api_mail.go
@@ -48,10 +49,12 @@ docs/ApiKey.md
 docs/AutoBackup.md
 docs/AutoReplyIsDisabled.md
 docs/AutoReplyIsEnabled.md
+docs/AvailabilityZone.md
 docs/Backup.md
 docs/Balancer.md
 docs/BalancersAPI.md
 docs/BaseError.md
+docs/BindFloatingIp.md
 docs/Bonus.md
 docs/Bucket.md
 docs/BucketDiskStats.md
@@ -87,6 +90,8 @@ docs/CreateDomainDNSRecord201Response.md
 docs/CreateDomainMailbox201Response.md
 docs/CreateDomainMailboxRequest.md
 docs/CreateDomainRequest201Response.md
+docs/CreateFloatingIp.md
+docs/CreateFloatingIp201Response.md
 docs/CreateFolderInStorageRequest.md
 docs/CreateInstance.md
 docs/CreateKey201Response.md
@@ -117,6 +122,7 @@ docs/DatabaseInstance.md
 docs/DatabasesAPI.md
 docs/Db.md
 docs/DbDiskStats.md
+docs/DbType.md
 docs/DedicatedServer.md
 docs/DedicatedServerAdditionalService.md
 docs/DedicatedServerPreset.md
@@ -168,6 +174,8 @@ docs/FirewallRuleOutAPI.md
 docs/FirewallRuleOutResponse.md
 docs/FirewallRuleProtocol.md
 docs/FirewallRulesOutResponse.md
+docs/FloatingIPAPI.md
+docs/FloatingIp.md
 docs/ForwardingIncomingIsDisabled.md
 docs/ForwardingIncomingIsEnabled.md
 docs/ForwardingOutgoingIsDisabled.md
@@ -206,6 +214,7 @@ docs/GetFinances403Response.md
 docs/GetFinances404Response.md
 docs/GetFinances429Response.md
 docs/GetFinances500Response.md
+docs/GetFloatingIps200Response.md
 docs/GetKey200Response.md
 docs/GetKeys200Response.md
 docs/GetMailQuota200Response.md
@@ -284,6 +293,7 @@ docs/NotificationSettingType.md
 docs/OS.md
 docs/PerformActionOnBackupRequest.md
 docs/PerformActionOnServerRequest.md
+docs/Policy.md
 docs/PresetsBalancer.md
 docs/PresetsDbs.md
 docs/PresetsResponse.md
@@ -345,6 +355,7 @@ docs/UpdateDomainAutoProlongation200Response.md
 docs/UpdateDomainMailInfoRequest.md
 docs/UpdateDomainNameServers.md
 docs/UpdateDomainNameServersNameServersInner.md
+docs/UpdateFloatingIp.md
 docs/UpdateInstance.md
 docs/UpdateKeyRequest.md
 docs/UpdateMailQuotaRequest.md
@@ -412,9 +423,11 @@ model_api_key.go
 model_auto_backup.go
 model_auto_reply_is_disabled.go
 model_auto_reply_is_enabled.go
+model_availability_zone.go
 model_backup.go
 model_balancer.go
 model_base_error.go
+model_bind_floating_ip.go
 model_bonus.go
 model_bucket.go
 model_bucket_disk_stats.go
@@ -450,6 +463,8 @@ model_create_domain_dns_record_201_response.go
 model_create_domain_mailbox_201_response.go
 model_create_domain_mailbox_request.go
 model_create_domain_request_201_response.go
+model_create_floating_ip.go
+model_create_floating_ip_201_response.go
 model_create_folder_in_storage_request.go
 model_create_instance.go
 model_create_key_201_response.go
@@ -479,6 +494,7 @@ model_database_cluster_networks_inner_ips_inner.go
 model_database_instance.go
 model_db.go
 model_db_disk_stats.go
+model_db_type.go
 model_dedicated_server.go
 model_dedicated_server_additional_service.go
 model_dedicated_server_preset.go
@@ -527,6 +543,7 @@ model_firewall_rule_out_api.go
 model_firewall_rule_out_response.go
 model_firewall_rule_protocol.go
 model_firewall_rules_out_response.go
+model_floating_ip.go
 model_forwarding_incoming_is_disabled.go
 model_forwarding_incoming_is_enabled.go
 model_forwarding_outgoing_is_disabled.go
@@ -565,6 +582,7 @@ model_get_finances_403_response.go
 model_get_finances_404_response.go
 model_get_finances_429_response.go
 model_get_finances_500_response.go
+model_get_floating_ips_200_response.go
 model_get_key_200_response.go
 model_get_keys_200_response.go
 model_get_mail_quota_200_response.go
@@ -640,6 +658,7 @@ model_notification_setting_type.go
 model_os.go
 model_perform_action_on_backup_request.go
 model_perform_action_on_server_request.go
+model_policy.go
 model_presets_balancer.go
 model_presets_dbs.go
 model_presets_response.go
@@ -696,6 +715,7 @@ model_update_domain_auto_prolongation_200_response.go
 model_update_domain_mail_info_request.go
 model_update_domain_name_servers.go
 model_update_domain_name_servers_name_servers_inner.go
+model_update_floating_ip.go
 model_update_instance.go
 model_update_key_request.go
 model_update_mail_quota_request.go
@@ -742,6 +762,7 @@ test/api_databases_test.go
 test/api_dedicated_servers_test.go
 test/api_domains_test.go
 test/api_firewall_test.go
+test/api_floating_ip_test.go
 test/api_images_test.go
 test/api_kubernetes_test.go
 test/api_mail_test.go

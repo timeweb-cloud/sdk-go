@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Rise** | **float32** | Порог количества успешных ответов. | 
 **PresetId** | **float32** | Идентификатор тарифа. | 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
+**AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 
 ## Methods
 
@@ -343,6 +344,31 @@ SetNetwork sets Network field to given value.
 `func (o *CreateBalancer) HasNetwork() bool`
 
 HasNetwork returns a boolean if a field has been set.
+
+### GetAvailabilityZone
+
+`func (o *CreateBalancer) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *CreateBalancer) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *CreateBalancer) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
+### HasAvailabilityZone
+
+`func (o *CreateBalancer) HasAvailabilityZone() bool`
+
+HasAvailabilityZone returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

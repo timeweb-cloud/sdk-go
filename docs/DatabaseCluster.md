@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Location** | **NullableString** | Локация сервера. | 
 **Name** | **string** | Название кластера базы данных. | 
 **Networks** | [**[]DatabaseClusterNetworksInner**](DatabaseClusterNetworksInner.md) | Список сетей кластера базы данных. | 
-**Type** | **string** | Тип кластера базы данных. | 
+**Type** | [**DbType**](DbType.md) |  | 
 **HashType** | **NullableString** | Тип хеширования кластера базы данных (mysql5 | mysql | postgres). | 
 **Port** | **NullableInt32** | Порт | 
 **Status** | **string** | Текущий статус кластера базы данных. | 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewDatabaseCluster
 
-`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ string, hashType NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool, ) *DatabaseCluster`
+`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool, ) *DatabaseCluster`
 
 NewDatabaseCluster instantiates a new DatabaseCluster object
 This constructor will assign default values to properties that have it defined,
@@ -149,20 +149,20 @@ SetNetworks sets Networks field to given value.
 
 ### GetType
 
-`func (o *DatabaseCluster) GetType() string`
+`func (o *DatabaseCluster) GetType() DbType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *DatabaseCluster) GetTypeOk() (*string, bool)`
+`func (o *DatabaseCluster) GetTypeOk() (*DbType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *DatabaseCluster) SetType(v string)`
+`func (o *DatabaseCluster) SetType(v DbType)`
 
 SetType sets Type field to given value.
 

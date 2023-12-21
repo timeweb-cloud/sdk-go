@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **IsLocalNetwork** | Pointer to **bool** | Локальная сеть. | [optional] 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
 **CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
+**AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 
 ## Methods
 
@@ -372,6 +373,31 @@ SetCloudInit sets CloudInit field to given value.
 `func (o *CreateServer) HasCloudInit() bool`
 
 HasCloudInit returns a boolean if a field has been set.
+
+### GetAvailabilityZone
+
+`func (o *CreateServer) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *CreateServer) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *CreateServer) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
+### HasAvailabilityZone
+
+`func (o *CreateServer) HasAvailabilityZone() bool`
+
+HasAvailabilityZone returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

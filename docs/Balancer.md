@@ -26,12 +26,13 @@ Name | Type | Description | Notes
 **Rules** | [**[]Rule**](Rule.md) |  | 
 **Ips** | **[]string** | Список IP-адресов, привязанных к балансировщику | 
 **Location** | **string** | Географическое расположение балансировщика | 
+**AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods
 
 ### NewBalancer
 
-`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, ) *Balancer`
+`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, ) *Balancer`
 
 NewBalancer instantiates a new Balancer object
 This constructor will assign default values to properties that have it defined,
@@ -504,6 +505,26 @@ and a boolean to check if the value has been set.
 `func (o *Balancer) SetLocation(v string)`
 
 SetLocation sets Location field to given value.
+
+
+### GetAvailabilityZone
+
+`func (o *Balancer) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *Balancer) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *Balancer) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
 
 
 

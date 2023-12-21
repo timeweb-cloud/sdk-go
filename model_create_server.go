@@ -47,6 +47,7 @@ type CreateServer struct {
 	Network *Network `json:"network,omitempty"`
 	// Cloud-init скрипт
 	CloudInit *string `json:"cloud_init,omitempty"`
+	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 }
 
 // NewCreateServer instantiates a new CreateServer object
@@ -496,6 +497,38 @@ func (o *CreateServer) SetCloudInit(v string) {
 	o.CloudInit = &v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value if set, zero value otherwise.
+func (o *CreateServer) GetAvailabilityZone() AvailabilityZone {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		var ret AvailabilityZone
+		return ret
+	}
+	return *o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateServer) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil || IsNil(o.AvailabilityZone) {
+		return nil, false
+	}
+	return o.AvailabilityZone, true
+}
+
+// HasAvailabilityZone returns a boolean if a field has been set.
+func (o *CreateServer) HasAvailabilityZone() bool {
+	if o != nil && !IsNil(o.AvailabilityZone) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailabilityZone gets a reference to the given AvailabilityZone and assigns it to the AvailabilityZone field.
+func (o *CreateServer) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = &v
+}
+
 func (o CreateServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -541,6 +574,9 @@ func (o CreateServer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CloudInit) {
 		toSerialize["cloud_init"] = o.CloudInit
+	}
+	if !IsNil(o.AvailabilityZone) {
+		toSerialize["availability_zone"] = o.AvailabilityZone
 	}
 	return toSerialize, nil
 }

@@ -33,19 +33,21 @@ type Vpc struct {
 	CreatedAt time.Time `json:"created_at"`
 	// Описание.
 	Description *string `json:"description,omitempty"`
+	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 }
 
 // NewVpc instantiates a new Vpc object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time) *Vpc {
+func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, availabilityZone AvailabilityZone) *Vpc {
 	this := Vpc{}
 	this.Id = id
 	this.Name = name
 	this.SubnetV4 = subnetV4
 	this.Location = location
 	this.CreatedAt = createdAt
+	this.AvailabilityZone = availabilityZone
 	return &this
 }
 
@@ -209,6 +211,30 @@ func (o *Vpc) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetAvailabilityZone returns the AvailabilityZone field value
+func (o *Vpc) GetAvailabilityZone() AvailabilityZone {
+	if o == nil {
+		var ret AvailabilityZone
+		return ret
+	}
+
+	return o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value
+// and a boolean to check if the value has been set.
+func (o *Vpc) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AvailabilityZone, true
+}
+
+// SetAvailabilityZone sets field value
+func (o *Vpc) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = v
+}
+
 func (o Vpc) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -227,6 +253,7 @@ func (o Vpc) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	toSerialize["availability_zone"] = o.AvailabilityZone
 	return toSerialize, nil
 }
 

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **BootMode** | **string** | Режим загрузки ОС сервера. | 
 **Status** | **string** | Статус сервера. | 
 **StartAt** | **NullableTime** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был запущен сервер. | 
-**IsDdosGuard** | **bool** | Это логическое значение, которое показывает, включена ли защита от DDOS у данного сервера. | 
+**IsDdosGuard** | **bool** | Это логическое значение, которое показывает, включена ли защита от DDoS у данного сервера. | 
 **Cpu** | **float32** | Количество ядер процессора сервера. | 
 **CpuFrequency** | **string** | Частота ядер процессора сервера. | 
 **Ram** | **float32** | Размер (в Мб) ОЗУ сервера. | 
@@ -28,12 +28,13 @@ Name | Type | Description | Notes
 **Networks** | [**[]VdsNetworksInner**](VdsNetworksInner.md) | Список сетей диска. | 
 **CloudInit** | **NullableString** | Cloud-init скрипт. | 
 **IsQemuAgent** | Pointer to **bool** | Включен ли QEMU-agent на сервере. | [optional] 
+**AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods
 
 ### NewVds
 
-`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, ) *Vds`
+`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, availabilityZone AvailabilityZone, ) *Vds`
 
 NewVds instantiates a new Vds object
 This constructor will assign default values to properties that have it defined,
@@ -612,6 +613,26 @@ SetIsQemuAgent sets IsQemuAgent field to given value.
 `func (o *Vds) HasIsQemuAgent() bool`
 
 HasIsQemuAgent returns a boolean if a field has been set.
+
+### GetAvailabilityZone
+
+`func (o *Vds) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *Vds) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *Vds) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
