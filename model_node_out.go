@@ -41,13 +41,15 @@ type NodeOut struct {
 	Disk int32 `json:"disk"`
 	// Пропускная способность сети
 	Network int32 `json:"network"`
+	// Ip-адрес ноды
+	NodeIp string `json:"node_ip"`
 }
 
 // NewNodeOut instantiates a new NodeOut object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeOut(id int32, createdAt time.Time, type_ string, groupId int32, status string, presetId int32, cpu int32, ram int32, disk int32, network int32) *NodeOut {
+func NewNodeOut(id int32, createdAt time.Time, type_ string, groupId int32, status string, presetId int32, cpu int32, ram int32, disk int32, network int32, nodeIp string) *NodeOut {
 	this := NodeOut{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -59,6 +61,7 @@ func NewNodeOut(id int32, createdAt time.Time, type_ string, groupId int32, stat
 	this.Ram = ram
 	this.Disk = disk
 	this.Network = network
+	this.NodeIp = nodeIp
 	return &this
 }
 
@@ -310,6 +313,30 @@ func (o *NodeOut) SetNetwork(v int32) {
 	o.Network = v
 }
 
+// GetNodeIp returns the NodeIp field value
+func (o *NodeOut) GetNodeIp() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.NodeIp
+}
+
+// GetNodeIpOk returns a tuple with the NodeIp field value
+// and a boolean to check if the value has been set.
+func (o *NodeOut) GetNodeIpOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NodeIp, true
+}
+
+// SetNodeIp sets field value
+func (o *NodeOut) SetNodeIp(v string) {
+	o.NodeIp = v
+}
+
 func (o NodeOut) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -330,6 +357,7 @@ func (o NodeOut) ToMap() (map[string]interface{}, error) {
 	toSerialize["ram"] = o.Ram
 	toSerialize["disk"] = o.Disk
 	toSerialize["network"] = o.Network
+	toSerialize["node_ip"] = o.NodeIp
 	return toSerialize, nil
 }
 

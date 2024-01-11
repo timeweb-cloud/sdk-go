@@ -14,12 +14,13 @@ Name | Type | Description | Notes
 **Ram** | **int32** | Количество памяти | 
 **Disk** | **int32** | Количество пространства | 
 **Network** | **int32** | Пропускная способность сети | 
+**NodeIp** | **string** | Ip-адрес ноды | 
 
 ## Methods
 
 ### NewNodeOut
 
-`func NewNodeOut(id int32, createdAt time.Time, type_ string, groupId int32, status string, presetId int32, cpu int32, ram int32, disk int32, network int32, ) *NodeOut`
+`func NewNodeOut(id int32, createdAt time.Time, type_ string, groupId int32, status string, presetId int32, cpu int32, ram int32, disk int32, network int32, nodeIp string, ) *NodeOut`
 
 NewNodeOut instantiates a new NodeOut object
 This constructor will assign default values to properties that have it defined,
@@ -232,6 +233,26 @@ and a boolean to check if the value has been set.
 `func (o *NodeOut) SetNetwork(v int32)`
 
 SetNetwork sets Network field to given value.
+
+
+### GetNodeIp
+
+`func (o *NodeOut) GetNodeIp() string`
+
+GetNodeIp returns the NodeIp field if non-nil, zero value otherwise.
+
+### GetNodeIpOk
+
+`func (o *NodeOut) GetNodeIpOk() (*string, bool)`
+
+GetNodeIpOk returns a tuple with the NodeIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeIp
+
+`func (o *NodeOut) SetNodeIp(v string)`
+
+SetNodeIp sets NodeIp field to given value.
 
 
 
