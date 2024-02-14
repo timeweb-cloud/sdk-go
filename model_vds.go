@@ -60,7 +60,7 @@ type Vds struct {
 	// Пароль root сервера или пароль Администратора для серверов Windows.
 	RootPass NullableString `json:"root_pass"`
 	Image NullableVdsImage `json:"image"`
-	// Список сетей диска.
+	// Список сетей сервера.
 	Networks []VdsNetworksInner `json:"networks"`
 	// Cloud-init скрипт.
 	CloudInit NullableString `json:"cloud_init"`

@@ -20,6 +20,8 @@ var _ MappedNullable = &VdsNetworksInner{}
 
 // VdsNetworksInner struct for VdsNetworksInner
 type VdsNetworksInner struct {
+	// Уникальный идентификатор сети. Есть только у приватных сетей.
+	Id *string `json:"id,omitempty"`
 	// Тип сети.
 	Type string `json:"type"`
 	// Тип преобразования сетевых адресов.
@@ -49,6 +51,38 @@ func NewVdsNetworksInner(type_ string, ips []VdsNetworksInnerIpsInner) *VdsNetwo
 func NewVdsNetworksInnerWithDefaults() *VdsNetworksInner {
 	this := VdsNetworksInner{}
 	return &this
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *VdsNetworksInner) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VdsNetworksInner) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *VdsNetworksInner) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *VdsNetworksInner) SetId(v string) {
+	o.Id = &v
 }
 
 // GetType returns the Type field value
@@ -217,6 +251,9 @@ func (o VdsNetworksInner) MarshalJSON() ([]byte, error) {
 
 func (o VdsNetworksInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	toSerialize["type"] = o.Type
 	if !IsNil(o.NatMode) {
 		toSerialize["nat_mode"] = o.NatMode

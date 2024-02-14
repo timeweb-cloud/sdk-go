@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Id** | Pointer to **string** | Уникальный идентификатор сети. Есть только у приватных сетей. | [optional] 
 **Type** | **string** | Тип сети. | 
 **NatMode** | Pointer to **string** | Тип преобразования сетевых адресов. | [optional] 
 **Bandwidth** | Pointer to **NullableFloat32** | Пропускная способность сети. | [optional] 
@@ -28,6 +29,31 @@ will change when the set of required properties is changed
 NewVdsNetworksInnerWithDefaults instantiates a new VdsNetworksInner object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetId
+
+`func (o *VdsNetworksInner) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *VdsNetworksInner) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *VdsNetworksInner) SetId(v string)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *VdsNetworksInner) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetType
 

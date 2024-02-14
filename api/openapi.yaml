@@ -40609,6 +40609,7 @@ components:
         start_at: 2022-10-25T15:15:45Z
         networks:
         - bandwidth: 200
+          id: network-1a627c44a3b34e10b6c19f72e50ce843
           type: public
           nat_mode: dnat_and_snat
           ips:
@@ -40622,6 +40623,7 @@ components:
             ptr: ptr
           is_ddos_guard: false
         - bandwidth: 200
+          id: network-1a627c44a3b34e10b6c19f72e50ce843
           type: public
           nat_mode: dnat_and_snat
           ips:
@@ -40780,7 +40782,7 @@ components:
         image:
           $ref: '#/components/schemas/vds_image'
         networks:
-          description: Список сетей диска.
+          description: Список сетей сервера.
           items:
             $ref: '#/components/schemas/vds_networks_inner'
           type: array
@@ -44945,6 +44947,7 @@ components:
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -44958,6 +44961,7 @@ components:
               ptr: ptr
             is_ddos_guard: false
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -45020,6 +45024,7 @@ components:
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -45033,6 +45038,7 @@ components:
               ptr: ptr
             is_ddos_guard: false
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -45111,6 +45117,7 @@ components:
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -45124,6 +45131,7 @@ components:
               ptr: ptr
             is_ddos_guard: false
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46113,6 +46121,7 @@ components:
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46126,6 +46135,7 @@ components:
               ptr: ptr
             is_ddos_guard: false
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46188,6 +46198,7 @@ components:
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46201,6 +46212,7 @@ components:
               ptr: ptr
             is_ddos_guard: false
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46591,6 +46603,7 @@ components:
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46604,6 +46617,7 @@ components:
               ptr: ptr
             is_ddos_guard: false
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46666,6 +46680,7 @@ components:
           start_at: 2022-10-25T15:15:45Z
           networks:
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -46679,6 +46694,7 @@ components:
               ptr: ptr
             is_ddos_guard: false
           - bandwidth: 200
+            id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
             ips:
@@ -48843,6 +48859,7 @@ components:
     vds_networks_inner:
       example:
         bandwidth: 200
+        id: network-1a627c44a3b34e10b6c19f72e50ce843
         type: public
         nat_mode: dnat_and_snat
         ips:
@@ -48856,6 +48873,10 @@ components:
           ptr: ptr
         is_ddos_guard: false
       properties:
+        id:
+          description: Уникальный идентификатор сети. Есть только у приватных сетей.
+          example: network-1a627c44a3b34e10b6c19f72e50ce843
+          type: string
         type:
           description: Тип сети.
           enum:
