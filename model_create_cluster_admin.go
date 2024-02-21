@@ -18,7 +18,7 @@ import (
 // checks if the CreateClusterAdmin type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateClusterAdmin{}
 
-// CreateClusterAdmin struct for CreateClusterAdmin
+// CreateClusterAdmin Пользователь базы данных.
 type CreateClusterAdmin struct {
 	// Имя пользователя базы данных
 	Login *string `json:"login,omitempty"`
