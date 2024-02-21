@@ -38439,6 +38439,7 @@ components:
       - opensearch
       - kafka
       - rabbitmq
+      - clickhouse
       example: mysql
       type: string
     config-parameters:

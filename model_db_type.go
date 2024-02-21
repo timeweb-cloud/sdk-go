@@ -31,6 +31,7 @@ const (
 	OPENSEARCH DbType = "opensearch"
 	KAFKA DbType = "kafka"
 	RABBITMQ DbType = "rabbitmq"
+	CLICKHOUSE DbType = "clickhouse"
 )
 
 // All allowed values of DbType enum
@@ -45,6 +46,7 @@ var AllowedDbTypeEnumValues = []DbType{
 	"opensearch",
 	"kafka",
 	"rabbitmq",
+	"clickhouse",
 }
 
 func (v *DbType) UnmarshalJSON(src []byte) error {
