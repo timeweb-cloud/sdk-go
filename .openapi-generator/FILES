@@ -83,6 +83,7 @@ docs/CreateDatabaseCluster201Response.md
 docs/CreateDatabaseInstance201Response.md
 docs/CreateDatabaseUser201Response.md
 docs/CreateDb.md
+docs/CreateDbAutoBackups.md
 docs/CreateDedicatedServer.md
 docs/CreateDedicatedServer201Response.md
 docs/CreateDns.md
@@ -456,6 +457,7 @@ model_create_database_cluster_201_response.go
 model_create_database_instance_201_response.go
 model_create_database_user_201_response.go
 model_create_db.go
+model_create_db_auto_backups.go
 model_create_dedicated_server.go
 model_create_dedicated_server_201_response.go
 model_create_dns.go

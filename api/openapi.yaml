@@ -38755,6 +38755,40 @@ components:
       - status
       - type
       type: object
+    create-db-auto-backups:
+      description: База данных
+      properties:
+        copy_count:
+          description: "Количество копий для хранения. Минимальное количество `1`,\
+            \ максимальное `99`"
+          example: 2
+          type: number
+        creation_start_at:
+          description: Дата начала создания первого автобэкапа. Значение в формате
+            `ISO8601`. Время не учитывается.
+          example: 2023-02-02T00:00:00Z
+          format: date-time
+          type: string
+        interval:
+          description: Периодичность создания автобэкапов
+          enum:
+          - day
+          - week
+          - month
+          example: week
+          type: string
+        day_of_week:
+          description: "День недели, в который будут создаваться автобэкапы. Работ\
+            ает только со значением `interval`: `week`. Доступные значение от `1 `д\
+            о `7`."
+          example: 1
+          type: number
+      required:
+      - copy_count
+      - creation_start_at
+      - day_of_week
+      - interval
+      type: object
     create-cluster:
       properties:
         name:
@@ -38788,6 +38822,8 @@ components:
           type: string
         availability_zone:
           $ref: '#/components/schemas/availability-zone'
+        auto_backups:
+          $ref: '#/components/schemas/create-db-auto-backups'
       required:
       - name
       - password

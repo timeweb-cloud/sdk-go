@@ -13,379 +13,142 @@ package openapi
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// checks if the CreateCluster type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateCluster{}
+// checks if the CreateDbAutoBackups type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateDbAutoBackups{}
 
-// CreateCluster struct for CreateCluster
-type CreateCluster struct {
-	// Название кластера базы данных.
-	Name string `json:"name"`
-	Type DbType `json:"type"`
-	Admin *CreateClusterAdmin `json:"admin,omitempty"`
-	Instance *CreateClusterInstance `json:"instance,omitempty"`
-	// Тип хеширования базы данных (mysql5 | mysql | postgres).
-	HashType *string `json:"hash_type,omitempty"`
-	// Идентификатор тарифа.
-	PresetId int32 `json:"preset_id"`
-	ConfigParameters *ConfigParameters `json:"config_parameters,omitempty"`
-	Network *Network `json:"network,omitempty"`
-	// Описание кластера базы данных
-	Description *string `json:"description,omitempty"`
-	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
-	AutoBackups *CreateDbAutoBackups `json:"auto_backups,omitempty"`
+// CreateDbAutoBackups База данных
+type CreateDbAutoBackups struct {
+	// Количество копий для хранения. Минимальное количество `1`, максимальное `99`
+	CopyCount float32 `json:"copy_count"`
+	// Дата начала создания первого автобэкапа. Значение в формате `ISO8601`. Время не учитывается.
+	CreationStartAt time.Time `json:"creation_start_at"`
+	// Периодичность создания автобэкапов
+	Interval string `json:"interval"`
+	// День недели, в который будут создаваться автобэкапы. Работает только со значением `interval`: `week`. Доступные значение от `1 `до `7`.
+	DayOfWeek float32 `json:"day_of_week"`
 }
 
-// NewCreateCluster instantiates a new CreateCluster object
+// NewCreateDbAutoBackups instantiates a new CreateDbAutoBackups object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCluster(name string, type_ DbType, presetId int32) *CreateCluster {
-	this := CreateCluster{}
-	this.Name = name
-	this.Type = type_
-	this.PresetId = presetId
+func NewCreateDbAutoBackups(copyCount float32, creationStartAt time.Time, interval string, dayOfWeek float32) *CreateDbAutoBackups {
+	this := CreateDbAutoBackups{}
+	this.CopyCount = copyCount
+	this.CreationStartAt = creationStartAt
+	this.Interval = interval
+	this.DayOfWeek = dayOfWeek
 	return &this
 }
 
-// NewCreateClusterWithDefaults instantiates a new CreateCluster object
+// NewCreateDbAutoBackupsWithDefaults instantiates a new CreateDbAutoBackups object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateClusterWithDefaults() *CreateCluster {
-	this := CreateCluster{}
+func NewCreateDbAutoBackupsWithDefaults() *CreateDbAutoBackups {
+	this := CreateDbAutoBackups{}
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *CreateCluster) GetName() string {
+// GetCopyCount returns the CopyCount field value
+func (o *CreateDbAutoBackups) GetCopyCount() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.CopyCount
+}
+
+// GetCopyCountOk returns a tuple with the CopyCount field value
+// and a boolean to check if the value has been set.
+func (o *CreateDbAutoBackups) GetCopyCountOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CopyCount, true
+}
+
+// SetCopyCount sets field value
+func (o *CreateDbAutoBackups) SetCopyCount(v float32) {
+	o.CopyCount = v
+}
+
+// GetCreationStartAt returns the CreationStartAt field value
+func (o *CreateDbAutoBackups) GetCreationStartAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreationStartAt
+}
+
+// GetCreationStartAtOk returns a tuple with the CreationStartAt field value
+// and a boolean to check if the value has been set.
+func (o *CreateDbAutoBackups) GetCreationStartAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreationStartAt, true
+}
+
+// SetCreationStartAt sets field value
+func (o *CreateDbAutoBackups) SetCreationStartAt(v time.Time) {
+	o.CreationStartAt = v
+}
+
+// GetInterval returns the Interval field value
+func (o *CreateDbAutoBackups) GetInterval() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Name
+	return o.Interval
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetIntervalOk returns a tuple with the Interval field value
 // and a boolean to check if the value has been set.
-func (o *CreateCluster) GetNameOk() (*string, bool) {
+func (o *CreateDbAutoBackups) GetIntervalOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.Interval, true
 }
 
-// SetName sets field value
-func (o *CreateCluster) SetName(v string) {
-	o.Name = v
+// SetInterval sets field value
+func (o *CreateDbAutoBackups) SetInterval(v string) {
+	o.Interval = v
 }
 
-// GetType returns the Type field value
-func (o *CreateCluster) GetType() DbType {
+// GetDayOfWeek returns the DayOfWeek field value
+func (o *CreateDbAutoBackups) GetDayOfWeek() float32 {
 	if o == nil {
-		var ret DbType
+		var ret float32
 		return ret
 	}
 
-	return o.Type
+	return o.DayOfWeek
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetDayOfWeekOk returns a tuple with the DayOfWeek field value
 // and a boolean to check if the value has been set.
-func (o *CreateCluster) GetTypeOk() (*DbType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *CreateCluster) SetType(v DbType) {
-	o.Type = v
-}
-
-// GetAdmin returns the Admin field value if set, zero value otherwise.
-func (o *CreateCluster) GetAdmin() CreateClusterAdmin {
-	if o == nil || IsNil(o.Admin) {
-		var ret CreateClusterAdmin
-		return ret
-	}
-	return *o.Admin
-}
-
-// GetAdminOk returns a tuple with the Admin field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetAdminOk() (*CreateClusterAdmin, bool) {
-	if o == nil || IsNil(o.Admin) {
-		return nil, false
-	}
-	return o.Admin, true
-}
-
-// HasAdmin returns a boolean if a field has been set.
-func (o *CreateCluster) HasAdmin() bool {
-	if o != nil && !IsNil(o.Admin) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdmin gets a reference to the given CreateClusterAdmin and assigns it to the Admin field.
-func (o *CreateCluster) SetAdmin(v CreateClusterAdmin) {
-	o.Admin = &v
-}
-
-// GetInstance returns the Instance field value if set, zero value otherwise.
-func (o *CreateCluster) GetInstance() CreateClusterInstance {
-	if o == nil || IsNil(o.Instance) {
-		var ret CreateClusterInstance
-		return ret
-	}
-	return *o.Instance
-}
-
-// GetInstanceOk returns a tuple with the Instance field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetInstanceOk() (*CreateClusterInstance, bool) {
-	if o == nil || IsNil(o.Instance) {
-		return nil, false
-	}
-	return o.Instance, true
-}
-
-// HasInstance returns a boolean if a field has been set.
-func (o *CreateCluster) HasInstance() bool {
-	if o != nil && !IsNil(o.Instance) {
-		return true
-	}
-
-	return false
-}
-
-// SetInstance gets a reference to the given CreateClusterInstance and assigns it to the Instance field.
-func (o *CreateCluster) SetInstance(v CreateClusterInstance) {
-	o.Instance = &v
-}
-
-// GetHashType returns the HashType field value if set, zero value otherwise.
-func (o *CreateCluster) GetHashType() string {
-	if o == nil || IsNil(o.HashType) {
-		var ret string
-		return ret
-	}
-	return *o.HashType
-}
-
-// GetHashTypeOk returns a tuple with the HashType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetHashTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.HashType) {
-		return nil, false
-	}
-	return o.HashType, true
-}
-
-// HasHashType returns a boolean if a field has been set.
-func (o *CreateCluster) HasHashType() bool {
-	if o != nil && !IsNil(o.HashType) {
-		return true
-	}
-
-	return false
-}
-
-// SetHashType gets a reference to the given string and assigns it to the HashType field.
-func (o *CreateCluster) SetHashType(v string) {
-	o.HashType = &v
-}
-
-// GetPresetId returns the PresetId field value
-func (o *CreateCluster) GetPresetId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.PresetId
-}
-
-// GetPresetIdOk returns a tuple with the PresetId field value
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetPresetIdOk() (*int32, bool) {
+func (o *CreateDbAutoBackups) GetDayOfWeekOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PresetId, true
+	return &o.DayOfWeek, true
 }
 
-// SetPresetId sets field value
-func (o *CreateCluster) SetPresetId(v int32) {
-	o.PresetId = v
+// SetDayOfWeek sets field value
+func (o *CreateDbAutoBackups) SetDayOfWeek(v float32) {
+	o.DayOfWeek = v
 }
 
-// GetConfigParameters returns the ConfigParameters field value if set, zero value otherwise.
-func (o *CreateCluster) GetConfigParameters() ConfigParameters {
-	if o == nil || IsNil(o.ConfigParameters) {
-		var ret ConfigParameters
-		return ret
-	}
-	return *o.ConfigParameters
-}
-
-// GetConfigParametersOk returns a tuple with the ConfigParameters field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetConfigParametersOk() (*ConfigParameters, bool) {
-	if o == nil || IsNil(o.ConfigParameters) {
-		return nil, false
-	}
-	return o.ConfigParameters, true
-}
-
-// HasConfigParameters returns a boolean if a field has been set.
-func (o *CreateCluster) HasConfigParameters() bool {
-	if o != nil && !IsNil(o.ConfigParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfigParameters gets a reference to the given ConfigParameters and assigns it to the ConfigParameters field.
-func (o *CreateCluster) SetConfigParameters(v ConfigParameters) {
-	o.ConfigParameters = &v
-}
-
-// GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *CreateCluster) GetNetwork() Network {
-	if o == nil || IsNil(o.Network) {
-		var ret Network
-		return ret
-	}
-	return *o.Network
-}
-
-// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetNetworkOk() (*Network, bool) {
-	if o == nil || IsNil(o.Network) {
-		return nil, false
-	}
-	return o.Network, true
-}
-
-// HasNetwork returns a boolean if a field has been set.
-func (o *CreateCluster) HasNetwork() bool {
-	if o != nil && !IsNil(o.Network) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetwork gets a reference to the given Network and assigns it to the Network field.
-func (o *CreateCluster) SetNetwork(v Network) {
-	o.Network = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *CreateCluster) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *CreateCluster) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *CreateCluster) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetAvailabilityZone returns the AvailabilityZone field value if set, zero value otherwise.
-func (o *CreateCluster) GetAvailabilityZone() AvailabilityZone {
-	if o == nil || IsNil(o.AvailabilityZone) {
-		var ret AvailabilityZone
-		return ret
-	}
-	return *o.AvailabilityZone
-}
-
-// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
-	if o == nil || IsNil(o.AvailabilityZone) {
-		return nil, false
-	}
-	return o.AvailabilityZone, true
-}
-
-// HasAvailabilityZone returns a boolean if a field has been set.
-func (o *CreateCluster) HasAvailabilityZone() bool {
-	if o != nil && !IsNil(o.AvailabilityZone) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvailabilityZone gets a reference to the given AvailabilityZone and assigns it to the AvailabilityZone field.
-func (o *CreateCluster) SetAvailabilityZone(v AvailabilityZone) {
-	o.AvailabilityZone = &v
-}
-
-// GetAutoBackups returns the AutoBackups field value if set, zero value otherwise.
-func (o *CreateCluster) GetAutoBackups() CreateDbAutoBackups {
-	if o == nil || IsNil(o.AutoBackups) {
-		var ret CreateDbAutoBackups
-		return ret
-	}
-	return *o.AutoBackups
-}
-
-// GetAutoBackupsOk returns a tuple with the AutoBackups field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCluster) GetAutoBackupsOk() (*CreateDbAutoBackups, bool) {
-	if o == nil || IsNil(o.AutoBackups) {
-		return nil, false
-	}
-	return o.AutoBackups, true
-}
-
-// HasAutoBackups returns a boolean if a field has been set.
-func (o *CreateCluster) HasAutoBackups() bool {
-	if o != nil && !IsNil(o.AutoBackups) {
-		return true
-	}
-
-	return false
-}
-
-// SetAutoBackups gets a reference to the given CreateDbAutoBackups and assigns it to the AutoBackups field.
-func (o *CreateCluster) SetAutoBackups(v CreateDbAutoBackups) {
-	o.AutoBackups = &v
-}
-
-func (o CreateCluster) MarshalJSON() ([]byte, error) {
+func (o CreateDbAutoBackups) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -393,70 +156,47 @@ func (o CreateCluster) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateCluster) ToMap() (map[string]interface{}, error) {
+func (o CreateDbAutoBackups) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
-	if !IsNil(o.Admin) {
-		toSerialize["admin"] = o.Admin
-	}
-	if !IsNil(o.Instance) {
-		toSerialize["instance"] = o.Instance
-	}
-	if !IsNil(o.HashType) {
-		toSerialize["hash_type"] = o.HashType
-	}
-	toSerialize["preset_id"] = o.PresetId
-	if !IsNil(o.ConfigParameters) {
-		toSerialize["config_parameters"] = o.ConfigParameters
-	}
-	if !IsNil(o.Network) {
-		toSerialize["network"] = o.Network
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.AvailabilityZone) {
-		toSerialize["availability_zone"] = o.AvailabilityZone
-	}
-	if !IsNil(o.AutoBackups) {
-		toSerialize["auto_backups"] = o.AutoBackups
-	}
+	toSerialize["copy_count"] = o.CopyCount
+	toSerialize["creation_start_at"] = o.CreationStartAt
+	toSerialize["interval"] = o.Interval
+	toSerialize["day_of_week"] = o.DayOfWeek
 	return toSerialize, nil
 }
 
-type NullableCreateCluster struct {
-	value *CreateCluster
+type NullableCreateDbAutoBackups struct {
+	value *CreateDbAutoBackups
 	isSet bool
 }
 
-func (v NullableCreateCluster) Get() *CreateCluster {
+func (v NullableCreateDbAutoBackups) Get() *CreateDbAutoBackups {
 	return v.value
 }
 
-func (v *NullableCreateCluster) Set(val *CreateCluster) {
+func (v *NullableCreateDbAutoBackups) Set(val *CreateDbAutoBackups) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateCluster) IsSet() bool {
+func (v NullableCreateDbAutoBackups) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateCluster) Unset() {
+func (v *NullableCreateDbAutoBackups) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateCluster(val *CreateCluster) *NullableCreateCluster {
-	return &NullableCreateCluster{value: val, isSet: true}
+func NewNullableCreateDbAutoBackups(val *CreateDbAutoBackups) *NullableCreateDbAutoBackups {
+	return &NullableCreateDbAutoBackups{value: val, isSet: true}
 }
 
-func (v NullableCreateCluster) MarshalJSON() ([]byte, error) {
+func (v NullableCreateDbAutoBackups) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateCluster) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateDbAutoBackups) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
