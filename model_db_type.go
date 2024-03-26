@@ -26,8 +26,12 @@ const (
 	POSTGRES DbType = "postgres"
 	POSTGRES14 DbType = "postgres14"
 	POSTGRES15 DbType = "postgres15"
+	POSTGRES16 DbType = "postgres16"
 	REDIS DbType = "redis"
+	MONGODB4 DbType = "mongodb4"
 	MONGODB DbType = "mongodb"
+	MONGODB6 DbType = "mongodb6"
+	MONGODB7 DbType = "mongodb7"
 	OPENSEARCH DbType = "opensearch"
 	KAFKA DbType = "kafka"
 	RABBITMQ DbType = "rabbitmq"
@@ -41,8 +45,12 @@ var AllowedDbTypeEnumValues = []DbType{
 	"postgres",
 	"postgres14",
 	"postgres15",
+	"postgres16",
 	"redis",
+	"mongodb4",
 	"mongodb",
+	"mongodb6",
+	"mongodb7",
 	"opensearch",
 	"kafka",
 	"rabbitmq",

@@ -38434,8 +38434,12 @@ components:
       - postgres
       - postgres14
       - postgres15
+      - postgres16
       - redis
+      - mongodb4
       - mongodb
+      - mongodb6
+      - mongodb7
       - opensearch
       - kafka
       - rabbitmq
