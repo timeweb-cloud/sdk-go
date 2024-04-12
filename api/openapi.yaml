@@ -176,7 +176,7 @@ tags:
 - description: "Плавающий IP - это статический внешний IP-адрес, который вы можете\
     \ переносить между сервисами внутри одной зоны доступности: облачными серверам\
     и, базами данных и балансировщиками нагрузки."
-  name: Floating IP
+  name: Floating IPs
 - description: "Проекты позволяют организовать ваши ресурсы в группы, соответствую\
     щие вашему стилю работы. Вы можете группировать ресурсы (например, облачные и\
     \ выделенные серверы, балансировщики нагрузки, базы данных и т.д.) таким образ\
@@ -35460,7 +35460,7 @@ paths:
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
     post:
-      description: "Чтобы создать создать плавающий IP, отправьте POST-запрос в `/api/v1/floating-ip`,\
+      description: "Чтобы создать создать плавающий IP, отправьте POST-запрос в `/api/v1/floating-ips`,\
         \ задав необходимые атрибуты."
       operationId: createFloatingIp
       requestBody:
@@ -35635,7 +35635,7 @@ paths:
           type: string
         style: simple
       responses:
-        "201":
+        "204":
           description: Плавающий IP успешно удален
         "400":
           content:
@@ -43546,6 +43546,7 @@ components:
         ip:
           description: IP-адрес
           example: 82.97.244.202
+          nullable: true
           type: string
         is_ddos_guard:
           description: "Это логическое значение, которое показывает, включена ли з\
@@ -43560,25 +43561,34 @@ components:
           - server
           - balancer
           - database
+          - network
           example: server
+          nullable: true
           type: string
         resource_id:
           description: Id ресурса.
           example: 24569
+          nullable: true
           type: number
         comment:
           description: Комментарий
           example: Комментарий
+          nullable: true
           type: string
         ptr:
           description: Запись имени узла.
           example: ptr
+          nullable: true
           type: string
       required:
       - availability_zone
+      - comment
       - id
       - ip
       - is_ddos_guard
+      - ptr
+      - resource_id
+      - resource_type
     create-floating-ip:
       properties:
         is_ddos_guard:
@@ -43609,6 +43619,7 @@ components:
           - server
           - balancer
           - database
+          - network
           example: server
           type: string
         resource_id:
@@ -43885,6 +43896,7 @@ components:
               telegram: "on"
           items:
             $ref: '#/components/schemas/updateNotificationSettings_request_settings_inner'
+          minItems: 1
           type: array
       type: object
     getBalancers_200_response:

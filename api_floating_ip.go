@@ -210,7 +210,7 @@ func (r ApiCreateFloatingIpRequest) Execute() (*CreateFloatingIp201Response, *ht
 /*
 CreateFloatingIp Создание плавающего IP
 
-Чтобы создать создать плавающий IP, отправьте POST-запрос в `/api/v1/floating-ip`, задав необходимые атрибуты.
+Чтобы создать создать плавающий IP, отправьте POST-запрос в `/api/v1/floating-ips`, задав необходимые атрибуты.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateFloatingIpRequest

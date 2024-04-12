@@ -23,30 +23,34 @@ type FloatingIp struct {
 	// Идентификатор IP.
 	Id string `json:"id"`
 	// IP-адрес
-	Ip string `json:"ip"`
+	Ip NullableString `json:"ip"`
 	// Это логическое значение, которое показывает, включена ли защита от DDoS.
 	IsDdosGuard bool `json:"is_ddos_guard"`
 	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 	// Тип ресурса.
-	ResourceType *string `json:"resource_type,omitempty"`
+	ResourceType NullableString `json:"resource_type"`
 	// Id ресурса.
-	ResourceId *float32 `json:"resource_id,omitempty"`
+	ResourceId NullableFloat32 `json:"resource_id"`
 	// Комментарий
-	Comment *string `json:"comment,omitempty"`
+	Comment NullableString `json:"comment"`
 	// Запись имени узла.
-	Ptr *string `json:"ptr,omitempty"`
+	Ptr NullableString `json:"ptr"`
 }
 
 // NewFloatingIp instantiates a new FloatingIp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFloatingIp(id string, ip string, isDdosGuard bool, availabilityZone AvailabilityZone) *FloatingIp {
+func NewFloatingIp(id string, ip NullableString, isDdosGuard bool, availabilityZone AvailabilityZone, resourceType NullableString, resourceId NullableFloat32, comment NullableString, ptr NullableString) *FloatingIp {
 	this := FloatingIp{}
 	this.Id = id
 	this.Ip = ip
 	this.IsDdosGuard = isDdosGuard
 	this.AvailabilityZone = availabilityZone
+	this.ResourceType = resourceType
+	this.ResourceId = resourceId
+	this.Comment = comment
+	this.Ptr = ptr
 	return &this
 }
 
@@ -83,27 +87,29 @@ func (o *FloatingIp) SetId(v string) {
 }
 
 // GetIp returns the Ip field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *FloatingIp) GetIp() string {
-	if o == nil {
+	if o == nil || o.Ip.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Ip
+	return *o.Ip.Get()
 }
 
 // GetIpOk returns a tuple with the Ip field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FloatingIp) GetIpOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ip, true
+	return o.Ip.Get(), o.Ip.IsSet()
 }
 
 // SetIp sets field value
 func (o *FloatingIp) SetIp(v string) {
-	o.Ip = v
+	o.Ip.Set(&v)
 }
 
 // GetIsDdosGuard returns the IsDdosGuard field value
@@ -154,132 +160,108 @@ func (o *FloatingIp) SetAvailabilityZone(v AvailabilityZone) {
 	o.AvailabilityZone = v
 }
 
-// GetResourceType returns the ResourceType field value if set, zero value otherwise.
+// GetResourceType returns the ResourceType field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *FloatingIp) GetResourceType() string {
-	if o == nil || IsNil(o.ResourceType) {
+	if o == nil || o.ResourceType.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.ResourceType
+
+	return *o.ResourceType.Get()
 }
 
-// GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
+// GetResourceTypeOk returns a tuple with the ResourceType field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FloatingIp) GetResourceTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResourceType, true
+	return o.ResourceType.Get(), o.ResourceType.IsSet()
 }
 
-// HasResourceType returns a boolean if a field has been set.
-func (o *FloatingIp) HasResourceType() bool {
-	if o != nil && !IsNil(o.ResourceType) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceType gets a reference to the given string and assigns it to the ResourceType field.
+// SetResourceType sets field value
 func (o *FloatingIp) SetResourceType(v string) {
-	o.ResourceType = &v
+	o.ResourceType.Set(&v)
 }
 
-// GetResourceId returns the ResourceId field value if set, zero value otherwise.
+// GetResourceId returns the ResourceId field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *FloatingIp) GetResourceId() float32 {
-	if o == nil || IsNil(o.ResourceId) {
+	if o == nil || o.ResourceId.Get() == nil {
 		var ret float32
 		return ret
 	}
-	return *o.ResourceId
+
+	return *o.ResourceId.Get()
 }
 
-// GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
+// GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FloatingIp) GetResourceIdOk() (*float32, bool) {
-	if o == nil || IsNil(o.ResourceId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResourceId, true
+	return o.ResourceId.Get(), o.ResourceId.IsSet()
 }
 
-// HasResourceId returns a boolean if a field has been set.
-func (o *FloatingIp) HasResourceId() bool {
-	if o != nil && !IsNil(o.ResourceId) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceId gets a reference to the given float32 and assigns it to the ResourceId field.
+// SetResourceId sets field value
 func (o *FloatingIp) SetResourceId(v float32) {
-	o.ResourceId = &v
+	o.ResourceId.Set(&v)
 }
 
-// GetComment returns the Comment field value if set, zero value otherwise.
+// GetComment returns the Comment field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *FloatingIp) GetComment() string {
-	if o == nil || IsNil(o.Comment) {
+	if o == nil || o.Comment.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Comment
+
+	return *o.Comment.Get()
 }
 
-// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// GetCommentOk returns a tuple with the Comment field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FloatingIp) GetCommentOk() (*string, bool) {
-	if o == nil || IsNil(o.Comment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Comment, true
+	return o.Comment.Get(), o.Comment.IsSet()
 }
 
-// HasComment returns a boolean if a field has been set.
-func (o *FloatingIp) HasComment() bool {
-	if o != nil && !IsNil(o.Comment) {
-		return true
-	}
-
-	return false
-}
-
-// SetComment gets a reference to the given string and assigns it to the Comment field.
+// SetComment sets field value
 func (o *FloatingIp) SetComment(v string) {
-	o.Comment = &v
+	o.Comment.Set(&v)
 }
 
-// GetPtr returns the Ptr field value if set, zero value otherwise.
+// GetPtr returns the Ptr field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *FloatingIp) GetPtr() string {
-	if o == nil || IsNil(o.Ptr) {
+	if o == nil || o.Ptr.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Ptr
+
+	return *o.Ptr.Get()
 }
 
-// GetPtrOk returns a tuple with the Ptr field value if set, nil otherwise
+// GetPtrOk returns a tuple with the Ptr field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FloatingIp) GetPtrOk() (*string, bool) {
-	if o == nil || IsNil(o.Ptr) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ptr, true
+	return o.Ptr.Get(), o.Ptr.IsSet()
 }
 
-// HasPtr returns a boolean if a field has been set.
-func (o *FloatingIp) HasPtr() bool {
-	if o != nil && !IsNil(o.Ptr) {
-		return true
-	}
-
-	return false
-}
-
-// SetPtr gets a reference to the given string and assigns it to the Ptr field.
+// SetPtr sets field value
 func (o *FloatingIp) SetPtr(v string) {
-	o.Ptr = &v
+	o.Ptr.Set(&v)
 }
 
 func (o FloatingIp) MarshalJSON() ([]byte, error) {
@@ -293,21 +275,13 @@ func (o FloatingIp) MarshalJSON() ([]byte, error) {
 func (o FloatingIp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	toSerialize["ip"] = o.Ip
+	toSerialize["ip"] = o.Ip.Get()
 	toSerialize["is_ddos_guard"] = o.IsDdosGuard
 	toSerialize["availability_zone"] = o.AvailabilityZone
-	if !IsNil(o.ResourceType) {
-		toSerialize["resource_type"] = o.ResourceType
-	}
-	if !IsNil(o.ResourceId) {
-		toSerialize["resource_id"] = o.ResourceId
-	}
-	if !IsNil(o.Comment) {
-		toSerialize["comment"] = o.Comment
-	}
-	if !IsNil(o.Ptr) {
-		toSerialize["ptr"] = o.Ptr
-	}
+	toSerialize["resource_type"] = o.ResourceType.Get()
+	toSerialize["resource_id"] = o.ResourceId.Get()
+	toSerialize["comment"] = o.Comment.Get()
+	toSerialize["ptr"] = o.Ptr.Get()
 	return toSerialize, nil
 }
 

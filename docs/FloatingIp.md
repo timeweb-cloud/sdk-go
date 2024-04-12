@@ -5,19 +5,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Идентификатор IP. | 
-**Ip** | **string** | IP-адрес | 
+**Ip** | **NullableString** | IP-адрес | 
 **IsDdosGuard** | **bool** | Это логическое значение, которое показывает, включена ли защита от DDoS. | 
 **AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
-**ResourceType** | Pointer to **string** | Тип ресурса. | [optional] 
-**ResourceId** | Pointer to **float32** | Id ресурса. | [optional] 
-**Comment** | Pointer to **string** | Комментарий | [optional] 
-**Ptr** | Pointer to **string** | Запись имени узла. | [optional] 
+**ResourceType** | **NullableString** | Тип ресурса. | 
+**ResourceId** | **NullableFloat32** | Id ресурса. | 
+**Comment** | **NullableString** | Комментарий | 
+**Ptr** | **NullableString** | Запись имени узла. | 
 
 ## Methods
 
 ### NewFloatingIp
 
-`func NewFloatingIp(id string, ip string, isDdosGuard bool, availabilityZone AvailabilityZone, ) *FloatingIp`
+`func NewFloatingIp(id string, ip NullableString, isDdosGuard bool, availabilityZone AvailabilityZone, resourceType NullableString, resourceId NullableFloat32, comment NullableString, ptr NullableString, ) *FloatingIp`
 
 NewFloatingIp instantiates a new FloatingIp object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +72,16 @@ and a boolean to check if the value has been set.
 SetIp sets Ip field to given value.
 
 
+### SetIpNil
+
+`func (o *FloatingIp) SetIpNil(b bool)`
+
+ SetIpNil sets the value for Ip to be an explicit nil
+
+### UnsetIp
+`func (o *FloatingIp) UnsetIp()`
+
+UnsetIp ensures that no value is present for Ip, not even an explicit nil
 ### GetIsDdosGuard
 
 `func (o *FloatingIp) GetIsDdosGuard() bool`
@@ -131,12 +141,17 @@ and a boolean to check if the value has been set.
 
 SetResourceType sets ResourceType field to given value.
 
-### HasResourceType
 
-`func (o *FloatingIp) HasResourceType() bool`
+### SetResourceTypeNil
 
-HasResourceType returns a boolean if a field has been set.
+`func (o *FloatingIp) SetResourceTypeNil(b bool)`
 
+ SetResourceTypeNil sets the value for ResourceType to be an explicit nil
+
+### UnsetResourceType
+`func (o *FloatingIp) UnsetResourceType()`
+
+UnsetResourceType ensures that no value is present for ResourceType, not even an explicit nil
 ### GetResourceId
 
 `func (o *FloatingIp) GetResourceId() float32`
@@ -156,12 +171,17 @@ and a boolean to check if the value has been set.
 
 SetResourceId sets ResourceId field to given value.
 
-### HasResourceId
 
-`func (o *FloatingIp) HasResourceId() bool`
+### SetResourceIdNil
 
-HasResourceId returns a boolean if a field has been set.
+`func (o *FloatingIp) SetResourceIdNil(b bool)`
 
+ SetResourceIdNil sets the value for ResourceId to be an explicit nil
+
+### UnsetResourceId
+`func (o *FloatingIp) UnsetResourceId()`
+
+UnsetResourceId ensures that no value is present for ResourceId, not even an explicit nil
 ### GetComment
 
 `func (o *FloatingIp) GetComment() string`
@@ -181,12 +201,17 @@ and a boolean to check if the value has been set.
 
 SetComment sets Comment field to given value.
 
-### HasComment
 
-`func (o *FloatingIp) HasComment() bool`
+### SetCommentNil
 
-HasComment returns a boolean if a field has been set.
+`func (o *FloatingIp) SetCommentNil(b bool)`
 
+ SetCommentNil sets the value for Comment to be an explicit nil
+
+### UnsetComment
+`func (o *FloatingIp) UnsetComment()`
+
+UnsetComment ensures that no value is present for Comment, not even an explicit nil
 ### GetPtr
 
 `func (o *FloatingIp) GetPtr() string`
@@ -206,12 +231,17 @@ and a boolean to check if the value has been set.
 
 SetPtr sets Ptr field to given value.
 
-### HasPtr
 
-`func (o *FloatingIp) HasPtr() bool`
+### SetPtrNil
 
-HasPtr returns a boolean if a field has been set.
+`func (o *FloatingIp) SetPtrNil(b bool)`
 
+ SetPtrNil sets the value for Ptr to be an explicit nil
+
+### UnsetPtr
+`func (o *FloatingIp) UnsetPtr()`
+
+UnsetPtr ensures that no value is present for Ptr, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
