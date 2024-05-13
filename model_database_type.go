@@ -13,108 +13,163 @@ package openapi
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
-// Location Локация.
-type Location string
+// checks if the DatabaseType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DatabaseType{}
 
-// List of location
-const (
-	RU_1 Location = "ru-1"
-	RU_2 Location = "ru-2"
-	RU_3 Location = "ru-3"
-	PL_1 Location = "pl-1"
-	KZ_1 Location = "kz-1"
-	NL_1 Location = "nl-1"
-)
-
-// All allowed values of Location enum
-var AllowedLocationEnumValues = []Location{
-	"ru-1",
-	"ru-2",
-	"ru-3",
-	"pl-1",
-	"kz-1",
-	"nl-1",
+// DatabaseType Тип кластера базы данных
+type DatabaseType struct {
+	// Название кластера базы данных.
+	Name string `json:"name"`
+	// Версия кластера базы данных.
+	Version string `json:"version"`
+	// Тип кластера базы данных. Передается при создании кластера в поле `type`
+	Type string `json:"type"`
 }
 
-func (v *Location) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+// NewDatabaseType instantiates a new DatabaseType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDatabaseType(name string, version string, type_ string) *DatabaseType {
+	this := DatabaseType{}
+	this.Name = name
+	this.Version = version
+	this.Type = type_
+	return &this
+}
+
+// NewDatabaseTypeWithDefaults instantiates a new DatabaseType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDatabaseTypeWithDefaults() *DatabaseType {
+	this := DatabaseType{}
+	return &this
+}
+
+// GetName returns the Name field value
+func (o *DatabaseType) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseType) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *DatabaseType) SetName(v string) {
+	o.Name = v
+}
+
+// GetVersion returns the Version field value
+func (o *DatabaseType) GetVersion() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseType) GetVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Version, true
+}
+
+// SetVersion sets field value
+func (o *DatabaseType) SetVersion(v string) {
+	o.Version = v
+}
+
+// GetType returns the Type field value
+func (o *DatabaseType) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseType) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *DatabaseType) SetType(v string) {
+	o.Type = v
+}
+
+func (o DatabaseType) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
-		return err
+		return []byte{}, err
 	}
-	enumTypeValue := Location(value)
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Location", value)
+	return json.Marshal(toSerialize)
 }
 
-// NewLocationFromValue returns a pointer to a valid Location
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewLocationFromValue(v string) (*Location, error) {
-	ev := Location(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for Location: valid values are %v", v, AllowedLocationEnumValues)
-	}
+func (o DatabaseType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
+	toSerialize["version"] = o.Version
+	toSerialize["type"] = o.Type
+	return toSerialize, nil
 }
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v Location) IsValid() bool {
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == v {
-			return true
-		}
-	}
-	return false
-}
-
-// Ptr returns reference to location value
-func (v Location) Ptr() *Location {
-	return &v
-}
-
-type NullableLocation struct {
-	value *Location
+type NullableDatabaseType struct {
+	value *DatabaseType
 	isSet bool
 }
 
-func (v NullableLocation) Get() *Location {
+func (v NullableDatabaseType) Get() *DatabaseType {
 	return v.value
 }
 
-func (v *NullableLocation) Set(val *Location) {
+func (v *NullableDatabaseType) Set(val *DatabaseType) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLocation) IsSet() bool {
+func (v NullableDatabaseType) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLocation) Unset() {
+func (v *NullableDatabaseType) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLocation(val *Location) *NullableLocation {
-	return &NullableLocation{value: val, isSet: true}
+func NewNullableDatabaseType(val *DatabaseType) *NullableDatabaseType {
+	return &NullableDatabaseType{value: val, isSet: true}
 }
 
-func (v NullableLocation) MarshalJSON() ([]byte, error) {
+func (v NullableDatabaseType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLocation) UnmarshalJSON(src []byte) error {
+func (v *NullableDatabaseType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

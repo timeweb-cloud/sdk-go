@@ -154,6 +154,8 @@ tags:
     еров.</br></br> Подробнее о доменах – в нашей <a href='https://timeweb.cloud/docs/domains'\
     \ target='_blank'>базе знаний</a>."
   name: Domains
+- description: Локация - это конкретное физическое местоположение дата-центра.
+  name: Locations
 - description: "Облачные серверы — это способ размещения данных, при котором вы по\
     лучаете полный доступ (root-доступ) к виртуальному серверу и его настройкам. В\
     ы можете гибко масштабировать параметры (процессор, память, диск) сервера, пос\
@@ -209,8 +211,6 @@ tags:
     \ target='_blank'>SSH-ключи</a>, чтобы использовать при создании новых серверо\
     в."
   name: SSH
-- description: Локация - это конкретное физическое местоположение дата-центра.
-  name: Locations
 - description: "VPC (Virtual Private Cloud) - это виртуальная частная сеть в облак\
     е, которая позволяет изолировать ресурсы в облачной среде. Она предоставляет к\
     онтроль над сетевой конфигурацией, такими как IP-адреса, маршрутизация и безоп\
@@ -8966,6 +8966,133 @@ paths:
           \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/database-types:
+    get:
+      description: "Чтобы получить список типов баз данных на вашем аккаунте, отпр\
+        авьте GET-запрос на `/api/v1/database-types`."
+      operationId: getDatabaseClusterTypes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDatabaseClusterTypes_200_response'
+          description: Ответ будет представлять собой объект JSON c ключом `types`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка типов кластеров баз данных
+      tags:
+      - Databases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/database-types"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/database-types', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/database-types', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/database-types', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/database-types');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/database-types\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/database-types\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
   /api/v1/dbs:
     get:
@@ -39201,6 +39328,31 @@ components:
           description: Описанеие инстанса базы данных
           example: description
           type: string
+    database-type:
+      description: Тип кластера базы данных
+      example:
+        name: mysql
+        type: mysql5
+        version: "5.7"
+      properties:
+        name:
+          description: Название кластера базы данных.
+          example: mysql
+          type: string
+        version:
+          description: Версия кластера базы данных.
+          example: "5.7"
+          type: string
+        type:
+          description: Тип кластера базы данных. Передается при создании кластера
+            в поле `type`
+          example: mysql5
+          type: string
+      required:
+      - name
+      - type
+      - version
+      type: object
     db:
       description: База данных
       example:
@@ -43767,8 +43919,6 @@ components:
       - pl-1
       - kz-1
       - nl-1
-      - us-1
-      - us-2
       example: ru-1
       type: string
     location-dto:
@@ -44609,6 +44759,28 @@ components:
           $ref: '#/components/schemas/database-instance'
       required:
       - instance
+      type: object
+    getDatabaseClusterTypes_200_response:
+      example:
+        types:
+        - name: mysql
+          type: mysql5
+          version: "5.7"
+        - name: mysql
+          type: mysql5
+          version: "5.7"
+        meta:
+          total: 10
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        types:
+          items:
+            $ref: '#/components/schemas/database-type'
+          type: array
+      required:
+      - meta
+      - types
       type: object
     getDatabases_200_response:
       example:

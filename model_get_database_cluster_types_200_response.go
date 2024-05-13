@@ -13,108 +13,133 @@ package openapi
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
-// Location Локация.
-type Location string
+// checks if the GetDatabaseClusterTypes200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetDatabaseClusterTypes200Response{}
 
-// List of location
-const (
-	RU_1 Location = "ru-1"
-	RU_2 Location = "ru-2"
-	RU_3 Location = "ru-3"
-	PL_1 Location = "pl-1"
-	KZ_1 Location = "kz-1"
-	NL_1 Location = "nl-1"
-)
-
-// All allowed values of Location enum
-var AllowedLocationEnumValues = []Location{
-	"ru-1",
-	"ru-2",
-	"ru-3",
-	"pl-1",
-	"kz-1",
-	"nl-1",
+// GetDatabaseClusterTypes200Response struct for GetDatabaseClusterTypes200Response
+type GetDatabaseClusterTypes200Response struct {
+	Meta Meta `json:"meta"`
+	Types []DatabaseType `json:"types"`
 }
 
-func (v *Location) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+// NewGetDatabaseClusterTypes200Response instantiates a new GetDatabaseClusterTypes200Response object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewGetDatabaseClusterTypes200Response(meta Meta, types []DatabaseType) *GetDatabaseClusterTypes200Response {
+	this := GetDatabaseClusterTypes200Response{}
+	this.Meta = meta
+	this.Types = types
+	return &this
+}
+
+// NewGetDatabaseClusterTypes200ResponseWithDefaults instantiates a new GetDatabaseClusterTypes200Response object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewGetDatabaseClusterTypes200ResponseWithDefaults() *GetDatabaseClusterTypes200Response {
+	this := GetDatabaseClusterTypes200Response{}
+	return &this
+}
+
+// GetMeta returns the Meta field value
+func (o *GetDatabaseClusterTypes200Response) GetMeta() Meta {
+	if o == nil {
+		var ret Meta
+		return ret
+	}
+
+	return o.Meta
+}
+
+// GetMetaOk returns a tuple with the Meta field value
+// and a boolean to check if the value has been set.
+func (o *GetDatabaseClusterTypes200Response) GetMetaOk() (*Meta, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Meta, true
+}
+
+// SetMeta sets field value
+func (o *GetDatabaseClusterTypes200Response) SetMeta(v Meta) {
+	o.Meta = v
+}
+
+// GetTypes returns the Types field value
+func (o *GetDatabaseClusterTypes200Response) GetTypes() []DatabaseType {
+	if o == nil {
+		var ret []DatabaseType
+		return ret
+	}
+
+	return o.Types
+}
+
+// GetTypesOk returns a tuple with the Types field value
+// and a boolean to check if the value has been set.
+func (o *GetDatabaseClusterTypes200Response) GetTypesOk() ([]DatabaseType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Types, true
+}
+
+// SetTypes sets field value
+func (o *GetDatabaseClusterTypes200Response) SetTypes(v []DatabaseType) {
+	o.Types = v
+}
+
+func (o GetDatabaseClusterTypes200Response) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
-		return err
+		return []byte{}, err
 	}
-	enumTypeValue := Location(value)
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Location", value)
+	return json.Marshal(toSerialize)
 }
 
-// NewLocationFromValue returns a pointer to a valid Location
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewLocationFromValue(v string) (*Location, error) {
-	ev := Location(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for Location: valid values are %v", v, AllowedLocationEnumValues)
-	}
+func (o GetDatabaseClusterTypes200Response) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["meta"] = o.Meta
+	toSerialize["types"] = o.Types
+	return toSerialize, nil
 }
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v Location) IsValid() bool {
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == v {
-			return true
-		}
-	}
-	return false
-}
-
-// Ptr returns reference to location value
-func (v Location) Ptr() *Location {
-	return &v
-}
-
-type NullableLocation struct {
-	value *Location
+type NullableGetDatabaseClusterTypes200Response struct {
+	value *GetDatabaseClusterTypes200Response
 	isSet bool
 }
 
-func (v NullableLocation) Get() *Location {
+func (v NullableGetDatabaseClusterTypes200Response) Get() *GetDatabaseClusterTypes200Response {
 	return v.value
 }
 
-func (v *NullableLocation) Set(val *Location) {
+func (v *NullableGetDatabaseClusterTypes200Response) Set(val *GetDatabaseClusterTypes200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLocation) IsSet() bool {
+func (v NullableGetDatabaseClusterTypes200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLocation) Unset() {
+func (v *NullableGetDatabaseClusterTypes200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLocation(val *Location) *NullableLocation {
-	return &NullableLocation{value: val, isSet: true}
+func NewNullableGetDatabaseClusterTypes200Response(val *GetDatabaseClusterTypes200Response) *NullableGetDatabaseClusterTypes200Response {
+	return &NullableGetDatabaseClusterTypes200Response{value: val, isSet: true}
 }
 
-func (v NullableLocation) MarshalJSON() ([]byte, error) {
+func (v NullableGetDatabaseClusterTypes200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLocation) UnmarshalJSON(src []byte) error {
+func (v *NullableGetDatabaseClusterTypes200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

@@ -15,10 +15,6 @@
 
 * `NL_1` (value: `"nl-1"`)
 
-* `US_1` (value: `"us-1"`)
-
-* `US_2` (value: `"us-2"`)
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

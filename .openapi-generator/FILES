@@ -121,6 +121,7 @@ docs/DatabaseClusterDiskStats.md
 docs/DatabaseClusterNetworksInner.md
 docs/DatabaseClusterNetworksInnerIpsInner.md
 docs/DatabaseInstance.md
+docs/DatabaseType.md
 docs/DatabasesAPI.md
 docs/Db.md
 docs/DbDiskStats.md
@@ -195,6 +196,7 @@ docs/GetConfigurators200Response.md
 docs/GetCountries200Response.md
 docs/GetDatabaseAutoBackupsSettings200Response.md
 docs/GetDatabaseBackups200Response.md
+docs/GetDatabaseClusterTypes200Response.md
 docs/GetDatabaseClusters200Response.md
 docs/GetDatabaseInstances200Response.md
 docs/GetDatabaseUsers200Response.md
@@ -498,6 +500,7 @@ model_database_cluster_disk_stats.go
 model_database_cluster_networks_inner.go
 model_database_cluster_networks_inner_ips_inner.go
 model_database_instance.go
+model_database_type.go
 model_db.go
 model_db_disk_stats.go
 model_db_type.go
@@ -567,6 +570,7 @@ model_get_configurators_200_response.go
 model_get_countries_200_response.go
 model_get_database_auto_backups_settings_200_response.go
 model_get_database_backups_200_response.go
+model_get_database_cluster_types_200_response.go
 model_get_database_clusters_200_response.go
 model_get_database_instances_200_response.go
 model_get_database_users_200_response.go

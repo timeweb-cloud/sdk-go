@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**GetDatabaseBackup**](DatabasesAPI.md#GetDatabaseBackup) | **Get** /api/v1/dbs/{db_id}/backups/{backup_id} | Получение бэкапа базы данных
 [**GetDatabaseBackups**](DatabasesAPI.md#GetDatabaseBackups) | **Get** /api/v1/dbs/{db_id}/backups | Список бэкапов базы данных
 [**GetDatabaseCluster**](DatabasesAPI.md#GetDatabaseCluster) | **Get** /api/v1/databases/{db_cluster_id} | Получение кластера базы данных
+[**GetDatabaseClusterTypes**](DatabasesAPI.md#GetDatabaseClusterTypes) | **Get** /api/v1/database-types | Получение списка типов кластеров баз данных
 [**GetDatabaseClusters**](DatabasesAPI.md#GetDatabaseClusters) | **Get** /api/v1/databases | Получение списка кластеров баз данных
 [**GetDatabaseInstance**](DatabasesAPI.md#GetDatabaseInstance) | **Get** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Получение инстанса базы данных
 [**GetDatabaseInstances**](DatabasesAPI.md#GetDatabaseInstances) | **Get** /api/v1/databases/{db_cluster_id}/instances | Получение списка инстансов баз данных
@@ -1084,6 +1085,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateDatabaseCluster201Response**](CreateDatabaseCluster201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabaseClusterTypes
+
+> GetDatabaseClusterTypes200Response GetDatabaseClusterTypes(ctx).Execute()
+
+Получение списка типов кластеров баз данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabaseClusterTypes(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseClusterTypes``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabaseClusterTypes`: GetDatabaseClusterTypes200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseClusterTypes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabaseClusterTypesRequest struct via the builder pattern
+
+
+### Return type
+
+[**GetDatabaseClusterTypes200Response**](GetDatabaseClusterTypes200Response.md)
 
 ### Authorization
 
