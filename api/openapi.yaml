@@ -36407,10 +36407,10 @@ paths:
           curl -X GET \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v2/locaitons"
+            "https://api.timeweb.cloud/api/v2/locations"
       - lang: JavaScript
         source: |
-          fetch('https://api.timeweb.cloud/api/v2/locaitons', {
+          fetch('https://api.timeweb.cloud/api/v2/locations', {
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
@@ -36420,7 +36420,7 @@ paths:
         source: |
           const axios = require('axios');
 
-          const response = await axios.get('https://api.timeweb.cloud/api/v2/locaitons', {
+          const response = await axios.get('https://api.timeweb.cloud/api/v2/locations', {
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
@@ -36436,12 +36436,12 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          response = requests.get('https://api.timeweb.cloud/api/v2/locaitons', headers=headers)
+          response = requests.get('https://api.timeweb.cloud/api/v2/locations', headers=headers)
       - lang: PHP
         source: |
           <?php
           $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/locaitons');
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/locations');
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
           curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -36455,7 +36455,7 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v2/locaitons\"\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v2/locations\"\
           , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -36466,7 +36466,7 @@ paths:
         source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
           \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
           import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/locaitons\"\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/locations\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
           Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
