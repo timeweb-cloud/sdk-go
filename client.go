@@ -70,6 +70,8 @@ type APIClient struct {
 
 	KubernetesAPI *KubernetesAPIService
 
+	LocationsAPI *LocationsAPIService
+
 	MailAPI *MailAPIService
 
 	ProjectsAPI *ProjectsAPIService
@@ -109,6 +111,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FloatingIPAPI = (*FloatingIPAPIService)(&c.common)
 	c.ImagesAPI = (*ImagesAPIService)(&c.common)
 	c.KubernetesAPI = (*KubernetesAPIService)(&c.common)
+	c.LocationsAPI = (*LocationsAPIService)(&c.common)
 	c.MailAPI = (*MailAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
 	c.S3API = (*S3APIService)(&c.common)

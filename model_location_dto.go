@@ -13,112 +13,162 @@ package openapi
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
-// Location Локация.
-type Location string
+// checks if the LocationDto type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LocationDto{}
 
-// List of location
-const (
-	RU_1 Location = "ru-1"
-	RU_2 Location = "ru-2"
-	RU_3 Location = "ru-3"
-	PL_1 Location = "pl-1"
-	KZ_1 Location = "kz-1"
-	NL_1 Location = "nl-1"
-	US_1 Location = "us-1"
-	US_2 Location = "us-2"
-)
-
-// All allowed values of Location enum
-var AllowedLocationEnumValues = []Location{
-	"ru-1",
-	"ru-2",
-	"ru-3",
-	"pl-1",
-	"kz-1",
-	"nl-1",
-	"us-1",
-	"us-2",
+// LocationDto Локация
+type LocationDto struct {
+	Location Location `json:"location"`
+	// Код локации в формате `ISO 3166`
+	LocationCode string `json:"location_code"`
+	// Список зон, доступных в данной локации
+	AvailabilityZones []string `json:"availability_zones"`
 }
 
-func (v *Location) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+// NewLocationDto instantiates a new LocationDto object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewLocationDto(location Location, locationCode string, availabilityZones []string) *LocationDto {
+	this := LocationDto{}
+	this.Location = location
+	this.LocationCode = locationCode
+	this.AvailabilityZones = availabilityZones
+	return &this
+}
+
+// NewLocationDtoWithDefaults instantiates a new LocationDto object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewLocationDtoWithDefaults() *LocationDto {
+	this := LocationDto{}
+	return &this
+}
+
+// GetLocation returns the Location field value
+func (o *LocationDto) GetLocation() Location {
+	if o == nil {
+		var ret Location
+		return ret
+	}
+
+	return o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value
+// and a boolean to check if the value has been set.
+func (o *LocationDto) GetLocationOk() (*Location, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Location, true
+}
+
+// SetLocation sets field value
+func (o *LocationDto) SetLocation(v Location) {
+	o.Location = v
+}
+
+// GetLocationCode returns the LocationCode field value
+func (o *LocationDto) GetLocationCode() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LocationCode
+}
+
+// GetLocationCodeOk returns a tuple with the LocationCode field value
+// and a boolean to check if the value has been set.
+func (o *LocationDto) GetLocationCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LocationCode, true
+}
+
+// SetLocationCode sets field value
+func (o *LocationDto) SetLocationCode(v string) {
+	o.LocationCode = v
+}
+
+// GetAvailabilityZones returns the AvailabilityZones field value
+func (o *LocationDto) GetAvailabilityZones() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.AvailabilityZones
+}
+
+// GetAvailabilityZonesOk returns a tuple with the AvailabilityZones field value
+// and a boolean to check if the value has been set.
+func (o *LocationDto) GetAvailabilityZonesOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvailabilityZones, true
+}
+
+// SetAvailabilityZones sets field value
+func (o *LocationDto) SetAvailabilityZones(v []string) {
+	o.AvailabilityZones = v
+}
+
+func (o LocationDto) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
-		return err
+		return []byte{}, err
 	}
-	enumTypeValue := Location(value)
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Location", value)
+	return json.Marshal(toSerialize)
 }
 
-// NewLocationFromValue returns a pointer to a valid Location
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewLocationFromValue(v string) (*Location, error) {
-	ev := Location(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for Location: valid values are %v", v, AllowedLocationEnumValues)
-	}
+func (o LocationDto) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["location"] = o.Location
+	toSerialize["location_code"] = o.LocationCode
+	toSerialize["availability_zones"] = o.AvailabilityZones
+	return toSerialize, nil
 }
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v Location) IsValid() bool {
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == v {
-			return true
-		}
-	}
-	return false
-}
-
-// Ptr returns reference to location value
-func (v Location) Ptr() *Location {
-	return &v
-}
-
-type NullableLocation struct {
-	value *Location
+type NullableLocationDto struct {
+	value *LocationDto
 	isSet bool
 }
 
-func (v NullableLocation) Get() *Location {
+func (v NullableLocationDto) Get() *LocationDto {
 	return v.value
 }
 
-func (v *NullableLocation) Set(val *Location) {
+func (v *NullableLocationDto) Set(val *LocationDto) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLocation) IsSet() bool {
+func (v NullableLocationDto) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLocation) Unset() {
+func (v *NullableLocationDto) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLocation(val *Location) *NullableLocation {
-	return &NullableLocation{value: val, isSet: true}
+func NewNullableLocationDto(val *LocationDto) *NullableLocationDto {
+	return &NullableLocationDto{value: val, isSet: true}
 }
 
-func (v NullableLocation) MarshalJSON() ([]byte, error) {
+func (v NullableLocationDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLocation) UnmarshalJSON(src []byte) error {
+func (v *NullableLocationDto) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

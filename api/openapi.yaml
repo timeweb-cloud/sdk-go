@@ -209,7 +209,13 @@ tags:
     \ target='_blank'>SSH-ключи</a>, чтобы использовать при создании новых серверо\
     в."
   name: SSH
-- description: ""
+- description: Локация - это конкретное физическое местоположение дата-центра.
+  name: Locations
+- description: "VPC (Virtual Private Cloud) - это виртуальная частная сеть в облак\
+    е, которая позволяет изолировать ресурсы в облачной среде. Она предоставляет к\
+    онтроль над сетевой конфигурацией, такими как IP-адреса, маршрутизация и безоп\
+    асность, и обеспечивает логическое разделение ресурсов для повышения безопасно\
+    сти и управляемости."
   name: VPC
 paths:
   /api/v1/account/finances:
@@ -36347,6 +36353,129 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v2/locations:
+    get:
+      description: |-
+        Чтобы получить список локаций, отправьте GET-запрос на `/api/v2/locations`.
+
+         Тело ответа будет представлять собой объект JSON с ключом `locations`.
+      operationId: getLocations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getLocations_200_response'
+          description: Объект JSON c ключом `locations`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка локаций
+      tags:
+      - Locations
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v2/locaitons"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/locaitons', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v2/locaitons', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v2/locaitons', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/locaitons');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v2/locaitons\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/locaitons\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
 components:
   parameters:
     limit:
@@ -43629,6 +43758,45 @@ components:
       required:
       - resource_id
       - resource_type
+    location:
+      description: Локация.
+      enum:
+      - ru-1
+      - ru-2
+      - ru-3
+      - pl-1
+      - kz-1
+      - nl-1
+      - us-1
+      - us-2
+      example: ru-1
+      type: string
+    location-dto:
+      description: Локация
+      example:
+        location_code: RU
+        availability_zones:
+        - spb-1
+        location: ru-1
+      properties:
+        location:
+          $ref: '#/components/schemas/location'
+        location_code:
+          description: Код локации в формате `ISO 3166`
+          example: RU
+          type: string
+        availability_zones:
+          description: "Список зон, доступных в данной локации"
+          example:
+          - spb-1
+          items:
+            type: string
+          type: array
+      required:
+      - availability_zones
+      - location
+      - location_code
+      type: object
     getFinances_200_response:
       example:
         finances:
@@ -48462,6 +48630,30 @@ components:
           $ref: '#/components/schemas/floating-ip'
       required:
       - ip
+      type: object
+    getLocations_200_response:
+      example:
+        meta:
+          total: 10
+        locations:
+        - location_code: RU
+          availability_zones:
+          - spb-1
+          location: ru-1
+        - location_code: RU
+          availability_zones:
+          - spb-1
+          location: ru-1
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        locations:
+          items:
+            $ref: '#/components/schemas/location-dto'
+          type: array
+      required:
+      - locations
+      - meta
       type: object
     status_company_info:
       description: Информация о компании.

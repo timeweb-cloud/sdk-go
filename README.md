@@ -359,6 +359,7 @@ Class | Method | HTTP request | Description
 *KubernetesAPI* | [**IncreaseCountOfNodesInGroup**](docs/KubernetesAPI.md#increasecountofnodesingroup) | **Post** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Увеличение количества нод в группе на указанное количество
 *KubernetesAPI* | [**ReduceCountOfNodesInGroup**](docs/KubernetesAPI.md#reducecountofnodesingroup) | **Delete** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Уменьшение количества нод в группе на указанное количество
 *KubernetesAPI* | [**UpdateCluster**](docs/KubernetesAPI.md#updatecluster) | **Patch** /api/v1/k8s/clusters/{cluster_id} | Обновление информации о кластере
+*LocationsAPI* | [**GetLocations**](docs/LocationsAPI.md#getlocations) | **Get** /api/v2/locations | Получение списка локаций
 *MailAPI* | [**CreateDomainMailbox**](docs/MailAPI.md#createdomainmailbox) | **Post** /api/v1/mail/domains/{domain} | Создание почтового ящика
 *MailAPI* | [**DeleteMailbox**](docs/MailAPI.md#deletemailbox) | **Delete** /api/v1/mail/domains/{domain}/mailboxes/{mailbox} | Удаление почтового ящика
 *MailAPI* | [**GetDomainMailInfo**](docs/MailAPI.md#getdomainmailinfo) | **Get** /api/v1/mail/domains/{domain}/info | Получение почтовой информации о домене
@@ -653,6 +654,7 @@ Class | Method | HTTP request | Description
  - [GetFloatingIps200Response](docs/GetFloatingIps200Response.md)
  - [GetKey200Response](docs/GetKey200Response.md)
  - [GetKeys200Response](docs/GetKeys200Response.md)
+ - [GetLocations200Response](docs/GetLocations200Response.md)
  - [GetMailQuota200Response](docs/GetMailQuota200Response.md)
  - [GetMailboxes200Response](docs/GetMailboxes200Response.md)
  - [GetNotificationSettings200Response](docs/GetNotificationSettings200Response.md)
@@ -703,6 +705,7 @@ Class | Method | HTTP request | Description
  - [Invoice](docs/Invoice.md)
  - [K8SVersionsResponse](docs/K8SVersionsResponse.md)
  - [Location](docs/Location.md)
+ - [LocationDto](docs/LocationDto.md)
  - [Mailbox](docs/Mailbox.md)
  - [MailboxAutoReply](docs/MailboxAutoReply.md)
  - [MailboxForwardingIncoming](docs/MailboxForwardingIncoming.md)

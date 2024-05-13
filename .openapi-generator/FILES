@@ -13,6 +13,7 @@ api_firewall.go
 api_floating_ip.go
 api_images.go
 api_kubernetes.go
+api_locations.go
 api_mail.go
 api_projects.go
 api_s3.go
@@ -218,6 +219,7 @@ docs/GetFinances500Response.md
 docs/GetFloatingIps200Response.md
 docs/GetKey200Response.md
 docs/GetKeys200Response.md
+docs/GetLocations200Response.md
 docs/GetMailQuota200Response.md
 docs/GetMailboxes200Response.md
 docs/GetNotificationSettings200Response.md
@@ -270,6 +272,8 @@ docs/Invoice.md
 docs/K8SVersionsResponse.md
 docs/KubernetesAPI.md
 docs/Location.md
+docs/LocationDto.md
+docs/LocationsAPI.md
 docs/MailAPI.md
 docs/Mailbox.md
 docs/MailboxAutoReply.md
@@ -587,6 +591,7 @@ model_get_finances_500_response.go
 model_get_floating_ips_200_response.go
 model_get_key_200_response.go
 model_get_keys_200_response.go
+model_get_locations_200_response.go
 model_get_mail_quota_200_response.go
 model_get_mailboxes_200_response.go
 model_get_notification_settings_200_response.go
@@ -637,6 +642,7 @@ model_images_out_response.go
 model_invoice.go
 model_k8_s_versions_response.go
 model_location.go
+model_location_dto.go
 model_mailbox.go
 model_mailbox_auto_reply.go
 model_mailbox_forwarding_incoming.go
@@ -767,6 +773,7 @@ test/api_firewall_test.go
 test/api_floating_ip_test.go
 test/api_images_test.go
 test/api_kubernetes_test.go
+test/api_locations_test.go
 test/api_mail_test.go
 test/api_projects_test.go
 test/api_s3_test.go

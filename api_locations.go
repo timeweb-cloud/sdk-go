@@ -12,113 +12,168 @@ Contact: info@timeweb.cloud
 package openapi
 
 import (
-	"encoding/json"
-	"fmt"
+	"bytes"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 )
 
-// Location Локация.
-type Location string
 
-// List of location
-const (
-	RU_1 Location = "ru-1"
-	RU_2 Location = "ru-2"
-	RU_3 Location = "ru-3"
-	PL_1 Location = "pl-1"
-	KZ_1 Location = "kz-1"
-	NL_1 Location = "nl-1"
-	US_1 Location = "us-1"
-	US_2 Location = "us-2"
-)
+// LocationsAPIService LocationsAPI service
+type LocationsAPIService service
 
-// All allowed values of Location enum
-var AllowedLocationEnumValues = []Location{
-	"ru-1",
-	"ru-2",
-	"ru-3",
-	"pl-1",
-	"kz-1",
-	"nl-1",
-	"us-1",
-	"us-2",
+type ApiGetLocationsRequest struct {
+	ctx context.Context
+	ApiService *LocationsAPIService
 }
 
-func (v *Location) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+func (r ApiGetLocationsRequest) Execute() (*GetLocations200Response, *http.Response, error) {
+	return r.ApiService.GetLocationsExecute(r)
+}
+
+/*
+GetLocations Получение списка локаций
+
+Чтобы получить список локаций, отправьте GET-запрос на `/api/v2/locations`.
+
+ Тело ответа будет представлять собой объект JSON с ключом `locations`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetLocationsRequest
+*/
+func (a *LocationsAPIService) GetLocations(ctx context.Context) ApiGetLocationsRequest {
+	return ApiGetLocationsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetLocations200Response
+func (a *LocationsAPIService) GetLocationsExecute(r ApiGetLocationsRequest) (*GetLocations200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetLocations200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocations")
 	if err != nil {
-		return err
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
-	enumTypeValue := Location(value)
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
+
+	localVarPath := localBasePath + "/api/v2/locations"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
-	}
-
-	return fmt.Errorf("%+v is not a valid Location", value)
-}
-
-// NewLocationFromValue returns a pointer to a valid Location
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewLocationFromValue(v string) (*Location, error) {
-	ev := Location(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for Location: valid values are %v", v, AllowedLocationEnumValues)
-	}
-}
-
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v Location) IsValid() bool {
-	for _, existing := range AllowedLocationEnumValues {
-		if existing == v {
-			return true
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetFinances403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
-	return false
-}
 
-// Ptr returns reference to location value
-func (v Location) Ptr() *Location {
-	return &v
-}
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
 
-type NullableLocation struct {
-	value *Location
-	isSet bool
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
-
-func (v NullableLocation) Get() *Location {
-	return v.value
-}
-
-func (v *NullableLocation) Set(val *Location) {
-	v.value = val
-	v.isSet = true
-}
-
-func (v NullableLocation) IsSet() bool {
-	return v.isSet
-}
-
-func (v *NullableLocation) Unset() {
-	v.value = nil
-	v.isSet = false
-}
-
-func NewNullableLocation(val *Location) *NullableLocation {
-	return &NullableLocation{value: val, isSet: true}
-}
-
-func (v NullableLocation) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
-}
-
-func (v *NullableLocation) UnmarshalJSON(src []byte) error {
-	v.isSet = true
-	return json.Unmarshal(src, &v.value)
-}
-
