@@ -43,7 +43,7 @@ func (r ApiBindFloatingIpRequest) Execute() (*http.Response, error) {
 /*
 BindFloatingIp Привязать IP к сервису
 
-Чтобы привязать IP к сервису, отправьте POST-запрос на `/api/v1/floating-ip/{floating_ip_id}/bind`.
+Чтобы привязать IP к сервису, отправьте POST-запрос на `/api/v1/floating-ips/{floating_ip_id}/bind`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param floatingIpId Идентификатор плавающего IP
@@ -869,7 +869,7 @@ func (r ApiUnbindFloatingIpRequest) Execute() (*http.Response, error) {
 /*
 UnbindFloatingIp Отвязать IP от сервиса
 
-Чтобы отвязать IP от сервиса, отправьте POST-запрос на `/api/v1/floating-ip/{floating_ip_id}/unbind`.
+Чтобы отвязать IP от сервиса, отправьте POST-запрос на `/api/v1/floating-ips/{floating_ip_id}/unbind`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param floatingIpId Идентификатор плавающего IP
