@@ -15950,6 +15950,7 @@ paths:
           \t}\n}\n"
   /api/v1/servers/{server_id}/action:
     post:
+      deprecated: true
       description: "Чтобы выполнить действие над сервером, отправьте POST-запрос н\
         а `/api/v1/servers/{server_id}/action`."
       operationId: performActionOnServer

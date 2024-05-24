@@ -4583,6 +4583,8 @@ PerformActionOnServer Выполнение действия над сервер�
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId Уникальный идентификатор облачного сервера.
  @return ApiPerformActionOnServerRequest
+
+Deprecated
 */
 func (a *ServersAPIService) PerformActionOnServer(ctx context.Context, serverId int32) ApiPerformActionOnServerRequest {
 	return ApiPerformActionOnServerRequest{
@@ -4593,6 +4595,7 @@ func (a *ServersAPIService) PerformActionOnServer(ctx context.Context, serverId 
 }
 
 // Execute executes the request
+// Deprecated
 func (a *ServersAPIService) PerformActionOnServerExecute(r ApiPerformActionOnServerRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
