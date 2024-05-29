@@ -4,6 +4,7 @@ All URIs are relative to *https://api.timeweb.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**ActionOnServer**](ServersAPI.md#ActionOnServer) | **Post** /api/v2/{account_id}/servers/{server_id}/{action} | Выполнение действия над сервером
 [**AddServerIP**](ServersAPI.md#AddServerIP) | **Post** /api/v1/servers/{server_id}/ips | Добавление IP-адреса сервера
 [**CloneServer**](ServersAPI.md#CloneServer) | **Post** /api/v1/servers/{server_id}/clone | Клонирование сервера
 [**CreateServer**](ServersAPI.md#CreateServer) | **Post** /api/v1/servers | Создание сервера
@@ -38,6 +39,77 @@ Method | HTTP request | Description
 [**UpdateServerNAT**](ServersAPI.md#UpdateServerNAT) | **Patch** /api/v1/servers/{server_id}/local-networks/nat-mode | Изменение правил маршрутизации трафика сервера (NAT)
 [**UpdateServerOSBootMode**](ServersAPI.md#UpdateServerOSBootMode) | **Post** /api/v1/servers/{server_id}/boot-mode | Выбор типа загрузки операционной системы сервера
 
+
+
+## ActionOnServer
+
+> ActionOnServer(ctx, serverId, action).Execute()
+
+Выполнение действия над сервером
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    action := "install" // string | Действие над сервером
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ServersAPI.ActionOnServer(context.Background(), serverId, action).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.ActionOnServer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**action** | **string** | Действие над сервером | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiActionOnServerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## AddServerIP
@@ -1817,7 +1889,7 @@ import (
 
 func main() {
     serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    performActionOnServerRequest := *openapiclient.NewPerformActionOnServerRequest("Action_example") // PerformActionOnServerRequest | 
+    performActionOnServerRequest := *openapiclient.NewPerformActionOnServerRequest("Action_example") // PerformActionOnServerRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

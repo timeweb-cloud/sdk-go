@@ -22,6 +22,20 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test ServersAPIService ActionOnServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+		var action string
+
+		httpRes, err := apiClient.ServersAPI.ActionOnServer(context.Background(), serverId, action).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ServersAPIService AddServerIP", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
