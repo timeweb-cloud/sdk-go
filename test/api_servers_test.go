@@ -22,20 +22,6 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ServersAPIService ActionOnServer", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var serverId int32
-		var action string
-
-		httpRes, err := apiClient.ServersAPI.ActionOnServer(context.Background(), serverId, action).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test ServersAPIService AddServerIP", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -352,6 +338,19 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ServersAPIService HardShutdownServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+
+		httpRes, err := apiClient.ServersAPI.HardShutdownServer(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ServersAPIService ImageUnmountAndServerReload", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -359,6 +358,19 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 		var serverId int32
 
 		httpRes, err := apiClient.ServersAPI.ImageUnmountAndServerReload(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService InstallServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+
+		httpRes, err := apiClient.ServersAPI.InstallServer(context.Background(), serverId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -387,6 +399,58 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 		var serverId int32
 
 		httpRes, err := apiClient.ServersAPI.PerformActionOnServer(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService RebootServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+
+		httpRes, err := apiClient.ServersAPI.RebootServer(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService ResetServerPassword", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+
+		httpRes, err := apiClient.ServersAPI.ResetServerPassword(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService ShutdownServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+
+		httpRes, err := apiClient.ServersAPI.ShutdownServer(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService StartServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+
+		httpRes, err := apiClient.ServersAPI.StartServer(context.Background(), serverId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

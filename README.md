@@ -422,7 +422,6 @@ Class | Method | HTTP request | Description
 *SSHAPI* | [**GetKey**](docs/SSHAPI.md#getkey) | **Get** /api/v1/ssh-keys/{ssh_key_id} | Получение SSH-ключа по уникальному идентификатору
 *SSHAPI* | [**GetKeys**](docs/SSHAPI.md#getkeys) | **Get** /api/v1/ssh-keys | Получение списка SSH-ключей
 *SSHAPI* | [**UpdateKey**](docs/SSHAPI.md#updatekey) | **Patch** /api/v1/ssh-keys/{ssh_key_id} | Изменение SSH-ключа по уникальному идентификатору
-*ServersAPI* | [**ActionOnServer**](docs/ServersAPI.md#actiononserver) | **Post** /api/v2/{account_id}/servers/{server_id}/{action} | Выполнение действия над сервером
 *ServersAPI* | [**AddServerIP**](docs/ServersAPI.md#addserverip) | **Post** /api/v1/servers/{server_id}/ips | Добавление IP-адреса сервера
 *ServersAPI* | [**CloneServer**](docs/ServersAPI.md#cloneserver) | **Post** /api/v1/servers/{server_id}/clone | Клонирование сервера
 *ServersAPI* | [**CreateServer**](docs/ServersAPI.md#createserver) | **Post** /api/v1/servers | Создание сервера
@@ -446,9 +445,15 @@ Class | Method | HTTP request | Description
 *ServersAPI* | [**GetServers**](docs/ServersAPI.md#getservers) | **Get** /api/v1/servers | Получение списка серверов
 *ServersAPI* | [**GetServersPresets**](docs/ServersAPI.md#getserverspresets) | **Get** /api/v1/presets/servers | Получение списка тарифов серверов
 *ServersAPI* | [**GetSoftware**](docs/ServersAPI.md#getsoftware) | **Get** /api/v1/software/servers | Получение списка ПО из маркетплейса
+*ServersAPI* | [**HardShutdownServer**](docs/ServersAPI.md#hardshutdownserver) | **Post** /api/v1/servers/{server_id}/hard-shutdown | Принудительное выключение сервера
 *ServersAPI* | [**ImageUnmountAndServerReload**](docs/ServersAPI.md#imageunmountandserverreload) | **Post** /api/v1/servers/{server_id}/image-unmount | Отмонтирование ISO образа и перезагрузка сервера
+*ServersAPI* | [**InstallServer**](docs/ServersAPI.md#installserver) | **Post** /api/v1/servers/{server_id}/install | Установка сервера
 *ServersAPI* | [**PerformActionOnBackup**](docs/ServersAPI.md#performactiononbackup) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/action | Выполнение действия над бэкапом диска сервера
 *ServersAPI* | [**PerformActionOnServer**](docs/ServersAPI.md#performactiononserver) | **Post** /api/v1/servers/{server_id}/action | Выполнение действия над сервером
+*ServersAPI* | [**RebootServer**](docs/ServersAPI.md#rebootserver) | **Post** /api/v1/servers/{server_id}/reboot | Перезагрузка сервера
+*ServersAPI* | [**ResetServerPassword**](docs/ServersAPI.md#resetserverpassword) | **Post** /api/v1/servers/{server_id}/reset-password | Сброс пароля сервера
+*ServersAPI* | [**ShutdownServer**](docs/ServersAPI.md#shutdownserver) | **Post** /api/v1/servers/{server_id}/shutdown | Выключение сервера
+*ServersAPI* | [**StartServer**](docs/ServersAPI.md#startserver) | **Post** /api/v1/servers/{server_id}/start | Запуск сервера
 *ServersAPI* | [**UpdateServer**](docs/ServersAPI.md#updateserver) | **Patch** /api/v1/servers/{server_id} | Изменение сервера
 *ServersAPI* | [**UpdateServerDisk**](docs/ServersAPI.md#updateserverdisk) | **Patch** /api/v1/servers/{server_id}/disks/{disk_id} | Изменение параметров диска сервера
 *ServersAPI* | [**UpdateServerDiskAutoBackupSettings**](docs/ServersAPI.md#updateserverdiskautobackupsettings) | **Patch** /api/v1/servers/{server_id}/disks/{disk_id}/auto-backups | Изменение настроек автобэкапов диска сервера

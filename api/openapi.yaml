@@ -16123,171 +16123,6 @@ paths:
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v2/{account_id}/servers/{server_id}/{action}:
-    post:
-      deprecated: false
-      description: "Чтобы выполнить действие над сервером, отправьте POST-запрос н\
-        а `/api/v2/{account_id}/servers/{server_id}/{action}`."
-      operationId: actionOnServer
-      parameters:
-      - description: Уникальный идентификатор облачного сервера.
-        explode: false
-        in: path
-        name: server_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      - description: Действие над сервером
-        explode: false
-        in: path
-        name: action
-        required: true
-        schema:
-          enum:
-          - hard_reboot
-          - hard_shutdown
-          - install
-          - reboot
-          - remove
-          - reset_password
-          - shutdown
-          - start
-          - clone
-          example: install
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Успешное выполнение действия
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/createDatabaseBackup_409_response'
-          description: Конфликт
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Выполнение действия над сервером
-      tags:
-      - Servers
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-           "https://api.timeweb.cloud/api/v2/1/servers/1/install"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v2/1/servers/1/install', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v2/1/servers/1/install',
-              '',
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.post('https://api.timeweb.cloud/api/v2/1/servers/1/install', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/1/servers/1/install');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v2/1/servers/1/install\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/1/servers/1/install\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
   /api/v1/servers/{server_id}/clone:
     post:
       description: "Чтобы клонировать сервер, отправьте POST-запрос на `/api/v1/servers/{server_id}/clone`."
@@ -16421,6 +16256,823 @@ paths:
           \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
           import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
           \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/clone\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/servers/{server_id}/install:
+    post:
+      description: "Чтобы установить сервер, отправьте POST-запрос на `/api/v1/servers/{server_id}/install`."
+      operationId: installServer
+      parameters:
+      - description: Уникальный идентификатор облачного сервера.
+        explode: false
+        in: path
+        name: server_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Успешное выполнение действия
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Установка сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+           "https://api.timeweb.cloud/api/v1/servers/123/install"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/servers/123/install', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/install',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/install', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/servers/123/install');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/install\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/install\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/servers/{server_id}/hard-shutdown:
+    post:
+      description: "Чтобы выполнить принудительное выключение сервера, отправьте POST-з\
+        апрос на `/api/v1/servers/{server_id}/hard-shutdown`."
+      operationId: hardShutdownServer
+      parameters:
+      - description: Уникальный идентификатор облачного сервера.
+        explode: false
+        in: path
+        name: server_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Успешное выполнение действия
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Принудительное выключение сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+           "https://api.timeweb.cloud/api/v1/servers/123/hard-shutdown"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/servers/123/hard-shutdown', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/hard-shutdown',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/hard-shutdown', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/servers/123/hard-shutdown');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/hard-shutdown\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/hard-shutdown\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/servers/{server_id}/shutdown:
+    post:
+      description: "Чтобы выключить сервер, отправьте POST-запрос на `/api/v1/servers/{server_id}/shutdown`."
+      operationId: shutdownServer
+      parameters:
+      - description: Уникальный идентификатор облачного сервера.
+        explode: false
+        in: path
+        name: server_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Успешное выполнение действия
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Выключение сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+           "https://api.timeweb.cloud/api/v1/servers/123/shutdown"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/servers/123/shutdown', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/shutdown',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/shutdown', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/servers/123/shutdown');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/shutdown\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/shutdown\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/servers/{server_id}/reset-password:
+    post:
+      description: "Чтобы сбросить пароль сервера, отправьте POST-запрос на `/api/v1/servers/{server_id}/reset-password`."
+      operationId: resetServerPassword
+      parameters:
+      - description: Уникальный идентификатор облачного сервера.
+        explode: false
+        in: path
+        name: server_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Успешное выполнение действия
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Сброс пароля сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+           "https://api.timeweb.cloud/api/v1/servers/123/reset-password"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/servers/123/reset-password', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/reset-password',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/reset-password', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/servers/123/reset-password');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/reset-password\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/reset-password\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/servers/{server_id}/start:
+    post:
+      description: "Чтобы запустить сервер, отправьте POST-запрос на `/api/v1/servers/{server_id}/start`."
+      operationId: startServer
+      parameters:
+      - description: Уникальный идентификатор облачного сервера.
+        explode: false
+        in: path
+        name: server_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Успешное выполнение действия
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Запуск сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+           "https://api.timeweb.cloud/api/v1/servers/123/start"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/servers/123/start', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/start',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/start', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/servers/123/start');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/start\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/start\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/servers/{server_id}/reboot:
+    post:
+      description: "Чтобы перезагрузить сервер, отправьте POST-запрос на `/api/v1/servers/{server_id}/reboot`."
+      operationId: rebootServer
+      parameters:
+      - description: Уникальный идентификатор облачного сервера.
+        explode: false
+        in: path
+        name: server_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Успешное выполнение действия
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Перезагрузка сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+           "https://api.timeweb.cloud/api/v1/servers/123/reboot"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/servers/123/reboot', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/reboot',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/servers/123/reboot', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/servers/123/reboot');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/reboot\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123/reboot\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
           Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
