@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Fqdn** | **string** | Полное имя домена. | 
 **IsAutoprolongEnabled** | Pointer to **bool** | Это логическое значение, которое показывает, включено ли автопродление домена. | [optional] 
 **IsWhoisPrivacyEnabled** | Pointer to **bool** | Это логическое значение, которое показывает, включено ли скрытие данных администратора домена для whois. Опция недоступна для доменов в зонах .ru и .рф. | [optional] 
-**Ns** | Pointer to [**[]DomainRegisterNsInner**](DomainRegisterNsInner.md) | Name-серверы для регистрации домена. Если не передавать этот параметр, будут использованы наши стандартные name-серверы. Нужно указать как минимум 2 name-сервера. | [optional] 
 **Period** | Pointer to [**DomainPaymentPeriod**](DomainPaymentPeriod.md) |  | [optional] 
 **PersonId** | **float32** | Идентификатор администратора, на которого регистрируется домен. | 
 
@@ -120,31 +119,6 @@ SetIsWhoisPrivacyEnabled sets IsWhoisPrivacyEnabled field to given value.
 `func (o *DomainRegister) HasIsWhoisPrivacyEnabled() bool`
 
 HasIsWhoisPrivacyEnabled returns a boolean if a field has been set.
-
-### GetNs
-
-`func (o *DomainRegister) GetNs() []DomainRegisterNsInner`
-
-GetNs returns the Ns field if non-nil, zero value otherwise.
-
-### GetNsOk
-
-`func (o *DomainRegister) GetNsOk() (*[]DomainRegisterNsInner, bool)`
-
-GetNsOk returns a tuple with the Ns field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNs
-
-`func (o *DomainRegister) SetNs(v []DomainRegisterNsInner)`
-
-SetNs sets Ns field to given value.
-
-### HasNs
-
-`func (o *DomainRegister) HasNs() bool`
-
-HasNs returns a boolean if a field has been set.
 
 ### GetPeriod
 

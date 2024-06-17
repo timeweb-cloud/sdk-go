@@ -602,7 +602,6 @@ Class | Method | HTTP request | Description
  - [DomainPrimeType](docs/DomainPrimeType.md)
  - [DomainProlong](docs/DomainProlong.md)
  - [DomainRegister](docs/DomainRegister.md)
- - [DomainRegisterNsInner](docs/DomainRegisterNsInner.md)
  - [DomainRequest](docs/DomainRequest.md)
  - [DomainTransfer](docs/DomainTransfer.md)
  - [EditApiKey](docs/EditApiKey.md)

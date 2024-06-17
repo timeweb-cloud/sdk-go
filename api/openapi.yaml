@@ -44117,13 +44117,6 @@ components:
             менов в зонах .ru и .рф."
           example: true
           type: boolean
-        ns:
-          description: "Name-серверы для регистрации домена. Если не передавать эт\
-            от параметр, будут использованы наши стандартные name-серверы. Нужно у\
-            казать как минимум 2 name-сервера."
-          items:
-            $ref: '#/components/schemas/domain_register_ns_inner'
-          type: array
         period:
           $ref: '#/components/schemas/domain-payment-period'
         person_id:
@@ -50555,22 +50548,6 @@ components:
           type: array
       required:
       - host
-      type: object
-    domain_register_ns_inner:
-      properties:
-        host:
-          description: Хост name-сервера.
-          example: ns1.timeweb.ru
-          type: string
-        ips:
-          description: Список IP-адресов name-сервера
-          items:
-            example: 192.168.1.1
-            type: string
-          type: array
-      required:
-      - host
-      - ips
       type: object
     top_level_domain_allowed_buy_periods_inner:
       example:

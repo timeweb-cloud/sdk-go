@@ -157,7 +157,6 @@ docs/DomainPaymentPeriod.md
 docs/DomainPrimeType.md
 docs/DomainProlong.md
 docs/DomainRegister.md
-docs/DomainRegisterNsInner.md
 docs/DomainRequest.md
 docs/DomainTransfer.md
 docs/DomainsAPI.md
@@ -534,7 +533,6 @@ model_domain_payment_period.go
 model_domain_prime_type.go
 model_domain_prolong.go
 model_domain_register.go
-model_domain_register_ns_inner.go
 model_domain_request.go
 model_domain_transfer.go
 model_edit_api_key.go

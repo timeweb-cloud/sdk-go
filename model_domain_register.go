@@ -28,8 +28,6 @@ type DomainRegister struct {
 	IsAutoprolongEnabled *bool `json:"is_autoprolong_enabled,omitempty"`
 	// Это логическое значение, которое показывает, включено ли скрытие данных администратора домена для whois. Опция недоступна для доменов в зонах .ru и .рф.
 	IsWhoisPrivacyEnabled *bool `json:"is_whois_privacy_enabled,omitempty"`
-	// Name-серверы для регистрации домена. Если не передавать этот параметр, будут использованы наши стандартные name-серверы. Нужно указать как минимум 2 name-сервера.
-	Ns []DomainRegisterNsInner `json:"ns,omitempty"`
 	Period *DomainPaymentPeriod `json:"period,omitempty"`
 	// Идентификатор администратора, на которого регистрируется домен.
 	PersonId float32 `json:"person_id"`
@@ -167,38 +165,6 @@ func (o *DomainRegister) SetIsWhoisPrivacyEnabled(v bool) {
 	o.IsWhoisPrivacyEnabled = &v
 }
 
-// GetNs returns the Ns field value if set, zero value otherwise.
-func (o *DomainRegister) GetNs() []DomainRegisterNsInner {
-	if o == nil || IsNil(o.Ns) {
-		var ret []DomainRegisterNsInner
-		return ret
-	}
-	return o.Ns
-}
-
-// GetNsOk returns a tuple with the Ns field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainRegister) GetNsOk() ([]DomainRegisterNsInner, bool) {
-	if o == nil || IsNil(o.Ns) {
-		return nil, false
-	}
-	return o.Ns, true
-}
-
-// HasNs returns a boolean if a field has been set.
-func (o *DomainRegister) HasNs() bool {
-	if o != nil && !IsNil(o.Ns) {
-		return true
-	}
-
-	return false
-}
-
-// SetNs gets a reference to the given []DomainRegisterNsInner and assigns it to the Ns field.
-func (o *DomainRegister) SetNs(v []DomainRegisterNsInner) {
-	o.Ns = v
-}
-
 // GetPeriod returns the Period field value if set, zero value otherwise.
 func (o *DomainRegister) GetPeriod() DomainPaymentPeriod {
 	if o == nil || IsNil(o.Period) {
@@ -272,9 +238,6 @@ func (o DomainRegister) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsWhoisPrivacyEnabled) {
 		toSerialize["is_whois_privacy_enabled"] = o.IsWhoisPrivacyEnabled
-	}
-	if !IsNil(o.Ns) {
-		toSerialize["ns"] = o.Ns
 	}
 	if !IsNil(o.Period) {
 		toSerialize["period"] = o.Period
