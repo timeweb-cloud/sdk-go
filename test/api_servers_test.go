@@ -364,19 +364,6 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ServersAPIService InstallServer", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var serverId int32
-
-		httpRes, err := apiClient.ServersAPI.InstallServer(context.Background(), serverId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test ServersAPIService PerformActionOnBackup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

@@ -29,7 +29,6 @@ Method | HTTP request | Description
 [**GetSoftware**](ServersAPI.md#GetSoftware) | **Get** /api/v1/software/servers | Получение списка ПО из маркетплейса
 [**HardShutdownServer**](ServersAPI.md#HardShutdownServer) | **Post** /api/v1/servers/{server_id}/hard-shutdown | Принудительное выключение сервера
 [**ImageUnmountAndServerReload**](ServersAPI.md#ImageUnmountAndServerReload) | **Post** /api/v1/servers/{server_id}/image-unmount | Отмонтирование ISO образа и перезагрузка сервера
-[**InstallServer**](ServersAPI.md#InstallServer) | **Post** /api/v1/servers/{server_id}/install | Установка сервера
 [**PerformActionOnBackup**](ServersAPI.md#PerformActionOnBackup) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/action | Выполнение действия над бэкапом диска сервера
 [**PerformActionOnServer**](ServersAPI.md#PerformActionOnServer) | **Post** /api/v1/servers/{server_id}/action | Выполнение действия над сервером
 [**RebootServer**](ServersAPI.md#RebootServer) | **Post** /api/v1/servers/{server_id}/reboot | Перезагрузка сервера
@@ -1769,74 +1768,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiImageUnmountAndServerReloadRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## InstallServer
-
-> InstallServer(ctx, serverId).Execute()
-
-Установка сервера
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ServersAPI.InstallServer(context.Background(), serverId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.InstallServer``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiInstallServerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
