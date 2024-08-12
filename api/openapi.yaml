@@ -187,6 +187,11 @@ tags:
 - description: "Токены API — это JWT-токены, с помощью которых вы можете получить\
     \ доступ к управлению вашей облачной инфраструктурой через API."
   name: API keys
+- description: "Apps - Облачные приложения позволяют автоматически выполнять проце\
+    сс сборки и развертывания при каждом обновлении кода в Github, Gitlab или Bitbucket.\
+    \ </br></br> Подробнее об Apps – в нашей <a href='https://timeweb.cloud/docs/apps'\
+    \ target='_blank'>базе знаний</a>."
+  name: Apps
 - description: Firewall позволяет фильтровать трафик по заранее установленным правилам.
     Вы можете создать несколько групп правил и подключить их на один или несколько
     облачных серверов.
@@ -37283,6 +37288,3270 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/apps:
+    get:
+      description: "Чтобы получить список приложений, отправьте GET-запрос на `/api/v1/apps`."
+      operationId: getApps
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getApps_200_response'
+          description: Объект JSON c ключом `apps`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка приложений
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/apps"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/apps', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/apps\", nil)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\"\
+          , \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
+          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/apps\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: "Чтобы создать приложение, отправьте POST-запрос в `/api/v1/apps`,\
+        \ задав необходимые атрибуты."
+      operationId: createApp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-app'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createApp_201_response'
+          description: Объект JSON c ключом `app`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+              "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",
+              "type": "frontend",
+              "repository_id": "b392b624-ee80-496e-8b61-47276acac2da",
+              "build_cmd": "npm run build",
+              "envs": {
+                "NODE_ENV": "production"
+              },
+              "branch_name": "master",
+              "is_auto_deploy": true,
+              "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",
+              "name": "app_example",
+              "comment": "description",
+              "preset_id": 42,
+              "env_version": "18",
+              "framework": {
+                "name": "React",
+                "version": "17.0.2"
+              },
+              "run_cmd": "npm run start"
+            }' \
+            "https://api.timeweb.cloud/api/v1/apps"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n    "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",\n    "type": "frontend",\n    "repository_id": "b392b624-ee80-496e-8b61-47276acac2da",\n    "build_cmd": "npm run build",\n    "envs": {\n      "NODE_ENV": "production"\n    },\n    "branch_name": "master",\n    "is_auto_deploy": true,\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n    "name": "app_example",\n    "comment": "description",\n    "preset_id": 42,\n    "env_version": "18",\n    "framework": {\n      "name": "React",\n      "version": "17.0.2"\n    },\n    "run_cmd": "npm run start"\n  }',
+              body: JSON.stringify({
+                  'provider_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+                  'type': 'frontend',
+                  'repository_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+                  'build_cmd': 'npm run build',
+                  'envs': {
+                      'NODE_ENV': 'production'
+                  },
+                  'branch_name': 'master',
+                  'is_auto_deploy': true,
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+                  'name': 'app_example',
+                  'comment': 'description',
+                  'preset_id': 42,
+                  'env_version': '18',
+                  'framework': {
+                      'name': 'React',
+                      'version': '17.0.2'
+                  },
+                  'run_cmd': 'npm run start'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/apps',
+              // '{\n    "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",\n    "type": "frontend",\n    "repository_id": "b392b624-ee80-496e-8b61-47276acac2da",\n    "build_cmd": "npm run build",\n    "envs": {\n      "NODE_ENV": "production"\n    },\n    "branch_name": "master",\n    "is_auto_deploy": true,\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n    "name": "app_example",\n    "comment": "description",\n    "preset_id": 42,\n    "env_version": "18",\n    "framework": {\n      "name": "React",\n      "version": "17.0.2"\n    },\n    "run_cmd": "npm run start"\n  }',
+              {
+                  'provider_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+                  'type': 'frontend',
+                  'repository_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+                  'build_cmd': 'npm run build',
+                  'envs': {
+                      'NODE_ENV': 'production'
+                  },
+                  'branch_name': 'master',
+                  'is_auto_deploy': true,
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+                  'name': 'app_example',
+                  'comment': 'description',
+                  'preset_id': 42,
+                  'env_version': '18',
+                  'framework': {
+                      'name': 'React',
+                      'version': '17.0.2'
+                  },
+                  'run_cmd': 'npm run start'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'provider_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+              'type': 'frontend',
+              'repository_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+              'build_cmd': 'npm run build',
+              'envs': {
+                  'NODE_ENV': 'production',
+              },
+              'branch_name': 'master',
+              'is_auto_deploy': True,
+              'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+              'name': 'app_example',
+              'comment': 'description',
+              'preset_id': 42,
+              'env_version': '18',
+              'framework': {
+                  'name': 'React',
+                  'version': '17.0.2',
+              },
+              'run_cmd': 'npm run start',
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/apps', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n    "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",\n    "type": "frontend",\n    "repository_id": "b392b624-ee80-496e-8b61-47276acac2da",\n    "build_cmd": "npm run build",\n    "envs": {\n      "NODE_ENV": "production"\n    },\n    "branch_name": "master",\n    "is_auto_deploy": true,\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n    "name": "app_example",\n    "comment": "description",\n    "preset_id": 42,\n    "env_version": "18",\n    "framework": {\n      "name": "React",\n      "version": "17.0.2"\n    },\n    "run_cmd": "npm run start"\n  }'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/apps', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n    \"provider_id\": \"b392b624-ee80-496e-8b61-47276acac2da\",\n    \"type\": \"frontend\",\n    \"repository_id\": \"b392b624-ee80-496e-8b61-47276acac2da\",\n    \"build_cmd\": \"npm run build\",\n    \"envs\": {\n      \"NODE_ENV\": \"production\"\n    },\n    \"branch_name\": \"master\",\n    \"is_auto_deploy\": true,\n    \"commit_sha\": \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\",\n    \"name\": \"app_example\",\n    \"comment\": \"description\",\n    \"preset_id\": 42,\n    \"env_version\": \"18\",\n    \"framework\": {\n      \"name\": \"React\",\n      \"version\": \"17.0.2\"\n    },\n    \"run_cmd\": \"npm run start\"\n  }");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n    \"provider_id\": \"b392b624-ee80-496e-8b61-47276acac2da\"\
+          ,\n    \"type\": \"frontend\",\n    \"repository_id\": \"b392b624-ee80-496e-8b61-47276acac2da\"\
+          ,\n    \"build_cmd\": \"npm run build\",\n    \"envs\": {\n      \"NODE_ENV\"\
+          : \"production\"\n    },\n    \"branch_name\": \"master\",\n    \"is_auto_deploy\"\
+          : true,\n    \"commit_sha\": \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\"\
+          ,\n    \"name\": \"app_example\",\n    \"comment\": \"description\",\n \
+          \   \"preset_id\": 42,\n    \"env_version\": \"18\",\n    \"framework\"\
+          : {\n      \"name\": \"React\",\n      \"version\": \"17.0.2\"\n    },\n\
+          \    \"run_cmd\": \"npm run start\"\n  }`)\n\treq, err := http.NewRequest(\"\
+          POST\", \"https://api.timeweb.cloud/api/v1/apps\", data)\n\tif err != nil\
+          \ {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\", \"application/json\"\
+          )\n\treq.Header.Set(\"Authorization\", \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"\
+          ))\n\tresp, err := client.Do(req)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tdefer resp.Body.Close()\n\tbodyText, err := io.ReadAll(resp.Body)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n\
+          }\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/apps\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n    \\\"provider_id\\\": \\\"b392b624-ee80-496e-8b61-47276acac2da\\\"\
+          ,\\n    \\\"type\\\": \\\"frontend\\\",\\n    \\\"repository_id\\\": \\\"\
+          b392b624-ee80-496e-8b61-47276acac2da\\\",\\n    \\\"build_cmd\\\": \\\"\
+          npm run build\\\",\\n    \\\"envs\\\": {\\n      \\\"NODE_ENV\\\": \\\"\
+          production\\\"\\n    },\\n    \\\"branch_name\\\": \\\"master\\\",\\n  \
+          \  \\\"is_auto_deploy\\\": true,\\n    \\\"commit_sha\\\": \\\"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\\\
+          \",\\n    \\\"name\\\": \\\"app_example\\\",\\n    \\\"comment\\\": \\\"\
+          description\\\",\\n    \\\"preset_id\\\": 42,\\n    \\\"env_version\\\"\
+          : \\\"18\\\",\\n    \\\"framework\\\": {\\n      \\\"name\\\": \\\"React\\\
+          \",\\n      \\\"version\\\": \\\"17.0.2\\\"\\n    },\\n    \\\"run_cmd\\\
+          \": \\\"npm run start\\\"\\n  }\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}:
+    delete:
+      description: "Чтобы удалить приложение, отправьте DELETE-запрос в `/api/v1/apps/{app_id}`."
+      operationId: deleteApp
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Приложение успешно удалено.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/apps/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/apps/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/apps/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/apps/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/apps/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: "Чтобы получить приложение по id, отправьте GET-запрос на `/api/v1/apps/{app_id}`."
+      operationId: getApp
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getApp_200_response'
+          description: Объект JSON c ключом `app`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение приложения по id
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/apps/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/apps/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/apps/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/apps/1\",\
+          \ nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/apps/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    patch:
+      description: "Чтобы изменить настройки приложения отправьте PATCH-запрос в `/api/v1/apps/{app_id}`,\
+        \ задав необходимые атрибуты."
+      operationId: updateAppSettings
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updete-settings'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateAppSettings_200_response'
+          description: Ответ будет представлять собой объект JSON c ключом `app`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Изменение настроек приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+              "is_auto_deploy": true,
+              "build_cmd": "npm run build",
+              "envs": {
+                "NODE_ENV": "production"
+              },
+              "branch_name": "master",
+              "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",
+              "env_version": "18",
+              "index_dir": "dist",
+              "run_cmd": "npm start",
+              "framework": {
+                "name": "React",
+                "version": "17.0.2"
+              },
+              "name": "app_example",
+              "comment": "example comment",
+              "preset_id": 42
+            }' \
+            "https://api.timeweb.cloud/api/v1/apps/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n    "is_auto_deploy": true,\n    "build_cmd": "npm run build",\n    "envs": {\n      "NODE_ENV": "production"\n    },\n    "branch_name": "master",\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n    "env_version": "18",\n    "index_dir": "dist",\n    "run_cmd": "npm start",\n    "framework": {\n      "name": "React",\n      "version": "17.0.2"\n    },\n    "name": "app_example",\n    "comment": "example comment",\n    "preset_id": 42\n  }',
+              body: JSON.stringify({
+                  'is_auto_deploy': true,
+                  'build_cmd': 'npm run build',
+                  'envs': {
+                      'NODE_ENV': 'production'
+                  },
+                  'branch_name': 'master',
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+                  'env_version': '18',
+                  'index_dir': 'dist',
+                  'run_cmd': 'npm start',
+                  'framework': {
+                      'name': 'React',
+                      'version': '17.0.2'
+                  },
+                  'name': 'app_example',
+                  'comment': 'example comment',
+                  'preset_id': 42
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/apps/1',
+              // '{\n    "is_auto_deploy": true,\n    "build_cmd": "npm run build",\n    "envs": {\n      "NODE_ENV": "production"\n    },\n    "branch_name": "master",\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n    "env_version": "18",\n    "index_dir": "dist",\n    "run_cmd": "npm start",\n    "framework": {\n      "name": "React",\n      "version": "17.0.2"\n    },\n    "name": "app_example",\n    "comment": "example comment",\n    "preset_id": 42\n  }',
+              {
+                  'is_auto_deploy': true,
+                  'build_cmd': 'npm run build',
+                  'envs': {
+                      'NODE_ENV': 'production'
+                  },
+                  'branch_name': 'master',
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+                  'env_version': '18',
+                  'index_dir': 'dist',
+                  'run_cmd': 'npm start',
+                  'framework': {
+                      'name': 'React',
+                      'version': '17.0.2'
+                  },
+                  'name': 'app_example',
+                  'comment': 'example comment',
+                  'preset_id': 42
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'is_auto_deploy': True,
+              'build_cmd': 'npm run build',
+              'envs': {
+                  'NODE_ENV': 'production',
+              },
+              'branch_name': 'master',
+              'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+              'env_version': '18',
+              'index_dir': 'dist',
+              'run_cmd': 'npm start',
+              'framework': {
+                  'name': 'React',
+                  'version': '17.0.2',
+              },
+              'name': 'app_example',
+              'comment': 'example comment',
+              'preset_id': 42,
+          }
+
+          response = requests.patch('https://api.timeweb.cloud/api/v1/apps/1', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n    "is_auto_deploy": true,\n    "build_cmd": "npm run build",\n    "envs": {\n      "NODE_ENV": "production"\n    },\n    "branch_name": "master",\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n    "env_version": "18",\n    "index_dir": "dist",\n    "run_cmd": "npm start",\n    "framework": {\n      "name": "React",\n      "version": "17.0.2"\n    },\n    "name": "app_example",\n    "comment": "example comment",\n    "preset_id": 42\n  }'
+          #response = requests.patch('https://api.timeweb.cloud/api/v1/apps/1', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n    \"is_auto_deploy\": true,\n    \"build_cmd\": \"npm run build\",\n    \"envs\": {\n      \"NODE_ENV\": \"production\"\n    },\n    \"branch_name\": \"master\",\n    \"commit_sha\": \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\",\n    \"env_version\": \"18\",\n    \"index_dir\": \"dist\",\n    \"run_cmd\": \"npm start\",\n    \"framework\": {\n      \"name\": \"React\",\n      \"version\": \"17.0.2\"\n    },\n    \"name\": \"app_example\",\n    \"comment\": \"example comment\",\n    \"preset_id\": 42\n  }");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n    \"is_auto_deploy\": true,\n    \"\
+          build_cmd\": \"npm run build\",\n    \"envs\": {\n      \"NODE_ENV\": \"\
+          production\"\n    },\n    \"branch_name\": \"master\",\n    \"commit_sha\"\
+          : \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\",\n    \"env_version\": \"\
+          18\",\n    \"index_dir\": \"dist\",\n    \"run_cmd\": \"npm start\",\n \
+          \   \"framework\": {\n      \"name\": \"React\",\n      \"version\": \"\
+          17.0.2\"\n    },\n    \"name\": \"app_example\",\n    \"comment\": \"example\
+          \ comment\",\n    \"preset_id\": 42\n  }`)\n\treq, err := http.NewRequest(\"\
+          PATCH\", \"https://api.timeweb.cloud/api/v1/apps/1\", data)\n\tif err !=\
+          \ nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\", \"\
+          application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \" + os.Getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\tif err != nil\
+          \ {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\tbodyText, err\
+          \ := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\
+          \tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/apps/1\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          PATCH\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n    \\\"is_auto_deploy\\\": true,\\n    \\\"build_cmd\\\": \\\"npm run\
+          \ build\\\",\\n    \\\"envs\\\": {\\n      \\\"NODE_ENV\\\": \\\"production\\\
+          \"\\n    },\\n    \\\"branch_name\\\": \\\"master\\\",\\n    \\\"commit_sha\\\
+          \": \\\"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\\\",\\n    \\\"env_version\\\
+          \": \\\"18\\\",\\n    \\\"index_dir\\\": \\\"dist\\\",\\n    \\\"run_cmd\\\
+          \": \\\"npm start\\\",\\n    \\\"framework\\\": {\\n      \\\"name\\\":\
+          \ \\\"React\\\",\\n      \\\"version\\\": \\\"17.0.2\\\"\\n    },\\n   \
+          \ \\\"name\\\": \\\"app_example\\\",\\n    \\\"comment\\\": \\\"example\
+          \ comment\\\",\\n    \\\"preset_id\\\": 42\\n  }\");\n\t\twriter.flush();\n\
+          \t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
+          \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}/action/{action}:
+    patch:
+      description: "Чтобы изменить состояние приложения отправьте PATCH-запрос в `/api/v1/apps/{app_id}/action/{action}`,\
+        \ задав необходимые атрибуты."
+      operationId: updateAppState
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: action
+        required: true
+        schema:
+          description: "Действие `reboot` доступно только для приложений `type: backend`."
+          enum:
+          - reboot
+          - pause
+          - resume
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Действие выполнено успешно.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Изменение состояния приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+           "https://api.timeweb.cloud/api/v1/apps/1/action/reboot"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1/action/reboot', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/apps/1/action/reboot',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.patch('https://api.timeweb.cloud/api/v1/apps/1/action/reboot', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1/action/reboot');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/apps/1/action/reboot\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/apps/1/action/reboot\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}/logs:
+    get:
+      description: "Чтобы получить логи приложения, отправьте GET-запрос на `/api/v1/apps/{app_id}/logs`."
+      operationId: getAppLogs
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAppLogs_200_response'
+          description: Объект JSON c ключом `app_logs`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение логов приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/apps/1/logs"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/apps/1/logs', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/apps/1/logs', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/apps/1/logs', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/apps/1/logs');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/apps/1/logs\", nil)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\"\
+          , \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
+          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/apps/1/logs\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}/statistics:
+    get:
+      description: "Чтобы получить статистику сервера, отправьте GET-запрос на `/api/v1/apps/{app_id}/statistics`.\
+        \ Метод поддерживает только приложения `type: backend`."
+      operationId: getAppStatistics
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Дата начала сбора статистики. Строка в формате ISO 8061, зак\
+          одированная в ASCII, пример: `2023-05-25%202023-05-25T14%3A35%3A38`"
+        explode: true
+        in: query
+        name: date_from
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "Дата окончания сбора статистики. Строка в формате ISO 8061,\
+          \ закодированная в ASCII, пример: `2023-05-26%202023-05-25T14%3A35%3A38`"
+        explode: true
+        in: query
+        name: date_to
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getServerStatistics_200_response'
+          description: "Объект JSON c ключами `cpu`, `disk`, `network_traffic`, `ram`"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение статистики приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/apps/1/statistics"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1/statistics', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/apps/1/statistics', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/apps/1/statistics', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1/statistics');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/apps/1/statistics\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/apps/1/statistics\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/vcs-provider:
+    get:
+      description: "Чтобы получить список vcs провайдеров, отправьте GET-запрос на\
+        \ `/api/v1/vcs-provider`."
+      operationId: getProviders
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProviders_200_response'
+          description: Объект JSON c ключом `providers`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка vcs провайдеров
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/vcs-provider"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/vcs-provider', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/vcs-provider', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/vcs-provider', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/vcs-provider');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/vcs-provider\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/vcs-provider\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: "Чтобы привязать аккаунт провайдера отправьте POST-запрос в `/api/v1/vcs-provider`,\
+        \ задав необходимые атрибуты."
+      operationId: addProvider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/add-github'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addProvider_201_response'
+          description: "Добавление аккаунта провайдера: объект JSON c ключом `provider`"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Привязка vcs провайдера
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+              "provider_type": "github",
+              "code": "ihifj384f394h3h43ofij3o4fuih4f",
+              "url": "https://github.com/timeweb-cloud/app-example-flask.git",
+              "login": "timeweb-cloud",
+              "password": "password",
+              "installation_id": "4672395634312",
+              "setup_action": "install"
+            }' \
+            "https://api.timeweb.cloud/api/v1/vcs-provider"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/vcs-provider', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n    "provider_type": "github",\n    "code": "ihifj384f394h3h43ofij3o4fuih4f",\n    "url": "https://github.com/timeweb-cloud/app-example-flask.git",\n    "login": "timeweb-cloud",\n    "password": "password",\n    "installation_id": "4672395634312",\n    "setup_action": "install"\n  }',
+              body: JSON.stringify({
+                  'provider_type': 'github',
+                  'code': 'ihifj384f394h3h43ofij3o4fuih4f',
+                  'url': 'https://github.com/timeweb-cloud/app-example-flask.git',
+                  'login': 'timeweb-cloud',
+                  'password': 'password',
+                  'installation_id': '4672395634312',
+                  'setup_action': 'install'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/vcs-provider',
+              // '{\n    "provider_type": "github",\n    "code": "ihifj384f394h3h43ofij3o4fuih4f",\n    "url": "https://github.com/timeweb-cloud/app-example-flask.git",\n    "login": "timeweb-cloud",\n    "password": "password",\n    "installation_id": "4672395634312",\n    "setup_action": "install"\n  }',
+              {
+                  'provider_type': 'github',
+                  'code': 'ihifj384f394h3h43ofij3o4fuih4f',
+                  'url': 'https://github.com/timeweb-cloud/app-example-flask.git',
+                  'login': 'timeweb-cloud',
+                  'password': 'password',
+                  'installation_id': '4672395634312',
+                  'setup_action': 'install'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'provider_type': 'github',
+              'code': 'ihifj384f394h3h43ofij3o4fuih4f',
+              'url': 'https://github.com/timeweb-cloud/app-example-flask.git',
+              'login': 'timeweb-cloud',
+              'password': 'password',
+              'installation_id': '4672395634312',
+              'setup_action': 'install',
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/vcs-provider', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n    "provider_type": "github",\n    "code": "ihifj384f394h3h43ofij3o4fuih4f",\n    "url": "https://github.com/timeweb-cloud/app-example-flask.git",\n    "login": "timeweb-cloud",\n    "password": "password",\n    "installation_id": "4672395634312",\n    "setup_action": "install"\n  }'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/vcs-provider', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/vcs-provider');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n    \"provider_type\": \"github\",\n    \"code\": \"ihifj384f394h3h43ofij3o4fuih4f\",\n    \"url\": \"https://github.com/timeweb-cloud/app-example-flask.git\",\n    \"login\": \"timeweb-cloud\",\n    \"password\": \"password\",\n    \"installation_id\": \"4672395634312\",\n    \"setup_action\": \"install\"\n  }");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n    \"provider_type\": \"github\",\n\
+          \    \"code\": \"ihifj384f394h3h43ofij3o4fuih4f\",\n    \"url\": \"https://github.com/timeweb-cloud/app-example-flask.git\"\
+          ,\n    \"login\": \"timeweb-cloud\",\n    \"password\": \"password\",\n\
+          \    \"installation_id\": \"4672395634312\",\n    \"setup_action\": \"install\"\
+          \n  }`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/vcs-provider\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/vcs-provider\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n    \\\"provider_type\\\": \\\"github\\\",\\n    \\\"code\\\": \\\"\
+          ihifj384f394h3h43ofij3o4fuih4f\\\",\\n    \\\"url\\\": \\\"https://github.com/timeweb-cloud/app-example-flask.git\\\
+          \",\\n    \\\"login\\\": \\\"timeweb-cloud\\\",\\n    \\\"password\\\":\
+          \ \\\"password\\\",\\n    \\\"installation_id\\\": \\\"4672395634312\\\"\
+          ,\\n    \\\"setup_action\\\": \\\"install\\\"\\n  }\");\n\t\twriter.flush();\n\
+          \t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
+          \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/vcs-provider/{provider_id}:
+    delete:
+      description: "Чтобы отвязать vcs провайдера от аккаунта, отправьте DELETE-за\
+        прос в `/api/v1/vcs-provider/{provider_id}`."
+      operationId: deleteProvider
+      parameters:
+      - explode: false
+        in: path
+        name: provider_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Успешное удаление провайдера
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Отвязка vcs провайдера от аккаунта
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: "Чтобы получить список репозиториев vcs провайдера, отправьте GET-з\
+        апрос на `/api/v1/vcs-provider/{provider_id}`."
+      operationId: getRepositories
+      parameters:
+      - explode: false
+        in: path
+        name: provider_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRepositories_200_response'
+          description: Объект JSON c ключом `repositories`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка репозиториев vcs провайдера
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/vcs-provider/{provider_id}/repository/{repository_id}:
+    get:
+      description: "Чтобы получить список веток репозитория, отправьте GET-запрос\
+        \ на `/api/v1/vcs-provider/{provider_id}/repository/{repository_id}`."
+      operationId: getBranches
+      parameters:
+      - explode: false
+        in: path
+        name: provider_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repository_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getBranches_200_response'
+          description: Объект JSON c ключом `branches`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка веток репозитория
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get(
+              'https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f',
+              headers=headers,
+          )
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/vcs-provider/{provider_id}/repository/{repository_id}/branch:
+    get:
+      description: "Чтобы получить список коммитов ветки репозитория, отправьте GET-з\
+        апрос на `/api/v1/vcs-provider/{provider_id}/repository/{repository_id}/branch`."
+      operationId: getCommits
+      parameters:
+      - explode: false
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: provider_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repository_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Название ветки
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCommits_200_response'
+          description: Объект JSON c ключом `commits`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка коммитов ветки репозитория
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f/branch"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f/branch', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f/branch', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get(
+              'https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f/branch',
+              headers=headers,
+          )
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f/branch');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f/branch\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/vcs-provider/ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b/repository/eb4e1796-78ce-4232-a824-3c3f4dfaf98f/branch\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}/deploy:
+    post:
+      description: "Чтобы запустить деплой приложения, отправьте POST-запрос в `/api/v1/apps/{app_id}/deploy`,\
+        \ задав необходимые атрибуты."
+      operationId: createDeploy
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createDeploy_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDeploy_201_response'
+          description: "Деплой: объект JSON c ключом `deploy`"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Запуск деплоя приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+              "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c"
+            }' \
+            "https://api.timeweb.cloud/api/v1/apps/1/deploy"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1/deploy', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c"\n  }',
+              body: JSON.stringify({
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/apps/1/deploy',
+              // '{\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c"\n  }',
+              {
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/apps/1/deploy', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n    "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c"\n  }'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/apps/1/deploy', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1/deploy');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n    \"commit_sha\": \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\"\n  }");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n    \"commit_sha\": \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\"\
+          \n  }`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/apps/1/deploy\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/apps/1/deploy\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n    \\\"commit_sha\\\": \\\"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\\\
+          \"\\n  }\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}/deploys:
+    get:
+      description: "Чтобы получить список деплоев приложения, отправьте GET-запрос\
+        \ на `/api/v1/apps/{app_id}/deploys`."
+      operationId: getAppDeploys
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Обозначает количество записей, которое необходимо вернуть."
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 5
+          type: integer
+        style: form
+      - description: Указывает на смещение относительно начала списка.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAppDeploys_200_response'
+          description: Объект JSON c ключом `deploys`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка деплоев приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/apps/1/deploys"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1/deploys', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/apps/1/deploys', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/apps/1/deploys', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1/deploys');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/apps/1/deploys\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/apps/1/deploys\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}/deploy/{deploy_id}/logs:
+    get:
+      description: "Чтобы получить информацию о деплое, отправьте GET-запрос на `/app/{app_id}/deploy/{deploy_id}`."
+      operationId: getDeployLogs
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: deploy_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Управляет выводом логов деплоя
+        explode: true
+        in: query
+        name: debug
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDeployLogs_200_response'
+          description: Объект JSON c ключом `deploy_logs`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение логов деплоя приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/apps/{app_id}/deploy/{deploy_id}/stop:
+    post:
+      description: "Чтобы остановить деплой приложения, отправьте POST-запрос в `api/v1/apps/{app_id}/deploy/{deploy_id}/stop`."
+      operationId: deployAction
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: deploy_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDeploy_201_response'
+          description: Ответ будет представлять собой объект JSON c ключом `deploy`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Остановка деплоя приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "description": "Описание для примера"
+          }' "https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "description": "Описание для примера"\n}',
+              body: JSON.stringify({
+                  'description': '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0434\u043B\u044F \u043F\u0440\u0438\u043C\u0435\u0440\u0430'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop',
+              // '{\n  "description": "Описание для примера"\n}',
+              {
+                  'description': '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0434\u043B\u044F \u043F\u0440\u0438\u043C\u0435\u0440\u0430'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'description': 'Описание для примера',
+          }
+
+          response = requests.post(
+              'https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop',
+              headers=headers,
+              json=json_data,
+          )
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "description": "Описание для примера"\n}'.encode()
+          #response = requests.post(
+          #    'https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop',
+          #    headers=headers,
+          #    data=data,
+          #)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"description\": \"Описание для примера\"\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"description\": \"Описание для при\
+          мера\"\n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/apps/1/deploy/123e4567-e89b-12d3-a456-426614174000/stop\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\n  \\\"description\\\": \\\"Описание для примера\\\
+          \"\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/presets/apps:
+    get:
+      description: "Чтобы получить список доступных тарифов, отправьте GET-запрос\
+        \ на `/api/v1/presets/apps`."
+      operationId: getAppsPresets
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apps-presets'
+          description: "Объект JSON c ключами  `backend_presets`, `frontend_presets`"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка доступных тарифов для приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/presets/apps"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/presets/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/presets/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/presets/apps', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/presets/apps');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/presets/apps\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/presets/apps\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/deploy-settings/apps:
+    get:
+      description: "Чтобы получить список настроек деплоя, отправьте GET-запрос на\
+        \ `/api/v1/deploy-settings/apps`."
+      operationId: getDeploySettings
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDeploySettings_200_response'
+          description: Объект JSON c ключом `default_deploy_settings`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка дефолтных настроек деплоя для приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/deploy-settings/apps"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/deploy-settings/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/deploy-settings/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/deploy-settings/apps', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/deploy-settings/apps');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/deploy-settings/apps\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/deploy-settings/apps\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/frameworks/apps:
+    get:
+      description: "Чтобы получить список доступных фреймворков, отправьте GET-зап\
+        рос на `/api/v1/frameworks/apps`."
+      operationId: getFrameworks
+      parameters:
+      - explode: false
+        in: path
+        name: app_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/available-frameworks'
+          description: "Объект JSON c ключом `backend_frameworks`, `frontend_frameworks`"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка доступных фреймворков для приложения
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/frameworks/apps"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/frameworks/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/frameworks/apps', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/frameworks/apps', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/frameworks/apps');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/frameworks/apps\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/frameworks/apps\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
 components:
   parameters:
     limit:
@@ -44620,6 +47889,726 @@ components:
       - location
       - location_code
       type: object
+    providers:
+      description: Тип провайдера.
+      enum:
+      - github
+      - gitlab
+      - bitbucket
+      - git
+      example: github
+      type: string
+    frameworks:
+      description: Фреймворк приложения.
+      enum:
+      - django
+      - express
+      - phoenix
+      - Spring
+      - laravel
+      - beego
+      - fastapi
+      - ASP.NET Core
+      - hapi
+      - celery
+      - flask
+      - gin
+      - docker
+      - fastify
+      - nest
+      - symfony
+      - yii
+      example: django
+      type: string
+    repository:
+      example:
+        is_private: false
+        full_name: example-repo/app-example-express
+        name: app-example-express
+        id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+        is_allowed_webhook: true
+        url: https://github.com/example-repo/app-example-express
+      properties:
+        id:
+          description: Идентификатор репозитория.
+          example: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+          format: uuid
+          type: string
+        name:
+          description: Имя репозитория.
+          example: app-example-express
+          type: string
+        full_name:
+          description: Полное имя репозитория.
+          example: example-repo/app-example-express
+          type: string
+        url:
+          description: Ссылка на репозиторий.
+          example: https://github.com/example-repo/app-example-express
+          type: string
+        is_private:
+          description: Является ли репозиторий приватным.
+          example: false
+          type: boolean
+        is_allowed_webhook:
+          description: Доступно ли создание вебхука для функции автодеплойя.
+          example: true
+          type: boolean
+      required:
+      - full_name
+      - id
+      - is_allowed_webhook
+      - is_private
+      - name
+      - url
+      type: object
+    app:
+      description: Экземпляр приложения.
+      example:
+        index_dir: dist
+        configuration:
+          network_bandwidth: 1000
+          disk_type: nvme
+          cpu: 1
+          cpu_frequency: "3.3"
+          ram: 1024
+        envs:
+          NODE_ENV: production
+        language: node
+        type: backend
+        repository:
+          is_private: false
+          full_name: example-repo/app-example-express
+          name: app-example-express
+          id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+          is_allowed_webhook: true
+          url: https://github.com/example-repo/app-example-express
+        commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+        provider:
+          id: 826e9a9d-40cd-49b1-b547-0c439834498b
+          type: github
+        branch_name: master
+        is_auto_deploy: true
+        disk_status:
+          size: 15360
+          used: 4509
+          disk_id: 19769639
+        id: 1
+        env_version: "18"
+        ip: 165.23.54.161.
+        is_qemu_agent: true
+        domains:
+        - fqdn: app-example.twc1.net
+        - fqdn: app-example.twc1.net
+        build_cmd: npm run build
+        run_cmd: npm start
+        start_time: 2024-07-24T10:38:44Z
+        framework: django
+        preset_id: 42
+        name: app_example
+        location: ru-1
+        comment: example comment
+        status: active
+      properties:
+        id:
+          description: Уникальный идентификатор для каждого экземпляра приложения.
+            Автоматически генерируется при создании.
+          example: 1
+          type: number
+        type:
+          description: Тип приложения.
+          enum:
+          - backend
+          - frontend
+          example: backend
+          type: string
+        name:
+          description: "Удобочитаемое имя, установленное для приложения."
+          example: app_example
+          type: string
+        status:
+          description: Статус приложения.
+          enum:
+          - active
+          - paused
+          - no_paid
+          - deploy
+          - failure
+          - startup_error
+          - new
+          - reboot
+          example: active
+          type: string
+        provider:
+          $ref: '#/components/schemas/app_provider'
+        ip:
+          description: IPv4-адрес приложения.
+          example: 165.23.54.161.
+          format: ipv4
+          type: string
+        domains:
+          items:
+            $ref: '#/components/schemas/app_domains_inner'
+          type: array
+        framework:
+          $ref: '#/components/schemas/frameworks'
+        location:
+          description: Локация сервера.
+          enum:
+          - ru-1
+          - pl-1
+          - nl-1
+          example: ru-1
+          type: string
+        repository:
+          $ref: '#/components/schemas/repository'
+        env_version:
+          description: Версия окружения.
+          example: "18"
+          nullable: true
+          type: string
+        envs:
+          description: Переменные окружения приложения. Объект с ключами и значениями
+            типа string.
+          example:
+            NODE_ENV: production
+          type: object
+        branch_name:
+          description: Название ветки репозитория из которой собрано приложение.
+          example: master
+          type: string
+        is_auto_deploy:
+          description: Включен ли автоматический деплой.
+          example: true
+          type: boolean
+        commit_sha:
+          description: Хэш коммита из которого собрано приложеие.
+          example: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          type: string
+        comment:
+          description: Комментарий к приложению.
+          example: example comment
+          type: string
+        preset_id:
+          description: Идентификатор тарифа.
+          example: 42
+          type: number
+        index_dir:
+          description: "Директория с индексным файлом. Определено для приложений `type:\
+            \ frontend`. Для приложений `type: backend` всегда null."
+          example: dist
+          nullable: true
+          type: string
+        build_cmd:
+          description: Команда сборки приложения.
+          example: npm run build
+          type: string
+        run_cmd:
+          description: "Команда для запуска приложения. Определено для приложений\
+            \ `type: backend`. Для приложений `type: frontend` всегда null."
+          example: npm start
+          nullable: true
+          type: string
+        configuration:
+          $ref: '#/components/schemas/app_configuration'
+        disk_status:
+          $ref: '#/components/schemas/app_disk_status'
+        is_qemu_agent:
+          description: Включен ли агент QEMU.
+          example: true
+          type: boolean
+        language:
+          description: Язык программирования приложения.
+          example: node
+          type: string
+        start_time:
+          description: Время запуска приложения.
+          example: 2024-07-24T10:38:44Z
+          format: date-time
+          type: string
+      required:
+      - branch_name
+      - build_cmd
+      - comment
+      - commit_sha
+      - configuration
+      - disk_status
+      - domains
+      - env_version
+      - envs
+      - framework
+      - id
+      - index_dir
+      - ip
+      - is_auto_deploy
+      - is_qemu_agent
+      - language
+      - location
+      - name
+      - preset_id
+      - provider
+      - repository
+      - run_cmd
+      - server_id
+      - start_time
+      - status
+      - type
+      type: object
+    create-app:
+      properties:
+        provider_id:
+          description: Уникальный идентификатор провайдера.
+          example: b392b624-ee80-496e-8b61-47276acac2da
+          format: uuid
+          type: string
+        type:
+          description: Тип приложения.
+          enum:
+          - frontend
+          - backend
+          example: backend
+          type: string
+        repository_id:
+          description: Уникальный идентификатор репозитория.
+          example: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+          format: uuid
+          type: string
+        build_cmd:
+          description: Команда сборки приложения.
+          example: npm run build
+          type: string
+        envs:
+          description: Переменные окружения приложения. Объект с ключами и значениями
+            типа string.
+          example:
+            NODE_ENV: production
+          type: object
+        branch_name:
+          description: Название ветки репозитория из которой необходимо собрать приложение.
+          example: master
+          type: string
+        is_auto_deploy:
+          description: Автоматический деплой.
+          example: true
+          type: boolean
+        commit_sha:
+          description: Хэш коммита из которого необходимо собрать приложение.
+          example: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          type: string
+        name:
+          description: Имя приложения.
+          example: app_example
+          type: string
+        comment:
+          description: Комментарий к приложения.
+          example: example comment
+          type: string
+        preset_id:
+          description: Идентификатор тарифа.
+          example: 42
+          type: number
+        env_version:
+          description: Версия окружения.
+          example: "18"
+          type: string
+        framework:
+          $ref: '#/components/schemas/frameworks'
+        index_dir:
+          description: "Директория с индексным файлом. Обязателен для приложений `type:\
+            \ frontend`. Не используется для приложений `type: backend`. Должно на\
+            чинаться с `/`."
+          example: dist
+          type: string
+        run_cmd:
+          description: "Команда для запуска приложения. Обязателен для приложений\
+            \ `type: backend`. Не используется для приложений `type: frontend`."
+          example: npm start
+          type: string
+      required:
+      - branch_name
+      - build_cmd
+      - comment
+      - commit_sha
+      - framework
+      - is_auto_deploy
+      - name
+      - preset_id
+      - provider_id
+      - repository_id
+      - type
+    updete-settings:
+      properties:
+        is_auto_deploy:
+          description: Автоматический деплой.
+          example: true
+          type: boolean
+        build_cmd:
+          description: Команда сборки приложения.
+          example: npm run build
+          type: string
+        envs:
+          description: Переменные окружения приложения. Объект с ключами и значениями
+            типа string.
+          example:
+            NODE_ENV: production
+          type: object
+        branch_name:
+          description: Название ветки репозитория из которой необходимо собрать приложение.
+          example: master
+          type: string
+        commit_sha:
+          description: Хэш коммита.
+          example: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          type: string
+        env_version:
+          description: Версия окружения.
+          example: "18"
+          type: string
+        index_dir:
+          description: "Директория с индексным файлом. Обязателен для приложений `type:\
+            \ frontend`. Не используется для приложений `type: backend`."
+          example: dist
+          type: string
+        run_cmd:
+          description: "Команда для запуска приложения. Обязателен для приложений\
+            \ `type: backend`. Не используется для приложений `type: frontend`."
+          example: npm start
+          type: string
+        framework:
+          $ref: '#/components/schemas/frameworks'
+        name:
+          description: Имя приложения.
+          example: app_example
+          type: string
+        comment:
+          description: Комментарий к приложения.
+          example: example comment
+          type: string
+        preset_id:
+          description: Идентификатор тарифа.
+          example: 42
+          type: number
+    provider:
+      example:
+        provider_type: github
+        provider_id: ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b
+        login: timeweb-cloud
+      properties:
+        provider_id:
+          description: Идентификатор провайдера.
+          example: ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b
+          format: uuid
+          type: string
+        login:
+          description: Логин пользователя.
+          example: timeweb-cloud
+          type: string
+        provider_type:
+          $ref: '#/components/schemas/providers'
+      required:
+      - login
+      - provider_id
+      - provider_type
+    add-github:
+      description: Добавление аккаунта github
+      properties:
+        provider_type:
+          description: Тип провайдера.
+          enum:
+          - github
+          example: github
+          type: string
+        provider_token:
+          description: "Токен доступа. <br> Для GitHub необходимо использовать 'Fine-grained\
+            \ personal access token'. Инструкции по созданию можно найти в <a target='_blank'\
+            \ href='https://docs.github.com/ru/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token'>д\
+            окументации GitHub</a>. <br> Выберите репозитории, к которым хотите пр\
+            едоставить доступ, и установите следующие разрешения: `Webhooks: read\
+            \ and write`, `Contents: read-only`."
+          type: string
+      required:
+      - provider_token
+      - provider_type
+      title: Добавление аккаунта Github
+      type: object
+    add-gitlab:
+      description: Добавление аккаунта gitlab
+      properties:
+        provider_type:
+          description: Тип провайдера.
+          enum:
+          - gitlab
+          example: gitlab
+          type: string
+        provider_token:
+          description: "Токен доступа. <br> Для Gitlab необходимо использовать пер\
+            сональный токен доступа. Инструкции по созданию можно найти в <a target='_blank'\
+            \ href='https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token'>д\
+            окументации GitLab</a>. <br> Установите следующие разрешения: `api`"
+          type: string
+      required:
+      - provider_token
+      - provider_type
+      title: Добавление аккаунта GitLab
+      type: object
+    add-bitbucket:
+      description: Добавление аккаунта Bitbucket
+      properties:
+        provider_type:
+          description: Тип провайдера.
+          enum:
+          - bitbucket
+          example: bitbucket
+          type: string
+        provider_token:
+          description: "Токен доступа. <br> Для Bitbucket необходимо использовать\
+            \ 'App password'. Инструкции по созданию можно найти в <a target='_blank'\
+            \ href='https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/'>д\
+            окументации Bitbucket</a>. <br> Установите следующие разрешения: `Account:\
+            \ Read`, `Projects: Read`, `Repositories: Read`, `Webhooks: Read and write`"
+          type: string
+        login:
+          description: Логин пользователя BitBucket.
+          example: timeweb-cloud
+          type: string
+      required:
+      - login
+      - provider_token
+      - provider_type
+      title: Добавление аккаунта Bitbucket
+      type: object
+    add-git:
+      properties:
+        provider_type:
+          description: Тип провайдера.
+          enum:
+          - git
+          example: git
+          type: string
+        url:
+          description: Внешний url адрес репозитория.
+          example: https://github.com/timeweb-cloud/app-example-flask.git
+          type: string
+        login:
+          description: Логин провайдера. Используется при добавлении приватных репозиториев
+          example: timeweb-cloud
+          type: string
+        password:
+          description: Пароль или токен провайдера. Обязателен при добавлении приватных
+            репозиториев. Подробнее в нашей <a href='https://timeweb.cloud/docs/apps/connecting-repositories#podkluchenie-repozitoriya-po-ssylke'>документации</a>.
+          example: password
+          type: string
+      required:
+      - provider_type
+      - url
+      title: Добавление репозитория любого провайдера по url
+      type: object
+    branch:
+      example:
+        name: master
+      properties:
+        name:
+          description: Имя ветки.
+          example: master
+          type: string
+      required:
+      - name
+    commit:
+      example:
+        created_at: 2022-10-25T15:15:45Z
+        message: initial commit
+        sha: inid8d9843hfu934f43iofnfi34f4ffed
+      properties:
+        sha:
+          description: Хэш коммита.
+          example: inid8d9843hfu934f43iofnfi34f4ffed
+          type: string
+        created_at:
+          description: "Значение времени, указанное в комбинированном формате даты\
+            \ и времени ISO8601, которое представляет, когда был создан коммит."
+          example: 2022-10-25T15:15:45Z
+          format: date-time
+          type: string
+        message:
+          description: Сообщение коммита.
+          example: initial commit
+          type: string
+      required:
+      - created_at
+      - message
+      - sha
+    deploy-status:
+      description: Статусы деплоя.
+      enum:
+      - created
+      - started
+      - preparing_environment
+      - cloning_code
+      - installing_dependencies
+      - building_code
+      - checking_ssl_certs
+      - cleaning_up
+      - running_container
+      - stopping
+      - stopped
+      - failure
+      - success
+      - access_error
+      example: success
+      type: string
+    deploy:
+      example:
+        commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+        started_at: 2024-07-24T10:38:44Z
+        id: 123e4567-e89b-12d3-a456-426614174000
+        app_id: "1"
+        ended_at: 2024-07-24T12:38:44Z
+        status: success
+        commit_msg: Initial commit
+      properties:
+        app_id:
+          description: Идентификатор приложения.
+          example: "1"
+          type: string
+        commit_sha:
+          description: Хэш коммита.
+          example: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          type: string
+        id:
+          description: Идентификатор.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+        started_at:
+          description: Время запуска деплоя.
+          example: 2024-07-24T10:38:44Z
+          format: date-time
+          type: string
+        ended_at:
+          description: Время окончания деплоя. Определено для завершенных деплоев
+          example: 2024-07-24T12:38:44Z
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          $ref: '#/components/schemas/deploy-status'
+        commit_msg:
+          description: Сообщение коммита.
+          example: Initial commit
+          type: string
+      required:
+      - app_id
+      - commit
+      - commit_msg
+      - commit_sha
+      - ended_at
+      - id
+      - started_at
+      - status
+      type: object
+    apps-presets:
+      example:
+        frontend_presets:
+        - description_short: frontend app
+          disk: 1024
+          price: 99
+          description: frontend app
+          location: ru-1
+          id: 584
+          requests: 200
+        - description_short: frontend app
+          disk: 1024
+          price: 99
+          description: frontend app
+          location: ru-1
+          id: 584
+          requests: 200
+        backend_presets:
+        - description_short: Backend apps
+          disk: 10240
+          price: 199
+          description: Backend apps
+          cpu: 1
+          location: ru-1
+          id: 568
+          cpu_frequency: "2.4"
+          ram: 1024
+        - description_short: Backend apps
+          disk: 10240
+          price: 199
+          description: Backend apps
+          cpu: 1
+          location: ru-1
+          id: 568
+          cpu_frequency: "2.4"
+          ram: 1024
+      properties:
+        backend_presets:
+          items:
+            $ref: '#/components/schemas/apps_presets_backend_presets_inner'
+          type: array
+        frontend_presets:
+          items:
+            $ref: '#/components/schemas/apps_presets_frontend_presets_inner'
+          type: array
+      required:
+      - backend
+      - frontend
+      type: object
+    deploy-settings:
+      items:
+        $ref: '#/components/schemas/deploy_settings_inner'
+      type: array
+    available-frameworks:
+      example:
+        backend_frameworks:
+        - versions:
+          - "20"
+          - "18"
+          - "16"
+          frameworks:
+          - express
+          - nest
+          language: node
+        - versions:
+          - "20"
+          - "18"
+          - "16"
+          frameworks:
+          - express
+          - nest
+          language: node
+        frontend_frameworks:
+        - versions:
+          - "20"
+          - "18"
+          - "16"
+          frameworks:
+          - angular
+          - react
+          - vue
+          language: javascript
+        - versions:
+          - "20"
+          - "18"
+          - "16"
+          frameworks:
+          - angular
+          - react
+          - vue
+          language: javascript
+      properties:
+        frontend_frameworks:
+          items:
+            $ref: '#/components/schemas/available_frameworks_frontend_frameworks_inner'
+          type: array
+        backend_frameworks:
+          items:
+            $ref: '#/components/schemas/available_frameworks_backend_frameworks_inner'
+          type: array
+      required:
+      - backend
+      - frontend
     getFinances_200_response:
       example:
         finances:
@@ -49500,6 +53489,578 @@ components:
       - locations
       - meta
       type: object
+    getApps_200_response:
+      example:
+        meta:
+          total: 10
+        apps:
+        - index_dir: dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          branch_name: master
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          id: 1
+          env_version: "18"
+          ip: 165.23.54.161.
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+          - fqdn: app-example.twc1.net
+          build_cmd: npm run build
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          framework: django
+          preset_id: 42
+          name: app_example
+          location: ru-1
+          comment: example comment
+          status: active
+        - index_dir: dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          branch_name: master
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          id: 1
+          env_version: "18"
+          ip: 165.23.54.161.
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+          - fqdn: app-example.twc1.net
+          build_cmd: npm run build
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          framework: django
+          preset_id: 42
+          name: app_example
+          location: ru-1
+          comment: example comment
+          status: active
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        apps:
+          items:
+            $ref: '#/components/schemas/app'
+          type: array
+      required:
+      - apps
+      - meta
+      type: object
+    createApp_201_response:
+      example:
+        app:
+          index_dir: dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          branch_name: master
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          id: 1
+          env_version: "18"
+          ip: 165.23.54.161.
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+          - fqdn: app-example.twc1.net
+          build_cmd: npm run build
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          framework: django
+          preset_id: 42
+          name: app_example
+          location: ru-1
+          comment: example comment
+          status: active
+      properties:
+        app:
+          $ref: '#/components/schemas/app'
+      required:
+      - app
+      type: object
+    getApp_200_response:
+      example:
+        app:
+        - index_dir: dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          branch_name: master
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          id: 1
+          env_version: "18"
+          ip: 165.23.54.161.
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+          - fqdn: app-example.twc1.net
+          build_cmd: npm run build
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          framework: django
+          preset_id: 42
+          name: app_example
+          location: ru-1
+          comment: example comment
+          status: active
+        - index_dir: dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          branch_name: master
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          id: 1
+          env_version: "18"
+          ip: 165.23.54.161.
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+          - fqdn: app-example.twc1.net
+          build_cmd: npm run build
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          framework: django
+          preset_id: 42
+          name: app_example
+          location: ru-1
+          comment: example comment
+          status: active
+      properties:
+        app:
+          items:
+            $ref: '#/components/schemas/app'
+          type: array
+      required:
+      - app
+      type: object
+    updateAppSettings_200_response:
+      example:
+        app:
+        - index_dir: dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          branch_name: master
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          id: 1
+          env_version: "18"
+          ip: 165.23.54.161.
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+          - fqdn: app-example.twc1.net
+          build_cmd: npm run build
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          framework: django
+          preset_id: 42
+          name: app_example
+          location: ru-1
+          comment: example comment
+          status: active
+        - index_dir: dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          branch_name: master
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          id: 1
+          env_version: "18"
+          ip: 165.23.54.161.
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+          - fqdn: app-example.twc1.net
+          build_cmd: npm run build
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          framework: django
+          preset_id: 42
+          name: app_example
+          location: ru-1
+          comment: example comment
+          status: active
+        meta:
+          total: 10
+      properties:
+        app:
+          items:
+            $ref: '#/components/schemas/app'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - app
+      - meta
+      type: object
+    getAppLogs_200_response:
+      example:
+        app_logs:
+        - app_logs
+        - app_logs
+        meta:
+          total: 10
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        app_logs:
+          items:
+            type: string
+          type: array
+      required:
+      - app_logs
+      - meta
+      type: object
+    getProviders_200_response:
+      example:
+        meta:
+          total: 10
+        providers:
+        - provider_type: github
+          provider_id: ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b
+          login: timeweb-cloud
+        - provider_type: github
+          provider_id: ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b
+          login: timeweb-cloud
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        providers:
+          items:
+            $ref: '#/components/schemas/provider'
+          type: array
+      required:
+      - meta
+      - providers
+      type: object
+    addProvider_201_response:
+      example:
+        provider:
+          provider_type: github
+          provider_id: ec23f4b1-3b7b-4b7b-8b7b-3b7b4b7b8b7b
+          login: timeweb-cloud
+      properties:
+        provider:
+          $ref: '#/components/schemas/provider'
+      required:
+      - provider
+      type: object
+    getRepositories_200_response:
+      example:
+        repositories:
+        - is_private: false
+          full_name: example-repo/app-example-express
+          name: app-example-express
+          id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+          is_allowed_webhook: true
+          url: https://github.com/example-repo/app-example-express
+        - is_private: false
+          full_name: example-repo/app-example-express
+          name: app-example-express
+          id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+          is_allowed_webhook: true
+          url: https://github.com/example-repo/app-example-express
+        meta:
+          total: 10
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        repositories:
+          items:
+            $ref: '#/components/schemas/repository'
+          type: array
+      required:
+      - meta
+      - repositories
+      type: object
+    getBranches_200_response:
+      example:
+        meta:
+          total: 10
+        branches:
+        - name: master
+        - name: master
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        branches:
+          items:
+            $ref: '#/components/schemas/branch'
+          type: array
+      required:
+      - branches
+      - meta
+      type: object
+    getCommits_200_response:
+      example:
+        meta:
+          total: 10
+        commits:
+        - created_at: 2022-10-25T15:15:45Z
+          message: initial commit
+          sha: inid8d9843hfu934f43iofnfi34f4ffed
+        - created_at: 2022-10-25T15:15:45Z
+          message: initial commit
+          sha: inid8d9843hfu934f43iofnfi34f4ffed
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        commits:
+          items:
+            $ref: '#/components/schemas/commit'
+          type: array
+      required:
+      - commits
+      - meta
+      type: object
+    createDeploy_request:
+      properties:
+        commit_sha:
+          description: Хэш коммита.
+          example: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          type: string
+      type: object
+    createDeploy_201_response:
+      example:
+        deploy:
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          started_at: 2024-07-24T10:38:44Z
+          id: 123e4567-e89b-12d3-a456-426614174000
+          app_id: "1"
+          ended_at: 2024-07-24T12:38:44Z
+          status: success
+          commit_msg: Initial commit
+      properties:
+        deploy:
+          $ref: '#/components/schemas/deploy'
+      required:
+      - deploy
+      type: object
+    getAppDeploys_200_response:
+      example:
+        meta:
+          total: 10
+        deploys:
+        - commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          started_at: 2024-07-24T10:38:44Z
+          id: 123e4567-e89b-12d3-a456-426614174000
+          app_id: "1"
+          ended_at: 2024-07-24T12:38:44Z
+          status: success
+          commit_msg: Initial commit
+        - commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          started_at: 2024-07-24T10:38:44Z
+          id: 123e4567-e89b-12d3-a456-426614174000
+          app_id: "1"
+          ended_at: 2024-07-24T12:38:44Z
+          status: success
+          commit_msg: Initial commit
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        deploys:
+          items:
+            $ref: '#/components/schemas/deploy'
+          type: array
+      required:
+      - deploy
+      - meta
+      type: object
+    getDeployLogs_200_response:
+      example:
+        meta:
+          total: 10
+        deploy_logs:
+        - deploy_logs
+        - deploy_logs
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        deploy_logs:
+          items:
+            type: string
+          type: array
+      required:
+      - deploy_logs
+      - meta
+      type: object
+    getDeploySettings_200_response:
+      example:
+        default_deploy_settings:
+        - framework: angular
+          index_dir: /dist/<outputPath>/browser
+          build_cmd: npm run build
+          run_cmd: ""
+        - framework: angular
+          index_dir: /dist/<outputPath>/browser
+          build_cmd: npm run build
+          run_cmd: ""
+        meta:
+          total: 10
+      properties:
+        default_deploy_settings:
+          items:
+            $ref: '#/components/schemas/deploy_settings_inner'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      type: object
     status_company_info:
       description: Информация о компании.
       example:
@@ -50472,6 +55033,297 @@ components:
       required:
       - id
       - name
+      type: object
+    app_provider:
+      example:
+        id: 826e9a9d-40cd-49b1-b547-0c439834498b
+        type: github
+      properties:
+        id:
+          description: Уникальный идентификатор провайдера.
+          example: 826e9a9d-40cd-49b1-b547-0c439834498b
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/providers'
+      required:
+      - id
+      - type
+      type: object
+    app_domains_inner:
+      example:
+        fqdn: app-example.twc1.net
+      properties:
+        fqdn:
+          description: Домен
+          example: app-example.twc1.net
+          type: string
+      type: object
+    app_configuration:
+      description: "Объект с конфигурацией сервера. Определено для приложений `type:\
+        \ backend`.Для приложений `type: frontend` всегда null."
+      example:
+        network_bandwidth: 1000
+        disk_type: nvme
+        cpu: 1
+        cpu_frequency: "3.3"
+        ram: 1024
+      nullable: true
+      properties:
+        cpu:
+          description: Количество ядер процессора.
+          example: 1
+          type: number
+        ram:
+          description: Объем оперативной памяти (в МБ).
+          example: 1024
+          type: number
+        network_bandwidth:
+          description: Скорость сетевого канала (в Мбит/с).
+          example: 1000
+          type: number
+        cpu_frequency:
+          description: Частота процессора (в ГГц).
+          example: "3.3"
+          type: string
+        disk_type:
+          description: Тип диска.
+          enum:
+          - ssd
+          - nvme
+          - hdd
+          example: nvme
+          type: string
+      type: object
+    app_disk_status:
+      description: "Объект с конфигурацией диска. Определено для приложений `type:\
+        \ backend`.Для приложений `type: frontend` всегда null."
+      example:
+        size: 15360
+        used: 4509
+        disk_id: 19769639
+      nullable: true
+      properties:
+        used:
+          description: Использованное пространство диска.
+          example: 4509
+          type: number
+        size:
+          description: Размер диска.
+          example: 15360
+          type: number
+        disk_id:
+          description: Идентификатор диска.
+          example: 19769639
+          type: number
+      type: object
+    apps_presets_backend_presets_inner:
+      example:
+        description_short: Backend apps
+        disk: 10240
+        price: 199
+        description: Backend apps
+        cpu: 1
+        location: ru-1
+        id: 568
+        cpu_frequency: "2.4"
+        ram: 1024
+      properties:
+        id:
+          description: Идентификатор пресета.
+          example: 568
+          type: integer
+        description:
+          description: Описание пресета.
+          example: Backend apps
+          type: string
+        description_short:
+          description: Краткое описание пресета.
+          example: Backend apps
+          type: string
+        price:
+          description: Цена пресета.
+          example: 199
+          type: integer
+        cpu:
+          description: Количество CPU.
+          example: 1
+          type: integer
+        ram:
+          description: Объем RAM в МБ.
+          example: 1024
+          type: integer
+        disk:
+          description: Объем диска в МБ.
+          example: 10240
+          type: integer
+        location:
+          description: Локация.
+          example: ru-1
+          type: string
+        cpu_frequency:
+          description: Частота CPU.
+          example: "2.4"
+          type: string
+      required:
+      - cpu
+      - description_short
+      - disk
+      - id
+      - location
+      - price
+      - ram
+      type: object
+    apps_presets_frontend_presets_inner:
+      example:
+        description_short: frontend app
+        disk: 1024
+        price: 99
+        description: frontend app
+        location: ru-1
+        id: 584
+        requests: 200
+      properties:
+        id:
+          description: Идентификатор пресета.
+          example: 584
+          type: integer
+        description:
+          description: Описание пресета.
+          example: frontend app
+          type: string
+        description_short:
+          description: Краткое описание пресета.
+          example: frontend app
+          type: string
+        price:
+          description: Цена пресета.
+          example: 99
+          type: integer
+        location:
+          description: Локация.
+          example: ru-1
+          type: string
+        requests:
+          description: Количество запросов.
+          example: 200
+          type: integer
+        disk:
+          description: Объем диска в МБ.
+          example: 1024
+          type: integer
+      required:
+      - description_short
+      - disk
+      - id
+      - location
+      - price
+      - requests
+      type: object
+    deploy_settings_inner:
+      example:
+        framework: angular
+        index_dir: /dist/<outputPath>/browser
+        build_cmd: npm run build
+        run_cmd: ""
+      properties:
+        framework:
+          description: Название фреймворка.
+          example: angular
+          type: string
+        build_cmd:
+          description: Команда для сборки проекта.
+          example: npm run build
+          type: string
+        index_dir:
+          description: Директория с индексными файлами.
+          example: /dist/<outputPath>/browser
+          type: string
+        run_cmd:
+          description: Команда для запуска проекта.
+          example: ""
+          type: string
+      required:
+      - build_cmd
+      - framework
+      - index_dir
+      - run_cmd
+      type: object
+    available_frameworks_frontend_frameworks_inner:
+      example:
+        versions:
+        - "20"
+        - "18"
+        - "16"
+        frameworks:
+        - angular
+        - react
+        - vue
+        language: javascript
+      properties:
+        language:
+          description: "Язык программирования для приложений `type: frontend`."
+          example: javascript
+          type: string
+        versions:
+          description: Поддерживаемые версии языка.
+          example:
+          - "20"
+          - "18"
+          - "16"
+          items:
+            type: string
+          type: array
+        frameworks:
+          description: Поддерживаемые фреймворки.
+          example:
+          - angular
+          - react
+          - vue
+          items:
+            type: string
+          type: array
+      required:
+      - frameworks
+      - language
+      - versions
+      type: object
+    available_frameworks_backend_frameworks_inner:
+      example:
+        versions:
+        - "20"
+        - "18"
+        - "16"
+        frameworks:
+        - express
+        - nest
+        language: node
+      properties:
+        language:
+          description: "Язык программирования для приложения `type: backend`."
+          example: node
+          type: string
+        versions:
+          description: Поддерживаемые версии языка.
+          example:
+          - "20"
+          - "18"
+          - "16"
+          items:
+            type: string
+          type: array
+        frameworks:
+          description: Поддерживаемые фреймворки.
+          example:
+          - express
+          - nest
+          items:
+            type: string
+          type: array
+      required:
+      - frameworks
+      - language
+      - versions
       type: object
   securitySchemes:
     Bearer:
