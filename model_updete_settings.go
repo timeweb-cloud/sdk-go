@@ -32,9 +32,9 @@ type UpdeteSettings struct {
 	CommitSha *string `json:"commit_sha,omitempty"`
 	// Версия окружения.
 	EnvVersion *string `json:"env_version,omitempty"`
-	// Директория с индексным файлом. Обязателен для приложений `type: frontend`. Не используется для приложений `type: backend`.
+	// Путь к директории с индексным файлом. Используется для приложений `type: frontend`. Не используется для приложений `type: backend`. Значение всегда должно начинаться с `/`.
 	IndexDir *string `json:"index_dir,omitempty"`
-	// Команда для запуска приложения. Обязателен для приложений `type: backend`. Не используется для приложений `type: frontend`.
+	// Команда для запуска приложения. Используется для приложений `type: backend`. Не используется для приложений `type: frontend`.
 	RunCmd *string `json:"run_cmd,omitempty"`
 	Framework *Frameworks `json:"framework,omitempty"`
 	// Имя приложения.

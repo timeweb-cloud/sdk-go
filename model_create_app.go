@@ -45,7 +45,7 @@ type CreateApp struct {
 	// Версия окружения.
 	EnvVersion *string `json:"env_version,omitempty"`
 	Framework Frameworks `json:"framework"`
-	// Директория с индексным файлом. Обязателен для приложений `type: frontend`. Не используется для приложений `type: backend`. Должно начинаться с `/`.
+	// Путь к директории с индексным файлом. Обязателен для приложений `type: frontend`. Не используется для приложений `type: backend`. Значение всегда должно начинаться с `/`.
 	IndexDir *string `json:"index_dir,omitempty"`
 	// Команда для запуска приложения. Обязателен для приложений `type: backend`. Не используется для приложений `type: frontend`.
 	RunCmd *string `json:"run_cmd,omitempty"`

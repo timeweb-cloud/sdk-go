@@ -37812,7 +37812,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getApp_200_response'
+                $ref: '#/components/schemas/createApp_201_response'
           description: Объект JSON c ключом `app`
         "400":
           content:
@@ -48214,10 +48214,10 @@ components:
         framework:
           $ref: '#/components/schemas/frameworks'
         index_dir:
-          description: "Директория с индексным файлом. Обязателен для приложений `type:\
-            \ frontend`. Не используется для приложений `type: backend`. Должно на\
-            чинаться с `/`."
-          example: dist
+          description: "Путь к директории с индексным файлом. Обязателен для прило\
+            жений `type: frontend`. Не используется для приложений `type: backend`.\
+            \ Значение всегда должно начинаться с `/`."
+          example: /dist
           type: string
         run_cmd:
           description: "Команда для запуска приложения. Обязателен для приложений\
@@ -48265,13 +48265,14 @@ components:
           example: "18"
           type: string
         index_dir:
-          description: "Директория с индексным файлом. Обязателен для приложений `type:\
-            \ frontend`. Не используется для приложений `type: backend`."
-          example: dist
+          description: "Путь к директории с индексным файлом. Используется для при\
+            ложений `type: frontend`. Не используется для приложений `type: backend`.\
+            \ Значение всегда должно начинаться с `/`."
+          example: /dist
           type: string
         run_cmd:
-          description: "Команда для запуска приложения. Обязателен для приложений\
-            \ `type: backend`. Не используется для приложений `type: frontend`."
+          description: "Команда для запуска приложения. Используется для приложени\
+            й `type: backend`. Не используется для приложений `type: frontend`."
           example: npm start
           type: string
         framework:
@@ -48310,18 +48311,18 @@ components:
       - provider_id
       - provider_type
     add-github:
-      description: Добавление аккаунта github
+      description: Добавление аккаунта GitHub
       properties:
         provider_type:
           description: Тип провайдера.
           enum:
-          - github
-          example: github
+          - Github
+          example: GitHub
           type: string
         provider_token:
           description: "Токен доступа. <br> Для GitHub необходимо использовать 'Fine-grained\
             \ personal access token'. Инструкции по созданию можно найти в <a target='_blank'\
-            \ href='https://docs.github.com/ru/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token'>д\
+            \ href='https://docs.GitHub.com/ru/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token'>д\
             окументации GitHub</a>. <br> Выберите репозитории, к которым хотите пр\
             едоставить доступ, и установите следующие разрешения: `Webhooks: read\
             \ and write`, `Contents: read-only`."
@@ -48329,21 +48330,21 @@ components:
       required:
       - provider_token
       - provider_type
-      title: Добавление аккаунта Github
+      title: Добавление аккаунта GitHub
       type: object
     add-gitlab:
-      description: Добавление аккаунта gitlab
+      description: Добавление аккаунта GitLab
       properties:
         provider_type:
           description: Тип провайдера.
           enum:
-          - gitlab
-          example: gitlab
+          - Gitlab
+          example: GitLab
           type: string
         provider_token:
-          description: "Токен доступа. <br> Для Gitlab необходимо использовать пер\
+          description: "Токен доступа. <br> Для GitLab необходимо использовать пер\
             сональный токен доступа. Инструкции по созданию можно найти в <a target='_blank'\
-            \ href='https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token'>д\
+            \ href='https://docs.GitLab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token'>д\
             окументации GitLab</a>. <br> Установите следующие разрешения: `api`"
           type: string
       required:
@@ -48368,7 +48369,7 @@ components:
             \ Read`, `Projects: Read`, `Repositories: Read`, `Webhooks: Read and write`"
           type: string
         login:
-          description: Логин пользователя BitBucket.
+          description: Логин пользователя Bitbucket.
           example: timeweb-cloud
           type: string
       required:
@@ -53646,153 +53647,10 @@ components:
       required:
       - app
       type: object
-    getApp_200_response:
-      example:
-        app:
-        - index_dir: dist
-          configuration:
-            network_bandwidth: 1000
-            disk_type: nvme
-            cpu: 1
-            cpu_frequency: "3.3"
-            ram: 1024
-          envs:
-            NODE_ENV: production
-          language: node
-          type: backend
-          repository:
-            is_private: false
-            full_name: example-repo/app-example-express
-            name: app-example-express
-            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
-            is_allowed_webhook: true
-            url: https://github.com/example-repo/app-example-express
-          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
-          provider:
-            id: 826e9a9d-40cd-49b1-b547-0c439834498b
-            type: github
-          branch_name: master
-          is_auto_deploy: true
-          disk_status:
-            size: 15360
-            used: 4509
-            disk_id: 19769639
-          id: 1
-          env_version: "18"
-          ip: 165.23.54.161.
-          is_qemu_agent: true
-          domains:
-          - fqdn: app-example.twc1.net
-          - fqdn: app-example.twc1.net
-          build_cmd: npm run build
-          run_cmd: npm start
-          start_time: 2024-07-24T10:38:44Z
-          framework: django
-          preset_id: 42
-          name: app_example
-          location: ru-1
-          comment: example comment
-          status: active
-        - index_dir: dist
-          configuration:
-            network_bandwidth: 1000
-            disk_type: nvme
-            cpu: 1
-            cpu_frequency: "3.3"
-            ram: 1024
-          envs:
-            NODE_ENV: production
-          language: node
-          type: backend
-          repository:
-            is_private: false
-            full_name: example-repo/app-example-express
-            name: app-example-express
-            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
-            is_allowed_webhook: true
-            url: https://github.com/example-repo/app-example-express
-          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
-          provider:
-            id: 826e9a9d-40cd-49b1-b547-0c439834498b
-            type: github
-          branch_name: master
-          is_auto_deploy: true
-          disk_status:
-            size: 15360
-            used: 4509
-            disk_id: 19769639
-          id: 1
-          env_version: "18"
-          ip: 165.23.54.161.
-          is_qemu_agent: true
-          domains:
-          - fqdn: app-example.twc1.net
-          - fqdn: app-example.twc1.net
-          build_cmd: npm run build
-          run_cmd: npm start
-          start_time: 2024-07-24T10:38:44Z
-          framework: django
-          preset_id: 42
-          name: app_example
-          location: ru-1
-          comment: example comment
-          status: active
-      properties:
-        app:
-          items:
-            $ref: '#/components/schemas/app'
-          type: array
-      required:
-      - app
-      type: object
     updateAppSettings_200_response:
       example:
         app:
-        - index_dir: dist
-          configuration:
-            network_bandwidth: 1000
-            disk_type: nvme
-            cpu: 1
-            cpu_frequency: "3.3"
-            ram: 1024
-          envs:
-            NODE_ENV: production
-          language: node
-          type: backend
-          repository:
-            is_private: false
-            full_name: example-repo/app-example-express
-            name: app-example-express
-            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
-            is_allowed_webhook: true
-            url: https://github.com/example-repo/app-example-express
-          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
-          provider:
-            id: 826e9a9d-40cd-49b1-b547-0c439834498b
-            type: github
-          branch_name: master
-          is_auto_deploy: true
-          disk_status:
-            size: 15360
-            used: 4509
-            disk_id: 19769639
-          id: 1
-          env_version: "18"
-          ip: 165.23.54.161.
-          is_qemu_agent: true
-          domains:
-          - fqdn: app-example.twc1.net
-          - fqdn: app-example.twc1.net
-          build_cmd: npm run build
-          run_cmd: npm start
-          start_time: 2024-07-24T10:38:44Z
-          framework: django
-          preset_id: 42
-          name: app_example
-          location: ru-1
-          comment: example comment
-          status: active
-        - index_dir: dist
+          index_dir: dist
           configuration:
             network_bandwidth: 1000
             disk_type: nvme
@@ -53840,9 +53698,7 @@ components:
           total: 10
       properties:
         app:
-          items:
-            $ref: '#/components/schemas/app'
-          type: array
+          $ref: '#/components/schemas/app'
         meta:
           $ref: '#/components/schemas/meta'
       required:

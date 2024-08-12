@@ -18,11 +18,11 @@ import (
 // checks if the AddGithub type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AddGithub{}
 
-// AddGithub Добавление аккаунта github
+// AddGithub Добавление аккаунта GitHub
 type AddGithub struct {
 	// Тип провайдера.
 	ProviderType string `json:"provider_type"`
-	// Токен доступа. <br> Для GitHub необходимо использовать 'Fine-grained personal access token'. Инструкции по созданию можно найти в <a target='_blank' href='https://docs.github.com/ru/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token'>документации GitHub</a>. <br> Выберите репозитории, к которым хотите предоставить доступ, и установите следующие разрешения: `Webhooks: read and write`, `Contents: read-only`.
+	// Токен доступа. <br> Для GitHub необходимо использовать 'Fine-grained personal access token'. Инструкции по созданию можно найти в <a target='_blank' href='https://docs.GitHub.com/ru/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token'>документации GitHub</a>. <br> Выберите репозитории, к которым хотите предоставить доступ, и установите следующие разрешения: `Webhooks: read and write`, `Contents: read-only`.
 	ProviderToken string `json:"provider_token"`
 }
 

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **PresetId** | **float32** | Идентификатор тарифа. | 
 **EnvVersion** | Pointer to **string** | Версия окружения. | [optional] 
 **Framework** | [**Frameworks**](Frameworks.md) |  | 
-**IndexDir** | Pointer to **string** | Директория с индексным файлом. Обязателен для приложений &#x60;type: frontend&#x60;. Не используется для приложений &#x60;type: backend&#x60;. Должно начинаться с &#x60;/&#x60;. | [optional] 
+**IndexDir** | Pointer to **string** | Путь к директории с индексным файлом. Обязателен для приложений &#x60;type: frontend&#x60;. Не используется для приложений &#x60;type: backend&#x60;. Значение всегда должно начинаться с &#x60;/&#x60;. | [optional] 
 **RunCmd** | Pointer to **string** | Команда для запуска приложения. Обязателен для приложений &#x60;type: backend&#x60;. Не используется для приложений &#x60;type: frontend&#x60;. | [optional] 
 
 ## Methods

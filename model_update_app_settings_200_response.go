@@ -20,7 +20,7 @@ var _ MappedNullable = &UpdateAppSettings200Response{}
 
 // UpdateAppSettings200Response struct for UpdateAppSettings200Response
 type UpdateAppSettings200Response struct {
-	App []App `json:"app"`
+	App App `json:"app"`
 	Meta Meta `json:"meta"`
 }
 
@@ -28,7 +28,7 @@ type UpdateAppSettings200Response struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAppSettings200Response(app []App, meta Meta) *UpdateAppSettings200Response {
+func NewUpdateAppSettings200Response(app App, meta Meta) *UpdateAppSettings200Response {
 	this := UpdateAppSettings200Response{}
 	this.App = app
 	this.Meta = meta
@@ -44,9 +44,9 @@ func NewUpdateAppSettings200ResponseWithDefaults() *UpdateAppSettings200Response
 }
 
 // GetApp returns the App field value
-func (o *UpdateAppSettings200Response) GetApp() []App {
+func (o *UpdateAppSettings200Response) GetApp() App {
 	if o == nil {
-		var ret []App
+		var ret App
 		return ret
 	}
 
@@ -55,15 +55,15 @@ func (o *UpdateAppSettings200Response) GetApp() []App {
 
 // GetAppOk returns a tuple with the App field value
 // and a boolean to check if the value has been set.
-func (o *UpdateAppSettings200Response) GetAppOk() ([]App, bool) {
+func (o *UpdateAppSettings200Response) GetAppOk() (*App, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.App, true
+	return &o.App, true
 }
 
 // SetApp sets field value
-func (o *UpdateAppSettings200Response) SetApp(v []App) {
+func (o *UpdateAppSettings200Response) SetApp(v App) {
 	o.App = v
 }
 

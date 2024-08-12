@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**App** | [**[]App**](App.md) |  | 
+**App** | [**App**](App.md) |  | 
 **Meta** | [**Meta**](Meta.md) |  | 
 
 ## Methods
 
 ### NewUpdateAppSettings200Response
 
-`func NewUpdateAppSettings200Response(app []App, meta Meta, ) *UpdateAppSettings200Response`
+`func NewUpdateAppSettings200Response(app App, meta Meta, ) *UpdateAppSettings200Response`
 
 NewUpdateAppSettings200Response instantiates a new UpdateAppSettings200Response object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetApp
 
-`func (o *UpdateAppSettings200Response) GetApp() []App`
+`func (o *UpdateAppSettings200Response) GetApp() App`
 
 GetApp returns the App field if non-nil, zero value otherwise.
 
 ### GetAppOk
 
-`func (o *UpdateAppSettings200Response) GetAppOk() (*[]App, bool)`
+`func (o *UpdateAppSettings200Response) GetAppOk() (*App, bool)`
 
 GetAppOk returns a tuple with the App field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApp
 
-`func (o *UpdateAppSettings200Response) SetApp(v []App)`
+`func (o *UpdateAppSettings200Response) SetApp(v App)`
 
 SetApp sets App field to given value.
 

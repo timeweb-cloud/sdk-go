@@ -1045,7 +1045,7 @@ type ApiGetAppRequest struct {
 	appId string
 }
 
-func (r ApiGetAppRequest) Execute() (*GetApp200Response, *http.Response, error) {
+func (r ApiGetAppRequest) Execute() (*CreateApp201Response, *http.Response, error) {
 	return r.ApiService.GetAppExecute(r)
 }
 
@@ -1067,13 +1067,13 @@ func (a *AppsAPIService) GetApp(ctx context.Context, appId string) ApiGetAppRequ
 }
 
 // Execute executes the request
-//  @return GetApp200Response
-func (a *AppsAPIService) GetAppExecute(r ApiGetAppRequest) (*GetApp200Response, *http.Response, error) {
+//  @return CreateApp201Response
+func (a *AppsAPIService) GetAppExecute(r ApiGetAppRequest) (*CreateApp201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetApp200Response
+		localVarReturnValue  *CreateApp201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.GetApp")

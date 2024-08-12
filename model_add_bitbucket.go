@@ -24,7 +24,7 @@ type AddBitbucket struct {
 	ProviderType string `json:"provider_type"`
 	// Токен доступа. <br> Для Bitbucket необходимо использовать 'App password'. Инструкции по созданию можно найти в <a target='_blank' href='https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/'>документации Bitbucket</a>. <br> Установите следующие разрешения: `Account: Read`, `Projects: Read`, `Repositories: Read`, `Webhooks: Read and write`
 	ProviderToken string `json:"provider_token"`
-	// Логин пользователя BitBucket.
+	// Логин пользователя Bitbucket.
 	Login string `json:"login"`
 }
 

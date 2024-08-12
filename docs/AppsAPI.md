@@ -49,7 +49,7 @@ import (
 )
 
 func main() {
-    addGithub := *openapiclient.NewAddGithub("github", "ProviderToken_example") // AddGithub | 
+    addGithub := *openapiclient.NewAddGithub("GitHub", "ProviderToken_example") // AddGithub | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -443,7 +443,7 @@ Name | Type | Description  | Notes
 
 ## GetApp
 
-> GetApp200Response GetApp(ctx, appId).Execute()
+> CreateApp201Response GetApp(ctx, appId).Execute()
 
 Получение приложения по id
 
@@ -471,7 +471,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.GetApp``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetApp`: GetApp200Response
+    // response from `GetApp`: CreateApp201Response
     fmt.Fprintf(os.Stdout, "Response from `AppsAPI.GetApp`: %v\n", resp)
 }
 ```
@@ -495,7 +495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetApp200Response**](GetApp200Response.md)
+[**CreateApp201Response**](CreateApp201Response.md)
 
 ### Authorization
 

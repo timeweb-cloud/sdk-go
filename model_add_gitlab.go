@@ -18,11 +18,11 @@ import (
 // checks if the AddGitlab type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AddGitlab{}
 
-// AddGitlab Добавление аккаунта gitlab
+// AddGitlab Добавление аккаунта GitLab
 type AddGitlab struct {
 	// Тип провайдера.
 	ProviderType string `json:"provider_type"`
-	// Токен доступа. <br> Для Gitlab необходимо использовать персональный токен доступа. Инструкции по созданию можно найти в <a target='_blank' href='https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token'>документации GitLab</a>. <br> Установите следующие разрешения: `api`
+	// Токен доступа. <br> Для GitLab необходимо использовать персональный токен доступа. Инструкции по созданию можно найти в <a target='_blank' href='https://docs.GitLab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token'>документации GitLab</a>. <br> Установите следующие разрешения: `api`
 	ProviderToken string `json:"provider_token"`
 }
 

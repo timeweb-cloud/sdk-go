@@ -213,7 +213,6 @@ docs/Frameworks.md
 docs/Free.md
 docs/GetAccountStatus200Response.md
 docs/GetAllProjectResources200Response.md
-docs/GetApp200Response.md
 docs/GetAppDeploys200Response.md
 docs/GetAppLogs200Response.md
 docs/GetApps200Response.md
@@ -627,7 +626,6 @@ model_frameworks.go
 model_free.go
 model_get_account_status_200_response.go
 model_get_all_project_resources_200_response.go
-model_get_app_200_response.go
 model_get_app_deploys_200_response.go
 model_get_app_logs_200_response.go
 model_get_apps_200_response.go
