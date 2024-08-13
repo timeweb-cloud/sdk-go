@@ -39822,7 +39822,7 @@ paths:
           \t}\n}\n"
   /api/v1/apps/{app_id}/deploy/{deploy_id}/logs:
     get:
-      description: "Чтобы получить информацию о деплое, отправьте GET-запрос на `/app/{app_id}/deploy/{deploy_id}`."
+      description: "Чтобы получить информацию о деплое, отправьте GET-запрос на `api/v1/apps/{app_id}/deploy/{deploy_id}/logs`."
       operationId: getDeployLogs
       parameters:
       - explode: false
@@ -47965,7 +47965,7 @@ components:
     app:
       description: Экземпляр приложения.
       example:
-        index_dir: dist
+        index_dir: /dist
         configuration:
           network_bandwidth: 1000
           disk_type: nvme
@@ -48094,9 +48094,9 @@ components:
           example: 42
           type: number
         index_dir:
-          description: "Директория с индексным файлом. Определено для приложений `type:\
-            \ frontend`. Для приложений `type: backend` всегда null."
-          example: dist
+          description: "Путь к директории с индексным файлом. Определен для прилож\
+            ений `type: frontend`. Для приложений `type: backend` всегда null."
+          example: /dist
           nullable: true
           type: string
         build_cmd:
@@ -48104,7 +48104,7 @@ components:
           example: npm run build
           type: string
         run_cmd:
-          description: "Команда для запуска приложения. Определено для приложений\
+          description: "Команда для запуска приложения. Определена для приложений\
             \ `type: backend`. Для приложений `type: frontend` всегда null."
           example: npm start
           nullable: true
@@ -48200,7 +48200,7 @@ components:
           example: app_example
           type: string
         comment:
-          description: Комментарий к приложения.
+          description: Комментарий к приложению.
           example: example comment
           type: string
         preset_id:
@@ -48220,7 +48220,7 @@ components:
           example: /dist
           type: string
         run_cmd:
-          description: "Команда для запуска приложения. Обязателен для приложений\
+          description: "Команда для запуска приложения. Обязательна для приложений\
             \ `type: backend`. Не используется для приложений `type: frontend`."
           example: npm start
           type: string
@@ -48282,7 +48282,7 @@ components:
           example: app_example
           type: string
         comment:
-          description: Комментарий к приложения.
+          description: Комментарий к приложению.
           example: example comment
           type: string
         preset_id:
@@ -53495,7 +53495,7 @@ components:
         meta:
           total: 10
         apps:
-        - index_dir: dist
+        - index_dir: /dist
           configuration:
             network_bandwidth: 1000
             disk_type: nvme
@@ -53539,7 +53539,7 @@ components:
           location: ru-1
           comment: example comment
           status: active
-        - index_dir: dist
+        - index_dir: /dist
           configuration:
             network_bandwidth: 1000
             disk_type: nvme
@@ -53597,7 +53597,7 @@ components:
     createApp_201_response:
       example:
         app:
-          index_dir: dist
+          index_dir: /dist
           configuration:
             network_bandwidth: 1000
             disk_type: nvme
@@ -53650,7 +53650,7 @@ components:
     updateAppSettings_200_response:
       example:
         app:
-          index_dir: dist
+          index_dir: /dist
           configuration:
             network_bandwidth: 1000
             disk_type: nvme
@@ -54916,7 +54916,7 @@ components:
           type: string
       type: object
     app_configuration:
-      description: "Объект с конфигурацией сервера. Определено для приложений `type:\
+      description: "Объект с конфигурацией сервера. Определен для приложений `type:\
         \ backend`.Для приложений `type: frontend` всегда null."
       example:
         network_bandwidth: 1000
@@ -54952,7 +54952,7 @@ components:
           type: string
       type: object
     app_disk_status:
-      description: "Объект с конфигурацией диска. Определено для приложений `type:\
+      description: "Объект с конфигурацией диска. Определен для приложений `type:\
         \ backend`.Для приложений `type: frontend` всегда null."
       example:
         size: 15360

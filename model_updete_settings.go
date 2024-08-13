@@ -39,7 +39,7 @@ type UpdeteSettings struct {
 	Framework *Frameworks `json:"framework,omitempty"`
 	// Имя приложения.
 	Name *string `json:"name,omitempty"`
-	// Комментарий к приложения.
+	// Комментарий к приложению.
 	Comment *string `json:"comment,omitempty"`
 	// Идентификатор тарифа.
 	PresetId *float32 `json:"preset_id,omitempty"`

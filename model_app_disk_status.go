@@ -18,7 +18,7 @@ import (
 // checks if the AppDiskStatus type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AppDiskStatus{}
 
-// AppDiskStatus Объект с конфигурацией диска. Определено для приложений `type: backend`.Для приложений `type: frontend` всегда null.
+// AppDiskStatus Объект с конфигурацией диска. Определен для приложений `type: backend`.Для приложений `type: frontend` всегда null.
 type AppDiskStatus struct {
 	// Использованное пространство диска.
 	Used *float32 `json:"used,omitempty"`

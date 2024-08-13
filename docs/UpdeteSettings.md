@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **RunCmd** | Pointer to **string** | Команда для запуска приложения. Используется для приложений &#x60;type: backend&#x60;. Не используется для приложений &#x60;type: frontend&#x60;. | [optional] 
 **Framework** | Pointer to [**Frameworks**](Frameworks.md) |  | [optional] 
 **Name** | Pointer to **string** | Имя приложения. | [optional] 
-**Comment** | Pointer to **string** | Комментарий к приложения. | [optional] 
+**Comment** | Pointer to **string** | Комментарий к приложению. | [optional] 
 **PresetId** | Pointer to **float32** | Идентификатор тарифа. | [optional] 
 
 ## Methods

@@ -18,7 +18,7 @@ import (
 // checks if the AppConfiguration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AppConfiguration{}
 
-// AppConfiguration Объект с конфигурацией сервера. Определено для приложений `type: backend`.Для приложений `type: frontend` всегда null.
+// AppConfiguration Объект с конфигурацией сервера. Определен для приложений `type: backend`.Для приложений `type: frontend` всегда null.
 type AppConfiguration struct {
 	// Количество ядер процессора.
 	Cpu *float32 `json:"cpu,omitempty"`

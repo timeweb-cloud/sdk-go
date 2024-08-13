@@ -51,11 +51,11 @@ type App struct {
 	Comment string `json:"comment"`
 	// Идентификатор тарифа.
 	PresetId float32 `json:"preset_id"`
-	// Директория с индексным файлом. Определено для приложений `type: frontend`. Для приложений `type: backend` всегда null.
+	// Путь к директории с индексным файлом. Определен для приложений `type: frontend`. Для приложений `type: backend` всегда null.
 	IndexDir NullableString `json:"index_dir"`
 	// Команда сборки приложения.
 	BuildCmd string `json:"build_cmd"`
-	// Команда для запуска приложения. Определено для приложений `type: backend`. Для приложений `type: frontend` всегда null.
+	// Команда для запуска приложения. Определена для приложений `type: backend`. Для приложений `type: frontend` всегда null.
 	RunCmd NullableString `json:"run_cmd"`
 	Configuration NullableAppConfiguration `json:"configuration"`
 	DiskStatus NullableAppDiskStatus `json:"disk_status"`
