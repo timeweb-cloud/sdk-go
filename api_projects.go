@@ -50,8 +50,6 @@ AddBalancerToProject Добавление балансировщика в про
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddBalancerToProjectRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) AddBalancerToProject(ctx context.Context, projectId int32) ApiAddBalancerToProjectRequest {
 	return ApiAddBalancerToProjectRequest{
@@ -63,7 +61,6 @@ func (a *ProjectsAPIService) AddBalancerToProject(ctx context.Context, projectId
 
 // Execute executes the request
 //  @return AddBalancerToProject200Response
-// Deprecated
 func (a *ProjectsAPIService) AddBalancerToProjectExecute(r ApiAddBalancerToProjectRequest) (*AddBalancerToProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -226,8 +223,6 @@ AddClusterToProject Добавление кластера в проект
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddClusterToProjectRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) AddClusterToProject(ctx context.Context, projectId int32) ApiAddClusterToProjectRequest {
 	return ApiAddClusterToProjectRequest{
@@ -239,7 +234,6 @@ func (a *ProjectsAPIService) AddClusterToProject(ctx context.Context, projectId 
 
 // Execute executes the request
 //  @return AddBalancerToProject200Response
-// Deprecated
 func (a *ProjectsAPIService) AddClusterToProjectExecute(r ApiAddClusterToProjectRequest) (*AddBalancerToProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -402,8 +396,6 @@ AddDatabaseToProject Добавление базы данных в проект
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddDatabaseToProjectRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) AddDatabaseToProject(ctx context.Context, projectId int32) ApiAddDatabaseToProjectRequest {
 	return ApiAddDatabaseToProjectRequest{
@@ -415,7 +407,6 @@ func (a *ProjectsAPIService) AddDatabaseToProject(ctx context.Context, projectId
 
 // Execute executes the request
 //  @return AddBalancerToProject200Response
-// Deprecated
 func (a *ProjectsAPIService) AddDatabaseToProjectExecute(r ApiAddDatabaseToProjectRequest) (*AddBalancerToProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -578,8 +569,6 @@ AddDedicatedServerToProject Добавление выделенного серв
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddDedicatedServerToProjectRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) AddDedicatedServerToProject(ctx context.Context, projectId int32) ApiAddDedicatedServerToProjectRequest {
 	return ApiAddDedicatedServerToProjectRequest{
@@ -591,7 +580,6 @@ func (a *ProjectsAPIService) AddDedicatedServerToProject(ctx context.Context, pr
 
 // Execute executes the request
 //  @return AddBalancerToProject200Response
-// Deprecated
 func (a *ProjectsAPIService) AddDedicatedServerToProjectExecute(r ApiAddDedicatedServerToProjectRequest) (*AddBalancerToProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -754,8 +742,6 @@ AddServerToProject Добавление сервера в проект
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddServerToProjectRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) AddServerToProject(ctx context.Context, projectId int32) ApiAddServerToProjectRequest {
 	return ApiAddServerToProjectRequest{
@@ -767,7 +753,6 @@ func (a *ProjectsAPIService) AddServerToProject(ctx context.Context, projectId i
 
 // Execute executes the request
 //  @return AddBalancerToProject200Response
-// Deprecated
 func (a *ProjectsAPIService) AddServerToProjectExecute(r ApiAddServerToProjectRequest) (*AddBalancerToProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -930,8 +915,6 @@ AddStorageToProject Добавление хранилища в проект
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiAddStorageToProjectRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) AddStorageToProject(ctx context.Context, projectId int32) ApiAddStorageToProjectRequest {
 	return ApiAddStorageToProjectRequest{
@@ -943,7 +926,6 @@ func (a *ProjectsAPIService) AddStorageToProject(ctx context.Context, projectId 
 
 // Execute executes the request
 //  @return AddBalancerToProject200Response
-// Deprecated
 func (a *ProjectsAPIService) AddStorageToProjectExecute(r ApiAddStorageToProjectRequest) (*AddBalancerToProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -1400,8 +1382,6 @@ GetAccountBalancers Получение списка всех балансиро�
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAccountBalancersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetAccountBalancers(ctx context.Context) ApiGetAccountBalancersRequest {
 	return ApiGetAccountBalancersRequest{
@@ -1412,7 +1392,6 @@ func (a *ProjectsAPIService) GetAccountBalancers(ctx context.Context) ApiGetAcco
 
 // Execute executes the request
 //  @return GetProjectBalancers200Response
-// Deprecated
 func (a *ProjectsAPIService) GetAccountBalancersExecute(r ApiGetAccountBalancersRequest) (*GetProjectBalancers200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1556,8 +1535,6 @@ GetAccountClusters Получение списка всех кластеров �
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAccountClustersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetAccountClusters(ctx context.Context) ApiGetAccountClustersRequest {
 	return ApiGetAccountClustersRequest{
@@ -1568,7 +1545,6 @@ func (a *ProjectsAPIService) GetAccountClusters(ctx context.Context) ApiGetAccou
 
 // Execute executes the request
 //  @return GetProjectClusters200Response
-// Deprecated
 func (a *ProjectsAPIService) GetAccountClustersExecute(r ApiGetAccountClustersRequest) (*GetProjectClusters200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1712,8 +1688,6 @@ GetAccountDatabases Получение списка всех баз данных
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAccountDatabasesRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetAccountDatabases(ctx context.Context) ApiGetAccountDatabasesRequest {
 	return ApiGetAccountDatabasesRequest{
@@ -1724,7 +1698,6 @@ func (a *ProjectsAPIService) GetAccountDatabases(ctx context.Context) ApiGetAcco
 
 // Execute executes the request
 //  @return GetProjectDatabases200Response
-// Deprecated
 func (a *ProjectsAPIService) GetAccountDatabasesExecute(r ApiGetAccountDatabasesRequest) (*GetProjectDatabases200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1868,8 +1841,6 @@ GetAccountDedicatedServers Получение списка всех выделе
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAccountDedicatedServersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetAccountDedicatedServers(ctx context.Context) ApiGetAccountDedicatedServersRequest {
 	return ApiGetAccountDedicatedServersRequest{
@@ -1880,7 +1851,6 @@ func (a *ProjectsAPIService) GetAccountDedicatedServers(ctx context.Context) Api
 
 // Execute executes the request
 //  @return GetProjectDedicatedServers200Response
-// Deprecated
 func (a *ProjectsAPIService) GetAccountDedicatedServersExecute(r ApiGetAccountDedicatedServersRequest) (*GetProjectDedicatedServers200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2024,8 +1994,6 @@ GetAccountServers Получение списка всех серверов на
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAccountServersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetAccountServers(ctx context.Context) ApiGetAccountServersRequest {
 	return ApiGetAccountServersRequest{
@@ -2036,7 +2004,6 @@ func (a *ProjectsAPIService) GetAccountServers(ctx context.Context) ApiGetAccoun
 
 // Execute executes the request
 //  @return GetProjectServers200Response
-// Deprecated
 func (a *ProjectsAPIService) GetAccountServersExecute(r ApiGetAccountServersRequest) (*GetProjectServers200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2180,8 +2147,6 @@ GetAccountStorages Получение списка всех хранилищ н�
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAccountStoragesRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetAccountStorages(ctx context.Context) ApiGetAccountStoragesRequest {
 	return ApiGetAccountStoragesRequest{
@@ -2192,7 +2157,6 @@ func (a *ProjectsAPIService) GetAccountStorages(ctx context.Context) ApiGetAccou
 
 // Execute executes the request
 //  @return GetProjectStorages200Response
-// Deprecated
 func (a *ProjectsAPIService) GetAccountStoragesExecute(r ApiGetAccountStoragesRequest) (*GetProjectStorages200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2338,8 +2302,6 @@ GetAllProjectResources Получение всех ресурсов проект
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetAllProjectResourcesRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetAllProjectResources(ctx context.Context, projectId int32) ApiGetAllProjectResourcesRequest {
 	return ApiGetAllProjectResourcesRequest{
@@ -2351,7 +2313,6 @@ func (a *ProjectsAPIService) GetAllProjectResources(ctx context.Context, project
 
 // Execute executes the request
 //  @return GetAllProjectResources200Response
-// Deprecated
 func (a *ProjectsAPIService) GetAllProjectResourcesExecute(r ApiGetAllProjectResourcesRequest) (*GetAllProjectResources200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2661,8 +2622,6 @@ GetProjectBalancers Получение списка балансировщико
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectBalancersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetProjectBalancers(ctx context.Context, projectId int32) ApiGetProjectBalancersRequest {
 	return ApiGetProjectBalancersRequest{
@@ -2674,7 +2633,6 @@ func (a *ProjectsAPIService) GetProjectBalancers(ctx context.Context, projectId 
 
 // Execute executes the request
 //  @return GetProjectBalancers200Response
-// Deprecated
 func (a *ProjectsAPIService) GetProjectBalancersExecute(r ApiGetProjectBalancersRequest) (*GetProjectBalancers200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2824,8 +2782,6 @@ GetProjectClusters Получение списка кластеров проек
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectClustersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetProjectClusters(ctx context.Context, projectId int32) ApiGetProjectClustersRequest {
 	return ApiGetProjectClustersRequest{
@@ -2837,7 +2793,6 @@ func (a *ProjectsAPIService) GetProjectClusters(ctx context.Context, projectId i
 
 // Execute executes the request
 //  @return GetProjectClusters200Response
-// Deprecated
 func (a *ProjectsAPIService) GetProjectClustersExecute(r ApiGetProjectClustersRequest) (*GetProjectClusters200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2987,8 +2942,6 @@ GetProjectDatabases Получение списка баз данных прое
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectDatabasesRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetProjectDatabases(ctx context.Context, projectId int32) ApiGetProjectDatabasesRequest {
 	return ApiGetProjectDatabasesRequest{
@@ -3000,7 +2953,6 @@ func (a *ProjectsAPIService) GetProjectDatabases(ctx context.Context, projectId 
 
 // Execute executes the request
 //  @return GetProjectDatabases200Response
-// Deprecated
 func (a *ProjectsAPIService) GetProjectDatabasesExecute(r ApiGetProjectDatabasesRequest) (*GetProjectDatabases200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -3150,8 +3102,6 @@ GetProjectDedicatedServers Получение списка выделенных 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectDedicatedServersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetProjectDedicatedServers(ctx context.Context, projectId int32) ApiGetProjectDedicatedServersRequest {
 	return ApiGetProjectDedicatedServersRequest{
@@ -3163,7 +3113,6 @@ func (a *ProjectsAPIService) GetProjectDedicatedServers(ctx context.Context, pro
 
 // Execute executes the request
 //  @return GetProjectDedicatedServers200Response
-// Deprecated
 func (a *ProjectsAPIService) GetProjectDedicatedServersExecute(r ApiGetProjectDedicatedServersRequest) (*GetProjectDedicatedServers200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -3313,8 +3262,6 @@ GetProjectServers Получение списка серверов проект�
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectServersRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetProjectServers(ctx context.Context, projectId int32) ApiGetProjectServersRequest {
 	return ApiGetProjectServersRequest{
@@ -3326,7 +3273,6 @@ func (a *ProjectsAPIService) GetProjectServers(ctx context.Context, projectId in
 
 // Execute executes the request
 //  @return GetProjectServers200Response
-// Deprecated
 func (a *ProjectsAPIService) GetProjectServersExecute(r ApiGetProjectServersRequest) (*GetProjectServers200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -3476,8 +3422,6 @@ GetProjectStorages Получение списка хранилищ проект
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId Уникальный идентификатор проекта.
  @return ApiGetProjectStoragesRequest
-
-Deprecated
 */
 func (a *ProjectsAPIService) GetProjectStorages(ctx context.Context, projectId int32) ApiGetProjectStoragesRequest {
 	return ApiGetProjectStoragesRequest{
@@ -3489,7 +3433,6 @@ func (a *ProjectsAPIService) GetProjectStorages(ctx context.Context, projectId i
 
 // Execute executes the request
 //  @return GetProjectStorages200Response
-// Deprecated
 func (a *ProjectsAPIService) GetProjectStoragesExecute(r ApiGetProjectStoragesRequest) (*GetProjectStorages200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
