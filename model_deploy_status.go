@@ -21,20 +21,20 @@ type DeployStatus string
 
 // List of deploy-status
 const (
-	CREATED DeployStatus = "created"
-	STARTED DeployStatus = "started"
-	PREPARING_ENVIRONMENT DeployStatus = "preparing_environment"
-	CLONING_CODE DeployStatus = "cloning_code"
-	INSTALLING_DEPENDENCIES DeployStatus = "installing_dependencies"
-	BUILDING_CODE DeployStatus = "building_code"
-	CHECKING_SSL_CERTS DeployStatus = "checking_ssl_certs"
-	CLEANING_UP DeployStatus = "cleaning_up"
-	RUNNING_CONTAINER DeployStatus = "running_container"
-	STOPPING DeployStatus = "stopping"
-	STOPPED DeployStatus = "stopped"
-	FAILURE DeployStatus = "failure"
-	SUCCESS DeployStatus = "success"
-	ACCESS_ERROR DeployStatus = "access_error"
+	DEPLOYSTATUS_CREATED DeployStatus = "created"
+	DEPLOYSTATUS_STARTED DeployStatus = "started"
+	DEPLOYSTATUS_PREPARING_ENVIRONMENT DeployStatus = "preparing_environment"
+	DEPLOYSTATUS_CLONING_CODE DeployStatus = "cloning_code"
+	DEPLOYSTATUS_INSTALLING_DEPENDENCIES DeployStatus = "installing_dependencies"
+	DEPLOYSTATUS_BUILDING_CODE DeployStatus = "building_code"
+	DEPLOYSTATUS_CHECKING_SSL_CERTS DeployStatus = "checking_ssl_certs"
+	DEPLOYSTATUS_CLEANING_UP DeployStatus = "cleaning_up"
+	DEPLOYSTATUS_RUNNING_CONTAINER DeployStatus = "running_container"
+	DEPLOYSTATUS_STOPPING DeployStatus = "stopping"
+	DEPLOYSTATUS_STOPPED DeployStatus = "stopped"
+	DEPLOYSTATUS_FAILURE DeployStatus = "failure"
+	DEPLOYSTATUS_SUCCESS DeployStatus = "success"
+	DEPLOYSTATUS_ACCESS_ERROR DeployStatus = "access_error"
 )
 
 // All allowed values of DeployStatus enum

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_FirewallAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService AddResourceToGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 		var resourceId string
@@ -39,7 +40,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService CreateGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FirewallAPI.CreateGroup(context.Background()).Execute()
 
@@ -51,7 +52,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService CreateGroupRule", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 
@@ -65,7 +66,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService DeleteGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 
@@ -78,7 +79,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService DeleteGroupRule", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 		var ruleId string
@@ -92,7 +93,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService DeleteResourceFromGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 		var resourceId string
@@ -106,7 +107,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService GetGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 
@@ -120,7 +121,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService GetGroupResources", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 
@@ -134,7 +135,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService GetGroupRule", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var ruleId string
 		var groupId string
@@ -149,7 +150,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService GetGroupRules", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 
@@ -163,7 +164,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService GetGroups", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FirewallAPI.GetGroups(context.Background()).Execute()
 
@@ -175,7 +176,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService GetRulesForResource", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var resourceId string
 		var resourceType ResourceType
@@ -190,7 +191,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService UpdateGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 
@@ -204,7 +205,7 @@ func Test_openapi_FirewallAPIService(t *testing.T) {
 
 	t.Run("Test FirewallAPIService UpdateGroupRule", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var groupId string
 		var ruleId string

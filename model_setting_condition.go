@@ -21,9 +21,9 @@ type SettingCondition string
 
 // List of setting-condition
 const (
-	ON SettingCondition = "on"
-	OFF SettingCondition = "off"
-	DISABLED_ON SettingCondition = "disabled_on"
+	SETTINGCONDITION_ON SettingCondition = "on"
+	SETTINGCONDITION_OFF SettingCondition = "off"
+	SETTINGCONDITION_DISABLED_ON SettingCondition = "disabled_on"
 )
 
 // All allowed values of SettingCondition enum

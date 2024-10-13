@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_SSHAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_SSHAPIService(t *testing.T) {
 
 	t.Run("Test SSHAPIService AddKeyToServer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var serverId int32
 
@@ -37,7 +38,7 @@ func Test_openapi_SSHAPIService(t *testing.T) {
 
 	t.Run("Test SSHAPIService CreateKey", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.SSHAPI.CreateKey(context.Background()).Execute()
 
@@ -49,7 +50,7 @@ func Test_openapi_SSHAPIService(t *testing.T) {
 
 	t.Run("Test SSHAPIService DeleteKey", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var sshKeyId int32
 
@@ -62,7 +63,7 @@ func Test_openapi_SSHAPIService(t *testing.T) {
 
 	t.Run("Test SSHAPIService DeleteKeyFromServer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var serverId int32
 		var sshKeyId int32
@@ -76,7 +77,7 @@ func Test_openapi_SSHAPIService(t *testing.T) {
 
 	t.Run("Test SSHAPIService GetKey", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var sshKeyId int32
 
@@ -90,7 +91,7 @@ func Test_openapi_SSHAPIService(t *testing.T) {
 
 	t.Run("Test SSHAPIService GetKeys", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.SSHAPI.GetKeys(context.Background()).Execute()
 
@@ -102,7 +103,7 @@ func Test_openapi_SSHAPIService(t *testing.T) {
 
 	t.Run("Test SSHAPIService UpdateKey", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var sshKeyId int32
 

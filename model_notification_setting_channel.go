@@ -21,10 +21,10 @@ type NotificationSettingChannel string
 
 // List of notification-setting-channel
 const (
-	ON NotificationSettingChannel = "on"
-	OFF NotificationSettingChannel = "off"
-	DISABLED_ON NotificationSettingChannel = "disabled_on"
-	DISABLED_OFF NotificationSettingChannel = "disabled_off"
+	NOTIFICATIONSETTINGCHANNEL_ON NotificationSettingChannel = "on"
+	NOTIFICATIONSETTINGCHANNEL_OFF NotificationSettingChannel = "off"
+	NOTIFICATIONSETTINGCHANNEL_DISABLED_ON NotificationSettingChannel = "disabled_on"
+	NOTIFICATIONSETTINGCHANNEL_DISABLED_OFF NotificationSettingChannel = "disabled_off"
 )
 
 // All allowed values of NotificationSettingChannel enum

@@ -21,10 +21,10 @@ type Providers string
 
 // List of providers
 const (
-	GITHUB Providers = "github"
-	GITLAB Providers = "gitlab"
-	BITBUCKET Providers = "bitbucket"
-	GIT Providers = "git"
+	PROVIDERS_GITHUB Providers = "github"
+	PROVIDERS_GITLAB Providers = "gitlab"
+	PROVIDERS_BITBUCKET Providers = "bitbucket"
+	PROVIDERS_GIT Providers = "git"
 )
 
 // All allowed values of Providers enum

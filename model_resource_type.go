@@ -21,7 +21,7 @@ type ResourceType string
 
 // List of ResourceType
 const (
-	SERVER ResourceType = "server"
+	RESOURCETYPE_SERVER ResourceType = "server"
 )
 
 // All allowed values of ResourceType enum

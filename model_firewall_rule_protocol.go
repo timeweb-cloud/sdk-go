@@ -21,9 +21,9 @@ type FirewallRuleProtocol string
 
 // List of FirewallRuleProtocol
 const (
-	TCP FirewallRuleProtocol = "tcp"
-	UDP FirewallRuleProtocol = "udp"
-	ICMP FirewallRuleProtocol = "icmp"
+	FIREWALLRULEPROTOCOL_TCP FirewallRuleProtocol = "tcp"
+	FIREWALLRULEPROTOCOL_UDP FirewallRuleProtocol = "udp"
+	FIREWALLRULEPROTOCOL_ICMP FirewallRuleProtocol = "icmp"
 )
 
 // All allowed values of FirewallRuleProtocol enum

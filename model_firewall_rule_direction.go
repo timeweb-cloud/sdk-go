@@ -21,8 +21,8 @@ type FirewallRuleDirection string
 
 // List of FirewallRuleDirection
 const (
-	INGRESS FirewallRuleDirection = "ingress"
-	EGRESS FirewallRuleDirection = "egress"
+	FIREWALLRULEDIRECTION_INGRESS FirewallRuleDirection = "ingress"
+	FIREWALLRULEDIRECTION_EGRESS FirewallRuleDirection = "egress"
 )
 
 // All allowed values of FirewallRuleDirection enum

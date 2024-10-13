@@ -21,9 +21,9 @@ type URLType string
 
 // List of URLType
 const (
-	TIMEWEB URLType = "timeweb"
-	GOOGLE_DRIVE URLType = "google_drive"
-	YANDEX URLType = "yandex"
+	URLTYPE_TIMEWEB URLType = "timeweb"
+	URLTYPE_GOOGLE_DRIVE URLType = "google_drive"
+	URLTYPE_YANDEX URLType = "yandex"
 )
 
 // All allowed values of URLType enum

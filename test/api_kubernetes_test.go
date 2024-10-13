@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_KubernetesAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService CreateCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.KubernetesAPI.CreateCluster(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService CreateClusterNodeGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 
@@ -50,7 +51,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService DeleteCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 
@@ -64,7 +65,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService DeleteClusterNode", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 		var nodeId int32
@@ -78,7 +79,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService DeleteClusterNodeGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 		var groupId int32
@@ -92,7 +93,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 
@@ -106,7 +107,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetClusterKubeconfig", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 
@@ -120,7 +121,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetClusterNodeGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 		var groupId int32
@@ -135,7 +136,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetClusterNodeGroups", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 
@@ -149,7 +150,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetClusterNodes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 
@@ -163,7 +164,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetClusterNodesFromGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 		var groupId int32
@@ -178,7 +179,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetClusterResources", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 
@@ -192,7 +193,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetClusters", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.KubernetesAPI.GetClusters(context.Background()).Execute()
 
@@ -204,7 +205,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetK8SNetworkDrivers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.KubernetesAPI.GetK8SNetworkDrivers(context.Background()).Execute()
 
@@ -216,7 +217,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetK8SVersions", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.KubernetesAPI.GetK8SVersions(context.Background()).Execute()
 
@@ -228,7 +229,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService GetKubernetesPresets", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.KubernetesAPI.GetKubernetesPresets(context.Background()).Execute()
 
@@ -240,7 +241,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService IncreaseCountOfNodesInGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 		var groupId int32
@@ -255,7 +256,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService ReduceCountOfNodesInGroup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 		var groupId int32
@@ -269,7 +270,7 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	t.Run("Test KubernetesAPIService UpdateCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var clusterId int32
 

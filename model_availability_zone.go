@@ -21,14 +21,14 @@ type AvailabilityZone string
 
 // List of availability-zone
 const (
-	SPB_1 AvailabilityZone = "spb-1"
-	SPB_2 AvailabilityZone = "spb-2"
-	SPB_3 AvailabilityZone = "spb-3"
-	SPB_4 AvailabilityZone = "spb-4"
-	NSK_1 AvailabilityZone = "nsk-1"
-	AMS_1 AvailabilityZone = "ams-1"
-	GDN_1 AvailabilityZone = "gdn-1"
-	ALA_1 AvailabilityZone = "ala-1"
+	AVAILABILITYZONE_SPB_1 AvailabilityZone = "spb-1"
+	AVAILABILITYZONE_SPB_2 AvailabilityZone = "spb-2"
+	AVAILABILITYZONE_SPB_3 AvailabilityZone = "spb-3"
+	AVAILABILITYZONE_SPB_4 AvailabilityZone = "spb-4"
+	AVAILABILITYZONE_NSK_1 AvailabilityZone = "nsk-1"
+	AVAILABILITYZONE_AMS_1 AvailabilityZone = "ams-1"
+	AVAILABILITYZONE_GDN_1 AvailabilityZone = "gdn-1"
+	AVAILABILITYZONE_ALA_1 AvailabilityZone = "ala-1"
 )
 
 // All allowed values of AvailabilityZone enum

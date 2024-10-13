@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_AccountAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService AddCountriesToAllowedList", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.AddCountriesToAllowedList(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService AddIPsToAllowedList", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.AddIPsToAllowedList(context.Background()).Execute()
 
@@ -48,7 +49,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService DeleteCountriesFromAllowedList", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.DeleteCountriesFromAllowedList(context.Background()).Execute()
 
@@ -60,7 +61,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService DeleteIPsFromAllowedList", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.DeleteIPsFromAllowedList(context.Background()).Execute()
 
@@ -72,7 +73,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService GetAccountStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.GetAccountStatus(context.Background()).Execute()
 
@@ -84,7 +85,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService GetAuthAccessSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.GetAuthAccessSettings(context.Background()).Execute()
 
@@ -96,7 +97,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService GetCountries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.GetCountries(context.Background()).Execute()
 
@@ -108,7 +109,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService GetFinances", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.GetFinances(context.Background()).Execute()
 
@@ -120,7 +121,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService GetNotificationSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.GetNotificationSettings(context.Background()).Execute()
 
@@ -132,7 +133,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService UpdateAuthRestrictionsByCountries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.AccountAPI.UpdateAuthRestrictionsByCountries(context.Background()).Execute()
 
@@ -143,7 +144,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService UpdateAuthRestrictionsByIP", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.AccountAPI.UpdateAuthRestrictionsByIP(context.Background()).Execute()
 
@@ -154,7 +155,7 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	t.Run("Test AccountAPIService UpdateNotificationSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.UpdateNotificationSettings(context.Background()).Execute()
 

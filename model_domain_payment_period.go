@@ -21,16 +21,16 @@ type DomainPaymentPeriod string
 
 // List of domain-payment-period
 const (
-	P1_Y DomainPaymentPeriod = "P1Y"
-	P2_Y DomainPaymentPeriod = "P2Y"
-	P3_Y DomainPaymentPeriod = "P3Y"
-	P4_Y DomainPaymentPeriod = "P4Y"
-	P5_Y DomainPaymentPeriod = "P5Y"
-	P6_Y DomainPaymentPeriod = "P6Y"
-	P7_Y DomainPaymentPeriod = "P7Y"
-	P8_Y DomainPaymentPeriod = "P8Y"
-	P9_Y DomainPaymentPeriod = "P9Y"
-	P10_Y DomainPaymentPeriod = "P10Y"
+	DOMAINPAYMENTPERIOD_P1_Y DomainPaymentPeriod = "P1Y"
+	DOMAINPAYMENTPERIOD_P2_Y DomainPaymentPeriod = "P2Y"
+	DOMAINPAYMENTPERIOD_P3_Y DomainPaymentPeriod = "P3Y"
+	DOMAINPAYMENTPERIOD_P4_Y DomainPaymentPeriod = "P4Y"
+	DOMAINPAYMENTPERIOD_P5_Y DomainPaymentPeriod = "P5Y"
+	DOMAINPAYMENTPERIOD_P6_Y DomainPaymentPeriod = "P6Y"
+	DOMAINPAYMENTPERIOD_P7_Y DomainPaymentPeriod = "P7Y"
+	DOMAINPAYMENTPERIOD_P8_Y DomainPaymentPeriod = "P8Y"
+	DOMAINPAYMENTPERIOD_P9_Y DomainPaymentPeriod = "P9Y"
+	DOMAINPAYMENTPERIOD_P10_Y DomainPaymentPeriod = "P10Y"
 )
 
 // All allowed values of DomainPaymentPeriod enum

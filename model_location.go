@@ -21,12 +21,12 @@ type Location string
 
 // List of location
 const (
-	RU_1 Location = "ru-1"
-	RU_2 Location = "ru-2"
-	RU_3 Location = "ru-3"
-	PL_1 Location = "pl-1"
-	KZ_1 Location = "kz-1"
-	NL_1 Location = "nl-1"
+	LOCATION_RU_1 Location = "ru-1"
+	LOCATION_RU_2 Location = "ru-2"
+	LOCATION_RU_3 Location = "ru-3"
+	LOCATION_PL_1 Location = "pl-1"
+	LOCATION_KZ_1 Location = "kz-1"
+	LOCATION_NL_1 Location = "nl-1"
 )
 
 // All allowed values of Location enum

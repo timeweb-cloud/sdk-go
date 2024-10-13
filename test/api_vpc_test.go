@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_VPCAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 	t.Run("Test VPCAPIService CreateVPC", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.VPCAPI.CreateVPC(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 	t.Run("Test VPCAPIService DeleteVPC", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var vpcId string
 
@@ -50,7 +51,7 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 	t.Run("Test VPCAPIService GetVPC", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var vpcId string
 
@@ -64,7 +65,7 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 	t.Run("Test VPCAPIService GetVPCPorts", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var vpcId string
 
@@ -78,7 +79,7 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 	t.Run("Test VPCAPIService GetVPCServices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var vpcId string
 
@@ -92,7 +93,7 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 	t.Run("Test VPCAPIService GetVPCs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.VPCAPI.GetVPCs(context.Background()).Execute()
 
@@ -104,7 +105,7 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 	t.Run("Test VPCAPIService UpdateVPCs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var vpcId string
 
