@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_MailAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService CreateDomainMailbox", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var domain string
 
@@ -38,7 +39,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService DeleteMailbox", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var domain string
 		var mailbox string
@@ -52,7 +53,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService GetDomainMailInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var domain string
 
@@ -66,7 +67,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService GetDomainMailboxes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var domain string
 
@@ -80,7 +81,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService GetMailQuota", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.MailAPI.GetMailQuota(context.Background()).Execute()
 
@@ -92,7 +93,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService GetMailbox", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var domain string
 		var mailbox string
@@ -107,7 +108,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService GetMailboxes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.MailAPI.GetMailboxes(context.Background()).Execute()
 
@@ -119,7 +120,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService UpdateDomainMailInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var domain string
 
@@ -133,7 +134,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService UpdateMailQuota", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.MailAPI.UpdateMailQuota(context.Background()).Execute()
 
@@ -145,7 +146,7 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	t.Run("Test MailAPIService UpdateMailbox", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var domain string
 		var mailbox string

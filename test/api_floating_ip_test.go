@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_FloatingIPAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_FloatingIPAPIService(t *testing.T) {
 
 	t.Run("Test FloatingIPAPIService BindFloatingIp", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var floatingIpId string
 
@@ -37,7 +38,7 @@ func Test_openapi_FloatingIPAPIService(t *testing.T) {
 
 	t.Run("Test FloatingIPAPIService CreateFloatingIp", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FloatingIPAPI.CreateFloatingIp(context.Background()).Execute()
 
@@ -49,7 +50,7 @@ func Test_openapi_FloatingIPAPIService(t *testing.T) {
 
 	t.Run("Test FloatingIPAPIService DeleteFloatingIP", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var floatingIpId string
 
@@ -62,7 +63,7 @@ func Test_openapi_FloatingIPAPIService(t *testing.T) {
 
 	t.Run("Test FloatingIPAPIService GetFloatingIp", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var floatingIpId string
 
@@ -76,7 +77,7 @@ func Test_openapi_FloatingIPAPIService(t *testing.T) {
 
 	t.Run("Test FloatingIPAPIService GetFloatingIps", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FloatingIPAPI.GetFloatingIps(context.Background()).Execute()
 
@@ -88,7 +89,7 @@ func Test_openapi_FloatingIPAPIService(t *testing.T) {
 
 	t.Run("Test FloatingIPAPIService UnbindFloatingIp", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var floatingIpId string
 
@@ -101,7 +102,7 @@ func Test_openapi_FloatingIPAPIService(t *testing.T) {
 
 	t.Run("Test FloatingIPAPIService UpdateFloatingIP", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var floatingIpId string
 
