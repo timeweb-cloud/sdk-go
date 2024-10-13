@@ -21,10 +21,10 @@ type UrlStatus string
 
 // List of UrlStatus
 const (
-	PROCESS UrlStatus = "process"
-	FAILED UrlStatus = "failed"
-	FINISHED UrlStatus = "finished"
-	ALREADY_EXISTS UrlStatus = "already_exists"
+	URLSTATUS_PROCESS UrlStatus = "process"
+	URLSTATUS_FAILED UrlStatus = "failed"
+	URLSTATUS_FINISHED UrlStatus = "finished"
+	URLSTATUS_ALREADY_EXISTS UrlStatus = "already_exists"
 )
 
 // All allowed values of UrlStatus enum

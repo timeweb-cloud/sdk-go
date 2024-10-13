@@ -21,10 +21,10 @@ type DomainPrimeType string
 
 // List of domain-prime-type
 const (
-	EXTRA DomainPrimeType = "extra"
-	PREMIUM DomainPrimeType = "premium"
-	OPTIMAL DomainPrimeType = "optimal"
-	MAXIMAL DomainPrimeType = "maximal"
+	DOMAINPRIMETYPE_EXTRA DomainPrimeType = "extra"
+	DOMAINPRIMETYPE_PREMIUM DomainPrimeType = "premium"
+	DOMAINPRIMETYPE_OPTIMAL DomainPrimeType = "optimal"
+	DOMAINPRIMETYPE_MAXIMAL DomainPrimeType = "maximal"
 )
 
 // All allowed values of DomainPrimeType enum

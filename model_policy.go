@@ -21,8 +21,8 @@ type Policy string
 
 // List of Policy
 const (
-	ACCEPT Policy = "ACCEPT"
-	DROP Policy = "DROP"
+	POLICY_ACCEPT Policy = "ACCEPT"
+	POLICY_DROP Policy = "DROP"
 )
 
 // All allowed values of Policy enum
