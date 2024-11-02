@@ -12921,7 +12921,10 @@ paths:
           \t}\n}\n"
   /api/v1/k8s/clusters/{cluster_id}/resources:
     get:
-      description: "Чтобы получить ресурсы кластера, отправьте GET-запрос в `/api/v1/k8s/clusters/{cluster_id}/resources`."
+      deprecated: true
+      description: |-
+        Устаревший метод, работает только для старых кластеров. \
+         Чтобы получить ресурсы кластера, отправьте GET-запрос в `/api/v1/k8s/clusters/{cluster_id}/resources`.
       operationId: getClusterResources
       parameters:
       - description: Уникальный идентификатор кластера

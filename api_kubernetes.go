@@ -1915,11 +1915,14 @@ func (r ApiGetClusterResourcesRequest) Execute() (*ResourcesResponse, *http.Resp
 /*
 GetClusterResources Получение ресурсов кластера
 
-Чтобы получить ресурсы кластера, отправьте GET-запрос в `/api/v1/k8s/clusters/{cluster_id}/resources`.
+Устаревший метод, работает только для старых кластеров. \
+ Чтобы получить ресурсы кластера, отправьте GET-запрос в `/api/v1/k8s/clusters/{cluster_id}/resources`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId Уникальный идентификатор кластера
  @return ApiGetClusterResourcesRequest
+
+Deprecated
 */
 func (a *KubernetesAPIService) GetClusterResources(ctx context.Context, clusterId int32) ApiGetClusterResourcesRequest {
 	return ApiGetClusterResourcesRequest{
@@ -1931,6 +1934,7 @@ func (a *KubernetesAPIService) GetClusterResources(ctx context.Context, clusterI
 
 // Execute executes the request
 //  @return ResourcesResponse
+// Deprecated
 func (a *KubernetesAPIService) GetClusterResourcesExecute(r ApiGetClusterResourcesRequest) (*ResourcesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
