@@ -17,8 +17,8 @@ Method | HTTP request | Description
 [**GetClusterNodesFromGroup**](KubernetesAPI.md#GetClusterNodesFromGroup) | **Get** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Получение списка нод, принадлежащих группе
 [**GetClusterResources**](KubernetesAPI.md#GetClusterResources) | **Get** /api/v1/k8s/clusters/{cluster_id}/resources | Получение ресурсов кластера
 [**GetClusters**](KubernetesAPI.md#GetClusters) | **Get** /api/v1/k8s/clusters | Получение списка кластеров
-[**GetK8SNetworkDrivers**](KubernetesAPI.md#GetK8SNetworkDrivers) | **Get** /api/v1/k8s/network_drivers | Получение списка сетевых драйверов k8s
-[**GetK8SVersions**](KubernetesAPI.md#GetK8SVersions) | **Get** /api/v1/k8s/k8s_versions | Получение списка версий k8s
+[**GetK8SNetworkDrivers**](KubernetesAPI.md#GetK8SNetworkDrivers) | **Get** /api/v1/k8s/network-drivers | Получение списка сетевых драйверов k8s
+[**GetK8SVersions**](KubernetesAPI.md#GetK8SVersions) | **Get** /api/v1/k8s/k8s-versions | Получение списка версий k8s
 [**GetKubernetesPresets**](KubernetesAPI.md#GetKubernetesPresets) | **Get** /api/v1/presets/k8s | Получение списка тарифов
 [**IncreaseCountOfNodesInGroup**](KubernetesAPI.md#IncreaseCountOfNodesInGroup) | **Post** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Увеличение количества нод в группе на указанное количество
 [**ReduceCountOfNodesInGroup**](KubernetesAPI.md#ReduceCountOfNodesInGroup) | **Delete** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Уменьшение количества нод в группе на указанное количество

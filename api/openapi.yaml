@@ -14765,9 +14765,9 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/k8s/k8s_versions:
+  /api/v1/k8s/k8s-versions:
     get:
-      description: "Чтобы получить список версий k8s, отправьте GET-запрос в `/api/v1/k8s/k8s_versions`."
+      description: "Чтобы получить список версий k8s, отправьте GET-запрос в `/api/v1/k8s/k8s-versions`."
       operationId: getK8SVersions
       responses:
         "200":
@@ -14879,10 +14879,10 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/k8s/network_drivers:
+  /api/v1/k8s/network-drivers:
     get:
       description: "Чтобы получить список сетевых драйверов k8s, отправьте GET-зап\
-        рос в `/api/v1/k8s/network_drivers`."
+        рос в `/api/v1/k8s/network-drivers`."
       operationId: getK8SNetworkDrivers
       responses:
         "200":

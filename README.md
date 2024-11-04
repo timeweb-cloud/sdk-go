@@ -375,8 +375,8 @@ Class | Method | HTTP request | Description
 *KubernetesAPI* | [**GetClusterNodesFromGroup**](docs/KubernetesAPI.md#getclusternodesfromgroup) | **Get** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Получение списка нод, принадлежащих группе
 *KubernetesAPI* | [**GetClusterResources**](docs/KubernetesAPI.md#getclusterresources) | **Get** /api/v1/k8s/clusters/{cluster_id}/resources | Получение ресурсов кластера
 *KubernetesAPI* | [**GetClusters**](docs/KubernetesAPI.md#getclusters) | **Get** /api/v1/k8s/clusters | Получение списка кластеров
-*KubernetesAPI* | [**GetK8SNetworkDrivers**](docs/KubernetesAPI.md#getk8snetworkdrivers) | **Get** /api/v1/k8s/network_drivers | Получение списка сетевых драйверов k8s
-*KubernetesAPI* | [**GetK8SVersions**](docs/KubernetesAPI.md#getk8sversions) | **Get** /api/v1/k8s/k8s_versions | Получение списка версий k8s
+*KubernetesAPI* | [**GetK8SNetworkDrivers**](docs/KubernetesAPI.md#getk8snetworkdrivers) | **Get** /api/v1/k8s/network-drivers | Получение списка сетевых драйверов k8s
+*KubernetesAPI* | [**GetK8SVersions**](docs/KubernetesAPI.md#getk8sversions) | **Get** /api/v1/k8s/k8s-versions | Получение списка версий k8s
 *KubernetesAPI* | [**GetKubernetesPresets**](docs/KubernetesAPI.md#getkubernetespresets) | **Get** /api/v1/presets/k8s | Получение списка тарифов
 *KubernetesAPI* | [**IncreaseCountOfNodesInGroup**](docs/KubernetesAPI.md#increasecountofnodesingroup) | **Post** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Увеличение количества нод в группе на указанное количество
 *KubernetesAPI* | [**ReduceCountOfNodesInGroup**](docs/KubernetesAPI.md#reducecountofnodesingroup) | **Delete** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Уменьшение количества нод в группе на указанное количество

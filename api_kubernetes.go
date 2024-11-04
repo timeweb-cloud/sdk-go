@@ -2248,7 +2248,7 @@ func (r ApiGetK8SNetworkDriversRequest) Execute() (*NetworkDriversResponse, *htt
 /*
 GetK8SNetworkDrivers Получение списка сетевых драйверов k8s
 
-Чтобы получить список сетевых драйверов k8s, отправьте GET-запрос в `/api/v1/k8s/network_drivers`.
+Чтобы получить список сетевых драйверов k8s, отправьте GET-запрос в `/api/v1/k8s/network-drivers`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetK8SNetworkDriversRequest
@@ -2275,7 +2275,7 @@ func (a *KubernetesAPIService) GetK8SNetworkDriversExecute(r ApiGetK8SNetworkDri
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/k8s/network_drivers"
+	localVarPath := localBasePath + "/api/v1/k8s/network-drivers"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2390,7 +2390,7 @@ func (r ApiGetK8SVersionsRequest) Execute() (*K8SVersionsResponse, *http.Respons
 /*
 GetK8SVersions Получение списка версий k8s
 
-Чтобы получить список версий k8s, отправьте GET-запрос в `/api/v1/k8s/k8s_versions`.
+Чтобы получить список версий k8s, отправьте GET-запрос в `/api/v1/k8s/k8s-versions`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetK8SVersionsRequest
@@ -2417,7 +2417,7 @@ func (a *KubernetesAPIService) GetK8SVersionsExecute(r ApiGetK8SVersionsRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/k8s/k8s_versions"
+	localVarPath := localBasePath + "/api/v1/k8s/k8s-versions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
