@@ -21,21 +21,21 @@ type DbType string
 
 // List of db-type
 const (
-	MYSQL DbType = "mysql"
-	MYSQL5 DbType = "mysql5"
-	POSTGRES DbType = "postgres"
-	POSTGRES14 DbType = "postgres14"
-	POSTGRES15 DbType = "postgres15"
-	POSTGRES16 DbType = "postgres16"
-	REDIS DbType = "redis"
-	MONGODB4 DbType = "mongodb4"
-	MONGODB DbType = "mongodb"
-	MONGODB6 DbType = "mongodb6"
-	MONGODB7 DbType = "mongodb7"
-	OPENSEARCH DbType = "opensearch"
-	KAFKA DbType = "kafka"
-	RABBITMQ DbType = "rabbitmq"
-	CLICKHOUSE DbType = "clickhouse"
+	DBTYPE_MYSQL DbType = "mysql"
+	DBTYPE_MYSQL5 DbType = "mysql5"
+	DBTYPE_POSTGRES DbType = "postgres"
+	DBTYPE_POSTGRES14 DbType = "postgres14"
+	DBTYPE_POSTGRES15 DbType = "postgres15"
+	DBTYPE_POSTGRES16 DbType = "postgres16"
+	DBTYPE_REDIS DbType = "redis"
+	DBTYPE_MONGODB4 DbType = "mongodb4"
+	DBTYPE_MONGODB DbType = "mongodb"
+	DBTYPE_MONGODB6 DbType = "mongodb6"
+	DBTYPE_MONGODB7 DbType = "mongodb7"
+	DBTYPE_OPENSEARCH DbType = "opensearch"
+	DBTYPE_KAFKA DbType = "kafka"
+	DBTYPE_RABBITMQ DbType = "rabbitmq"
+	DBTYPE_CLICKHOUSE DbType = "clickhouse"
 )
 
 // All allowed values of DbType enum

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_LocationsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_LocationsAPIService(t *testing.T) {
 
 	t.Run("Test LocationsAPIService GetLocations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.LocationsAPI.GetLocations(context.Background()).Execute()
 

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_AppsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService AddProvider", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AppsAPI.AddProvider(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService CreateApp", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AppsAPI.CreateApp(context.Background()).Execute()
 
@@ -48,7 +49,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService CreateDeploy", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -62,7 +63,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService DeleteApp", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -75,7 +76,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService DeleteProvider", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerId string
 
@@ -88,7 +89,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService DeployAction", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 		var deployId string
@@ -103,7 +104,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetApp", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -117,7 +118,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetAppDeploys", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -131,7 +132,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetAppLogs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -145,7 +146,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetAppStatistics", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -159,7 +160,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetApps", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AppsAPI.GetApps(context.Background()).Execute()
 
@@ -171,7 +172,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetAppsPresets", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -185,7 +186,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetBranches", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerId string
 		var repositoryId string
@@ -200,7 +201,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetCommits", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var accountId string
 		var providerId string
@@ -216,7 +217,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetDeployLogs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 		var deployId string
@@ -231,7 +232,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetDeploySettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -245,7 +246,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetFrameworks", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -259,7 +260,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetProviders", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AppsAPI.GetProviders(context.Background()).Execute()
 
@@ -271,7 +272,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService GetRepositories", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerId string
 
@@ -285,7 +286,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService UpdateAppSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 
@@ -299,7 +300,7 @@ func Test_openapi_AppsAPIService(t *testing.T) {
 
 	t.Run("Test AppsAPIService UpdateAppState", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var appId string
 		var action string

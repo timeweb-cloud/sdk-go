@@ -21,17 +21,17 @@ type OS string
 
 // List of OS
 const (
-	CENTOS OS = "centos"
-	ALMALINUX OS = "almalinux"
-	DEBIAN OS = "debian"
-	BITRIX OS = "bitrix"
-	UBUNTU OS = "ubuntu"
-	BRAINYCP OS = "brainycp"
-	ARCHLINUX OS = "archlinux"
-	ASTRALINUX OS = "astralinux"
-	WINDOWS OS = "windows"
-	CUSTOM_OS OS = "custom_os"
-	OTHER OS = "other"
+	OS_CENTOS OS = "centos"
+	OS_ALMALINUX OS = "almalinux"
+	OS_DEBIAN OS = "debian"
+	OS_BITRIX OS = "bitrix"
+	OS_UBUNTU OS = "ubuntu"
+	OS_BRAINYCP OS = "brainycp"
+	OS_ARCHLINUX OS = "archlinux"
+	OS_ASTRALINUX OS = "astralinux"
+	OS_WINDOWS OS = "windows"
+	OS_CUSTOM_OS OS = "custom_os"
+	OS_OTHER OS = "other"
 )
 
 // All allowed values of OS enum

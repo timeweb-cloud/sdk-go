@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_DomainsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService AddDomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -37,7 +38,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService AddSubdomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 		var subdomainFqdn string
@@ -52,7 +53,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService CheckDomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -66,7 +67,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService CreateDomainDNSRecord", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -80,7 +81,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService CreateDomainRequest", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DomainsAPI.CreateDomainRequest(context.Background()).Execute()
 
@@ -92,7 +93,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService DeleteDomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -105,7 +106,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService DeleteDomainDNSRecord", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 		var recordId int32
@@ -119,7 +120,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService DeleteSubdomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 		var subdomainFqdn string
@@ -133,7 +134,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -147,7 +148,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomainDNSRecords", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -161,7 +162,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomainDefaultDNSRecords", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -175,7 +176,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomainNameServers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -189,7 +190,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomainRequest", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var requestId int32
 
@@ -203,7 +204,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomainRequests", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DomainsAPI.GetDomainRequests(context.Background()).Execute()
 
@@ -215,7 +216,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomains", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DomainsAPI.GetDomains(context.Background()).Execute()
 
@@ -227,7 +228,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetTLD", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var tldId int32
 
@@ -241,7 +242,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetTLDs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DomainsAPI.GetTLDs(context.Background()).Execute()
 
@@ -253,7 +254,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService UpdateDomainAutoProlongation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -267,7 +268,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService UpdateDomainDNSRecord", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 		var recordId int32
@@ -282,7 +283,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService UpdateDomainNameServers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var fqdn string
 
@@ -296,7 +297,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService UpdateDomainRequest", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var requestId int32
 

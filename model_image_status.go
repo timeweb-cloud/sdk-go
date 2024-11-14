@@ -21,10 +21,10 @@ type ImageStatus string
 
 // List of ImageStatus
 const (
-	NEW ImageStatus = "new"
-	CREATED ImageStatus = "created"
-	FAILED ImageStatus = "failed"
-	DELETED ImageStatus = "deleted"
+	IMAGESTATUS_NEW ImageStatus = "new"
+	IMAGESTATUS_CREATED ImageStatus = "created"
+	IMAGESTATUS_FAILED ImageStatus = "failed"
+	IMAGESTATUS_DELETED ImageStatus = "deleted"
 )
 
 // All allowed values of ImageStatus enum

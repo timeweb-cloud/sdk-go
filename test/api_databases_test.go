@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_DatabasesAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService CreateDatabase", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DatabasesAPI.CreateDatabase(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService CreateDatabaseBackup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 
@@ -50,7 +51,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService CreateDatabaseCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DatabasesAPI.CreateDatabaseCluster(context.Background()).Execute()
 
@@ -62,7 +63,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService CreateDatabaseInstance", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -76,7 +77,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService CreateDatabaseUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -90,7 +91,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService DeleteDatabase", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 
@@ -104,7 +105,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService DeleteDatabaseBackup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 		var backupId int32
@@ -118,7 +119,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService DeleteDatabaseCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -132,7 +133,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService DeleteDatabaseInstance", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 		var instanceId int32
@@ -146,7 +147,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService DeleteDatabaseUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 		var adminId int32
@@ -160,7 +161,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabase", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 
@@ -174,7 +175,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseAutoBackupsSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 
@@ -188,7 +189,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseBackup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 		var backupId int32
@@ -203,7 +204,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseBackups", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 
@@ -217,7 +218,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -231,7 +232,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseClusterTypes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseClusterTypes(context.Background()).Execute()
 
@@ -243,7 +244,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseClusters", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseClusters(context.Background()).Execute()
 
@@ -255,7 +256,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseInstance", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 		var instanceId int32
@@ -270,7 +271,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseInstances", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -284,7 +285,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 		var adminId int32
@@ -299,7 +300,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabaseUsers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -313,7 +314,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabases", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabases(context.Background()).Execute()
 
@@ -325,7 +326,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService GetDatabasesPresets", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabasesPresets(context.Background()).Execute()
 
@@ -337,7 +338,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService RestoreDatabaseFromBackup", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 		var backupId int32
@@ -351,7 +352,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService UpdateDatabase", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 
@@ -365,7 +366,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService UpdateDatabaseAutoBackupsSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbId int32
 
@@ -379,7 +380,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService UpdateDatabaseCluster", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -393,7 +394,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService UpdateDatabaseInstance", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 
@@ -407,7 +408,7 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	t.Run("Test DatabasesAPIService UpdateDatabaseUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var dbClusterId int32
 		var adminId int32

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/timeweb-cloud/sdk-go"
 )
 
 func Test_openapi_BalancersAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService AddIPsToBalancer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -37,7 +38,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService CreateBalancer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.BalancersAPI.CreateBalancer(context.Background()).Execute()
 
@@ -49,7 +50,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService CreateBalancerRule", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -63,7 +64,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService DeleteBalancer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -77,7 +78,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService DeleteBalancerRule", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 		var ruleId int32
@@ -91,7 +92,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService DeleteIPsFromBalancer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -104,7 +105,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService GetBalancer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -118,7 +119,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService GetBalancerIPs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -132,7 +133,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService GetBalancerRules", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -146,7 +147,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService GetBalancers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.BalancersAPI.GetBalancers(context.Background()).Execute()
 
@@ -158,7 +159,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService GetBalancersPresets", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.BalancersAPI.GetBalancersPresets(context.Background()).Execute()
 
@@ -170,7 +171,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService UpdateBalancer", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 
@@ -184,7 +185,7 @@ func Test_openapi_BalancersAPIService(t *testing.T) {
 
 	t.Run("Test BalancersAPIService UpdateBalancerRule", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var balancerId int32
 		var ruleId int32
