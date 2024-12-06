@@ -23,11 +23,12 @@ type DbType string
 const (
 	MYSQL DbType = "mysql"
 	MYSQL5 DbType = "mysql5"
-	POSTGRES DbType = "postgres"
 	POSTGRES14 DbType = "postgres14"
 	POSTGRES15 DbType = "postgres15"
 	POSTGRES16 DbType = "postgres16"
+	POSTGRES17 DbType = "postgres17"
 	REDIS DbType = "redis"
+	REDIS7 DbType = "redis7"
 	MONGODB4 DbType = "mongodb4"
 	MONGODB DbType = "mongodb"
 	MONGODB6 DbType = "mongodb6"
@@ -42,11 +43,12 @@ const (
 var AllowedDbTypeEnumValues = []DbType{
 	"mysql",
 	"mysql5",
-	"postgres",
 	"postgres14",
 	"postgres15",
 	"postgres16",
+	"postgres17",
 	"redis",
+	"redis7",
 	"mongodb4",
 	"mongodb",
 	"mongodb6",

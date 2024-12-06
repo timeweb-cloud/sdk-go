@@ -42639,11 +42639,12 @@ components:
       enum:
       - mysql
       - mysql5
-      - postgres
       - postgres14
       - postgres15
       - postgres16
+      - postgres17
       - redis
+      - redis7
       - mongodb4
       - mongodb
       - mongodb6

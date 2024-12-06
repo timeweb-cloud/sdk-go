@@ -7,15 +7,17 @@
 
 * `MYSQL5` (value: `"mysql5"`)
 
-* `POSTGRES` (value: `"postgres"`)
-
 * `POSTGRES14` (value: `"postgres14"`)
 
 * `POSTGRES15` (value: `"postgres15"`)
 
 * `POSTGRES16` (value: `"postgres16"`)
 
+* `POSTGRES17` (value: `"postgres17"`)
+
 * `REDIS` (value: `"redis"`)
+
+* `REDIS7` (value: `"redis7"`)
 
 * `MONGODB4` (value: `"mongodb4"`)
 
