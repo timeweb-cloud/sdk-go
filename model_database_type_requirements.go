@@ -15,172 +15,133 @@ import (
 	"encoding/json"
 )
 
-// checks if the DatabaseType type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DatabaseType{}
+// checks if the DatabaseTypeRequirements type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DatabaseTypeRequirements{}
 
-// DatabaseType Тип кластера базы данных
-type DatabaseType struct {
-	// Название кластера базы данных.
-	Name string `json:"name"`
-	// Версия кластера базы данных.
-	Version string `json:"version"`
-	// Тип кластера базы данных. Передается при создании кластера в поле `type`
-	Type string `json:"type"`
-	// Поддерживает ли база данных репликацию.
-	IsAvailableReplication bool `json:"is_available_replication"`
-	Requirements *DatabaseTypeRequirements `json:"requirements,omitempty"`
+// DatabaseTypeRequirements Требования к кластеру базы данных.
+type DatabaseTypeRequirements struct {
+	// Минимальное количество CPU.
+	CpuMin *float32 `json:"cpu_min,omitempty"`
+	// Минимальный объем оперативной памяти.
+	RamMin *float32 `json:"ram_min,omitempty"`
+	// Минимальный объем дискового пространства.
+	DiskMin *float32 `json:"disk_min,omitempty"`
 }
 
-// NewDatabaseType instantiates a new DatabaseType object
+// NewDatabaseTypeRequirements instantiates a new DatabaseTypeRequirements object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseType(name string, version string, type_ string, isAvailableReplication bool) *DatabaseType {
-	this := DatabaseType{}
-	this.Name = name
-	this.Version = version
-	this.Type = type_
-	this.IsAvailableReplication = isAvailableReplication
+func NewDatabaseTypeRequirements() *DatabaseTypeRequirements {
+	this := DatabaseTypeRequirements{}
 	return &this
 }
 
-// NewDatabaseTypeWithDefaults instantiates a new DatabaseType object
+// NewDatabaseTypeRequirementsWithDefaults instantiates a new DatabaseTypeRequirements object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDatabaseTypeWithDefaults() *DatabaseType {
-	this := DatabaseType{}
+func NewDatabaseTypeRequirementsWithDefaults() *DatabaseTypeRequirements {
+	this := DatabaseTypeRequirements{}
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *DatabaseType) GetName() string {
-	if o == nil {
-		var ret string
+// GetCpuMin returns the CpuMin field value if set, zero value otherwise.
+func (o *DatabaseTypeRequirements) GetCpuMin() float32 {
+	if o == nil || IsNil(o.CpuMin) {
+		var ret float32
 		return ret
 	}
-
-	return o.Name
+	return *o.CpuMin
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetCpuMinOk returns a tuple with the CpuMin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DatabaseType) GetNameOk() (*string, bool) {
-	if o == nil {
+func (o *DatabaseTypeRequirements) GetCpuMinOk() (*float32, bool) {
+	if o == nil || IsNil(o.CpuMin) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.CpuMin, true
 }
 
-// SetName sets field value
-func (o *DatabaseType) SetName(v string) {
-	o.Name = v
-}
-
-// GetVersion returns the Version field value
-func (o *DatabaseType) GetVersion() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Version
-}
-
-// GetVersionOk returns a tuple with the Version field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseType) GetVersionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Version, true
-}
-
-// SetVersion sets field value
-func (o *DatabaseType) SetVersion(v string) {
-	o.Version = v
-}
-
-// GetType returns the Type field value
-func (o *DatabaseType) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseType) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *DatabaseType) SetType(v string) {
-	o.Type = v
-}
-
-// GetIsAvailableReplication returns the IsAvailableReplication field value
-func (o *DatabaseType) GetIsAvailableReplication() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsAvailableReplication
-}
-
-// GetIsAvailableReplicationOk returns a tuple with the IsAvailableReplication field value
-// and a boolean to check if the value has been set.
-func (o *DatabaseType) GetIsAvailableReplicationOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsAvailableReplication, true
-}
-
-// SetIsAvailableReplication sets field value
-func (o *DatabaseType) SetIsAvailableReplication(v bool) {
-	o.IsAvailableReplication = v
-}
-
-// GetRequirements returns the Requirements field value if set, zero value otherwise.
-func (o *DatabaseType) GetRequirements() DatabaseTypeRequirements {
-	if o == nil || IsNil(o.Requirements) {
-		var ret DatabaseTypeRequirements
-		return ret
-	}
-	return *o.Requirements
-}
-
-// GetRequirementsOk returns a tuple with the Requirements field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DatabaseType) GetRequirementsOk() (*DatabaseTypeRequirements, bool) {
-	if o == nil || IsNil(o.Requirements) {
-		return nil, false
-	}
-	return o.Requirements, true
-}
-
-// HasRequirements returns a boolean if a field has been set.
-func (o *DatabaseType) HasRequirements() bool {
-	if o != nil && !IsNil(o.Requirements) {
+// HasCpuMin returns a boolean if a field has been set.
+func (o *DatabaseTypeRequirements) HasCpuMin() bool {
+	if o != nil && !IsNil(o.CpuMin) {
 		return true
 	}
 
 	return false
 }
 
-// SetRequirements gets a reference to the given DatabaseTypeRequirements and assigns it to the Requirements field.
-func (o *DatabaseType) SetRequirements(v DatabaseTypeRequirements) {
-	o.Requirements = &v
+// SetCpuMin gets a reference to the given float32 and assigns it to the CpuMin field.
+func (o *DatabaseTypeRequirements) SetCpuMin(v float32) {
+	o.CpuMin = &v
 }
 
-func (o DatabaseType) MarshalJSON() ([]byte, error) {
+// GetRamMin returns the RamMin field value if set, zero value otherwise.
+func (o *DatabaseTypeRequirements) GetRamMin() float32 {
+	if o == nil || IsNil(o.RamMin) {
+		var ret float32
+		return ret
+	}
+	return *o.RamMin
+}
+
+// GetRamMinOk returns a tuple with the RamMin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DatabaseTypeRequirements) GetRamMinOk() (*float32, bool) {
+	if o == nil || IsNil(o.RamMin) {
+		return nil, false
+	}
+	return o.RamMin, true
+}
+
+// HasRamMin returns a boolean if a field has been set.
+func (o *DatabaseTypeRequirements) HasRamMin() bool {
+	if o != nil && !IsNil(o.RamMin) {
+		return true
+	}
+
+	return false
+}
+
+// SetRamMin gets a reference to the given float32 and assigns it to the RamMin field.
+func (o *DatabaseTypeRequirements) SetRamMin(v float32) {
+	o.RamMin = &v
+}
+
+// GetDiskMin returns the DiskMin field value if set, zero value otherwise.
+func (o *DatabaseTypeRequirements) GetDiskMin() float32 {
+	if o == nil || IsNil(o.DiskMin) {
+		var ret float32
+		return ret
+	}
+	return *o.DiskMin
+}
+
+// GetDiskMinOk returns a tuple with the DiskMin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DatabaseTypeRequirements) GetDiskMinOk() (*float32, bool) {
+	if o == nil || IsNil(o.DiskMin) {
+		return nil, false
+	}
+	return o.DiskMin, true
+}
+
+// HasDiskMin returns a boolean if a field has been set.
+func (o *DatabaseTypeRequirements) HasDiskMin() bool {
+	if o != nil && !IsNil(o.DiskMin) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskMin gets a reference to the given float32 and assigns it to the DiskMin field.
+func (o *DatabaseTypeRequirements) SetDiskMin(v float32) {
+	o.DiskMin = &v
+}
+
+func (o DatabaseTypeRequirements) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -188,50 +149,52 @@ func (o DatabaseType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DatabaseType) ToMap() (map[string]interface{}, error) {
+func (o DatabaseTypeRequirements) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["version"] = o.Version
-	toSerialize["type"] = o.Type
-	toSerialize["is_available_replication"] = o.IsAvailableReplication
-	if !IsNil(o.Requirements) {
-		toSerialize["requirements"] = o.Requirements
+	if !IsNil(o.CpuMin) {
+		toSerialize["cpu_min"] = o.CpuMin
+	}
+	if !IsNil(o.RamMin) {
+		toSerialize["ram_min"] = o.RamMin
+	}
+	if !IsNil(o.DiskMin) {
+		toSerialize["disk_min"] = o.DiskMin
 	}
 	return toSerialize, nil
 }
 
-type NullableDatabaseType struct {
-	value *DatabaseType
+type NullableDatabaseTypeRequirements struct {
+	value *DatabaseTypeRequirements
 	isSet bool
 }
 
-func (v NullableDatabaseType) Get() *DatabaseType {
+func (v NullableDatabaseTypeRequirements) Get() *DatabaseTypeRequirements {
 	return v.value
 }
 
-func (v *NullableDatabaseType) Set(val *DatabaseType) {
+func (v *NullableDatabaseTypeRequirements) Set(val *DatabaseTypeRequirements) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDatabaseType) IsSet() bool {
+func (v NullableDatabaseTypeRequirements) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDatabaseType) Unset() {
+func (v *NullableDatabaseTypeRequirements) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDatabaseType(val *DatabaseType) *NullableDatabaseType {
-	return &NullableDatabaseType{value: val, isSet: true}
+func NewNullableDatabaseTypeRequirements(val *DatabaseTypeRequirements) *NullableDatabaseTypeRequirements {
+	return &NullableDatabaseTypeRequirements{value: val, isSet: true}
 }
 
-func (v NullableDatabaseType) MarshalJSON() ([]byte, error) {
+func (v NullableDatabaseTypeRequirements) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDatabaseType) UnmarshalJSON(src []byte) error {
+func (v *NullableDatabaseTypeRequirements) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

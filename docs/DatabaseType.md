@@ -7,12 +7,14 @@ Name | Type | Description | Notes
 **Name** | **string** | Название кластера базы данных. | 
 **Version** | **string** | Версия кластера базы данных. | 
 **Type** | **string** | Тип кластера базы данных. Передается при создании кластера в поле &#x60;type&#x60; | 
+**IsAvailableReplication** | **bool** | Поддерживает ли база данных репликацию. | 
+**Requirements** | Pointer to [**DatabaseTypeRequirements**](DatabaseTypeRequirements.md) |  | [optional] 
 
 ## Methods
 
 ### NewDatabaseType
 
-`func NewDatabaseType(name string, version string, type_ string, ) *DatabaseType`
+`func NewDatabaseType(name string, version string, type_ string, isAvailableReplication bool, ) *DatabaseType`
 
 NewDatabaseType instantiates a new DatabaseType object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +88,51 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetIsAvailableReplication
+
+`func (o *DatabaseType) GetIsAvailableReplication() bool`
+
+GetIsAvailableReplication returns the IsAvailableReplication field if non-nil, zero value otherwise.
+
+### GetIsAvailableReplicationOk
+
+`func (o *DatabaseType) GetIsAvailableReplicationOk() (*bool, bool)`
+
+GetIsAvailableReplicationOk returns a tuple with the IsAvailableReplication field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAvailableReplication
+
+`func (o *DatabaseType) SetIsAvailableReplication(v bool)`
+
+SetIsAvailableReplication sets IsAvailableReplication field to given value.
+
+
+### GetRequirements
+
+`func (o *DatabaseType) GetRequirements() DatabaseTypeRequirements`
+
+GetRequirements returns the Requirements field if non-nil, zero value otherwise.
+
+### GetRequirementsOk
+
+`func (o *DatabaseType) GetRequirementsOk() (*DatabaseTypeRequirements, bool)`
+
+GetRequirementsOk returns a tuple with the Requirements field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequirements
+
+`func (o *DatabaseType) SetRequirements(v DatabaseTypeRequirements)`
+
+SetRequirements sets Requirements field to given value.
+
+### HasRequirements
+
+`func (o *DatabaseType) HasRequirements() bool`
+
+HasRequirements returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

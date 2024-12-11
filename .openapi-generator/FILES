@@ -146,6 +146,7 @@ docs/DatabaseClusterNetworksInner.md
 docs/DatabaseClusterNetworksInnerIpsInner.md
 docs/DatabaseInstance.md
 docs/DatabaseType.md
+docs/DatabaseTypeRequirements.md
 docs/DatabasesAPI.md
 docs/Db.md
 docs/DbDiskStats.md
@@ -564,6 +565,7 @@ model_database_cluster_networks_inner.go
 model_database_cluster_networks_inner_ips_inner.go
 model_database_instance.go
 model_database_type.go
+model_database_type_requirements.go
 model_db.go
 model_db_disk_stats.go
 model_db_type.go

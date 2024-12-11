@@ -21120,7 +21120,7 @@ paths:
   /api/v1/projects:
     get:
       description: |-
-        Чтобы получить список всех проектов на вашем аккаунте, отправьте GET-запрос на `/api/v1/dedicated-servers`.
+        Чтобы получить список всех проектов на вашем аккаунте, отправьте GET-запрос на `/api/v1/projects`.
 
          Тело ответа будет представлять собой объект JSON с ключом `projects`.
       operationId: getProjects
@@ -43284,6 +43284,11 @@ components:
     database-type:
       description: Тип кластера базы данных
       example:
+        requirements:
+          disk_min: 1024
+          ram_min: 8192
+          cpu_min: 1
+        is_available_replication: true
         name: mysql
         type: mysql5
         version: "5.7"
@@ -43301,7 +43306,14 @@ components:
             в поле `type`
           example: mysql5
           type: string
+        is_available_replication:
+          description: Поддерживает ли база данных репликацию.
+          example: true
+          type: boolean
+        requirements:
+          $ref: '#/components/schemas/database_type_requirements'
       required:
+      - is_available_replication
       - name
       - type
       - version
@@ -49430,10 +49442,20 @@ components:
     getDatabaseClusterTypes_200_response:
       example:
         types:
-        - name: mysql
+        - requirements:
+            disk_min: 1024
+            ram_min: 8192
+            cpu_min: 1
+          is_available_replication: true
+          name: mysql
           type: mysql5
           version: "5.7"
-        - name: mysql
+        - requirements:
+            disk_min: 1024
+            ram_min: 8192
+            cpu_min: 1
+          is_available_replication: true
+          name: mysql
           type: mysql5
           version: "5.7"
         meta:
@@ -54121,6 +54143,26 @@ components:
       required:
       - instance_id
       - privileges
+      type: object
+    database_type_requirements:
+      description: Требования к кластеру базы данных.
+      example:
+        disk_min: 1024
+        ram_min: 8192
+        cpu_min: 1
+      properties:
+        cpu_min:
+          description: Минимальное количество CPU.
+          example: 1
+          type: number
+        ram_min:
+          description: Минимальный объем оперативной памяти.
+          example: 8192
+          type: number
+        disk_min:
+          description: Минимальный объем дискового пространства.
+          example: 1024
+          type: number
       type: object
     db_disk_stats:
       description: Статистика использования диска базы данных.

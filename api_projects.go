@@ -3576,7 +3576,7 @@ func (r ApiGetProjectsRequest) Execute() (*GetProjects200Response, *http.Respons
 /*
 GetProjects Получение списка проектов
 
-Чтобы получить список всех проектов на вашем аккаунте, отправьте GET-запрос на `/api/v1/dedicated-servers`.
+Чтобы получить список всех проектов на вашем аккаунте, отправьте GET-запрос на `/api/v1/projects`.
 
  Тело ответа будет представлять собой объект JSON с ключом `projects`.
 
