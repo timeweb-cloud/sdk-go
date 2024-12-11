@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**GetDatabaseClusters**](DatabasesAPI.md#GetDatabaseClusters) | **Get** /api/v1/databases | Получение списка кластеров баз данных
 [**GetDatabaseInstance**](DatabasesAPI.md#GetDatabaseInstance) | **Get** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Получение инстанса базы данных
 [**GetDatabaseInstances**](DatabasesAPI.md#GetDatabaseInstances) | **Get** /api/v1/databases/{db_cluster_id}/instances | Получение списка инстансов баз данных
+[**GetDatabaseParameters**](DatabasesAPI.md#GetDatabaseParameters) | **Get** /api/v1/dbs/parameters | Получение списка параметров баз данных
 [**GetDatabaseUser**](DatabasesAPI.md#GetDatabaseUser) | **Get** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Получение пользователя базы данных
 [**GetDatabaseUsers**](DatabasesAPI.md#GetDatabaseUsers) | **Get** /api/v1/databases/{db_cluster_id}/admins | Получение списка пользователей базы данных
 [**GetDatabases**](DatabasesAPI.md#GetDatabases) | **Get** /api/v1/dbs | Получение списка всех баз данных
@@ -1357,6 +1358,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDatabaseInstances200Response**](GetDatabaseInstances200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabaseParameters
+
+> map[string][]string GetDatabaseParameters(ctx).Execute()
+
+Получение списка параметров баз данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabaseParameters(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseParameters``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabaseParameters`: map[string][]string
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseParameters`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabaseParametersRequest struct via the builder pattern
+
+
+### Return type
+
+[**map[string][]string**](array.md)
 
 ### Authorization
 

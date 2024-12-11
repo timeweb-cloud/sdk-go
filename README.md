@@ -293,6 +293,7 @@ Class | Method | HTTP request | Description
 *DatabasesAPI* | [**GetDatabaseClusters**](docs/DatabasesAPI.md#getdatabaseclusters) | **Get** /api/v1/databases | Получение списка кластеров баз данных
 *DatabasesAPI* | [**GetDatabaseInstance**](docs/DatabasesAPI.md#getdatabaseinstance) | **Get** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Получение инстанса базы данных
 *DatabasesAPI* | [**GetDatabaseInstances**](docs/DatabasesAPI.md#getdatabaseinstances) | **Get** /api/v1/databases/{db_cluster_id}/instances | Получение списка инстансов баз данных
+*DatabasesAPI* | [**GetDatabaseParameters**](docs/DatabasesAPI.md#getdatabaseparameters) | **Get** /api/v1/dbs/parameters | Получение списка параметров баз данных
 *DatabasesAPI* | [**GetDatabaseUser**](docs/DatabasesAPI.md#getdatabaseuser) | **Get** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Получение пользователя базы данных
 *DatabasesAPI* | [**GetDatabaseUsers**](docs/DatabasesAPI.md#getdatabaseusers) | **Get** /api/v1/databases/{db_cluster_id}/admins | Получение списка пользователей базы данных
 *DatabasesAPI* | [**GetDatabases**](docs/DatabasesAPI.md#getdatabases) | **Get** /api/v1/dbs | Получение списка всех баз данных
