@@ -393,6 +393,15 @@ Class | Method | HTTP request | Description
 *MailAPI* | [**UpdateDomainMailInfo**](docs/MailAPI.md#updatedomainmailinfo) | **Patch** /api/v1/mail/domains/{domain}/info | Изменение почтовой информации о домене
 *MailAPI* | [**UpdateMailQuota**](docs/MailAPI.md#updatemailquota) | **Patch** /api/v1/mail/quota | Изменение квоты почты аккаунта
 *MailAPI* | [**UpdateMailbox**](docs/MailAPI.md#updatemailbox) | **Patch** /api/v1/mail/domains/{domain}/mailboxes/{mailbox} | Изменение почтового ящика
+*NetworkDrivesAPI* | [**CreateNetworkDrive**](docs/NetworkDrivesAPI.md#createnetworkdrive) | **Post** /api/v1/network-drives | Создание сетевого диска
+*NetworkDrivesAPI* | [**DeleteNetworkDrive**](docs/NetworkDrivesAPI.md#deletenetworkdrive) | **Delete** /api/v1/network-drives/{network_drive_id} | Удаление сетевого диска по идентификатору
+*NetworkDrivesAPI* | [**GetNetworkDrive**](docs/NetworkDrivesAPI.md#getnetworkdrive) | **Get** /api/v1/network-drives/{network_drive_id} | Получение сетевого диска
+*NetworkDrivesAPI* | [**GetNetworkDrives**](docs/NetworkDrivesAPI.md#getnetworkdrives) | **Get** /api/v1/network-drives | Получение списка cетевых дисков
+*NetworkDrivesAPI* | [**GetNetworkDrivesAvailableResources**](docs/NetworkDrivesAPI.md#getnetworkdrivesavailableresources) | **Get** /api/v1/network-drives/available-resources | Получение списка сервисов доступных для подключения диска
+*NetworkDrivesAPI* | [**GetNetworkDrivesPresets**](docs/NetworkDrivesAPI.md#getnetworkdrivespresets) | **Get** /api/v1/presets/network-drives | Получение списка доступных тарифов для сетевого диска
+*NetworkDrivesAPI* | [**MountNetworkDrive**](docs/NetworkDrivesAPI.md#mountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/bind | Подключить сетевой диск к сервису
+*NetworkDrivesAPI* | [**UnmountNetworkDrive**](docs/NetworkDrivesAPI.md#unmountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/unbind | Отключить сетевой диск от сервиса
+*NetworkDrivesAPI* | [**UpdateNetworkDrive**](docs/NetworkDrivesAPI.md#updatenetworkdrive) | **Patch** /api/v1/network-drives/{network_drive_id} | Изменение сетевого диска по идентификатору
 *ProjectsAPI* | [**AddBalancerToProject**](docs/ProjectsAPI.md#addbalancertoproject) | **Post** /api/v1/projects/{project_id}/resources/balancers | Добавление балансировщика в проект
 *ProjectsAPI* | [**AddClusterToProject**](docs/ProjectsAPI.md#addclustertoproject) | **Post** /api/v1/projects/{project_id}/resources/clusters | Добавление кластера в проект
 *ProjectsAPI* | [**AddDatabaseToProject**](docs/ProjectsAPI.md#adddatabasetoproject) | **Post** /api/v1/projects/{project_id}/resources/databases | Добавление базы данных в проект
@@ -588,6 +597,8 @@ Class | Method | HTTP request | Description
  - [CreateInstance](docs/CreateInstance.md)
  - [CreateKey201Response](docs/CreateKey201Response.md)
  - [CreateKeyRequest](docs/CreateKeyRequest.md)
+ - [CreateNetworkDrive](docs/CreateNetworkDrive.md)
+ - [CreateNetworkDrive201Response](docs/CreateNetworkDrive201Response.md)
  - [CreateProject](docs/CreateProject.md)
  - [CreateProject201Response](docs/CreateProject201Response.md)
  - [CreateRule](docs/CreateRule.md)
@@ -720,6 +731,9 @@ Class | Method | HTTP request | Description
  - [GetLocations200Response](docs/GetLocations200Response.md)
  - [GetMailQuota200Response](docs/GetMailQuota200Response.md)
  - [GetMailboxes200Response](docs/GetMailboxes200Response.md)
+ - [GetNetworkDrives200Response](docs/GetNetworkDrives200Response.md)
+ - [GetNetworkDrivesAvailableResources200Response](docs/GetNetworkDrivesAvailableResources200Response.md)
+ - [GetNetworkDrivesPresets200Response](docs/GetNetworkDrivesPresets200Response.md)
  - [GetNotificationSettings200Response](docs/GetNotificationSettings200Response.md)
  - [GetOsList200Response](docs/GetOsList200Response.md)
  - [GetProjectBalancers200Response](docs/GetProjectBalancers200Response.md)
@@ -778,7 +792,14 @@ Class | Method | HTTP request | Description
  - [MailboxSpamFilter](docs/MailboxSpamFilter.md)
  - [MasterPresetOutApi](docs/MasterPresetOutApi.md)
  - [Meta](docs/Meta.md)
+ - [MountNetworkDrive](docs/MountNetworkDrive.md)
  - [Network](docs/Network.md)
+ - [NetworkDrive](docs/NetworkDrive.md)
+ - [NetworkDriveAvailableResource](docs/NetworkDriveAvailableResource.md)
+ - [NetworkDrivePreset](docs/NetworkDrivePreset.md)
+ - [NetworkDrivePresetRead](docs/NetworkDrivePresetRead.md)
+ - [NetworkDrivePresetWrite](docs/NetworkDrivePresetWrite.md)
+ - [NetworkDriveServiceListInner](docs/NetworkDriveServiceListInner.md)
  - [NetworkDriversResponse](docs/NetworkDriversResponse.md)
  - [NodeCount](docs/NodeCount.md)
  - [NodeGroupIn](docs/NodeGroupIn.md)
@@ -861,6 +882,7 @@ Class | Method | HTTP request | Description
  - [UpdateKeyRequest](docs/UpdateKeyRequest.md)
  - [UpdateMailQuotaRequest](docs/UpdateMailQuotaRequest.md)
  - [UpdateMailbox](docs/UpdateMailbox.md)
+ - [UpdateNetworkDrive](docs/UpdateNetworkDrive.md)
  - [UpdateNotificationSettingsRequest](docs/UpdateNotificationSettingsRequest.md)
  - [UpdateNotificationSettingsRequestSettingsInner](docs/UpdateNotificationSettingsRequestSettingsInner.md)
  - [UpdateNotificationSettingsRequestSettingsInnerChannels](docs/UpdateNotificationSettingsRequestSettingsInnerChannels.md)

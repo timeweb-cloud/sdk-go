@@ -76,6 +76,8 @@ type APIClient struct {
 
 	MailAPI *MailAPIService
 
+	NetworkDrivesAPI *NetworkDrivesAPIService
+
 	ProjectsAPI *ProjectsAPIService
 
 	S3API *S3APIService
@@ -116,6 +118,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.KubernetesAPI = (*KubernetesAPIService)(&c.common)
 	c.LocationsAPI = (*LocationsAPIService)(&c.common)
 	c.MailAPI = (*MailAPIService)(&c.common)
+	c.NetworkDrivesAPI = (*NetworkDrivesAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
 	c.S3API = (*S3APIService)(&c.common)
 	c.SSHAPI = (*SSHAPIService)(&c.common)
