@@ -37,7 +37,7 @@ type NetworkDrive struct {
 	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 	// Тип сетевого диска.
 	Type string `json:"type"`
-	// Идентификатор сетевого диска.
+	// Идентификатор тарифа.
 	PresetId int32 `json:"preset_id"`
 }
 
