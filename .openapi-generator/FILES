@@ -123,6 +123,9 @@ docs/CreateFolderInStorageRequest.md
 docs/CreateInstance.md
 docs/CreateKey201Response.md
 docs/CreateKeyRequest.md
+docs/CreateMultipleDomainMailboxes201Response.md
+docs/CreateMultipleDomainMailboxesRequest.md
+docs/CreateMultipleDomainMailboxesRequestMailboxesInner.md
 docs/CreateNetworkDrive.md
 docs/CreateNetworkDrive201Response.md
 docs/CreateProject.md
@@ -253,10 +256,10 @@ docs/GetFinances200Response.md
 docs/GetFinances400Response.md
 docs/GetFinances401Response.md
 docs/GetFinances403Response.md
-docs/GetFinances404Response.md
 docs/GetFinances429Response.md
 docs/GetFinances500Response.md
 docs/GetFloatingIps200Response.md
+docs/GetImage404Response.md
 docs/GetKey200Response.md
 docs/GetKeys200Response.md
 docs/GetLocations200Response.md
@@ -556,6 +559,9 @@ model_create_folder_in_storage_request.go
 model_create_instance.go
 model_create_key_201_response.go
 model_create_key_request.go
+model_create_multiple_domain_mailboxes_201_response.go
+model_create_multiple_domain_mailboxes_request.go
+model_create_multiple_domain_mailboxes_request_mailboxes_inner.go
 model_create_network_drive.go
 model_create_network_drive_201_response.go
 model_create_project.go
@@ -681,10 +687,10 @@ model_get_finances_200_response.go
 model_get_finances_400_response.go
 model_get_finances_401_response.go
 model_get_finances_403_response.go
-model_get_finances_404_response.go
 model_get_finances_429_response.go
 model_get_finances_500_response.go
 model_get_floating_ips_200_response.go
+model_get_image_404_response.go
 model_get_key_200_response.go
 model_get_keys_200_response.go
 model_get_locations_200_response.go

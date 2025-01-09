@@ -13,198 +13,148 @@ package openapi
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the CreateApiKey type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateApiKey{}
+// checks if the GetImage404Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetImage404Response{}
 
-// CreateApiKey struct for CreateApiKey
-type CreateApiKey struct {
-	// Имя, установленное для токена.
-	Name string `json:"name"`
-	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда истекает токен.
-	Expire *time.Time `json:"expire,omitempty"`
-	// Это логическое значение, которое показывает, можно ли удалять управляемые сервисы при помощи данного токена без подтверждения через Телеграм, когда это подтверждение включено.
-	IsAbleToDelete *bool `json:"is_able_to_delete,omitempty"`
-	// Роли, которые могут быть назначены токену.
-	Roles []string `json:"roles,omitempty"`
-	// Список идентификаторов проектов, к которым привязан токен. Если передан null - доступ к проектам не ограничен.
-	Projects []float32 `json:"projects,omitempty"`
+// GetImage404Response struct for GetImage404Response
+type GetImage404Response struct {
+	// Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP.
+	StatusCode float32 `json:"status_code"`
+	// Сообщение, предоставляющее дополнительную информацию об ошибке, в том числе сведения, помогающие устранить ее, когда это возможно.
+	Message *string `json:"message,omitempty"`
+	// Краткое описание ошибки HTTP на основе статуса.
+	ErrorCode string `json:"error_code"`
+	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
+	ResponseId string `json:"response_id"`
 }
 
-// NewCreateApiKey instantiates a new CreateApiKey object
+// NewGetImage404Response instantiates a new GetImage404Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApiKey(name string) *CreateApiKey {
-	this := CreateApiKey{}
-	this.Name = name
+func NewGetImage404Response(statusCode float32, errorCode string, responseId string) *GetImage404Response {
+	this := GetImage404Response{}
+	this.StatusCode = statusCode
+	this.ErrorCode = errorCode
+	this.ResponseId = responseId
 	return &this
 }
 
-// NewCreateApiKeyWithDefaults instantiates a new CreateApiKey object
+// NewGetImage404ResponseWithDefaults instantiates a new GetImage404Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateApiKeyWithDefaults() *CreateApiKey {
-	this := CreateApiKey{}
+func NewGetImage404ResponseWithDefaults() *GetImage404Response {
+	this := GetImage404Response{}
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *CreateApiKey) GetName() string {
+// GetStatusCode returns the StatusCode field value
+func (o *GetImage404Response) GetStatusCode() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.StatusCode
+}
+
+// GetStatusCodeOk returns a tuple with the StatusCode field value
+// and a boolean to check if the value has been set.
+func (o *GetImage404Response) GetStatusCodeOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.StatusCode, true
+}
+
+// SetStatusCode sets field value
+func (o *GetImage404Response) SetStatusCode(v float32) {
+	o.StatusCode = v
+}
+
+// GetMessage returns the Message field value if set, zero value otherwise.
+func (o *GetImage404Response) GetMessage() string {
+	if o == nil || IsNil(o.Message) {
+		var ret string
+		return ret
+	}
+	return *o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetImage404Response) GetMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.Message) {
+		return nil, false
+	}
+	return o.Message, true
+}
+
+// HasMessage returns a boolean if a field has been set.
+func (o *GetImage404Response) HasMessage() bool {
+	if o != nil && !IsNil(o.Message) {
+		return true
+	}
+
+	return false
+}
+
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *GetImage404Response) SetMessage(v string) {
+	o.Message = &v
+}
+
+// GetErrorCode returns the ErrorCode field value
+func (o *GetImage404Response) GetErrorCode() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Name
+	return o.ErrorCode
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetErrorCodeOk returns a tuple with the ErrorCode field value
 // and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetNameOk() (*string, bool) {
+func (o *GetImage404Response) GetErrorCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.ErrorCode, true
 }
 
-// SetName sets field value
-func (o *CreateApiKey) SetName(v string) {
-	o.Name = v
+// SetErrorCode sets field value
+func (o *GetImage404Response) SetErrorCode(v string) {
+	o.ErrorCode = v
 }
 
-// GetExpire returns the Expire field value if set, zero value otherwise.
-func (o *CreateApiKey) GetExpire() time.Time {
-	if o == nil || IsNil(o.Expire) {
-		var ret time.Time
-		return ret
-	}
-	return *o.Expire
-}
-
-// GetExpireOk returns a tuple with the Expire field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetExpireOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Expire) {
-		return nil, false
-	}
-	return o.Expire, true
-}
-
-// HasExpire returns a boolean if a field has been set.
-func (o *CreateApiKey) HasExpire() bool {
-	if o != nil && !IsNil(o.Expire) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpire gets a reference to the given time.Time and assigns it to the Expire field.
-func (o *CreateApiKey) SetExpire(v time.Time) {
-	o.Expire = &v
-}
-
-// GetIsAbleToDelete returns the IsAbleToDelete field value if set, zero value otherwise.
-func (o *CreateApiKey) GetIsAbleToDelete() bool {
-	if o == nil || IsNil(o.IsAbleToDelete) {
-		var ret bool
-		return ret
-	}
-	return *o.IsAbleToDelete
-}
-
-// GetIsAbleToDeleteOk returns a tuple with the IsAbleToDelete field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetIsAbleToDeleteOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsAbleToDelete) {
-		return nil, false
-	}
-	return o.IsAbleToDelete, true
-}
-
-// HasIsAbleToDelete returns a boolean if a field has been set.
-func (o *CreateApiKey) HasIsAbleToDelete() bool {
-	if o != nil && !IsNil(o.IsAbleToDelete) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsAbleToDelete gets a reference to the given bool and assigns it to the IsAbleToDelete field.
-func (o *CreateApiKey) SetIsAbleToDelete(v bool) {
-	o.IsAbleToDelete = &v
-}
-
-// GetRoles returns the Roles field value if set, zero value otherwise.
-func (o *CreateApiKey) GetRoles() []string {
-	if o == nil || IsNil(o.Roles) {
-		var ret []string
-		return ret
-	}
-	return o.Roles
-}
-
-// GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetRolesOk() ([]string, bool) {
-	if o == nil || IsNil(o.Roles) {
-		return nil, false
-	}
-	return o.Roles, true
-}
-
-// HasRoles returns a boolean if a field has been set.
-func (o *CreateApiKey) HasRoles() bool {
-	if o != nil && !IsNil(o.Roles) {
-		return true
-	}
-
-	return false
-}
-
-// SetRoles gets a reference to the given []string and assigns it to the Roles field.
-func (o *CreateApiKey) SetRoles(v []string) {
-	o.Roles = v
-}
-
-// GetProjects returns the Projects field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateApiKey) GetProjects() []float32 {
+// GetResponseId returns the ResponseId field value
+func (o *GetImage404Response) GetResponseId() string {
 	if o == nil {
-		var ret []float32
+		var ret string
 		return ret
 	}
-	return o.Projects
+
+	return o.ResponseId
 }
 
-// GetProjectsOk returns a tuple with the Projects field value if set, nil otherwise
+// GetResponseIdOk returns a tuple with the ResponseId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateApiKey) GetProjectsOk() ([]float32, bool) {
-	if o == nil || IsNil(o.Projects) {
+func (o *GetImage404Response) GetResponseIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Projects, true
+	return &o.ResponseId, true
 }
 
-// HasProjects returns a boolean if a field has been set.
-func (o *CreateApiKey) HasProjects() bool {
-	if o != nil && IsNil(o.Projects) {
-		return true
-	}
-
-	return false
+// SetResponseId sets field value
+func (o *GetImage404Response) SetResponseId(v string) {
+	o.ResponseId = v
 }
 
-// SetProjects gets a reference to the given []float32 and assigns it to the Projects field.
-func (o *CreateApiKey) SetProjects(v []float32) {
-	o.Projects = v
-}
-
-func (o CreateApiKey) MarshalJSON() ([]byte, error) {
+func (o GetImage404Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -212,56 +162,49 @@ func (o CreateApiKey) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateApiKey) ToMap() (map[string]interface{}, error) {
+func (o GetImage404Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	if !IsNil(o.Expire) {
-		toSerialize["expire"] = o.Expire
+	toSerialize["status_code"] = o.StatusCode
+	if !IsNil(o.Message) {
+		toSerialize["message"] = o.Message
 	}
-	if !IsNil(o.IsAbleToDelete) {
-		toSerialize["is_able_to_delete"] = o.IsAbleToDelete
-	}
-	if !IsNil(o.Roles) {
-		toSerialize["roles"] = o.Roles
-	}
-	if o.Projects != nil {
-		toSerialize["projects"] = o.Projects
-	}
+	toSerialize["error_code"] = o.ErrorCode
+	toSerialize["response_id"] = o.ResponseId
 	return toSerialize, nil
 }
 
-type NullableCreateApiKey struct {
-	value *CreateApiKey
+type NullableGetImage404Response struct {
+	value *GetImage404Response
 	isSet bool
 }
 
-func (v NullableCreateApiKey) Get() *CreateApiKey {
+func (v NullableGetImage404Response) Get() *GetImage404Response {
 	return v.value
 }
 
-func (v *NullableCreateApiKey) Set(val *CreateApiKey) {
+func (v *NullableGetImage404Response) Set(val *GetImage404Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateApiKey) IsSet() bool {
+func (v NullableGetImage404Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateApiKey) Unset() {
+func (v *NullableGetImage404Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateApiKey(val *CreateApiKey) *NullableCreateApiKey {
-	return &NullableCreateApiKey{value: val, isSet: true}
+func NewNullableGetImage404Response(val *GetImage404Response) *NullableGetImage404Response {
+	return &NullableGetImage404Response{value: val, isSet: true}
 }
 
-func (v NullableCreateApiKey) MarshalJSON() ([]byte, error) {
+func (v NullableGetImage404Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateApiKey) UnmarshalJSON(src []byte) error {
+func (v *NullableGetImage404Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

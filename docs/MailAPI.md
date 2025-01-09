@@ -5,6 +5,7 @@ All URIs are relative to *https://api.timeweb.cloud*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateDomainMailbox**](MailAPI.md#CreateDomainMailbox) | **Post** /api/v1/mail/domains/{domain} | Создание почтового ящика
+[**CreateMultipleDomainMailboxes**](MailAPI.md#CreateMultipleDomainMailboxes) | **Post** /api/v1/mail/domains/{domain}/batch | Множественное создание почтовых ящиков
 [**DeleteMailbox**](MailAPI.md#DeleteMailbox) | **Delete** /api/v1/mail/domains/{domain}/mailboxes/{mailbox} | Удаление почтового ящика
 [**GetDomainMailInfo**](MailAPI.md#GetDomainMailInfo) | **Get** /api/v1/mail/domains/{domain}/info | Получение почтовой информации о домене
 [**GetDomainMailboxes**](MailAPI.md#GetDomainMailboxes) | **Get** /api/v1/mail/domains/{domain} | Получение списка почтовых ящиков домена
@@ -74,6 +75,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateDomainMailbox201Response**](CreateDomainMailbox201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateMultipleDomainMailboxes
+
+> CreateMultipleDomainMailboxes201Response CreateMultipleDomainMailboxes(ctx, domain).CreateMultipleDomainMailboxesRequest(createMultipleDomainMailboxesRequest).Execute()
+
+Множественное создание почтовых ящиков
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    domain := "somedomain.ru" // string | Полное имя домена
+    createMultipleDomainMailboxesRequest := *openapiclient.NewCreateMultipleDomainMailboxesRequest([]openapiclient.CreateMultipleDomainMailboxesRequestMailboxesInner{*openapiclient.NewCreateMultipleDomainMailboxesRequestMailboxesInner("mailbox", "zfAsl-")}) // CreateMultipleDomainMailboxesRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MailAPI.CreateMultipleDomainMailboxes(context.Background(), domain).CreateMultipleDomainMailboxesRequest(createMultipleDomainMailboxesRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MailAPI.CreateMultipleDomainMailboxes``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateMultipleDomainMailboxes`: CreateMultipleDomainMailboxes201Response
+    fmt.Fprintf(os.Stdout, "Response from `MailAPI.CreateMultipleDomainMailboxes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**domain** | **string** | Полное имя домена | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateMultipleDomainMailboxesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createMultipleDomainMailboxesRequest** | [**CreateMultipleDomainMailboxesRequest**](CreateMultipleDomainMailboxesRequest.md) |  | 
+
+### Return type
+
+[**CreateMultipleDomainMailboxes201Response**](CreateMultipleDomainMailboxes201Response.md)
 
 ### Authorization
 

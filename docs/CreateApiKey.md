@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **Name** | **string** | Имя, установленное для токена. | 
 **Expire** | Pointer to **time.Time** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда истекает токен. | [optional] 
 **IsAbleToDelete** | Pointer to **bool** | Это логическое значение, которое показывает, можно ли удалять управляемые сервисы при помощи данного токена без подтверждения через Телеграм, когда это подтверждение включено. | [optional] 
+**Roles** | Pointer to **[]string** | Роли, которые могут быть назначены токену. | [optional] 
+**Projects** | Pointer to **[]float32** | Список идентификаторов проектов, к которым привязан токен. Если передан null - доступ к проектам не ограничен. | [optional] 
 
 ## Methods
 
@@ -97,6 +99,66 @@ SetIsAbleToDelete sets IsAbleToDelete field to given value.
 
 HasIsAbleToDelete returns a boolean if a field has been set.
 
+### GetRoles
+
+`func (o *CreateApiKey) GetRoles() []string`
+
+GetRoles returns the Roles field if non-nil, zero value otherwise.
+
+### GetRolesOk
+
+`func (o *CreateApiKey) GetRolesOk() (*[]string, bool)`
+
+GetRolesOk returns a tuple with the Roles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoles
+
+`func (o *CreateApiKey) SetRoles(v []string)`
+
+SetRoles sets Roles field to given value.
+
+### HasRoles
+
+`func (o *CreateApiKey) HasRoles() bool`
+
+HasRoles returns a boolean if a field has been set.
+
+### GetProjects
+
+`func (o *CreateApiKey) GetProjects() []float32`
+
+GetProjects returns the Projects field if non-nil, zero value otherwise.
+
+### GetProjectsOk
+
+`func (o *CreateApiKey) GetProjectsOk() (*[]float32, bool)`
+
+GetProjectsOk returns a tuple with the Projects field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjects
+
+`func (o *CreateApiKey) SetProjects(v []float32)`
+
+SetProjects sets Projects field to given value.
+
+### HasProjects
+
+`func (o *CreateApiKey) HasProjects() bool`
+
+HasProjects returns a boolean if a field has been set.
+
+### SetProjectsNil
+
+`func (o *CreateApiKey) SetProjectsNil(b bool)`
+
+ SetProjectsNil sets the value for Projects to be an explicit nil
+
+### UnsetProjects
+`func (o *CreateApiKey) UnsetProjects()`
+
+UnsetProjects ensures that no value is present for Projects, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

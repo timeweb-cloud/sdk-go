@@ -36,6 +36,20 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test MailAPIService CreateMultipleDomainMailboxes", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var domain string
+
+		resp, httpRes, err := apiClient.MailAPI.CreateMultipleDomainMailboxes(context.Background(), domain).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MailAPIService DeleteMailbox", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

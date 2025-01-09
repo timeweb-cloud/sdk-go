@@ -13,198 +13,155 @@ package openapi
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the CreateApiKey type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateApiKey{}
+// checks if the CreateMultipleDomainMailboxesRequestMailboxesInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateMultipleDomainMailboxesRequestMailboxesInner{}
 
-// CreateApiKey struct for CreateApiKey
-type CreateApiKey struct {
-	// Имя, установленное для токена.
-	Name string `json:"name"`
-	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда истекает токен.
-	Expire *time.Time `json:"expire,omitempty"`
-	// Это логическое значение, которое показывает, можно ли удалять управляемые сервисы при помощи данного токена без подтверждения через Телеграм, когда это подтверждение включено.
-	IsAbleToDelete *bool `json:"is_able_to_delete,omitempty"`
-	// Роли, которые могут быть назначены токену.
-	Roles []string `json:"roles,omitempty"`
-	// Список идентификаторов проектов, к которым привязан токен. Если передан null - доступ к проектам не ограничен.
-	Projects []float32 `json:"projects,omitempty"`
+// CreateMultipleDomainMailboxesRequestMailboxesInner struct for CreateMultipleDomainMailboxesRequestMailboxesInner
+type CreateMultipleDomainMailboxesRequestMailboxesInner struct {
+	// Название почтового ящика
+	Login string `json:"login"`
+	// Пароль почтового ящика
+	Password string `json:"password"`
+	// ФИО владельца почтового ящика
+	OwnerFullName *string `json:"owner_full_name,omitempty"`
+	// Комментарий почтового ящика
+	Comment *string `json:"comment,omitempty"`
 }
 
-// NewCreateApiKey instantiates a new CreateApiKey object
+// NewCreateMultipleDomainMailboxesRequestMailboxesInner instantiates a new CreateMultipleDomainMailboxesRequestMailboxesInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApiKey(name string) *CreateApiKey {
-	this := CreateApiKey{}
-	this.Name = name
+func NewCreateMultipleDomainMailboxesRequestMailboxesInner(login string, password string) *CreateMultipleDomainMailboxesRequestMailboxesInner {
+	this := CreateMultipleDomainMailboxesRequestMailboxesInner{}
+	this.Login = login
+	this.Password = password
 	return &this
 }
 
-// NewCreateApiKeyWithDefaults instantiates a new CreateApiKey object
+// NewCreateMultipleDomainMailboxesRequestMailboxesInnerWithDefaults instantiates a new CreateMultipleDomainMailboxesRequestMailboxesInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateApiKeyWithDefaults() *CreateApiKey {
-	this := CreateApiKey{}
+func NewCreateMultipleDomainMailboxesRequestMailboxesInnerWithDefaults() *CreateMultipleDomainMailboxesRequestMailboxesInner {
+	this := CreateMultipleDomainMailboxesRequestMailboxesInner{}
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *CreateApiKey) GetName() string {
+// GetLogin returns the Login field value
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetLogin() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Name
+	return o.Login
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetLoginOk returns a tuple with the Login field value
 // and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetNameOk() (*string, bool) {
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetLoginOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.Login, true
 }
 
-// SetName sets field value
-func (o *CreateApiKey) SetName(v string) {
-	o.Name = v
+// SetLogin sets field value
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) SetLogin(v string) {
+	o.Login = v
 }
 
-// GetExpire returns the Expire field value if set, zero value otherwise.
-func (o *CreateApiKey) GetExpire() time.Time {
-	if o == nil || IsNil(o.Expire) {
-		var ret time.Time
-		return ret
-	}
-	return *o.Expire
-}
-
-// GetExpireOk returns a tuple with the Expire field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetExpireOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Expire) {
-		return nil, false
-	}
-	return o.Expire, true
-}
-
-// HasExpire returns a boolean if a field has been set.
-func (o *CreateApiKey) HasExpire() bool {
-	if o != nil && !IsNil(o.Expire) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpire gets a reference to the given time.Time and assigns it to the Expire field.
-func (o *CreateApiKey) SetExpire(v time.Time) {
-	o.Expire = &v
-}
-
-// GetIsAbleToDelete returns the IsAbleToDelete field value if set, zero value otherwise.
-func (o *CreateApiKey) GetIsAbleToDelete() bool {
-	if o == nil || IsNil(o.IsAbleToDelete) {
-		var ret bool
-		return ret
-	}
-	return *o.IsAbleToDelete
-}
-
-// GetIsAbleToDeleteOk returns a tuple with the IsAbleToDelete field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetIsAbleToDeleteOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsAbleToDelete) {
-		return nil, false
-	}
-	return o.IsAbleToDelete, true
-}
-
-// HasIsAbleToDelete returns a boolean if a field has been set.
-func (o *CreateApiKey) HasIsAbleToDelete() bool {
-	if o != nil && !IsNil(o.IsAbleToDelete) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsAbleToDelete gets a reference to the given bool and assigns it to the IsAbleToDelete field.
-func (o *CreateApiKey) SetIsAbleToDelete(v bool) {
-	o.IsAbleToDelete = &v
-}
-
-// GetRoles returns the Roles field value if set, zero value otherwise.
-func (o *CreateApiKey) GetRoles() []string {
-	if o == nil || IsNil(o.Roles) {
-		var ret []string
-		return ret
-	}
-	return o.Roles
-}
-
-// GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateApiKey) GetRolesOk() ([]string, bool) {
-	if o == nil || IsNil(o.Roles) {
-		return nil, false
-	}
-	return o.Roles, true
-}
-
-// HasRoles returns a boolean if a field has been set.
-func (o *CreateApiKey) HasRoles() bool {
-	if o != nil && !IsNil(o.Roles) {
-		return true
-	}
-
-	return false
-}
-
-// SetRoles gets a reference to the given []string and assigns it to the Roles field.
-func (o *CreateApiKey) SetRoles(v []string) {
-	o.Roles = v
-}
-
-// GetProjects returns the Projects field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateApiKey) GetProjects() []float32 {
+// GetPassword returns the Password field value
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetPassword() string {
 	if o == nil {
-		var ret []float32
+		var ret string
 		return ret
 	}
-	return o.Projects
+
+	return o.Password
 }
 
-// GetProjectsOk returns a tuple with the Projects field value if set, nil otherwise
+// GetPasswordOk returns a tuple with the Password field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateApiKey) GetProjectsOk() ([]float32, bool) {
-	if o == nil || IsNil(o.Projects) {
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetPasswordOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Projects, true
+	return &o.Password, true
 }
 
-// HasProjects returns a boolean if a field has been set.
-func (o *CreateApiKey) HasProjects() bool {
-	if o != nil && IsNil(o.Projects) {
+// SetPassword sets field value
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) SetPassword(v string) {
+	o.Password = v
+}
+
+// GetOwnerFullName returns the OwnerFullName field value if set, zero value otherwise.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetOwnerFullName() string {
+	if o == nil || IsNil(o.OwnerFullName) {
+		var ret string
+		return ret
+	}
+	return *o.OwnerFullName
+}
+
+// GetOwnerFullNameOk returns a tuple with the OwnerFullName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetOwnerFullNameOk() (*string, bool) {
+	if o == nil || IsNil(o.OwnerFullName) {
+		return nil, false
+	}
+	return o.OwnerFullName, true
+}
+
+// HasOwnerFullName returns a boolean if a field has been set.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) HasOwnerFullName() bool {
+	if o != nil && !IsNil(o.OwnerFullName) {
 		return true
 	}
 
 	return false
 }
 
-// SetProjects gets a reference to the given []float32 and assigns it to the Projects field.
-func (o *CreateApiKey) SetProjects(v []float32) {
-	o.Projects = v
+// SetOwnerFullName gets a reference to the given string and assigns it to the OwnerFullName field.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) SetOwnerFullName(v string) {
+	o.OwnerFullName = &v
 }
 
-func (o CreateApiKey) MarshalJSON() ([]byte, error) {
+// GetComment returns the Comment field value if set, zero value otherwise.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetComment() string {
+	if o == nil || IsNil(o.Comment) {
+		var ret string
+		return ret
+	}
+	return *o.Comment
+}
+
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) GetCommentOk() (*string, bool) {
+	if o == nil || IsNil(o.Comment) {
+		return nil, false
+	}
+	return o.Comment, true
+}
+
+// HasComment returns a boolean if a field has been set.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) HasComment() bool {
+	if o != nil && !IsNil(o.Comment) {
+		return true
+	}
+
+	return false
+}
+
+// SetComment gets a reference to the given string and assigns it to the Comment field.
+func (o *CreateMultipleDomainMailboxesRequestMailboxesInner) SetComment(v string) {
+	o.Comment = &v
+}
+
+func (o CreateMultipleDomainMailboxesRequestMailboxesInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -212,56 +169,51 @@ func (o CreateApiKey) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateApiKey) ToMap() (map[string]interface{}, error) {
+func (o CreateMultipleDomainMailboxesRequestMailboxesInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	if !IsNil(o.Expire) {
-		toSerialize["expire"] = o.Expire
+	toSerialize["login"] = o.Login
+	toSerialize["password"] = o.Password
+	if !IsNil(o.OwnerFullName) {
+		toSerialize["owner_full_name"] = o.OwnerFullName
 	}
-	if !IsNil(o.IsAbleToDelete) {
-		toSerialize["is_able_to_delete"] = o.IsAbleToDelete
-	}
-	if !IsNil(o.Roles) {
-		toSerialize["roles"] = o.Roles
-	}
-	if o.Projects != nil {
-		toSerialize["projects"] = o.Projects
+	if !IsNil(o.Comment) {
+		toSerialize["comment"] = o.Comment
 	}
 	return toSerialize, nil
 }
 
-type NullableCreateApiKey struct {
-	value *CreateApiKey
+type NullableCreateMultipleDomainMailboxesRequestMailboxesInner struct {
+	value *CreateMultipleDomainMailboxesRequestMailboxesInner
 	isSet bool
 }
 
-func (v NullableCreateApiKey) Get() *CreateApiKey {
+func (v NullableCreateMultipleDomainMailboxesRequestMailboxesInner) Get() *CreateMultipleDomainMailboxesRequestMailboxesInner {
 	return v.value
 }
 
-func (v *NullableCreateApiKey) Set(val *CreateApiKey) {
+func (v *NullableCreateMultipleDomainMailboxesRequestMailboxesInner) Set(val *CreateMultipleDomainMailboxesRequestMailboxesInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateApiKey) IsSet() bool {
+func (v NullableCreateMultipleDomainMailboxesRequestMailboxesInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateApiKey) Unset() {
+func (v *NullableCreateMultipleDomainMailboxesRequestMailboxesInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateApiKey(val *CreateApiKey) *NullableCreateApiKey {
-	return &NullableCreateApiKey{value: val, isSet: true}
+func NewNullableCreateMultipleDomainMailboxesRequestMailboxesInner(val *CreateMultipleDomainMailboxesRequestMailboxesInner) *NullableCreateMultipleDomainMailboxesRequestMailboxesInner {
+	return &NullableCreateMultipleDomainMailboxesRequestMailboxesInner{value: val, isSet: true}
 }
 
-func (v NullableCreateApiKey) MarshalJSON() ([]byte, error) {
+func (v NullableCreateMultipleDomainMailboxesRequestMailboxesInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateApiKey) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateMultipleDomainMailboxesRequestMailboxesInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

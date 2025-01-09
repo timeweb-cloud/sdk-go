@@ -15,146 +15,57 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetFinances404Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetFinances404Response{}
+// checks if the CreateMultipleDomainMailboxes201Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateMultipleDomainMailboxes201Response{}
 
-// GetFinances404Response struct for GetFinances404Response
-type GetFinances404Response struct {
-	// Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP.
-	StatusCode float32 `json:"status_code"`
-	// Сообщение, предоставляющее дополнительную информацию об ошибке, в том числе сведения, помогающие устранить ее, когда это возможно.
-	Message *string `json:"message,omitempty"`
-	// Краткое описание ошибки HTTP на основе статуса.
-	ErrorCode string `json:"error_code"`
-	// Идентификатор запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
+// CreateMultipleDomainMailboxes201Response struct for CreateMultipleDomainMailboxes201Response
+type CreateMultipleDomainMailboxes201Response struct {
+	Mailboxes []Mailbox `json:"mailboxes"`
 }
 
-// NewGetFinances404Response instantiates a new GetFinances404Response object
+// NewCreateMultipleDomainMailboxes201Response instantiates a new CreateMultipleDomainMailboxes201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetFinances404Response(statusCode float32, errorCode string, responseId string) *GetFinances404Response {
-	this := GetFinances404Response{}
-	this.StatusCode = statusCode
-	this.ErrorCode = errorCode
-	this.ResponseId = responseId
+func NewCreateMultipleDomainMailboxes201Response(mailboxes []Mailbox) *CreateMultipleDomainMailboxes201Response {
+	this := CreateMultipleDomainMailboxes201Response{}
+	this.Mailboxes = mailboxes
 	return &this
 }
 
-// NewGetFinances404ResponseWithDefaults instantiates a new GetFinances404Response object
+// NewCreateMultipleDomainMailboxes201ResponseWithDefaults instantiates a new CreateMultipleDomainMailboxes201Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetFinances404ResponseWithDefaults() *GetFinances404Response {
-	this := GetFinances404Response{}
+func NewCreateMultipleDomainMailboxes201ResponseWithDefaults() *CreateMultipleDomainMailboxes201Response {
+	this := CreateMultipleDomainMailboxes201Response{}
 	return &this
 }
 
-// GetStatusCode returns the StatusCode field value
-func (o *GetFinances404Response) GetStatusCode() float32 {
+// GetMailboxes returns the Mailboxes field value
+func (o *CreateMultipleDomainMailboxes201Response) GetMailboxes() []Mailbox {
 	if o == nil {
-		var ret float32
+		var ret []Mailbox
 		return ret
 	}
 
-	return o.StatusCode
+	return o.Mailboxes
 }
 
-// GetStatusCodeOk returns a tuple with the StatusCode field value
+// GetMailboxesOk returns a tuple with the Mailboxes field value
 // and a boolean to check if the value has been set.
-func (o *GetFinances404Response) GetStatusCodeOk() (*float32, bool) {
+func (o *CreateMultipleDomainMailboxes201Response) GetMailboxesOk() ([]Mailbox, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.StatusCode, true
+	return o.Mailboxes, true
 }
 
-// SetStatusCode sets field value
-func (o *GetFinances404Response) SetStatusCode(v float32) {
-	o.StatusCode = v
+// SetMailboxes sets field value
+func (o *CreateMultipleDomainMailboxes201Response) SetMailboxes(v []Mailbox) {
+	o.Mailboxes = v
 }
 
-// GetMessage returns the Message field value if set, zero value otherwise.
-func (o *GetFinances404Response) GetMessage() string {
-	if o == nil || IsNil(o.Message) {
-		var ret string
-		return ret
-	}
-	return *o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetFinances404Response) GetMessageOk() (*string, bool) {
-	if o == nil || IsNil(o.Message) {
-		return nil, false
-	}
-	return o.Message, true
-}
-
-// HasMessage returns a boolean if a field has been set.
-func (o *GetFinances404Response) HasMessage() bool {
-	if o != nil && !IsNil(o.Message) {
-		return true
-	}
-
-	return false
-}
-
-// SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *GetFinances404Response) SetMessage(v string) {
-	o.Message = &v
-}
-
-// GetErrorCode returns the ErrorCode field value
-func (o *GetFinances404Response) GetErrorCode() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ErrorCode
-}
-
-// GetErrorCodeOk returns a tuple with the ErrorCode field value
-// and a boolean to check if the value has been set.
-func (o *GetFinances404Response) GetErrorCodeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ErrorCode, true
-}
-
-// SetErrorCode sets field value
-func (o *GetFinances404Response) SetErrorCode(v string) {
-	o.ErrorCode = v
-}
-
-// GetResponseId returns the ResponseId field value
-func (o *GetFinances404Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetFinances404Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetFinances404Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
-func (o GetFinances404Response) MarshalJSON() ([]byte, error) {
+func (o CreateMultipleDomainMailboxes201Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -162,49 +73,44 @@ func (o GetFinances404Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetFinances404Response) ToMap() (map[string]interface{}, error) {
+func (o CreateMultipleDomainMailboxes201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["status_code"] = o.StatusCode
-	if !IsNil(o.Message) {
-		toSerialize["message"] = o.Message
-	}
-	toSerialize["error_code"] = o.ErrorCode
-	toSerialize["response_id"] = o.ResponseId
+	toSerialize["mailboxes"] = o.Mailboxes
 	return toSerialize, nil
 }
 
-type NullableGetFinances404Response struct {
-	value *GetFinances404Response
+type NullableCreateMultipleDomainMailboxes201Response struct {
+	value *CreateMultipleDomainMailboxes201Response
 	isSet bool
 }
 
-func (v NullableGetFinances404Response) Get() *GetFinances404Response {
+func (v NullableCreateMultipleDomainMailboxes201Response) Get() *CreateMultipleDomainMailboxes201Response {
 	return v.value
 }
 
-func (v *NullableGetFinances404Response) Set(val *GetFinances404Response) {
+func (v *NullableCreateMultipleDomainMailboxes201Response) Set(val *CreateMultipleDomainMailboxes201Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetFinances404Response) IsSet() bool {
+func (v NullableCreateMultipleDomainMailboxes201Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetFinances404Response) Unset() {
+func (v *NullableCreateMultipleDomainMailboxes201Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetFinances404Response(val *GetFinances404Response) *NullableGetFinances404Response {
-	return &NullableGetFinances404Response{value: val, isSet: true}
+func NewNullableCreateMultipleDomainMailboxes201Response(val *CreateMultipleDomainMailboxes201Response) *NullableCreateMultipleDomainMailboxes201Response {
+	return &NullableCreateMultipleDomainMailboxes201Response{value: val, isSet: true}
 }
 
-func (v NullableGetFinances404Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateMultipleDomainMailboxes201Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetFinances404Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateMultipleDomainMailboxes201Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

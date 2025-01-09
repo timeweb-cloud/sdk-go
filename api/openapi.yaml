@@ -256,12 +256,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_403_response'
           description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -382,12 +376,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_403_response'
           description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -508,12 +496,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_403_response'
           description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -634,6 +616,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "429":
           content:
             application/json:
@@ -1316,7 +1304,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -1465,7 +1453,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -1833,7 +1821,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -1981,7 +1969,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -2331,7 +2319,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -2795,7 +2783,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -2938,7 +2926,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -3085,7 +3073,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -3429,7 +3417,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -4098,7 +4086,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -4252,7 +4240,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -4411,7 +4399,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -4786,7 +4774,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -4920,7 +4908,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -5086,7 +5074,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -5222,7 +5210,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -5363,7 +5351,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -5515,7 +5503,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -5651,7 +5639,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -5788,7 +5776,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -5929,7 +5917,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -6070,7 +6058,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -6215,7 +6203,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -6365,7 +6353,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -6499,7 +6487,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -6647,7 +6635,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -6781,7 +6769,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -6985,7 +6973,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -7121,7 +7109,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -7262,7 +7250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -7436,7 +7424,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -7577,7 +7565,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -7773,7 +7761,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -7917,7 +7905,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -8066,7 +8054,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -8249,7 +8237,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -8393,7 +8381,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -8566,7 +8554,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -8709,7 +8697,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -8850,7 +8838,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -9010,7 +8998,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -9142,7 +9130,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -9291,7 +9279,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -9426,7 +9414,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -9593,7 +9581,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -9730,7 +9718,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -9872,7 +9860,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -10022,7 +10010,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -10164,7 +10152,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -10355,7 +10343,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -10490,7 +10478,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -10641,7 +10629,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -10785,7 +10773,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -10924,7 +10912,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -11064,7 +11052,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -11193,7 +11181,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -11327,7 +11315,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -11523,7 +11511,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -11661,7 +11649,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -11803,7 +11791,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -11973,7 +11961,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -12111,7 +12099,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -12627,7 +12615,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -12780,7 +12768,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -12939,7 +12927,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -13121,7 +13109,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -13267,7 +13255,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -13424,7 +13412,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -13574,7 +13562,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -13748,7 +13736,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -13904,7 +13892,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -14054,7 +14042,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -14281,7 +14269,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -14469,7 +14457,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -14664,7 +14652,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -14807,7 +14795,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -15299,7 +15287,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -15654,7 +15642,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -15797,7 +15785,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -15946,7 +15934,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -16140,7 +16128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -17150,7 +17138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -17285,7 +17273,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -17660,7 +17648,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -17800,7 +17788,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -17971,7 +17959,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -18143,7 +18131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -18315,7 +18303,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -18463,7 +18451,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -18642,7 +18630,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -18843,7 +18831,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -18987,7 +18975,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -19135,7 +19123,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -19311,7 +19299,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -19464,7 +19452,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -19622,7 +19610,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -19802,7 +19790,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -19956,7 +19944,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -20143,7 +20131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -20297,7 +20285,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -20478,7 +20466,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -20644,7 +20632,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -20806,7 +20794,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -20991,7 +20979,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -21155,7 +21143,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -21401,6 +21389,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "429":
           content:
             application/json:
@@ -21547,11 +21541,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -21679,11 +21679,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -21815,11 +21821,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -21972,11 +21984,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -22111,11 +22129,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -22268,11 +22292,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -22407,11 +22437,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -22564,11 +22600,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -22703,11 +22745,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -22860,11 +22908,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -22999,11 +23053,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -23156,11 +23216,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -23295,11 +23361,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -23452,11 +23524,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -23591,11 +23669,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -23748,11 +23832,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -23869,12 +23959,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -23990,12 +24074,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -24111,12 +24189,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -24232,12 +24304,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -24353,12 +24419,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -24474,12 +24534,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -24492,8 +24546,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_500_response'
           description: Внутренняя ошибка сервера
-      security:
-      - Bearer: []
       summary: Получение списка всех выделенных серверов на аккаунте
       tags:
       - Projects
@@ -24624,7 +24676,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -24783,7 +24835,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -24914,7 +24966,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -25108,7 +25160,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -25251,7 +25303,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -25405,7 +25457,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -25532,7 +25584,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -25676,7 +25728,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -25839,7 +25891,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -25968,7 +26020,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -26160,7 +26212,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -26326,7 +26378,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -26469,7 +26521,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -26658,7 +26710,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -26798,7 +26850,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -26985,7 +27037,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -27161,7 +27213,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -27352,7 +27404,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -27526,7 +27578,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -27694,7 +27746,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -27843,12 +27895,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_403_response'
           description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -27977,12 +28023,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_403_response'
           description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_404_response'
-          description: Не найдено
         "429":
           content:
             application/json:
@@ -28142,7 +28182,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -28288,7 +28328,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -28467,7 +28507,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -29760,6 +29800,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "429":
           content:
             application/json:
@@ -29874,6 +29920,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "429":
           content:
             application/json:
@@ -29994,6 +30046,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
         "429":
           content:
             application/json:
@@ -30168,6 +30226,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
         "429":
           content:
             application/json:
@@ -30297,6 +30367,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
         "429":
           content:
             application/json:
@@ -30415,6 +30497,163 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/mail/domains/{domain}/batch:
+    post:
+      description: "Чтобы создать почтовый ящики, отправьте POST-запрос на `/api/v1/mail/domains/{domain}/batch`."
+      operationId: createMultipleDomainMailboxes
+      parameters:
+      - description: Полное имя домена
+        explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          example: somedomain.ru
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createMultipleDomainMailboxes_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createMultipleDomainMailboxes_201_response'
+          description: Ответ будет представлять собой объект JSON c ключом `mailboxes`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Множественное создание почтовых ящиков
+      tags:
+      - Mail
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"mailboxes": ["login": "mail", "password": "zHas2-"]}' \
+            "https://api.timeweb.cloud/api/v1/mail/domains/{domain}/batch"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/mail/domains/{domain}/batch', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: '{"mailboxes": ["login": "mail", "password": "zHas2-"]}'
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/mail/domains/{domain}/batch',
+              '{"mailboxes": ["login": "mail", "password": "zHas2-"]}',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          data = '{"mailboxes": ["login": "mail", "password": "zHas2-"]}'
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/mail/domains/{domain}/batch', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/mail/domains/{domain}/batch');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"mailboxes": ["login": "mail", "password": "zHas2-"]}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"mailboxes\": [\"login\": \"mail\", \"\
+          password\": \"zHas2-\"]}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/mail/domains/{domain}/batch\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/mail/domains/{domain}/batch\");\n\
+          \t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"mailboxes\\\": [\\\"login\\\": \\\"mail\\\", \\\"\
+          password\\\": \\\"zHas2-\\\"]}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v1/mail/domains/{domain}/info:
     get:
       description: "Чтобы получить почтовую информацию о домене, отправьте GET-зап\
@@ -30449,6 +30688,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
         "429":
           content:
             application/json:
@@ -30579,6 +30830,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
         "429":
           content:
             application/json:
@@ -30731,6 +30994,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
         "429":
           content:
             application/json:
@@ -30868,6 +31143,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
         "429":
           content:
             application/json:
@@ -31006,6 +31293,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_401_response'
           description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
         "429":
           content:
             application/json:
@@ -31327,7 +31626,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -31464,7 +31763,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -31600,7 +31899,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -31780,7 +32079,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -31919,7 +32218,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -32084,7 +32383,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -32232,7 +32531,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -32414,7 +32713,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -32549,7 +32848,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -32700,7 +32999,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -32839,7 +33138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -32977,7 +33276,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -33450,7 +33749,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -33588,7 +33887,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -33886,7 +34185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -34269,7 +34568,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -34567,7 +34866,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -34709,7 +35008,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -34871,7 +35170,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -35008,7 +35307,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -35147,7 +35446,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -35273,7 +35572,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -35578,7 +35877,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -35715,7 +36014,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -35857,7 +36156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -36020,7 +36319,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -36196,7 +36495,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -36323,7 +36622,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -36616,7 +36915,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -36754,7 +37053,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -36896,7 +37195,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -37068,7 +37367,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -37206,7 +37505,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -37460,7 +37759,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -37841,7 +38140,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -37975,7 +38274,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -38354,7 +38653,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -38493,7 +38792,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -38646,7 +38945,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "409":
           content:
@@ -38779,7 +39078,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -39102,7 +39401,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -39237,7 +39536,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -39379,7 +39678,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -39539,7 +39838,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -39866,7 +40165,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -40015,7 +40314,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -40328,7 +40627,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -40463,7 +40762,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -40598,7 +40897,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -40725,7 +41024,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -41018,7 +41317,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -41159,7 +41458,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -41304,7 +41603,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -41477,7 +41776,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -41616,7 +41915,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -41747,7 +42046,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -41873,7 +42172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getFinances_404_response'
+                $ref: '#/components/schemas/getImage_404_response'
           description: Не найдено
         "429":
           content:
@@ -42458,7 +42757,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/getFinances_404_response'
+            $ref: '#/components/schemas/getImage_404_response'
       description: Не найдено
     too-many-requests:
       content:
@@ -47691,6 +47990,44 @@ components:
       - is_able_to_delete
       - name
       type: object
+    iam-roles:
+      description: "Роли, которые могут быть назначены токену."
+      items:
+        enum:
+        - servers:read
+        - servers:write
+        - databases:read
+        - databases:write
+        - balancers:read
+        - balancers:write
+        - storages:read
+        - storages:write
+        - dedicated:read
+        - dedicated:write
+        - clusters:read
+        - clusters:write
+        - vpc:read
+        - vpc:write
+        - floating-ips:read
+        - floating-ips:write
+        - domains:read
+        - domains:write
+        - administrators:write
+        - firewall:read
+        - firewall:read
+        - finances:write
+        - support:read
+        - support:write
+        - vpn:read
+        - vpn:write
+        - mail:read
+        - mail:write
+        - apps:read
+        - apps:write
+        - network-drives:read
+        - network-drives:write
+        type: string
+      type: array
     create-api-key:
       properties:
         name:
@@ -47709,6 +48046,54 @@ components:
             рез Телеграм, когда это подтверждение включено."
           example: true
           type: boolean
+        roles:
+          description: "Роли, которые могут быть назначены токену."
+          items:
+            enum:
+            - servers:read
+            - servers:write
+            - databases:read
+            - databases:write
+            - balancers:read
+            - balancers:write
+            - storages:read
+            - storages:write
+            - dedicated:read
+            - dedicated:write
+            - clusters:read
+            - clusters:write
+            - vpc:read
+            - vpc:write
+            - floating-ips:read
+            - floating-ips:write
+            - domains:read
+            - domains:write
+            - administrators:write
+            - firewall:read
+            - firewall:read
+            - finances:write
+            - support:read
+            - support:write
+            - vpn:read
+            - vpn:write
+            - mail:read
+            - mail:write
+            - apps:read
+            - apps:write
+            - network-drives:read
+            - network-drives:write
+            type: string
+          type: array
+        projects:
+          description: "Список идентификаторов проектов, к которым привязан токен\
+            . Если передан null - доступ к проектам не ограничен."
+          example:
+          - 123
+          - 321
+          items:
+            type: number
+          nullable: true
+          type: array
       required:
       - name
       type: object
@@ -50366,34 +50751,6 @@ components:
       - response_id
       - status_code
       type: object
-    getFinances_404_response:
-      properties:
-        status_code:
-          description: "Короткий идентификатор, соответствующий возвращаемому коду\
-            \ состояния HTTP."
-          example: 404
-          type: number
-        message:
-          description: "Сообщение, предоставляющее дополнительную информацию об ош\
-            ибке, в том числе сведения, помогающие устранить ее, когда это возможн\
-            о."
-          example: Resource not found
-          type: string
-        error_code:
-          description: Краткое описание ошибки HTTP на основе статуса.
-          example: not_found
-          type: string
-        response_id:
-          description: "Идентификатор запроса, который можно указывать при обращен\
-            ии в службу технической поддержки, чтобы помочь определить проблему."
-          example: 15095f25-aac3-4d60-a788-96cb5136f186
-          format: uuid
-          type: string
-      required:
-      - error_code
-      - response_id
-      - status_code
-      type: object
     getFinances_429_response:
       properties:
         status_code:
@@ -50531,6 +50888,34 @@ components:
             $ref: '#/components/schemas/updateNotificationSettings_request_settings_inner'
           minItems: 1
           type: array
+      type: object
+    getImage_404_response:
+      properties:
+        status_code:
+          description: "Короткий идентификатор, соответствующий возвращаемому коду\
+            \ состояния HTTP."
+          example: 404
+          type: number
+        message:
+          description: "Сообщение, предоставляющее дополнительную информацию об ош\
+            ибке, в том числе сведения, помогающие устранить ее, когда это возможн\
+            о."
+          example: Resource not found
+          type: string
+        error_code:
+          description: Краткое описание ошибки HTTP на основе статуса.
+          example: not_found
+          type: string
+        response_id:
+          description: "Идентификатор запроса, который можно указывать при обращен\
+            ии в службу технической поддержки, чтобы помочь определить проблему."
+          example: 15095f25-aac3-4d60-a788-96cb5136f186
+          format: uuid
+          type: string
+      required:
+      - error_code
+      - response_id
+      - status_code
       type: object
     getBalancers_200_response:
       example:
@@ -54405,6 +54790,105 @@ components:
           $ref: '#/components/schemas/mailbox'
       required:
       - mailbox
+      type: object
+    createMultipleDomainMailboxes_request_mailboxes_inner:
+      properties:
+        login:
+          description: Название почтового ящика
+          example: mailbox
+          type: string
+        password:
+          description: Пароль почтового ящика
+          example: zfAsl-
+          type: string
+        owner_full_name:
+          description: ФИО владельца почтового ящика
+          example: Иванов Иван Иванович
+          type: string
+        comment:
+          description: Комментарий почтового ящика
+          example: some comment
+          type: string
+      required:
+      - login
+      - password
+      type: object
+    createMultipleDomainMailboxes_request:
+      properties:
+        mailboxes:
+          description: Массив объектов с данными почтовых ящиков
+          items:
+            $ref: '#/components/schemas/createMultipleDomainMailboxes_request_mailboxes_inner'
+          type: array
+      required:
+      - mailboxes
+      type: object
+    createMultipleDomainMailboxes_201_response:
+      example:
+        mailboxes:
+        - password: ps3-1asZa
+          auto_reply:
+            is_enabled: true
+            subject: some subject
+            message: some message
+          forwarding_outgoing:
+            is_enabled: true
+            outgoing_to: test@timeweb.ru
+          mailbox: mailbox
+          fqdn: timeweb.ru
+          is_webmail: false
+          spam_filter:
+            is_enabled: true
+            white_list:
+            - test@timeweb.ru
+            - test@timeweb.ru
+            forward_to: test@timeweb.ru
+            action: forward
+          comment: some comment
+          idn_name: timeweb.ru
+          usage_space: 512
+          is_dovecot: false
+          forwarding_incoming:
+            is_enabled: true
+            is_delete_messages: false
+            incoming_list:
+            - test@timeweb.ru
+            - test@timeweb.ru
+        - password: ps3-1asZa
+          auto_reply:
+            is_enabled: true
+            subject: some subject
+            message: some message
+          forwarding_outgoing:
+            is_enabled: true
+            outgoing_to: test@timeweb.ru
+          mailbox: mailbox
+          fqdn: timeweb.ru
+          is_webmail: false
+          spam_filter:
+            is_enabled: true
+            white_list:
+            - test@timeweb.ru
+            - test@timeweb.ru
+            forward_to: test@timeweb.ru
+            action: forward
+          comment: some comment
+          idn_name: timeweb.ru
+          usage_space: 512
+          is_dovecot: false
+          forwarding_incoming:
+            is_enabled: true
+            is_delete_messages: false
+            incoming_list:
+            - test@timeweb.ru
+            - test@timeweb.ru
+      properties:
+        mailboxes:
+          items:
+            $ref: '#/components/schemas/mailbox'
+          type: array
+      required:
+      - mailboxes
       type: object
     getDomainMailInfo_200_response:
       example:

@@ -1,4 +1,4 @@
-# GetFinances404Response
+# GetImage404Response
 
 ## Properties
 
@@ -11,104 +11,104 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewGetFinances404Response
+### NewGetImage404Response
 
-`func NewGetFinances404Response(statusCode float32, errorCode string, responseId string, ) *GetFinances404Response`
+`func NewGetImage404Response(statusCode float32, errorCode string, responseId string, ) *GetImage404Response`
 
-NewGetFinances404Response instantiates a new GetFinances404Response object
+NewGetImage404Response instantiates a new GetImage404Response object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetFinances404ResponseWithDefaults
+### NewGetImage404ResponseWithDefaults
 
-`func NewGetFinances404ResponseWithDefaults() *GetFinances404Response`
+`func NewGetImage404ResponseWithDefaults() *GetImage404Response`
 
-NewGetFinances404ResponseWithDefaults instantiates a new GetFinances404Response object
+NewGetImage404ResponseWithDefaults instantiates a new GetImage404Response object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetStatusCode
 
-`func (o *GetFinances404Response) GetStatusCode() float32`
+`func (o *GetImage404Response) GetStatusCode() float32`
 
 GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
 
 ### GetStatusCodeOk
 
-`func (o *GetFinances404Response) GetStatusCodeOk() (*float32, bool)`
+`func (o *GetImage404Response) GetStatusCodeOk() (*float32, bool)`
 
 GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatusCode
 
-`func (o *GetFinances404Response) SetStatusCode(v float32)`
+`func (o *GetImage404Response) SetStatusCode(v float32)`
 
 SetStatusCode sets StatusCode field to given value.
 
 
 ### GetMessage
 
-`func (o *GetFinances404Response) GetMessage() string`
+`func (o *GetImage404Response) GetMessage() string`
 
 GetMessage returns the Message field if non-nil, zero value otherwise.
 
 ### GetMessageOk
 
-`func (o *GetFinances404Response) GetMessageOk() (*string, bool)`
+`func (o *GetImage404Response) GetMessageOk() (*string, bool)`
 
 GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessage
 
-`func (o *GetFinances404Response) SetMessage(v string)`
+`func (o *GetImage404Response) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
 
 ### HasMessage
 
-`func (o *GetFinances404Response) HasMessage() bool`
+`func (o *GetImage404Response) HasMessage() bool`
 
 HasMessage returns a boolean if a field has been set.
 
 ### GetErrorCode
 
-`func (o *GetFinances404Response) GetErrorCode() string`
+`func (o *GetImage404Response) GetErrorCode() string`
 
 GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
 
 ### GetErrorCodeOk
 
-`func (o *GetFinances404Response) GetErrorCodeOk() (*string, bool)`
+`func (o *GetImage404Response) GetErrorCodeOk() (*string, bool)`
 
 GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrorCode
 
-`func (o *GetFinances404Response) SetErrorCode(v string)`
+`func (o *GetImage404Response) SetErrorCode(v string)`
 
 SetErrorCode sets ErrorCode field to given value.
 
 
 ### GetResponseId
 
-`func (o *GetFinances404Response) GetResponseId() string`
+`func (o *GetImage404Response) GetResponseId() string`
 
 GetResponseId returns the ResponseId field if non-nil, zero value otherwise.
 
 ### GetResponseIdOk
 
-`func (o *GetFinances404Response) GetResponseIdOk() (*string, bool)`
+`func (o *GetImage404Response) GetResponseIdOk() (*string, bool)`
 
 GetResponseIdOk returns a tuple with the ResponseId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponseId
 
-`func (o *GetFinances404Response) SetResponseId(v string)`
+`func (o *GetImage404Response) SetResponseId(v string)`
 
 SetResponseId sets ResponseId field to given value.
 
