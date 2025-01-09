@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Название сетевого диска. | 
 **Comment** | Pointer to **NullableString** | Комментарий | [optional] 
 **Size** | **float32** | Размер диска в Гб | 
-**PresetId** | **int32** | Идентификатор сетевого диска. | 
+**PresetId** | **int32** | ID сетевого диска. | 
 
 ## Methods
 

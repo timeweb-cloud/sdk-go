@@ -47,7 +47,7 @@ type ClusterOut struct {
 	Disk *int32 `json:"disk,omitempty"`
 	// Зона доступности
 	AvailabilityZone *string `json:"availability_zone,omitempty"`
-	// Идентификатор проекта
+	// ID проекта
 	ProjectId *int32 `json:"project_id,omitempty"`
 }
 

@@ -1,284 +1,321 @@
-# ImageOutAPI
+# Image
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Идентификатор образа | 
+**Id** | **string** | ID образа. | 
 **Status** | [**ImageStatus**](ImageStatus.md) |  | 
-**CreatedAt** | **time.Time** | Дата и время создания | 
-**DeletedAt** | **time.Time** | Дата и время удаления | 
-**Size** | **int32** | Размер в мегабайтах | 
-**Name** | **string** | Имя образа | 
-**Description** | **string** | Описание образа | 
-**DiskId** | **int32** | Идентификатор связанного с образом диска | 
-**Location** | Pointer to **string** | Локация, в которой создан образ | [optional] 
+**CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан образ. | 
+**DeletedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был удален образ. | 
+**Size** | **int32** | Размер физического диска в мегабайтах. | 
+**VirtualSize** | **int32** | Размер виртуального диска в мегабайтах. | 
+**Name** | **string** | Имя образа. | 
+**Description** | **string** | Описание образа. | 
+**DiskId** | **int32** | ID связанного с образом диска. | 
+**Location** | **string** | Локация образа. | 
 **Os** | [**OS**](OS.md) |  | 
-**Progress** | **int32** | Процент создания образа | 
-**IsCustom** | **bool** | Признак указывающий на то является ли образ кастомным | 
+**Progress** | **int32** | Процент создания образа. | 
+**IsCustom** | **bool** | Логическое значение, которое показывает, является ли образ кастомным. | 
+**Type** | **string** | Тип образа. | 
 
 ## Methods
 
-### NewImageOutAPI
+### NewImage
 
-`func NewImageOutAPI(id string, status ImageStatus, createdAt time.Time, deletedAt time.Time, size int32, name string, description string, diskId int32, os OS, progress int32, isCustom bool, ) *ImageOutAPI`
+`func NewImage(id string, status ImageStatus, createdAt string, deletedAt string, size int32, virtualSize int32, name string, description string, diskId int32, location string, os OS, progress int32, isCustom bool, type_ string, ) *Image`
 
-NewImageOutAPI instantiates a new ImageOutAPI object
+NewImage instantiates a new Image object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewImageOutAPIWithDefaults
+### NewImageWithDefaults
 
-`func NewImageOutAPIWithDefaults() *ImageOutAPI`
+`func NewImageWithDefaults() *Image`
 
-NewImageOutAPIWithDefaults instantiates a new ImageOutAPI object
+NewImageWithDefaults instantiates a new Image object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *ImageOutAPI) GetId() string`
+`func (o *Image) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *ImageOutAPI) GetIdOk() (*string, bool)`
+`func (o *Image) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *ImageOutAPI) SetId(v string)`
+`func (o *Image) SetId(v string)`
 
 SetId sets Id field to given value.
 
 
 ### GetStatus
 
-`func (o *ImageOutAPI) GetStatus() ImageStatus`
+`func (o *Image) GetStatus() ImageStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ImageOutAPI) GetStatusOk() (*ImageStatus, bool)`
+`func (o *Image) GetStatusOk() (*ImageStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ImageOutAPI) SetStatus(v ImageStatus)`
+`func (o *Image) SetStatus(v ImageStatus)`
 
 SetStatus sets Status field to given value.
 
 
 ### GetCreatedAt
 
-`func (o *ImageOutAPI) GetCreatedAt() time.Time`
+`func (o *Image) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *ImageOutAPI) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *Image) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *ImageOutAPI) SetCreatedAt(v time.Time)`
+`func (o *Image) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 
 ### GetDeletedAt
 
-`func (o *ImageOutAPI) GetDeletedAt() time.Time`
+`func (o *Image) GetDeletedAt() string`
 
 GetDeletedAt returns the DeletedAt field if non-nil, zero value otherwise.
 
 ### GetDeletedAtOk
 
-`func (o *ImageOutAPI) GetDeletedAtOk() (*time.Time, bool)`
+`func (o *Image) GetDeletedAtOk() (*string, bool)`
 
 GetDeletedAtOk returns a tuple with the DeletedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDeletedAt
 
-`func (o *ImageOutAPI) SetDeletedAt(v time.Time)`
+`func (o *Image) SetDeletedAt(v string)`
 
 SetDeletedAt sets DeletedAt field to given value.
 
 
 ### GetSize
 
-`func (o *ImageOutAPI) GetSize() int32`
+`func (o *Image) GetSize() int32`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *ImageOutAPI) GetSizeOk() (*int32, bool)`
+`func (o *Image) GetSizeOk() (*int32, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *ImageOutAPI) SetSize(v int32)`
+`func (o *Image) SetSize(v int32)`
 
 SetSize sets Size field to given value.
 
 
+### GetVirtualSize
+
+`func (o *Image) GetVirtualSize() int32`
+
+GetVirtualSize returns the VirtualSize field if non-nil, zero value otherwise.
+
+### GetVirtualSizeOk
+
+`func (o *Image) GetVirtualSizeOk() (*int32, bool)`
+
+GetVirtualSizeOk returns a tuple with the VirtualSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualSize
+
+`func (o *Image) SetVirtualSize(v int32)`
+
+SetVirtualSize sets VirtualSize field to given value.
+
+
 ### GetName
 
-`func (o *ImageOutAPI) GetName() string`
+`func (o *Image) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *ImageOutAPI) GetNameOk() (*string, bool)`
+`func (o *Image) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *ImageOutAPI) SetName(v string)`
+`func (o *Image) SetName(v string)`
 
 SetName sets Name field to given value.
 
 
 ### GetDescription
 
-`func (o *ImageOutAPI) GetDescription() string`
+`func (o *Image) GetDescription() string`
 
 GetDescription returns the Description field if non-nil, zero value otherwise.
 
 ### GetDescriptionOk
 
-`func (o *ImageOutAPI) GetDescriptionOk() (*string, bool)`
+`func (o *Image) GetDescriptionOk() (*string, bool)`
 
 GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescription
 
-`func (o *ImageOutAPI) SetDescription(v string)`
+`func (o *Image) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
 
 
 ### GetDiskId
 
-`func (o *ImageOutAPI) GetDiskId() int32`
+`func (o *Image) GetDiskId() int32`
 
 GetDiskId returns the DiskId field if non-nil, zero value otherwise.
 
 ### GetDiskIdOk
 
-`func (o *ImageOutAPI) GetDiskIdOk() (*int32, bool)`
+`func (o *Image) GetDiskIdOk() (*int32, bool)`
 
 GetDiskIdOk returns a tuple with the DiskId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDiskId
 
-`func (o *ImageOutAPI) SetDiskId(v int32)`
+`func (o *Image) SetDiskId(v int32)`
 
 SetDiskId sets DiskId field to given value.
 
 
 ### GetLocation
 
-`func (o *ImageOutAPI) GetLocation() string`
+`func (o *Image) GetLocation() string`
 
 GetLocation returns the Location field if non-nil, zero value otherwise.
 
 ### GetLocationOk
 
-`func (o *ImageOutAPI) GetLocationOk() (*string, bool)`
+`func (o *Image) GetLocationOk() (*string, bool)`
 
 GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocation
 
-`func (o *ImageOutAPI) SetLocation(v string)`
+`func (o *Image) SetLocation(v string)`
 
 SetLocation sets Location field to given value.
 
-### HasLocation
-
-`func (o *ImageOutAPI) HasLocation() bool`
-
-HasLocation returns a boolean if a field has been set.
 
 ### GetOs
 
-`func (o *ImageOutAPI) GetOs() OS`
+`func (o *Image) GetOs() OS`
 
 GetOs returns the Os field if non-nil, zero value otherwise.
 
 ### GetOsOk
 
-`func (o *ImageOutAPI) GetOsOk() (*OS, bool)`
+`func (o *Image) GetOsOk() (*OS, bool)`
 
 GetOsOk returns a tuple with the Os field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOs
 
-`func (o *ImageOutAPI) SetOs(v OS)`
+`func (o *Image) SetOs(v OS)`
 
 SetOs sets Os field to given value.
 
 
 ### GetProgress
 
-`func (o *ImageOutAPI) GetProgress() int32`
+`func (o *Image) GetProgress() int32`
 
 GetProgress returns the Progress field if non-nil, zero value otherwise.
 
 ### GetProgressOk
 
-`func (o *ImageOutAPI) GetProgressOk() (*int32, bool)`
+`func (o *Image) GetProgressOk() (*int32, bool)`
 
 GetProgressOk returns a tuple with the Progress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProgress
 
-`func (o *ImageOutAPI) SetProgress(v int32)`
+`func (o *Image) SetProgress(v int32)`
 
 SetProgress sets Progress field to given value.
 
 
 ### GetIsCustom
 
-`func (o *ImageOutAPI) GetIsCustom() bool`
+`func (o *Image) GetIsCustom() bool`
 
 GetIsCustom returns the IsCustom field if non-nil, zero value otherwise.
 
 ### GetIsCustomOk
 
-`func (o *ImageOutAPI) GetIsCustomOk() (*bool, bool)`
+`func (o *Image) GetIsCustomOk() (*bool, bool)`
 
 GetIsCustomOk returns a tuple with the IsCustom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsCustom
 
-`func (o *ImageOutAPI) SetIsCustom(v bool)`
+`func (o *Image) SetIsCustom(v bool)`
 
 SetIsCustom sets IsCustom field to given value.
+
+
+### GetType
+
+`func (o *Image) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Image) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Image) SetType(v string)`
+
+SetType sets Type field to given value.
 
 
 

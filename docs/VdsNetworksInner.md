@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **NatMode** | Pointer to **string** | Тип преобразования сетевых адресов. | [optional] 
 **Bandwidth** | Pointer to **NullableFloat32** | Пропускная способность сети. | [optional] 
 **Ips** | [**[]VdsNetworksInnerIpsInner**](VdsNetworksInnerIpsInner.md) | Список IP-адресов сети. | 
-**IsDdosGuard** | Pointer to **bool** | Подключена ли DDoS-защита. Только для публичных сетей. | [optional] 
+**IsDdosGuard** | Pointer to **bool** | Это логическое значение, которое показывает, подключена ли DDoS-защита. Только для публичных сетей. | [optional] 
+**IsImageMounted** | Pointer to **bool** | Это логическое значение, которое показывает, примонтирован ли образ к серверу. | [optional] 
+**BlockedPorts** | Pointer to **[]int32** | Список заблокированных портов на сервере. | [optional] 
 
 ## Methods
 
@@ -189,6 +191,56 @@ SetIsDdosGuard sets IsDdosGuard field to given value.
 `func (o *VdsNetworksInner) HasIsDdosGuard() bool`
 
 HasIsDdosGuard returns a boolean if a field has been set.
+
+### GetIsImageMounted
+
+`func (o *VdsNetworksInner) GetIsImageMounted() bool`
+
+GetIsImageMounted returns the IsImageMounted field if non-nil, zero value otherwise.
+
+### GetIsImageMountedOk
+
+`func (o *VdsNetworksInner) GetIsImageMountedOk() (*bool, bool)`
+
+GetIsImageMountedOk returns a tuple with the IsImageMounted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsImageMounted
+
+`func (o *VdsNetworksInner) SetIsImageMounted(v bool)`
+
+SetIsImageMounted sets IsImageMounted field to given value.
+
+### HasIsImageMounted
+
+`func (o *VdsNetworksInner) HasIsImageMounted() bool`
+
+HasIsImageMounted returns a boolean if a field has been set.
+
+### GetBlockedPorts
+
+`func (o *VdsNetworksInner) GetBlockedPorts() []int32`
+
+GetBlockedPorts returns the BlockedPorts field if non-nil, zero value otherwise.
+
+### GetBlockedPortsOk
+
+`func (o *VdsNetworksInner) GetBlockedPortsOk() (*[]int32, bool)`
+
+GetBlockedPortsOk returns a tuple with the BlockedPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlockedPorts
+
+`func (o *VdsNetworksInner) SetBlockedPorts(v []int32)`
+
+SetBlockedPorts sets BlockedPorts field to given value.
+
+### HasBlockedPorts
+
+`func (o *VdsNetworksInner) HasBlockedPorts() bool`
+
+HasBlockedPorts returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

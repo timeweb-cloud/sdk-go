@@ -20,18 +20,17 @@ var _ MappedNullable = &ImageDownloadsResponse{}
 
 // ImageDownloadsResponse struct for ImageDownloadsResponse
 type ImageDownloadsResponse struct {
-	// ID запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
 	Meta Meta `json:"meta"`
-	// Массив объектов \"Ссылка на загрузку\"
-	Downloads []ImageDownloadAPI `json:"downloads"`
+	Downloads []ImageDownload `json:"downloads"`
 }
 
 // NewImageDownloadsResponse instantiates a new ImageDownloadsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDownloadsResponse(meta Meta, downloads []ImageDownloadAPI) *ImageDownloadsResponse {
+func NewImageDownloadsResponse(meta Meta, downloads []ImageDownload) *ImageDownloadsResponse {
 	this := ImageDownloadsResponse{}
 	this.Meta = meta
 	this.Downloads = downloads
@@ -103,9 +102,9 @@ func (o *ImageDownloadsResponse) SetMeta(v Meta) {
 }
 
 // GetDownloads returns the Downloads field value
-func (o *ImageDownloadsResponse) GetDownloads() []ImageDownloadAPI {
+func (o *ImageDownloadsResponse) GetDownloads() []ImageDownload {
 	if o == nil {
-		var ret []ImageDownloadAPI
+		var ret []ImageDownload
 		return ret
 	}
 
@@ -114,7 +113,7 @@ func (o *ImageDownloadsResponse) GetDownloads() []ImageDownloadAPI {
 
 // GetDownloadsOk returns a tuple with the Downloads field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadsResponse) GetDownloadsOk() ([]ImageDownloadAPI, bool) {
+func (o *ImageDownloadsResponse) GetDownloadsOk() ([]ImageDownload, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +121,7 @@ func (o *ImageDownloadsResponse) GetDownloadsOk() ([]ImageDownloadAPI, bool) {
 }
 
 // SetDownloads sets field value
-func (o *ImageDownloadsResponse) SetDownloads(v []ImageDownloadAPI) {
+func (o *ImageDownloadsResponse) SetDownloads(v []ImageDownload) {
 	o.Downloads = v
 }
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **int32** | ID группы | 
 **Name** | **string** | Название группы | 
 **CreatedAt** | **time.Time** | Дата и время создания группы в формате ISO8601 | 
-**PresetId** | **int32** | Идентификатор тарифа мастер-ноды | 
+**PresetId** | **int32** | ID тарифа мастер-ноды | 
 **NodeCount** | **int32** | Количество нод в группе | 
 
 ## Methods

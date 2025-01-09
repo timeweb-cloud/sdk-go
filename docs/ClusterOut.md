@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Ram** | Pointer to **int32** | Общее количество памяти | [optional] [default to 0]
 **Disk** | Pointer to **int32** | Общее дисковое пространство | [optional] [default to 0]
 **AvailabilityZone** | Pointer to **string** | Зона доступности | [optional] 
-**ProjectId** | Pointer to **int32** | Идентификатор проекта | [optional] 
+**ProjectId** | Pointer to **int32** | ID проекта | [optional] 
 
 ## Methods
 

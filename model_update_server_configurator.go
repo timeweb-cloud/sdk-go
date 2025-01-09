@@ -28,6 +28,8 @@ type UpdateServerConfigurator struct {
 	Cpu *float32 `json:"cpu,omitempty"`
 	// Размер ОЗУ сервера в МБ.
 	Ram *float32 `json:"ram,omitempty"`
+	// Количество видеокарт.
+	Gpu *float32 `json:"gpu,omitempty"`
 }
 
 // NewUpdateServerConfigurator instantiates a new UpdateServerConfigurator object
@@ -175,6 +177,38 @@ func (o *UpdateServerConfigurator) SetRam(v float32) {
 	o.Ram = &v
 }
 
+// GetGpu returns the Gpu field value if set, zero value otherwise.
+func (o *UpdateServerConfigurator) GetGpu() float32 {
+	if o == nil || IsNil(o.Gpu) {
+		var ret float32
+		return ret
+	}
+	return *o.Gpu
+}
+
+// GetGpuOk returns a tuple with the Gpu field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateServerConfigurator) GetGpuOk() (*float32, bool) {
+	if o == nil || IsNil(o.Gpu) {
+		return nil, false
+	}
+	return o.Gpu, true
+}
+
+// HasGpu returns a boolean if a field has been set.
+func (o *UpdateServerConfigurator) HasGpu() bool {
+	if o != nil && !IsNil(o.Gpu) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpu gets a reference to the given float32 and assigns it to the Gpu field.
+func (o *UpdateServerConfigurator) SetGpu(v float32) {
+	o.Gpu = &v
+}
+
 func (o UpdateServerConfigurator) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -196,6 +230,9 @@ func (o UpdateServerConfigurator) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Ram) {
 		toSerialize["ram"] = o.Ram
+	}
+	if !IsNil(o.Gpu) {
+		toSerialize["gpu"] = o.Gpu
 	}
 	return toSerialize, nil
 }

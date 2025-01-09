@@ -46,7 +46,7 @@ type CreateBalancer struct {
 	Fall float32 `json:"fall"`
 	// Порог количества успешных ответов.
 	Rise float32 `json:"rise"`
-	// Идентификатор тарифа.
+	// ID тарифа.
 	PresetId float32 `json:"preset_id"`
 	Network *Network `json:"network,omitempty"`
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`

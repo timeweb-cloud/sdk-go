@@ -20,18 +20,17 @@ var _ MappedNullable = &ImagesOutResponse{}
 
 // ImagesOutResponse struct for ImagesOutResponse
 type ImagesOutResponse struct {
-	// Идентификатор запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
 	Meta Meta `json:"meta"`
-	// Массив объектов Образ
-	Images []ImageOutAPI `json:"images"`
+	Images []Image `json:"images"`
 }
 
 // NewImagesOutResponse instantiates a new ImagesOutResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImagesOutResponse(meta Meta, images []ImageOutAPI) *ImagesOutResponse {
+func NewImagesOutResponse(meta Meta, images []Image) *ImagesOutResponse {
 	this := ImagesOutResponse{}
 	this.Meta = meta
 	this.Images = images
@@ -103,9 +102,9 @@ func (o *ImagesOutResponse) SetMeta(v Meta) {
 }
 
 // GetImages returns the Images field value
-func (o *ImagesOutResponse) GetImages() []ImageOutAPI {
+func (o *ImagesOutResponse) GetImages() []Image {
 	if o == nil {
-		var ret []ImageOutAPI
+		var ret []Image
 		return ret
 	}
 
@@ -114,7 +113,7 @@ func (o *ImagesOutResponse) GetImages() []ImageOutAPI {
 
 // GetImagesOk returns a tuple with the Images field value
 // and a boolean to check if the value has been set.
-func (o *ImagesOutResponse) GetImagesOk() ([]ImageOutAPI, bool) {
+func (o *ImagesOutResponse) GetImagesOk() ([]Image, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +121,7 @@ func (o *ImagesOutResponse) GetImagesOk() ([]ImageOutAPI, bool) {
 }
 
 // SetImages sets field value
-func (o *ImagesOutResponse) SetImages(v []ImageOutAPI) {
+func (o *ImagesOutResponse) SetImages(v []Image) {
 	o.Images = v
 }
 

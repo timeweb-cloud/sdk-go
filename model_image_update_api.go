@@ -20,9 +20,9 @@ var _ MappedNullable = &ImageUpdateAPI{}
 
 // ImageUpdateAPI struct for ImageUpdateAPI
 type ImageUpdateAPI struct {
-	// Имя образа
+	// Имя образа.
 	Name *string `json:"name,omitempty"`
-	// Описание образа
+	// Описание образа.
 	Description *string `json:"description,omitempty"`
 }
 

@@ -6,11 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddKeyToServer**](SSHAPI.md#AddKeyToServer) | **Post** /api/v1/servers/{server_id}/ssh-keys | Добавление SSH-ключей на сервер
 [**CreateKey**](SSHAPI.md#CreateKey) | **Post** /api/v1/ssh-keys | Создание SSH-ключа
-[**DeleteKey**](SSHAPI.md#DeleteKey) | **Delete** /api/v1/ssh-keys/{ssh_key_id} | Удаление SSH-ключа по уникальному идентификатору
+[**DeleteKey**](SSHAPI.md#DeleteKey) | **Delete** /api/v1/ssh-keys/{ssh_key_id} | Удаление SSH-ключа по ID
 [**DeleteKeyFromServer**](SSHAPI.md#DeleteKeyFromServer) | **Delete** /api/v1/servers/{server_id}/ssh-keys/{ssh_key_id} | Удаление SSH-ключей с сервера
-[**GetKey**](SSHAPI.md#GetKey) | **Get** /api/v1/ssh-keys/{ssh_key_id} | Получение SSH-ключа по уникальному идентификатору
+[**GetKey**](SSHAPI.md#GetKey) | **Get** /api/v1/ssh-keys/{ssh_key_id} | Получение SSH-ключа по ID
 [**GetKeys**](SSHAPI.md#GetKeys) | **Get** /api/v1/ssh-keys | Получение списка SSH-ключей
-[**UpdateKey**](SSHAPI.md#UpdateKey) | **Patch** /api/v1/ssh-keys/{ssh_key_id} | Изменение SSH-ключа по уникальному идентификатору
+[**UpdateKey**](SSHAPI.md#UpdateKey) | **Patch** /api/v1/ssh-keys/{ssh_key_id} | Изменение SSH-ключа по ID
 
 
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 > DeleteKey(ctx, sshKeyId).Execute()
 
-Удаление SSH-ключа по уникальному идентификатору
+Удаление SSH-ключа по ID
 
 
 
@@ -171,7 +171,7 @@ import (
 )
 
 func main() {
-    sshKeyId := int32(1051) // int32 | ID SSH-ключа
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -189,7 +189,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sshKeyId** | **int32** | ID SSH-ключа | 
+**sshKeyId** | **int32** | ID SSH-ключа. | 
 
 ### Other Parameters
 
@@ -240,7 +240,7 @@ import (
 
 func main() {
     serverId := int32(1051) // int32 | ID облачного сервера.
-    sshKeyId := int32(1051) // int32 | ID SSH-ключа
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -259,7 +259,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **int32** | ID облачного сервера. | 
-**sshKeyId** | **int32** | ID SSH-ключа | 
+**sshKeyId** | **int32** | ID SSH-ключа. | 
 
 ### Other Parameters
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 
 > GetKey200Response GetKey(ctx, sshKeyId).Execute()
 
-Получение SSH-ключа по уникальному идентификатору
+Получение SSH-ключа по ID
 
 
 
@@ -310,7 +310,7 @@ import (
 )
 
 func main() {
-    sshKeyId := int32(1051) // int32 | ID SSH-ключа
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -330,7 +330,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sshKeyId** | **int32** | ID SSH-ключа | 
+**sshKeyId** | **int32** | ID SSH-ключа. | 
 
 ### Other Parameters
 
@@ -424,7 +424,7 @@ Other parameters are passed through a pointer to a apiGetKeysRequest struct via 
 
 > GetKey200Response UpdateKey(ctx, sshKeyId).UpdateKeyRequest(updateKeyRequest).Execute()
 
-Изменение SSH-ключа по уникальному идентификатору
+Изменение SSH-ключа по ID
 
 
 
@@ -441,7 +441,7 @@ import (
 )
 
 func main() {
-    sshKeyId := int32(1051) // int32 | ID SSH-ключа
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа.
     updateKeyRequest := *openapiclient.NewUpdateKeyRequest() // UpdateKeyRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -462,7 +462,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sshKeyId** | **int32** | ID SSH-ключа | 
+**sshKeyId** | **int32** | ID SSH-ключа. | 
 
 ### Other Parameters
 

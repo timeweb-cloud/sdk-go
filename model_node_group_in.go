@@ -22,7 +22,7 @@ var _ MappedNullable = &NodeGroupIn{}
 type NodeGroupIn struct {
 	// Название группы
 	Name string `json:"name"`
-	// Идентификатор тарифа воркер-ноды. Нельзя передавать вместе с `configuration`. Локация воркер-нод должна совпадать с локацией кластера
+	// ID тарифа воркер-ноды. Нельзя передавать вместе с `configuration`. Локация воркер-нод должна совпадать с локацией кластера
 	PresetId *int32 `json:"preset_id,omitempty"`
 	Configuration *NodeGroupInConfiguration `json:"configuration,omitempty"`
 	// Количество нод в группе

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
-**Group** | [**FirewallGroupOutAPI**](FirewallGroupOutAPI.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
+**Group** | [**FirewallGroup**](FirewallGroup.md) |  | 
 
 ## Methods
 
 ### NewFirewallGroupOutResponse
 
-`func NewFirewallGroupOutResponse(group FirewallGroupOutAPI, ) *FirewallGroupOutResponse`
+`func NewFirewallGroupOutResponse(group FirewallGroup, ) *FirewallGroupOutResponse`
 
 NewFirewallGroupOutResponse instantiates a new FirewallGroupOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetGroup
 
-`func (o *FirewallGroupOutResponse) GetGroup() FirewallGroupOutAPI`
+`func (o *FirewallGroupOutResponse) GetGroup() FirewallGroup`
 
 GetGroup returns the Group field if non-nil, zero value otherwise.
 
 ### GetGroupOk
 
-`func (o *FirewallGroupOutResponse) GetGroupOk() (*FirewallGroupOutAPI, bool)`
+`func (o *FirewallGroupOutResponse) GetGroupOk() (*FirewallGroup, bool)`
 
 GetGroupOk returns a tuple with the Group field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGroup
 
-`func (o *FirewallGroupOutResponse) SetGroup(v FirewallGroupOutAPI)`
+`func (o *FirewallGroupOutResponse) SetGroup(v FirewallGroup)`
 
 SetGroup sets Group field to given value.
 

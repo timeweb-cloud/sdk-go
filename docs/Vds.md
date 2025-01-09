@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **float32** | ID для каждого экземпляра сервера. Автоматически генерируется при создании. | 
-**Name** | **string** | Удобочитаемое имя, установленное для выделенного сервера. | 
-**Comment** | **string** | Комментарий к выделенному серверу. | 
+**Name** | **string** | Удобочитаемое имя, установленное для сервера. | 
+**Comment** | **string** | Комментарий к серверу. | 
 **CreatedAt** | **string** | Дата создания сервера в формате ISO8061. | 
 **Os** | [**VdsOs**](VdsOs.md) |  | 
 **Software** | [**NullableVdsSoftware**](VdsSoftware.md) |  | 
@@ -17,6 +17,9 @@ Name | Type | Description | Notes
 **Status** | **string** | Статус сервера. | 
 **StartAt** | **NullableTime** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был запущен сервер. | 
 **IsDdosGuard** | **bool** | Это логическое значение, которое показывает, включена ли защита от DDoS у данного сервера. | 
+**IsMasterSsh** | **bool** | Это логическое значение, которое показывает, доступно ли подключение по SSH для поддержки. | 
+**IsDedicatedCpu** | **bool** | Это логическое значение, которое показывает, является ли CPU выделенным. | 
+**Gpu** | **float32** | Количество видеокарт сервера. | 
 **Cpu** | **float32** | Количество ядер процессора сервера. | 
 **CpuFrequency** | **string** | Частота ядер процессора сервера. | 
 **Ram** | **float32** | Размер (в Мб) ОЗУ сервера. | 
@@ -27,14 +30,14 @@ Name | Type | Description | Notes
 **Image** | [**NullableVdsImage**](VdsImage.md) |  | 
 **Networks** | [**[]VdsNetworksInner**](VdsNetworksInner.md) | Список сетей сервера. | 
 **CloudInit** | **NullableString** | Cloud-init скрипт. | 
-**IsQemuAgent** | Pointer to **bool** | Включен ли QEMU-agent на сервере. | [optional] 
+**IsQemuAgent** | **bool** | Это логическое значение, которое показывает, включен ли QEMU-agent на сервере. | 
 **AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods
 
 ### NewVds
 
-`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, availabilityZone AvailabilityZone, ) *Vds`
+`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, isMasterSsh bool, isDedicatedCpu bool, gpu float32, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, isQemuAgent bool, availabilityZone AvailabilityZone, ) *Vds`
 
 NewVds instantiates a new Vds object
 This constructor will assign default values to properties that have it defined,
@@ -349,6 +352,66 @@ and a boolean to check if the value has been set.
 SetIsDdosGuard sets IsDdosGuard field to given value.
 
 
+### GetIsMasterSsh
+
+`func (o *Vds) GetIsMasterSsh() bool`
+
+GetIsMasterSsh returns the IsMasterSsh field if non-nil, zero value otherwise.
+
+### GetIsMasterSshOk
+
+`func (o *Vds) GetIsMasterSshOk() (*bool, bool)`
+
+GetIsMasterSshOk returns a tuple with the IsMasterSsh field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMasterSsh
+
+`func (o *Vds) SetIsMasterSsh(v bool)`
+
+SetIsMasterSsh sets IsMasterSsh field to given value.
+
+
+### GetIsDedicatedCpu
+
+`func (o *Vds) GetIsDedicatedCpu() bool`
+
+GetIsDedicatedCpu returns the IsDedicatedCpu field if non-nil, zero value otherwise.
+
+### GetIsDedicatedCpuOk
+
+`func (o *Vds) GetIsDedicatedCpuOk() (*bool, bool)`
+
+GetIsDedicatedCpuOk returns a tuple with the IsDedicatedCpu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDedicatedCpu
+
+`func (o *Vds) SetIsDedicatedCpu(v bool)`
+
+SetIsDedicatedCpu sets IsDedicatedCpu field to given value.
+
+
+### GetGpu
+
+`func (o *Vds) GetGpu() float32`
+
+GetGpu returns the Gpu field if non-nil, zero value otherwise.
+
+### GetGpuOk
+
+`func (o *Vds) GetGpuOk() (*float32, bool)`
+
+GetGpuOk returns a tuple with the Gpu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpu
+
+`func (o *Vds) SetGpu(v float32)`
+
+SetGpu sets Gpu field to given value.
+
+
 ### GetCpu
 
 `func (o *Vds) GetCpu() float32`
@@ -608,11 +671,6 @@ and a boolean to check if the value has been set.
 
 SetIsQemuAgent sets IsQemuAgent field to given value.
 
-### HasIsQemuAgent
-
-`func (o *Vds) HasIsQemuAgent() bool`
-
-HasIsQemuAgent returns a boolean if a field has been set.
 
 ### GetAvailabilityZone
 

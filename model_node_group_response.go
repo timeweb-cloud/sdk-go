@@ -20,7 +20,7 @@ var _ MappedNullable = &NodeGroupResponse{}
 
 // NodeGroupResponse struct for NodeGroupResponse
 type NodeGroupResponse struct {
-	// Идентификатор запроса
+	// ID запроса
 	ResponseId *string `json:"response_id,omitempty"`
 	NodeGroup NodeGroupOut `json:"node_group"`
 }

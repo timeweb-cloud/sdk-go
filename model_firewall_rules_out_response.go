@@ -20,18 +20,17 @@ var _ MappedNullable = &FirewallRulesOutResponse{}
 
 // FirewallRulesOutResponse struct for FirewallRulesOutResponse
 type FirewallRulesOutResponse struct {
-	// Идентификатор запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
 	Meta Meta `json:"meta"`
-	// Массив объектов Firewall правил
-	Rules []FirewallRuleOutAPI `json:"rules"`
+	Rules []FirewallRule `json:"rules"`
 }
 
 // NewFirewallRulesOutResponse instantiates a new FirewallRulesOutResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFirewallRulesOutResponse(meta Meta, rules []FirewallRuleOutAPI) *FirewallRulesOutResponse {
+func NewFirewallRulesOutResponse(meta Meta, rules []FirewallRule) *FirewallRulesOutResponse {
 	this := FirewallRulesOutResponse{}
 	this.Meta = meta
 	this.Rules = rules
@@ -103,9 +102,9 @@ func (o *FirewallRulesOutResponse) SetMeta(v Meta) {
 }
 
 // GetRules returns the Rules field value
-func (o *FirewallRulesOutResponse) GetRules() []FirewallRuleOutAPI {
+func (o *FirewallRulesOutResponse) GetRules() []FirewallRule {
 	if o == nil {
-		var ret []FirewallRuleOutAPI
+		var ret []FirewallRule
 		return ret
 	}
 
@@ -114,7 +113,7 @@ func (o *FirewallRulesOutResponse) GetRules() []FirewallRuleOutAPI {
 
 // GetRulesOk returns a tuple with the Rules field value
 // and a boolean to check if the value has been set.
-func (o *FirewallRulesOutResponse) GetRulesOk() ([]FirewallRuleOutAPI, bool) {
+func (o *FirewallRulesOutResponse) GetRulesOk() ([]FirewallRule, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +121,7 @@ func (o *FirewallRulesOutResponse) GetRulesOk() ([]FirewallRuleOutAPI, bool) {
 }
 
 // SetRules sets field value
-func (o *FirewallRulesOutResponse) SetRules(v []FirewallRuleOutAPI) {
+func (o *FirewallRulesOutResponse) SetRules(v []FirewallRule) {
 	o.Rules = v
 }
 

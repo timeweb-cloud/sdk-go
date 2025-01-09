@@ -20,11 +20,11 @@ var _ MappedNullable = &CreateKeyRequest{}
 
 // CreateKeyRequest struct for CreateKeyRequest
 type CreateKeyRequest struct {
-	// Тело SSH-ключа
+	// Тело SSH-ключа.
 	Body string `json:"body"`
-	// Будет ли выбираться SSH-ключ по умолчанию при создании сервера  
+	// Будет ли выбираться SSH-ключ по умолчанию при создании сервера.  
 	IsDefault bool `json:"is_default"`
-	// Название SSH-ключа
+	// Название SSH-ключа.
 	Name string `json:"name"`
 }
 

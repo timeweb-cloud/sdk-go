@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | Pointer to **string** | Описание правила | [optional] 
+**Description** | Pointer to **string** | Описание правила. | [optional] 
 **Direction** | [**FirewallRuleDirection**](FirewallRuleDirection.md) |  | 
-**Port** | Pointer to **string** | Порт или диапазон портов, в случае tcp или udp | [optional] 
+**Port** | Pointer to **string** | Порт или диапазон портов, в случае tcp или udp. | [optional] 
 **Protocol** | [**FirewallRuleProtocol**](FirewallRuleProtocol.md) |  | 
-**Cidr** | Pointer to **string** | Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv6 | [optional] 
+**Cidr** | Pointer to **string** | Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv.6 | [optional] 
 
 ## Methods
 

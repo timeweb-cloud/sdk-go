@@ -20,7 +20,7 @@ var _ MappedNullable = &AddStorageToProjectRequest{}
 
 // AddStorageToProjectRequest struct for AddStorageToProjectRequest
 type AddStorageToProjectRequest struct {
-	// Идентификатор добавляемого хранилища.
+	// ID добавляемого хранилища.
 	ResourceId float32 `json:"resource_id"`
 }
 

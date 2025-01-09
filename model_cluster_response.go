@@ -20,7 +20,7 @@ var _ MappedNullable = &ClusterResponse{}
 
 // ClusterResponse struct for ClusterResponse
 type ClusterResponse struct {
-	// Идентификатор запроса
+	// ID запроса
 	ResponseId *string `json:"response_id,omitempty"`
 	Cluster ClusterOut `json:"cluster"`
 }

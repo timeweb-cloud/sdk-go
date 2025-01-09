@@ -13,195 +13,144 @@ package openapi
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the FirewallGroupOutAPI type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FirewallGroupOutAPI{}
+// checks if the ComponentsSchemasBaseError type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComponentsSchemasBaseError{}
 
-// FirewallGroupOutAPI struct for FirewallGroupOutAPI
-type FirewallGroupOutAPI struct {
-	// Идентификатор группы правил
-	Id string `json:"id"`
-	// Дата и время создания
-	CreatedAt time.Time `json:"created_at"`
-	// Дата и время последнего обновления
-	UpdatedAt time.Time `json:"updated_at"`
-	// Имя группы правил
-	Name string `json:"name"`
-	// Описание группы правил
-	Description string `json:"description"`
-	Policy Policy `json:"policy"`
+// ComponentsSchemasBaseError struct for ComponentsSchemasBaseError
+type ComponentsSchemasBaseError struct {
+	StatusCode int32 `json:"status_code"`
+	ErrorCode string `json:"error_code"`
+	Message string `json:"message"`
+	ResponseId *string `json:"response_id,omitempty"`
 }
 
-// NewFirewallGroupOutAPI instantiates a new FirewallGroupOutAPI object
+// NewComponentsSchemasBaseError instantiates a new ComponentsSchemasBaseError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFirewallGroupOutAPI(id string, createdAt time.Time, updatedAt time.Time, name string, description string, policy Policy) *FirewallGroupOutAPI {
-	this := FirewallGroupOutAPI{}
-	this.Id = id
-	this.CreatedAt = createdAt
-	this.UpdatedAt = updatedAt
-	this.Name = name
-	this.Description = description
-	this.Policy = policy
+func NewComponentsSchemasBaseError(statusCode int32, errorCode string, message string) *ComponentsSchemasBaseError {
+	this := ComponentsSchemasBaseError{}
+	this.StatusCode = statusCode
+	this.ErrorCode = errorCode
+	this.Message = message
 	return &this
 }
 
-// NewFirewallGroupOutAPIWithDefaults instantiates a new FirewallGroupOutAPI object
+// NewComponentsSchemasBaseErrorWithDefaults instantiates a new ComponentsSchemasBaseError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFirewallGroupOutAPIWithDefaults() *FirewallGroupOutAPI {
-	this := FirewallGroupOutAPI{}
+func NewComponentsSchemasBaseErrorWithDefaults() *ComponentsSchemasBaseError {
+	this := ComponentsSchemasBaseError{}
 	return &this
 }
 
-// GetId returns the Id field value
-func (o *FirewallGroupOutAPI) GetId() string {
+// GetStatusCode returns the StatusCode field value
+func (o *ComponentsSchemasBaseError) GetStatusCode() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.StatusCode
+}
+
+// GetStatusCodeOk returns a tuple with the StatusCode field value
+// and a boolean to check if the value has been set.
+func (o *ComponentsSchemasBaseError) GetStatusCodeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.StatusCode, true
+}
+
+// SetStatusCode sets field value
+func (o *ComponentsSchemasBaseError) SetStatusCode(v int32) {
+	o.StatusCode = v
+}
+
+// GetErrorCode returns the ErrorCode field value
+func (o *ComponentsSchemasBaseError) GetErrorCode() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Id
+	return o.ErrorCode
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetErrorCodeOk returns a tuple with the ErrorCode field value
 // and a boolean to check if the value has been set.
-func (o *FirewallGroupOutAPI) GetIdOk() (*string, bool) {
+func (o *ComponentsSchemasBaseError) GetErrorCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Id, true
+	return &o.ErrorCode, true
 }
 
-// SetId sets field value
-func (o *FirewallGroupOutAPI) SetId(v string) {
-	o.Id = v
+// SetErrorCode sets field value
+func (o *ComponentsSchemasBaseError) SetErrorCode(v string) {
+	o.ErrorCode = v
 }
 
-// GetCreatedAt returns the CreatedAt field value
-func (o *FirewallGroupOutAPI) GetCreatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *FirewallGroupOutAPI) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *FirewallGroupOutAPI) SetCreatedAt(v time.Time) {
-	o.CreatedAt = v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value
-func (o *FirewallGroupOutAPI) GetUpdatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
-// and a boolean to check if the value has been set.
-func (o *FirewallGroupOutAPI) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UpdatedAt, true
-}
-
-// SetUpdatedAt sets field value
-func (o *FirewallGroupOutAPI) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = v
-}
-
-// GetName returns the Name field value
-func (o *FirewallGroupOutAPI) GetName() string {
+// GetMessage returns the Message field value
+func (o *ComponentsSchemasBaseError) GetMessage() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Name
+	return o.Message
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *FirewallGroupOutAPI) GetNameOk() (*string, bool) {
+func (o *ComponentsSchemasBaseError) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.Message, true
 }
 
-// SetName sets field value
-func (o *FirewallGroupOutAPI) SetName(v string) {
-	o.Name = v
+// SetMessage sets field value
+func (o *ComponentsSchemasBaseError) SetMessage(v string) {
+	o.Message = v
 }
 
-// GetDescription returns the Description field value
-func (o *FirewallGroupOutAPI) GetDescription() string {
-	if o == nil {
+// GetResponseId returns the ResponseId field value if set, zero value otherwise.
+func (o *ComponentsSchemasBaseError) GetResponseId() string {
+	if o == nil || IsNil(o.ResponseId) {
 		var ret string
 		return ret
 	}
-
-	return o.Description
+	return *o.ResponseId
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetResponseIdOk returns a tuple with the ResponseId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FirewallGroupOutAPI) GetDescriptionOk() (*string, bool) {
-	if o == nil {
+func (o *ComponentsSchemasBaseError) GetResponseIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ResponseId) {
 		return nil, false
 	}
-	return &o.Description, true
+	return o.ResponseId, true
 }
 
-// SetDescription sets field value
-func (o *FirewallGroupOutAPI) SetDescription(v string) {
-	o.Description = v
-}
-
-// GetPolicy returns the Policy field value
-func (o *FirewallGroupOutAPI) GetPolicy() Policy {
-	if o == nil {
-		var ret Policy
-		return ret
+// HasResponseId returns a boolean if a field has been set.
+func (o *ComponentsSchemasBaseError) HasResponseId() bool {
+	if o != nil && !IsNil(o.ResponseId) {
+		return true
 	}
 
-	return o.Policy
+	return false
 }
 
-// GetPolicyOk returns a tuple with the Policy field value
-// and a boolean to check if the value has been set.
-func (o *FirewallGroupOutAPI) GetPolicyOk() (*Policy, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Policy, true
+// SetResponseId gets a reference to the given string and assigns it to the ResponseId field.
+func (o *ComponentsSchemasBaseError) SetResponseId(v string) {
+	o.ResponseId = &v
 }
 
-// SetPolicy sets field value
-func (o *FirewallGroupOutAPI) SetPolicy(v Policy) {
-	o.Policy = v
-}
-
-func (o FirewallGroupOutAPI) MarshalJSON() ([]byte, error) {
+func (o ComponentsSchemasBaseError) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -209,49 +158,49 @@ func (o FirewallGroupOutAPI) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FirewallGroupOutAPI) ToMap() (map[string]interface{}, error) {
+func (o ComponentsSchemasBaseError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["created_at"] = o.CreatedAt
-	toSerialize["updated_at"] = o.UpdatedAt
-	toSerialize["name"] = o.Name
-	toSerialize["description"] = o.Description
-	toSerialize["policy"] = o.Policy
+	toSerialize["status_code"] = o.StatusCode
+	toSerialize["error_code"] = o.ErrorCode
+	toSerialize["message"] = o.Message
+	if !IsNil(o.ResponseId) {
+		toSerialize["response_id"] = o.ResponseId
+	}
 	return toSerialize, nil
 }
 
-type NullableFirewallGroupOutAPI struct {
-	value *FirewallGroupOutAPI
+type NullableComponentsSchemasBaseError struct {
+	value *ComponentsSchemasBaseError
 	isSet bool
 }
 
-func (v NullableFirewallGroupOutAPI) Get() *FirewallGroupOutAPI {
+func (v NullableComponentsSchemasBaseError) Get() *ComponentsSchemasBaseError {
 	return v.value
 }
 
-func (v *NullableFirewallGroupOutAPI) Set(val *FirewallGroupOutAPI) {
+func (v *NullableComponentsSchemasBaseError) Set(val *ComponentsSchemasBaseError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFirewallGroupOutAPI) IsSet() bool {
+func (v NullableComponentsSchemasBaseError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFirewallGroupOutAPI) Unset() {
+func (v *NullableComponentsSchemasBaseError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFirewallGroupOutAPI(val *FirewallGroupOutAPI) *NullableFirewallGroupOutAPI {
-	return &NullableFirewallGroupOutAPI{value: val, isSet: true}
+func NewNullableComponentsSchemasBaseError(val *ComponentsSchemasBaseError) *NullableComponentsSchemasBaseError {
+	return &NullableComponentsSchemasBaseError{value: val, isSet: true}
 }
 
-func (v NullableFirewallGroupOutAPI) MarshalJSON() ([]byte, error) {
+func (v NullableComponentsSchemasBaseError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFirewallGroupOutAPI) UnmarshalJSON(src []byte) error {
+func (v *NullableComponentsSchemasBaseError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

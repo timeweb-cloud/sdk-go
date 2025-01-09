@@ -20,16 +20,16 @@ var _ MappedNullable = &ImageDownloadResponse{}
 
 // ImageDownloadResponse struct for ImageDownloadResponse
 type ImageDownloadResponse struct {
-	// ID запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
-	Download ImageDownloadAPI `json:"download"`
+	Download ImageDownload `json:"download"`
 }
 
 // NewImageDownloadResponse instantiates a new ImageDownloadResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDownloadResponse(download ImageDownloadAPI) *ImageDownloadResponse {
+func NewImageDownloadResponse(download ImageDownload) *ImageDownloadResponse {
 	this := ImageDownloadResponse{}
 	this.Download = download
 	return &this
@@ -76,9 +76,9 @@ func (o *ImageDownloadResponse) SetResponseId(v string) {
 }
 
 // GetDownload returns the Download field value
-func (o *ImageDownloadResponse) GetDownload() ImageDownloadAPI {
+func (o *ImageDownloadResponse) GetDownload() ImageDownload {
 	if o == nil {
-		var ret ImageDownloadAPI
+		var ret ImageDownload
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *ImageDownloadResponse) GetDownload() ImageDownloadAPI {
 
 // GetDownloadOk returns a tuple with the Download field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadResponse) GetDownloadOk() (*ImageDownloadAPI, bool) {
+func (o *ImageDownloadResponse) GetDownloadOk() (*ImageDownload, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *ImageDownloadResponse) GetDownloadOk() (*ImageDownloadAPI, bool) {
 }
 
 // SetDownload sets field value
-func (o *ImageDownloadResponse) SetDownload(v ImageDownloadAPI) {
+func (o *ImageDownloadResponse) SetDownload(v ImageDownload) {
 	o.Download = v
 }
 

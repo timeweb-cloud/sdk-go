@@ -20,17 +20,17 @@ var _ MappedNullable = &FirewallGroupResourcesOutResponse{}
 
 // FirewallGroupResourcesOutResponse struct for FirewallGroupResourcesOutResponse
 type FirewallGroupResourcesOutResponse struct {
-	// Идентификатор запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
 	Meta Meta `json:"meta"`
-	Resources []FirewallGroupResourceOutAPI `json:"resources"`
+	Resources []FirewallGroupResource `json:"resources"`
 }
 
 // NewFirewallGroupResourcesOutResponse instantiates a new FirewallGroupResourcesOutResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFirewallGroupResourcesOutResponse(meta Meta, resources []FirewallGroupResourceOutAPI) *FirewallGroupResourcesOutResponse {
+func NewFirewallGroupResourcesOutResponse(meta Meta, resources []FirewallGroupResource) *FirewallGroupResourcesOutResponse {
 	this := FirewallGroupResourcesOutResponse{}
 	this.Meta = meta
 	this.Resources = resources
@@ -102,9 +102,9 @@ func (o *FirewallGroupResourcesOutResponse) SetMeta(v Meta) {
 }
 
 // GetResources returns the Resources field value
-func (o *FirewallGroupResourcesOutResponse) GetResources() []FirewallGroupResourceOutAPI {
+func (o *FirewallGroupResourcesOutResponse) GetResources() []FirewallGroupResource {
 	if o == nil {
-		var ret []FirewallGroupResourceOutAPI
+		var ret []FirewallGroupResource
 		return ret
 	}
 
@@ -113,7 +113,7 @@ func (o *FirewallGroupResourcesOutResponse) GetResources() []FirewallGroupResour
 
 // GetResourcesOk returns a tuple with the Resources field value
 // and a boolean to check if the value has been set.
-func (o *FirewallGroupResourcesOutResponse) GetResourcesOk() ([]FirewallGroupResourceOutAPI, bool) {
+func (o *FirewallGroupResourcesOutResponse) GetResourcesOk() ([]FirewallGroupResource, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -121,7 +121,7 @@ func (o *FirewallGroupResourcesOutResponse) GetResourcesOk() ([]FirewallGroupRes
 }
 
 // SetResources sets field value
-func (o *FirewallGroupResourcesOutResponse) SetResources(v []FirewallGroupResourceOutAPI) {
+func (o *FirewallGroupResourcesOutResponse) SetResources(v []FirewallGroupResource) {
 	o.Resources = v
 }
 

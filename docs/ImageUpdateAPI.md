@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | Имя образа | [optional] 
-**Description** | Pointer to **string** | Описание образа | [optional] 
+**Name** | Pointer to **string** | Имя образа. | [optional] 
+**Description** | Pointer to **string** | Описание образа. | [optional] 
 
 ## Methods
 

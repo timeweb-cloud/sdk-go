@@ -15,118 +15,58 @@ import (
 	"encoding/json"
 )
 
-// checks if the NetworkDriversResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &NetworkDriversResponse{}
+// checks if the SchemasMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SchemasMeta{}
 
-// NetworkDriversResponse struct for NetworkDriversResponse
-type NetworkDriversResponse struct {
-	// ID запроса
-	ResponseId *string `json:"response_id,omitempty"`
-	Meta SchemasMeta `json:"meta"`
-	// Массив сетевых драйверов k8s
-	NetworkDrivers []string `json:"network_drivers"`
+// SchemasMeta struct for SchemasMeta
+type SchemasMeta struct {
+	// Число элементов в результате
+	Total int32 `json:"total"`
 }
 
-// NewNetworkDriversResponse instantiates a new NetworkDriversResponse object
+// NewSchemasMeta instantiates a new SchemasMeta object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkDriversResponse(meta SchemasMeta, networkDrivers []string) *NetworkDriversResponse {
-	this := NetworkDriversResponse{}
-	this.Meta = meta
-	this.NetworkDrivers = networkDrivers
+func NewSchemasMeta(total int32) *SchemasMeta {
+	this := SchemasMeta{}
+	this.Total = total
 	return &this
 }
 
-// NewNetworkDriversResponseWithDefaults instantiates a new NetworkDriversResponse object
+// NewSchemasMetaWithDefaults instantiates a new SchemasMeta object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkDriversResponseWithDefaults() *NetworkDriversResponse {
-	this := NetworkDriversResponse{}
+func NewSchemasMetaWithDefaults() *SchemasMeta {
+	this := SchemasMeta{}
 	return &this
 }
 
-// GetResponseId returns the ResponseId field value if set, zero value otherwise.
-func (o *NetworkDriversResponse) GetResponseId() string {
-	if o == nil || IsNil(o.ResponseId) {
-		var ret string
-		return ret
-	}
-	return *o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkDriversResponse) GetResponseIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ResponseId) {
-		return nil, false
-	}
-	return o.ResponseId, true
-}
-
-// HasResponseId returns a boolean if a field has been set.
-func (o *NetworkDriversResponse) HasResponseId() bool {
-	if o != nil && !IsNil(o.ResponseId) {
-		return true
-	}
-
-	return false
-}
-
-// SetResponseId gets a reference to the given string and assigns it to the ResponseId field.
-func (o *NetworkDriversResponse) SetResponseId(v string) {
-	o.ResponseId = &v
-}
-
-// GetMeta returns the Meta field value
-func (o *NetworkDriversResponse) GetMeta() SchemasMeta {
+// GetTotal returns the Total field value
+func (o *SchemasMeta) GetTotal() int32 {
 	if o == nil {
-		var ret SchemasMeta
+		var ret int32
 		return ret
 	}
 
-	return o.Meta
+	return o.Total
 }
 
-// GetMetaOk returns a tuple with the Meta field value
+// GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *NetworkDriversResponse) GetMetaOk() (*SchemasMeta, bool) {
+func (o *SchemasMeta) GetTotalOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Meta, true
+	return &o.Total, true
 }
 
-// SetMeta sets field value
-func (o *NetworkDriversResponse) SetMeta(v SchemasMeta) {
-	o.Meta = v
+// SetTotal sets field value
+func (o *SchemasMeta) SetTotal(v int32) {
+	o.Total = v
 }
 
-// GetNetworkDrivers returns the NetworkDrivers field value
-func (o *NetworkDriversResponse) GetNetworkDrivers() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.NetworkDrivers
-}
-
-// GetNetworkDriversOk returns a tuple with the NetworkDrivers field value
-// and a boolean to check if the value has been set.
-func (o *NetworkDriversResponse) GetNetworkDriversOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.NetworkDrivers, true
-}
-
-// SetNetworkDrivers sets field value
-func (o *NetworkDriversResponse) SetNetworkDrivers(v []string) {
-	o.NetworkDrivers = v
-}
-
-func (o NetworkDriversResponse) MarshalJSON() ([]byte, error) {
+func (o SchemasMeta) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -134,48 +74,44 @@ func (o NetworkDriversResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkDriversResponse) ToMap() (map[string]interface{}, error) {
+func (o SchemasMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResponseId) {
-		toSerialize["response_id"] = o.ResponseId
-	}
-	toSerialize["meta"] = o.Meta
-	toSerialize["network_drivers"] = o.NetworkDrivers
+	toSerialize["total"] = o.Total
 	return toSerialize, nil
 }
 
-type NullableNetworkDriversResponse struct {
-	value *NetworkDriversResponse
+type NullableSchemasMeta struct {
+	value *SchemasMeta
 	isSet bool
 }
 
-func (v NullableNetworkDriversResponse) Get() *NetworkDriversResponse {
+func (v NullableSchemasMeta) Get() *SchemasMeta {
 	return v.value
 }
 
-func (v *NullableNetworkDriversResponse) Set(val *NetworkDriversResponse) {
+func (v *NullableSchemasMeta) Set(val *SchemasMeta) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkDriversResponse) IsSet() bool {
+func (v NullableSchemasMeta) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkDriversResponse) Unset() {
+func (v *NullableSchemasMeta) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkDriversResponse(val *NetworkDriversResponse) *NullableNetworkDriversResponse {
-	return &NullableNetworkDriversResponse{value: val, isSet: true}
+func NewNullableSchemasMeta(val *SchemasMeta) *NullableSchemasMeta {
+	return &NullableSchemasMeta{value: val, isSet: true}
 }
 
-func (v NullableNetworkDriversResponse) MarshalJSON() ([]byte, error) {
+func (v NullableSchemasMeta) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNetworkDriversResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableSchemasMeta) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

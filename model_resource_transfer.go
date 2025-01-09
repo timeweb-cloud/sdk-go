@@ -20,9 +20,9 @@ var _ MappedNullable = &ResourceTransfer{}
 
 // ResourceTransfer struct for ResourceTransfer
 type ResourceTransfer struct {
-	// Идентификатор проекта, куда переносится ресурс.
+	// ID проекта, куда переносится ресурс.
 	ToProject float32 `json:"to_project"`
-	// Идентификатор перемещаемого ресурса (сервера, хранилища, кластера, балансировщика, базы данных или выделенного сервера).
+	// ID перемещаемого ресурса (сервера, хранилища, кластера, балансировщика, базы данных или выделенного сервера).
 	ResourceId float32 `json:"resource_id"`
 	// Тип перемещаемого ресурса.
 	ResourceType string `json:"resource_type"`

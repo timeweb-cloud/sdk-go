@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## DeleteVPC
 
-> CreateVPC201Response DeleteVPC(ctx, vpcId).Execute()
+> DeleteVPC(ctx, vpcId).Execute()
 
 Удаление VPC по ID сети
 
@@ -105,13 +105,11 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.VPCAPI.DeleteVPC(context.Background(), vpcId).Execute()
+    r, err := apiClient.VPCAPI.DeleteVPC(context.Background(), vpcId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VPCAPI.DeleteVPC``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeleteVPC`: CreateVPC201Response
-    fmt.Fprintf(os.Stdout, "Response from `VPCAPI.DeleteVPC`: %v\n", resp)
 }
 ```
 
@@ -134,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateVPC201Response**](CreateVPC201Response.md)
+ (empty response body)
 
 ### Authorization
 

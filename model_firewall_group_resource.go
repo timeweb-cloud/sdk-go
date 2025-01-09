@@ -15,51 +15,39 @@ import (
 	"encoding/json"
 )
 
-// checks if the FirewallRuleOutAPI type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FirewallRuleOutAPI{}
+// checks if the FirewallGroupResource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirewallGroupResource{}
 
-// FirewallRuleOutAPI struct for FirewallRuleOutAPI
-type FirewallRuleOutAPI struct {
-	// Идентификатор правила
-	Id string `json:"id"`
-	// Описание правила
-	Description string `json:"description"`
-	Direction FirewallRuleDirection `json:"direction"`
-	Protocol FirewallRuleProtocol `json:"protocol"`
-	// Порт или диапазон портов, в случае tcp или udp
-	Port *string `json:"port,omitempty"`
-	// Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv6
-	Cidr *string `json:"cidr,omitempty"`
-	// Идентификатор группы правил
-	GroupId string `json:"group_id"`
+// FirewallGroupResource struct for FirewallGroupResource
+type FirewallGroupResource struct {
+	// ID ресурса.
+	Id int32 `json:"id"`
+	Type ResourceType `json:"type"`
 }
 
-// NewFirewallRuleOutAPI instantiates a new FirewallRuleOutAPI object
+// NewFirewallGroupResource instantiates a new FirewallGroupResource object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFirewallRuleOutAPI(id string, description string, direction FirewallRuleDirection, protocol FirewallRuleProtocol, groupId string) *FirewallRuleOutAPI {
-	this := FirewallRuleOutAPI{}
+func NewFirewallGroupResource(id int32, type_ ResourceType) *FirewallGroupResource {
+	this := FirewallGroupResource{}
 	this.Id = id
-	this.Description = description
-	this.Direction = direction
-	this.Protocol = protocol
-	this.GroupId = groupId
+	this.Type = type_
 	return &this
 }
 
-// NewFirewallRuleOutAPIWithDefaults instantiates a new FirewallRuleOutAPI object
+// NewFirewallGroupResourceWithDefaults instantiates a new FirewallGroupResource object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFirewallRuleOutAPIWithDefaults() *FirewallRuleOutAPI {
-	this := FirewallRuleOutAPI{}
+func NewFirewallGroupResourceWithDefaults() *FirewallGroupResource {
+	this := FirewallGroupResource{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *FirewallRuleOutAPI) GetId() string {
+func (o *FirewallGroupResource) GetId() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -68,7 +56,7 @@ func (o *FirewallRuleOutAPI) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetIdOk() (*string, bool) {
+func (o *FirewallGroupResource) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,171 +64,35 @@ func (o *FirewallRuleOutAPI) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *FirewallRuleOutAPI) SetId(v string) {
+func (o *FirewallGroupResource) SetId(v int32) {
 	o.Id = v
 }
 
-// GetDescription returns the Description field value
-func (o *FirewallRuleOutAPI) GetDescription() string {
+// GetType returns the Type field value
+func (o *FirewallGroupResource) GetType() ResourceType {
 	if o == nil {
-		var ret string
+		var ret ResourceType
 		return ret
 	}
 
-	return o.Description
+	return o.Type
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetDescriptionOk() (*string, bool) {
+func (o *FirewallGroupResource) GetTypeOk() (*ResourceType, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Description, true
+	return &o.Type, true
 }
 
-// SetDescription sets field value
-func (o *FirewallRuleOutAPI) SetDescription(v string) {
-	o.Description = v
+// SetType sets field value
+func (o *FirewallGroupResource) SetType(v ResourceType) {
+	o.Type = v
 }
 
-// GetDirection returns the Direction field value
-func (o *FirewallRuleOutAPI) GetDirection() FirewallRuleDirection {
-	if o == nil {
-		var ret FirewallRuleDirection
-		return ret
-	}
-
-	return o.Direction
-}
-
-// GetDirectionOk returns a tuple with the Direction field value
-// and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetDirectionOk() (*FirewallRuleDirection, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Direction, true
-}
-
-// SetDirection sets field value
-func (o *FirewallRuleOutAPI) SetDirection(v FirewallRuleDirection) {
-	o.Direction = v
-}
-
-// GetProtocol returns the Protocol field value
-func (o *FirewallRuleOutAPI) GetProtocol() FirewallRuleProtocol {
-	if o == nil {
-		var ret FirewallRuleProtocol
-		return ret
-	}
-
-	return o.Protocol
-}
-
-// GetProtocolOk returns a tuple with the Protocol field value
-// and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetProtocolOk() (*FirewallRuleProtocol, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Protocol, true
-}
-
-// SetProtocol sets field value
-func (o *FirewallRuleOutAPI) SetProtocol(v FirewallRuleProtocol) {
-	o.Protocol = v
-}
-
-// GetPort returns the Port field value if set, zero value otherwise.
-func (o *FirewallRuleOutAPI) GetPort() string {
-	if o == nil || IsNil(o.Port) {
-		var ret string
-		return ret
-	}
-	return *o.Port
-}
-
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetPortOk() (*string, bool) {
-	if o == nil || IsNil(o.Port) {
-		return nil, false
-	}
-	return o.Port, true
-}
-
-// HasPort returns a boolean if a field has been set.
-func (o *FirewallRuleOutAPI) HasPort() bool {
-	if o != nil && !IsNil(o.Port) {
-		return true
-	}
-
-	return false
-}
-
-// SetPort gets a reference to the given string and assigns it to the Port field.
-func (o *FirewallRuleOutAPI) SetPort(v string) {
-	o.Port = &v
-}
-
-// GetCidr returns the Cidr field value if set, zero value otherwise.
-func (o *FirewallRuleOutAPI) GetCidr() string {
-	if o == nil || IsNil(o.Cidr) {
-		var ret string
-		return ret
-	}
-	return *o.Cidr
-}
-
-// GetCidrOk returns a tuple with the Cidr field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetCidrOk() (*string, bool) {
-	if o == nil || IsNil(o.Cidr) {
-		return nil, false
-	}
-	return o.Cidr, true
-}
-
-// HasCidr returns a boolean if a field has been set.
-func (o *FirewallRuleOutAPI) HasCidr() bool {
-	if o != nil && !IsNil(o.Cidr) {
-		return true
-	}
-
-	return false
-}
-
-// SetCidr gets a reference to the given string and assigns it to the Cidr field.
-func (o *FirewallRuleOutAPI) SetCidr(v string) {
-	o.Cidr = &v
-}
-
-// GetGroupId returns the GroupId field value
-func (o *FirewallRuleOutAPI) GetGroupId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.GroupId
-}
-
-// GetGroupIdOk returns a tuple with the GroupId field value
-// and a boolean to check if the value has been set.
-func (o *FirewallRuleOutAPI) GetGroupIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.GroupId, true
-}
-
-// SetGroupId sets field value
-func (o *FirewallRuleOutAPI) SetGroupId(v string) {
-	o.GroupId = v
-}
-
-func (o FirewallRuleOutAPI) MarshalJSON() ([]byte, error) {
+func (o FirewallGroupResource) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -248,54 +100,45 @@ func (o FirewallRuleOutAPI) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FirewallRuleOutAPI) ToMap() (map[string]interface{}, error) {
+func (o FirewallGroupResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	toSerialize["description"] = o.Description
-	toSerialize["direction"] = o.Direction
-	toSerialize["protocol"] = o.Protocol
-	if !IsNil(o.Port) {
-		toSerialize["port"] = o.Port
-	}
-	if !IsNil(o.Cidr) {
-		toSerialize["cidr"] = o.Cidr
-	}
-	toSerialize["group_id"] = o.GroupId
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 
-type NullableFirewallRuleOutAPI struct {
-	value *FirewallRuleOutAPI
+type NullableFirewallGroupResource struct {
+	value *FirewallGroupResource
 	isSet bool
 }
 
-func (v NullableFirewallRuleOutAPI) Get() *FirewallRuleOutAPI {
+func (v NullableFirewallGroupResource) Get() *FirewallGroupResource {
 	return v.value
 }
 
-func (v *NullableFirewallRuleOutAPI) Set(val *FirewallRuleOutAPI) {
+func (v *NullableFirewallGroupResource) Set(val *FirewallGroupResource) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFirewallRuleOutAPI) IsSet() bool {
+func (v NullableFirewallGroupResource) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFirewallRuleOutAPI) Unset() {
+func (v *NullableFirewallGroupResource) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFirewallRuleOutAPI(val *FirewallRuleOutAPI) *NullableFirewallRuleOutAPI {
-	return &NullableFirewallRuleOutAPI{value: val, isSet: true}
+func NewNullableFirewallGroupResource(val *FirewallGroupResource) *NullableFirewallGroupResource {
+	return &NullableFirewallGroupResource{value: val, isSet: true}
 }
 
-func (v NullableFirewallRuleOutAPI) MarshalJSON() ([]byte, error) {
+func (v NullableFirewallGroupResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFirewallRuleOutAPI) UnmarshalJSON(src []byte) error {
+func (v *NullableFirewallGroupResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

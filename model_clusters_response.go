@@ -20,9 +20,9 @@ var _ MappedNullable = &ClustersResponse{}
 
 // ClustersResponse struct for ClustersResponse
 type ClustersResponse struct {
-	// Идентификатор запроса
+	// ID запроса
 	ResponseId *string `json:"response_id,omitempty"`
-	Meta Meta `json:"meta"`
+	Meta SchemasMeta `json:"meta"`
 	// Массив объектов Кластер
 	Clusters []ClusterOut `json:"clusters"`
 }
@@ -31,7 +31,7 @@ type ClustersResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClustersResponse(meta Meta, clusters []ClusterOut) *ClustersResponse {
+func NewClustersResponse(meta SchemasMeta, clusters []ClusterOut) *ClustersResponse {
 	this := ClustersResponse{}
 	this.Meta = meta
 	this.Clusters = clusters
@@ -79,9 +79,9 @@ func (o *ClustersResponse) SetResponseId(v string) {
 }
 
 // GetMeta returns the Meta field value
-func (o *ClustersResponse) GetMeta() Meta {
+func (o *ClustersResponse) GetMeta() SchemasMeta {
 	if o == nil {
-		var ret Meta
+		var ret SchemasMeta
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *ClustersResponse) GetMeta() Meta {
 
 // GetMetaOk returns a tuple with the Meta field value
 // and a boolean to check if the value has been set.
-func (o *ClustersResponse) GetMetaOk() (*Meta, bool) {
+func (o *ClustersResponse) GetMetaOk() (*SchemasMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *ClustersResponse) GetMetaOk() (*Meta, bool) {
 }
 
 // SetMeta sets field value
-func (o *ClustersResponse) SetMeta(v Meta) {
+func (o *ClustersResponse) SetMeta(v SchemasMeta) {
 	o.Meta = v
 }
 

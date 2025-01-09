@@ -13,68 +13,74 @@ package openapi
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the ImageOutAPI type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ImageOutAPI{}
+// checks if the Image type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Image{}
 
-// ImageOutAPI struct for ImageOutAPI
-type ImageOutAPI struct {
-	// Идентификатор образа
+// Image struct for Image
+type Image struct {
+	// ID образа.
 	Id string `json:"id"`
 	Status ImageStatus `json:"status"`
-	// Дата и время создания
-	CreatedAt time.Time `json:"created_at"`
-	// Дата и время удаления
-	DeletedAt time.Time `json:"deleted_at"`
-	// Размер в мегабайтах
+	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан образ.
+	CreatedAt string `json:"created_at"`
+	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был удален образ.
+	DeletedAt string `json:"deleted_at"`
+	// Размер физического диска в мегабайтах.
 	Size int32 `json:"size"`
-	// Имя образа
+	// Размер виртуального диска в мегабайтах.
+	VirtualSize int32 `json:"virtual_size"`
+	// Имя образа.
 	Name string `json:"name"`
-	// Описание образа
+	// Описание образа.
 	Description string `json:"description"`
-	// Идентификатор связанного с образом диска
+	// ID связанного с образом диска.
 	DiskId int32 `json:"disk_id"`
-	// Локация, в которой создан образ
-	Location *string `json:"location,omitempty"`
+	// Локация образа.
+	Location string `json:"location"`
 	Os OS `json:"os"`
-	// Процент создания образа
+	// Процент создания образа.
 	Progress int32 `json:"progress"`
-	// Признак указывающий на то является ли образ кастомным
+	// Логическое значение, которое показывает, является ли образ кастомным.
 	IsCustom bool `json:"is_custom"`
+	// Тип образа.
+	Type string `json:"type"`
 }
 
-// NewImageOutAPI instantiates a new ImageOutAPI object
+// NewImage instantiates a new Image object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageOutAPI(id string, status ImageStatus, createdAt time.Time, deletedAt time.Time, size int32, name string, description string, diskId int32, os OS, progress int32, isCustom bool) *ImageOutAPI {
-	this := ImageOutAPI{}
+func NewImage(id string, status ImageStatus, createdAt string, deletedAt string, size int32, virtualSize int32, name string, description string, diskId int32, location string, os OS, progress int32, isCustom bool, type_ string) *Image {
+	this := Image{}
 	this.Id = id
 	this.Status = status
 	this.CreatedAt = createdAt
 	this.DeletedAt = deletedAt
 	this.Size = size
+	this.VirtualSize = virtualSize
 	this.Name = name
 	this.Description = description
 	this.DiskId = diskId
+	this.Location = location
 	this.Os = os
 	this.Progress = progress
 	this.IsCustom = isCustom
+	this.Type = type_
 	return &this
 }
 
-// NewImageOutAPIWithDefaults instantiates a new ImageOutAPI object
+// NewImageWithDefaults instantiates a new Image object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewImageOutAPIWithDefaults() *ImageOutAPI {
-	this := ImageOutAPI{}
+func NewImageWithDefaults() *Image {
+	this := Image{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *ImageOutAPI) GetId() string {
+func (o *Image) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -85,7 +91,7 @@ func (o *ImageOutAPI) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetIdOk() (*string, bool) {
+func (o *Image) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,12 +99,12 @@ func (o *ImageOutAPI) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *ImageOutAPI) SetId(v string) {
+func (o *Image) SetId(v string) {
 	o.Id = v
 }
 
 // GetStatus returns the Status field value
-func (o *ImageOutAPI) GetStatus() ImageStatus {
+func (o *Image) GetStatus() ImageStatus {
 	if o == nil {
 		var ret ImageStatus
 		return ret
@@ -109,7 +115,7 @@ func (o *ImageOutAPI) GetStatus() ImageStatus {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetStatusOk() (*ImageStatus, bool) {
+func (o *Image) GetStatusOk() (*ImageStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -117,14 +123,14 @@ func (o *ImageOutAPI) GetStatusOk() (*ImageStatus, bool) {
 }
 
 // SetStatus sets field value
-func (o *ImageOutAPI) SetStatus(v ImageStatus) {
+func (o *Image) SetStatus(v ImageStatus) {
 	o.Status = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *ImageOutAPI) GetCreatedAt() time.Time {
+func (o *Image) GetCreatedAt() string {
 	if o == nil {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 
@@ -133,7 +139,7 @@ func (o *ImageOutAPI) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetCreatedAtOk() (*time.Time, bool) {
+func (o *Image) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -141,14 +147,14 @@ func (o *ImageOutAPI) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *ImageOutAPI) SetCreatedAt(v time.Time) {
+func (o *Image) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetDeletedAt returns the DeletedAt field value
-func (o *ImageOutAPI) GetDeletedAt() time.Time {
+func (o *Image) GetDeletedAt() string {
 	if o == nil {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 
@@ -157,7 +163,7 @@ func (o *ImageOutAPI) GetDeletedAt() time.Time {
 
 // GetDeletedAtOk returns a tuple with the DeletedAt field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetDeletedAtOk() (*time.Time, bool) {
+func (o *Image) GetDeletedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -165,12 +171,12 @@ func (o *ImageOutAPI) GetDeletedAtOk() (*time.Time, bool) {
 }
 
 // SetDeletedAt sets field value
-func (o *ImageOutAPI) SetDeletedAt(v time.Time) {
+func (o *Image) SetDeletedAt(v string) {
 	o.DeletedAt = v
 }
 
 // GetSize returns the Size field value
-func (o *ImageOutAPI) GetSize() int32 {
+func (o *Image) GetSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -181,7 +187,7 @@ func (o *ImageOutAPI) GetSize() int32 {
 
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetSizeOk() (*int32, bool) {
+func (o *Image) GetSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -189,12 +195,36 @@ func (o *ImageOutAPI) GetSizeOk() (*int32, bool) {
 }
 
 // SetSize sets field value
-func (o *ImageOutAPI) SetSize(v int32) {
+func (o *Image) SetSize(v int32) {
 	o.Size = v
 }
 
+// GetVirtualSize returns the VirtualSize field value
+func (o *Image) GetVirtualSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.VirtualSize
+}
+
+// GetVirtualSizeOk returns a tuple with the VirtualSize field value
+// and a boolean to check if the value has been set.
+func (o *Image) GetVirtualSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VirtualSize, true
+}
+
+// SetVirtualSize sets field value
+func (o *Image) SetVirtualSize(v int32) {
+	o.VirtualSize = v
+}
+
 // GetName returns the Name field value
-func (o *ImageOutAPI) GetName() string {
+func (o *Image) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -205,7 +235,7 @@ func (o *ImageOutAPI) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetNameOk() (*string, bool) {
+func (o *Image) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -213,12 +243,12 @@ func (o *ImageOutAPI) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *ImageOutAPI) SetName(v string) {
+func (o *Image) SetName(v string) {
 	o.Name = v
 }
 
 // GetDescription returns the Description field value
-func (o *ImageOutAPI) GetDescription() string {
+func (o *Image) GetDescription() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -229,7 +259,7 @@ func (o *ImageOutAPI) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetDescriptionOk() (*string, bool) {
+func (o *Image) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -237,12 +267,12 @@ func (o *ImageOutAPI) GetDescriptionOk() (*string, bool) {
 }
 
 // SetDescription sets field value
-func (o *ImageOutAPI) SetDescription(v string) {
+func (o *Image) SetDescription(v string) {
 	o.Description = v
 }
 
 // GetDiskId returns the DiskId field value
-func (o *ImageOutAPI) GetDiskId() int32 {
+func (o *Image) GetDiskId() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -253,7 +283,7 @@ func (o *ImageOutAPI) GetDiskId() int32 {
 
 // GetDiskIdOk returns a tuple with the DiskId field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetDiskIdOk() (*int32, bool) {
+func (o *Image) GetDiskIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -261,44 +291,36 @@ func (o *ImageOutAPI) GetDiskIdOk() (*int32, bool) {
 }
 
 // SetDiskId sets field value
-func (o *ImageOutAPI) SetDiskId(v int32) {
+func (o *Image) SetDiskId(v int32) {
 	o.DiskId = v
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
-func (o *ImageOutAPI) GetLocation() string {
-	if o == nil || IsNil(o.Location) {
+// GetLocation returns the Location field value
+func (o *Image) GetLocation() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Location
+
+	return o.Location
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetLocationOk() (*string, bool) {
-	if o == nil || IsNil(o.Location) {
+func (o *Image) GetLocationOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Location, true
+	return &o.Location, true
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *ImageOutAPI) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given string and assigns it to the Location field.
-func (o *ImageOutAPI) SetLocation(v string) {
-	o.Location = &v
+// SetLocation sets field value
+func (o *Image) SetLocation(v string) {
+	o.Location = v
 }
 
 // GetOs returns the Os field value
-func (o *ImageOutAPI) GetOs() OS {
+func (o *Image) GetOs() OS {
 	if o == nil {
 		var ret OS
 		return ret
@@ -309,7 +331,7 @@ func (o *ImageOutAPI) GetOs() OS {
 
 // GetOsOk returns a tuple with the Os field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetOsOk() (*OS, bool) {
+func (o *Image) GetOsOk() (*OS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -317,12 +339,12 @@ func (o *ImageOutAPI) GetOsOk() (*OS, bool) {
 }
 
 // SetOs sets field value
-func (o *ImageOutAPI) SetOs(v OS) {
+func (o *Image) SetOs(v OS) {
 	o.Os = v
 }
 
 // GetProgress returns the Progress field value
-func (o *ImageOutAPI) GetProgress() int32 {
+func (o *Image) GetProgress() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -333,7 +355,7 @@ func (o *ImageOutAPI) GetProgress() int32 {
 
 // GetProgressOk returns a tuple with the Progress field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetProgressOk() (*int32, bool) {
+func (o *Image) GetProgressOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -341,12 +363,12 @@ func (o *ImageOutAPI) GetProgressOk() (*int32, bool) {
 }
 
 // SetProgress sets field value
-func (o *ImageOutAPI) SetProgress(v int32) {
+func (o *Image) SetProgress(v int32) {
 	o.Progress = v
 }
 
 // GetIsCustom returns the IsCustom field value
-func (o *ImageOutAPI) GetIsCustom() bool {
+func (o *Image) GetIsCustom() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -357,7 +379,7 @@ func (o *ImageOutAPI) GetIsCustom() bool {
 
 // GetIsCustomOk returns a tuple with the IsCustom field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutAPI) GetIsCustomOk() (*bool, bool) {
+func (o *Image) GetIsCustomOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -365,11 +387,35 @@ func (o *ImageOutAPI) GetIsCustomOk() (*bool, bool) {
 }
 
 // SetIsCustom sets field value
-func (o *ImageOutAPI) SetIsCustom(v bool) {
+func (o *Image) SetIsCustom(v bool) {
 	o.IsCustom = v
 }
 
-func (o ImageOutAPI) MarshalJSON() ([]byte, error) {
+// GetType returns the Type field value
+func (o *Image) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *Image) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *Image) SetType(v string) {
+	o.Type = v
+}
+
+func (o Image) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -377,57 +423,57 @@ func (o ImageOutAPI) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ImageOutAPI) ToMap() (map[string]interface{}, error) {
+func (o Image) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["deleted_at"] = o.DeletedAt
 	toSerialize["size"] = o.Size
+	toSerialize["virtual_size"] = o.VirtualSize
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
 	toSerialize["disk_id"] = o.DiskId
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
-	}
+	toSerialize["location"] = o.Location
 	toSerialize["os"] = o.Os
 	toSerialize["progress"] = o.Progress
 	toSerialize["is_custom"] = o.IsCustom
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 
-type NullableImageOutAPI struct {
-	value *ImageOutAPI
+type NullableImage struct {
+	value *Image
 	isSet bool
 }
 
-func (v NullableImageOutAPI) Get() *ImageOutAPI {
+func (v NullableImage) Get() *Image {
 	return v.value
 }
 
-func (v *NullableImageOutAPI) Set(val *ImageOutAPI) {
+func (v *NullableImage) Set(val *Image) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableImageOutAPI) IsSet() bool {
+func (v NullableImage) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableImageOutAPI) Unset() {
+func (v *NullableImage) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableImageOutAPI(val *ImageOutAPI) *NullableImageOutAPI {
-	return &NullableImageOutAPI{value: val, isSet: true}
+func NewNullableImage(val *Image) *NullableImage {
+	return &NullableImage{value: val, isSet: true}
 }
 
-func (v NullableImageOutAPI) MarshalJSON() ([]byte, error) {
+func (v NullableImage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableImageOutAPI) UnmarshalJSON(src []byte) error {
+func (v *NullableImage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

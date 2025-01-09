@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
 **Meta** | [**Meta**](Meta.md) |  | 
-**Groups** | [**[]FirewallGroupOutAPI**](FirewallGroupOutAPI.md) | Массив объектов Групп правил | 
+**Groups** | [**[]FirewallGroup**](FirewallGroup.md) |  | 
 
 ## Methods
 
 ### NewFirewallGroupsOutResponse
 
-`func NewFirewallGroupsOutResponse(meta Meta, groups []FirewallGroupOutAPI, ) *FirewallGroupsOutResponse`
+`func NewFirewallGroupsOutResponse(meta Meta, groups []FirewallGroup, ) *FirewallGroupsOutResponse`
 
 NewFirewallGroupsOutResponse instantiates a new FirewallGroupsOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetMeta sets Meta field to given value.
 
 ### GetGroups
 
-`func (o *FirewallGroupsOutResponse) GetGroups() []FirewallGroupOutAPI`
+`func (o *FirewallGroupsOutResponse) GetGroups() []FirewallGroup`
 
 GetGroups returns the Groups field if non-nil, zero value otherwise.
 
 ### GetGroupsOk
 
-`func (o *FirewallGroupsOutResponse) GetGroupsOk() (*[]FirewallGroupOutAPI, bool)`
+`func (o *FirewallGroupsOutResponse) GetGroupsOk() (*[]FirewallGroup, bool)`
 
 GetGroupsOk returns a tuple with the Groups field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGroups
 
-`func (o *FirewallGroupsOutResponse) SetGroups(v []FirewallGroupOutAPI)`
+`func (o *FirewallGroupsOutResponse) SetGroups(v []FirewallGroup)`
 
 SetGroups sets Groups field to given value.
 

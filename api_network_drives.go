@@ -215,7 +215,7 @@ DeleteNetworkDrive Удаление сетевого диска по идент�
 Чтобы удалить сетевой диск, отправьте DELETE-запрос на `/api/v1/network-drives/{network_drive_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param networkDriveId Идентификатор сетевого диска
+ @param networkDriveId ID сетевого диска
  @return ApiDeleteNetworkDriveRequest
 */
 func (a *NetworkDrivesAPIService) DeleteNetworkDrive(ctx context.Context, networkDriveId string) ApiDeleteNetworkDriveRequest {
@@ -372,7 +372,7 @@ GetNetworkDrive Получение сетевого диска
 Чтобы отобразить информацию об отдельном сетевом диске, отправьте запрос GET на `api/v1/network-drives/{network_drive_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param networkDriveId Идентификатор сетевого диска
+ @param networkDriveId ID сетевого диска
  @return ApiGetNetworkDriveRequest
 */
 func (a *NetworkDrivesAPIService) GetNetworkDrive(ctx context.Context, networkDriveId string) ApiGetNetworkDriveRequest {
@@ -1038,7 +1038,7 @@ MountNetworkDrive Подключить сетевой диск к сервису
 Чтобы подключить сетевой диск к сервису, отправьте POST-запрос на `/api/v1/network-drives/{network_drive_id}/mount`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param networkDriveId Идентификатор сетевого диска
+ @param networkDriveId ID сетевого диска
  @return ApiMountNetworkDriveRequest
 */
 func (a *NetworkDrivesAPIService) MountNetworkDrive(ctx context.Context, networkDriveId string) ApiMountNetworkDriveRequest {
@@ -1200,7 +1200,7 @@ UnmountNetworkDrive Отключить сетевой диск от сервис
 Чтобы отключить сетевой диск от сервиса, отправьте POST-запрос на `/api/v1/network-drives/{network_drive_id}/unmount`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param networkDriveId Идентификатор сетевого диска
+ @param networkDriveId ID сетевого диска
  @return ApiUnmountNetworkDriveRequest
 */
 func (a *NetworkDrivesAPIService) UnmountNetworkDrive(ctx context.Context, networkDriveId string) ApiUnmountNetworkDriveRequest {
@@ -1358,12 +1358,12 @@ func (r ApiUpdateNetworkDriveRequest) Execute() (*CreateNetworkDrive201Response,
 }
 
 /*
-UpdateNetworkDrive Изменение сетевого диска по идентификатору
+UpdateNetworkDrive Изменение сетевого диска по ID
 
 Чтобы изменить сетевой диск, отправьте PATCH-запрос на `/api/v1/network-drives/{network_drive_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param networkDriveId Идентификатор сетевого диска
+ @param networkDriveId ID сетевого диска
  @return ApiUpdateNetworkDriveRequest
 */
 func (a *NetworkDrivesAPIService) UpdateNetworkDrive(ctx context.Context, networkDriveId string) ApiUpdateNetworkDriveRequest {

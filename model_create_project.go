@@ -24,7 +24,7 @@ type CreateProject struct {
 	Name string `json:"name"`
 	// Описание проекта. Максимальная длина — 255 символов.
 	Description NullableString `json:"description,omitempty"`
-	// Идентификатор аватара пользователя. Описание методов работы с аватарами появится позднее.
+	// ID аватара пользователя. Описание методов работы с аватарами появится позднее.
 	AvatarId NullableString `json:"avatar_id,omitempty"`
 }
 

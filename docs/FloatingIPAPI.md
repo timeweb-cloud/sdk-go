@@ -6,11 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**BindFloatingIp**](FloatingIPAPI.md#BindFloatingIp) | **Post** /api/v1/floating-ips/{floating_ip_id}/bind | Привязать IP к сервису
 [**CreateFloatingIp**](FloatingIPAPI.md#CreateFloatingIp) | **Post** /api/v1/floating-ips | Создание плавающего IP
-[**DeleteFloatingIP**](FloatingIPAPI.md#DeleteFloatingIP) | **Delete** /api/v1/floating-ips/{floating_ip_id} | Удаление плавающего IP по идентификатору
+[**DeleteFloatingIP**](FloatingIPAPI.md#DeleteFloatingIP) | **Delete** /api/v1/floating-ips/{floating_ip_id} | Удаление плавающего IP по ID
 [**GetFloatingIp**](FloatingIPAPI.md#GetFloatingIp) | **Get** /api/v1/floating-ips/{floating_ip_id} | Получение плавающего IP
 [**GetFloatingIps**](FloatingIPAPI.md#GetFloatingIps) | **Get** /api/v1/floating-ips | Получение списка плавающих IP
 [**UnbindFloatingIp**](FloatingIPAPI.md#UnbindFloatingIp) | **Post** /api/v1/floating-ips/{floating_ip_id}/unbind | Отвязать IP от сервиса
-[**UpdateFloatingIP**](FloatingIPAPI.md#UpdateFloatingIP) | **Patch** /api/v1/floating-ips/{floating_ip_id} | Изменение плавающего IP по идентификатору
+[**UpdateFloatingIP**](FloatingIPAPI.md#UpdateFloatingIP) | **Patch** /api/v1/floating-ips/{floating_ip_id} | Изменение плавающего IP по ID
 
 
 
@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор плавающего IP
+    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID плавающего IP
     bindFloatingIp := *openapiclient.NewBindFloatingIp("server", float32(24569)) // BindFloatingIp | 
 
     configuration := openapiclient.NewConfiguration()
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**floatingIpId** | **string** | Идентификатор плавающего IP | 
+**floatingIpId** | **string** | ID плавающего IP | 
 
 ### Other Parameters
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 > DeleteFloatingIP(ctx, floatingIpId).Execute()
 
-Удаление плавающего IP по идентификатору
+Удаление плавающего IP по ID
 
 
 
@@ -171,7 +171,7 @@ import (
 )
 
 func main() {
-    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор плавающего IP
+    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID плавающего IP
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -189,7 +189,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**floatingIpId** | **string** | Идентификатор плавающего IP | 
+**floatingIpId** | **string** | ID плавающего IP | 
 
 ### Other Parameters
 
@@ -239,7 +239,7 @@ import (
 )
 
 func main() {
-    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор плавающего IP
+    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID плавающего IP
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -259,7 +259,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**floatingIpId** | **string** | Идентификатор плавающего IP | 
+**floatingIpId** | **string** | ID плавающего IP | 
 
 ### Other Parameters
 
@@ -370,7 +370,7 @@ import (
 )
 
 func main() {
-    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор плавающего IP
+    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID плавающего IP
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -388,7 +388,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**floatingIpId** | **string** | Идентификатор плавающего IP | 
+**floatingIpId** | **string** | ID плавающего IP | 
 
 ### Other Parameters
 
@@ -421,7 +421,7 @@ Name | Type | Description  | Notes
 
 > CreateFloatingIp201Response UpdateFloatingIP(ctx, floatingIpId).UpdateFloatingIp(updateFloatingIp).Execute()
 
-Изменение плавающего IP по идентификатору
+Изменение плавающего IP по ID
 
 
 
@@ -438,7 +438,7 @@ import (
 )
 
 func main() {
-    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор плавающего IP
+    floatingIpId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID плавающего IP
     updateFloatingIp := *openapiclient.NewUpdateFloatingIp() // UpdateFloatingIp | 
 
     configuration := openapiclient.NewConfiguration()
@@ -459,7 +459,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**floatingIpId** | **string** | Идентификатор плавающего IP | 
+**floatingIpId** | **string** | ID плавающего IP | 
 
 ### Other Parameters
 

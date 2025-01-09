@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Имя группы правил | 
-**Description** | Pointer to **string** | Описание группы правил | [optional] 
+**Name** | **string** | Имя группы правил. | 
+**Description** | Pointer to **string** | Описание группы правил. | [optional] 
 
 ## Methods
 

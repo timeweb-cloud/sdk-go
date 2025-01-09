@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
-**Meta** | [**Meta**](Meta.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса | [optional] 
+**Meta** | [**SchemasMeta**](SchemasMeta.md) |  | 
 **NetworkDrivers** | **[]string** | Массив сетевых драйверов k8s | 
 
 ## Methods
 
 ### NewNetworkDriversResponse
 
-`func NewNetworkDriversResponse(meta Meta, networkDrivers []string, ) *NetworkDriversResponse`
+`func NewNetworkDriversResponse(meta SchemasMeta, networkDrivers []string, ) *NetworkDriversResponse`
 
 NewNetworkDriversResponse instantiates a new NetworkDriversResponse object
 This constructor will assign default values to properties that have it defined,
@@ -54,20 +54,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetMeta
 
-`func (o *NetworkDriversResponse) GetMeta() Meta`
+`func (o *NetworkDriversResponse) GetMeta() SchemasMeta`
 
 GetMeta returns the Meta field if non-nil, zero value otherwise.
 
 ### GetMetaOk
 
-`func (o *NetworkDriversResponse) GetMetaOk() (*Meta, bool)`
+`func (o *NetworkDriversResponse) GetMetaOk() (*SchemasMeta, bool)`
 
 GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMeta
 
-`func (o *NetworkDriversResponse) SetMeta(v Meta)`
+`func (o *NetworkDriversResponse) SetMeta(v SchemasMeta)`
 
 SetMeta sets Meta field to given value.
 

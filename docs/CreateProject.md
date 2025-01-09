@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Удобочитаемое имя проекта. Максимальная длина — 255 символов. | 
 **Description** | Pointer to **NullableString** | Описание проекта. Максимальная длина — 255 символов. | [optional] 
-**AvatarId** | Pointer to **NullableString** | Идентификатор аватара пользователя. Описание методов работы с аватарами появится позднее. | [optional] 
+**AvatarId** | Pointer to **NullableString** | ID аватара пользователя. Описание методов работы с аватарами появится позднее. | [optional] 
 
 ## Methods
 

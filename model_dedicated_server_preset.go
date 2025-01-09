@@ -26,6 +26,8 @@ type DedicatedServerPreset struct {
 	Description string `json:"description"`
 	// Это логическое значение, которое показывает, доступен ли IPMI у данного тарифа.
 	IsIpmiEnabled bool `json:"is_ipmi_enabled"`
+	// Это логическое значение, которое показывает, готов ли выделенный сервер к моментальной выдаче.
+	IsPreInstalled bool `json:"is_pre_installed"`
 	Cpu DedicatedServerPresetCpu `json:"cpu"`
 	Disk DedicatedServerPresetDisk `json:"disk"`
 	// Стоимость тарифа выделенного сервера
@@ -39,11 +41,12 @@ type DedicatedServerPreset struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, memory DedicatedServerPresetMemory, location string) *DedicatedServerPreset {
+func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, isPreInstalled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, memory DedicatedServerPresetMemory, location string) *DedicatedServerPreset {
 	this := DedicatedServerPreset{}
 	this.Id = id
 	this.Description = description
 	this.IsIpmiEnabled = isIpmiEnabled
+	this.IsPreInstalled = isPreInstalled
 	this.Cpu = cpu
 	this.Disk = disk
 	this.Memory = memory
@@ -129,6 +132,30 @@ func (o *DedicatedServerPreset) GetIsIpmiEnabledOk() (*bool, bool) {
 // SetIsIpmiEnabled sets field value
 func (o *DedicatedServerPreset) SetIsIpmiEnabled(v bool) {
 	o.IsIpmiEnabled = v
+}
+
+// GetIsPreInstalled returns the IsPreInstalled field value
+func (o *DedicatedServerPreset) GetIsPreInstalled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsPreInstalled
+}
+
+// GetIsPreInstalledOk returns a tuple with the IsPreInstalled field value
+// and a boolean to check if the value has been set.
+func (o *DedicatedServerPreset) GetIsPreInstalledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsPreInstalled, true
+}
+
+// SetIsPreInstalled sets field value
+func (o *DedicatedServerPreset) SetIsPreInstalled(v bool) {
+	o.IsPreInstalled = v
 }
 
 // GetCpu returns the Cpu field value
@@ -272,6 +299,7 @@ func (o DedicatedServerPreset) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["description"] = o.Description
 	toSerialize["is_ipmi_enabled"] = o.IsIpmiEnabled
+	toSerialize["is_pre_installed"] = o.IsPreInstalled
 	toSerialize["cpu"] = o.Cpu
 	toSerialize["disk"] = o.Disk
 	if !IsNil(o.Price) {

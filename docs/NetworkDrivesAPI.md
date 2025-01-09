@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**GetNetworkDrivesPresets**](NetworkDrivesAPI.md#GetNetworkDrivesPresets) | **Get** /api/v1/presets/network-drives | Получение списка доступных тарифов для сетевого диска
 [**MountNetworkDrive**](NetworkDrivesAPI.md#MountNetworkDrive) | **Post** /api/v1/network-drives/{network_drive_id}/bind | Подключить сетевой диск к сервису
 [**UnmountNetworkDrive**](NetworkDrivesAPI.md#UnmountNetworkDrive) | **Post** /api/v1/network-drives/{network_drive_id}/unbind | Отключить сетевой диск от сервиса
-[**UpdateNetworkDrive**](NetworkDrivesAPI.md#UpdateNetworkDrive) | **Patch** /api/v1/network-drives/{network_drive_id} | Изменение сетевого диска по идентификатору
+[**UpdateNetworkDrive**](NetworkDrivesAPI.md#UpdateNetworkDrive) | **Patch** /api/v1/network-drives/{network_drive_id} | Изменение сетевого диска по ID
 
 
 
@@ -103,7 +103,7 @@ import (
 )
 
 func main() {
-    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор сетевого диска
+    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID сетевого диска
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -121,7 +121,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**networkDriveId** | **string** | Идентификатор сетевого диска | 
+**networkDriveId** | **string** | ID сетевого диска | 
 
 ### Other Parameters
 
@@ -171,7 +171,7 @@ import (
 )
 
 func main() {
-    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор сетевого диска
+    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID сетевого диска
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -191,7 +191,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**networkDriveId** | **string** | Идентификатор сетевого диска | 
+**networkDriveId** | **string** | ID сетевого диска | 
 
 ### Other Parameters
 
@@ -424,7 +424,7 @@ import (
 )
 
 func main() {
-    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор сетевого диска
+    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID сетевого диска
     mountNetworkDrive := *openapiclient.NewMountNetworkDrive("server", float32(24569)) // MountNetworkDrive | 
 
     configuration := openapiclient.NewConfiguration()
@@ -443,7 +443,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**networkDriveId** | **string** | Идентификатор сетевого диска | 
+**networkDriveId** | **string** | ID сетевого диска | 
 
 ### Other Parameters
 
@@ -494,7 +494,7 @@ import (
 )
 
 func main() {
-    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор сетевого диска
+    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID сетевого диска
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -512,7 +512,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**networkDriveId** | **string** | Идентификатор сетевого диска | 
+**networkDriveId** | **string** | ID сетевого диска | 
 
 ### Other Parameters
 
@@ -545,7 +545,7 @@ Name | Type | Description  | Notes
 
 > CreateNetworkDrive201Response UpdateNetworkDrive(ctx, networkDriveId).UpdateNetworkDrive(updateNetworkDrive).Execute()
 
-Изменение сетевого диска по идентификатору
+Изменение сетевого диска по ID
 
 
 
@@ -562,7 +562,7 @@ import (
 )
 
 func main() {
-    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | Идентификатор сетевого диска
+    networkDriveId := "87fa289f-1513-4c4d-8d49-5707f411f14b" // string | ID сетевого диска
     updateNetworkDrive := *openapiclient.NewUpdateNetworkDrive() // UpdateNetworkDrive | 
 
     configuration := openapiclient.NewConfiguration()
@@ -583,7 +583,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**networkDriveId** | **string** | Идентификатор сетевого диска | 
+**networkDriveId** | **string** | ID сетевого диска | 
 
 ### Other Parameters
 

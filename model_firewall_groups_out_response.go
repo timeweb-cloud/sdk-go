@@ -20,18 +20,17 @@ var _ MappedNullable = &FirewallGroupsOutResponse{}
 
 // FirewallGroupsOutResponse struct for FirewallGroupsOutResponse
 type FirewallGroupsOutResponse struct {
-	// Идентификатор запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
 	Meta Meta `json:"meta"`
-	// Массив объектов Групп правил
-	Groups []FirewallGroupOutAPI `json:"groups"`
+	Groups []FirewallGroup `json:"groups"`
 }
 
 // NewFirewallGroupsOutResponse instantiates a new FirewallGroupsOutResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFirewallGroupsOutResponse(meta Meta, groups []FirewallGroupOutAPI) *FirewallGroupsOutResponse {
+func NewFirewallGroupsOutResponse(meta Meta, groups []FirewallGroup) *FirewallGroupsOutResponse {
 	this := FirewallGroupsOutResponse{}
 	this.Meta = meta
 	this.Groups = groups
@@ -103,9 +102,9 @@ func (o *FirewallGroupsOutResponse) SetMeta(v Meta) {
 }
 
 // GetGroups returns the Groups field value
-func (o *FirewallGroupsOutResponse) GetGroups() []FirewallGroupOutAPI {
+func (o *FirewallGroupsOutResponse) GetGroups() []FirewallGroup {
 	if o == nil {
-		var ret []FirewallGroupOutAPI
+		var ret []FirewallGroup
 		return ret
 	}
 
@@ -114,7 +113,7 @@ func (o *FirewallGroupsOutResponse) GetGroups() []FirewallGroupOutAPI {
 
 // GetGroupsOk returns a tuple with the Groups field value
 // and a boolean to check if the value has been set.
-func (o *FirewallGroupsOutResponse) GetGroupsOk() ([]FirewallGroupOutAPI, bool) {
+func (o *FirewallGroupsOutResponse) GetGroupsOk() ([]FirewallGroup, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +121,7 @@ func (o *FirewallGroupsOutResponse) GetGroupsOk() ([]FirewallGroupOutAPI, bool) 
 }
 
 // SetGroups sets field value
-func (o *FirewallGroupsOutResponse) SetGroups(v []FirewallGroupOutAPI) {
+func (o *FirewallGroupsOutResponse) SetGroups(v []FirewallGroup) {
 	o.Groups = v
 }
 

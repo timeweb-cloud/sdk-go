@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | ID запроса | [optional] 
-**Download** | [**ImageDownloadAPI**](ImageDownloadAPI.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
+**Download** | [**ImageDownload**](ImageDownload.md) |  | 
 
 ## Methods
 
 ### NewImageDownloadResponse
 
-`func NewImageDownloadResponse(download ImageDownloadAPI, ) *ImageDownloadResponse`
+`func NewImageDownloadResponse(download ImageDownload, ) *ImageDownloadResponse`
 
 NewImageDownloadResponse instantiates a new ImageDownloadResponse object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetDownload
 
-`func (o *ImageDownloadResponse) GetDownload() ImageDownloadAPI`
+`func (o *ImageDownloadResponse) GetDownload() ImageDownload`
 
 GetDownload returns the Download field if non-nil, zero value otherwise.
 
 ### GetDownloadOk
 
-`func (o *ImageDownloadResponse) GetDownloadOk() (*ImageDownloadAPI, bool)`
+`func (o *ImageDownloadResponse) GetDownloadOk() (*ImageDownload, bool)`
 
 GetDownloadOk returns a tuple with the Download field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDownload
 
-`func (o *ImageDownloadResponse) SetDownload(v ImageDownloadAPI)`
+`func (o *ImageDownloadResponse) SetDownload(v ImageDownload)`
 
 SetDownload sets Download field to given value.
 

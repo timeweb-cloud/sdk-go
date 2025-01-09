@@ -40,10 +40,9 @@ func Test_openapi_VPCAPIService(t *testing.T) {
 
 		var vpcId string
 
-		resp, httpRes, err := apiClient.VPCAPI.DeleteVPC(context.Background(), vpcId).Execute()
+		httpRes, err := apiClient.VPCAPI.DeleteVPC(context.Background(), vpcId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

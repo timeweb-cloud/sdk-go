@@ -20,7 +20,7 @@ var _ MappedNullable = &UploadSuccessfulResponse{}
 
 // UploadSuccessfulResponse struct for UploadSuccessfulResponse
 type UploadSuccessfulResponse struct {
-	// Идентификатор запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
 	UploadSuccessful UploadSuccessful `json:"upload_successful"`
 }

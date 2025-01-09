@@ -383,12 +383,12 @@ func (r ApiDeleteKeyRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteKey Удаление SSH-ключа по уникальному идентификатору
+DeleteKey Удаление SSH-ключа по ID
 
 Чтобы удалить SSH-ключ, отправьте DELETE-запрос на `/api/v1/ssh-keys/{ssh_key_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sshKeyId ID SSH-ключа
+ @param sshKeyId ID SSH-ключа.
  @return ApiDeleteKeyRequest
 */
 func (a *SSHAPIService) DeleteKey(ctx context.Context, sshKeyId int32) ApiDeleteKeyRequest {
@@ -550,7 +550,7 @@ DeleteKeyFromServer Удаление SSH-ключей с сервера
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId ID облачного сервера.
- @param sshKeyId ID SSH-ключа
+ @param sshKeyId ID SSH-ключа.
  @return ApiDeleteKeyFromServerRequest
 */
 func (a *SSHAPIService) DeleteKeyFromServer(ctx context.Context, serverId int32, sshKeyId int32) ApiDeleteKeyFromServerRequest {
@@ -710,12 +710,12 @@ func (r ApiGetKeyRequest) Execute() (*GetKey200Response, *http.Response, error) 
 }
 
 /*
-GetKey Получение SSH-ключа по уникальному идентификатору
+GetKey Получение SSH-ключа по ID
 
 Чтобы получить SSH-ключ, отправьте GET-запрос на `/api/v1/ssh-keys/{ssh_key_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sshKeyId ID SSH-ключа
+ @param sshKeyId ID SSH-ключа.
  @return ApiGetKeyRequest
 */
 func (a *SSHAPIService) GetKey(ctx context.Context, sshKeyId int32) ApiGetKeyRequest {
@@ -1051,12 +1051,12 @@ func (r ApiUpdateKeyRequest) Execute() (*GetKey200Response, *http.Response, erro
 }
 
 /*
-UpdateKey Изменение SSH-ключа по уникальному идентификатору
+UpdateKey Изменение SSH-ключа по ID
 
 Чтобы изменить SSH-ключ, отправьте PATCH-запрос на `/api/v1/ssh-keys/{ssh_key_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sshKeyId ID SSH-ключа
+ @param sshKeyId ID SSH-ключа.
  @return ApiUpdateKeyRequest
 */
 func (a *SSHAPIService) UpdateKey(ctx context.Context, sshKeyId int32) ApiUpdateKeyRequest {

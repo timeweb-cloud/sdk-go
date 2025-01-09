@@ -27,11 +27,11 @@ type NodeOut struct {
 	CreatedAt time.Time `json:"created_at"`
 	// Тип ноды
 	Type string `json:"type"`
-	// Идентификатор группы нод
+	// ID группы нод
 	GroupId int32 `json:"group_id"`
 	// Статус
 	Status string `json:"status"`
-	// Идентификатор тарифа ноды
+	// ID тарифа ноды
 	PresetId int32 `json:"preset_id"`
 	// Количество ядер
 	Cpu int32 `json:"cpu"`

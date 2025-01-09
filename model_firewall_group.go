@@ -13,120 +13,195 @@ package openapi
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// checks if the NetworkDriversResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &NetworkDriversResponse{}
+// checks if the FirewallGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirewallGroup{}
 
-// NetworkDriversResponse struct for NetworkDriversResponse
-type NetworkDriversResponse struct {
-	// ID запроса
-	ResponseId *string `json:"response_id,omitempty"`
-	Meta SchemasMeta `json:"meta"`
-	// Массив сетевых драйверов k8s
-	NetworkDrivers []string `json:"network_drivers"`
+// FirewallGroup struct for FirewallGroup
+type FirewallGroup struct {
+	// ID группы правил.
+	Id string `json:"id"`
+	// Дата и время создания.
+	CreatedAt time.Time `json:"created_at"`
+	// Дата и время последнего обновления.
+	UpdatedAt time.Time `json:"updated_at"`
+	// Имя группы правил.
+	Name string `json:"name"`
+	// Описание группы правил.
+	Description string `json:"description"`
+	Policy Policy `json:"policy"`
 }
 
-// NewNetworkDriversResponse instantiates a new NetworkDriversResponse object
+// NewFirewallGroup instantiates a new FirewallGroup object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkDriversResponse(meta SchemasMeta, networkDrivers []string) *NetworkDriversResponse {
-	this := NetworkDriversResponse{}
-	this.Meta = meta
-	this.NetworkDrivers = networkDrivers
+func NewFirewallGroup(id string, createdAt time.Time, updatedAt time.Time, name string, description string, policy Policy) *FirewallGroup {
+	this := FirewallGroup{}
+	this.Id = id
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
+	this.Name = name
+	this.Description = description
+	this.Policy = policy
 	return &this
 }
 
-// NewNetworkDriversResponseWithDefaults instantiates a new NetworkDriversResponse object
+// NewFirewallGroupWithDefaults instantiates a new FirewallGroup object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkDriversResponseWithDefaults() *NetworkDriversResponse {
-	this := NetworkDriversResponse{}
+func NewFirewallGroupWithDefaults() *FirewallGroup {
+	this := FirewallGroup{}
 	return &this
 }
 
-// GetResponseId returns the ResponseId field value if set, zero value otherwise.
-func (o *NetworkDriversResponse) GetResponseId() string {
-	if o == nil || IsNil(o.ResponseId) {
+// GetId returns the Id field value
+func (o *FirewallGroup) GetId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ResponseId
+
+	return o.Id
 }
 
-// GetResponseIdOk returns a tuple with the ResponseId field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *NetworkDriversResponse) GetResponseIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ResponseId) {
+func (o *FirewallGroup) GetIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResponseId, true
+	return &o.Id, true
 }
 
-// HasResponseId returns a boolean if a field has been set.
-func (o *NetworkDriversResponse) HasResponseId() bool {
-	if o != nil && !IsNil(o.ResponseId) {
-		return true
-	}
-
-	return false
+// SetId sets field value
+func (o *FirewallGroup) SetId(v string) {
+	o.Id = v
 }
 
-// SetResponseId gets a reference to the given string and assigns it to the ResponseId field.
-func (o *NetworkDriversResponse) SetResponseId(v string) {
-	o.ResponseId = &v
-}
-
-// GetMeta returns the Meta field value
-func (o *NetworkDriversResponse) GetMeta() SchemasMeta {
+// GetCreatedAt returns the CreatedAt field value
+func (o *FirewallGroup) GetCreatedAt() time.Time {
 	if o == nil {
-		var ret SchemasMeta
+		var ret time.Time
 		return ret
 	}
 
-	return o.Meta
+	return o.CreatedAt
 }
 
-// GetMetaOk returns a tuple with the Meta field value
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *NetworkDriversResponse) GetMetaOk() (*SchemasMeta, bool) {
+func (o *FirewallGroup) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Meta, true
+	return &o.CreatedAt, true
 }
 
-// SetMeta sets field value
-func (o *NetworkDriversResponse) SetMeta(v SchemasMeta) {
-	o.Meta = v
+// SetCreatedAt sets field value
+func (o *FirewallGroup) SetCreatedAt(v time.Time) {
+	o.CreatedAt = v
 }
 
-// GetNetworkDrivers returns the NetworkDrivers field value
-func (o *NetworkDriversResponse) GetNetworkDrivers() []string {
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *FirewallGroup) GetUpdatedAt() time.Time {
 	if o == nil {
-		var ret []string
+		var ret time.Time
 		return ret
 	}
 
-	return o.NetworkDrivers
+	return o.UpdatedAt
 }
 
-// GetNetworkDriversOk returns a tuple with the NetworkDrivers field value
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *NetworkDriversResponse) GetNetworkDriversOk() ([]string, bool) {
+func (o *FirewallGroup) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.NetworkDrivers, true
+	return &o.UpdatedAt, true
 }
 
-// SetNetworkDrivers sets field value
-func (o *NetworkDriversResponse) SetNetworkDrivers(v []string) {
-	o.NetworkDrivers = v
+// SetUpdatedAt sets field value
+func (o *FirewallGroup) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = v
 }
 
-func (o NetworkDriversResponse) MarshalJSON() ([]byte, error) {
+// GetName returns the Name field value
+func (o *FirewallGroup) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *FirewallGroup) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *FirewallGroup) SetName(v string) {
+	o.Name = v
+}
+
+// GetDescription returns the Description field value
+func (o *FirewallGroup) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *FirewallGroup) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *FirewallGroup) SetDescription(v string) {
+	o.Description = v
+}
+
+// GetPolicy returns the Policy field value
+func (o *FirewallGroup) GetPolicy() Policy {
+	if o == nil {
+		var ret Policy
+		return ret
+	}
+
+	return o.Policy
+}
+
+// GetPolicyOk returns a tuple with the Policy field value
+// and a boolean to check if the value has been set.
+func (o *FirewallGroup) GetPolicyOk() (*Policy, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Policy, true
+}
+
+// SetPolicy sets field value
+func (o *FirewallGroup) SetPolicy(v Policy) {
+	o.Policy = v
+}
+
+func (o FirewallGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -134,48 +209,49 @@ func (o NetworkDriversResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkDriversResponse) ToMap() (map[string]interface{}, error) {
+func (o FirewallGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResponseId) {
-		toSerialize["response_id"] = o.ResponseId
-	}
-	toSerialize["meta"] = o.Meta
-	toSerialize["network_drivers"] = o.NetworkDrivers
+	toSerialize["id"] = o.Id
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["updated_at"] = o.UpdatedAt
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
+	toSerialize["policy"] = o.Policy
 	return toSerialize, nil
 }
 
-type NullableNetworkDriversResponse struct {
-	value *NetworkDriversResponse
+type NullableFirewallGroup struct {
+	value *FirewallGroup
 	isSet bool
 }
 
-func (v NullableNetworkDriversResponse) Get() *NetworkDriversResponse {
+func (v NullableFirewallGroup) Get() *FirewallGroup {
 	return v.value
 }
 
-func (v *NullableNetworkDriversResponse) Set(val *NetworkDriversResponse) {
+func (v *NullableFirewallGroup) Set(val *FirewallGroup) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkDriversResponse) IsSet() bool {
+func (v NullableFirewallGroup) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkDriversResponse) Unset() {
+func (v *NullableFirewallGroup) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkDriversResponse(val *NetworkDriversResponse) *NullableNetworkDriversResponse {
-	return &NullableNetworkDriversResponse{value: val, isSet: true}
+func NewNullableFirewallGroup(val *FirewallGroup) *NullableFirewallGroup {
+	return &NullableFirewallGroup{value: val, isSet: true}
 }
 
-func (v NullableNetworkDriversResponse) MarshalJSON() ([]byte, error) {
+func (v NullableFirewallGroup) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNetworkDriversResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableFirewallGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

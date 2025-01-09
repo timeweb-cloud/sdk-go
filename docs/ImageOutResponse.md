@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
-**Image** | [**ImageOutAPI**](ImageOutAPI.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
+**Image** | [**Image**](Image.md) |  | 
 
 ## Methods
 
 ### NewImageOutResponse
 
-`func NewImageOutResponse(image ImageOutAPI, ) *ImageOutResponse`
+`func NewImageOutResponse(image Image, ) *ImageOutResponse`
 
 NewImageOutResponse instantiates a new ImageOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetImage
 
-`func (o *ImageOutResponse) GetImage() ImageOutAPI`
+`func (o *ImageOutResponse) GetImage() Image`
 
 GetImage returns the Image field if non-nil, zero value otherwise.
 
 ### GetImageOk
 
-`func (o *ImageOutResponse) GetImageOk() (*ImageOutAPI, bool)`
+`func (o *ImageOutResponse) GetImageOk() (*Image, bool)`
 
 GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImage
 
-`func (o *ImageOutResponse) SetImage(v ImageOutAPI)`
+`func (o *ImageOutResponse) SetImage(v Image)`
 
 SetImage sets Image field to given value.
 

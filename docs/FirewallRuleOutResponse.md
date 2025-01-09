@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
-**Rule** | [**FirewallRuleOutAPI**](FirewallRuleOutAPI.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
+**Rule** | [**FirewallRule**](FirewallRule.md) |  | 
 
 ## Methods
 
 ### NewFirewallRuleOutResponse
 
-`func NewFirewallRuleOutResponse(rule FirewallRuleOutAPI, ) *FirewallRuleOutResponse`
+`func NewFirewallRuleOutResponse(rule FirewallRule, ) *FirewallRuleOutResponse`
 
 NewFirewallRuleOutResponse instantiates a new FirewallRuleOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetRule
 
-`func (o *FirewallRuleOutResponse) GetRule() FirewallRuleOutAPI`
+`func (o *FirewallRuleOutResponse) GetRule() FirewallRule`
 
 GetRule returns the Rule field if non-nil, zero value otherwise.
 
 ### GetRuleOk
 
-`func (o *FirewallRuleOutResponse) GetRuleOk() (*FirewallRuleOutAPI, bool)`
+`func (o *FirewallRuleOutResponse) GetRuleOk() (*FirewallRule, bool)`
 
 GetRuleOk returns a tuple with the Rule field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRule
 
-`func (o *FirewallRuleOutResponse) SetRule(v FirewallRuleOutAPI)`
+`func (o *FirewallRuleOutResponse) SetRule(v FirewallRule)`
 
 SetRule sets Rule field to given value.
 

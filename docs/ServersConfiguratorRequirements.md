@@ -16,12 +16,15 @@ Name | Type | Description | Notes
 **NetworkBandwidthMin** | **float32** | Минимальныая пропускная способноть интернет-канала (в Мб) | 
 **NetworkBandwidthStep** | **float32** | Размер шага пропускной способноти интернет-канала (в Мб) | 
 **NetworkBandwidthMax** | **float32** | Максимальная пропускная способноть интернет-канала (в Мб) | 
+**GpuMin** | **NullableFloat32** | Минимальное количество видеокарт | 
+**GpuMax** | **NullableFloat32** | Максимальное количество видеокарт | 
+**GpuStep** | **NullableFloat32** | Размер шага видеокарт | 
 
 ## Methods
 
 ### NewServersConfiguratorRequirements
 
-`func NewServersConfiguratorRequirements(cpuMin float32, cpuStep float32, cpuMax float32, ramMin float32, ramStep float32, ramMax float32, diskMin float32, diskStep float32, diskMax float32, networkBandwidthMin float32, networkBandwidthStep float32, networkBandwidthMax float32, ) *ServersConfiguratorRequirements`
+`func NewServersConfiguratorRequirements(cpuMin float32, cpuStep float32, cpuMax float32, ramMin float32, ramStep float32, ramMax float32, diskMin float32, diskStep float32, diskMax float32, networkBandwidthMin float32, networkBandwidthStep float32, networkBandwidthMax float32, gpuMin NullableFloat32, gpuMax NullableFloat32, gpuStep NullableFloat32, ) *ServersConfiguratorRequirements`
 
 NewServersConfiguratorRequirements instantiates a new ServersConfiguratorRequirements object
 This constructor will assign default values to properties that have it defined,
@@ -276,6 +279,96 @@ and a boolean to check if the value has been set.
 SetNetworkBandwidthMax sets NetworkBandwidthMax field to given value.
 
 
+### GetGpuMin
+
+`func (o *ServersConfiguratorRequirements) GetGpuMin() float32`
+
+GetGpuMin returns the GpuMin field if non-nil, zero value otherwise.
+
+### GetGpuMinOk
+
+`func (o *ServersConfiguratorRequirements) GetGpuMinOk() (*float32, bool)`
+
+GetGpuMinOk returns a tuple with the GpuMin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuMin
+
+`func (o *ServersConfiguratorRequirements) SetGpuMin(v float32)`
+
+SetGpuMin sets GpuMin field to given value.
+
+
+### SetGpuMinNil
+
+`func (o *ServersConfiguratorRequirements) SetGpuMinNil(b bool)`
+
+ SetGpuMinNil sets the value for GpuMin to be an explicit nil
+
+### UnsetGpuMin
+`func (o *ServersConfiguratorRequirements) UnsetGpuMin()`
+
+UnsetGpuMin ensures that no value is present for GpuMin, not even an explicit nil
+### GetGpuMax
+
+`func (o *ServersConfiguratorRequirements) GetGpuMax() float32`
+
+GetGpuMax returns the GpuMax field if non-nil, zero value otherwise.
+
+### GetGpuMaxOk
+
+`func (o *ServersConfiguratorRequirements) GetGpuMaxOk() (*float32, bool)`
+
+GetGpuMaxOk returns a tuple with the GpuMax field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuMax
+
+`func (o *ServersConfiguratorRequirements) SetGpuMax(v float32)`
+
+SetGpuMax sets GpuMax field to given value.
+
+
+### SetGpuMaxNil
+
+`func (o *ServersConfiguratorRequirements) SetGpuMaxNil(b bool)`
+
+ SetGpuMaxNil sets the value for GpuMax to be an explicit nil
+
+### UnsetGpuMax
+`func (o *ServersConfiguratorRequirements) UnsetGpuMax()`
+
+UnsetGpuMax ensures that no value is present for GpuMax, not even an explicit nil
+### GetGpuStep
+
+`func (o *ServersConfiguratorRequirements) GetGpuStep() float32`
+
+GetGpuStep returns the GpuStep field if non-nil, zero value otherwise.
+
+### GetGpuStepOk
+
+`func (o *ServersConfiguratorRequirements) GetGpuStepOk() (*float32, bool)`
+
+GetGpuStepOk returns a tuple with the GpuStep field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuStep
+
+`func (o *ServersConfiguratorRequirements) SetGpuStep(v float32)`
+
+SetGpuStep sets GpuStep field to given value.
+
+
+### SetGpuStepNil
+
+`func (o *ServersConfiguratorRequirements) SetGpuStepNil(b bool)`
+
+ SetGpuStepNil sets the value for GpuStep to be an explicit nil
+
+### UnsetGpuStep
+`func (o *ServersConfiguratorRequirements) UnsetGpuStep()`
+
+UnsetGpuStep ensures that no value is present for GpuStep, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

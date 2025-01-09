@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
-**Meta** | [**Meta**](Meta.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса | [optional] 
+**Meta** | [**SchemasMeta**](SchemasMeta.md) |  | 
 **Clusters** | [**[]ClusterOut**](ClusterOut.md) | Массив объектов Кластер | 
 
 ## Methods
 
 ### NewClustersResponse
 
-`func NewClustersResponse(meta Meta, clusters []ClusterOut, ) *ClustersResponse`
+`func NewClustersResponse(meta SchemasMeta, clusters []ClusterOut, ) *ClustersResponse`
 
 NewClustersResponse instantiates a new ClustersResponse object
 This constructor will assign default values to properties that have it defined,
@@ -54,20 +54,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetMeta
 
-`func (o *ClustersResponse) GetMeta() Meta`
+`func (o *ClustersResponse) GetMeta() SchemasMeta`
 
 GetMeta returns the Meta field if non-nil, zero value otherwise.
 
 ### GetMetaOk
 
-`func (o *ClustersResponse) GetMetaOk() (*Meta, bool)`
+`func (o *ClustersResponse) GetMetaOk() (*SchemasMeta, bool)`
 
 GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMeta
 
-`func (o *ClustersResponse) SetMeta(v Meta)`
+`func (o *ClustersResponse) SetMeta(v SchemasMeta)`
 
 SetMeta sets Meta field to given value.
 

@@ -20,7 +20,7 @@ var _ MappedNullable = &FloatingIp{}
 
 // FloatingIp struct for FloatingIp
 type FloatingIp struct {
-	// Идентификатор IP.
+	// ID IP.
 	Id string `json:"id"`
 	// IP-адрес
 	Ip NullableString `json:"ip"`

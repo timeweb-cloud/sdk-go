@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Название группы | 
-**PresetId** | Pointer to **int32** | Идентификатор тарифа воркер-ноды. Нельзя передавать вместе с &#x60;configuration&#x60;. Локация воркер-нод должна совпадать с локацией кластера | [optional] 
+**PresetId** | Pointer to **int32** | ID тарифа воркер-ноды. Нельзя передавать вместе с &#x60;configuration&#x60;. Локация воркер-нод должна совпадать с локацией кластера | [optional] 
 **Configuration** | Pointer to [**NodeGroupInConfiguration**](NodeGroupInConfiguration.md) |  | [optional] 
 **NodeCount** | **int32** | Количество нод в группе | 
 **Labels** | Pointer to [**[]SetLabels**](SetLabels.md) | Лейблы для группы нод | [optional] 

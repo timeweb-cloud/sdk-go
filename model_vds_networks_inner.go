@@ -30,8 +30,12 @@ type VdsNetworksInner struct {
 	Bandwidth NullableFloat32 `json:"bandwidth,omitempty"`
 	// Список IP-адресов сети.
 	Ips []VdsNetworksInnerIpsInner `json:"ips"`
-	// Подключена ли DDoS-защита. Только для публичных сетей.
+	// Это логическое значение, которое показывает, подключена ли DDoS-защита. Только для публичных сетей.
 	IsDdosGuard *bool `json:"is_ddos_guard,omitempty"`
+	// Это логическое значение, которое показывает, примонтирован ли образ к серверу.
+	IsImageMounted *bool `json:"is_image_mounted,omitempty"`
+	// Список заблокированных портов на сервере.
+	BlockedPorts []int32 `json:"blocked_ports,omitempty"`
 }
 
 // NewVdsNetworksInner instantiates a new VdsNetworksInner object
@@ -241,6 +245,70 @@ func (o *VdsNetworksInner) SetIsDdosGuard(v bool) {
 	o.IsDdosGuard = &v
 }
 
+// GetIsImageMounted returns the IsImageMounted field value if set, zero value otherwise.
+func (o *VdsNetworksInner) GetIsImageMounted() bool {
+	if o == nil || IsNil(o.IsImageMounted) {
+		var ret bool
+		return ret
+	}
+	return *o.IsImageMounted
+}
+
+// GetIsImageMountedOk returns a tuple with the IsImageMounted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VdsNetworksInner) GetIsImageMountedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsImageMounted) {
+		return nil, false
+	}
+	return o.IsImageMounted, true
+}
+
+// HasIsImageMounted returns a boolean if a field has been set.
+func (o *VdsNetworksInner) HasIsImageMounted() bool {
+	if o != nil && !IsNil(o.IsImageMounted) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsImageMounted gets a reference to the given bool and assigns it to the IsImageMounted field.
+func (o *VdsNetworksInner) SetIsImageMounted(v bool) {
+	o.IsImageMounted = &v
+}
+
+// GetBlockedPorts returns the BlockedPorts field value if set, zero value otherwise.
+func (o *VdsNetworksInner) GetBlockedPorts() []int32 {
+	if o == nil || IsNil(o.BlockedPorts) {
+		var ret []int32
+		return ret
+	}
+	return o.BlockedPorts
+}
+
+// GetBlockedPortsOk returns a tuple with the BlockedPorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VdsNetworksInner) GetBlockedPortsOk() ([]int32, bool) {
+	if o == nil || IsNil(o.BlockedPorts) {
+		return nil, false
+	}
+	return o.BlockedPorts, true
+}
+
+// HasBlockedPorts returns a boolean if a field has been set.
+func (o *VdsNetworksInner) HasBlockedPorts() bool {
+	if o != nil && !IsNil(o.BlockedPorts) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockedPorts gets a reference to the given []int32 and assigns it to the BlockedPorts field.
+func (o *VdsNetworksInner) SetBlockedPorts(v []int32) {
+	o.BlockedPorts = v
+}
+
 func (o VdsNetworksInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -266,6 +334,12 @@ func (o VdsNetworksInner) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsDdosGuard) {
 		toSerialize["is_ddos_guard"] = o.IsDdosGuard
+	}
+	if !IsNil(o.IsImageMounted) {
+		toSerialize["is_image_mounted"] = o.IsImageMounted
+	}
+	if !IsNil(o.BlockedPorts) {
+		toSerialize["blocked_ports"] = o.BlockedPorts
 	}
 	return toSerialize, nil
 }

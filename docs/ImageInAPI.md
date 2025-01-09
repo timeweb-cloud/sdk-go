@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | Имя образа | [optional] 
-**Description** | Pointer to **string** | Описание образа | [optional] 
-**DiskId** | Pointer to **int32** | Идентификатор диска, для которого создается образ | [optional] 
-**UploadUrl** | Pointer to **string** | Cсылка для загрузки образа | [optional] 
-**Location** | Pointer to [**Location**](Location.md) |  | [optional] 
-**Os** | Pointer to [**OS**](OS.md) |  | [optional] 
+**Name** | Pointer to **string** | Имя образа. | [optional] 
+**Description** | Pointer to **string** | Описание образа. | [optional] 
+**DiskId** | Pointer to **int32** | ID диска, для которого создается образ. | [optional] 
+**UploadUrl** | Pointer to **string** | Ссылка для загрузки образа. | [optional] 
+**Location** | [**Location**](Location.md) |  | 
+**Os** | [**OS**](OS.md) |  | 
 
 ## Methods
 
 ### NewImageInAPI
 
-`func NewImageInAPI() *ImageInAPI`
+`func NewImageInAPI(location Location, os OS, ) *ImageInAPI`
 
 NewImageInAPI instantiates a new ImageInAPI object
 This constructor will assign default values to properties that have it defined,
@@ -149,11 +149,6 @@ and a boolean to check if the value has been set.
 
 SetLocation sets Location field to given value.
 
-### HasLocation
-
-`func (o *ImageInAPI) HasLocation() bool`
-
-HasLocation returns a boolean if a field has been set.
 
 ### GetOs
 
@@ -174,11 +169,6 @@ and a boolean to check if the value has been set.
 
 SetOs sets Os field to given value.
 
-### HasOs
-
-`func (o *ImageInAPI) HasOs() bool`
-
-HasOs returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

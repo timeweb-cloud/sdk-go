@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
-**Resource** | [**FirewallGroupResourceOutAPI**](FirewallGroupResourceOutAPI.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
+**Resource** | [**FirewallGroupResource**](FirewallGroupResource.md) |  | 
 
 ## Methods
 
 ### NewFirewallGroupResourceOutResponse
 
-`func NewFirewallGroupResourceOutResponse(resource FirewallGroupResourceOutAPI, ) *FirewallGroupResourceOutResponse`
+`func NewFirewallGroupResourceOutResponse(resource FirewallGroupResource, ) *FirewallGroupResourceOutResponse`
 
 NewFirewallGroupResourceOutResponse instantiates a new FirewallGroupResourceOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetResource
 
-`func (o *FirewallGroupResourceOutResponse) GetResource() FirewallGroupResourceOutAPI`
+`func (o *FirewallGroupResourceOutResponse) GetResource() FirewallGroupResource`
 
 GetResource returns the Resource field if non-nil, zero value otherwise.
 
 ### GetResourceOk
 
-`func (o *FirewallGroupResourceOutResponse) GetResourceOk() (*FirewallGroupResourceOutAPI, bool)`
+`func (o *FirewallGroupResourceOutResponse) GetResourceOk() (*FirewallGroupResource, bool)`
 
 GetResourceOk returns a tuple with the Resource field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResource
 
-`func (o *FirewallGroupResourceOutResponse) SetResource(v FirewallGroupResourceOutAPI)`
+`func (o *FirewallGroupResourceOutResponse) SetResource(v FirewallGroupResource)`
 
 SetResource sets Resource field to given value.
 

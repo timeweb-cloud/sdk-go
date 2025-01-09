@@ -20,16 +20,16 @@ var _ MappedNullable = &ImageOutResponse{}
 
 // ImageOutResponse struct for ImageOutResponse
 type ImageOutResponse struct {
-	// Идентификатор запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
-	Image ImageOutAPI `json:"image"`
+	Image Image `json:"image"`
 }
 
 // NewImageOutResponse instantiates a new ImageOutResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageOutResponse(image ImageOutAPI) *ImageOutResponse {
+func NewImageOutResponse(image Image) *ImageOutResponse {
 	this := ImageOutResponse{}
 	this.Image = image
 	return &this
@@ -76,9 +76,9 @@ func (o *ImageOutResponse) SetResponseId(v string) {
 }
 
 // GetImage returns the Image field value
-func (o *ImageOutResponse) GetImage() ImageOutAPI {
+func (o *ImageOutResponse) GetImage() Image {
 	if o == nil {
-		var ret ImageOutAPI
+		var ret Image
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *ImageOutResponse) GetImage() ImageOutAPI {
 
 // GetImageOk returns a tuple with the Image field value
 // and a boolean to check if the value has been set.
-func (o *ImageOutResponse) GetImageOk() (*ImageOutAPI, bool) {
+func (o *ImageOutResponse) GetImageOk() (*Image, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *ImageOutResponse) GetImageOk() (*ImageOutAPI, bool) {
 }
 
 // SetImage sets field value
-func (o *ImageOutResponse) SetImage(v ImageOutAPI) {
+func (o *ImageOutResponse) SetImage(v Image) {
 	o.Image = v
 }
 

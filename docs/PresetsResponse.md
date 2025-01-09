@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
-**Meta** | [**Meta**](Meta.md) |  | 
+**ResponseId** | Pointer to **string** | ID запроса | [optional] 
+**Meta** | [**SchemasMeta**](SchemasMeta.md) |  | 
 **K8sPresets** | [**[]WorkerPresetOutApi**](WorkerPresetOutApi.md) | Массив тарифов k8s | 
 
 ## Methods
 
 ### NewPresetsResponse
 
-`func NewPresetsResponse(meta Meta, k8sPresets []WorkerPresetOutApi, ) *PresetsResponse`
+`func NewPresetsResponse(meta SchemasMeta, k8sPresets []WorkerPresetOutApi, ) *PresetsResponse`
 
 NewPresetsResponse instantiates a new PresetsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -54,20 +54,20 @@ HasResponseId returns a boolean if a field has been set.
 
 ### GetMeta
 
-`func (o *PresetsResponse) GetMeta() Meta`
+`func (o *PresetsResponse) GetMeta() SchemasMeta`
 
 GetMeta returns the Meta field if non-nil, zero value otherwise.
 
 ### GetMetaOk
 
-`func (o *PresetsResponse) GetMetaOk() (*Meta, bool)`
+`func (o *PresetsResponse) GetMetaOk() (*SchemasMeta, bool)`
 
 GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMeta
 
-`func (o *PresetsResponse) SetMeta(v Meta)`
+`func (o *PresetsResponse) SetMeta(v SchemasMeta)`
 
 SetMeta sets Meta field to given value.
 

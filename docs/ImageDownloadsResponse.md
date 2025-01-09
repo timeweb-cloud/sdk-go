@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | ID запроса | [optional] 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
 **Meta** | [**Meta**](Meta.md) |  | 
-**Downloads** | [**[]ImageDownloadAPI**](ImageDownloadAPI.md) | Массив объектов \&quot;Ссылка на загрузку\&quot; | 
+**Downloads** | [**[]ImageDownload**](ImageDownload.md) |  | 
 
 ## Methods
 
 ### NewImageDownloadsResponse
 
-`func NewImageDownloadsResponse(meta Meta, downloads []ImageDownloadAPI, ) *ImageDownloadsResponse`
+`func NewImageDownloadsResponse(meta Meta, downloads []ImageDownload, ) *ImageDownloadsResponse`
 
 NewImageDownloadsResponse instantiates a new ImageDownloadsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetMeta sets Meta field to given value.
 
 ### GetDownloads
 
-`func (o *ImageDownloadsResponse) GetDownloads() []ImageDownloadAPI`
+`func (o *ImageDownloadsResponse) GetDownloads() []ImageDownload`
 
 GetDownloads returns the Downloads field if non-nil, zero value otherwise.
 
 ### GetDownloadsOk
 
-`func (o *ImageDownloadsResponse) GetDownloadsOk() (*[]ImageDownloadAPI, bool)`
+`func (o *ImageDownloadsResponse) GetDownloadsOk() (*[]ImageDownload, bool)`
 
 GetDownloadsOk returns a tuple with the Downloads field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDownloads
 
-`func (o *ImageDownloadsResponse) SetDownloads(v []ImageDownloadAPI)`
+`func (o *ImageDownloadsResponse) SetDownloads(v []ImageDownload)`
 
 SetDownloads sets Downloads field to given value.
 

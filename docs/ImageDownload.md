@@ -1,177 +1,177 @@
-# ImageDownloadAPI
+# ImageDownload
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | ID ссылки | 
-**CreatedAt** | **time.Time** | Дата и время создания ссылки | 
-**Image** | **string** | ID образа | 
+**Id** | **string** | ID ссылки. | 
+**CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана ссылка. | 
+**Image** | **string** | ID образа. | 
 **Type** | [**URLType**](URLType.md) |  | 
-**Url** | Pointer to **string** | Ссылка на скачивание | [optional] 
+**Url** | Pointer to **string** | Ссылка на скачивание. | [optional] 
 **Status** | [**UrlStatus**](UrlStatus.md) |  | 
-**Progress** | **int32** | Прогресс загрузки образа | 
+**Progress** | **int32** | Прогресс загрузки образа. | 
 
 ## Methods
 
-### NewImageDownloadAPI
+### NewImageDownload
 
-`func NewImageDownloadAPI(id string, createdAt time.Time, image string, type_ URLType, status UrlStatus, progress int32, ) *ImageDownloadAPI`
+`func NewImageDownload(id string, createdAt string, image string, type_ URLType, status UrlStatus, progress int32, ) *ImageDownload`
 
-NewImageDownloadAPI instantiates a new ImageDownloadAPI object
+NewImageDownload instantiates a new ImageDownload object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewImageDownloadAPIWithDefaults
+### NewImageDownloadWithDefaults
 
-`func NewImageDownloadAPIWithDefaults() *ImageDownloadAPI`
+`func NewImageDownloadWithDefaults() *ImageDownload`
 
-NewImageDownloadAPIWithDefaults instantiates a new ImageDownloadAPI object
+NewImageDownloadWithDefaults instantiates a new ImageDownload object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *ImageDownloadAPI) GetId() string`
+`func (o *ImageDownload) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *ImageDownloadAPI) GetIdOk() (*string, bool)`
+`func (o *ImageDownload) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *ImageDownloadAPI) SetId(v string)`
+`func (o *ImageDownload) SetId(v string)`
 
 SetId sets Id field to given value.
 
 
 ### GetCreatedAt
 
-`func (o *ImageDownloadAPI) GetCreatedAt() time.Time`
+`func (o *ImageDownload) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *ImageDownloadAPI) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *ImageDownload) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *ImageDownloadAPI) SetCreatedAt(v time.Time)`
+`func (o *ImageDownload) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 
 ### GetImage
 
-`func (o *ImageDownloadAPI) GetImage() string`
+`func (o *ImageDownload) GetImage() string`
 
 GetImage returns the Image field if non-nil, zero value otherwise.
 
 ### GetImageOk
 
-`func (o *ImageDownloadAPI) GetImageOk() (*string, bool)`
+`func (o *ImageDownload) GetImageOk() (*string, bool)`
 
 GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImage
 
-`func (o *ImageDownloadAPI) SetImage(v string)`
+`func (o *ImageDownload) SetImage(v string)`
 
 SetImage sets Image field to given value.
 
 
 ### GetType
 
-`func (o *ImageDownloadAPI) GetType() URLType`
+`func (o *ImageDownload) GetType() URLType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *ImageDownloadAPI) GetTypeOk() (*URLType, bool)`
+`func (o *ImageDownload) GetTypeOk() (*URLType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *ImageDownloadAPI) SetType(v URLType)`
+`func (o *ImageDownload) SetType(v URLType)`
 
 SetType sets Type field to given value.
 
 
 ### GetUrl
 
-`func (o *ImageDownloadAPI) GetUrl() string`
+`func (o *ImageDownload) GetUrl() string`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *ImageDownloadAPI) GetUrlOk() (*string, bool)`
+`func (o *ImageDownload) GetUrlOk() (*string, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *ImageDownloadAPI) SetUrl(v string)`
+`func (o *ImageDownload) SetUrl(v string)`
 
 SetUrl sets Url field to given value.
 
 ### HasUrl
 
-`func (o *ImageDownloadAPI) HasUrl() bool`
+`func (o *ImageDownload) HasUrl() bool`
 
 HasUrl returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *ImageDownloadAPI) GetStatus() UrlStatus`
+`func (o *ImageDownload) GetStatus() UrlStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ImageDownloadAPI) GetStatusOk() (*UrlStatus, bool)`
+`func (o *ImageDownload) GetStatusOk() (*UrlStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ImageDownloadAPI) SetStatus(v UrlStatus)`
+`func (o *ImageDownload) SetStatus(v UrlStatus)`
 
 SetStatus sets Status field to given value.
 
 
 ### GetProgress
 
-`func (o *ImageDownloadAPI) GetProgress() int32`
+`func (o *ImageDownload) GetProgress() int32`
 
 GetProgress returns the Progress field if non-nil, zero value otherwise.
 
 ### GetProgressOk
 
-`func (o *ImageDownloadAPI) GetProgressOk() (*int32, bool)`
+`func (o *ImageDownload) GetProgressOk() (*int32, bool)`
 
 GetProgressOk returns a tuple with the Progress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProgress
 
-`func (o *ImageDownloadAPI) SetProgress(v int32)`
+`func (o *ImageDownload) SetProgress(v int32)`
 
 SetProgress sets Progress field to given value.
 

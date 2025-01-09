@@ -23,9 +23,9 @@ var _ MappedNullable = &Vds{}
 type Vds struct {
 	// ID для каждого экземпляра сервера. Автоматически генерируется при создании.
 	Id float32 `json:"id"`
-	// Удобочитаемое имя, установленное для выделенного сервера.
+	// Удобочитаемое имя, установленное для сервера.
 	Name string `json:"name"`
-	// Комментарий к выделенному серверу.
+	// Комментарий к серверу.
 	Comment string `json:"comment"`
 	// Дата создания сервера в формате ISO8061.
 	CreatedAt string `json:"created_at"`
@@ -45,6 +45,12 @@ type Vds struct {
 	StartAt NullableTime `json:"start_at"`
 	// Это логическое значение, которое показывает, включена ли защита от DDoS у данного сервера.
 	IsDdosGuard bool `json:"is_ddos_guard"`
+	// Это логическое значение, которое показывает, доступно ли подключение по SSH для поддержки.
+	IsMasterSsh bool `json:"is_master_ssh"`
+	// Это логическое значение, которое показывает, является ли CPU выделенным.
+	IsDedicatedCpu bool `json:"is_dedicated_cpu"`
+	// Количество видеокарт сервера.
+	Gpu float32 `json:"gpu"`
 	// Количество ядер процессора сервера.
 	Cpu float32 `json:"cpu"`
 	// Частота ядер процессора сервера.
@@ -64,8 +70,8 @@ type Vds struct {
 	Networks []VdsNetworksInner `json:"networks"`
 	// Cloud-init скрипт.
 	CloudInit NullableString `json:"cloud_init"`
-	// Включен ли QEMU-agent на сервере.
-	IsQemuAgent *bool `json:"is_qemu_agent,omitempty"`
+	// Это логическое значение, которое показывает, включен ли QEMU-agent на сервере.
+	IsQemuAgent bool `json:"is_qemu_agent"`
 	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 }
 
@@ -73,7 +79,7 @@ type Vds struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, availabilityZone AvailabilityZone) *Vds {
+func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, isMasterSsh bool, isDedicatedCpu bool, gpu float32, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, isQemuAgent bool, availabilityZone AvailabilityZone) *Vds {
 	this := Vds{}
 	this.Id = id
 	this.Name = name
@@ -88,6 +94,9 @@ func NewVds(id float32, name string, comment string, createdAt string, os VdsOs,
 	this.Status = status
 	this.StartAt = startAt
 	this.IsDdosGuard = isDdosGuard
+	this.IsMasterSsh = isMasterSsh
+	this.IsDedicatedCpu = isDedicatedCpu
+	this.Gpu = gpu
 	this.Cpu = cpu
 	this.CpuFrequency = cpuFrequency
 	this.Ram = ram
@@ -98,6 +107,7 @@ func NewVds(id float32, name string, comment string, createdAt string, os VdsOs,
 	this.Image = image
 	this.Networks = networks
 	this.CloudInit = cloudInit
+	this.IsQemuAgent = isQemuAgent
 	this.AvailabilityZone = availabilityZone
 	return &this
 }
@@ -430,6 +440,78 @@ func (o *Vds) SetIsDdosGuard(v bool) {
 	o.IsDdosGuard = v
 }
 
+// GetIsMasterSsh returns the IsMasterSsh field value
+func (o *Vds) GetIsMasterSsh() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsMasterSsh
+}
+
+// GetIsMasterSshOk returns a tuple with the IsMasterSsh field value
+// and a boolean to check if the value has been set.
+func (o *Vds) GetIsMasterSshOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsMasterSsh, true
+}
+
+// SetIsMasterSsh sets field value
+func (o *Vds) SetIsMasterSsh(v bool) {
+	o.IsMasterSsh = v
+}
+
+// GetIsDedicatedCpu returns the IsDedicatedCpu field value
+func (o *Vds) GetIsDedicatedCpu() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsDedicatedCpu
+}
+
+// GetIsDedicatedCpuOk returns a tuple with the IsDedicatedCpu field value
+// and a boolean to check if the value has been set.
+func (o *Vds) GetIsDedicatedCpuOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsDedicatedCpu, true
+}
+
+// SetIsDedicatedCpu sets field value
+func (o *Vds) SetIsDedicatedCpu(v bool) {
+	o.IsDedicatedCpu = v
+}
+
+// GetGpu returns the Gpu field value
+func (o *Vds) GetGpu() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Gpu
+}
+
+// GetGpuOk returns a tuple with the Gpu field value
+// and a boolean to check if the value has been set.
+func (o *Vds) GetGpuOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Gpu, true
+}
+
+// SetGpu sets field value
+func (o *Vds) SetGpu(v float32) {
+	o.Gpu = v
+}
+
 // GetCpu returns the Cpu field value
 func (o *Vds) GetCpu() float32 {
 	if o == nil {
@@ -678,36 +760,28 @@ func (o *Vds) SetCloudInit(v string) {
 	o.CloudInit.Set(&v)
 }
 
-// GetIsQemuAgent returns the IsQemuAgent field value if set, zero value otherwise.
+// GetIsQemuAgent returns the IsQemuAgent field value
 func (o *Vds) GetIsQemuAgent() bool {
-	if o == nil || IsNil(o.IsQemuAgent) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsQemuAgent
+
+	return o.IsQemuAgent
 }
 
-// GetIsQemuAgentOk returns a tuple with the IsQemuAgent field value if set, nil otherwise
+// GetIsQemuAgentOk returns a tuple with the IsQemuAgent field value
 // and a boolean to check if the value has been set.
 func (o *Vds) GetIsQemuAgentOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsQemuAgent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsQemuAgent, true
+	return &o.IsQemuAgent, true
 }
 
-// HasIsQemuAgent returns a boolean if a field has been set.
-func (o *Vds) HasIsQemuAgent() bool {
-	if o != nil && !IsNil(o.IsQemuAgent) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsQemuAgent gets a reference to the given bool and assigns it to the IsQemuAgent field.
+// SetIsQemuAgent sets field value
 func (o *Vds) SetIsQemuAgent(v bool) {
-	o.IsQemuAgent = &v
+	o.IsQemuAgent = v
 }
 
 // GetAvailabilityZone returns the AvailabilityZone field value
@@ -757,6 +831,9 @@ func (o Vds) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["start_at"] = o.StartAt.Get()
 	toSerialize["is_ddos_guard"] = o.IsDdosGuard
+	toSerialize["is_master_ssh"] = o.IsMasterSsh
+	toSerialize["is_dedicated_cpu"] = o.IsDedicatedCpu
+	toSerialize["gpu"] = o.Gpu
 	toSerialize["cpu"] = o.Cpu
 	toSerialize["cpu_frequency"] = o.CpuFrequency
 	toSerialize["ram"] = o.Ram
@@ -767,9 +844,7 @@ func (o Vds) ToMap() (map[string]interface{}, error) {
 	toSerialize["image"] = o.Image.Get()
 	toSerialize["networks"] = o.Networks
 	toSerialize["cloud_init"] = o.CloudInit.Get()
-	if !IsNil(o.IsQemuAgent) {
-		toSerialize["is_qemu_agent"] = o.IsQemuAgent
-	}
+	toSerialize["is_qemu_agent"] = o.IsQemuAgent
 	toSerialize["availability_zone"] = o.AvailabilityZone
 	return toSerialize, nil
 }

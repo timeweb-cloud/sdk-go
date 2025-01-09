@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Disk** | Pointer to **float32** | Размер диска в МБ. | [optional] 
 **Cpu** | Pointer to **float32** | Количество ядер процессора. | [optional] 
 **Ram** | Pointer to **float32** | Размер ОЗУ сервера в МБ. | [optional] 
+**Gpu** | Pointer to **float32** | Количество видеокарт. | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetRam sets Ram field to given value.
 `func (o *UpdateServerConfigurator) HasRam() bool`
 
 HasRam returns a boolean if a field has been set.
+
+### GetGpu
+
+`func (o *UpdateServerConfigurator) GetGpu() float32`
+
+GetGpu returns the Gpu field if non-nil, zero value otherwise.
+
+### GetGpuOk
+
+`func (o *UpdateServerConfigurator) GetGpuOk() (*float32, bool)`
+
+GetGpuOk returns a tuple with the Gpu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpu
+
+`func (o *UpdateServerConfigurator) SetGpu(v float32)`
+
+SetGpu sets Gpu field to given value.
+
+### HasGpu
+
+`func (o *UpdateServerConfigurator) HasGpu() bool`
+
+HasGpu returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -770,7 +770,6 @@ paths:
         required: false
         schema:
           default: 100
-          title: Limit
           type: integer
         style: form
       - explode: true
@@ -779,7 +778,6 @@ paths:
         required: false
         schema:
           default: 0
-          title: Offset
           type: integer
         style: form
       responses:
@@ -789,7 +787,7 @@ paths:
               example:
                 response_id: 4ecc2300-2437-4422-bad1-ea23a8fd167f
                 meta:
-                  total: 5
+                  total: 1
                 images:
                 - id: d0f151de-7e10-4470-91f6-c1401c87537c
                   status: new
@@ -802,53 +800,11 @@ paths:
                   os: ubuntu
                   progress: 0
                   is_custom: false
-                - id: 8139c914-d1b2-4b45-abdd-8ea4d0b3c31c
-                  status: new
-                  created_at: 2023-03-27T14:14:13.129614
-                  size: 8388608
-                  name: image 8139c914-d1b2-4b45-abdd-8ea4d0b3c31c
-                  description: description of image 8139c914-d1b2-4b45-abdd-8ea4d0b3c31c
-                  disk_id: 131692
-                  location: ru-1
-                  os: ubuntu
-                  progress: 0
-                  is_custom: false
-                - id: d1dc70c2-8067-4a01-84e4-c0acb96e2f40
-                  status: new
-                  created_at: 2023-03-27T14:14:13.129642
-                  size: 33554432
-                  name: image d1dc70c2-8067-4a01-84e4-c0acb96e2f40
-                  description: description of image d1dc70c2-8067-4a01-84e4-c0acb96e2f40
-                  disk_id: 688567
-                  location: ru-1
-                  os: ubuntu
-                  progress: 0
-                  is_custom: false
-                - id: ace94d07-6279-4be5-9656-03e50080f2cd
-                  status: new
-                  created_at: 2023-03-27T14:14:13.129671
-                  size: 33554432
-                  name: image ace94d07-6279-4be5-9656-03e50080f2cd
-                  description: description of image ace94d07-6279-4be5-9656-03e50080f2cd
-                  disk_id: 731335
-                  location: ru-1
-                  os: ubuntu
-                  progress: 0
-                  is_custom: false
-                - id: b652650b-556d-4e0c-941d-e788e51738fc
-                  status: new
-                  created_at: 2023-03-27T14:14:13.129699
-                  size: 1048576
-                  name: image b652650b-556d-4e0c-941d-e788e51738fc
-                  description: description of image b652650b-556d-4e0c-941d-e788e51738fc
-                  disk_id: 618449
-                  location: ru-1
-                  os: ubuntu
-                  progress: 0
-                  is_custom: false
+                  virtual_size: 16777216
+                  type: qcow2
               schema:
                 $ref: '#/components/schemas/ImagesOutResponse'
-          description: Объект JSON c ключом images
+          description: Объект JSON c ключом `images`
         "400":
           content:
             application/json:
@@ -985,9 +941,11 @@ paths:
                   os: ubuntu
                   progress: 0
                   is_custom: false
+                  virtual_size: 16777216
+                  type: qcow2
               schema:
                 $ref: '#/components/schemas/ImageOutResponse'
-          description: Образ создан
+          description: Объект JSON c ключом `image`
         "400":
           content:
             application/json:
@@ -1136,14 +1094,13 @@ paths:
       description: "Чтобы удалить образ, отправьте запрос DELETE в `/api/v1/images/{image_id}`."
       operationId: deleteImage
       parameters:
-      - description: ID образа
+      - description: ID образа.
         explode: false
         in: path
         name: image_id
         required: true
         schema:
-          description: ID образа
-          title: Image Id
+          description: ID образа.
           type: string
         style: simple
       responses:
@@ -1255,14 +1212,13 @@ paths:
       description: "Чтобы получить образ, отправьте запрос GET в `/api/v1/images/{image_id}`."
       operationId: getImage
       parameters:
-      - description: ID образа
+      - description: ID образа.
         explode: false
         in: path
         name: image_id
         required: true
         schema:
-          description: ID образа
-          title: Image Id
+          description: ID образа.
           type: string
         style: simple
       responses:
@@ -1283,9 +1239,11 @@ paths:
                   os: ubuntu
                   progress: 0
                   is_custom: false
+                  virtual_size: 16777216
+                  type: qcow2
               schema:
                 $ref: '#/components/schemas/ImageOutResponse'
-          description: Информация о образе
+          description: Объект JSON c ключом `image`
         "400":
           content:
             application/json:
@@ -1398,14 +1356,13 @@ paths:
         \ запрос PATCH в `/api/v1/images/{image_id}`."
       operationId: updateImage
       parameters:
-      - description: ID образа
+      - description: ID образа.
         explode: false
         in: path
         name: image_id
         required: true
         schema:
-          description: ID образа
-          title: Image Id
+          description: ID образа.
           type: string
         style: simple
       requestBody:
@@ -1432,9 +1389,11 @@ paths:
                   os: ubuntu
                   progress: 0
                   is_custom: false
+                  virtual_size: 16777216
+                  type: qcow2
               schema:
                 $ref: '#/components/schemas/ImageOutResponse'
-          description: Образ обновлен
+          description: Объект JSON c ключом `image`
         "400":
           content:
             application/json:
@@ -1593,7 +1552,6 @@ paths:
         name: image_id
         required: true
         schema:
-          title: Image Id
           type: string
         style: simple
       - explode: false
@@ -1601,7 +1559,6 @@ paths:
         name: content-disposition
         required: false
         schema:
-          title: Content-Disposition
           type: string
         style: simple
       responses:
@@ -1622,9 +1579,11 @@ paths:
                   os: ubuntu
                   progress: 0
                   is_custom: false
+                  virtual_size: 16777216
+                  type: qcow2
               schema:
                 $ref: '#/components/schemas/UploadSuccessfulResponse'
-          description: Информация о загрузке
+          description: Объект JSON c ключом `upload_successful`
         "400":
           content:
             application/json:
@@ -1756,14 +1715,13 @@ paths:
         равьте запрос GET в `/api/v1/images/{image_id}/download-url`."
       operationId: getImageDownloadURLs
       parameters:
-      - description: ID образа
+      - description: ID образа.
         explode: false
         in: path
         name: image_id
         required: true
         schema:
-          description: ID образа
-          title: Image Id
+          description: ID образа.
           type: string
         style: simple
       - explode: true
@@ -1772,7 +1730,6 @@ paths:
         required: false
         schema:
           default: 100
-          title: Limit
           type: integer
         style: form
       - explode: true
@@ -1781,7 +1738,6 @@ paths:
         required: false
         schema:
           default: 0
-          title: Offset
           type: integer
         style: form
       responses:
@@ -1802,7 +1758,7 @@ paths:
                   progress: 100
               schema:
                 $ref: '#/components/schemas/ImageDownloadsResponse'
-          description: Информация о ссылке на загрузку
+          description: Объект JSON c ключом `downloads`
         "400":
           content:
             application/json:
@@ -1918,14 +1874,13 @@ paths:
         \ в `/api/v1/images/{image_id}/download-url`."
       operationId: createImageDownloadUrl
       parameters:
-      - description: ID образа
+      - description: ID образа.
         explode: false
         in: path
         name: image_id
         required: true
         schema:
-          description: ID образа
-          title: Image Id
+          description: ID образа.
           type: string
         style: simple
       requestBody:
@@ -1950,7 +1905,7 @@ paths:
                   progress: 100
               schema:
                 $ref: '#/components/schemas/ImageDownloadResponse'
-          description: Ссылка успешно создана
+          description: Объект JSON c ключом `download`
         "400":
           content:
             application/json:
@@ -2131,24 +2086,22 @@ paths:
       description: "Чтобы удалить ссылку на образ, отправьте DELETE запрос в `/api/v1/images/{image_id}/download-url/{image_url_id}`."
       operationId: deleteImageDownloadURL
       parameters:
-      - description: ID образа
+      - description: ID образа.
         explode: false
         in: path
         name: image_id
         required: true
         schema:
-          description: ID образа
-          title: Image Id
+          description: ID образа.
           type: string
         style: simple
-      - description: ID ссылки
+      - description: ID ссылки.
         explode: false
         in: path
         name: image_url_id
         required: true
         schema:
-          description: ID ссылки
-          title: Image Url Id
+          description: ID ссылки.
           type: string
         style: simple
       responses:
@@ -2264,24 +2217,22 @@ paths:
         вьте запрос GET в `/api/v1/images/{image_id}/download-url/{image_url_id}`."
       operationId: getImageDownloadURL
       parameters:
-      - description: ID образа
+      - description: ID образа.
         explode: false
         in: path
         name: image_id
         required: true
         schema:
-          description: ID образа
-          title: Image Id
+          description: ID образа.
           type: string
         style: simple
-      - description: ID ссылки
+      - description: ID ссылки.
         explode: false
         in: path
         name: image_url_id
         required: true
         schema:
-          description: ID ссылки
-          title: Image Url Id
+          description: ID ссылки.
           type: string
         style: simple
       responses:
@@ -2300,7 +2251,7 @@ paths:
                   progress: 100
               schema:
                 $ref: '#/components/schemas/ImageDownloadResponse'
-          description: Информация о ссылке на загрузку
+          description: Объект JSON c ключом `download`
         "400":
           content:
             application/json:
@@ -2471,7 +2422,7 @@ paths:
                   description: Group description
               schema:
                 $ref: '#/components/schemas/FirewallGroupsOutResponse'
-          description: Список групп правил
+          description: Объект JSON c ключом `groups`
         "400":
           content:
             application/json:
@@ -2579,7 +2530,7 @@ paths:
       description: "Чтобы создать группу правил, отправьте POST запрос на `/api/v1/firewall/groups`"
       operationId: createGroup
       parameters:
-      - description: Тип группы правил
+      - description: Тип группы правил.
         explode: true
         in: query
         name: policy
@@ -2610,7 +2561,7 @@ paths:
                   description: Group description
               schema:
                 $ref: '#/components/schemas/FirewallGroupOutResponse'
-          description: Группа правил создана
+          description: Объект JSON c ключом `group`
         "400":
           content:
             application/json:
@@ -2752,14 +2703,13 @@ paths:
       description: "Чтобы удалить группу правил, отправьте DELETE запрос на `/api/v1/firewall/groups/{group_id}`"
       operationId: deleteGroup
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       responses:
@@ -2883,14 +2833,13 @@ paths:
         с на `/api/v1/firewall/groups/{group_id}`"
       operationId: getGroup
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       responses:
@@ -2907,7 +2856,7 @@ paths:
                   description: Group description
               schema:
                 $ref: '#/components/schemas/FirewallGroupOutResponse'
-          description: Информация о группе правил
+          description: Объект JSON c ключом `group`
         "400":
           content:
             application/json:
@@ -3024,14 +2973,13 @@ paths:
       description: "Чтобы изменить группу правил, отправьте PATCH запрос на `/api/v1/firewall/groups/{group_id}`"
       operationId: updateGroup
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       requestBody:
@@ -3054,7 +3002,7 @@ paths:
                   description: Group description
               schema:
                 $ref: '#/components/schemas/FirewallGroupOutResponse'
-          description: Группа правил обновлена
+          description: Объект JSON c ключом `group`
         "400":
           content:
             application/json:
@@ -3207,14 +3155,13 @@ paths:
         ьте GET запрос на `/api/v1/firewall/groups/{group_id}/resources`"
       operationId: getGroupResources
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       - description: "Обозначает количество записей, которое необходимо вернуть."
@@ -3256,7 +3203,7 @@ paths:
                   type: server
               schema:
                 $ref: '#/components/schemas/FirewallGroupResourcesOutResponse'
-          description: Список слинкованных ресурсов
+          description: Объект JSON c ключом `resources`
         "400":
           content:
             application/json:
@@ -3369,14 +3316,13 @@ paths:
         прос на `/api/v1/firewall/groups/{group_id}/resources/{resource_id}`"
       operationId: deleteResourceFromGroup
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       - description: ID ресурса
@@ -3386,7 +3332,6 @@ paths:
         required: true
         schema:
           description: ID ресурса
-          title: Resource Id
           type: string
         style: simple
       - explode: true
@@ -3517,14 +3462,13 @@ paths:
         с на `/api/v1/firewall/groups/{group_id}/resources/{resource_id}`"
       operationId: addResourceToGroup
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       - description: ID ресурса
@@ -3534,7 +3478,6 @@ paths:
         required: true
         schema:
           description: ID ресурса
-          title: Resource Id
           type: string
         style: simple
       - explode: true
@@ -3555,7 +3498,7 @@ paths:
                   type: server
               schema:
                 $ref: '#/components/schemas/FirewallGroupResourceOutResponse'
-          description: Ресурс добавлен к группе
+          description: Объект JSON c ключом `resources`
         "400":
           content:
             application/json:
@@ -3673,14 +3616,13 @@ paths:
         \ `/api/v1/firewall/groups/{group_id}/rules`"
       operationId: getGroupRules
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       - description: "Обозначает количество записей, которое необходимо вернуть."
@@ -3747,7 +3689,7 @@ paths:
                   group_id: 1a4ca5df-11a9-4ebb-ae7a-84f6b0f77b58
               schema:
                 $ref: '#/components/schemas/FirewallRulesOutResponse'
-          description: Список правил
+          description: Объект JSON c ключом `rules`
         "400":
           content:
             application/json:
@@ -3858,14 +3800,13 @@ paths:
       description: "Чтобы создать правило в группе, отправьте POST запрос на `/api/v1/firewall/groups/{group_id}/rules`"
       operationId: createGroupRule
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       requestBody:
@@ -3890,7 +3831,7 @@ paths:
                   group_id: 9d95f762-55a3-4dd4-8989-cba14eaca9e2
               schema:
                 $ref: '#/components/schemas/FirewallRuleOutResponse'
-          description: Правило создано
+          description: Объект JSON c ключом `rule`
         "400":
           content:
             application/json:
@@ -4045,14 +3986,13 @@ paths:
       description: "Чтобы удалить правило, отправьте DELETE запрос на `/api/v1/firewall/groups/{group_id}/rules/{rule_id}`"
       operationId: deleteGroupRule
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       - description: ID правила
@@ -4062,7 +4002,6 @@ paths:
         required: true
         schema:
           description: ID правила
-          title: Rule Id
           type: string
         style: simple
       responses:
@@ -4185,24 +4124,22 @@ paths:
       description: "Чтобы получить инфомрацию о правиле, отправьте GET запрос на `/api/v1/firewall/groups/{group_id}/rules/{rule_id}`"
       operationId: getGroupRule
       parameters:
-      - description: ID правила
+      - description: ID правила.
         explode: false
         in: path
         name: rule_id
         required: true
         schema:
-          description: ID правила
-          title: Rule Id
+          description: ID правила.
           type: string
         style: simple
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       responses:
@@ -4221,7 +4158,7 @@ paths:
                   group_id: 4083b942-bdcf-4493-937b-afd3e1a49d8b
               schema:
                 $ref: '#/components/schemas/FirewallRuleOutResponse'
-          description: Информация о правиле
+          description: Объект JSON c ключом `rule`
         "400":
           content:
             application/json:
@@ -4338,14 +4275,13 @@ paths:
       description: "Чтобы изменить правило, отправьте PATCH запрос на `/api/v1/firewall/groups/{group_id}/rules/{rule_id}`"
       operationId: updateGroupRule
       parameters:
-      - description: ID группы правил
+      - description: ID группы правил.
         explode: false
         in: path
         name: group_id
         required: true
         schema:
-          description: ID группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
         style: simple
       - description: ID правила
@@ -4355,7 +4291,6 @@ paths:
         required: true
         schema:
           description: ID правила
-          title: Rule Id
           type: string
         style: simple
       requestBody:
@@ -4380,7 +4315,7 @@ paths:
                   group_id: 84e4843e-c110-467f-a1f6-b08fbe57de6b
               schema:
                 $ref: '#/components/schemas/FirewallRuleOutResponse'
-          description: Правило обновлено
+          description: Объект JSON c ключом `rule`
         "400":
           content:
             application/json:
@@ -4542,14 +4477,13 @@ paths:
         с, отправьте GET запрос на `/api/v1/firewall/service/{resource_type}/{resource_id}`"
       operationId: getRulesForResource
       parameters:
-      - description: Идентификатор ресурса
+      - description: ID ресурса
         explode: false
         in: path
         name: resource_id
         required: true
         schema:
-          description: Идентификатор ресурса
-          title: Resource Id
+          description: ID ресурса
           type: string
         style: simple
       - explode: false
@@ -4613,7 +4547,7 @@ paths:
                   description: Group description
               schema:
                 $ref: '#/components/schemas/FirewallGroupsOutResponse'
-          description: Список групп правил
+          description: Объект JSON c ключом `groups`
         "400":
           content:
             application/json:
@@ -5010,7 +4944,7 @@ paths:
         Чтобы удалить балансировщик, отправьте запрос DELETE в `api/v1/balancers/{balancer_id}`.
       operationId: deleteBalancer
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -5171,7 +5105,7 @@ paths:
         Чтобы отобразить информацию об отдельном балансировщике, отправьте запрос GET на `api/v1/balancers/{balancer_id}`.
       operationId: getBalancer
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -5306,7 +5240,7 @@ paths:
         Чтобы обновить только определенные атрибуты балансировщика, отправьте запрос PATCH в `api/v1/balancers/{balancer_id}`.
       operationId: updateBalancer
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -5462,7 +5396,7 @@ paths:
         Чтобы удалить `IP`-адреса из балансировщика, отправьте запрос DELETE в `api/v1/balancers/{balancer_id}/ips`.
       operationId: deleteIPsFromBalancer
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -5600,7 +5534,7 @@ paths:
         Чтобы добавить `IP`-адреса к балансировщику, отправьте запрос GET в `api/v1/balancers/{balancer_id}/ips`.
       operationId: getBalancerIPs
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -5735,7 +5669,7 @@ paths:
         Чтобы добавить `IP`-адреса к балансировщику, отправьте запрос POST в `api/v1/balancers/{balancer_id}/ips`.
       operationId: addIPsToBalancer
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -5878,7 +5812,7 @@ paths:
         Чтобы получить правила балансировщика, отправьте запрос GET в `api/v1/balancers/{balancer_id}/rules`.
       operationId: getBalancerRules
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -6013,7 +5947,7 @@ paths:
         Чтобы создать правило для балансировщика, отправьте запрос POST в `api/v1/balancers/{balancer_id}/rules`.
       operationId: createBalancerRule
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -6160,7 +6094,7 @@ paths:
         Чтобы удалить правило для балансировщика, отправьте запрос DELETE в `api/v1/balancers/{balancer_id}/rules/{rule_id}`.
       operationId: deleteBalancerRule
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -6168,7 +6102,7 @@ paths:
         schema:
           type: integer
         style: simple
-      - description: Идентификатор правила для балансировщика
+      - description: ID правила для балансировщика
         explode: false
         in: path
         name: rule_id
@@ -6300,7 +6234,7 @@ paths:
         Чтобы обновить правило для балансировщика, отправьте запрос PATCH в `api/v1/balancers/{balancer_id}/rules/{rule_id}`.
       operationId: updateBalancerRule
       parameters:
-      - description: Идентификатор балансировщика
+      - description: ID балансировщика
         explode: false
         in: path
         name: balancer_id
@@ -6308,7 +6242,7 @@ paths:
         schema:
           type: integer
         style: simple
-      - description: Идентификатор правила для балансировщика
+      - description: ID правила для балансировщика
         explode: false
         in: path
         name: rule_id
@@ -35276,11 +35210,7 @@ paths:
         style: simple
       responses:
         "204":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/createVPC_201_response'
-          description: Объект JSON c ключом `vpc`
+          description: Успешное выполнение действия
         "400":
           content:
             application/json:
@@ -35838,7 +35768,7 @@ paths:
       description: "Чтобы удалить SSH-ключ, отправьте DELETE-запрос на `/api/v1/ssh-keys/{ssh_key_id}`"
       operationId: deleteKey
       parameters:
-      - description: ID SSH-ключа
+      - description: ID SSH-ключа.
         explode: false
         in: path
         name: ssh_key_id
@@ -35887,7 +35817,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_500_response'
           description: Внутренняя ошибка сервера
-      summary: Удаление SSH-ключа по уникальному идентификатору
+      summary: Удаление SSH-ключа по ID
       tags:
       - SSH
       x-codeSamples:
@@ -35971,7 +35901,7 @@ paths:
       description: "Чтобы получить SSH-ключ, отправьте GET-запрос на `/api/v1/ssh-keys/{ssh_key_id}`"
       operationId: getKey
       parameters:
-      - description: ID SSH-ключа
+      - description: ID SSH-ключа.
         explode: false
         in: path
         name: ssh_key_id
@@ -36024,7 +35954,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_500_response'
           description: Внутренняя ошибка сервера
-      summary: Получение SSH-ключа по уникальному идентификатору
+      summary: Получение SSH-ключа по ID
       tags:
       - SSH
       x-codeSamples:
@@ -36107,7 +36037,7 @@ paths:
       description: "Чтобы изменить SSH-ключ, отправьте PATCH-запрос на `/api/v1/ssh-keys/{ssh_key_id}`"
       operationId: updateKey
       parameters:
-      - description: ID SSH-ключа
+      - description: ID SSH-ключа.
         explode: false
         in: path
         name: ssh_key_id
@@ -36166,7 +36096,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_500_response'
           description: Внутренняя ошибка сервера
-      summary: Изменение SSH-ключа по уникальному идентификатору
+      summary: Изменение SSH-ключа по ID
       tags:
       - SSH
       x-codeSamples:
@@ -36456,7 +36386,7 @@ paths:
           minimum: 1
           type: integer
         style: simple
-      - description: ID SSH-ключа
+      - description: ID SSH-ключа.
         explode: false
         in: path
         name: ssh_key_id
@@ -36876,13 +36806,13 @@ paths:
       description: "Чтобы удалить плавающий IP, отправьте DELETE-запрос на `/api/v1/floating-ips/{floating_ip_id}`"
       operationId: deleteFloatingIP
       parameters:
-      - description: Идентификатор плавающего IP
+      - description: ID плавающего IP
         explode: false
         in: path
         name: floating_ip_id
         required: true
         schema:
-          description: Идентификатор плавающего IP
+          description: ID плавающего IP
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -36925,7 +36855,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_500_response'
           description: Внутренняя ошибка сервера
-      summary: Удаление плавающего IP по идентификатору
+      summary: Удаление плавающего IP по ID
       tags:
       - Floating IP
       x-codeSamples:
@@ -37010,13 +36940,13 @@ paths:
         те запрос GET на `api/v1/floating-ips/{floating_ip_id}`."
       operationId: getFloatingIp
       parameters:
-      - description: Идентификатор плавающего IP
+      - description: ID плавающего IP
         explode: false
         in: path
         name: floating_ip_id
         required: true
         schema:
-          description: Идентификатор плавающего IP
+          description: ID плавающего IP
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -37146,13 +37076,13 @@ paths:
       description: "Чтобы изменить плавающий IP, отправьте PATCH-запрос на `/api/v1/floating-ips/{floating_ip_id}`"
       operationId: updateFloatingIP
       parameters:
-      - description: Идентификатор плавающего IP
+      - description: ID плавающего IP
         explode: false
         in: path
         name: floating_ip_id
         required: true
         schema:
-          description: Идентификатор плавающего IP
+          description: ID плавающего IP
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -37205,7 +37135,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_500_response'
           description: Внутренняя ошибка сервера
-      summary: Изменение плавающего IP по идентификатору
+      summary: Изменение плавающего IP по ID
       tags:
       - Floating IP
       x-codeSamples:
@@ -37322,13 +37252,13 @@ paths:
       description: "Чтобы привязать IP к сервису, отправьте POST-запрос на `/api/v1/floating-ips/{floating_ip_id}/bind`."
       operationId: bindFloatingIp
       parameters:
-      - description: Идентификатор плавающего IP
+      - description: ID плавающего IP
         explode: false
         in: path
         name: floating_ip_id
         required: true
         schema:
-          description: Идентификатор плавающего IP
+          description: ID плавающего IP
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -37466,13 +37396,13 @@ paths:
       description: "Чтобы отвязать IP от сервиса, отправьте POST-запрос на `/api/v1/floating-ips/{floating_ip_id}/unbind`."
       operationId: unbindFloatingIp
       parameters:
-      - description: Идентификатор плавающего IP
+      - description: ID плавающего IP
         explode: false
         in: path
         name: floating_ip_id
         required: true
         schema:
-          description: Идентификатор плавающего IP
+          description: ID плавающего IP
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -41278,13 +41208,13 @@ paths:
       description: "Чтобы удалить сетевой диск, отправьте DELETE-запрос на `/api/v1/network-drives/{network_drive_id}`"
       operationId: deleteNetworkDrive
       parameters:
-      - description: Идентификатор сетевого диска
+      - description: ID сетевого диска
         explode: false
         in: path
         name: network-drive-id
         required: true
         schema:
-          description: Идентификатор сетевого диска
+          description: ID сетевого диска
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -41415,13 +41345,13 @@ paths:
         ьте запрос GET на `api/v1/network-drives/{network_drive_id}`."
       operationId: getNetworkDrive
       parameters:
-      - description: Идентификатор сетевого диска
+      - description: ID сетевого диска
         explode: false
         in: path
         name: network-drive-id
         required: true
         schema:
-          description: Идентификатор сетевого диска
+          description: ID сетевого диска
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -41554,13 +41484,13 @@ paths:
       description: "Чтобы изменить сетевой диск, отправьте PATCH-запрос на `/api/v1/network-drives/{network_drive_id}`"
       operationId: updateNetworkDrive
       parameters:
-      - description: Идентификатор сетевого диска
+      - description: ID сетевого диска
         explode: false
         in: path
         name: network-drive-id
         required: true
         schema:
-          description: Идентификатор сетевого диска
+          description: ID сетевого диска
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -41613,7 +41543,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/getFinances_500_response'
           description: Внутренняя ошибка сервера
-      summary: Изменение сетевого диска по идентификатору
+      summary: Изменение сетевого диска по ID
       tags:
       - Network drives
       x-codeSamples:
@@ -41731,13 +41661,13 @@ paths:
         \ на `/api/v1/network-drives/{network_drive_id}/mount`."
       operationId: mountNetworkDrive
       parameters:
-      - description: Идентификатор сетевого диска
+      - description: ID сетевого диска
         explode: false
         in: path
         name: network-drive-id
         required: true
         schema:
-          description: Идентификатор сетевого диска
+          description: ID сетевого диска
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -41876,13 +41806,13 @@ paths:
         \ на `/api/v1/network-drives/{network_drive_id}/unmount`."
       operationId: unmountNetworkDrive
       parameters:
-      - description: Идентификатор сетевого диска
+      - description: ID сетевого диска
         explode: false
         in: path
         name: network-drive-id
         required: true
         schema:
-          description: Идентификатор сетевого диска
+          description: ID сетевого диска
           example: 87fa289f-1513-4c4d-8d49-5707f411f14b
           type: string
         style: simple
@@ -42284,7 +42214,7 @@ components:
         type: integer
       style: form
     balancer-id:
-      description: Идентификатор балансировщика
+      description: ID балансировщика
       explode: false
       in: path
       name: balancer_id
@@ -42317,7 +42247,7 @@ components:
         type: string
       style: form
     rule-id:
-      description: Идентификатор правила для балансировщика
+      description: ID правила для балансировщика
       explode: false
       in: path
       name: rule_id
@@ -42677,7 +42607,7 @@ components:
         type: string
       style: simple
     ssh-key-id:
-      description: ID SSH-ключа
+      description: ID SSH-ключа.
       explode: false
       in: path
       name: ssh_key_id
@@ -42688,24 +42618,24 @@ components:
         type: integer
       style: simple
     floating-ip-id:
-      description: Идентификатор плавающего IP
+      description: ID плавающего IP
       explode: false
       in: path
       name: floating_ip_id
       required: true
       schema:
-        description: Идентификатор плавающего IP
+        description: ID плавающего IP
         example: 87fa289f-1513-4c4d-8d49-5707f411f14b
         type: string
       style: simple
     network-drive-id:
-      description: Идентификатор сетевого диска
+      description: ID сетевого диска
       explode: false
       in: path
       name: network-drive-id
       required: true
       schema:
-        description: Идентификатор сетевого диска
+        description: ID сетевого диска
         example: 87fa289f-1513-4c4d-8d49-5707f411f14b
         type: string
       style: simple
@@ -42984,11 +42914,9 @@ components:
       properties:
         total:
           description: Число элементов в результате
-          title: Total
           type: integer
       required:
       - total
-      title: Meta
       type: object
     ImageStatus:
       description: An enumeration.
@@ -42997,7 +42925,6 @@ components:
       - created
       - failed
       - deleted
-      title: ImageStatus
       type: string
     OS:
       description: An enumeration.
@@ -43013,69 +42940,78 @@ components:
       - windows
       - custom_os
       - other
-      title: OS
       type: string
-    ImageOutAPI:
+    image:
       example:
-        size: 6
         os: null
-        name: name
-        created_at: 2000-01-23T04:56:07.000+00:00
+        created_at: created_at
         description: description
+        type: qcow2
+        deleted_at: deleted_at
+        size: 6
+        name: name
         progress: 5
         is_custom: true
-        location: location
+        location: ru-1
         id: id
-        deleted_at: 2000-01-23T04:56:07.000+00:00
+        virtual_size: 1
         status: null
-        disk_id: 1
+        disk_id: 5
       properties:
         id:
-          description: Идентификатор образа
-          title: Id
+          description: ID образа.
           type: string
         status:
           $ref: '#/components/schemas/ImageStatus'
         created_at:
-          description: Дата и время создания
-          format: date-time
-          title: Created At
+          description: "Значение времени, указанное в комбинированном формате даты\
+            \ и времени ISO8601, которое представляет, когда был создан образ."
           type: string
         deleted_at:
-          description: Дата и время удаления
-          format: date-time
-          title: Deleted At
+          description: "Значение времени, указанное в комбинированном формате даты\
+            \ и времени ISO8601, которое представляет, когда был удален образ."
           type: string
         size:
-          description: Размер в мегабайтах
-          title: Size
+          description: Размер физического диска в мегабайтах.
+          type: integer
+        virtual_size:
+          description: Размер виртуального диска в мегабайтах.
           type: integer
         name:
-          description: Имя образа
-          title: Name
+          description: Имя образа.
           type: string
         description:
-          description: Описание образа
-          title: Description
+          description: Описание образа.
           type: string
         disk_id:
-          description: Идентификатор связанного с образом диска
-          title: Disk Id
+          description: ID связанного с образом диска.
           type: integer
         location:
-          description: "Локация, в которой создан образ"
-          title: Location
+          description: Локация образа.
+          enum:
+          - ru-1
+          - ru-2
+          - pl-1
+          - kz-1
+          - nl-1
+          example: ru-1
           type: string
         os:
           $ref: '#/components/schemas/OS'
         progress:
-          description: Процент создания образа
-          title: Progress
+          description: Процент создания образа.
           type: integer
         is_custom:
-          description: Признак указывающий на то является ли образ кастомным
-          title: Is Custom
+          description: "Логическое значение, которое показывает, является ли образ\
+            \ кастомным."
           type: boolean
+        type:
+          description: Тип образа.
+          enum:
+          - qcow2
+          - iso
+          example: qcow2
+          type: string
       required:
       - created_at
       - deleted_at
@@ -43083,81 +43019,78 @@ components:
       - disk_id
       - id
       - is_custom
+      - location
       - name
       - os
       - progress
       - size
       - status
-      title: ImageOutAPI
+      - type
+      - virtual_size
       type: object
     ImagesOutResponse:
       example:
         images:
-        - size: 6
-          os: null
-          name: name
-          created_at: 2000-01-23T04:56:07.000+00:00
+        - os: null
+          created_at: created_at
           description: description
+          type: qcow2
+          deleted_at: deleted_at
+          size: 6
+          name: name
           progress: 5
           is_custom: true
-          location: location
+          location: ru-1
           id: id
-          deleted_at: 2000-01-23T04:56:07.000+00:00
+          virtual_size: 1
           status: null
-          disk_id: 1
-        - size: 6
-          os: null
-          name: name
-          created_at: 2000-01-23T04:56:07.000+00:00
+          disk_id: 5
+        - os: null
+          created_at: created_at
           description: description
+          type: qcow2
+          deleted_at: deleted_at
+          size: 6
+          name: name
           progress: 5
           is_custom: true
-          location: location
+          location: ru-1
           id: id
-          deleted_at: 2000-01-23T04:56:07.000+00:00
+          virtual_size: 1
           status: null
-          disk_id: 1
+          disk_id: 5
         response_id: response_id
         meta:
           total: 0
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         meta:
           $ref: '#/components/schemas/Meta'
         images:
-          description: Массив объектов Образ
           items:
-            $ref: '#/components/schemas/ImageOutAPI'
-          title: Images
+            $ref: '#/components/schemas/image'
           type: array
       required:
       - images
       - meta
-      title: ImagesOutResponse
       type: object
     BaseError:
       properties:
         status_code:
-          title: Status Code
           type: integer
         error_code:
-          title: Error Code
           type: string
         message:
-          title: Message
           type: string
         response_id:
           example: 9c38a13d-ef14-45c7-a23a-1429f6a03824
-          title: Response Id
           type: string
       required:
       - error_code
       - message
       - status_code
-      title: BaseError
       type: object
     Location:
       description: An enumeration.
@@ -43166,75 +43099,70 @@ components:
       - ru-2
       - pl-1
       - kz-1
-      title: Location
       type: string
     ImageInAPI:
       example:
-        description: Мой образ для диска 123
-        disk_id: 123
+        os: other
+        location: ru-1
       properties:
         name:
-          description: Имя образа
-          title: Name
+          description: Имя образа.
           type: string
         description:
-          description: Описание образа
-          title: Description
+          description: Описание образа.
           type: string
         disk_id:
-          description: "Идентификатор диска, для которого создается образ"
-          title: Disk Id
+          description: "ID диска, для которого создается образ."
           type: integer
         upload_url:
-          description: Cсылка для загрузки образа
+          description: Ссылка для загрузки образа.
           format: uri
           maxLength: 65536
           minLength: 1
-          title: Upload Url
           type: string
         location:
           $ref: '#/components/schemas/Location'
         os:
           $ref: '#/components/schemas/OS'
-      title: ImageInAPI
+      required:
+      - location
+      - os
       type: object
     ImageOutResponse:
       example:
         image:
-          size: 6
           os: null
-          name: name
-          created_at: 2000-01-23T04:56:07.000+00:00
+          created_at: created_at
           description: description
+          type: qcow2
+          deleted_at: deleted_at
+          size: 6
+          name: name
           progress: 5
           is_custom: true
-          location: location
+          location: ru-1
           id: id
-          deleted_at: 2000-01-23T04:56:07.000+00:00
+          virtual_size: 1
           status: null
-          disk_id: 1
+          disk_id: 5
         response_id: response_id
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         image:
-          $ref: '#/components/schemas/ImageOutAPI'
+          $ref: '#/components/schemas/image'
       required:
       - image
-      title: ImageOutResponse
       type: object
     UploadSuccessful:
       example:
         image_id: image_id
       properties:
         image_id:
-          title: Image Id
           type: string
       required:
       - image_id
-      title: UploadSuccessful
       type: object
     UploadSuccessfulResponse:
       example:
@@ -43243,14 +43171,12 @@ components:
         response_id: response_id
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         upload_successful:
           $ref: '#/components/schemas/UploadSuccessful'
       required:
       - upload_successful
-      title: UploadSuccessfulResponse
       type: object
     ImageUpdateAPI:
       example:
@@ -43258,14 +43184,11 @@ components:
         description: Описание образа
       properties:
         name:
-          description: Имя образа
-          title: Name
+          description: Имя образа.
           type: string
         description:
-          description: Описание образа
-          title: Description
+          description: Описание образа.
           type: string
-      title: ImageUpdateAPI
       type: object
     URLType:
       description: An enumeration.
@@ -43273,7 +43196,6 @@ components:
       - timeweb
       - google_drive
       - yandex
-      title: URLType
       type: string
     UrlStatus:
       description: An enumeration.
@@ -43282,12 +43204,11 @@ components:
       - failed
       - finished
       - already_exists
-      title: UrlStatus
       type: string
-    ImageDownloadAPI:
+    image-download:
       example:
         image: image
-        created_at: 2000-01-23T04:56:07.000+00:00
+        created_at: created_at
         progress: 0
         id: id
         type: null
@@ -43295,32 +43216,27 @@ components:
         status: null
       properties:
         id:
-          description: ID ссылки
-          title: Id
+          description: ID ссылки.
           type: string
         created_at:
-          description: Дата и время создания ссылки
-          format: date-time
-          title: Created At
+          description: "Значение времени, указанное в комбинированном формате даты\
+            \ и времени ISO8601, которое представляет, когда была создана ссылка."
           type: string
         image:
-          description: ID образа
-          title: Image
+          description: ID образа.
           type: string
         type:
           $ref: '#/components/schemas/URLType'
         url:
-          description: Ссылка на скачивание
+          description: Ссылка на скачивание.
           format: uri
           maxLength: 2083
           minLength: 1
-          title: Url
           type: string
         status:
           $ref: '#/components/schemas/UrlStatus'
         progress:
-          description: Прогресс загрузки образа
-          title: Progress
+          description: Прогресс загрузки образа.
           type: integer
       required:
       - created_at
@@ -43329,20 +43245,19 @@ components:
       - progress
       - status
       - type
-      title: ImageDownloadAPI
       type: object
     ImageDownloadsResponse:
       example:
         downloads:
         - image: image
-          created_at: 2000-01-23T04:56:07.000+00:00
+          created_at: created_at
           progress: 0
           id: id
           type: null
           url: https://openapi-generator.tech
           status: null
         - image: image
-          created_at: 2000-01-23T04:56:07.000+00:00
+          created_at: created_at
           progress: 0
           id: id
           type: null
@@ -43353,21 +43268,17 @@ components:
           total: 0
       properties:
         response_id:
-          description: ID запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         meta:
           $ref: '#/components/schemas/Meta'
         downloads:
-          description: Массив объектов "Ссылка на загрузку"
           items:
-            $ref: '#/components/schemas/ImageDownloadAPI'
-          title: Downloads
+            $ref: '#/components/schemas/image-download'
           type: array
       required:
       - downloads
       - meta
-      title: ImageDownloadsResponse
       type: object
     ImageUrlAuth:
       example:
@@ -43376,25 +43287,20 @@ components:
       properties:
         access_token:
           description: Токен доступа к API облачного хранилища
-          title: Access Token
           type: string
         refresh_token:
           description: Токен обновления доступов к API
-          title: Refresh Token
           type: string
         expiry:
           description: Время истечения работы токена доступа
           format: date-time
-          title: Expiry
           type: string
         token_type:
           default: Bearer
           description: Тип токена доступа
-          title: Token Type
           type: string
       required:
       - access_token
-      title: ImageUrlAuth
       type: object
     ImageUrlIn:
       example:
@@ -43407,18 +43313,16 @@ components:
         type:
           $ref: '#/components/schemas/URLType'
         filename:
-          description: Имя файла для загрузки в облачное хранилище
-          title: Filename
+          description: Имя файла для загрузки в облачное хранилище.
           type: string
         auth:
           $ref: '#/components/schemas/ImageUrlAuth'
-      title: ImageUrlIn
       type: object
     ImageDownloadResponse:
       example:
         download:
           image: image
-          created_at: 2000-01-23T04:56:07.000+00:00
+          created_at: created_at
           progress: 0
           id: id
           type: null
@@ -43427,23 +43331,20 @@ components:
         response_id: response_id
       properties:
         response_id:
-          description: ID запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         download:
-          $ref: '#/components/schemas/ImageDownloadAPI'
+          $ref: '#/components/schemas/image-download'
       required:
       - download
-      title: ImageDownloadResponse
       type: object
     Policy:
       description: An enumeration.
       enum:
       - ACCEPT
       - DROP
-      title: policy
       type: string
-    FirewallGroupOutAPI:
+    firewall-group:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -43453,26 +43354,21 @@ components:
         policy: null
       properties:
         id:
-          description: Идентификатор группы правил
-          title: Id
+          description: ID группы правил.
           type: string
         created_at:
-          description: Дата и время создания
+          description: Дата и время создания.
           format: date-time
-          title: Created At
           type: string
         updated_at:
-          description: Дата и время последнего обновления
+          description: Дата и время последнего обновления.
           format: date-time
-          title: Updated At
           type: string
         name:
-          description: Имя группы правил
-          title: Name
+          description: Имя группы правил.
           type: string
         description:
-          description: Описание группы правил
-          title: Description
+          description: Описание группы правил.
           type: string
         policy:
           $ref: '#/components/schemas/Policy'
@@ -43483,7 +43379,6 @@ components:
       - name
       - policy
       - updated_at
-      title: FirewallGroupOutAPI
       type: object
     FirewallGroupsOutResponse:
       example:
@@ -43505,41 +43400,32 @@ components:
           policy: null
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         meta:
           $ref: '#/components/schemas/Meta'
         groups:
-          description: Массив объектов Групп правил
           items:
-            $ref: '#/components/schemas/FirewallGroupOutAPI'
-          title: Groups
+            $ref: '#/components/schemas/firewall-group'
           type: array
       required:
       - groups
       - meta
-      title: FirewallGroupsOutResponse
       type: object
     schemas-BaseError:
       properties:
         status_code:
-          title: Status Code
           type: integer
         error_code:
-          title: Error Code
           type: string
         message:
-          title: Message
           type: string
         response_id:
-          title: Response Id
           type: string
       required:
       - error_code
       - message
       - status_code
-      title: BaseError
       type: object
     FirewallGroupInAPI:
       example:
@@ -43547,16 +43433,13 @@ components:
         description: Описание фаерволла
       properties:
         name:
-          description: Имя группы правил
-          title: Name
+          description: Имя группы правил.
           type: string
         description:
-          description: Описание группы правил
-          title: Description
+          description: Описание группы правил.
           type: string
       required:
       - name
-      title: FirewallGroupInAPI
       type: object
     FirewallGroupOutResponse:
       example:
@@ -43570,36 +43453,31 @@ components:
           policy: null
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         group:
-          $ref: '#/components/schemas/FirewallGroupOutAPI'
+          $ref: '#/components/schemas/firewall-group'
       required:
       - group
-      title: FirewallGroupOutResponse
       type: object
     ResourceType:
       description: Тип линкуемого ресурса
       enum:
       - server
-      title: ResourceType
       type: string
-    FirewallGroupResourceOutAPI:
+    firewall-group-resource:
       example:
         id: 0
         type: null
       properties:
         id:
-          description: resource id
-          title: Id
+          description: ID ресурса.
           type: integer
         type:
           $ref: '#/components/schemas/ResourceType'
       required:
       - id
       - type
-      title: FirewallGroupResourceOutAPI
       type: object
     FirewallGroupResourcesOutResponse:
       example:
@@ -43613,20 +43491,17 @@ components:
           type: null
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         meta:
           $ref: '#/components/schemas/Meta'
         resources:
           items:
-            $ref: '#/components/schemas/FirewallGroupResourceOutAPI'
-          title: Resources
+            $ref: '#/components/schemas/firewall-group-resource'
           type: array
       required:
       - meta
       - resources
-      title: FirewallGroupResourcesOutResponse
       type: object
     FirewallGroupResourceOutResponse:
       example:
@@ -43636,21 +43511,18 @@ components:
         response_id: response_id
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         resource:
-          $ref: '#/components/schemas/FirewallGroupResourceOutAPI'
+          $ref: '#/components/schemas/firewall-group-resource'
       required:
       - resource
-      title: FirewallGroupResourceOutResponse
       type: object
     FirewallRuleDirection:
       description: Направление трафика
       enum:
       - ingress
       - egress
-      title: FirewallRuleDirection
       type: string
     FirewallRuleProtocol:
       description: Сетевой протокол
@@ -43658,9 +43530,8 @@ components:
       - tcp
       - udp
       - icmp
-      title: FirewallRuleProtocol
       type: string
-    FirewallRuleOutAPI:
+    firewall-rule:
       example:
         protocol: null
         port: port
@@ -43671,30 +43542,25 @@ components:
         direction: null
       properties:
         id:
-          description: Идентификатор правила
-          title: Id
+          description: ID правила.
           type: string
         description:
-          description: Описание правила
-          title: Description
+          description: Описание правила.
           type: string
         direction:
           $ref: '#/components/schemas/FirewallRuleDirection'
         protocol:
           $ref: '#/components/schemas/FirewallRuleProtocol'
         port:
-          description: "Порт или диапазон портов, в случае tcp или udp"
-          title: Port
+          description: "Порт или диапазон портов, в случае tcp или udp."
           type: string
         cidr:
           description: Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и
-            IPv6
+            IPv6.
           format: ipv4
-          title: Cidr
           type: string
         group_id:
-          description: Идентификатор группы правил
-          title: Group Id
+          description: ID группы правил.
           type: string
       required:
       - description
@@ -43702,7 +43568,6 @@ components:
       - group_id
       - id
       - protocol
-      title: FirewallRuleOutAPI
       type: object
     FirewallRulesOutResponse:
       example:
@@ -43726,21 +43591,17 @@ components:
           direction: null
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         meta:
           $ref: '#/components/schemas/Meta'
         rules:
-          description: Массив объектов Firewall правил
           items:
-            $ref: '#/components/schemas/FirewallRuleOutAPI'
-          title: Rules
+            $ref: '#/components/schemas/firewall-rule'
           type: array
       required:
       - meta
       - rules
-      title: FirewallRulesOutResponse
       type: object
     FirewallRuleInAPI:
       example:
@@ -43751,27 +43612,23 @@ components:
         cidr: 2.2.2.2/32
       properties:
         description:
-          description: Описание правила
-          title: Description
+          description: Описание правила.
           type: string
         direction:
           $ref: '#/components/schemas/FirewallRuleDirection'
         port:
-          description: "Порт или диапазон портов, в случае tcp или udp"
-          title: Port
+          description: "Порт или диапазон портов, в случае tcp или udp."
           type: string
         protocol:
           $ref: '#/components/schemas/FirewallRuleProtocol'
         cidr:
           description: Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и
-            IPv6
+            IPv.6
           format: ipv4
-          title: Cidr
           type: string
       required:
       - direction
       - protocol
-      title: FirewallRuleInAPI
       type: object
     FirewallRuleOutResponse:
       example:
@@ -43786,14 +43643,12 @@ components:
           direction: null
       properties:
         response_id:
-          description: Идентификатор запроса
-          title: Response Id
+          description: ID запроса.
           type: string
         rule:
-          $ref: '#/components/schemas/FirewallRuleOutAPI'
+          $ref: '#/components/schemas/firewall-rule'
       required:
       - rule
-      title: FirewallRuleOutResponse
       type: object
     rule:
       description: Правило для балансировщика
@@ -44122,7 +43977,7 @@ components:
           example: 2
           type: number
         preset_id:
-          description: Идентификатор тарифа.
+          description: ID тарифа.
           example: 5
           type: number
         network:
@@ -45422,30 +45277,31 @@ components:
       description: Выделенный сервер
       example:
         cpu_description: Intel Xeon E3-1240v3
-        autoinstall_ready: 2
-        ip: 1.1.1.1
         os_id: 44
         created_at: 2022-10-25T15:15:45Z
         cp_id: 16
-        bandwidth_id: 11
         ipmi_login: ipmi_login
         additional_ip_addr_id:
         - 2
         - 7
-        ram_description: 8 Гб RAM
-        vnc_pass: vnc_pass
-        hdd_description: 2 x 1 ТБ HDD
-        ipmi_password: ipmi_password
+        password: password
         network_drive_id:
         - 12
         - 11
         ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
         price: 5490
+        id: 1
+        ipmi_ip: 1.1.1.1
+        autoinstall_ready: 2
+        ip: 1.1.1.1
+        bandwidth_id: 11
+        ram_description: 8 Гб RAM
+        vnc_pass: vnc_pass
+        hdd_description: 2 x 1 ТБ HDD
+        ipmi_password: ipmi_password
         name: Cute Quail
         comment: Development Server
         location: ru-1
-        id: 1
-        ipmi_ip: 1.1.1.1
         plan_id: 2377
         node_id: 68
         status: installing
@@ -45581,6 +45437,11 @@ components:
           - ru-1
           - pl-1
           - kz-1
+          - nl-1
+          - tr-1
+          - us-2
+          - de-1
+          - fi-1
           example: ru-1
           type: string
         autoinstall_ready:
@@ -45588,6 +45449,12 @@ components:
             \ значение равно 0, сервер будет установлен через инженеров."
           example: 2
           type: number
+        password:
+          description: Пароль root сервера или пароль Администратора для серверов
+            Windows.
+          example: password
+          nullable: true
+          type: string
       required:
       - additional_ip_addr_id
       - autoinstall_ready
@@ -45608,6 +45475,7 @@ components:
       - network_drive_id
       - node_id
       - os_id
+      - password
       - plan_id
       - price
       - ram_description
@@ -45699,6 +45567,7 @@ components:
         is_ipmi_enabled: true
         location: ru-1
         id: 3017
+        is_pre_installed: true
       properties:
         id:
           description: ID тарифа выделенного сервера.
@@ -45711,6 +45580,11 @@ components:
         is_ipmi_enabled:
           description: "Это логическое значение, которое показывает, доступен ли IPMI\
             \ у данного тарифа."
+          example: true
+          type: boolean
+        is_pre_installed:
+          description: "Это логическое значение, которое показывает, готов ли выде\
+            ленный сервер к моментальной выдаче."
           example: true
           type: boolean
         cpu:
@@ -45730,6 +45604,11 @@ components:
           - ru-2
           - kz-1
           - pl-1
+          - nl-1
+          - us-2
+          - tr-1
+          - de-1
+          - fi-1
           example: ru-1
           type: string
       required:
@@ -45738,6 +45617,7 @@ components:
       - disk
       - id
       - is_ipmi_enabled
+      - is_pre_installed
       - location
       - memory
       type: object
@@ -45791,20 +45671,32 @@ components:
       - price
       - short_description
       type: object
+    schemas-Meta:
+      example:
+        total: 0
+      properties:
+        total:
+          description: Число элементов в результате
+          title: Total
+          type: integer
+      required:
+      - total
+      title: Meta
+      type: object
     ClusterOut:
       example:
         availability_zone: spb-3
         created_at: 2000-01-23T04:56:07.000+00:00
         description: description
-        cpu: 1
+        cpu: 5
         network_driver: kuberouter
         ingress: true
-        disk: 5
+        disk: 2
         k8s_version: k8s_version
-        preset_id: 6
-        project_id: 2
+        preset_id: 1
+        project_id: 7
         name: name
-        id: 0
+        id: 6
         status: status
         ram: 5
       properties:
@@ -45873,7 +45765,7 @@ components:
           - ams-1
           type: string
         project_id:
-          description: Идентификатор проекта
+          description: ID проекта
           type: integer
       required:
       - created_at
@@ -45896,38 +45788,38 @@ components:
         - availability_zone: spb-3
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
-          cpu: 1
+          cpu: 5
           network_driver: kuberouter
           ingress: true
-          disk: 5
+          disk: 2
           k8s_version: k8s_version
-          preset_id: 6
-          project_id: 2
+          preset_id: 1
+          project_id: 7
           name: name
-          id: 0
+          id: 6
           status: status
           ram: 5
         - availability_zone: spb-3
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
-          cpu: 1
+          cpu: 5
           network_driver: kuberouter
           ingress: true
-          disk: 5
+          disk: 2
           k8s_version: k8s_version
-          preset_id: 6
-          project_id: 2
+          preset_id: 1
+          project_id: 7
           name: name
-          id: 0
+          id: 6
           status: status
           ram: 5
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         meta:
-          $ref: '#/components/schemas/Meta'
+          $ref: '#/components/schemas/schemas-Meta'
         clusters:
           description: Массив объектов Кластер
           items:
@@ -45938,6 +45830,27 @@ components:
       - clusters
       - meta
       title: ClustersResponse
+      type: object
+    components-schemas-BaseError:
+      properties:
+        status_code:
+          title: Status Code
+          type: integer
+        error_code:
+          title: Error Code
+          type: string
+        message:
+          title: Message
+          type: string
+        response_id:
+          example: 9c38a13d-ef14-45c7-a23a-1429f6a03824
+          title: Response Id
+          type: string
+      required:
+      - error_code
+      - message
+      - status_code
+      title: BaseError
       type: object
     SetLabels:
       description: Лейбл для группы нод
@@ -45962,8 +45875,8 @@ components:
           description: Название группы
           type: string
         preset_id:
-          description: Идентификатор тарифа воркер-ноды. Нельзя передавать вместе
-            с `configuration`. Локация воркер-нод должна совпадать с локацией кластера
+          description: ID тарифа воркер-ноды. Нельзя передавать вместе с `configuration`.
+            Локация воркер-нод должна совпадать с локацией кластера
           type: integer
         configuration:
           $ref: '#/components/schemas/NodeGroupIn_configuration'
@@ -46075,21 +45988,21 @@ components:
           availability_zone: spb-3
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
-          cpu: 1
+          cpu: 5
           network_driver: kuberouter
           ingress: true
-          disk: 5
+          disk: 2
           k8s_version: k8s_version
-          preset_id: 6
-          project_id: 2
+          preset_id: 1
+          project_id: 7
           name: name
-          id: 0
+          id: 6
           status: status
           ram: 5
         response_id: response_id
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         cluster:
@@ -46192,7 +46105,7 @@ components:
             capacity: 5.962133916683182
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         resources:
@@ -46223,7 +46136,7 @@ components:
           title: Created At
           type: string
         preset_id:
-          description: Идентификатор тарифа мастер-ноды
+          description: ID тарифа мастер-ноды
           title: Preset Id
           type: integer
         node_count:
@@ -46256,11 +46169,11 @@ components:
           node_count: 1
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         meta:
-          $ref: '#/components/schemas/Meta'
+          $ref: '#/components/schemas/schemas-Meta'
         node_groups:
           description: Массив объектов Группа нод
           items:
@@ -46283,7 +46196,7 @@ components:
         response_id: response_id
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         node_group:
@@ -46320,7 +46233,7 @@ components:
           title: Type
           type: string
         group_id:
-          description: Идентификатор группы нод
+          description: ID группы нод
           title: Group Id
           type: integer
         status:
@@ -46328,7 +46241,7 @@ components:
           title: Status
           type: string
         preset_id:
-          description: Идентификатор тарифа ноды
+          description: ID тарифа ноды
           title: Preset Id
           type: integer
         cpu:
@@ -46395,11 +46308,11 @@ components:
           total: 0
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         meta:
-          $ref: '#/components/schemas/Meta'
+          $ref: '#/components/schemas/schemas-Meta'
         nodes:
           description: Массив объектов Нода
           items:
@@ -46435,11 +46348,11 @@ components:
         - k8s_versions
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         meta:
-          $ref: '#/components/schemas/Meta'
+          $ref: '#/components/schemas/schemas-Meta'
         k8s_versions:
           description: Массив версий k8s
           items:
@@ -46461,11 +46374,11 @@ components:
           total: 0
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         meta:
-          $ref: '#/components/schemas/Meta'
+          $ref: '#/components/schemas/schemas-Meta'
         network_drivers:
           description: Массив сетевых драйверов k8s
           items:
@@ -46621,11 +46534,11 @@ components:
           network: 2
       properties:
         response_id:
-          description: Идентификатор запроса
+          description: ID запроса
           title: Response Id
           type: string
         meta:
-          $ref: '#/components/schemas/Meta'
+          $ref: '#/components/schemas/schemas-Meta'
         k8s_presets:
           description: Массив тарифов k8s
           items:
@@ -46640,6 +46553,7 @@ components:
     vds:
       description: Сервер
       example:
+        is_master_ssh: false
         software:
           name: name
           id: 1
@@ -46662,8 +46576,12 @@ components:
           status: done
         created_at: 2021-02-25T11:04:15Z
         start_at: 2022-10-25T15:15:45Z
+        is_dedicated_cpu: false
         networks:
-        - bandwidth: 200
+        - is_image_mounted: false
+          bandwidth: 200
+          blocked_ports:
+          - 25
           id: network-1a627c44a3b34e10b6c19f72e50ce843
           type: public
           nat_mode: dnat_and_snat
@@ -46677,7 +46595,10 @@ components:
             type: ipv4
             ptr: ptr
           is_ddos_guard: false
-        - bandwidth: 200
+        - is_image_mounted: false
+          bandwidth: 200
+          blocked_ports:
+          - 25
           id: network-1a627c44a3b34e10b6c19f72e50ce843
           type: public
           nat_mode: dnat_and_snat
@@ -46709,6 +46630,7 @@ components:
         is_qemu_agent: true
         cpu: 16
         cloud_init: '#cloud-config'
+        gpu: 16
         avatar_id: avatar
         vnc_pass: password
         preset_id: 11
@@ -46724,11 +46646,11 @@ components:
           example: 1
           type: number
         name:
-          description: "Удобочитаемое имя, установленное для выделенного сервера."
+          description: "Удобочитаемое имя, установленное для сервера."
           example: Cute Quail
           type: string
         comment:
-          description: Комментарий к выделенному серверу.
+          description: Комментарий к серверу.
           example: Development Server
           type: string
         created_at:
@@ -46749,8 +46671,10 @@ components:
           enum:
           - ru-1
           - ru-2
+          - ru-3
           - pl-1
           - kz-1
+          - nl-1
           example: ru-1
           type: string
         configurator_id:
@@ -46801,6 +46725,20 @@ components:
             ащита от DDoS у данного сервера."
           example: false
           type: boolean
+        is_master_ssh:
+          description: "Это логическое значение, которое показывает, доступно ли п\
+            одключение по SSH для поддержки."
+          example: false
+          type: boolean
+        is_dedicated_cpu:
+          description: "Это логическое значение, которое показывает, является ли CPU\
+            \ выделенным."
+          example: false
+          type: boolean
+        gpu:
+          description: Количество видеокарт сервера.
+          example: 16
+          type: number
         cpu:
           description: Количество ядер процессора сервера.
           example: 16
@@ -46847,7 +46785,8 @@ components:
           nullable: true
           type: string
         is_qemu_agent:
-          description: Включен ли QEMU-agent на сервере.
+          description: "Это логическое значение, которое показывает, включен ли QEMU-agent\
+            \ на сервере."
           example: true
           type: boolean
         availability_zone:
@@ -46863,9 +46802,13 @@ components:
       - cpu_frequency
       - created_at
       - disks
+      - gpu
       - id
       - image
       - is_ddos_guard
+      - is_dedicated_cpu
+      - is_master_ssh
+      - is_qemu_agent
       - location
       - name
       - networks
@@ -47135,14 +47078,17 @@ components:
       example:
         requirements:
           disk_min: 10240
-          disk_max: 30720
-          network_bandwidth_max: 1000
+          gpu_min: 1
           disk_step: 1024
-          network_bandwidth_step: 100
           cpu_step: 1
           network_bandwidth_min: 200
           cpu_max: 12
           ram_min: 1024
+          gpu_max: 4
+          disk_max: 30720
+          network_bandwidth_max: 1000
+          network_bandwidth_step: 100
+          gpu_step: 1
           ram_max: 8192
           cpu_min: 1
           ram_step: 1024
@@ -47467,8 +47413,8 @@ components:
           nullable: true
           type: string
         avatar_id:
-          description: Идентификатор аватара пользователя. Описание методов работы
-            с аватарами появится позднее.
+          description: ID аватара пользователя. Описание методов работы с аватарами
+            появится позднее.
           example: "1664446660062"
           maxLength: 255
           nullable: true
@@ -47489,8 +47435,8 @@ components:
           nullable: true
           type: string
         avatar_id:
-          description: Идентификатор аватара пользователя. Описание методов работы
-            с аватарами появится позднее.
+          description: ID аватара пользователя. Описание методов работы с аватарами
+            появится позднее.
           example: "1664446660062"
           maxLength: 255
           nullable: true
@@ -47521,8 +47467,8 @@ components:
           example: 2021-02-25T11:04:15Z
           type: string
         resource_id:
-          description: "Идентификатор ресурса проекта (сервера, хранилища, кластер\
-            а, балансировщика, базы данных или выделенного сервера)."
+          description: "ID ресурса проекта (сервера, хранилища, кластера, балансир\
+            овщика, базы данных или выделенного сервера)."
           example: 1
           type: number
         project:
@@ -47721,12 +47667,12 @@ components:
     resource-transfer:
       properties:
         to_project:
-          description: "Идентификатор проекта, куда переносится ресурс."
+          description: "ID проекта, куда переносится ресурс."
           example: 1
           type: number
         resource_id:
-          description: "Идентификатор перемещаемого ресурса (сервера, хранилища, к\
-            ластера, балансировщика, базы данных или выделенного сервера)."
+          description: "ID перемещаемого ресурса (сервера, хранилища, кластера, ба\
+            лансировщика, базы данных или выделенного сервера)."
           example: 1
           type: number
         resource_type:
@@ -49406,12 +49352,14 @@ components:
     vpc:
       example:
         availability_zone: spb-1
+        public_ip: public_ip
         subnet_v4: 192.168.0.0/24
         name: Общая сеть
         created_at: 2023-02-06T17:33:13Z
         description: Сеть для примера
         location: ru-1
         id: network-1234567890
+        type: ovn
       properties:
         id:
           description: ID сети.
@@ -49429,7 +49377,9 @@ components:
           description: Локация сети.
           enum:
           - ru-1
+          - ru-2
           - pl-1
+          - nl-1
           example: ru-1
           type: string
         created_at:
@@ -49443,13 +49393,28 @@ components:
           type: string
         availability_zone:
           $ref: '#/components/schemas/availability-zone'
+        public_ip:
+          description: Публичный IP-адрес сети.
+          nullable: true
+          type: string
+          example: null
+        type:
+          description: Тип сети.
+          enum:
+          - bgp
+          - ovn
+          example: ovn
+          type: string
       required:
       - availability_zone
       - created_at
+      - description
       - id
       - location
       - name
+      - public_ip
       - subnet_v4
+      - type
     create-vpc:
       properties:
         name:
@@ -49464,7 +49429,9 @@ components:
           description: Локация сети.
           enum:
           - ru-1
+          - ru-2
           - pl-1
+          - nl-1
           example: ru-1
           type: string
         description:
@@ -49579,30 +49546,32 @@ components:
           id: 3
       properties:
         id:
-          description: ID SSH-ключа
+          description: ID SSH-ключа.
           example: 2
           type: number
         name:
-          description: Название SSH-ключа
+          description: Название SSH-ключа.
           example: ssh key
           type: string
         body:
-          description: Тело SSH-ключа
+          description: Тело SSH-ключа.
           example: ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzvbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjrVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw==
             test@MBP-test.office.timeweb.ru
           type: string
         created_at:
-          description: Дата создания ключа
+          description: "Значение времени, указанное в комбинированном формате даты\
+            \ и времени ISO8601, которое представляет, когда был создан SSH-ключ."
           example: 2023-02-06T17:33:13Z
           format: date-time
           type: string
         used_by:
-          description: "Список серверов, которые используют SSH-ключ"
+          description: "Список серверов, которые используют SSH-ключ."
           items:
             $ref: '#/components/schemas/ssh_key_used_by_inner'
           type: array
         is_default:
-          description: Будет ли выбираться SSh-ключ по умолчанию при создании сервера
+          description: "Это логическое значение, которое показывает, будет ли выби\
+            раться SSH-ключ по умолчанию при создании сервера."
           type: boolean
       required:
       - body
@@ -49623,7 +49592,7 @@ components:
         ptr: ptr
       properties:
         id:
-          description: Идентификатор IP.
+          description: ID IP.
           example: 4df0e781-cafb-4419-9636-ce5fc93591af
           type: string
         ip:
@@ -50488,7 +50457,7 @@ components:
         status: new
       properties:
         id:
-          description: Идентификатор сетевого диска.
+          description: ID сетевого диска.
           example: 4df0e781-cafb-4419-9636-ce5fc93591af
           type: string
         name:
@@ -50533,7 +50502,7 @@ components:
           example: nvme
           type: string
         preset_id:
-          description: Идентификатор тарифа.
+          description: ID тарифа.
           example: 5
           type: integer
       required:
@@ -50563,7 +50532,7 @@ components:
           example: 10
           type: number
         preset_id:
-          description: Идентификатор сетевого диска.
+          description: ID сетевого диска.
           example: 5
           type: integer
       required:
@@ -51854,58 +51823,60 @@ components:
           total: 10
         dedicated_servers:
         - cpu_description: Intel Xeon E3-1240v3
-          autoinstall_ready: 2
-          ip: 1.1.1.1
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
-          bandwidth_id: 11
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
           - 7
-          ram_description: 8 Гб RAM
-          vnc_pass: vnc_pass
-          hdd_description: 2 x 1 ТБ HDD
-          ipmi_password: ipmi_password
+          password: password
           network_drive_id:
           - 12
           - 11
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
+          id: 1
+          ipmi_ip: 1.1.1.1
+          autoinstall_ready: 2
+          ip: 1.1.1.1
+          bandwidth_id: 11
+          ram_description: 8 Гб RAM
+          vnc_pass: vnc_pass
+          hdd_description: 2 x 1 ТБ HDD
+          ipmi_password: ipmi_password
           name: Cute Quail
           comment: Development Server
           location: ru-1
-          id: 1
-          ipmi_ip: 1.1.1.1
           plan_id: 2377
           node_id: 68
           status: installing
         - cpu_description: Intel Xeon E3-1240v3
-          autoinstall_ready: 2
-          ip: 1.1.1.1
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
-          bandwidth_id: 11
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
           - 7
-          ram_description: 8 Гб RAM
-          vnc_pass: vnc_pass
-          hdd_description: 2 x 1 ТБ HDD
-          ipmi_password: ipmi_password
+          password: password
           network_drive_id:
           - 12
           - 11
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
+          id: 1
+          ipmi_ip: 1.1.1.1
+          autoinstall_ready: 2
+          ip: 1.1.1.1
+          bandwidth_id: 11
+          ram_description: 8 Гб RAM
+          vnc_pass: vnc_pass
+          hdd_description: 2 x 1 ТБ HDD
+          ipmi_password: ipmi_password
           name: Cute Quail
           comment: Development Server
           location: ru-1
-          id: 1
-          ipmi_ip: 1.1.1.1
           plan_id: 2377
           node_id: 68
           status: installing
@@ -51924,30 +51895,31 @@ components:
       example:
         dedicated_server:
           cpu_description: Intel Xeon E3-1240v3
-          autoinstall_ready: 2
-          ip: 1.1.1.1
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
-          bandwidth_id: 11
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
           - 7
-          ram_description: 8 Гб RAM
-          vnc_pass: vnc_pass
-          hdd_description: 2 x 1 ТБ HDD
-          ipmi_password: ipmi_password
+          password: password
           network_drive_id:
           - 12
           - 11
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
+          id: 1
+          ipmi_ip: 1.1.1.1
+          autoinstall_ready: 2
+          ip: 1.1.1.1
+          bandwidth_id: 11
+          ram_description: 8 Гб RAM
+          vnc_pass: vnc_pass
+          hdd_description: 2 x 1 ТБ HDD
+          ipmi_password: ipmi_password
           name: Cute Quail
           comment: Development Server
           location: ru-1
-          id: 1
-          ipmi_ip: 1.1.1.1
           plan_id: 2377
           node_id: 68
           status: installing
@@ -51994,6 +51966,7 @@ components:
           is_ipmi_enabled: true
           location: ru-1
           id: 3017
+          is_pre_installed: true
         - disk:
             count: 16
             description: 2 x 1 Тб NVMe
@@ -52011,6 +51984,7 @@ components:
           is_ipmi_enabled: true
           location: ru-1
           id: 3017
+          is_pre_installed: true
       properties:
         meta:
           $ref: '#/components/schemas/meta'
@@ -52063,7 +52037,8 @@ components:
     getServers_200_response:
       example:
         servers:
-        - software:
+        - is_master_ssh: false
+          software:
             name: name
             id: 1
           disks:
@@ -52085,8 +52060,12 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           start_at: 2022-10-25T15:15:45Z
+          is_dedicated_cpu: false
           networks:
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -52100,7 +52079,10 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -52132,6 +52114,7 @@ components:
           is_qemu_agent: true
           cpu: 16
           cloud_init: '#cloud-config'
+          gpu: 16
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
@@ -52140,7 +52123,8 @@ components:
           location: ru-1
           cpu_frequency: "3.3"
           status: "on"
-        - software:
+        - is_master_ssh: false
+          software:
             name: name
             id: 1
           disks:
@@ -52162,8 +52146,12 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           start_at: 2022-10-25T15:15:45Z
+          is_dedicated_cpu: false
           networks:
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -52177,7 +52165,10 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -52209,6 +52200,7 @@ components:
           is_qemu_agent: true
           cpu: 16
           cloud_init: '#cloud-config'
+          gpu: 16
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
@@ -52233,6 +52225,7 @@ components:
     createServer_201_response:
       example:
         server:
+          is_master_ssh: false
           software:
             name: name
             id: 1
@@ -52255,8 +52248,12 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           start_at: 2022-10-25T15:15:45Z
+          is_dedicated_cpu: false
           networks:
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -52270,7 +52267,10 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -52302,6 +52302,7 @@ components:
           is_qemu_agent: true
           cpu: 16
           cloud_init: '#cloud-config'
+          gpu: 16
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
@@ -52588,14 +52589,17 @@ components:
         server_configurators:
         - requirements:
             disk_min: 10240
-            disk_max: 30720
-            network_bandwidth_max: 1000
+            gpu_min: 1
             disk_step: 1024
-            network_bandwidth_step: 100
             cpu_step: 1
             network_bandwidth_min: 200
             cpu_max: 12
             ram_min: 1024
+            gpu_max: 4
+            disk_max: 30720
+            network_bandwidth_max: 1000
+            network_bandwidth_step: 100
+            gpu_step: 1
             ram_max: 8192
             cpu_min: 1
             ram_step: 1024
@@ -52606,14 +52610,17 @@ components:
           is_allowed_local_network: true
         - requirements:
             disk_min: 10240
-            disk_max: 30720
-            network_bandwidth_max: 1000
+            gpu_min: 1
             disk_step: 1024
-            network_bandwidth_step: 100
             cpu_step: 1
             network_bandwidth_min: 200
             cpu_max: 12
             ram_min: 1024
+            gpu_max: 4
+            disk_max: 30720
+            network_bandwidth_max: 1000
+            network_bandwidth_step: 100
+            gpu_step: 1
             ram_max: 8192
             cpu_min: 1
             ram_step: 1024
@@ -53177,7 +53184,7 @@ components:
     addStorageToProject_request:
       properties:
         resource_id:
-          description: Идентификатор добавляемого хранилища.
+          description: ID добавляемого хранилища.
           example: 1
           type: number
       required:
@@ -53228,7 +53235,7 @@ components:
     addClusterToProject_request:
       properties:
         resource_id:
-          description: Идентификатор добавляемого кластера.
+          description: ID добавляемого кластера.
           example: 1
           type: number
       required:
@@ -53237,7 +53244,8 @@ components:
     getProjectServers_200_response:
       example:
         servers:
-        - software:
+        - is_master_ssh: false
+          software:
             name: name
             id: 1
           disks:
@@ -53259,8 +53267,12 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           start_at: 2022-10-25T15:15:45Z
+          is_dedicated_cpu: false
           networks:
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53274,7 +53286,10 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53306,6 +53321,7 @@ components:
           is_qemu_agent: true
           cpu: 16
           cloud_init: '#cloud-config'
+          gpu: 16
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
@@ -53314,7 +53330,8 @@ components:
           location: ru-1
           cpu_frequency: "3.3"
           status: "on"
-        - software:
+        - is_master_ssh: false
+          software:
             name: name
             id: 1
           disks:
@@ -53336,8 +53353,12 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           start_at: 2022-10-25T15:15:45Z
+          is_dedicated_cpu: false
           networks:
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53351,7 +53372,10 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53383,6 +53407,7 @@ components:
           is_qemu_agent: true
           cpu: 16
           cloud_init: '#cloud-config'
+          gpu: 16
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
@@ -53407,7 +53432,7 @@ components:
     addServerToProject_request:
       properties:
         resource_id:
-          description: Идентификатор добавляемого сервера.
+          description: ID добавляемого сервера.
           example: 1
           type: number
       required:
@@ -53530,7 +53555,7 @@ components:
     addDatabaseToProject_request:
       properties:
         resource_id:
-          description: Идентификатор добавляемой базы данных.
+          description: ID добавляемой базы данных.
           example: 1
           type: number
       required:
@@ -53542,58 +53567,60 @@ components:
           total: 10
         dedicated_servers:
         - cpu_description: Intel Xeon E3-1240v3
-          autoinstall_ready: 2
-          ip: 1.1.1.1
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
-          bandwidth_id: 11
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
           - 7
-          ram_description: 8 Гб RAM
-          vnc_pass: vnc_pass
-          hdd_description: 2 x 1 ТБ HDD
-          ipmi_password: ipmi_password
+          password: password
           network_drive_id:
           - 12
           - 11
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
+          id: 1
+          ipmi_ip: 1.1.1.1
+          autoinstall_ready: 2
+          ip: 1.1.1.1
+          bandwidth_id: 11
+          ram_description: 8 Гб RAM
+          vnc_pass: vnc_pass
+          hdd_description: 2 x 1 ТБ HDD
+          ipmi_password: ipmi_password
           name: Cute Quail
           comment: Development Server
           location: ru-1
-          id: 1
-          ipmi_ip: 1.1.1.1
           plan_id: 2377
           node_id: 68
           status: installing
         - cpu_description: Intel Xeon E3-1240v3
-          autoinstall_ready: 2
-          ip: 1.1.1.1
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
-          bandwidth_id: 11
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
           - 7
-          ram_description: 8 Гб RAM
-          vnc_pass: vnc_pass
-          hdd_description: 2 x 1 ТБ HDD
-          ipmi_password: ipmi_password
+          password: password
           network_drive_id:
           - 12
           - 11
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
+          id: 1
+          ipmi_ip: 1.1.1.1
+          autoinstall_ready: 2
+          ip: 1.1.1.1
+          bandwidth_id: 11
+          ram_description: 8 Гб RAM
+          vnc_pass: vnc_pass
+          hdd_description: 2 x 1 ТБ HDD
+          ipmi_password: ipmi_password
           name: Cute Quail
           comment: Development Server
           location: ru-1
-          id: 1
-          ipmi_ip: 1.1.1.1
           plan_id: 2377
           node_id: 68
           status: installing
@@ -53611,7 +53638,7 @@ components:
     addDedicatedServerToProject_request:
       properties:
         resource_id:
-          description: Идентификатор добавляемого выделенного сервера.
+          description: ID добавляемого выделенного сервера.
           example: 1
           type: number
       required:
@@ -53719,7 +53746,8 @@ components:
           hash_type: caching_sha2
           status: started
         servers:
-        - software:
+        - is_master_ssh: false
+          software:
             name: name
             id: 1
           disks:
@@ -53741,8 +53769,12 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           start_at: 2022-10-25T15:15:45Z
+          is_dedicated_cpu: false
           networks:
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53756,7 +53788,10 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53788,6 +53823,7 @@ components:
           is_qemu_agent: true
           cpu: 16
           cloud_init: '#cloud-config'
+          gpu: 16
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
@@ -53796,7 +53832,8 @@ components:
           location: ru-1
           cpu_frequency: "3.3"
           status: "on"
-        - software:
+        - is_master_ssh: false
+          software:
             name: name
             id: 1
           disks:
@@ -53818,8 +53855,12 @@ components:
             status: done
           created_at: 2021-02-25T11:04:15Z
           start_at: 2022-10-25T15:15:45Z
+          is_dedicated_cpu: false
           networks:
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53833,7 +53874,10 @@ components:
               type: ipv4
               ptr: ptr
             is_ddos_guard: false
-          - bandwidth: 200
+          - is_image_mounted: false
+            bandwidth: 200
+            blocked_ports:
+            - 25
             id: network-1a627c44a3b34e10b6c19f72e50ce843
             type: public
             nat_mode: dnat_and_snat
@@ -53865,6 +53909,7 @@ components:
           is_qemu_agent: true
           cpu: 16
           cloud_init: '#cloud-config'
+          gpu: 16
           avatar_id: avatar
           vnc_pass: password
           preset_id: 11
@@ -53971,58 +54016,60 @@ components:
           status: created
         dedicated_servers:
         - cpu_description: Intel Xeon E3-1240v3
-          autoinstall_ready: 2
-          ip: 1.1.1.1
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
-          bandwidth_id: 11
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
           - 7
-          ram_description: 8 Гб RAM
-          vnc_pass: vnc_pass
-          hdd_description: 2 x 1 ТБ HDD
-          ipmi_password: ipmi_password
+          password: password
           network_drive_id:
           - 12
           - 11
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
+          id: 1
+          ipmi_ip: 1.1.1.1
+          autoinstall_ready: 2
+          ip: 1.1.1.1
+          bandwidth_id: 11
+          ram_description: 8 Гб RAM
+          vnc_pass: vnc_pass
+          hdd_description: 2 x 1 ТБ HDD
+          ipmi_password: ipmi_password
           name: Cute Quail
           comment: Development Server
           location: ru-1
-          id: 1
-          ipmi_ip: 1.1.1.1
           plan_id: 2377
           node_id: 68
           status: installing
         - cpu_description: Intel Xeon E3-1240v3
-          autoinstall_ready: 2
-          ip: 1.1.1.1
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
-          bandwidth_id: 11
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
           - 7
-          ram_description: 8 Гб RAM
-          vnc_pass: vnc_pass
-          hdd_description: 2 x 1 ТБ HDD
-          ipmi_password: ipmi_password
+          password: password
           network_drive_id:
           - 12
           - 11
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
+          id: 1
+          ipmi_ip: 1.1.1.1
+          autoinstall_ready: 2
+          ip: 1.1.1.1
+          bandwidth_id: 11
+          ram_description: 8 Гб RAM
+          vnc_pass: vnc_pass
+          hdd_description: 2 x 1 ТБ HDD
+          ipmi_password: ipmi_password
           name: Cute Quail
           comment: Development Server
           location: ru-1
-          id: 1
-          ipmi_ip: 1.1.1.1
           plan_id: 2377
           node_id: 68
           status: installing
@@ -55370,19 +55417,23 @@ components:
           total: 10
         vpcs:
         - availability_zone: spb-1
+          public_ip: public_ip
           subnet_v4: 192.168.0.0/24
           name: Общая сеть
           created_at: 2023-02-06T17:33:13Z
           description: Сеть для примера
           location: ru-1
           id: network-1234567890
+          type: ovn
         - availability_zone: spb-1
+          public_ip: public_ip
           subnet_v4: 192.168.0.0/24
           name: Общая сеть
           created_at: 2023-02-06T17:33:13Z
           description: Сеть для примера
           location: ru-1
           id: network-1234567890
+          type: ovn
       properties:
         meta:
           $ref: '#/components/schemas/meta'
@@ -55398,12 +55449,14 @@ components:
       example:
         vpc:
           availability_zone: spb-1
+          public_ip: public_ip
           subnet_v4: 192.168.0.0/24
           name: Общая сеть
           created_at: 2023-02-06T17:33:13Z
           description: Сеть для примера
           location: ru-1
           id: network-1234567890
+          type: ovn
       properties:
         vpc:
           $ref: '#/components/schemas/vpc'
@@ -55509,18 +55562,18 @@ components:
     createKey_request:
       properties:
         body:
-          description: Тело SSH-ключа
+          description: Тело SSH-ключа.
           example: ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw==
             test@MBP-test.office.timeweb.ru
           type: string
         is_default:
           description: |+
-            Будет ли выбираться SSH-ключ по умолчанию при создании сервера
+            Будет ли выбираться SSH-ключ по умолчанию при создании сервера.
 
           example: false
           type: boolean
         name:
-          description: Название SSH-ключа
+          description: Название SSH-ключа.
           example: test
           type: string
       required:
@@ -55576,23 +55629,23 @@ components:
     updateKey_request:
       properties:
         body:
-          description: Тело SSH-ключа
+          description: Тело SSH-ключа.
           example: ssh-dss AAAAB3NzaC1kc3MAAACBALixbc+uF2kuv83LiB3gg200vHJ7hH0QCC77fqlu+5raX6Y1PJZZORwzWbvU6k8gfrmjMRwQFDNncu3aXUiM9TleOBxFsQ2Hg5hDblSr2bnnyVP0jjPzsYye+0Ebaa+IjEqZz8y0qu8zejCpHqhLP/PlRDS9vtTsadrVvNwFFCyhAAAAFQD7m0AZOd/lHraIgBjXJvfN+qGiAQAAAIAdXSV0n47akGC/g0ejkNzHDSdRFf2fR0FsOos/7f5j+QfstijVBMwzA4Ti+dNJv3BQqQv3Bk5X3o5yUTUL+cM6fa4KSyIhGi14RL0kqjJrNjqVAhwjPH8K9aHDouqQEz56UL72+iGhMxwBHBMWq7cZ2k31mmFgEoYgwNcYuNmtlAAAAIBxIebJMItpq3ez5Hg5GyhpnSU7h0kshh+D5UAAlPmJo8OUQH6avQGf6gpxs3CnQ/im/aCKcb/bYm4V5Y9a7Zq+LrZGQZ79GLWsu/oK0HfQiP+oWwzCGmsdIGblsTRzrKU0FFo7zGmyTsBU48OeD76nKsc5EJ9F9wQC3S2KK38Ynw==
             test@MBP-test.office.timeweb.ru
           type: string
         is_default:
-          description: Будет ли выбираться SSH-ключ по умолчанию при создании сервера
+          description: Будет ли выбираться SSH-ключ по умолчанию при создании сервера.
           example: false
           type: boolean
         name:
-          description: Название SSH-ключа
+          description: Название SSH-ключа.
           example: test
           type: string
       type: object
     addKeyToServer_request:
       properties:
         ssh_key_ids:
-          description: Массив уникальных идентификаторов SSH-ключей
+          description: Массив ID SSH-ключей
           items:
             example: 1
             type: number
@@ -56722,7 +56775,10 @@ components:
       - type
     vds_networks_inner:
       example:
+        is_image_mounted: false
         bandwidth: 200
+        blocked_ports:
+        - 25
         id: network-1a627c44a3b34e10b6c19f72e50ce843
         type: public
         nat_mode: dnat_and_snat
@@ -56768,9 +56824,22 @@ components:
           nullable: true
           type: array
         is_ddos_guard:
-          description: Подключена ли DDoS-защита. Только для публичных сетей.
+          description: "Это логическое значение, которое показывает, подключена ли\
+            \ DDoS-защита. Только для публичных сетей."
           example: false
           type: boolean
+        is_image_mounted:
+          description: "Это логическое значение, которое показывает, примонтирован\
+            \ ли образ к серверу."
+          example: false
+          type: boolean
+        blocked_ports:
+          description: Список заблокированных портов на сервере.
+          example:
+          - 25
+          items:
+            type: integer
+          type: array
       required:
       - ips
       - type
@@ -56792,6 +56861,10 @@ components:
         ram:
           description: Размер ОЗУ сервера в МБ.
           example: 2048
+          type: number
+        gpu:
+          description: Количество видеокарт.
+          example: 1
           type: number
       required:
       - configurator_id
@@ -56817,6 +56890,10 @@ components:
         ram:
           description: Размер ОЗУ сервера в МБ.
           example: 2048
+          type: number
+        gpu:
+          description: Количество видеокарт.
+          example: 1
           type: number
       type: object
     servers_os_requirements:
@@ -56847,14 +56924,17 @@ components:
     servers_configurator_requirements:
       example:
         disk_min: 10240
-        disk_max: 30720
-        network_bandwidth_max: 1000
+        gpu_min: 1
         disk_step: 1024
-        network_bandwidth_step: 100
         cpu_step: 1
         network_bandwidth_min: 200
         cpu_max: 12
         ram_min: 1024
+        gpu_max: 4
+        disk_max: 30720
+        network_bandwidth_max: 1000
+        network_bandwidth_step: 100
+        gpu_step: 1
         ram_max: 8192
         cpu_min: 1
         ram_step: 1024
@@ -56907,6 +56987,21 @@ components:
           description: Максимальная пропускная способноть интернет-канала (в Мб)
           example: 1000
           type: number
+        gpu_min:
+          description: Минимальное количество видеокарт
+          example: 1
+          nullable: true
+          type: number
+        gpu_max:
+          description: Максимальное количество видеокарт
+          example: 4
+          nullable: true
+          type: number
+        gpu_step:
+          description: Размер шага видеокарт
+          example: 1
+          nullable: true
+          type: number
       required:
       - cpu_max
       - cpu_min
@@ -56914,6 +57009,9 @@ components:
       - disk_max
       - disk_min
       - disk_step
+      - gpu_max
+      - gpu_min
+      - gpu_step
       - network_bandwidth_max
       - network_bandwidth_min
       - network_bandwidth_step
@@ -57235,11 +57333,11 @@ components:
         id: 3
       properties:
         id:
-          description: ID сервера
+          description: ID сервер.а
           example: 3
           type: number
         name:
-          description: Название сервера
+          description: Название сервера.
           example: test
           type: string
       required:

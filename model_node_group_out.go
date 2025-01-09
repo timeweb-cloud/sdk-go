@@ -27,7 +27,7 @@ type NodeGroupOut struct {
 	Name string `json:"name"`
 	// Дата и время создания группы в формате ISO8601
 	CreatedAt time.Time `json:"created_at"`
-	// Идентификатор тарифа мастер-ноды
+	// ID тарифа мастер-ноды
 	PresetId int32 `json:"preset_id"`
 	// Количество нод в группе
 	NodeCount int32 `json:"node_count"`

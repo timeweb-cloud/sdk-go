@@ -21,7 +21,7 @@ var _ MappedNullable = &ImageUrlIn{}
 // ImageUrlIn struct for ImageUrlIn
 type ImageUrlIn struct {
 	Type *URLType `json:"type,omitempty"`
-	// Имя файла для загрузки в облачное хранилище
+	// Имя файла для загрузки в облачное хранилище.
 	Filename *string `json:"filename,omitempty"`
 	Auth *ImageUrlAuth `json:"auth,omitempty"`
 }

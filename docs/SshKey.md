@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | ID SSH-ключа | 
-**Name** | **string** | Название SSH-ключа | 
-**Body** | **string** | Тело SSH-ключа | 
-**CreatedAt** | **time.Time** | Дата создания ключа | 
-**UsedBy** | [**[]SshKeyUsedByInner**](SshKeyUsedByInner.md) | Список серверов, которые используют SSH-ключ | 
-**IsDefault** | Pointer to **bool** | Будет ли выбираться SSh-ключ по умолчанию при создании сервера | [optional] 
+**Id** | **float32** | ID SSH-ключа. | 
+**Name** | **string** | Название SSH-ключа. | 
+**Body** | **string** | Тело SSH-ключа. | 
+**CreatedAt** | **time.Time** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан SSH-ключ. | 
+**UsedBy** | [**[]SshKeyUsedByInner**](SshKeyUsedByInner.md) | Список серверов, которые используют SSH-ключ. | 
+**IsDefault** | Pointer to **bool** | Это логическое значение, которое показывает, будет ли выбираться SSH-ключ по умолчанию при создании сервера. | [optional] 
 
 ## Methods
 

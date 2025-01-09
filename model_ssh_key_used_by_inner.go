@@ -20,9 +20,9 @@ var _ MappedNullable = &SshKeyUsedByInner{}
 
 // SshKeyUsedByInner struct for SshKeyUsedByInner
 type SshKeyUsedByInner struct {
-	// ID сервера
+	// ID сервер.а
 	Id float32 `json:"id"`
-	// Название сервера
+	// Название сервера.
 	Name string `json:"name"`
 }
 

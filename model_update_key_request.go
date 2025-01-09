@@ -20,11 +20,11 @@ var _ MappedNullable = &UpdateKeyRequest{}
 
 // UpdateKeyRequest struct for UpdateKeyRequest
 type UpdateKeyRequest struct {
-	// Тело SSH-ключа
+	// Тело SSH-ключа.
 	Body *string `json:"body,omitempty"`
-	// Будет ли выбираться SSH-ключ по умолчанию при создании сервера
+	// Будет ли выбираться SSH-ключ по умолчанию при создании сервера.
 	IsDefault *bool `json:"is_default,omitempty"`
-	// Название SSH-ключа
+	// Название SSH-ключа.
 	Name *string `json:"name,omitempty"`
 }
 

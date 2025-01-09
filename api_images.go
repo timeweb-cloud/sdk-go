@@ -206,7 +206,7 @@ CreateImageDownloadUrl Создание ссылки на скачивание �
 Чтобы создать ссылку на скачивание образа, отправьте запрос POST в `/api/v1/images/{image_id}/download-url`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param imageId ID образа
+ @param imageId ID образа.
  @return ApiCreateImageDownloadUrlRequest
 */
 func (a *ImagesAPIService) CreateImageDownloadUrl(ctx context.Context, imageId string) ApiCreateImageDownloadUrlRequest {
@@ -379,7 +379,7 @@ DeleteImage Удаление образа
 Чтобы удалить образ, отправьте запрос DELETE в `/api/v1/images/{image_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param imageId ID образа
+ @param imageId ID образа.
  @return ApiDeleteImageRequest
 */
 func (a *ImagesAPIService) DeleteImage(ctx context.Context, imageId string) ApiDeleteImageRequest {
@@ -515,8 +515,8 @@ DeleteImageDownloadURL Удаление ссылки на образ
 Чтобы удалить ссылку на образ, отправьте DELETE запрос в `/api/v1/images/{image_id}/download-url/{image_url_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param imageId ID образа
- @param imageUrlId ID ссылки
+ @param imageId ID образа.
+ @param imageUrlId ID ссылки.
  @return ApiDeleteImageDownloadURLRequest
 */
 func (a *ImagesAPIService) DeleteImageDownloadURL(ctx context.Context, imageId string, imageUrlId string) ApiDeleteImageDownloadURLRequest {
@@ -653,7 +653,7 @@ GetImage Получение информации о образе
 Чтобы получить образ, отправьте запрос GET в `/api/v1/images/{image_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param imageId ID образа
+ @param imageId ID образа.
  @return ApiGetImageRequest
 */
 func (a *ImagesAPIService) GetImage(ctx context.Context, imageId string) ApiGetImageRequest {
@@ -811,8 +811,8 @@ GetImageDownloadURL Получение информации о ссылке на
 Чтобы получить информацию о ссылке на скачивание образа, отправьте запрос GET в `/api/v1/images/{image_id}/download-url/{image_url_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param imageId ID образа
- @param imageUrlId ID ссылки
+ @param imageId ID образа.
+ @param imageUrlId ID ссылки.
  @return ApiGetImageDownloadURLRequest
 */
 func (a *ImagesAPIService) GetImageDownloadURL(ctx context.Context, imageId string, imageUrlId string) ApiGetImageDownloadURLRequest {
@@ -983,7 +983,7 @@ GetImageDownloadURLs Получение информации о ссылках �
 Чтобы получить информацию о ссылках на скачивание образов, отправьте запрос GET в `/api/v1/images/{image_id}/download-url`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param imageId ID образа
+ @param imageId ID образа.
  @return ApiGetImageDownloadURLsRequest
 */
 func (a *ImagesAPIService) GetImageDownloadURLs(ctx context.Context, imageId string) ApiGetImageDownloadURLsRequest {
@@ -1312,7 +1312,7 @@ UpdateImage Обновление информации о образе
 Чтобы обновить только определенные атрибуты образа, отправьте запрос PATCH в `/api/v1/images/{image_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param imageId ID образа
+ @param imageId ID образа.
  @return ApiUpdateImageRequest
 */
 func (a *ImagesAPIService) UpdateImage(ctx context.Context, imageId string) ApiUpdateImageRequest {

@@ -20,16 +20,16 @@ var _ MappedNullable = &FirewallGroupOutResponse{}
 
 // FirewallGroupOutResponse struct for FirewallGroupOutResponse
 type FirewallGroupOutResponse struct {
-	// Идентификатор запроса
+	// ID запроса.
 	ResponseId *string `json:"response_id,omitempty"`
-	Group FirewallGroupOutAPI `json:"group"`
+	Group FirewallGroup `json:"group"`
 }
 
 // NewFirewallGroupOutResponse instantiates a new FirewallGroupOutResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFirewallGroupOutResponse(group FirewallGroupOutAPI) *FirewallGroupOutResponse {
+func NewFirewallGroupOutResponse(group FirewallGroup) *FirewallGroupOutResponse {
 	this := FirewallGroupOutResponse{}
 	this.Group = group
 	return &this
@@ -76,9 +76,9 @@ func (o *FirewallGroupOutResponse) SetResponseId(v string) {
 }
 
 // GetGroup returns the Group field value
-func (o *FirewallGroupOutResponse) GetGroup() FirewallGroupOutAPI {
+func (o *FirewallGroupOutResponse) GetGroup() FirewallGroup {
 	if o == nil {
-		var ret FirewallGroupOutAPI
+		var ret FirewallGroup
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *FirewallGroupOutResponse) GetGroup() FirewallGroupOutAPI {
 
 // GetGroupOk returns a tuple with the Group field value
 // and a boolean to check if the value has been set.
-func (o *FirewallGroupOutResponse) GetGroupOk() (*FirewallGroupOutAPI, bool) {
+func (o *FirewallGroupOutResponse) GetGroupOk() (*FirewallGroup, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *FirewallGroupOutResponse) GetGroupOk() (*FirewallGroupOutAPI, bool) {
 }
 
 // SetGroup sets field value
-func (o *FirewallGroupOutResponse) SetGroup(v FirewallGroupOutAPI) {
+func (o *FirewallGroupOutResponse) SetGroup(v FirewallGroup) {
 	o.Group = v
 }
 

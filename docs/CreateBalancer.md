@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Timeout** | **float32** | Таймаут ответа балансировщика. | 
 **Fall** | **float32** | Порог количества ошибок. | 
 **Rise** | **float32** | Порог количества успешных ответов. | 
-**PresetId** | **float32** | Идентификатор тарифа. | 
+**PresetId** | **float32** | ID тарифа. | 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 

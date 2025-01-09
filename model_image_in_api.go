@@ -20,24 +20,26 @@ var _ MappedNullable = &ImageInAPI{}
 
 // ImageInAPI struct for ImageInAPI
 type ImageInAPI struct {
-	// Имя образа
+	// Имя образа.
 	Name *string `json:"name,omitempty"`
-	// Описание образа
+	// Описание образа.
 	Description *string `json:"description,omitempty"`
-	// Идентификатор диска, для которого создается образ
+	// ID диска, для которого создается образ.
 	DiskId *int32 `json:"disk_id,omitempty"`
-	// Cсылка для загрузки образа
+	// Ссылка для загрузки образа.
 	UploadUrl *string `json:"upload_url,omitempty"`
-	Location *Location `json:"location,omitempty"`
-	Os *OS `json:"os,omitempty"`
+	Location Location `json:"location"`
+	Os OS `json:"os"`
 }
 
 // NewImageInAPI instantiates a new ImageInAPI object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageInAPI() *ImageInAPI {
+func NewImageInAPI(location Location, os OS) *ImageInAPI {
 	this := ImageInAPI{}
+	this.Location = location
+	this.Os = os
 	return &this
 }
 
@@ -177,68 +179,52 @@ func (o *ImageInAPI) SetUploadUrl(v string) {
 	o.UploadUrl = &v
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
+// GetLocation returns the Location field value
 func (o *ImageInAPI) GetLocation() Location {
-	if o == nil || IsNil(o.Location) {
+	if o == nil {
 		var ret Location
 		return ret
 	}
-	return *o.Location
+
+	return o.Location
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
 func (o *ImageInAPI) GetLocationOk() (*Location, bool) {
-	if o == nil || IsNil(o.Location) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Location, true
+	return &o.Location, true
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *ImageInAPI) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given Location and assigns it to the Location field.
+// SetLocation sets field value
 func (o *ImageInAPI) SetLocation(v Location) {
-	o.Location = &v
+	o.Location = v
 }
 
-// GetOs returns the Os field value if set, zero value otherwise.
+// GetOs returns the Os field value
 func (o *ImageInAPI) GetOs() OS {
-	if o == nil || IsNil(o.Os) {
+	if o == nil {
 		var ret OS
 		return ret
 	}
-	return *o.Os
+
+	return o.Os
 }
 
-// GetOsOk returns a tuple with the Os field value if set, nil otherwise
+// GetOsOk returns a tuple with the Os field value
 // and a boolean to check if the value has been set.
 func (o *ImageInAPI) GetOsOk() (*OS, bool) {
-	if o == nil || IsNil(o.Os) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Os, true
+	return &o.Os, true
 }
 
-// HasOs returns a boolean if a field has been set.
-func (o *ImageInAPI) HasOs() bool {
-	if o != nil && !IsNil(o.Os) {
-		return true
-	}
-
-	return false
-}
-
-// SetOs gets a reference to the given OS and assigns it to the Os field.
+// SetOs sets field value
 func (o *ImageInAPI) SetOs(v OS) {
-	o.Os = &v
+	o.Os = v
 }
 
 func (o ImageInAPI) MarshalJSON() ([]byte, error) {
@@ -263,12 +249,8 @@ func (o ImageInAPI) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UploadUrl) {
 		toSerialize["upload_url"] = o.UploadUrl
 	}
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
-	}
-	if !IsNil(o.Os) {
-		toSerialize["os"] = o.Os
-	}
+	toSerialize["location"] = o.Location
+	toSerialize["os"] = o.Os
 	return toSerialize, nil
 }
 

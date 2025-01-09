@@ -20,7 +20,7 @@ var _ MappedNullable = &NetworkDrive{}
 
 // NetworkDrive struct for NetworkDrive
 type NetworkDrive struct {
-	// Идентификатор сетевого диска.
+	// ID сетевого диска.
 	Id string `json:"id"`
 	// Название сетевого диска.
 	Name string `json:"name"`
@@ -37,7 +37,7 @@ type NetworkDrive struct {
 	AvailabilityZone AvailabilityZone `json:"availability_zone"`
 	// Тип сетевого диска.
 	Type string `json:"type"`
-	// Идентификатор тарифа.
+	// ID тарифа.
 	PresetId int32 `json:"preset_id"`
 }
 

@@ -20,9 +20,9 @@ var _ MappedNullable = &NodeGroupsResponse{}
 
 // NodeGroupsResponse struct for NodeGroupsResponse
 type NodeGroupsResponse struct {
-	// Идентификатор запроса
+	// ID запроса
 	ResponseId *string `json:"response_id,omitempty"`
-	Meta Meta `json:"meta"`
+	Meta SchemasMeta `json:"meta"`
 	// Массив объектов Группа нод
 	NodeGroups []NodeGroupOut `json:"node_groups"`
 }
@@ -31,7 +31,7 @@ type NodeGroupsResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeGroupsResponse(meta Meta, nodeGroups []NodeGroupOut) *NodeGroupsResponse {
+func NewNodeGroupsResponse(meta SchemasMeta, nodeGroups []NodeGroupOut) *NodeGroupsResponse {
 	this := NodeGroupsResponse{}
 	this.Meta = meta
 	this.NodeGroups = nodeGroups
@@ -79,9 +79,9 @@ func (o *NodeGroupsResponse) SetResponseId(v string) {
 }
 
 // GetMeta returns the Meta field value
-func (o *NodeGroupsResponse) GetMeta() Meta {
+func (o *NodeGroupsResponse) GetMeta() SchemasMeta {
 	if o == nil {
-		var ret Meta
+		var ret SchemasMeta
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *NodeGroupsResponse) GetMeta() Meta {
 
 // GetMetaOk returns a tuple with the Meta field value
 // and a boolean to check if the value has been set.
-func (o *NodeGroupsResponse) GetMetaOk() (*Meta, bool) {
+func (o *NodeGroupsResponse) GetMetaOk() (*SchemasMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *NodeGroupsResponse) GetMetaOk() (*Meta, bool) {
 }
 
 // SetMeta sets field value
-func (o *NodeGroupsResponse) SetMeta(v Meta) {
+func (o *NodeGroupsResponse) SetMeta(v SchemasMeta) {
 	o.Meta = v
 }
 

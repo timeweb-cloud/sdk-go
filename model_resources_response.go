@@ -20,7 +20,7 @@ var _ MappedNullable = &ResourcesResponse{}
 
 // ResourcesResponse struct for ResourcesResponse
 type ResourcesResponse struct {
-	// Идентификатор запроса
+	// ID запроса
 	ResponseId *string `json:"response_id,omitempty"`
 	Resources Resources `json:"resources"`
 }

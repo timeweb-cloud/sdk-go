@@ -20,13 +20,13 @@ var _ MappedNullable = &FirewallRuleInAPI{}
 
 // FirewallRuleInAPI struct for FirewallRuleInAPI
 type FirewallRuleInAPI struct {
-	// Описание правила
+	// Описание правила.
 	Description *string `json:"description,omitempty"`
 	Direction FirewallRuleDirection `json:"direction"`
-	// Порт или диапазон портов, в случае tcp или udp
+	// Порт или диапазон портов, в случае tcp или udp.
 	Port *string `json:"port,omitempty"`
 	Protocol FirewallRuleProtocol `json:"protocol"`
-	// Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv6
+	// Сетевой адрес или подсеть. Поддерживаются протоколы IPv4  и IPv.6
 	Cidr *string `json:"cidr,omitempty"`
 }
 

@@ -13,34 +13,33 @@ package openapi
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the ImageDownloadAPI type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ImageDownloadAPI{}
+// checks if the ImageDownload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ImageDownload{}
 
-// ImageDownloadAPI struct for ImageDownloadAPI
-type ImageDownloadAPI struct {
-	// ID ссылки
+// ImageDownload struct for ImageDownload
+type ImageDownload struct {
+	// ID ссылки.
 	Id string `json:"id"`
-	// Дата и время создания ссылки
-	CreatedAt time.Time `json:"created_at"`
-	// ID образа
+	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана ссылка.
+	CreatedAt string `json:"created_at"`
+	// ID образа.
 	Image string `json:"image"`
 	Type URLType `json:"type"`
-	// Ссылка на скачивание
+	// Ссылка на скачивание.
 	Url *string `json:"url,omitempty"`
 	Status UrlStatus `json:"status"`
-	// Прогресс загрузки образа
+	// Прогресс загрузки образа.
 	Progress int32 `json:"progress"`
 }
 
-// NewImageDownloadAPI instantiates a new ImageDownloadAPI object
+// NewImageDownload instantiates a new ImageDownload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDownloadAPI(id string, createdAt time.Time, image string, type_ URLType, status UrlStatus, progress int32) *ImageDownloadAPI {
-	this := ImageDownloadAPI{}
+func NewImageDownload(id string, createdAt string, image string, type_ URLType, status UrlStatus, progress int32) *ImageDownload {
+	this := ImageDownload{}
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.Image = image
@@ -50,16 +49,16 @@ func NewImageDownloadAPI(id string, createdAt time.Time, image string, type_ URL
 	return &this
 }
 
-// NewImageDownloadAPIWithDefaults instantiates a new ImageDownloadAPI object
+// NewImageDownloadWithDefaults instantiates a new ImageDownload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewImageDownloadAPIWithDefaults() *ImageDownloadAPI {
-	this := ImageDownloadAPI{}
+func NewImageDownloadWithDefaults() *ImageDownload {
+	this := ImageDownload{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *ImageDownloadAPI) GetId() string {
+func (o *ImageDownload) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -70,7 +69,7 @@ func (o *ImageDownloadAPI) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadAPI) GetIdOk() (*string, bool) {
+func (o *ImageDownload) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -78,14 +77,14 @@ func (o *ImageDownloadAPI) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *ImageDownloadAPI) SetId(v string) {
+func (o *ImageDownload) SetId(v string) {
 	o.Id = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *ImageDownloadAPI) GetCreatedAt() time.Time {
+func (o *ImageDownload) GetCreatedAt() string {
 	if o == nil {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 
@@ -94,7 +93,7 @@ func (o *ImageDownloadAPI) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadAPI) GetCreatedAtOk() (*time.Time, bool) {
+func (o *ImageDownload) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,12 +101,12 @@ func (o *ImageDownloadAPI) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *ImageDownloadAPI) SetCreatedAt(v time.Time) {
+func (o *ImageDownload) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetImage returns the Image field value
-func (o *ImageDownloadAPI) GetImage() string {
+func (o *ImageDownload) GetImage() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -118,7 +117,7 @@ func (o *ImageDownloadAPI) GetImage() string {
 
 // GetImageOk returns a tuple with the Image field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadAPI) GetImageOk() (*string, bool) {
+func (o *ImageDownload) GetImageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,12 +125,12 @@ func (o *ImageDownloadAPI) GetImageOk() (*string, bool) {
 }
 
 // SetImage sets field value
-func (o *ImageDownloadAPI) SetImage(v string) {
+func (o *ImageDownload) SetImage(v string) {
 	o.Image = v
 }
 
 // GetType returns the Type field value
-func (o *ImageDownloadAPI) GetType() URLType {
+func (o *ImageDownload) GetType() URLType {
 	if o == nil {
 		var ret URLType
 		return ret
@@ -142,7 +141,7 @@ func (o *ImageDownloadAPI) GetType() URLType {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadAPI) GetTypeOk() (*URLType, bool) {
+func (o *ImageDownload) GetTypeOk() (*URLType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -150,12 +149,12 @@ func (o *ImageDownloadAPI) GetTypeOk() (*URLType, bool) {
 }
 
 // SetType sets field value
-func (o *ImageDownloadAPI) SetType(v URLType) {
+func (o *ImageDownload) SetType(v URLType) {
 	o.Type = v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
-func (o *ImageDownloadAPI) GetUrl() string {
+func (o *ImageDownload) GetUrl() string {
 	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
@@ -165,7 +164,7 @@ func (o *ImageDownloadAPI) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadAPI) GetUrlOk() (*string, bool) {
+func (o *ImageDownload) GetUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
@@ -173,7 +172,7 @@ func (o *ImageDownloadAPI) GetUrlOk() (*string, bool) {
 }
 
 // HasUrl returns a boolean if a field has been set.
-func (o *ImageDownloadAPI) HasUrl() bool {
+func (o *ImageDownload) HasUrl() bool {
 	if o != nil && !IsNil(o.Url) {
 		return true
 	}
@@ -182,12 +181,12 @@ func (o *ImageDownloadAPI) HasUrl() bool {
 }
 
 // SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *ImageDownloadAPI) SetUrl(v string) {
+func (o *ImageDownload) SetUrl(v string) {
 	o.Url = &v
 }
 
 // GetStatus returns the Status field value
-func (o *ImageDownloadAPI) GetStatus() UrlStatus {
+func (o *ImageDownload) GetStatus() UrlStatus {
 	if o == nil {
 		var ret UrlStatus
 		return ret
@@ -198,7 +197,7 @@ func (o *ImageDownloadAPI) GetStatus() UrlStatus {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadAPI) GetStatusOk() (*UrlStatus, bool) {
+func (o *ImageDownload) GetStatusOk() (*UrlStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -206,12 +205,12 @@ func (o *ImageDownloadAPI) GetStatusOk() (*UrlStatus, bool) {
 }
 
 // SetStatus sets field value
-func (o *ImageDownloadAPI) SetStatus(v UrlStatus) {
+func (o *ImageDownload) SetStatus(v UrlStatus) {
 	o.Status = v
 }
 
 // GetProgress returns the Progress field value
-func (o *ImageDownloadAPI) GetProgress() int32 {
+func (o *ImageDownload) GetProgress() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -222,7 +221,7 @@ func (o *ImageDownloadAPI) GetProgress() int32 {
 
 // GetProgressOk returns a tuple with the Progress field value
 // and a boolean to check if the value has been set.
-func (o *ImageDownloadAPI) GetProgressOk() (*int32, bool) {
+func (o *ImageDownload) GetProgressOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -230,11 +229,11 @@ func (o *ImageDownloadAPI) GetProgressOk() (*int32, bool) {
 }
 
 // SetProgress sets field value
-func (o *ImageDownloadAPI) SetProgress(v int32) {
+func (o *ImageDownload) SetProgress(v int32) {
 	o.Progress = v
 }
 
-func (o ImageDownloadAPI) MarshalJSON() ([]byte, error) {
+func (o ImageDownload) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -242,7 +241,7 @@ func (o ImageDownloadAPI) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ImageDownloadAPI) ToMap() (map[string]interface{}, error) {
+func (o ImageDownload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["created_at"] = o.CreatedAt
@@ -256,38 +255,38 @@ func (o ImageDownloadAPI) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableImageDownloadAPI struct {
-	value *ImageDownloadAPI
+type NullableImageDownload struct {
+	value *ImageDownload
 	isSet bool
 }
 
-func (v NullableImageDownloadAPI) Get() *ImageDownloadAPI {
+func (v NullableImageDownload) Get() *ImageDownload {
 	return v.value
 }
 
-func (v *NullableImageDownloadAPI) Set(val *ImageDownloadAPI) {
+func (v *NullableImageDownload) Set(val *ImageDownload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableImageDownloadAPI) IsSet() bool {
+func (v NullableImageDownload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableImageDownloadAPI) Unset() {
+func (v *NullableImageDownload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableImageDownloadAPI(val *ImageDownloadAPI) *NullableImageDownloadAPI {
-	return &NullableImageDownloadAPI{value: val, isSet: true}
+func NewNullableImageDownload(val *ImageDownload) *NullableImageDownload {
+	return &NullableImageDownload{value: val, isSet: true}
 }
 
-func (v NullableImageDownloadAPI) MarshalJSON() ([]byte, error) {
+func (v NullableImageDownload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableImageDownloadAPI) UnmarshalJSON(src []byte) error {
+func (v *NullableImageDownload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

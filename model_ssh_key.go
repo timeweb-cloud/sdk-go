@@ -21,17 +21,17 @@ var _ MappedNullable = &SshKey{}
 
 // SshKey struct for SshKey
 type SshKey struct {
-	// ID SSH-ключа
+	// ID SSH-ключа.
 	Id float32 `json:"id"`
-	// Название SSH-ключа
+	// Название SSH-ключа.
 	Name string `json:"name"`
-	// Тело SSH-ключа
+	// Тело SSH-ключа.
 	Body string `json:"body"`
-	// Дата создания ключа
+	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан SSH-ключ.
 	CreatedAt time.Time `json:"created_at"`
-	// Список серверов, которые используют SSH-ключ
+	// Список серверов, которые используют SSH-ключ.
 	UsedBy []SshKeyUsedByInner `json:"used_by"`
-	// Будет ли выбираться SSh-ключ по умолчанию при создании сервера
+	// Это логическое значение, которое показывает, будет ли выбираться SSH-ключ по умолчанию при создании сервера.
 	IsDefault *bool `json:"is_default,omitempty"`
 }
 

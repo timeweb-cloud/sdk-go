@@ -20,7 +20,7 @@ var _ MappedNullable = &AddClusterToProjectRequest{}
 
 // AddClusterToProjectRequest struct for AddClusterToProjectRequest
 type AddClusterToProjectRequest struct {
-	// Идентификатор добавляемого кластера.
+	// ID добавляемого кластера.
 	ResourceId float32 `json:"resource_id"`
 }
 

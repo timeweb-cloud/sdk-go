@@ -26,7 +26,7 @@ type CreateNetworkDrive struct {
 	Comment NullableString `json:"comment,omitempty"`
 	// Размер диска в Гб
 	Size float32 `json:"size"`
-	// Идентификатор сетевого диска.
+	// ID сетевого диска.
 	PresetId int32 `json:"preset_id"`
 }
 

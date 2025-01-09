@@ -20,7 +20,7 @@ var _ MappedNullable = &AddServerToProjectRequest{}
 
 // AddServerToProjectRequest struct for AddServerToProjectRequest
 type AddServerToProjectRequest struct {
-	// Идентификатор добавляемого сервера.
+	// ID добавляемого сервера.
 	ResourceId float32 `json:"resource_id"`
 }
 

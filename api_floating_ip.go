@@ -46,7 +46,7 @@ BindFloatingIp Привязать IP к сервису
 Чтобы привязать IP к сервису, отправьте POST-запрос на `/api/v1/floating-ips/{floating_ip_id}/bind`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param floatingIpId Идентификатор плавающего IP
+ @param floatingIpId ID плавающего IP
  @return ApiBindFloatingIpRequest
 */
 func (a *FloatingIPAPIService) BindFloatingIp(ctx context.Context, floatingIpId string) ApiBindFloatingIpRequest {
@@ -378,12 +378,12 @@ func (r ApiDeleteFloatingIPRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteFloatingIP Удаление плавающего IP по идентификатору
+DeleteFloatingIP Удаление плавающего IP по ID
 
 Чтобы удалить плавающий IP, отправьте DELETE-запрос на `/api/v1/floating-ips/{floating_ip_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param floatingIpId Идентификатор плавающего IP
+ @param floatingIpId ID плавающего IP
  @return ApiDeleteFloatingIPRequest
 */
 func (a *FloatingIPAPIService) DeleteFloatingIP(ctx context.Context, floatingIpId string) ApiDeleteFloatingIPRequest {
@@ -540,7 +540,7 @@ GetFloatingIp Получение плавающего IP
 Чтобы отобразить информацию об отдельном плавающем IP, отправьте запрос GET на `api/v1/floating-ips/{floating_ip_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param floatingIpId Идентификатор плавающего IP
+ @param floatingIpId ID плавающего IP
  @return ApiGetFloatingIpRequest
 */
 func (a *FloatingIPAPIService) GetFloatingIp(ctx context.Context, floatingIpId string) ApiGetFloatingIpRequest {
@@ -872,7 +872,7 @@ UnbindFloatingIp Отвязать IP от сервиса
 Чтобы отвязать IP от сервиса, отправьте POST-запрос на `/api/v1/floating-ips/{floating_ip_id}/unbind`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param floatingIpId Идентификатор плавающего IP
+ @param floatingIpId ID плавающего IP
  @return ApiUnbindFloatingIpRequest
 */
 func (a *FloatingIPAPIService) UnbindFloatingIp(ctx context.Context, floatingIpId string) ApiUnbindFloatingIpRequest {
@@ -1030,12 +1030,12 @@ func (r ApiUpdateFloatingIPRequest) Execute() (*CreateFloatingIp201Response, *ht
 }
 
 /*
-UpdateFloatingIP Изменение плавающего IP по идентификатору
+UpdateFloatingIP Изменение плавающего IP по ID
 
 Чтобы изменить плавающий IP, отправьте PATCH-запрос на `/api/v1/floating-ips/{floating_ip_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param floatingIpId Идентификатор плавающего IP
+ @param floatingIpId ID плавающего IP
  @return ApiUpdateFloatingIPRequest
 */
 func (a *FloatingIPAPIService) UpdateFloatingIP(ctx context.Context, floatingIpId string) ApiUpdateFloatingIPRequest {

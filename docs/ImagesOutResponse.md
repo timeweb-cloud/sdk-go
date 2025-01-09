@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
 **Meta** | [**Meta**](Meta.md) |  | 
-**Images** | [**[]ImageOutAPI**](ImageOutAPI.md) | Массив объектов Образ | 
+**Images** | [**[]Image**](Image.md) |  | 
 
 ## Methods
 
 ### NewImagesOutResponse
 
-`func NewImagesOutResponse(meta Meta, images []ImageOutAPI, ) *ImagesOutResponse`
+`func NewImagesOutResponse(meta Meta, images []Image, ) *ImagesOutResponse`
 
 NewImagesOutResponse instantiates a new ImagesOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetMeta sets Meta field to given value.
 
 ### GetImages
 
-`func (o *ImagesOutResponse) GetImages() []ImageOutAPI`
+`func (o *ImagesOutResponse) GetImages() []Image`
 
 GetImages returns the Images field if non-nil, zero value otherwise.
 
 ### GetImagesOk
 
-`func (o *ImagesOutResponse) GetImagesOk() (*[]ImageOutAPI, bool)`
+`func (o *ImagesOutResponse) GetImagesOk() (*[]Image, bool)`
 
 GetImagesOk returns a tuple with the Images field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImages
 
-`func (o *ImagesOutResponse) SetImages(v []ImageOutAPI)`
+`func (o *ImagesOutResponse) SetImages(v []Image)`
 
 SetImages sets Images field to given value.
 

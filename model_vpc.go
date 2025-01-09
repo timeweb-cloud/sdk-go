@@ -32,22 +32,29 @@ type Vpc struct {
 	// Дата создания сети.
 	CreatedAt time.Time `json:"created_at"`
 	// Описание.
-	Description *string `json:"description,omitempty"`
+	Description string `json:"description"`
 	AvailabilityZone AvailabilityZone `json:"availability_zone"`
+	// Публичный IP-адрес сети.
+	PublicIp NullableString `json:"public_ip"`
+	// Тип сети.
+	Type string `json:"type"`
 }
 
 // NewVpc instantiates a new Vpc object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, availabilityZone AvailabilityZone) *Vpc {
+func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, description string, availabilityZone AvailabilityZone, publicIp NullableString, type_ string) *Vpc {
 	this := Vpc{}
 	this.Id = id
 	this.Name = name
 	this.SubnetV4 = subnetV4
 	this.Location = location
 	this.CreatedAt = createdAt
+	this.Description = description
 	this.AvailabilityZone = availabilityZone
+	this.PublicIp = publicIp
+	this.Type = type_
 	return &this
 }
 
@@ -179,36 +186,28 @@ func (o *Vpc) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *Vpc) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *Vpc) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *Vpc) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *Vpc) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
 // GetAvailabilityZone returns the AvailabilityZone field value
@@ -235,6 +234,56 @@ func (o *Vpc) SetAvailabilityZone(v AvailabilityZone) {
 	o.AvailabilityZone = v
 }
 
+// GetPublicIp returns the PublicIp field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Vpc) GetPublicIp() string {
+	if o == nil || o.PublicIp.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PublicIp.Get()
+}
+
+// GetPublicIpOk returns a tuple with the PublicIp field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Vpc) GetPublicIpOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PublicIp.Get(), o.PublicIp.IsSet()
+}
+
+// SetPublicIp sets field value
+func (o *Vpc) SetPublicIp(v string) {
+	o.PublicIp.Set(&v)
+}
+
+// GetType returns the Type field value
+func (o *Vpc) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *Vpc) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *Vpc) SetType(v string) {
+	o.Type = v
+}
+
 func (o Vpc) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -250,10 +299,10 @@ func (o Vpc) ToMap() (map[string]interface{}, error) {
 	toSerialize["subnet_v4"] = o.SubnetV4
 	toSerialize["location"] = o.Location
 	toSerialize["created_at"] = o.CreatedAt
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
+	toSerialize["description"] = o.Description
 	toSerialize["availability_zone"] = o.AvailabilityZone
+	toSerialize["public_ip"] = o.PublicIp.Get()
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 

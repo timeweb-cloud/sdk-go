@@ -41,7 +41,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
     addIPsToBalancerRequest := *openapiclient.NewAddIPsToBalancerRequest([]string{"192.168.0.0"}) // AddIPsToBalancerRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -60,7 +60,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -177,7 +177,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
     createRule := *openapiclient.NewCreateRule("https", float32(80), "https", float32(80)) // CreateRule | 
 
     configuration := openapiclient.NewConfiguration()
@@ -198,7 +198,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -249,7 +249,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
     hash := "15095f25-aac3-4d60-a788-96cb5136f186" // string | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. (optional)
     code := "0000" // string | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true` (optional)
 
@@ -271,7 +271,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -323,8 +323,8 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
-    ruleId := int32(56) // int32 | Идентификатор правила для балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
+    ruleId := int32(56) // int32 | ID правила для балансировщика
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -342,8 +342,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
-**ruleId** | **int32** | Идентификатор правила для балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
+**ruleId** | **int32** | ID правила для балансировщика | 
 
 ### Other Parameters
 
@@ -394,7 +394,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
     addIPsToBalancerRequest := *openapiclient.NewAddIPsToBalancerRequest([]string{"192.168.0.0"}) // AddIPsToBalancerRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -413,7 +413,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -464,7 +464,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -484,7 +484,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -534,7 +534,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -554,7 +554,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -604,7 +604,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -624,7 +624,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -803,7 +803,7 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
     updateBalancer := *openapiclient.NewUpdateBalancer() // UpdateBalancer | 
 
     configuration := openapiclient.NewConfiguration()
@@ -824,7 +824,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
 
 ### Other Parameters
 
@@ -875,8 +875,8 @@ import (
 )
 
 func main() {
-    balancerId := int32(56) // int32 | Идентификатор балансировщика
-    ruleId := int32(56) // int32 | Идентификатор правила для балансировщика
+    balancerId := int32(56) // int32 | ID балансировщика
+    ruleId := int32(56) // int32 | ID правила для балансировщика
     updateRule := *openapiclient.NewUpdateRule("https", float32(80), "https", float32(80)) // UpdateRule | 
 
     configuration := openapiclient.NewConfiguration()
@@ -897,8 +897,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**balancerId** | **int32** | Идентификатор балансировщика | 
-**ruleId** | **int32** | Идентификатор правила для балансировщика | 
+**balancerId** | **int32** | ID балансировщика | 
+**ruleId** | **int32** | ID правила для балансировщика | 
 
 ### Other Parameters
 

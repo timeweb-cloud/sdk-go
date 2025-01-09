@@ -9,14 +9,16 @@ Name | Type | Description | Notes
 **SubnetV4** | **string** | Маска подсети. | 
 **Location** | **string** | Локация сети. | 
 **CreatedAt** | **time.Time** | Дата создания сети. | 
-**Description** | Pointer to **string** | Описание. | [optional] 
+**Description** | **string** | Описание. | 
 **AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
+**PublicIp** | **NullableString** | Публичный IP-адрес сети. | 
+**Type** | **string** | Тип сети. | 
 
 ## Methods
 
 ### NewVpc
 
-`func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, availabilityZone AvailabilityZone, ) *Vpc`
+`func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, description string, availabilityZone AvailabilityZone, publicIp NullableString, type_ string, ) *Vpc`
 
 NewVpc instantiates a new Vpc object
 This constructor will assign default values to properties that have it defined,
@@ -150,11 +152,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *Vpc) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### GetAvailabilityZone
 
@@ -174,6 +171,56 @@ and a boolean to check if the value has been set.
 `func (o *Vpc) SetAvailabilityZone(v AvailabilityZone)`
 
 SetAvailabilityZone sets AvailabilityZone field to given value.
+
+
+### GetPublicIp
+
+`func (o *Vpc) GetPublicIp() string`
+
+GetPublicIp returns the PublicIp field if non-nil, zero value otherwise.
+
+### GetPublicIpOk
+
+`func (o *Vpc) GetPublicIpOk() (*string, bool)`
+
+GetPublicIpOk returns a tuple with the PublicIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPublicIp
+
+`func (o *Vpc) SetPublicIp(v string)`
+
+SetPublicIp sets PublicIp field to given value.
+
+
+### SetPublicIpNil
+
+`func (o *Vpc) SetPublicIpNil(b bool)`
+
+ SetPublicIpNil sets the value for PublicIp to be an explicit nil
+
+### UnsetPublicIp
+`func (o *Vpc) UnsetPublicIp()`
+
+UnsetPublicIp ensures that no value is present for PublicIp, not even an explicit nil
+### GetType
+
+`func (o *Vpc) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Vpc) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Vpc) SetType(v string)`
+
+SetType sets Type field to given value.
 
 
 

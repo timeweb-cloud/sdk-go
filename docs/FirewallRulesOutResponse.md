@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
 **Meta** | [**Meta**](Meta.md) |  | 
-**Rules** | [**[]FirewallRuleOutAPI**](FirewallRuleOutAPI.md) | Массив объектов Firewall правил | 
+**Rules** | [**[]FirewallRule**](FirewallRule.md) |  | 
 
 ## Methods
 
 ### NewFirewallRulesOutResponse
 
-`func NewFirewallRulesOutResponse(meta Meta, rules []FirewallRuleOutAPI, ) *FirewallRulesOutResponse`
+`func NewFirewallRulesOutResponse(meta Meta, rules []FirewallRule, ) *FirewallRulesOutResponse`
 
 NewFirewallRulesOutResponse instantiates a new FirewallRulesOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetMeta sets Meta field to given value.
 
 ### GetRules
 
-`func (o *FirewallRulesOutResponse) GetRules() []FirewallRuleOutAPI`
+`func (o *FirewallRulesOutResponse) GetRules() []FirewallRule`
 
 GetRules returns the Rules field if non-nil, zero value otherwise.
 
 ### GetRulesOk
 
-`func (o *FirewallRulesOutResponse) GetRulesOk() (*[]FirewallRuleOutAPI, bool)`
+`func (o *FirewallRulesOutResponse) GetRulesOk() (*[]FirewallRule, bool)`
 
 GetRulesOk returns a tuple with the Rules field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRules
 
-`func (o *FirewallRulesOutResponse) SetRules(v []FirewallRuleOutAPI)`
+`func (o *FirewallRulesOutResponse) SetRules(v []FirewallRule)`
 
 SetRules sets Rules field to given value.
 

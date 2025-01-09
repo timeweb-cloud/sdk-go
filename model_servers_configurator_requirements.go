@@ -44,13 +44,19 @@ type ServersConfiguratorRequirements struct {
 	NetworkBandwidthStep float32 `json:"network_bandwidth_step"`
 	// Максимальная пропускная способноть интернет-канала (в Мб)
 	NetworkBandwidthMax float32 `json:"network_bandwidth_max"`
+	// Минимальное количество видеокарт
+	GpuMin NullableFloat32 `json:"gpu_min"`
+	// Максимальное количество видеокарт
+	GpuMax NullableFloat32 `json:"gpu_max"`
+	// Размер шага видеокарт
+	GpuStep NullableFloat32 `json:"gpu_step"`
 }
 
 // NewServersConfiguratorRequirements instantiates a new ServersConfiguratorRequirements object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServersConfiguratorRequirements(cpuMin float32, cpuStep float32, cpuMax float32, ramMin float32, ramStep float32, ramMax float32, diskMin float32, diskStep float32, diskMax float32, networkBandwidthMin float32, networkBandwidthStep float32, networkBandwidthMax float32) *ServersConfiguratorRequirements {
+func NewServersConfiguratorRequirements(cpuMin float32, cpuStep float32, cpuMax float32, ramMin float32, ramStep float32, ramMax float32, diskMin float32, diskStep float32, diskMax float32, networkBandwidthMin float32, networkBandwidthStep float32, networkBandwidthMax float32, gpuMin NullableFloat32, gpuMax NullableFloat32, gpuStep NullableFloat32) *ServersConfiguratorRequirements {
 	this := ServersConfiguratorRequirements{}
 	this.CpuMin = cpuMin
 	this.CpuStep = cpuStep
@@ -64,6 +70,9 @@ func NewServersConfiguratorRequirements(cpuMin float32, cpuStep float32, cpuMax 
 	this.NetworkBandwidthMin = networkBandwidthMin
 	this.NetworkBandwidthStep = networkBandwidthStep
 	this.NetworkBandwidthMax = networkBandwidthMax
+	this.GpuMin = gpuMin
+	this.GpuMax = gpuMax
+	this.GpuStep = gpuStep
 	return &this
 }
 
@@ -363,6 +372,84 @@ func (o *ServersConfiguratorRequirements) SetNetworkBandwidthMax(v float32) {
 	o.NetworkBandwidthMax = v
 }
 
+// GetGpuMin returns the GpuMin field value
+// If the value is explicit nil, the zero value for float32 will be returned
+func (o *ServersConfiguratorRequirements) GetGpuMin() float32 {
+	if o == nil || o.GpuMin.Get() == nil {
+		var ret float32
+		return ret
+	}
+
+	return *o.GpuMin.Get()
+}
+
+// GetGpuMinOk returns a tuple with the GpuMin field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServersConfiguratorRequirements) GetGpuMinOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpuMin.Get(), o.GpuMin.IsSet()
+}
+
+// SetGpuMin sets field value
+func (o *ServersConfiguratorRequirements) SetGpuMin(v float32) {
+	o.GpuMin.Set(&v)
+}
+
+// GetGpuMax returns the GpuMax field value
+// If the value is explicit nil, the zero value for float32 will be returned
+func (o *ServersConfiguratorRequirements) GetGpuMax() float32 {
+	if o == nil || o.GpuMax.Get() == nil {
+		var ret float32
+		return ret
+	}
+
+	return *o.GpuMax.Get()
+}
+
+// GetGpuMaxOk returns a tuple with the GpuMax field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServersConfiguratorRequirements) GetGpuMaxOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpuMax.Get(), o.GpuMax.IsSet()
+}
+
+// SetGpuMax sets field value
+func (o *ServersConfiguratorRequirements) SetGpuMax(v float32) {
+	o.GpuMax.Set(&v)
+}
+
+// GetGpuStep returns the GpuStep field value
+// If the value is explicit nil, the zero value for float32 will be returned
+func (o *ServersConfiguratorRequirements) GetGpuStep() float32 {
+	if o == nil || o.GpuStep.Get() == nil {
+		var ret float32
+		return ret
+	}
+
+	return *o.GpuStep.Get()
+}
+
+// GetGpuStepOk returns a tuple with the GpuStep field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServersConfiguratorRequirements) GetGpuStepOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpuStep.Get(), o.GpuStep.IsSet()
+}
+
+// SetGpuStep sets field value
+func (o *ServersConfiguratorRequirements) SetGpuStep(v float32) {
+	o.GpuStep.Set(&v)
+}
+
 func (o ServersConfiguratorRequirements) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -385,6 +472,9 @@ func (o ServersConfiguratorRequirements) ToMap() (map[string]interface{}, error)
 	toSerialize["network_bandwidth_min"] = o.NetworkBandwidthMin
 	toSerialize["network_bandwidth_step"] = o.NetworkBandwidthStep
 	toSerialize["network_bandwidth_max"] = o.NetworkBandwidthMax
+	toSerialize["gpu_min"] = o.GpuMin.Get()
+	toSerialize["gpu_max"] = o.GpuMax.Get()
+	toSerialize["gpu_step"] = o.GpuStep.Get()
 	return toSerialize, nil
 }
 

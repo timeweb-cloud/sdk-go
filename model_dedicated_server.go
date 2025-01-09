@@ -69,13 +69,15 @@ type DedicatedServer struct {
 	Location string `json:"location"`
 	// Количество готовых к автоматической выдаче серверов. Если значение равно 0, сервер будет установлен через инженеров.
 	AutoinstallReady float32 `json:"autoinstall_ready"`
+	// Пароль root сервера или пароль Администратора для серверов Windows.
+	Password NullableString `json:"password"`
 }
 
 // NewDedicatedServer instantiates a new DedicatedServer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32) *DedicatedServer {
+func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32, password NullableString) *DedicatedServer {
 	this := DedicatedServer{}
 	this.Id = id
 	this.CpuDescription = cpuDescription
@@ -101,6 +103,7 @@ func NewDedicatedServer(id float32, cpuDescription string, hddDescription string
 	this.Price = price
 	this.Location = location
 	this.AutoinstallReady = autoinstallReady
+	this.Password = password
 	return &this
 }
 
@@ -714,6 +717,32 @@ func (o *DedicatedServer) SetAutoinstallReady(v float32) {
 	o.AutoinstallReady = v
 }
 
+// GetPassword returns the Password field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DedicatedServer) GetPassword() string {
+	if o == nil || o.Password.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.Password.Get()
+}
+
+// GetPasswordOk returns a tuple with the Password field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DedicatedServer) GetPasswordOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Password.Get(), o.Password.IsSet()
+}
+
+// SetPassword sets field value
+func (o *DedicatedServer) SetPassword(v string) {
+	o.Password.Set(&v)
+}
+
 func (o DedicatedServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -752,6 +781,7 @@ func (o DedicatedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize["price"] = o.Price
 	toSerialize["location"] = o.Location
 	toSerialize["autoinstall_ready"] = o.AutoinstallReady
+	toSerialize["password"] = o.Password.Get()
 	return toSerialize, nil
 }
 

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Body** | Pointer to **string** | Тело SSH-ключа | [optional] 
-**IsDefault** | Pointer to **bool** | Будет ли выбираться SSH-ключ по умолчанию при создании сервера | [optional] 
-**Name** | Pointer to **string** | Название SSH-ключа | [optional] 
+**Body** | Pointer to **string** | Тело SSH-ключа. | [optional] 
+**IsDefault** | Pointer to **bool** | Будет ли выбираться SSH-ключ по умолчанию при создании сервера. | [optional] 
+**Name** | Pointer to **string** | Название SSH-ключа. | [optional] 
 
 ## Methods
 

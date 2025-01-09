@@ -28,12 +28,13 @@ Name | Type | Description | Notes
 **Price** | **float32** | Стоимость выделенного сервера. | 
 **Location** | **string** | Локация сервера. | 
 **AutoinstallReady** | **float32** | Количество готовых к автоматической выдаче серверов. Если значение равно 0, сервер будет установлен через инженеров. | 
+**Password** | **NullableString** | Пароль root сервера или пароль Администратора для серверов Windows. | 
 
 ## Methods
 
 ### NewDedicatedServer
 
-`func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32, ) *DedicatedServer`
+`func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32, password NullableString, ) *DedicatedServer`
 
 NewDedicatedServer instantiates a new DedicatedServer object
 This constructor will assign default values to properties that have it defined,
@@ -658,6 +659,36 @@ and a boolean to check if the value has been set.
 SetAutoinstallReady sets AutoinstallReady field to given value.
 
 
+### GetPassword
+
+`func (o *DedicatedServer) GetPassword() string`
+
+GetPassword returns the Password field if non-nil, zero value otherwise.
+
+### GetPasswordOk
+
+`func (o *DedicatedServer) GetPasswordOk() (*string, bool)`
+
+GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPassword
+
+`func (o *DedicatedServer) SetPassword(v string)`
+
+SetPassword sets Password field to given value.
+
+
+### SetPasswordNil
+
+`func (o *DedicatedServer) SetPasswordNil(b bool)`
+
+ SetPasswordNil sets the value for Password to be an explicit nil
+
+### UnsetPassword
+`func (o *DedicatedServer) UnsetPassword()`
+
+UnsetPassword ensures that no value is present for Password, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

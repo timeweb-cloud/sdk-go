@@ -20,9 +20,9 @@ var _ MappedNullable = &K8SVersionsResponse{}
 
 // K8SVersionsResponse struct for K8SVersionsResponse
 type K8SVersionsResponse struct {
-	// Идентификатор запроса
+	// ID запроса
 	ResponseId *string `json:"response_id,omitempty"`
-	Meta Meta `json:"meta"`
+	Meta SchemasMeta `json:"meta"`
 	// Массив версий k8s
 	K8sVersions []string `json:"k8s_versions"`
 }
@@ -31,7 +31,7 @@ type K8SVersionsResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewK8SVersionsResponse(meta Meta, k8sVersions []string) *K8SVersionsResponse {
+func NewK8SVersionsResponse(meta SchemasMeta, k8sVersions []string) *K8SVersionsResponse {
 	this := K8SVersionsResponse{}
 	this.Meta = meta
 	this.K8sVersions = k8sVersions
@@ -79,9 +79,9 @@ func (o *K8SVersionsResponse) SetResponseId(v string) {
 }
 
 // GetMeta returns the Meta field value
-func (o *K8SVersionsResponse) GetMeta() Meta {
+func (o *K8SVersionsResponse) GetMeta() SchemasMeta {
 	if o == nil {
-		var ret Meta
+		var ret SchemasMeta
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *K8SVersionsResponse) GetMeta() Meta {
 
 // GetMetaOk returns a tuple with the Meta field value
 // and a boolean to check if the value has been set.
-func (o *K8SVersionsResponse) GetMetaOk() (*Meta, bool) {
+func (o *K8SVersionsResponse) GetMetaOk() (*SchemasMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *K8SVersionsResponse) GetMetaOk() (*Meta, bool) {
 }
 
 // SetMeta sets field value
-func (o *K8SVersionsResponse) SetMeta(v Meta) {
+func (o *K8SVersionsResponse) SetMeta(v SchemasMeta) {
 	o.Meta = v
 }
 

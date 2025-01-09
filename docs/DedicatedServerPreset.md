@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | **float32** | ID тарифа выделенного сервера. | 
 **Description** | **string** | Описание характеристик тарифа выделенного сервера. | 
 **IsIpmiEnabled** | **bool** | Это логическое значение, которое показывает, доступен ли IPMI у данного тарифа. | 
+**IsPreInstalled** | **bool** | Это логическое значение, которое показывает, готов ли выделенный сервер к моментальной выдаче. | 
 **Cpu** | [**DedicatedServerPresetCpu**](DedicatedServerPresetCpu.md) |  | 
 **Disk** | [**DedicatedServerPresetDisk**](DedicatedServerPresetDisk.md) |  | 
 **Price** | Pointer to **float32** | Стоимость тарифа выделенного сервера | [optional] 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewDedicatedServerPreset
 
-`func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, memory DedicatedServerPresetMemory, location string, ) *DedicatedServerPreset`
+`func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, isPreInstalled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, memory DedicatedServerPresetMemory, location string, ) *DedicatedServerPreset`
 
 NewDedicatedServerPreset instantiates a new DedicatedServerPreset object
 This constructor will assign default values to properties that have it defined,
@@ -90,6 +91,26 @@ and a boolean to check if the value has been set.
 `func (o *DedicatedServerPreset) SetIsIpmiEnabled(v bool)`
 
 SetIsIpmiEnabled sets IsIpmiEnabled field to given value.
+
+
+### GetIsPreInstalled
+
+`func (o *DedicatedServerPreset) GetIsPreInstalled() bool`
+
+GetIsPreInstalled returns the IsPreInstalled field if non-nil, zero value otherwise.
+
+### GetIsPreInstalledOk
+
+`func (o *DedicatedServerPreset) GetIsPreInstalledOk() (*bool, bool)`
+
+GetIsPreInstalledOk returns a tuple with the IsPreInstalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPreInstalled
+
+`func (o *DedicatedServerPreset) SetIsPreInstalled(v bool)`
+
+SetIsPreInstalled sets IsPreInstalled field to given value.
 
 
 ### GetCpu

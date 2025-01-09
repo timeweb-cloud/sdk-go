@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SshKeyIds** | **[]float32** | Массив уникальных идентификаторов SSH-ключей | 
+**SshKeyIds** | **[]float32** | Массив ID SSH-ключей | 
 
 ## Methods
 

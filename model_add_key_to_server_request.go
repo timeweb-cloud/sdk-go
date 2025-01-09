@@ -20,7 +20,7 @@ var _ MappedNullable = &AddKeyToServerRequest{}
 
 // AddKeyToServerRequest struct for AddKeyToServerRequest
 type AddKeyToServerRequest struct {
-	// Массив уникальных идентификаторов SSH-ключей
+	// Массив ID SSH-ключей
 	SshKeyIds []float32 `json:"ssh_key_ids"`
 }
 

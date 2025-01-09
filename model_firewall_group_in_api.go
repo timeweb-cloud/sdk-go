@@ -20,9 +20,9 @@ var _ MappedNullable = &FirewallGroupInAPI{}
 
 // FirewallGroupInAPI struct for FirewallGroupInAPI
 type FirewallGroupInAPI struct {
-	// Имя группы правил
+	// Имя группы правил.
 	Name string `json:"name"`
-	// Описание группы правил
+	// Описание группы правил.
 	Description *string `json:"description,omitempty"`
 }
 

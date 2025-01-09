@@ -47,7 +47,7 @@ AddResourceToGroup Линковка ресурса в firewall group
 Чтобы слинковать ресурс с группой правил, отправьте POST запрос на `/api/v1/firewall/groups/{group_id}/resources/{resource_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @param resourceId ID ресурса
  @return ApiAddResourceToGroupRequest
 */
@@ -195,7 +195,7 @@ func (r ApiCreateGroupRequest) FirewallGroupInAPI(firewallGroupInAPI FirewallGro
 	return r
 }
 
-// Тип группы правил
+// Тип группы правил.
 func (r ApiCreateGroupRequest) Policy(policy string) ApiCreateGroupRequest {
 	r.policy = &policy
 	return r
@@ -368,7 +368,7 @@ CreateGroupRule Создание firewall правила
 Чтобы создать правило в группе, отправьте POST запрос на `/api/v1/firewall/groups/{group_id}/rules`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @return ApiCreateGroupRuleRequest
 */
 func (a *FirewallAPIService) CreateGroupRule(ctx context.Context, groupId string) ApiCreateGroupRuleRequest {
@@ -519,7 +519,7 @@ DeleteGroup Удаление группы правил
 Чтобы удалить группу правил, отправьте DELETE запрос на `/api/v1/firewall/groups/{group_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @return ApiDeleteGroupRequest
 */
 func (a *FirewallAPIService) DeleteGroup(ctx context.Context, groupId string) ApiDeleteGroupRequest {
@@ -666,7 +666,7 @@ DeleteGroupRule Удаление firewall правила
 Чтобы удалить правило, отправьте DELETE запрос на `/api/v1/firewall/groups/{group_id}/rules/{rule_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @param ruleId ID правила
  @return ApiDeleteGroupRuleRequest
 */
@@ -822,7 +822,7 @@ DeleteResourceFromGroup Отлинковка ресурса из firewall group
 Чтобы отлинковать ресурс от группы правил, отправьте DELETE запрос на `/api/v1/firewall/groups/{group_id}/resources/{resource_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @param resourceId ID ресурса
  @return ApiDeleteResourceFromGroupRequest
 */
@@ -974,7 +974,7 @@ GetGroup Получение информации о группе правил
 Чтобы получить информацию о группе правил, отправьте GET запрос на `/api/v1/firewall/groups/{group_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @return ApiGetGroupRequest
 */
 func (a *FirewallAPIService) GetGroup(ctx context.Context, groupId string) ApiGetGroupRequest {
@@ -1145,7 +1145,7 @@ GetGroupResources Получение слинкованных ресурсов
 Чтобы получить слинкованных ресурсов для группы правил, отправьте GET запрос на `/api/v1/firewall/groups/{group_id}/resources`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @return ApiGetGroupResourcesRequest
 */
 func (a *FirewallAPIService) GetGroupResources(ctx context.Context, groupId string) ApiGetGroupResourcesRequest {
@@ -1298,8 +1298,8 @@ GetGroupRule Получение информации о правиле
 Чтобы получить инфомрацию о правиле, отправьте GET запрос на `/api/v1/firewall/groups/{group_id}/rules/{rule_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param ruleId ID правила
- @param groupId ID группы правил
+ @param ruleId ID правила.
+ @param groupId ID группы правил.
  @return ApiGetGroupRuleRequest
 */
 func (a *FirewallAPIService) GetGroupRule(ctx context.Context, ruleId string, groupId string) ApiGetGroupRuleRequest {
@@ -1472,7 +1472,7 @@ GetGroupRules Получение списка правил
 Чтобы получить список правил в группе, отправьте GET запрос на `/api/v1/firewall/groups/{group_id}/rules`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @return ApiGetGroupRulesRequest
 */
 func (a *FirewallAPIService) GetGroupRules(ctx context.Context, groupId string) ApiGetGroupRulesRequest {
@@ -1801,7 +1801,7 @@ GetRulesForResource Получение групп правил для ресур
 Чтобы получить список групп правил, с которыми слинкован ресурс, отправьте GET запрос на `/api/v1/firewall/service/{resource_type}/{resource_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param resourceId Идентификатор ресурса
+ @param resourceId ID ресурса
  @param resourceType
  @return ApiGetRulesForResourceRequest
 */
@@ -1962,7 +1962,7 @@ UpdateGroup Обновление группы правил
 Чтобы изменить группу правил, отправьте PATCH запрос на `/api/v1/firewall/groups/{group_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @return ApiUpdateGroupRequest
 */
 func (a *FirewallAPIService) UpdateGroup(ctx context.Context, groupId string) ApiUpdateGroupRequest {
@@ -2131,7 +2131,7 @@ UpdateGroupRule Обновление firewall правила
 Чтобы изменить правило, отправьте PATCH запрос на `/api/v1/firewall/groups/{group_id}/rules/{rule_id}`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId ID группы правил
+ @param groupId ID группы правил.
  @param ruleId ID правила
  @return ApiUpdateGroupRuleRequest
 */

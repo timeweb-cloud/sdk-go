@@ -47,7 +47,7 @@ AddIPsToBalancer Добавление IP-адресов к балансиров�
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiAddIPsToBalancerRequest
 */
 func (a *BalancersAPIService) AddIPsToBalancer(ctx context.Context, balancerId int32) ApiAddIPsToBalancerRequest {
@@ -393,7 +393,7 @@ CreateBalancerRule Создание правила для балансировщ
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiCreateBalancerRuleRequest
 */
 func (a *BalancersAPIService) CreateBalancerRule(ctx context.Context, balancerId int32) ApiCreateBalancerRuleRequest {
@@ -581,7 +581,7 @@ DeleteBalancer Удаление балансировщика
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiDeleteBalancerRequest
 */
 func (a *BalancersAPIService) DeleteBalancer(ctx context.Context, balancerId int32) ApiDeleteBalancerRequest {
@@ -757,8 +757,8 @@ DeleteBalancerRule Удаление правила для балансировщ
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
- @param ruleId Идентификатор правила для балансировщика
+ @param balancerId ID балансировщика
+ @param ruleId ID правила для балансировщика
  @return ApiDeleteBalancerRuleRequest
 */
 func (a *BalancersAPIService) DeleteBalancerRule(ctx context.Context, balancerId int32, ruleId int32) ApiDeleteBalancerRuleRequest {
@@ -924,7 +924,7 @@ DeleteIPsFromBalancer Удаление IP-адресов из балансиро
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiDeleteIPsFromBalancerRequest
 */
 func (a *BalancersAPIService) DeleteIPsFromBalancer(ctx context.Context, balancerId int32) ApiDeleteIPsFromBalancerRequest {
@@ -1087,7 +1087,7 @@ GetBalancer Получение бaлансировщика
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiGetBalancerRequest
 */
 func (a *BalancersAPIService) GetBalancer(ctx context.Context, balancerId int32) ApiGetBalancerRequest {
@@ -1256,7 +1256,7 @@ GetBalancerIPs Получение списка IP-адресов баланси�
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiGetBalancerIPsRequest
 */
 func (a *BalancersAPIService) GetBalancerIPs(ctx context.Context, balancerId int32) ApiGetBalancerIPsRequest {
@@ -1425,7 +1425,7 @@ GetBalancerRules Получение правил балансировщика
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiGetBalancerRulesRequest
 */
 func (a *BalancersAPIService) GetBalancerRules(ctx context.Context, balancerId int32) ApiGetBalancerRulesRequest {
@@ -1952,7 +1952,7 @@ UpdateBalancer Обновление балансировщика
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
+ @param balancerId ID балансировщика
  @return ApiUpdateBalancerRequest
 */
 func (a *BalancersAPIService) UpdateBalancer(ctx context.Context, balancerId int32) ApiUpdateBalancerRequest {
@@ -2133,8 +2133,8 @@ UpdateBalancerRule Обновление правила для балансиро
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param balancerId Идентификатор балансировщика
- @param ruleId Идентификатор правила для балансировщика
+ @param balancerId ID балансировщика
+ @param ruleId ID правила для балансировщика
  @return ApiUpdateBalancerRuleRequest
 */
 func (a *BalancersAPIService) UpdateBalancerRule(ctx context.Context, balancerId int32, ruleId int32) ApiUpdateBalancerRuleRequest {

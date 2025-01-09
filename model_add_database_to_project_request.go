@@ -20,7 +20,7 @@ var _ MappedNullable = &AddDatabaseToProjectRequest{}
 
 // AddDatabaseToProjectRequest struct for AddDatabaseToProjectRequest
 type AddDatabaseToProjectRequest struct {
-	// Идентификатор добавляемой базы данных.
+	// ID добавляемой базы данных.
 	ResourceId float32 `json:"resource_id"`
 }
 

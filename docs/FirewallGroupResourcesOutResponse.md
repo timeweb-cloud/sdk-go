@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
+**ResponseId** | Pointer to **string** | ID запроса. | [optional] 
 **Meta** | [**Meta**](Meta.md) |  | 
-**Resources** | [**[]FirewallGroupResourceOutAPI**](FirewallGroupResourceOutAPI.md) |  | 
+**Resources** | [**[]FirewallGroupResource**](FirewallGroupResource.md) |  | 
 
 ## Methods
 
 ### NewFirewallGroupResourcesOutResponse
 
-`func NewFirewallGroupResourcesOutResponse(meta Meta, resources []FirewallGroupResourceOutAPI, ) *FirewallGroupResourcesOutResponse`
+`func NewFirewallGroupResourcesOutResponse(meta Meta, resources []FirewallGroupResource, ) *FirewallGroupResourcesOutResponse`
 
 NewFirewallGroupResourcesOutResponse instantiates a new FirewallGroupResourcesOutResponse object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetMeta sets Meta field to given value.
 
 ### GetResources
 
-`func (o *FirewallGroupResourcesOutResponse) GetResources() []FirewallGroupResourceOutAPI`
+`func (o *FirewallGroupResourcesOutResponse) GetResources() []FirewallGroupResource`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *FirewallGroupResourcesOutResponse) GetResourcesOk() (*[]FirewallGroupResourceOutAPI, bool)`
+`func (o *FirewallGroupResourcesOutResponse) GetResourcesOk() (*[]FirewallGroupResource, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *FirewallGroupResourcesOutResponse) SetResources(v []FirewallGroupResourceOutAPI)`
+`func (o *FirewallGroupResourcesOutResponse) SetResources(v []FirewallGroupResource)`
 
 SetResources sets Resources field to given value.
 
