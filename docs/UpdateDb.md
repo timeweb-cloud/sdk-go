@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Password** | Pointer to **string** | Пароль для подключения к базе данных. | [optional] 
 **Name** | Pointer to **string** | Название базы данных. | [optional] 
-**PresetId** | Pointer to **int32** | Идентификатор тарифа. | [optional] 
+**PresetId** | Pointer to **int32** | ID тарифа. | [optional] 
 **ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
 **IsExternalIp** | Pointer to **bool** | Использовать или нет внешний IP. | [optional] 
 

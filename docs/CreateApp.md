@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ProviderId** | **string** | Уникальный идентификатор провайдера. | 
+**ProviderId** | **string** | ID провайдера. | 
 **Type** | **string** | Тип приложения. | 
-**RepositoryId** | **string** | Уникальный идентификатор репозитория. | 
+**RepositoryId** | **string** | ID репозитория. | 
 **BuildCmd** | **string** | Команда сборки приложения. | 
 **Envs** | Pointer to **map[string]interface{}** | Переменные окружения приложения. Объект с ключами и значениями типа string. | [optional] 
 **BranchName** | **string** | Название ветки репозитория из которой необходимо собрать приложение. | 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **CommitSha** | **string** | Хэш коммита из которого необходимо собрать приложение. | 
 **Name** | **string** | Имя приложения. | 
 **Comment** | **string** | Комментарий к приложению. | 
-**PresetId** | **float32** | Идентификатор тарифа. | 
+**PresetId** | **float32** | ID тарифа. | 
 **EnvVersion** | Pointer to **string** | Версия окружения. | [optional] 
 **Framework** | [**Frameworks**](Frameworks.md) |  | 
 **IndexDir** | Pointer to **string** | Путь к директории с индексным файлом. Обязателен для приложений &#x60;type: frontend&#x60;. Не используется для приложений &#x60;type: backend&#x60;. Значение всегда должно начинаться с &#x60;/&#x60;. | [optional] 

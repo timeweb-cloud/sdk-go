@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Уникальный идентификатор сети. Есть только у приватных сетей. | [optional] 
+**Id** | Pointer to **string** | ID сети. Есть только у приватных сетей. | [optional] 
 **Type** | **string** | Тип сети. | 
 **NatMode** | Pointer to **string** | Тип преобразования сетевых адресов. | [optional] 
 **Bandwidth** | Pointer to **NullableFloat32** | Пропускная способность сети. | [optional] 

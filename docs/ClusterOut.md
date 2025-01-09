@@ -4,25 +4,26 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** | Уникальный идентификатор кластера | 
+**Id** | **int32** | ID кластера | 
 **Name** | **string** | Название | 
 **CreatedAt** | **time.Time** | Дата и время создания кластера в формате ISO8601 | 
 **Status** | **string** | Статус | 
 **Description** | **string** | Описание | 
-**Ha** | **bool** | Описание появится позже | 
 **K8sVersion** | **string** | Версия Kubernetes | 
 **NetworkDriver** | **string** | Используемый сетевой драйвер | 
 **Ingress** | **bool** | Логическое значение, показывающее, включен ли Ingress | 
-**PresetId** | **int32** | Идентификатор тарифа мастер-ноды | 
+**PresetId** | **int32** | ID тарифа мастер-ноды | 
 **Cpu** | Pointer to **int32** | Общее количество ядер | [optional] [default to 0]
 **Ram** | Pointer to **int32** | Общее количество памяти | [optional] [default to 0]
 **Disk** | Pointer to **int32** | Общее дисковое пространство | [optional] [default to 0]
+**AvailabilityZone** | Pointer to **string** | Зона доступности | [optional] 
+**ProjectId** | Pointer to **int32** | Идентификатор проекта | [optional] 
 
 ## Methods
 
 ### NewClusterOut
 
-`func NewClusterOut(id int32, name string, createdAt time.Time, status string, description string, ha bool, k8sVersion string, networkDriver string, ingress bool, presetId int32, ) *ClusterOut`
+`func NewClusterOut(id int32, name string, createdAt time.Time, status string, description string, k8sVersion string, networkDriver string, ingress bool, presetId int32, ) *ClusterOut`
 
 NewClusterOut instantiates a new ClusterOut object
 This constructor will assign default values to properties that have it defined,
@@ -135,26 +136,6 @@ and a boolean to check if the value has been set.
 `func (o *ClusterOut) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
-
-
-### GetHa
-
-`func (o *ClusterOut) GetHa() bool`
-
-GetHa returns the Ha field if non-nil, zero value otherwise.
-
-### GetHaOk
-
-`func (o *ClusterOut) GetHaOk() (*bool, bool)`
-
-GetHaOk returns a tuple with the Ha field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHa
-
-`func (o *ClusterOut) SetHa(v bool)`
-
-SetHa sets Ha field to given value.
 
 
 ### GetK8sVersion
@@ -311,6 +292,56 @@ SetDisk sets Disk field to given value.
 `func (o *ClusterOut) HasDisk() bool`
 
 HasDisk returns a boolean if a field has been set.
+
+### GetAvailabilityZone
+
+`func (o *ClusterOut) GetAvailabilityZone() string`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *ClusterOut) GetAvailabilityZoneOk() (*string, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *ClusterOut) SetAvailabilityZone(v string)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
+### HasAvailabilityZone
+
+`func (o *ClusterOut) HasAvailabilityZone() bool`
+
+HasAvailabilityZone returns a boolean if a field has been set.
+
+### GetProjectId
+
+`func (o *ClusterOut) GetProjectId() int32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *ClusterOut) GetProjectIdOk() (*int32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *ClusterOut) SetProjectId(v int32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *ClusterOut) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

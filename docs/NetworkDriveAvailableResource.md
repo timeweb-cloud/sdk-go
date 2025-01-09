@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResourceId** | **float32** | Уникальный идентификатор сервиса. | 
+**ResourceId** | **float32** | ID сервиса. | 
 **ResourceType** | **string** | Тип ресурса. | 
 **Ip** | Pointer to **NullableString** | IP-адрес сервиса. | [optional] 
 **AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Framework** | Pointer to [**Frameworks**](Frameworks.md) |  | [optional] 
 **Name** | Pointer to **string** | Имя приложения. | [optional] 
 **Comment** | Pointer to **string** | Комментарий к приложению. | [optional] 
-**PresetId** | Pointer to **float32** | Идентификатор тарифа. | [optional] 
+**PresetId** | Pointer to **float32** | ID тарифа. | [optional] 
 
 ## Methods
 

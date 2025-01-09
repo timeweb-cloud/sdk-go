@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Идентификатор сервисв. | 
+**Id** | **float32** | ID сервисв. | 
 **Name** | **string** | Имя сервиса. | 
 **PublicIp** | Pointer to **string** | Публичный IP-адрес сервиса | [optional] 
 **LocalIp** | Pointer to **string** | Приватный IP-адрес сервиса | [optional] 

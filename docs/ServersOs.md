@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **float32** | Уникальный идентификатор операционной системы. | [optional] 
+**Id** | Pointer to **float32** | ID операционной системы. | [optional] 
 **Family** | Pointer to **string** | Семейство операционной системы. | [optional] 
 **Name** | Pointer to **string** | Название операционной системы. | [optional] 
 **Version** | Pointer to **string** | Версия операционной системы. | [optional] 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Уникальный идентификатор для каждого экземпляра базы данных. Автоматически генерируется при создании. | 
+**Id** | **float32** | ID для каждого экземпляра базы данных. Автоматически генерируется при создании. | 
 **CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана база данных. | 
 **Location** | **NullableString** | Локация сервера. | 
 **Name** | **string** | Название кластера базы данных. | 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **HashType** | **NullableString** | Тип хеширования кластера базы данных (mysql5 | mysql | postgres). | 
 **Port** | **NullableInt32** | Порт | 
 **Status** | **string** | Текущий статус кластера базы данных. | 
-**PresetId** | **int32** | Идентификатор тарифа. | 
+**PresetId** | **int32** | ID тарифа. | 
 **DiskStats** | [**NullableDatabaseClusterDiskStats**](DatabaseClusterDiskStats.md) |  | 
 **ConfigParameters** | [**ConfigParameters**](ConfigParameters.md) |  | 
 **IsEnabledPublicNetwork** | **bool** | Доступность публичного IP-адреса | 

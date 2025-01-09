@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PresetId** | Pointer to **float32** | Идентификатор тарифа. | [optional] 
+**PresetId** | Pointer to **float32** | ID тарифа. | [optional] 
 **BucketType** | Pointer to **string** | Тип хранилища. | [optional] 
 
 ## Methods

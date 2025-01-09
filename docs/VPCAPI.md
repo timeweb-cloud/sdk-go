@@ -5,12 +5,12 @@ All URIs are relative to *https://api.timeweb.cloud*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateVPC**](VPCAPI.md#CreateVPC) | **Post** /api/v2/vpcs | Создание VPC
-[**DeleteVPC**](VPCAPI.md#DeleteVPC) | **Delete** /api/v1/vpcs/{vpc_id} | Удаление VPC по идентификатору сети
+[**DeleteVPC**](VPCAPI.md#DeleteVPC) | **Delete** /api/v1/vpcs/{vpc_id} | Удаление VPC по ID сети
 [**GetVPC**](VPCAPI.md#GetVPC) | **Get** /api/v2/vpcs/{vpc_id} | Получение VPC
 [**GetVPCPorts**](VPCAPI.md#GetVPCPorts) | **Get** /api/v1/vpcs/{vpc_id}/ports | Получение списка портов для VPC
 [**GetVPCServices**](VPCAPI.md#GetVPCServices) | **Get** /api/v2/vpcs/{vpc_id}/services | Получение списка сервисов в VPC
 [**GetVPCs**](VPCAPI.md#GetVPCs) | **Get** /api/v2/vpcs | Получение списка VPCs
-[**UpdateVPCs**](VPCAPI.md#UpdateVPCs) | **Patch** /api/v2/vpcs/{vpc_id} | Изменение VPC по идентификатору сети
+[**UpdateVPCs**](VPCAPI.md#UpdateVPCs) | **Patch** /api/v2/vpcs/{vpc_id} | Изменение VPC по ID сети
 
 
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 > CreateVPC201Response DeleteVPC(ctx, vpcId).Execute()
 
-Удаление VPC по идентификатору сети
+Удаление VPC по ID сети
 
 
 
@@ -101,7 +101,7 @@ import (
 )
 
 func main() {
-    vpcId := "network-1234567890" // string | Идентификатор сети
+    vpcId := "network-1234567890" // string | ID сети
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -121,7 +121,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpcId** | **string** | Идентификатор сети | 
+**vpcId** | **string** | ID сети | 
 
 ### Other Parameters
 
@@ -171,7 +171,7 @@ import (
 )
 
 func main() {
-    vpcId := "network-1234567890" // string | Идентификатор сети
+    vpcId := "network-1234567890" // string | ID сети
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -191,7 +191,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpcId** | **string** | Идентификатор сети | 
+**vpcId** | **string** | ID сети | 
 
 ### Other Parameters
 
@@ -241,7 +241,7 @@ import (
 )
 
 func main() {
-    vpcId := "network-1234567890" // string | Идентификатор сети
+    vpcId := "network-1234567890" // string | ID сети
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -261,7 +261,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpcId** | **string** | Идентификатор сети | 
+**vpcId** | **string** | ID сети | 
 
 ### Other Parameters
 
@@ -311,7 +311,7 @@ import (
 )
 
 func main() {
-    vpcId := "network-1234567890" // string | Идентификатор сети
+    vpcId := "network-1234567890" // string | ID сети
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -331,7 +331,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpcId** | **string** | Идентификатор сети | 
+**vpcId** | **string** | ID сети | 
 
 ### Other Parameters
 
@@ -425,7 +425,7 @@ Other parameters are passed through a pointer to a apiGetVPCsRequest struct via 
 
 > CreateVPC201Response UpdateVPCs(ctx, vpcId).UpdateVpc(updateVpc).Execute()
 
-Изменение VPC по идентификатору сети
+Изменение VPC по ID сети
 
 
 
@@ -442,7 +442,7 @@ import (
 )
 
 func main() {
-    vpcId := "network-1234567890" // string | Идентификатор сети
+    vpcId := "network-1234567890" // string | ID сети
     updateVpc := *openapiclient.NewUpdateVpc() // UpdateVpc | 
 
     configuration := openapiclient.NewConfiguration()
@@ -463,7 +463,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpcId** | **string** | Идентификатор сети | 
+**vpcId** | **string** | ID сети | 
 
 ### Other Parameters
 

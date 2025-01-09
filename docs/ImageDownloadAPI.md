@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Идентификатор ссылки | 
+**Id** | **string** | ID ссылки | 
 **CreatedAt** | **time.Time** | Дата и время создания ссылки | 
-**Image** | **string** | Идентификатор образа | 
+**Image** | **string** | ID образа | 
 **Type** | [**URLType**](URLType.md) |  | 
 **Url** | Pointer to **string** | Ссылка на скачивание | [optional] 
 **Status** | [**UrlStatus**](UrlStatus.md) |  | 

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AppId** | **string** | Идентификатор приложения. | 
+**AppId** | **string** | ID приложения. | 
 **CommitSha** | **string** | Хэш коммита. | 
-**Id** | **string** | Идентификатор. | 
+**Id** | **string** | ID. | 
 **StartedAt** | **time.Time** | Время запуска деплоя. | 
 **EndedAt** | **NullableTime** | Время окончания деплоя. Определено для завершенных деплоев | 
 **Status** | [**DeployStatus**](DeployStatus.md) |  | 

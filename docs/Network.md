@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Уникальный идентификатор сети. | 
+**Id** | **string** | ID сети. | 
 **FloatingIp** | Pointer to **string** | Плавающий IP-адрес | [optional] 
 **Ip** | Pointer to **string** | IP-адрес в сети. | [optional] 
 

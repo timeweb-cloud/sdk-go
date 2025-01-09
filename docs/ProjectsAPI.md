@@ -19,7 +19,7 @@ Method | HTTP request | Description
 [**GetAccountServers**](ProjectsAPI.md#GetAccountServers) | **Get** /api/v1/projects/resources/servers | Получение списка всех серверов на аккаунте
 [**GetAccountStorages**](ProjectsAPI.md#GetAccountStorages) | **Get** /api/v1/projects/resources/buckets | Получение списка всех хранилищ на аккаунте
 [**GetAllProjectResources**](ProjectsAPI.md#GetAllProjectResources) | **Get** /api/v1/projects/{project_id}/resources | Получение всех ресурсов проекта
-[**GetProject**](ProjectsAPI.md#GetProject) | **Get** /api/v1/projects/{project_id} | Получение проекта по идентификатору
+[**GetProject**](ProjectsAPI.md#GetProject) | **Get** /api/v1/projects/{project_id} | Получение проекта по ID
 [**GetProjectBalancers**](ProjectsAPI.md#GetProjectBalancers) | **Get** /api/v1/projects/{project_id}/resources/balancers | Получение списка балансировщиков проекта
 [**GetProjectClusters**](ProjectsAPI.md#GetProjectClusters) | **Get** /api/v1/projects/{project_id}/resources/clusters | Получение списка кластеров проекта
 [**GetProjectDatabases**](ProjectsAPI.md#GetProjectDatabases) | **Get** /api/v1/projects/{project_id}/resources/databases | Получение списка баз данных проекта
@@ -53,7 +53,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     addBalancerToProjectRequest := *openapiclient.NewAddBalancerToProjectRequest(float32(1)) // AddBalancerToProjectRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -74,7 +74,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -125,7 +125,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     addClusterToProjectRequest := *openapiclient.NewAddClusterToProjectRequest(float32(1)) // AddClusterToProjectRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -146,7 +146,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -197,7 +197,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     addDatabaseToProjectRequest := *openapiclient.NewAddDatabaseToProjectRequest(float32(1)) // AddDatabaseToProjectRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -218,7 +218,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -269,7 +269,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     addDedicatedServerToProjectRequest := *openapiclient.NewAddDedicatedServerToProjectRequest(float32(1)) // AddDedicatedServerToProjectRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -290,7 +290,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -341,7 +341,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     addServerToProjectRequest := *openapiclient.NewAddServerToProjectRequest(float32(1)) // AddServerToProjectRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -362,7 +362,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -413,7 +413,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     addStorageToProjectRequest := *openapiclient.NewAddStorageToProjectRequest(float32(1)) // AddStorageToProjectRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -434,7 +434,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -551,7 +551,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -569,7 +569,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -985,7 +985,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1005,7 +1005,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 > CreateProject201Response GetProject(ctx, projectId).Execute()
 
-Получение проекта по идентификатору
+Получение проекта по ID
 
 
 
@@ -1055,7 +1055,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1075,7 +1075,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1125,7 +1125,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1145,7 +1145,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1195,7 +1195,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1215,7 +1215,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1265,7 +1265,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1285,7 +1285,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1335,7 +1335,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1355,7 +1355,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1405,7 +1405,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1425,7 +1425,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1475,7 +1475,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1495,7 +1495,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1606,7 +1606,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     resourceTransfer := *openapiclient.NewResourceTransfer(float32(1), float32(1), "server") // ResourceTransfer | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1627,7 +1627,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 
@@ -1678,7 +1678,7 @@ import (
 )
 
 func main() {
-    projectId := int32(99) // int32 | Уникальный идентификатор проекта.
+    projectId := int32(99) // int32 | ID проекта.
     updateProject := *openapiclient.NewUpdateProject() // UpdateProject | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1699,7 +1699,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **int32** | Уникальный идентификатор проекта. | 
+**projectId** | **int32** | ID проекта. | 
 
 ### Other Parameters
 

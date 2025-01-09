@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseId** | Pointer to **string** | Идентификатор запроса | [optional] 
+**ResponseId** | Pointer to **string** | ID запроса | [optional] 
 **Meta** | [**Meta**](Meta.md) |  | 
 **Downloads** | [**[]ImageDownloadAPI**](ImageDownloadAPI.md) | Массив объектов \&quot;Ссылка на загрузку\&quot; | 
 

@@ -99,7 +99,7 @@ import (
 )
 
 func main() {
-    tokenId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Идентификатор токена
+    tokenId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID токена
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -117,7 +117,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**tokenId** | **string** | Идентификатор токена | 
+**tokenId** | **string** | ID токена | 
 
 ### Other Parameters
 
@@ -228,7 +228,7 @@ import (
 )
 
 func main() {
-    tokenId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Идентификатор токена
+    tokenId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID токена
     refreshApiKey := *openapiclient.NewRefreshApiKey() // RefreshApiKey | 
 
     configuration := openapiclient.NewConfiguration()
@@ -249,7 +249,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**tokenId** | **string** | Идентификатор токена | 
+**tokenId** | **string** | ID токена | 
 
 ### Other Parameters
 
@@ -300,7 +300,7 @@ import (
 )
 
 func main() {
-    tokenId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Идентификатор токена
+    tokenId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID токена
     editApiKey := *openapiclient.NewEditApiKey() // EditApiKey | 
 
     configuration := openapiclient.NewConfiguration()
@@ -321,7 +321,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**tokenId** | **string** | Идентификатор токена | 
+**tokenId** | **string** | ID токена | 
 
 ### Other Parameters
 

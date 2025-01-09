@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Used** | Pointer to **float32** | Использованное пространство диска. | [optional] 
 **Size** | Pointer to **float32** | Размер диска. | [optional] 
-**DiskId** | Pointer to **float32** | Идентификатор диска. | [optional] 
+**DiskId** | Pointer to **float32** | ID диска. | [optional] 
 
 ## Methods
 

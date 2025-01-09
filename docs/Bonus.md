@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MoneySource** | **string** | Тип создаваемой заявки. | 
-**PersonId** | Pointer to **float32** | Идентификатор администратора, на которого зарегистрирован домен. | [optional] 
-**BonusId** | **float32** | Идентификатор бонуса. | 
+**PersonId** | Pointer to **float32** | ID администратора, на которого зарегистрирован домен. | [optional] 
+**BonusId** | **float32** | ID бонуса. | 
 
 ## Methods
 

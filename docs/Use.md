@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MoneySource** | **string** | Тип создаваемой заявки. | 
-**PersonId** | Pointer to **float32** | Идентификатор администратора, на которого зарегистрирован домен. | [optional] 
+**PersonId** | Pointer to **float32** | ID администратора, на которого зарегистрирован домен. | [optional] 
 
 ## Methods
 

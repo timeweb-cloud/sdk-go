@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Название хранилища. | 
 **Type** | **string** | Тип хранилища. | 
-**PresetId** | **float32** | Идентификатор тарифа. | 
+**PresetId** | **float32** | ID тарифа. | 
 
 ## Methods
 

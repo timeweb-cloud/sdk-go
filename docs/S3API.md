@@ -111,7 +111,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     addStorageSubdomainsRequest := *openapiclient.NewAddStorageSubdomainsRequest([]string{"test.example.com"}) // AddStorageSubdomainsRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -132,7 +132,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -183,7 +183,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     copyStorageFileRequest := *openapiclient.NewCopyStorageFileRequest("new_path", []string{"test1/test2"}) // CopyStorageFileRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -202,7 +202,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -253,7 +253,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     createFolderInStorageRequest := *openapiclient.NewCreateFolderInStorageRequest("dir") // CreateFolderInStorageRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -272,7 +272,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -389,7 +389,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     hash := "15095f25-aac3-4d60-a788-96cb5136f186" // string | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. (optional)
     code := "0000" // string | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true` (optional)
 
@@ -411,7 +411,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -463,7 +463,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     deleteStorageFileRequest := *openapiclient.NewDeleteStorageFileRequest([]string{"test1/test2"}) // DeleteStorageFileRequest | 
     isMultipart := true // bool | Это логическое значение, которое используется для обозначения multipart-загрузки. (optional)
 
@@ -483,7 +483,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -535,7 +535,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     addStorageSubdomainsRequest := *openapiclient.NewAddStorageSubdomainsRequest([]string{"test.example.com"}) // AddStorageSubdomainsRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -556,7 +556,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -607,7 +607,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     prefix := "example" // string | Префикс для поиска файла. (optional)
     isMultipart := true // bool | Это логическое значение, которое используется для обозначения multipart-загрузки. (optional)
 
@@ -629,7 +629,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -681,7 +681,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -701,7 +701,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -751,7 +751,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -771,7 +771,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -1004,7 +1004,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     renameStorageFileRequest := *openapiclient.NewRenameStorageFileRequest("new_filename", "old_filename") // RenameStorageFileRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1023,7 +1023,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -1138,7 +1138,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     updateStorageRequest := *openapiclient.NewUpdateStorageRequest() // UpdateStorageRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1159,7 +1159,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 
@@ -1210,7 +1210,7 @@ import (
 )
 
 func main() {
-    userId := int32(1051) // int32 | Уникальный идентификатор пользователя хранилища.
+    userId := int32(1051) // int32 | ID пользователя хранилища.
     updateStorageUserRequest := *openapiclient.NewUpdateStorageUserRequest("password") // UpdateStorageUserRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1231,7 +1231,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32** | Уникальный идентификатор пользователя хранилища. | 
+**userId** | **int32** | ID пользователя хранилища. | 
 
 ### Other Parameters
 
@@ -1282,7 +1282,7 @@ import (
 )
 
 func main() {
-    bucketId := int32(1051) // int32 | Уникальный идентификатор хранилища.
+    bucketId := int32(1051) // int32 | ID хранилища.
     files := []*os.File{"TODO"} // []*os.File | 
     path := "test1/tes2" // string | Путь до директории в хранилище (optional)
 
@@ -1302,7 +1302,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | Уникальный идентификатор хранилища. | 
+**bucketId** | **int32** | ID хранилища. | 
 
 ### Other Parameters
 

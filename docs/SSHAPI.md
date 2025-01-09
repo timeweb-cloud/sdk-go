@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     addKeyToServerRequest := *openapiclient.NewAddKeyToServerRequest([]float32{float32(1)}) // AddKeyToServerRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -171,7 +171,7 @@ import (
 )
 
 func main() {
-    sshKeyId := int32(1051) // int32 | Уникальный идентификатор SSH-ключа
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -189,7 +189,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sshKeyId** | **int32** | Уникальный идентификатор SSH-ключа | 
+**sshKeyId** | **int32** | ID SSH-ключа | 
 
 ### Other Parameters
 
@@ -239,8 +239,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    sshKeyId := int32(1051) // int32 | Уникальный идентификатор SSH-ключа
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -258,8 +258,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**sshKeyId** | **int32** | Уникальный идентификатор SSH-ключа | 
+**serverId** | **int32** | ID облачного сервера. | 
+**sshKeyId** | **int32** | ID SSH-ключа | 
 
 ### Other Parameters
 
@@ -310,7 +310,7 @@ import (
 )
 
 func main() {
-    sshKeyId := int32(1051) // int32 | Уникальный идентификатор SSH-ключа
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -330,7 +330,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sshKeyId** | **int32** | Уникальный идентификатор SSH-ключа | 
+**sshKeyId** | **int32** | ID SSH-ключа | 
 
 ### Other Parameters
 
@@ -441,7 +441,7 @@ import (
 )
 
 func main() {
-    sshKeyId := int32(1051) // int32 | Уникальный идентификатор SSH-ключа
+    sshKeyId := int32(1051) // int32 | ID SSH-ключа
     updateKeyRequest := *openapiclient.NewUpdateKeyRequest() // UpdateKeyRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -462,7 +462,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sshKeyId** | **int32** | Уникальный идентификатор SSH-ключа | 
+**sshKeyId** | **int32** | ID SSH-ключа | 
 
 ### Other Parameters
 

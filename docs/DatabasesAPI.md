@@ -124,7 +124,7 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
+    dbId := int32(56) // int32 | ID базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -144,7 +144,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
+**dbId** | **int32** | ID базы данных | 
 
 ### Other Parameters
 
@@ -260,7 +260,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
     createInstance := *openapiclient.NewCreateInstance("default_name") // CreateInstance | 
 
     configuration := openapiclient.NewConfiguration()
@@ -281,7 +281,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -332,7 +332,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
     createAdmin := *openapiclient.NewCreateAdmin("default_login", "bs.:L2f$Tm:SC~", []string{"Privileges_example"}) // CreateAdmin | 
 
     configuration := openapiclient.NewConfiguration()
@@ -353,7 +353,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -404,7 +404,7 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
+    dbId := int32(56) // int32 | ID базы данных
     hash := "15095f25-aac3-4d60-a788-96cb5136f186" // string | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. (optional)
     code := "0000" // string | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true` (optional)
 
@@ -426,7 +426,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
+**dbId** | **int32** | ID базы данных | 
 
 ### Other Parameters
 
@@ -478,8 +478,8 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
-    backupId := int32(56) // int32 | Идентификатор резевной копии
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := int32(56) // int32 | ID резевной копии
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -497,8 +497,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
-**backupId** | **int32** | Идентификатор резевной копии | 
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **int32** | ID резевной копии | 
 
 ### Other Parameters
 
@@ -549,7 +549,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
     hash := "15095f25-aac3-4d60-a788-96cb5136f186" // string | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. (optional)
     code := "0000" // string | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true` (optional)
 
@@ -571,7 +571,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -623,8 +623,8 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
-    instanceId := int32(56) // int32 | Идентификатор инстанса базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+    instanceId := int32(56) // int32 | ID инстанса базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -642,8 +642,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
-**instanceId** | **int32** | Идентификатор инстанса базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
+**instanceId** | **int32** | ID инстанса базы данных | 
 
 ### Other Parameters
 
@@ -694,8 +694,8 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
-    adminId := int32(56) // int32 | Идентификатор пользователя базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+    adminId := int32(56) // int32 | ID пользователя базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -713,8 +713,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
-**adminId** | **int32** | Идентификатор пользователя базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
+**adminId** | **int32** | ID пользователя базы данных | 
 
 ### Other Parameters
 
@@ -765,7 +765,7 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
+    dbId := int32(56) // int32 | ID базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -785,7 +785,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
+**dbId** | **int32** | ID базы данных | 
 
 ### Other Parameters
 
@@ -835,7 +835,7 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
+    dbId := int32(56) // int32 | ID базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -855,7 +855,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
+**dbId** | **int32** | ID базы данных | 
 
 ### Other Parameters
 
@@ -905,8 +905,8 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
-    backupId := int32(56) // int32 | Идентификатор резевной копии
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := int32(56) // int32 | ID резевной копии
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -926,8 +926,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
-**backupId** | **int32** | Идентификатор резевной копии | 
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **int32** | ID резевной копии | 
 
 ### Other Parameters
 
@@ -978,7 +978,7 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
+    dbId := int32(56) // int32 | ID базы данных
     limit := int32(56) // int32 | Обозначает количество записей, которое необходимо вернуть. (optional) (default to 100)
     offset := int32(56) // int32 | Указывает на смещение относительно начала списка. (optional) (default to 0)
 
@@ -1000,7 +1000,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
+**dbId** | **int32** | ID базы данных | 
 
 ### Other Parameters
 
@@ -1052,7 +1052,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1072,7 +1072,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -1251,8 +1251,8 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
-    instanceId := int32(56) // int32 | Идентификатор инстанса базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+    instanceId := int32(56) // int32 | ID инстанса базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1272,8 +1272,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
-**instanceId** | **int32** | Идентификатор инстанса базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
+**instanceId** | **int32** | ID инстанса базы данных | 
 
 ### Other Parameters
 
@@ -1324,7 +1324,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1344,7 +1344,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -1455,8 +1455,8 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
-    adminId := int32(56) // int32 | Идентификатор пользователя базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+    adminId := int32(56) // int32 | ID пользователя базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1476,8 +1476,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
-**adminId** | **int32** | Идентификатор пользователя базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
+**adminId** | **int32** | ID пользователя базы данных | 
 
 ### Other Parameters
 
@@ -1528,7 +1528,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1548,7 +1548,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -1727,8 +1727,8 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
-    backupId := int32(56) // int32 | Идентификатор резевной копии
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := int32(56) // int32 | ID резевной копии
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1746,8 +1746,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
-**backupId** | **int32** | Идентификатор резевной копии | 
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **int32** | ID резевной копии | 
 
 ### Other Parameters
 
@@ -1798,7 +1798,7 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
+    dbId := int32(56) // int32 | ID базы данных
     updateDb := *openapiclient.NewUpdateDb() // UpdateDb | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1819,7 +1819,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
+**dbId** | **int32** | ID базы данных | 
 
 ### Other Parameters
 
@@ -1870,7 +1870,7 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | Идентификатор базы данных
+    dbId := int32(56) // int32 | ID базы данных
     autoBackup := *openapiclient.NewAutoBackup(true) // AutoBackup | При значении `is_enabled`: `true`, поля `copy_count`, `creation_start_at`, `interval` являются обязательными (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1891,7 +1891,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbId** | **int32** | Идентификатор базы данных | 
+**dbId** | **int32** | ID базы данных | 
 
 ### Other Parameters
 
@@ -1942,7 +1942,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
     updateCluster := *openapiclient.NewUpdateCluster() // UpdateCluster | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1963,7 +1963,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -2014,7 +2014,7 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
     updateInstance := *openapiclient.NewUpdateInstance() // UpdateInstance | 
 
     configuration := openapiclient.NewConfiguration()
@@ -2035,7 +2035,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
 
 ### Other Parameters
 
@@ -2086,8 +2086,8 @@ import (
 )
 
 func main() {
-    dbClusterId := int32(56) // int32 | Идентификатор кластера базы данных
-    adminId := int32(56) // int32 | Идентификатор пользователя базы данных
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+    adminId := int32(56) // int32 | ID пользователя базы данных
     updateAdmin := *openapiclient.NewUpdateAdmin() // UpdateAdmin | 
 
     configuration := openapiclient.NewConfiguration()
@@ -2108,8 +2108,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dbClusterId** | **int32** | Идентификатор кластера базы данных | 
-**adminId** | **int32** | Идентификатор пользователя базы данных | 
+**dbClusterId** | **int32** | ID кластера базы данных | 
+**adminId** | **int32** | ID пользователя базы данных | 
 
 ### Other Parameters
 

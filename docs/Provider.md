@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ProviderId** | **string** | Идентификатор провайдера. | 
+**ProviderId** | **string** | ID провайдера. | 
 **Login** | **string** | Логин пользователя. | 
 **ProviderType** | [**Providers**](Providers.md) |  | 
 

@@ -342,6 +342,7 @@ docs/NetworkDriversResponse.md
 docs/NetworkDrivesAPI.md
 docs/NodeCount.md
 docs/NodeGroupIn.md
+docs/NodeGroupInConfiguration.md
 docs/NodeGroupOut.md
 docs/NodeGroupResponse.md
 docs/NodeGroupsResponse.md
@@ -394,6 +395,7 @@ docs/ServersOsRequirements.md
 docs/ServersPreset.md
 docs/ServersSoftware.md
 docs/ServersSoftwareRequirements.md
+docs/SetLabels.md
 docs/SettingCondition.md
 docs/SpamFilterIsDisabled.md
 docs/SpamFilterIsEnabled.md
@@ -768,6 +770,7 @@ model_network_drive_service_list_inner.go
 model_network_drivers_response.go
 model_node_count.go
 model_node_group_in.go
+model_node_group_in_configuration.go
 model_node_group_out.go
 model_node_group_response.go
 model_node_groups_response.go
@@ -816,6 +819,7 @@ model_servers_os_requirements.go
 model_servers_preset.go
 model_servers_software.go
 model_servers_software_requirements.go
+model_set_labels.go
 model_setting_condition.go
 model_spam_filter_is_disabled.go
 model_spam_filter_is_enabled.go

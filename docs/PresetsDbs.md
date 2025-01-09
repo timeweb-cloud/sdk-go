@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **float32** | Уникальный идентификатор для каждого экземпляра тарифа базы данных. | [optional] 
+**Id** | Pointer to **float32** | ID для каждого экземпляра тарифа базы данных. | [optional] 
 **Description** | Pointer to **string** | Описание тарифа. | [optional] 
 **DescriptionShort** | Pointer to **string** | Краткое описание тарифа. | [optional] 
 **Cpu** | Pointer to **float32** | Описание процессора тарифа. | [optional] 

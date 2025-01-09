@@ -101,7 +101,7 @@ import (
 )
 
 func main() {
-    dedicatedId := int32(1051) // int32 | Уникальный идентификатор выделенного сервера.
+    dedicatedId := int32(1051) // int32 | ID выделенного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -119,7 +119,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dedicatedId** | **int32** | Уникальный идентификатор выделенного сервера. | 
+**dedicatedId** | **int32** | ID выделенного сервера. | 
 
 ### Other Parameters
 
@@ -169,7 +169,7 @@ import (
 )
 
 func main() {
-    dedicatedId := int32(1051) // int32 | Уникальный идентификатор выделенного сервера.
+    dedicatedId := int32(1051) // int32 | ID выделенного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -189,7 +189,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dedicatedId** | **int32** | Уникальный идентификатор выделенного сервера. | 
+**dedicatedId** | **int32** | ID выделенного сервера. | 
 
 ### Other Parameters
 
@@ -239,7 +239,7 @@ import (
 )
 
 func main() {
-    presetId := int32(1051) // int32 | Уникальный идентификатор тарифа выделенного сервера.
+    presetId := int32(1051) // int32 | ID тарифа выделенного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -259,7 +259,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**presetId** | **int32** | Уникальный идентификатор тарифа выделенного сервера. | 
+**presetId** | **int32** | ID тарифа выделенного сервера. | 
 
 ### Other Parameters
 
@@ -436,7 +436,7 @@ import (
 )
 
 func main() {
-    dedicatedId := int32(1051) // int32 | Уникальный идентификатор выделенного сервера.
+    dedicatedId := int32(1051) // int32 | ID выделенного сервера.
     updateDedicatedServerRequest := *openapiclient.NewUpdateDedicatedServerRequest() // UpdateDedicatedServerRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -457,7 +457,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**dedicatedId** | **int32** | Уникальный идентификатор выделенного сервера. | 
+**dedicatedId** | **int32** | ID выделенного сервера. | 
 
 ### Other Parameters
 

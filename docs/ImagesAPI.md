@@ -104,7 +104,7 @@ import (
 )
 
 func main() {
-    imageId := "imageId_example" // string | Идентификатор образа
+    imageId := "imageId_example" // string | ID образа
     imageUrlIn := *openapiclient.NewImageUrlIn() // ImageUrlIn | 
 
     configuration := openapiclient.NewConfiguration()
@@ -125,7 +125,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**imageId** | **string** | Идентификатор образа | 
+**imageId** | **string** | ID образа | 
 
 ### Other Parameters
 
@@ -176,7 +176,7 @@ import (
 )
 
 func main() {
-    imageId := "imageId_example" // string | Идентификатор образа
+    imageId := "imageId_example" // string | ID образа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -194,7 +194,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**imageId** | **string** | Идентификатор образа | 
+**imageId** | **string** | ID образа | 
 
 ### Other Parameters
 
@@ -244,8 +244,8 @@ import (
 )
 
 func main() {
-    imageId := "imageId_example" // string | Идентификатор образа
-    imageUrlId := "imageUrlId_example" // string | Идентификатор ссылки
+    imageId := "imageId_example" // string | ID образа
+    imageUrlId := "imageUrlId_example" // string | ID ссылки
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -263,8 +263,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**imageId** | **string** | Идентификатор образа | 
-**imageUrlId** | **string** | Идентификатор ссылки | 
+**imageId** | **string** | ID образа | 
+**imageUrlId** | **string** | ID ссылки | 
 
 ### Other Parameters
 
@@ -315,7 +315,7 @@ import (
 )
 
 func main() {
-    imageId := "imageId_example" // string | Идентификатор образа
+    imageId := "imageId_example" // string | ID образа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -335,7 +335,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**imageId** | **string** | Идентификатор образа | 
+**imageId** | **string** | ID образа | 
 
 ### Other Parameters
 
@@ -385,8 +385,8 @@ import (
 )
 
 func main() {
-    imageId := "imageId_example" // string | Идентификатор образа
-    imageUrlId := "imageUrlId_example" // string | Идентификатор ссылки
+    imageId := "imageId_example" // string | ID образа
+    imageUrlId := "imageUrlId_example" // string | ID ссылки
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -406,8 +406,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**imageId** | **string** | Идентификатор образа | 
-**imageUrlId** | **string** | Идентификатор ссылки | 
+**imageId** | **string** | ID образа | 
+**imageUrlId** | **string** | ID ссылки | 
 
 ### Other Parameters
 
@@ -458,7 +458,7 @@ import (
 )
 
 func main() {
-    imageId := "imageId_example" // string | Идентификатор образа
+    imageId := "imageId_example" // string | ID образа
     limit := int32(56) // int32 |  (optional) (default to 100)
     offset := int32(56) // int32 |  (optional) (default to 0)
 
@@ -480,7 +480,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**imageId** | **string** | Идентификатор образа | 
+**imageId** | **string** | ID образа | 
 
 ### Other Parameters
 
@@ -600,7 +600,7 @@ import (
 )
 
 func main() {
-    imageId := "imageId_example" // string | Идентификатор образа
+    imageId := "imageId_example" // string | ID образа
     imageUpdateAPI := *openapiclient.NewImageUpdateAPI() // ImageUpdateAPI | 
 
     configuration := openapiclient.NewConfiguration()
@@ -621,7 +621,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**imageId** | **string** | Идентификатор образа | 
+**imageId** | **string** | ID образа | 
 
 ### Other Parameters
 

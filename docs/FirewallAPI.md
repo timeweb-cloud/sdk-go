@@ -42,8 +42,8 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
-    resourceId := "resourceId_example" // string | Идентификатор ресурса
+    groupId := "groupId_example" // string | ID группы правил
+    resourceId := "resourceId_example" // string | ID ресурса
     resourceType := openapiclient.ResourceType("server") // ResourceType |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -64,8 +64,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
-**resourceId** | **string** | Идентификатор ресурса | 
+**groupId** | **string** | ID группы правил | 
+**resourceId** | **string** | ID ресурса | 
 
 ### Other Parameters
 
@@ -185,7 +185,7 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
+    groupId := "groupId_example" // string | ID группы правил
     firewallRuleInAPI := *openapiclient.NewFirewallRuleInAPI(openapiclient.FirewallRuleDirection("ingress"), openapiclient.FirewallRuleProtocol("tcp")) // FirewallRuleInAPI | 
 
     configuration := openapiclient.NewConfiguration()
@@ -206,7 +206,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
+**groupId** | **string** | ID группы правил | 
 
 ### Other Parameters
 
@@ -257,7 +257,7 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
+    groupId := "groupId_example" // string | ID группы правил
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -275,7 +275,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
+**groupId** | **string** | ID группы правил | 
 
 ### Other Parameters
 
@@ -325,8 +325,8 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
-    ruleId := "ruleId_example" // string | Идентификатор правила
+    groupId := "groupId_example" // string | ID группы правил
+    ruleId := "ruleId_example" // string | ID правила
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -344,8 +344,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
-**ruleId** | **string** | Идентификатор правила | 
+**groupId** | **string** | ID группы правил | 
+**ruleId** | **string** | ID правила | 
 
 ### Other Parameters
 
@@ -396,8 +396,8 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
-    resourceId := "resourceId_example" // string | Идентификатор ресурса
+    groupId := "groupId_example" // string | ID группы правил
+    resourceId := "resourceId_example" // string | ID ресурса
     resourceType := openapiclient.ResourceType("server") // ResourceType |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -416,8 +416,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
-**resourceId** | **string** | Идентификатор ресурса | 
+**groupId** | **string** | ID группы правил | 
+**resourceId** | **string** | ID ресурса | 
 
 ### Other Parameters
 
@@ -469,7 +469,7 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
+    groupId := "groupId_example" // string | ID группы правил
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -489,7 +489,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
+**groupId** | **string** | ID группы правил | 
 
 ### Other Parameters
 
@@ -539,7 +539,7 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
+    groupId := "groupId_example" // string | ID группы правил
     limit := int32(56) // int32 | Обозначает количество записей, которое необходимо вернуть. (optional) (default to 100)
     offset := int32(56) // int32 | Указывает на смещение относительно начала списка. (optional) (default to 0)
 
@@ -561,7 +561,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
+**groupId** | **string** | ID группы правил | 
 
 ### Other Parameters
 
@@ -613,8 +613,8 @@ import (
 )
 
 func main() {
-    ruleId := "ruleId_example" // string | Идентификатор правила
-    groupId := "groupId_example" // string | Идентификатор группы правил
+    ruleId := "ruleId_example" // string | ID правила
+    groupId := "groupId_example" // string | ID группы правил
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -634,8 +634,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ruleId** | **string** | Идентификатор правила | 
-**groupId** | **string** | Идентификатор группы правил | 
+**ruleId** | **string** | ID правила | 
+**groupId** | **string** | ID группы правил | 
 
 ### Other Parameters
 
@@ -686,7 +686,7 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
+    groupId := "groupId_example" // string | ID группы правил
     limit := int32(56) // int32 | Обозначает количество записей, которое необходимо вернуть. (optional) (default to 100)
     offset := int32(56) // int32 | Указывает на смещение относительно начала списка. (optional) (default to 0)
 
@@ -708,7 +708,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
+**groupId** | **string** | ID группы правил | 
 
 ### Other Parameters
 
@@ -905,7 +905,7 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
+    groupId := "groupId_example" // string | ID группы правил
     firewallGroupInAPI := *openapiclient.NewFirewallGroupInAPI("Name_example") // FirewallGroupInAPI | 
 
     configuration := openapiclient.NewConfiguration()
@@ -926,7 +926,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
+**groupId** | **string** | ID группы правил | 
 
 ### Other Parameters
 
@@ -977,8 +977,8 @@ import (
 )
 
 func main() {
-    groupId := "groupId_example" // string | Идентификатор группы правил
-    ruleId := "ruleId_example" // string | Идентификатор правила
+    groupId := "groupId_example" // string | ID группы правил
+    ruleId := "ruleId_example" // string | ID правила
     firewallRuleInAPI := *openapiclient.NewFirewallRuleInAPI(openapiclient.FirewallRuleDirection("ingress"), openapiclient.FirewallRuleProtocol("tcp")) // FirewallRuleInAPI | 
 
     configuration := openapiclient.NewConfiguration()
@@ -999,8 +999,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | Идентификатор группы правил | 
-**ruleId** | **string** | Идентификатор правила | 
+**groupId** | **string** | ID группы правил | 
+**ruleId** | **string** | ID правила | 
 
 ### Other Parameters
 

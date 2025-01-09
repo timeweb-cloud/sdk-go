@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Идентификатор владельца файла. | [optional] 
+**Id** | Pointer to **string** | ID владельца файла. | [optional] 
 **DisplayName** | Pointer to **string** | Имя владельца файла. | [optional] 
 
 ## Methods

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **IsSendBillLetters** | **bool** | Это логическое значение, которое показывает, требуется ли отправлять счета на почту. | 
 **CompanyInfo** | [**StatusCompanyInfo**](StatusCompanyInfo.md) |  | 
 **LastPasswordChangedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда последний раз изменялся пароль. | 
-**YmClientId** | **NullableString** | Идентификатор аккаунта для яндекс метрики. | 
+**YmClientId** | **NullableString** | ID аккаунта для яндекс метрики. | 
 
 ## Methods
 

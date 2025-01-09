@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Уникальный идентификатор провайдера. | 
+**Id** | **string** | ID провайдера. | 
 **Type** | [**Providers**](Providers.md) |  | 
 
 ## Methods

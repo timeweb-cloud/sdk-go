@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Configuration** | Pointer to [**CreateServerConfiguration**](CreateServerConfiguration.md) |  | [optional] 
 **IsDdosGuard** | **bool** | Защита от DDoS. Серверу выдается защищенный IP-адрес с защитой уровня L3 / L4. Для включения защиты уровня L7 необходимо создать тикет в техническую поддержку. | 
-**OsId** | Pointer to **float32** | Уникальный идентификатор операционной системы, которая будет установлена на облачный сервер. Нельзя передавать вместе с &#x60;image_id&#x60;. | [optional] 
-**ImageId** | Pointer to **string** | Уникальный идентификатор образа, который будет установлен на облачный сервер. Нельзя передавать вместе с &#x60;os_id&#x60;. | [optional] 
-**SoftwareId** | Pointer to **float32** | Уникальный идентификатор программного обеспечения сервера. | [optional] 
-**PresetId** | Pointer to **float32** | Уникальный идентификатор тарифа сервера. Нельзя передавать вместе с ключом &#x60;configurator&#x60;. | [optional] 
+**OsId** | Pointer to **float32** | ID операционной системы, которая будет установлена на облачный сервер. Нельзя передавать вместе с &#x60;image_id&#x60;. | [optional] 
+**ImageId** | Pointer to **string** | ID образа, который будет установлен на облачный сервер. Нельзя передавать вместе с &#x60;os_id&#x60;. | [optional] 
+**SoftwareId** | Pointer to **float32** | ID программного обеспечения сервера. | [optional] 
+**PresetId** | Pointer to **float32** | ID тарифа сервера. Нельзя передавать вместе с ключом &#x60;configurator&#x60;. | [optional] 
 **Bandwidth** | **float32** | Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100. | 
 **Name** | **string** | Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным. | 
-**AvatarId** | Pointer to **string** | Уникальный идентификатор аватара сервера. Описание методов работы с аватарами появится позднее. | [optional] 
+**AvatarId** | Pointer to **string** | ID аватара сервера. Описание методов работы с аватарами появится позднее. | [optional] 
 **Comment** | Pointer to **string** | Комментарий к облачному серверу. Максимальная длина — 255 символов. | [optional] 
 **SshKeysIds** | Pointer to **[]float32** | Список SSH-ключей. | [optional] 
 **IsLocalNetwork** | Pointer to **bool** | Локальная сеть. | [optional] 

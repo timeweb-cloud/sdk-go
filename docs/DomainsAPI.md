@@ -19,7 +19,7 @@ Method | HTTP request | Description
 [**GetDomainRequest**](DomainsAPI.md#GetDomainRequest) | **Get** /api/v1/domains-requests/{request_id} | Получение заявки на регистрацию/продление/трансфер домена
 [**GetDomainRequests**](DomainsAPI.md#GetDomainRequests) | **Get** /api/v1/domains-requests | Получение списка заявок на регистрацию/продление/трансфер домена
 [**GetDomains**](DomainsAPI.md#GetDomains) | **Get** /api/v1/domains | Получение списка всех доменов
-[**GetTLD**](DomainsAPI.md#GetTLD) | **Get** /api/v1/tlds/{tld_id} | Получить информацию о доменной зоне по идентификатору
+[**GetTLD**](DomainsAPI.md#GetTLD) | **Get** /api/v1/tlds/{tld_id} | Получить информацию о доменной зоне по ID
 [**GetTLDs**](DomainsAPI.md#GetTLDs) | **Get** /api/v1/tlds | Получить информацию о доменных зонах
 [**UpdateDomainAutoProlongation**](DomainsAPI.md#UpdateDomainAutoProlongation) | **Patch** /api/v1/domains/{fqdn} | Включение/выключение автопродления домена
 [**UpdateDomainDNSRecord**](DomainsAPI.md#UpdateDomainDNSRecord) | **Patch** /api/v1/domains/{fqdn}/dns-records/{record_id} | Обновить информацию о DNS-записи домена или поддомена
@@ -467,7 +467,7 @@ import (
 
 func main() {
     fqdn := "somedomain.ru" // string | Полное имя домена или поддомена.
-    recordId := int32(123) // int32 | Идентификатор DNS-записи домена или поддомена.
+    recordId := int32(123) // int32 | ID DNS-записи домена или поддомена.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -486,7 +486,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **fqdn** | **string** | Полное имя домена или поддомена. | 
-**recordId** | **int32** | Идентификатор DNS-записи домена или поддомена. | 
+**recordId** | **int32** | ID DNS-записи домена или поддомена. | 
 
 ### Other Parameters
 
@@ -896,7 +896,7 @@ import (
 )
 
 func main() {
-    requestId := int32(123) // int32 | Идентификатор заявки на регистрацию/продление/трансфер домена.
+    requestId := int32(123) // int32 | ID заявки на регистрацию/продление/трансфер домена.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -916,7 +916,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**requestId** | **int32** | Идентификатор заявки на регистрацию/продление/трансфер домена. | 
+**requestId** | **int32** | ID заявки на регистрацию/продление/трансфер домена. | 
 
 ### Other Parameters
 
@@ -966,7 +966,7 @@ import (
 )
 
 func main() {
-    personId := int32(123) // int32 | Идентификатор администратора, на которого зарегистрирован домен. (optional)
+    personId := int32(123) // int32 | ID администратора, на которого зарегистрирован домен. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -991,7 +991,7 @@ Other parameters are passed through a pointer to a apiGetDomainRequestsRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **personId** | **int32** | Идентификатор администратора, на которого зарегистрирован домен. | 
+ **personId** | **int32** | ID администратора, на которого зарегистрирован домен. | 
 
 ### Return type
 
@@ -1091,7 +1091,7 @@ Name | Type | Description  | Notes
 
 > GetTLD200Response GetTLD(ctx, tldId).Execute()
 
-Получить информацию о доменной зоне по идентификатору
+Получить информацию о доменной зоне по ID
 
 
 
@@ -1108,7 +1108,7 @@ import (
 )
 
 func main() {
-    tldId := int32(123) // int32 | Идентификатор доменной зоны.
+    tldId := int32(123) // int32 | ID доменной зоны.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1128,7 +1128,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**tldId** | **int32** | Идентификатор доменной зоны. | 
+**tldId** | **int32** | ID доменной зоны. | 
 
 ### Other Parameters
 
@@ -1319,7 +1319,7 @@ import (
 
 func main() {
     fqdn := "somedomain.ru" // string | Полное имя домена или поддомена.
-    recordId := int32(123) // int32 | Идентификатор DNS-записи домена или поддомена.
+    recordId := int32(123) // int32 | ID DNS-записи домена или поддомена.
     createDns := *openapiclient.NewCreateDns("A", "192.168.111.123") // CreateDns | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1341,7 +1341,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **fqdn** | **string** | Полное имя домена или поддомена. | 
-**recordId** | **int32** | Идентификатор DNS-записи домена или поддомена. | 
+**recordId** | **int32** | ID DNS-записи домена или поддомена. | 
 
 ### Other Parameters
 
@@ -1465,7 +1465,7 @@ import (
 )
 
 func main() {
-    requestId := int32(123) // int32 | Идентификатор заявки на регистрацию/продление/трансфер домена.
+    requestId := int32(123) // int32 | ID заявки на регистрацию/продление/трансфер домена.
     use := *openapiclient.NewUse("use") // Use | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1486,7 +1486,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**requestId** | **int32** | Идентификатор заявки на регистрацию/продление/трансфер домена. | 
+**requestId** | **int32** | ID заявки на регистрацию/продление/трансфер домена. | 
 
 ### Other Parameters
 

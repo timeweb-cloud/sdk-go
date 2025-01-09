@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | Тип DNS-записи. | 
-**Id** | Pointer to **NullableFloat32** | Идентификатор DNS-записи. | [optional] 
+**Id** | Pointer to **NullableFloat32** | ID DNS-записи. | [optional] 
 **Data** | [**DnsRecordData**](DnsRecordData.md) |  | 
 
 ## Methods

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Идентификатор сети. | 
+**Id** | **string** | ID сети. | 
 **Name** | **string** | Имя сети. | 
 **SubnetV4** | **string** | Маска подсети. | 
 **Location** | **string** | Локация сети. | 

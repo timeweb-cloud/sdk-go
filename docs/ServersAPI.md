@@ -66,7 +66,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     addServerIPRequest := *openapiclient.NewAddServerIPRequest("ipv6") // AddServerIPRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -87,7 +87,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -138,7 +138,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -158,7 +158,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -274,7 +274,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     createServerDiskRequest := *openapiclient.NewCreateServerDiskRequest(float32(10240)) // CreateServerDiskRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -295,7 +295,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -346,8 +346,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
     createServerDiskBackupRequest := *openapiclient.NewCreateServerDiskBackupRequest() // CreateServerDiskBackupRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -368,8 +368,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
 
 ### Other Parameters
 
@@ -421,7 +421,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     hash := "15095f25-aac3-4d60-a788-96cb5136f186" // string | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. (optional)
     code := "0000" // string | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true` (optional)
 
@@ -443,7 +443,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -495,8 +495,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -514,8 +514,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
 
 ### Other Parameters
 
@@ -566,9 +566,9 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
-    backupId := int32(1051) // int32 | Уникальный идентификатор бэкапа сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
+    backupId := int32(1051) // int32 | ID бэкапа сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -586,9 +586,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
-**backupId** | **int32** | Уникальный идентификатор бэкапа сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
+**backupId** | **int32** | ID бэкапа сервера. | 
 
 ### Other Parameters
 
@@ -640,7 +640,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     deleteServerIPRequest := *openapiclient.NewDeleteServerIPRequest("1.1.1.1") // DeleteServerIPRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -659,7 +659,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -832,7 +832,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -852,7 +852,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -902,8 +902,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -923,8 +923,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
 
 ### Other Parameters
 
@@ -975,8 +975,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -996,8 +996,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
 
 ### Other Parameters
 
@@ -1048,9 +1048,9 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
-    backupId := int32(1051) // int32 | Уникальный идентификатор бэкапа сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
+    backupId := int32(1051) // int32 | ID бэкапа сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1070,9 +1070,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
-**backupId** | **int32** | Уникальный идентификатор бэкапа сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
+**backupId** | **int32** | ID бэкапа сервера. | 
 
 ### Other Parameters
 
@@ -1124,8 +1124,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1145,8 +1145,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
 
 ### Other Parameters
 
@@ -1197,7 +1197,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1217,7 +1217,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -1267,7 +1267,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1287,7 +1287,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -1337,7 +1337,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     limit := int32(56) // int32 | Обозначает количество записей, которое необходимо вернуть. (optional) (default to 100)
     offset := int32(56) // int32 | Указывает на смещение относительно начала списка. (optional) (default to 0)
     order := "order_example" // string | Сортировка элементов по дате (optional) (default to "asc")
@@ -1360,7 +1360,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -1413,7 +1413,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     dateFrom := "dateFrom_example" // string | Дата начала сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: `2023-05-25%202023-05-25T14%3A35%3A38`
     dateTo := "dateTo_example" // string | Дата окончания сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: `2023-05-26%202023-05-25T14%3A35%3A38`
 
@@ -1435,7 +1435,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -1677,7 +1677,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1695,7 +1695,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -1745,7 +1745,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1763,7 +1763,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -1813,9 +1813,9 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
-    backupId := int32(1051) // int32 | Уникальный идентификатор бэкапа сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
+    backupId := int32(1051) // int32 | ID бэкапа сервера.
     performActionOnBackupRequest := *openapiclient.NewPerformActionOnBackupRequest("mount") // PerformActionOnBackupRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1834,9 +1834,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
-**backupId** | **int32** | Уникальный идентификатор бэкапа сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
+**backupId** | **int32** | ID бэкапа сервера. | 
 
 ### Other Parameters
 
@@ -1889,7 +1889,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     performActionOnServerRequest := *openapiclient.NewPerformActionOnServerRequest("Action_example") // PerformActionOnServerRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1908,7 +1908,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -1959,7 +1959,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1977,7 +1977,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -2027,7 +2027,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2045,7 +2045,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -2095,7 +2095,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2113,7 +2113,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -2163,7 +2163,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2181,7 +2181,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -2231,7 +2231,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     updateServer := *openapiclient.NewUpdateServer() // UpdateServer | 
 
     configuration := openapiclient.NewConfiguration()
@@ -2252,7 +2252,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -2303,8 +2303,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
     updateServerDiskRequest := *openapiclient.NewUpdateServerDiskRequest(float32(10240)) // UpdateServerDiskRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -2325,8 +2325,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
 
 ### Other Parameters
 
@@ -2378,8 +2378,8 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
     autoBackup := *openapiclient.NewAutoBackup(true) // AutoBackup | При значении `is_enabled`: `true`, поля `copy_count`, `creation_start_at`, `interval` являются обязательными (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -2400,8 +2400,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
 
 ### Other Parameters
 
@@ -2453,9 +2453,9 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
-    diskId := int32(1051) // int32 | Уникальный идентификатор диска сервера.
-    backupId := int32(1051) // int32 | Уникальный идентификатор бэкапа сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
+    backupId := int32(1051) // int32 | ID бэкапа сервера.
     updateServerDiskBackupRequest := *openapiclient.NewUpdateServerDiskBackupRequest("comment") // UpdateServerDiskBackupRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -2476,9 +2476,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
-**diskId** | **int32** | Уникальный идентификатор диска сервера. | 
-**backupId** | **int32** | Уникальный идентификатор бэкапа сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
+**backupId** | **int32** | ID бэкапа сервера. | 
 
 ### Other Parameters
 
@@ -2531,7 +2531,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     updateServerIPRequest := *openapiclient.NewUpdateServerIPRequest("1.1.1.1", "1197521-cl1233.tw1.ru") // UpdateServerIPRequest | 
 
     configuration := openapiclient.NewConfiguration()
@@ -2552,7 +2552,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -2603,7 +2603,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     updateServerNATRequest := *openapiclient.NewUpdateServerNATRequest("no_nat") // UpdateServerNATRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -2622,7 +2622,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 
@@ -2673,7 +2673,7 @@ import (
 )
 
 func main() {
-    serverId := int32(1051) // int32 | Уникальный идентификатор облачного сервера.
+    serverId := int32(1051) // int32 | ID облачного сервера.
     updateServerOSBootModeRequest := *openapiclient.NewUpdateServerOSBootModeRequest("default") // UpdateServerOSBootModeRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -2692,7 +2692,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **int32** | Уникальный идентификатор облачного сервера. | 
+**serverId** | **int32** | ID облачного сервера. | 
 
 ### Other Parameters
 

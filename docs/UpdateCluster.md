@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Название кластера базы данных. | [optional] 
-**PresetId** | Pointer to **int32** | Идентификатор тарифа. | [optional] 
+**PresetId** | Pointer to **int32** | ID тарифа. | [optional] 
 **Description** | Pointer to **string** | Описание кластера базы данных | [optional] 
 **IsEnabledPublicNetwork** | Pointer to **bool** | Доступность публичного IP-адреса | [optional] 
 

@@ -47,7 +47,7 @@ import (
 )
 
 func main() {
-    clusterIn := *openapiclient.NewClusterIn("Name_example", false, "K8sVersion_example", "NetworkDriver_example", false, int32(123)) // ClusterIn | 
+    clusterIn := *openapiclient.NewClusterIn("Name_example", "K8sVersion_example", "NetworkDriver_example", int32(123)) // ClusterIn | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -113,8 +113,8 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
-    nodeGroupIn := *openapiclient.NewNodeGroupIn("Name_example", int32(123), int32(123)) // NodeGroupIn | 
+    clusterId := int32(56) // int32 | ID кластера
+    nodeGroupIn := *openapiclient.NewNodeGroupIn("Name_example", int32(123)) // NodeGroupIn | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -134,7 +134,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 
@@ -185,7 +185,7 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
+    clusterId := int32(56) // int32 | ID кластера
     hash := "15095f25-aac3-4d60-a788-96cb5136f186" // string | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. (optional)
     code := "0000" // string | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true` (optional)
 
@@ -207,7 +207,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 
@@ -259,8 +259,8 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
-    nodeId := int32(56) // int32 | Уникальный идентификатор группы нод
+    clusterId := int32(56) // int32 | ID кластера
+    nodeId := int32(56) // int32 | ID группы нод
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -278,8 +278,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
-**nodeId** | **int32** | Уникальный идентификатор группы нод | 
+**clusterId** | **int32** | ID кластера | 
+**nodeId** | **int32** | ID группы нод | 
 
 ### Other Parameters
 
@@ -330,8 +330,8 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
-    groupId := int32(56) // int32 | Уникальный идентификатор группы
+    clusterId := int32(56) // int32 | ID кластера
+    groupId := int32(56) // int32 | ID группы
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -349,8 +349,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
-**groupId** | **int32** | Уникальный идентификатор группы | 
+**clusterId** | **int32** | ID кластера | 
+**groupId** | **int32** | ID группы | 
 
 ### Other Parameters
 
@@ -401,7 +401,7 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
+    clusterId := int32(56) // int32 | ID кластера
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -421,7 +421,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 
@@ -471,7 +471,7 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
+    clusterId := int32(56) // int32 | ID кластера
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -491,7 +491,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 
@@ -541,8 +541,8 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
-    groupId := int32(56) // int32 | Уникальный идентификатор группы
+    clusterId := int32(56) // int32 | ID кластера
+    groupId := int32(56) // int32 | ID группы
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -562,8 +562,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
-**groupId** | **int32** | Уникальный идентификатор группы | 
+**clusterId** | **int32** | ID кластера | 
+**groupId** | **int32** | ID группы | 
 
 ### Other Parameters
 
@@ -614,7 +614,7 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
+    clusterId := int32(56) // int32 | ID кластера
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -634,7 +634,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 
@@ -684,7 +684,7 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
+    clusterId := int32(56) // int32 | ID кластера
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -704,7 +704,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 
@@ -754,8 +754,8 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
-    groupId := int32(56) // int32 | Уникальный идентификатор группы
+    clusterId := int32(56) // int32 | ID кластера
+    groupId := int32(56) // int32 | ID группы
     limit := int32(56) // int32 | Обозначает количество записей, которое необходимо вернуть. (optional) (default to 100)
     offset := int32(56) // int32 | Указывает на смещение, относительно начала списка. (optional) (default to 0)
 
@@ -777,8 +777,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
-**groupId** | **int32** | Уникальный идентификатор группы | 
+**clusterId** | **int32** | ID кластера | 
+**groupId** | **int32** | ID группы | 
 
 ### Other Parameters
 
@@ -831,7 +831,7 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
+    clusterId := int32(56) // int32 | ID кластера
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -851,7 +851,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 
@@ -1152,8 +1152,8 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
-    groupId := int32(56) // int32 | Уникальный идентификатор группы
+    clusterId := int32(56) // int32 | ID кластера
+    groupId := int32(56) // int32 | ID группы
     nodeCount := *openapiclient.NewNodeCount(int32(2)) // NodeCount | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1174,8 +1174,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
-**groupId** | **int32** | Уникальный идентификатор группы | 
+**clusterId** | **int32** | ID кластера | 
+**groupId** | **int32** | ID группы | 
 
 ### Other Parameters
 
@@ -1227,8 +1227,8 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
-    groupId := int32(56) // int32 | Уникальный идентификатор группы
+    clusterId := int32(56) // int32 | ID кластера
+    groupId := int32(56) // int32 | ID группы
     nodeCount := *openapiclient.NewNodeCount(int32(2)) // NodeCount | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1247,8 +1247,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
-**groupId** | **int32** | Уникальный идентификатор группы | 
+**clusterId** | **int32** | ID кластера | 
+**groupId** | **int32** | ID группы | 
 
 ### Other Parameters
 
@@ -1300,7 +1300,7 @@ import (
 )
 
 func main() {
-    clusterId := int32(56) // int32 | Уникальный идентификатор кластера
+    clusterId := int32(56) // int32 | ID кластера
     clusterEdit := *openapiclient.NewClusterEdit() // ClusterEdit | 
 
     configuration := openapiclient.NewConfiguration()
@@ -1321,7 +1321,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **int32** | Уникальный идентификатор кластера | 
+**clusterId** | **int32** | ID кластера | 
 
 ### Other Parameters
 

@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Configurator** | Pointer to [**UpdateServerConfigurator**](UpdateServerConfigurator.md) |  | [optional] 
-**OsId** | Pointer to **float32** | Уникальный идентификатор операционной системы, которая будет установлена на облачный сервер. | [optional] 
-**SoftwareId** | Pointer to **float32** | Уникальный идентификатор программного обеспечения сервера. | [optional] 
-**PresetId** | Pointer to **float32** | Уникальный идентификатор тарифа сервера. Нельзя передавать вместе с ключом &#x60;configurator&#x60;. | [optional] 
+**OsId** | Pointer to **float32** | ID операционной системы, которая будет установлена на облачный сервер. | [optional] 
+**SoftwareId** | Pointer to **float32** | ID программного обеспечения сервера. | [optional] 
+**PresetId** | Pointer to **float32** | ID тарифа сервера. Нельзя передавать вместе с ключом &#x60;configurator&#x60;. | [optional] 
 **Bandwidth** | Pointer to **float32** | Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100. | [optional] 
 **Name** | Pointer to **string** | Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным. | [optional] 
-**AvatarId** | Pointer to **string** | Уникальный идентификатор аватара сервера. Описание методов работы с аватарами появится позднее. | [optional] 
+**AvatarId** | Pointer to **string** | ID аватара сервера. Описание методов работы с аватарами появится позднее. | [optional] 
 **Comment** | Pointer to **string** | Комментарий к облачному серверу. Максимальная длина — 255 символов. | [optional] 
-**ImageId** | Pointer to **string** | Уникальный идентификатор образа, который будет установлен на облачный сервер. Нельзя передавать вместе с &#x60;os_id&#x60;. | [optional] 
+**ImageId** | Pointer to **string** | ID образа, который будет установлен на облачный сервер. Нельзя передавать вместе с &#x60;os_id&#x60;. | [optional] 
 **CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
 
 ## Methods

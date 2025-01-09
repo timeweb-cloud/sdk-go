@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **IsAutoprolongEnabled** | Pointer to **bool** | Это логическое значение, которое показывает, включено ли автопродление домена. | [optional] 
 **IsWhoisPrivacyEnabled** | Pointer to **bool** | Это логическое значение, которое показывает, включено ли скрытие данных администратора домена для whois. Опция недоступна для доменов в зонах .ru и .рф. | [optional] 
 **Period** | Pointer to [**DomainPaymentPeriod**](DomainPaymentPeriod.md) |  | [optional] 
-**PersonId** | Pointer to **float32** | Идентификатор администратора, на которого зарегистрирован домен. | [optional] 
+**PersonId** | Pointer to **float32** | ID администратора, на которого зарегистрирован домен. | [optional] 
 **Prime** | Pointer to [**DomainPrimeType**](DomainPrimeType.md) |  | [optional] 
 
 ## Methods

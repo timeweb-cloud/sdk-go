@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **float32** | Уникальный идентификатор ПО из маркетплейса. | [optional] 
+**Id** | Pointer to **float32** | ID ПО из маркетплейса. | [optional] 
 **Name** | Pointer to **string** | Имя ПО из маркетплейса. | [optional] 
 **OsIds** | Pointer to **[]float32** | Список id операционных систем, на которых доступна установка ПО. | [optional] 
 **Description** | Pointer to **string** | Описание ПО из маркетплейса. | [optional] 
