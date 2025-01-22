@@ -44509,6 +44509,13 @@ components:
           - starting
           - stopped
           - no_paid
+          - lan_transfer
+          - error
+          - blocked
+          - backup_recovery
+          - rebooting
+          - turning_off
+          - turning_on
           example: started
           type: string
         preset_id:
