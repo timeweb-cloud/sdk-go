@@ -28,6 +28,8 @@ type CreateDns struct {
 	Type string `json:"type"`
 	// Значение DNS-записи.
 	Value string `json:"value"`
+	// Время жизни DNS-записи.
+	Ttl NullableFloat32 `json:"ttl,omitempty"`
 }
 
 // NewCreateDns instantiates a new CreateDns object
@@ -161,6 +163,48 @@ func (o *CreateDns) SetValue(v string) {
 	o.Value = v
 }
 
+// GetTtl returns the Ttl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateDns) GetTtl() float32 {
+	if o == nil || IsNil(o.Ttl.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.Ttl.Get()
+}
+
+// GetTtlOk returns a tuple with the Ttl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateDns) GetTtlOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ttl.Get(), o.Ttl.IsSet()
+}
+
+// HasTtl returns a boolean if a field has been set.
+func (o *CreateDns) HasTtl() bool {
+	if o != nil && o.Ttl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTtl gets a reference to the given NullableFloat32 and assigns it to the Ttl field.
+func (o *CreateDns) SetTtl(v float32) {
+	o.Ttl.Set(&v)
+}
+// SetTtlNil sets the value for Ttl to be an explicit nil
+func (o *CreateDns) SetTtlNil() {
+	o.Ttl.Set(nil)
+}
+
+// UnsetTtl ensures that no value is present for Ttl, not even an explicit nil
+func (o *CreateDns) UnsetTtl() {
+	o.Ttl.Unset()
+}
+
 func (o CreateDns) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -179,6 +223,9 @@ func (o CreateDns) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["type"] = o.Type
 	toSerialize["value"] = o.Value
+	if o.Ttl.IsSet() {
+		toSerialize["ttl"] = o.Ttl.Get()
+	}
 	return toSerialize, nil
 }
 

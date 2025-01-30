@@ -25,6 +25,8 @@ type DnsRecord struct {
 	// ID DNS-записи.
 	Id NullableFloat32 `json:"id,omitempty"`
 	Data DnsRecordData `json:"data"`
+	// Время жизни DNS-записи.
+	Ttl NullableFloat32 `json:"ttl,omitempty"`
 }
 
 // NewDnsRecord instantiates a new DnsRecord object
@@ -136,6 +138,48 @@ func (o *DnsRecord) SetData(v DnsRecordData) {
 	o.Data = v
 }
 
+// GetTtl returns the Ttl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DnsRecord) GetTtl() float32 {
+	if o == nil || IsNil(o.Ttl.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.Ttl.Get()
+}
+
+// GetTtlOk returns a tuple with the Ttl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DnsRecord) GetTtlOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ttl.Get(), o.Ttl.IsSet()
+}
+
+// HasTtl returns a boolean if a field has been set.
+func (o *DnsRecord) HasTtl() bool {
+	if o != nil && o.Ttl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTtl gets a reference to the given NullableFloat32 and assigns it to the Ttl field.
+func (o *DnsRecord) SetTtl(v float32) {
+	o.Ttl.Set(&v)
+}
+// SetTtlNil sets the value for Ttl to be an explicit nil
+func (o *DnsRecord) SetTtlNil() {
+	o.Ttl.Set(nil)
+}
+
+// UnsetTtl ensures that no value is present for Ttl, not even an explicit nil
+func (o *DnsRecord) UnsetTtl() {
+	o.Ttl.Unset()
+}
+
 func (o DnsRecord) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -151,6 +195,9 @@ func (o DnsRecord) ToMap() (map[string]interface{}, error) {
 		toSerialize["id"] = o.Id.Get()
 	}
 	toSerialize["data"] = o.Data
+	if o.Ttl.IsSet() {
+		toSerialize["ttl"] = o.Ttl.Get()
+	}
 	return toSerialize, nil
 }
 

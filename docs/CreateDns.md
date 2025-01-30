@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Subdomain** | Pointer to **string** | Полное имя поддомена. | [optional] 
 **Type** | **string** | Тип DNS-записи. | 
 **Value** | **string** | Значение DNS-записи. | 
+**Ttl** | Pointer to **NullableFloat32** | Время жизни DNS-записи. | [optional] 
 
 ## Methods
 
@@ -118,6 +119,41 @@ and a boolean to check if the value has been set.
 SetValue sets Value field to given value.
 
 
+### GetTtl
+
+`func (o *CreateDns) GetTtl() float32`
+
+GetTtl returns the Ttl field if non-nil, zero value otherwise.
+
+### GetTtlOk
+
+`func (o *CreateDns) GetTtlOk() (*float32, bool)`
+
+GetTtlOk returns a tuple with the Ttl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTtl
+
+`func (o *CreateDns) SetTtl(v float32)`
+
+SetTtl sets Ttl field to given value.
+
+### HasTtl
+
+`func (o *CreateDns) HasTtl() bool`
+
+HasTtl returns a boolean if a field has been set.
+
+### SetTtlNil
+
+`func (o *CreateDns) SetTtlNil(b bool)`
+
+ SetTtlNil sets the value for Ttl to be an explicit nil
+
+### UnsetTtl
+`func (o *CreateDns) UnsetTtl()`
+
+UnsetTtl ensures that no value is present for Ttl, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

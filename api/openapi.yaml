@@ -48796,6 +48796,7 @@ components:
           value: 98.76.54.32
         id: 123
         type: A
+        ttl: 600
       properties:
         type:
           description: Тип DNS-записи.
@@ -48815,6 +48816,11 @@ components:
           type: number
         data:
           $ref: '#/components/schemas/dns_record_data'
+        ttl:
+          description: Время жизни DNS-записи.
+          example: 600
+          nullable: true
+          type: number
       required:
       - data
       - type
@@ -48844,6 +48850,11 @@ components:
           description: Значение DNS-записи.
           example: 192.168.111.123
           type: string
+        ttl:
+          description: Время жизни DNS-записи.
+          example: 600
+          nullable: true
+          type: number
       required:
       - type
       - value
@@ -55161,12 +55172,14 @@ components:
             value: 98.76.54.32
           id: 123
           type: A
+          ttl: 600
         - data:
             subdomain: sub.somedomain.ru
             priority: 0
             value: 98.76.54.32
           id: 123
           type: A
+          ttl: 600
         meta:
           total: 10
       properties:
@@ -55189,6 +55202,7 @@ components:
             value: 98.76.54.32
           id: 123
           type: A
+          ttl: 600
       properties:
         dns_record:
           $ref: '#/components/schemas/dns-record'
