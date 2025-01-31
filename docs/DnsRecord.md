@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | Тип DNS-записи. | 
 **Id** | Pointer to **NullableFloat32** | ID DNS-записи. | [optional] 
 **Data** | [**DnsRecordData**](DnsRecordData.md) |  | 
-**Ttl** | Pointer to **NullableFloat32** | Время жизни DNS-записи. | [optional] 
+**Ttl** | Pointer to **float32** | Время жизни DNS-записи. | [optional] 
 
 ## Methods
 
@@ -128,16 +128,6 @@ SetTtl sets Ttl field to given value.
 
 HasTtl returns a boolean if a field has been set.
 
-### SetTtlNil
-
-`func (o *DnsRecord) SetTtlNil(b bool)`
-
- SetTtlNil sets the value for Ttl to be an explicit nil
-
-### UnsetTtl
-`func (o *DnsRecord) UnsetTtl()`
-
-UnsetTtl ensures that no value is present for Ttl, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

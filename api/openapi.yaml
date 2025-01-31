@@ -48819,7 +48819,6 @@ components:
         ttl:
           description: Время жизни DNS-записи.
           example: 600
-          nullable: true
           type: number
       required:
       - data
@@ -48853,7 +48852,6 @@ components:
         ttl:
           description: Время жизни DNS-записи.
           example: 600
-          nullable: true
           type: number
       required:
       - type

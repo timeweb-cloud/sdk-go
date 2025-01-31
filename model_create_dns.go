@@ -29,7 +29,7 @@ type CreateDns struct {
 	// Значение DNS-записи.
 	Value string `json:"value"`
 	// Время жизни DNS-записи.
-	Ttl NullableFloat32 `json:"ttl,omitempty"`
+	Ttl *float32 `json:"ttl,omitempty"`
 }
 
 // NewCreateDns instantiates a new CreateDns object
@@ -163,46 +163,36 @@ func (o *CreateDns) SetValue(v string) {
 	o.Value = v
 }
 
-// GetTtl returns the Ttl field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetTtl returns the Ttl field value if set, zero value otherwise.
 func (o *CreateDns) GetTtl() float32 {
-	if o == nil || IsNil(o.Ttl.Get()) {
+	if o == nil || IsNil(o.Ttl) {
 		var ret float32
 		return ret
 	}
-	return *o.Ttl.Get()
+	return *o.Ttl
 }
 
 // GetTtlOk returns a tuple with the Ttl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateDns) GetTtlOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Ttl) {
 		return nil, false
 	}
-	return o.Ttl.Get(), o.Ttl.IsSet()
+	return o.Ttl, true
 }
 
 // HasTtl returns a boolean if a field has been set.
 func (o *CreateDns) HasTtl() bool {
-	if o != nil && o.Ttl.IsSet() {
+	if o != nil && !IsNil(o.Ttl) {
 		return true
 	}
 
 	return false
 }
 
-// SetTtl gets a reference to the given NullableFloat32 and assigns it to the Ttl field.
+// SetTtl gets a reference to the given float32 and assigns it to the Ttl field.
 func (o *CreateDns) SetTtl(v float32) {
-	o.Ttl.Set(&v)
-}
-// SetTtlNil sets the value for Ttl to be an explicit nil
-func (o *CreateDns) SetTtlNil() {
-	o.Ttl.Set(nil)
-}
-
-// UnsetTtl ensures that no value is present for Ttl, not even an explicit nil
-func (o *CreateDns) UnsetTtl() {
-	o.Ttl.Unset()
+	o.Ttl = &v
 }
 
 func (o CreateDns) MarshalJSON() ([]byte, error) {
@@ -223,8 +213,8 @@ func (o CreateDns) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["type"] = o.Type
 	toSerialize["value"] = o.Value
-	if o.Ttl.IsSet() {
-		toSerialize["ttl"] = o.Ttl.Get()
+	if !IsNil(o.Ttl) {
+		toSerialize["ttl"] = o.Ttl
 	}
 	return toSerialize, nil
 }
