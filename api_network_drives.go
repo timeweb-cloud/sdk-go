@@ -1062,7 +1062,7 @@ func (a *NetworkDrivesAPIService) MountNetworkDriveExecute(r ApiMountNetworkDriv
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/network-drives/{network_drive_id}/bind"
+	localVarPath := localBasePath + "/api/v1/network-drives/{network_drive_id}/mount"
 	localVarPath = strings.Replace(localVarPath, "{"+"network-drive-id"+"}", url.PathEscape(parameterValueToString(r.networkDriveId, "networkDriveId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1224,7 +1224,7 @@ func (a *NetworkDrivesAPIService) UnmountNetworkDriveExecute(r ApiUnmountNetwork
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/network-drives/{network_drive_id}/unbind"
+	localVarPath := localBasePath + "/api/v1/network-drives/{network_drive_id}/unmount"
 	localVarPath = strings.Replace(localVarPath, "{"+"network-drive-id"+"}", url.PathEscape(parameterValueToString(r.networkDriveId, "networkDriveId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

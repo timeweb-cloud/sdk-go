@@ -400,8 +400,8 @@ Class | Method | HTTP request | Description
 *NetworkDrivesAPI* | [**GetNetworkDrives**](docs/NetworkDrivesAPI.md#getnetworkdrives) | **Get** /api/v1/network-drives | Получение списка cетевых дисков
 *NetworkDrivesAPI* | [**GetNetworkDrivesAvailableResources**](docs/NetworkDrivesAPI.md#getnetworkdrivesavailableresources) | **Get** /api/v1/network-drives/available-resources | Получение списка сервисов доступных для подключения диска
 *NetworkDrivesAPI* | [**GetNetworkDrivesPresets**](docs/NetworkDrivesAPI.md#getnetworkdrivespresets) | **Get** /api/v1/presets/network-drives | Получение списка доступных тарифов для сетевого диска
-*NetworkDrivesAPI* | [**MountNetworkDrive**](docs/NetworkDrivesAPI.md#mountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/bind | Подключить сетевой диск к сервису
-*NetworkDrivesAPI* | [**UnmountNetworkDrive**](docs/NetworkDrivesAPI.md#unmountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/unbind | Отключить сетевой диск от сервиса
+*NetworkDrivesAPI* | [**MountNetworkDrive**](docs/NetworkDrivesAPI.md#mountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/mount | Подключить сетевой диск к сервису
+*NetworkDrivesAPI* | [**UnmountNetworkDrive**](docs/NetworkDrivesAPI.md#unmountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/unmount | Отключить сетевой диск от сервиса
 *NetworkDrivesAPI* | [**UpdateNetworkDrive**](docs/NetworkDrivesAPI.md#updatenetworkdrive) | **Patch** /api/v1/network-drives/{network_drive_id} | Изменение сетевого диска по ID
 *ProjectsAPI* | [**AddBalancerToProject**](docs/ProjectsAPI.md#addbalancertoproject) | **Post** /api/v1/projects/{project_id}/resources/balancers | Добавление балансировщика в проект
 *ProjectsAPI* | [**AddClusterToProject**](docs/ProjectsAPI.md#addclustertoproject) | **Post** /api/v1/projects/{project_id}/resources/clusters | Добавление кластера в проект

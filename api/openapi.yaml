@@ -41655,7 +41655,7 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/network-drives/{network_drive_id}/bind:
+  /api/v1/network-drives/{network_drive_id}/mount:
     post:
       description: "Чтобы подключить сетевой диск к сервису, отправьте POST-запрос\
         \ на `/api/v1/network-drives/{network_drive_id}/mount`."
@@ -41800,7 +41800,7 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/network-drives/{network_drive_id}/unbind:
+  /api/v1/network-drives/{network_drive_id}/unmount:
     post:
       description: "Чтобы отключить сетевой диск от сервиса, отправьте POST-запрос\
         \ на `/api/v1/network-drives/{network_drive_id}/unmount`."
