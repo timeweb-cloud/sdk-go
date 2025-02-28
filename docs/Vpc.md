@@ -13,12 +13,13 @@ Name | Type | Description | Notes
 **AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
 **PublicIp** | **NullableString** | Публичный IP-адрес сети. | 
 **Type** | **string** | Тип сети. | 
+**BusyAddress** | **[]string** | Занятые адреса в сети | 
 
 ## Methods
 
 ### NewVpc
 
-`func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, description string, availabilityZone AvailabilityZone, publicIp NullableString, type_ string, ) *Vpc`
+`func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, description string, availabilityZone AvailabilityZone, publicIp NullableString, type_ string, busyAddress []string, ) *Vpc`
 
 NewVpc instantiates a new Vpc object
 This constructor will assign default values to properties that have it defined,
@@ -221,6 +222,26 @@ and a boolean to check if the value has been set.
 `func (o *Vpc) SetType(v string)`
 
 SetType sets Type field to given value.
+
+
+### GetBusyAddress
+
+`func (o *Vpc) GetBusyAddress() []string`
+
+GetBusyAddress returns the BusyAddress field if non-nil, zero value otherwise.
+
+### GetBusyAddressOk
+
+`func (o *Vpc) GetBusyAddressOk() (*[]string, bool)`
+
+GetBusyAddressOk returns a tuple with the BusyAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBusyAddress
+
+`func (o *Vpc) SetBusyAddress(v []string)`
+
+SetBusyAddress sets BusyAddress field to given value.
 
 
 

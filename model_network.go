@@ -25,6 +25,8 @@ type Network struct {
 	// Плавающий IP-адрес
 	FloatingIp *string `json:"floating_ip,omitempty"`
 	// IP-адрес в сети.
+	LocalIp *string `json:"local_ip,omitempty"`
+	// IP-адрес в сети.
 	// Deprecated
 	Ip *string `json:"ip,omitempty"`
 }
@@ -103,6 +105,38 @@ func (o *Network) SetFloatingIp(v string) {
 	o.FloatingIp = &v
 }
 
+// GetLocalIp returns the LocalIp field value if set, zero value otherwise.
+func (o *Network) GetLocalIp() string {
+	if o == nil || IsNil(o.LocalIp) {
+		var ret string
+		return ret
+	}
+	return *o.LocalIp
+}
+
+// GetLocalIpOk returns a tuple with the LocalIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Network) GetLocalIpOk() (*string, bool) {
+	if o == nil || IsNil(o.LocalIp) {
+		return nil, false
+	}
+	return o.LocalIp, true
+}
+
+// HasLocalIp returns a boolean if a field has been set.
+func (o *Network) HasLocalIp() bool {
+	if o != nil && !IsNil(o.LocalIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocalIp gets a reference to the given string and assigns it to the LocalIp field.
+func (o *Network) SetLocalIp(v string) {
+	o.LocalIp = &v
+}
+
 // GetIp returns the Ip field value if set, zero value otherwise.
 // Deprecated
 func (o *Network) GetIp() string {
@@ -151,6 +185,9 @@ func (o Network) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	if !IsNil(o.FloatingIp) {
 		toSerialize["floating_ip"] = o.FloatingIp
+	}
+	if !IsNil(o.LocalIp) {
+		toSerialize["local_ip"] = o.LocalIp
 	}
 	if !IsNil(o.Ip) {
 		toSerialize["ip"] = o.Ip

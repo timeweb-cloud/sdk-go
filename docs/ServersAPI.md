@@ -208,7 +208,7 @@ import (
 )
 
 func main() {
-    createServer := *openapiclient.NewCreateServer(true, float32(200), "name") // CreateServer | 
+    createServer := *openapiclient.NewCreateServer("name") // CreateServer | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

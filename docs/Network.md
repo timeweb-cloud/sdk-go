@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | ID сети. | 
 **FloatingIp** | Pointer to **string** | Плавающий IP-адрес | [optional] 
+**LocalIp** | Pointer to **string** | IP-адрес в сети. | [optional] 
 **Ip** | Pointer to **string** | IP-адрес в сети. | [optional] 
 
 ## Methods
@@ -71,6 +72,31 @@ SetFloatingIp sets FloatingIp field to given value.
 `func (o *Network) HasFloatingIp() bool`
 
 HasFloatingIp returns a boolean if a field has been set.
+
+### GetLocalIp
+
+`func (o *Network) GetLocalIp() string`
+
+GetLocalIp returns the LocalIp field if non-nil, zero value otherwise.
+
+### GetLocalIpOk
+
+`func (o *Network) GetLocalIpOk() (*string, bool)`
+
+GetLocalIpOk returns a tuple with the LocalIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalIp
+
+`func (o *Network) SetLocalIp(v string)`
+
+SetLocalIp sets LocalIp field to given value.
+
+### HasLocalIp
+
+`func (o *Network) HasLocalIp() bool`
+
+HasLocalIp returns a boolean if a field has been set.
 
 ### GetIp
 

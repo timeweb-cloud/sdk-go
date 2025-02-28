@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Configuration** | Pointer to [**CreateServerConfiguration**](CreateServerConfiguration.md) |  | [optional] 
-**IsDdosGuard** | **bool** | Защита от DDoS. Серверу выдается защищенный IP-адрес с защитой уровня L3 / L4. Для включения защиты уровня L7 необходимо создать тикет в техническую поддержку. | 
+**IsDdosGuard** | Pointer to **bool** | Защита от DDoS. Серверу выдается защищенный IP-адрес с защитой уровня L3 / L4. Для включения защиты уровня L7 необходимо создать тикет в техническую поддержку. | [optional] 
 **OsId** | Pointer to **float32** | ID операционной системы, которая будет установлена на облачный сервер. Нельзя передавать вместе с &#x60;image_id&#x60;. | [optional] 
 **ImageId** | Pointer to **string** | ID образа, который будет установлен на облачный сервер. Нельзя передавать вместе с &#x60;os_id&#x60;. | [optional] 
 **SoftwareId** | Pointer to **float32** | ID программного обеспечения сервера. | [optional] 
 **PresetId** | Pointer to **float32** | ID тарифа сервера. Нельзя передавать вместе с ключом &#x60;configurator&#x60;. | [optional] 
-**Bandwidth** | **float32** | Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100. | 
+**Bandwidth** | Pointer to **float32** | Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100. | [optional] 
 **Name** | **string** | Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным. | 
 **AvatarId** | Pointer to **string** | ID аватара сервера. Описание методов работы с аватарами появится позднее. | [optional] 
 **Comment** | Pointer to **string** | Комментарий к облачному серверу. Максимальная длина — 255 символов. | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewCreateServer
 
-`func NewCreateServer(isDdosGuard bool, bandwidth float32, name string, ) *CreateServer`
+`func NewCreateServer(name string, ) *CreateServer`
 
 NewCreateServer instantiates a new CreateServer object
 This constructor will assign default values to properties that have it defined,
@@ -83,6 +83,11 @@ and a boolean to check if the value has been set.
 
 SetIsDdosGuard sets IsDdosGuard field to given value.
 
+### HasIsDdosGuard
+
+`func (o *CreateServer) HasIsDdosGuard() bool`
+
+HasIsDdosGuard returns a boolean if a field has been set.
 
 ### GetOsId
 
@@ -203,6 +208,11 @@ and a boolean to check if the value has been set.
 
 SetBandwidth sets Bandwidth field to given value.
 
+### HasBandwidth
+
+`func (o *CreateServer) HasBandwidth() bool`
+
+HasBandwidth returns a boolean if a field has been set.
 
 ### GetName
 

@@ -38,13 +38,15 @@ type Vpc struct {
 	PublicIp NullableString `json:"public_ip"`
 	// Тип сети.
 	Type string `json:"type"`
+	// Занятые адреса в сети
+	BusyAddress []string `json:"busy_address"`
 }
 
 // NewVpc instantiates a new Vpc object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, description string, availabilityZone AvailabilityZone, publicIp NullableString, type_ string) *Vpc {
+func NewVpc(id string, name string, subnetV4 string, location string, createdAt time.Time, description string, availabilityZone AvailabilityZone, publicIp NullableString, type_ string, busyAddress []string) *Vpc {
 	this := Vpc{}
 	this.Id = id
 	this.Name = name
@@ -55,6 +57,7 @@ func NewVpc(id string, name string, subnetV4 string, location string, createdAt 
 	this.AvailabilityZone = availabilityZone
 	this.PublicIp = publicIp
 	this.Type = type_
+	this.BusyAddress = busyAddress
 	return &this
 }
 
@@ -284,6 +287,30 @@ func (o *Vpc) SetType(v string) {
 	o.Type = v
 }
 
+// GetBusyAddress returns the BusyAddress field value
+func (o *Vpc) GetBusyAddress() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.BusyAddress
+}
+
+// GetBusyAddressOk returns a tuple with the BusyAddress field value
+// and a boolean to check if the value has been set.
+func (o *Vpc) GetBusyAddressOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BusyAddress, true
+}
+
+// SetBusyAddress sets field value
+func (o *Vpc) SetBusyAddress(v []string) {
+	o.BusyAddress = v
+}
+
 func (o Vpc) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -303,6 +330,7 @@ func (o Vpc) ToMap() (map[string]interface{}, error) {
 	toSerialize["availability_zone"] = o.AvailabilityZone
 	toSerialize["public_ip"] = o.PublicIp.Get()
 	toSerialize["type"] = o.Type
+	toSerialize["busy_address"] = o.BusyAddress
 	return toSerialize, nil
 }
 

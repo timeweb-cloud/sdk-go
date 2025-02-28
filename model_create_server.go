@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateServer{}
 type CreateServer struct {
 	Configuration *CreateServerConfiguration `json:"configuration,omitempty"`
 	// Защита от DDoS. Серверу выдается защищенный IP-адрес с защитой уровня L3 / L4. Для включения защиты уровня L7 необходимо создать тикет в техническую поддержку.
-	IsDdosGuard bool `json:"is_ddos_guard"`
+	IsDdosGuard *bool `json:"is_ddos_guard,omitempty"`
 	// ID операционной системы, которая будет установлена на облачный сервер. Нельзя передавать вместе с `image_id`.
 	OsId *float32 `json:"os_id,omitempty"`
 	// ID образа, который будет установлен на облачный сервер. Нельзя передавать вместе с `os_id`.
@@ -32,7 +32,7 @@ type CreateServer struct {
 	// ID тарифа сервера. Нельзя передавать вместе с ключом `configurator`.
 	PresetId *float32 `json:"preset_id,omitempty"`
 	// Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100.
-	Bandwidth float32 `json:"bandwidth"`
+	Bandwidth *float32 `json:"bandwidth,omitempty"`
 	// Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным.
 	Name string `json:"name"`
 	// ID аватара сервера. Описание методов работы с аватарами появится позднее.
@@ -54,10 +54,8 @@ type CreateServer struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateServer(isDdosGuard bool, bandwidth float32, name string) *CreateServer {
+func NewCreateServer(name string) *CreateServer {
 	this := CreateServer{}
-	this.IsDdosGuard = isDdosGuard
-	this.Bandwidth = bandwidth
 	this.Name = name
 	return &this
 }
@@ -102,28 +100,36 @@ func (o *CreateServer) SetConfiguration(v CreateServerConfiguration) {
 	o.Configuration = &v
 }
 
-// GetIsDdosGuard returns the IsDdosGuard field value
+// GetIsDdosGuard returns the IsDdosGuard field value if set, zero value otherwise.
 func (o *CreateServer) GetIsDdosGuard() bool {
-	if o == nil {
+	if o == nil || IsNil(o.IsDdosGuard) {
 		var ret bool
 		return ret
 	}
-
-	return o.IsDdosGuard
+	return *o.IsDdosGuard
 }
 
-// GetIsDdosGuardOk returns a tuple with the IsDdosGuard field value
+// GetIsDdosGuardOk returns a tuple with the IsDdosGuard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateServer) GetIsDdosGuardOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IsDdosGuard) {
 		return nil, false
 	}
-	return &o.IsDdosGuard, true
+	return o.IsDdosGuard, true
 }
 
-// SetIsDdosGuard sets field value
+// HasIsDdosGuard returns a boolean if a field has been set.
+func (o *CreateServer) HasIsDdosGuard() bool {
+	if o != nil && !IsNil(o.IsDdosGuard) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsDdosGuard gets a reference to the given bool and assigns it to the IsDdosGuard field.
 func (o *CreateServer) SetIsDdosGuard(v bool) {
-	o.IsDdosGuard = v
+	o.IsDdosGuard = &v
 }
 
 // GetOsId returns the OsId field value if set, zero value otherwise.
@@ -254,28 +260,36 @@ func (o *CreateServer) SetPresetId(v float32) {
 	o.PresetId = &v
 }
 
-// GetBandwidth returns the Bandwidth field value
+// GetBandwidth returns the Bandwidth field value if set, zero value otherwise.
 func (o *CreateServer) GetBandwidth() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.Bandwidth) {
 		var ret float32
 		return ret
 	}
-
-	return o.Bandwidth
+	return *o.Bandwidth
 }
 
-// GetBandwidthOk returns a tuple with the Bandwidth field value
+// GetBandwidthOk returns a tuple with the Bandwidth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateServer) GetBandwidthOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Bandwidth) {
 		return nil, false
 	}
-	return &o.Bandwidth, true
+	return o.Bandwidth, true
 }
 
-// SetBandwidth sets field value
+// HasBandwidth returns a boolean if a field has been set.
+func (o *CreateServer) HasBandwidth() bool {
+	if o != nil && !IsNil(o.Bandwidth) {
+		return true
+	}
+
+	return false
+}
+
+// SetBandwidth gets a reference to the given float32 and assigns it to the Bandwidth field.
 func (o *CreateServer) SetBandwidth(v float32) {
-	o.Bandwidth = v
+	o.Bandwidth = &v
 }
 
 // GetName returns the Name field value
@@ -542,7 +556,9 @@ func (o CreateServer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Configuration) {
 		toSerialize["configuration"] = o.Configuration
 	}
-	toSerialize["is_ddos_guard"] = o.IsDdosGuard
+	if !IsNil(o.IsDdosGuard) {
+		toSerialize["is_ddos_guard"] = o.IsDdosGuard
+	}
 	if !IsNil(o.OsId) {
 		toSerialize["os_id"] = o.OsId
 	}
@@ -555,7 +571,9 @@ func (o CreateServer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PresetId) {
 		toSerialize["preset_id"] = o.PresetId
 	}
-	toSerialize["bandwidth"] = o.Bandwidth
+	if !IsNil(o.Bandwidth) {
+		toSerialize["bandwidth"] = o.Bandwidth
+	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.AvatarId) {
 		toSerialize["avatar_id"] = o.AvatarId
