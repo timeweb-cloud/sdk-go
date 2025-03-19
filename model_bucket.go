@@ -24,6 +24,8 @@ type Bucket struct {
 	Id float32 `json:"id"`
 	// Удобочитаемое имя, установленное для хранилища.
 	Name string `json:"name"`
+	// Комментарий к хранилищу.
+	Description *string `json:"description,omitempty"`
 	DiskStats BucketDiskStats `json:"disk_stats"`
 	// Тип хранилища.
 	Type string `json:"type"`
@@ -117,6 +119,38 @@ func (o *Bucket) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *Bucket) SetName(v string) {
 	o.Name = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *Bucket) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Bucket) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *Bucket) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *Bucket) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetDiskStats returns the DiskStats field value
@@ -349,6 +383,9 @@ func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["disk_stats"] = o.DiskStats
 	toSerialize["type"] = o.Type
 	toSerialize["preset_id"] = o.PresetId.Get()

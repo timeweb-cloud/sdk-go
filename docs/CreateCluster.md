@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | [**DbType**](DbType.md) |  | 
 **Admin** | Pointer to [**CreateClusterAdmin**](CreateClusterAdmin.md) |  | [optional] 
 **Instance** | Pointer to [**CreateClusterInstance**](CreateClusterInstance.md) |  | [optional] 
-**HashType** | Pointer to **string** | Тип хеширования базы данных (mysql5 | mysql | postgres). | [optional] 
+**HashType** | Pointer to **string** | Тип хеширования базы данных (mysql | postgres). | [optional] 
 **PresetId** | **int32** | ID тарифа. | 
 **ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 

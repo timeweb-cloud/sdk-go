@@ -22,7 +22,7 @@ type DbType string
 // List of db-type
 const (
 	MYSQL DbType = "mysql"
-	MYSQL5 DbType = "mysql5"
+	MYSQL8_4 DbType = "mysql8_4"
 	POSTGRES14 DbType = "postgres14"
 	POSTGRES15 DbType = "postgres15"
 	POSTGRES16 DbType = "postgres16"
@@ -37,12 +37,14 @@ const (
 	KAFKA DbType = "kafka"
 	RABBITMQ DbType = "rabbitmq"
 	CLICKHOUSE DbType = "clickhouse"
+	CLICKHOUSE24 DbType = "clickhouse24"
+	CLICKHOUSE25 DbType = "clickhouse25"
 )
 
 // All allowed values of DbType enum
 var AllowedDbTypeEnumValues = []DbType{
 	"mysql",
-	"mysql5",
+	"mysql8_4",
 	"postgres14",
 	"postgres15",
 	"postgres16",
@@ -57,6 +59,8 @@ var AllowedDbTypeEnumValues = []DbType{
 	"kafka",
 	"rabbitmq",
 	"clickhouse",
+	"clickhouse24",
+	"clickhouse25",
 }
 
 func (v *DbType) UnmarshalJSON(src []byte) error {

@@ -24,6 +24,8 @@ type UpdateStorageRequest struct {
 	PresetId *float32 `json:"preset_id,omitempty"`
 	// Тип хранилища.
 	BucketType *string `json:"bucket_type,omitempty"`
+	// Комментарий к хранилищу.
+	Description *string `json:"description,omitempty"`
 }
 
 // NewUpdateStorageRequest instantiates a new UpdateStorageRequest object
@@ -107,6 +109,38 @@ func (o *UpdateStorageRequest) SetBucketType(v string) {
 	o.BucketType = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *UpdateStorageRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateStorageRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *UpdateStorageRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *UpdateStorageRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
 func (o UpdateStorageRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -122,6 +156,9 @@ func (o UpdateStorageRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.BucketType) {
 		toSerialize["bucket_type"] = o.BucketType
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 	return toSerialize, nil
 }

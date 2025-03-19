@@ -22,6 +22,8 @@ var _ MappedNullable = &CreateStorageRequest{}
 type CreateStorageRequest struct {
 	// Название хранилища.
 	Name string `json:"name"`
+	// Комментарий к хранилищу.
+	Description *string `json:"description,omitempty"`
 	// Тип хранилища.
 	Type string `json:"type"`
 	// ID тарифа.
@@ -70,6 +72,38 @@ func (o *CreateStorageRequest) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *CreateStorageRequest) SetName(v string) {
 	o.Name = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateStorageRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateStorageRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateStorageRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateStorageRequest) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetType returns the Type field value
@@ -131,6 +165,9 @@ func (o CreateStorageRequest) MarshalJSON() ([]byte, error) {
 func (o CreateStorageRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["type"] = o.Type
 	toSerialize["preset_id"] = o.PresetId
 	return toSerialize, nil

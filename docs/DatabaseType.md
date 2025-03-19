@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **Version** | **string** | Версия кластера базы данных. | 
 **Type** | **string** | Тип кластера базы данных. Передается при создании кластера в поле &#x60;type&#x60; | 
 **IsAvailableReplication** | **bool** | Поддерживает ли база данных репликацию. | 
+**IsDeprecated** | **bool** | Устарела ли версия базы. | 
 **Requirements** | Pointer to [**DatabaseTypeRequirements**](DatabaseTypeRequirements.md) |  | [optional] 
 
 ## Methods
 
 ### NewDatabaseType
 
-`func NewDatabaseType(name string, version string, type_ string, isAvailableReplication bool, ) *DatabaseType`
+`func NewDatabaseType(name string, version string, type_ string, isAvailableReplication bool, isDeprecated bool, ) *DatabaseType`
 
 NewDatabaseType instantiates a new DatabaseType object
 This constructor will assign default values to properties that have it defined,
@@ -107,6 +108,26 @@ and a boolean to check if the value has been set.
 `func (o *DatabaseType) SetIsAvailableReplication(v bool)`
 
 SetIsAvailableReplication sets IsAvailableReplication field to given value.
+
+
+### GetIsDeprecated
+
+`func (o *DatabaseType) GetIsDeprecated() bool`
+
+GetIsDeprecated returns the IsDeprecated field if non-nil, zero value otherwise.
+
+### GetIsDeprecatedOk
+
+`func (o *DatabaseType) GetIsDeprecatedOk() (*bool, bool)`
+
+GetIsDeprecatedOk returns a tuple with the IsDeprecated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeprecated
+
+`func (o *DatabaseType) SetIsDeprecated(v bool)`
+
+SetIsDeprecated sets IsDeprecated field to given value.
 
 
 ### GetRequirements

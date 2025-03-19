@@ -44212,7 +44212,7 @@ components:
       description: Тип базы данных.
       enum:
       - mysql
-      - mysql5
+      - mysql8_4
       - postgres14
       - postgres15
       - postgres16
@@ -44227,6 +44227,8 @@ components:
       - kafka
       - rabbitmq
       - clickhouse
+      - clickhouse24
+      - clickhouse25
       example: mysql
       type: string
     config-parameters:
@@ -44596,7 +44598,7 @@ components:
         instance:
           $ref: '#/components/schemas/create_cluster_instance'
         hash_type:
-          description: Тип хеширования базы данных (mysql5 | mysql | postgres).
+          description: Тип хеширования базы данных (mysql | postgres).
           enum:
           - caching_sha2
           - mysql_native
@@ -44867,6 +44869,7 @@ components:
           disk_min: 1024
           ram_min: 8192
           cpu_min: 1
+        is_deprecated: true
         is_available_replication: true
         name: mysql
         type: mysql5
@@ -44889,10 +44892,15 @@ components:
           description: Поддерживает ли база данных репликацию.
           example: true
           type: boolean
+        is_deprecated:
+          description: Устарела ли версия базы.
+          example: true
+          type: boolean
         requirements:
           $ref: '#/components/schemas/database_type_requirements'
       required:
       - is_available_replication
+      - is_deprecated
       - name
       - type
       - version
@@ -47511,6 +47519,7 @@ components:
           used: 486.11328125
         access_key: access_key
         name: Cute Quail
+        description: Bucket of awesome cats
         location: ru-1
         id: 1
         type: public
@@ -47525,6 +47534,10 @@ components:
         name:
           description: "Удобочитаемое имя, установленное для хранилища."
           example: Cute Quail
+          type: string
+        description:
+          description: Комментарий к хранилищу.
+          example: Bucket of awesome cats
           type: string
         disk_stats:
           $ref: '#/components/schemas/bucket_disk_stats'
@@ -51497,6 +51510,7 @@ components:
             disk_min: 1024
             ram_min: 8192
             cpu_min: 1
+          is_deprecated: true
           is_available_replication: true
           name: mysql
           type: mysql5
@@ -51505,6 +51519,7 @@ components:
             disk_min: 1024
             ram_min: 8192
             cpu_min: 1
+          is_deprecated: true
           is_available_replication: true
           name: mysql
           type: mysql5
@@ -53176,6 +53191,7 @@ components:
             used: 486.11328125
           access_key: access_key
           name: Cute Quail
+          description: Bucket of awesome cats
           location: ru-1
           id: 1
           type: public
@@ -53189,6 +53205,7 @@ components:
             used: 486.11328125
           access_key: access_key
           name: Cute Quail
+          description: Bucket of awesome cats
           location: ru-1
           id: 1
           type: public
@@ -54020,6 +54037,7 @@ components:
             used: 486.11328125
           access_key: access_key
           name: Cute Quail
+          description: Bucket of awesome cats
           location: ru-1
           id: 1
           type: public
@@ -54033,6 +54051,7 @@ components:
             used: 486.11328125
           access_key: access_key
           name: Cute Quail
+          description: Bucket of awesome cats
           location: ru-1
           id: 1
           type: public
@@ -54168,6 +54187,12 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        description:
+          description: Комментарий к хранилищу.
+          example: Bucket of awesome cats
+          maxLength: 255
+          minLength: 1
+          type: string
         type:
           description: Тип хранилища.
           enum:
@@ -54195,6 +54220,7 @@ components:
             used: 486.11328125
           access_key: access_key
           name: Cute Quail
+          description: Bucket of awesome cats
           location: ru-1
           id: 1
           type: public
@@ -54228,6 +54254,12 @@ components:
           - private
           - public
           example: public
+          type: string
+        description:
+          description: Комментарий к хранилищу.
+          example: Bucket of awesome cats
+          maxLength: 255
+          minLength: 1
           type: string
       type: object
     getStoragesPresets_200_response:

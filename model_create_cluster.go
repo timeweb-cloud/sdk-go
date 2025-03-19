@@ -25,7 +25,7 @@ type CreateCluster struct {
 	Type DbType `json:"type"`
 	Admin *CreateClusterAdmin `json:"admin,omitempty"`
 	Instance *CreateClusterInstance `json:"instance,omitempty"`
-	// Тип хеширования базы данных (mysql5 | mysql | postgres).
+	// Тип хеширования базы данных (mysql | postgres).
 	HashType *string `json:"hash_type,omitempty"`
 	// ID тарифа.
 	PresetId int32 `json:"preset_id"`

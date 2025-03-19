@@ -28,6 +28,8 @@ type DatabaseType struct {
 	Type string `json:"type"`
 	// Поддерживает ли база данных репликацию.
 	IsAvailableReplication bool `json:"is_available_replication"`
+	// Устарела ли версия базы.
+	IsDeprecated bool `json:"is_deprecated"`
 	Requirements *DatabaseTypeRequirements `json:"requirements,omitempty"`
 }
 
@@ -35,12 +37,13 @@ type DatabaseType struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseType(name string, version string, type_ string, isAvailableReplication bool) *DatabaseType {
+func NewDatabaseType(name string, version string, type_ string, isAvailableReplication bool, isDeprecated bool) *DatabaseType {
 	this := DatabaseType{}
 	this.Name = name
 	this.Version = version
 	this.Type = type_
 	this.IsAvailableReplication = isAvailableReplication
+	this.IsDeprecated = isDeprecated
 	return &this
 }
 
@@ -148,6 +151,30 @@ func (o *DatabaseType) SetIsAvailableReplication(v bool) {
 	o.IsAvailableReplication = v
 }
 
+// GetIsDeprecated returns the IsDeprecated field value
+func (o *DatabaseType) GetIsDeprecated() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsDeprecated
+}
+
+// GetIsDeprecatedOk returns a tuple with the IsDeprecated field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseType) GetIsDeprecatedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsDeprecated, true
+}
+
+// SetIsDeprecated sets field value
+func (o *DatabaseType) SetIsDeprecated(v bool) {
+	o.IsDeprecated = v
+}
+
 // GetRequirements returns the Requirements field value if set, zero value otherwise.
 func (o *DatabaseType) GetRequirements() DatabaseTypeRequirements {
 	if o == nil || IsNil(o.Requirements) {
@@ -194,6 +221,7 @@ func (o DatabaseType) ToMap() (map[string]interface{}, error) {
 	toSerialize["version"] = o.Version
 	toSerialize["type"] = o.Type
 	toSerialize["is_available_replication"] = o.IsAvailableReplication
+	toSerialize["is_deprecated"] = o.IsDeprecated
 	if !IsNil(o.Requirements) {
 		toSerialize["requirements"] = o.Requirements
 	}

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **float32** | ID для каждого экземпляра хранилища. Автоматически генерируется при создании. | 
 **Name** | **string** | Удобочитаемое имя, установленное для хранилища. | 
+**Description** | Pointer to **string** | Комментарий к хранилищу. | [optional] 
 **DiskStats** | [**BucketDiskStats**](BucketDiskStats.md) |  | 
 **Type** | **string** | Тип хранилища. | 
 **PresetId** | **NullableFloat32** | ID тарифа хранилища. | 
@@ -74,6 +75,31 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
+### GetDescription
+
+`func (o *Bucket) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *Bucket) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *Bucket) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *Bucket) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetDiskStats
 

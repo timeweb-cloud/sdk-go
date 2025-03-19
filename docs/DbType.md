@@ -5,7 +5,7 @@
 
 * `MYSQL` (value: `"mysql"`)
 
-* `MYSQL5` (value: `"mysql5"`)
+* `MYSQL8_4` (value: `"mysql8_4"`)
 
 * `POSTGRES14` (value: `"postgres14"`)
 
@@ -34,6 +34,10 @@
 * `RABBITMQ` (value: `"rabbitmq"`)
 
 * `CLICKHOUSE` (value: `"clickhouse"`)
+
+* `CLICKHOUSE24` (value: `"clickhouse24"`)
+
+* `CLICKHOUSE25` (value: `"clickhouse25"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
