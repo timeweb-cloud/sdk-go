@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PresetId** | Pointer to **float32** | ID тарифа. | [optional] 
+**ConfiguratorId** | Pointer to **float32** | ID конфигуратора хранилища. | [optional] 
 **BucketType** | Pointer to **string** | Тип хранилища. | [optional] 
 **Description** | Pointer to **string** | Комментарий к хранилищу. | [optional] 
 
@@ -51,6 +52,31 @@ SetPresetId sets PresetId field to given value.
 `func (o *UpdateStorageRequest) HasPresetId() bool`
 
 HasPresetId returns a boolean if a field has been set.
+
+### GetConfiguratorId
+
+`func (o *UpdateStorageRequest) GetConfiguratorId() float32`
+
+GetConfiguratorId returns the ConfiguratorId field if non-nil, zero value otherwise.
+
+### GetConfiguratorIdOk
+
+`func (o *UpdateStorageRequest) GetConfiguratorIdOk() (*float32, bool)`
+
+GetConfiguratorIdOk returns a tuple with the ConfiguratorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguratorId
+
+`func (o *UpdateStorageRequest) SetConfiguratorId(v float32)`
+
+SetConfiguratorId sets ConfiguratorId field to given value.
+
+### HasConfiguratorId
+
+`func (o *UpdateStorageRequest) HasConfiguratorId() bool`
+
+HasConfiguratorId returns a boolean if a field has been set.
 
 ### GetBucketType
 

@@ -22,6 +22,8 @@ var _ MappedNullable = &UpdateStorageRequest{}
 type UpdateStorageRequest struct {
 	// ID тарифа.
 	PresetId *float32 `json:"preset_id,omitempty"`
+	// ID конфигуратора хранилища.
+	ConfiguratorId *float32 `json:"configurator_id,omitempty"`
 	// Тип хранилища.
 	BucketType *string `json:"bucket_type,omitempty"`
 	// Комментарий к хранилищу.
@@ -75,6 +77,38 @@ func (o *UpdateStorageRequest) HasPresetId() bool {
 // SetPresetId gets a reference to the given float32 and assigns it to the PresetId field.
 func (o *UpdateStorageRequest) SetPresetId(v float32) {
 	o.PresetId = &v
+}
+
+// GetConfiguratorId returns the ConfiguratorId field value if set, zero value otherwise.
+func (o *UpdateStorageRequest) GetConfiguratorId() float32 {
+	if o == nil || IsNil(o.ConfiguratorId) {
+		var ret float32
+		return ret
+	}
+	return *o.ConfiguratorId
+}
+
+// GetConfiguratorIdOk returns a tuple with the ConfiguratorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateStorageRequest) GetConfiguratorIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.ConfiguratorId) {
+		return nil, false
+	}
+	return o.ConfiguratorId, true
+}
+
+// HasConfiguratorId returns a boolean if a field has been set.
+func (o *UpdateStorageRequest) HasConfiguratorId() bool {
+	if o != nil && !IsNil(o.ConfiguratorId) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguratorId gets a reference to the given float32 and assigns it to the ConfiguratorId field.
+func (o *UpdateStorageRequest) SetConfiguratorId(v float32) {
+	o.ConfiguratorId = &v
 }
 
 // GetBucketType returns the BucketType field value if set, zero value otherwise.
@@ -153,6 +187,9 @@ func (o UpdateStorageRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.PresetId) {
 		toSerialize["preset_id"] = o.PresetId
+	}
+	if !IsNil(o.ConfiguratorId) {
+		toSerialize["configurator_id"] = o.ConfiguratorId
 	}
 	if !IsNil(o.BucketType) {
 		toSerialize["bucket_type"] = o.BucketType

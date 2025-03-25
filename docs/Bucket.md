@@ -10,18 +10,21 @@ Name | Type | Description | Notes
 **DiskStats** | [**BucketDiskStats**](BucketDiskStats.md) |  | 
 **Type** | **string** | Тип хранилища. | 
 **PresetId** | **NullableFloat32** | ID тарифа хранилища. | 
+**ConfiguratorId** | **float32** | ID конфигуратора хранилища. | 
 **Status** | **string** | Статус хранилища. | 
 **ObjectAmount** | **float32** | Количество файлов в хранилище. | 
 **Location** | **string** | Регион хранилища. | 
 **Hostname** | **string** | Адрес хранилища для подключения. | 
 **AccessKey** | **string** | Ключ доступа от хранилища. | 
 **SecretKey** | **string** | Секретный ключ доступа от хранилища. | 
+**MovedInQuarantineAt** | **time.Time** | Дата перемещения в карантин. | 
+**StorageClass** | **string** | Класс хранилища. | 
 
 ## Methods
 
 ### NewBucket
 
-`func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, ) *Bucket`
+`func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId float32, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt time.Time, storageClass string, ) *Bucket`
 
 NewBucket instantiates a new Bucket object
 This constructor will assign default values to properties that have it defined,
@@ -171,6 +174,26 @@ SetPresetId sets PresetId field to given value.
 `func (o *Bucket) UnsetPresetId()`
 
 UnsetPresetId ensures that no value is present for PresetId, not even an explicit nil
+### GetConfiguratorId
+
+`func (o *Bucket) GetConfiguratorId() float32`
+
+GetConfiguratorId returns the ConfiguratorId field if non-nil, zero value otherwise.
+
+### GetConfiguratorIdOk
+
+`func (o *Bucket) GetConfiguratorIdOk() (*float32, bool)`
+
+GetConfiguratorIdOk returns a tuple with the ConfiguratorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguratorId
+
+`func (o *Bucket) SetConfiguratorId(v float32)`
+
+SetConfiguratorId sets ConfiguratorId field to given value.
+
+
 ### GetStatus
 
 `func (o *Bucket) GetStatus() string`
@@ -289,6 +312,46 @@ and a boolean to check if the value has been set.
 `func (o *Bucket) SetSecretKey(v string)`
 
 SetSecretKey sets SecretKey field to given value.
+
+
+### GetMovedInQuarantineAt
+
+`func (o *Bucket) GetMovedInQuarantineAt() time.Time`
+
+GetMovedInQuarantineAt returns the MovedInQuarantineAt field if non-nil, zero value otherwise.
+
+### GetMovedInQuarantineAtOk
+
+`func (o *Bucket) GetMovedInQuarantineAtOk() (*time.Time, bool)`
+
+GetMovedInQuarantineAtOk returns a tuple with the MovedInQuarantineAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMovedInQuarantineAt
+
+`func (o *Bucket) SetMovedInQuarantineAt(v time.Time)`
+
+SetMovedInQuarantineAt sets MovedInQuarantineAt field to given value.
+
+
+### GetStorageClass
+
+`func (o *Bucket) GetStorageClass() string`
+
+GetStorageClass returns the StorageClass field if non-nil, zero value otherwise.
+
+### GetStorageClassOk
+
+`func (o *Bucket) GetStorageClassOk() (*string, bool)`
+
+GetStorageClassOk returns a tuple with the StorageClass field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClass
+
+`func (o *Bucket) SetStorageClass(v string)`
+
+SetStorageClass sets StorageClass field to given value.
 
 
 

@@ -21,16 +21,17 @@ var _ MappedNullable = &DeleteServiceResponse{}
 // DeleteServiceResponse struct for DeleteServiceResponse
 type DeleteServiceResponse struct {
 	// Хеш, который совместно с кодом авторизации надо будет отправить для удаления.
-	Hash string `json:"hash"`
+	Hash *string `json:"hash,omitempty"`
+	// Флаг, указывающий на то, что сервис был перемещен в карантин или был удален немедленно.
+	IsMovedInQuarantine *bool `json:"is_moved_in_quarantine,omitempty"`
 }
 
 // NewDeleteServiceResponse instantiates a new DeleteServiceResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteServiceResponse(hash string) *DeleteServiceResponse {
+func NewDeleteServiceResponse() *DeleteServiceResponse {
 	this := DeleteServiceResponse{}
-	this.Hash = hash
 	return &this
 }
 
@@ -42,28 +43,68 @@ func NewDeleteServiceResponseWithDefaults() *DeleteServiceResponse {
 	return &this
 }
 
-// GetHash returns the Hash field value
+// GetHash returns the Hash field value if set, zero value otherwise.
 func (o *DeleteServiceResponse) GetHash() string {
-	if o == nil {
+	if o == nil || IsNil(o.Hash) {
 		var ret string
 		return ret
 	}
-
-	return o.Hash
+	return *o.Hash
 }
 
-// GetHashOk returns a tuple with the Hash field value
+// GetHashOk returns a tuple with the Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeleteServiceResponse) GetHashOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Hash) {
 		return nil, false
 	}
-	return &o.Hash, true
+	return o.Hash, true
 }
 
-// SetHash sets field value
+// HasHash returns a boolean if a field has been set.
+func (o *DeleteServiceResponse) HasHash() bool {
+	if o != nil && !IsNil(o.Hash) {
+		return true
+	}
+
+	return false
+}
+
+// SetHash gets a reference to the given string and assigns it to the Hash field.
 func (o *DeleteServiceResponse) SetHash(v string) {
-	o.Hash = v
+	o.Hash = &v
+}
+
+// GetIsMovedInQuarantine returns the IsMovedInQuarantine field value if set, zero value otherwise.
+func (o *DeleteServiceResponse) GetIsMovedInQuarantine() bool {
+	if o == nil || IsNil(o.IsMovedInQuarantine) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMovedInQuarantine
+}
+
+// GetIsMovedInQuarantineOk returns a tuple with the IsMovedInQuarantine field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DeleteServiceResponse) GetIsMovedInQuarantineOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMovedInQuarantine) {
+		return nil, false
+	}
+	return o.IsMovedInQuarantine, true
+}
+
+// HasIsMovedInQuarantine returns a boolean if a field has been set.
+func (o *DeleteServiceResponse) HasIsMovedInQuarantine() bool {
+	if o != nil && !IsNil(o.IsMovedInQuarantine) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMovedInQuarantine gets a reference to the given bool and assigns it to the IsMovedInQuarantine field.
+func (o *DeleteServiceResponse) SetIsMovedInQuarantine(v bool) {
+	o.IsMovedInQuarantine = &v
 }
 
 func (o DeleteServiceResponse) MarshalJSON() ([]byte, error) {
@@ -76,7 +117,12 @@ func (o DeleteServiceResponse) MarshalJSON() ([]byte, error) {
 
 func (o DeleteServiceResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["hash"] = o.Hash
+	if !IsNil(o.Hash) {
+		toSerialize["hash"] = o.Hash
+	}
+	if !IsNil(o.IsMovedInQuarantine) {
+		toSerialize["is_moved_in_quarantine"] = o.IsMovedInQuarantine
+	}
 	return toSerialize, nil
 }
 
