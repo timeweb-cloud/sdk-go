@@ -47561,6 +47561,7 @@ components:
         configurator_id:
           description: ID конфигуратора хранилища.
           example: 55
+          nullable: true
           type: number
         status:
           description: Статус хранилища.
@@ -47594,6 +47595,7 @@ components:
           description: Дата перемещения в карантин.
           example: 2025-01-01T12:00:00Z
           format: date-time
+          nullable: true
           type: string
         storage_class:
           description: Класс хранилища.

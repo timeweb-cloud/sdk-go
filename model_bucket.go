@@ -33,7 +33,7 @@ type Bucket struct {
 	// ID тарифа хранилища.
 	PresetId NullableFloat32 `json:"preset_id"`
 	// ID конфигуратора хранилища.
-	ConfiguratorId float32 `json:"configurator_id"`
+	ConfiguratorId NullableFloat32 `json:"configurator_id"`
 	// Статус хранилища.
 	Status string `json:"status"`
 	// Количество файлов в хранилище.
@@ -47,7 +47,7 @@ type Bucket struct {
 	// Секретный ключ доступа от хранилища.
 	SecretKey string `json:"secret_key"`
 	// Дата перемещения в карантин.
-	MovedInQuarantineAt time.Time `json:"moved_in_quarantine_at"`
+	MovedInQuarantineAt NullableTime `json:"moved_in_quarantine_at"`
 	// Класс хранилища.
 	StorageClass string `json:"storage_class"`
 }
@@ -56,7 +56,7 @@ type Bucket struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId float32, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt time.Time, storageClass string) *Bucket {
+func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string) *Bucket {
 	this := Bucket{}
 	this.Id = id
 	this.Name = name
@@ -238,27 +238,29 @@ func (o *Bucket) SetPresetId(v float32) {
 }
 
 // GetConfiguratorId returns the ConfiguratorId field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *Bucket) GetConfiguratorId() float32 {
-	if o == nil {
+	if o == nil || o.ConfiguratorId.Get() == nil {
 		var ret float32
 		return ret
 	}
 
-	return o.ConfiguratorId
+	return *o.ConfiguratorId.Get()
 }
 
 // GetConfiguratorIdOk returns a tuple with the ConfiguratorId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Bucket) GetConfiguratorIdOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ConfiguratorId, true
+	return o.ConfiguratorId.Get(), o.ConfiguratorId.IsSet()
 }
 
 // SetConfiguratorId sets field value
 func (o *Bucket) SetConfiguratorId(v float32) {
-	o.ConfiguratorId = v
+	o.ConfiguratorId.Set(&v)
 }
 
 // GetStatus returns the Status field value
@@ -406,27 +408,29 @@ func (o *Bucket) SetSecretKey(v string) {
 }
 
 // GetMovedInQuarantineAt returns the MovedInQuarantineAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *Bucket) GetMovedInQuarantineAt() time.Time {
-	if o == nil {
+	if o == nil || o.MovedInQuarantineAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
 
-	return o.MovedInQuarantineAt
+	return *o.MovedInQuarantineAt.Get()
 }
 
 // GetMovedInQuarantineAtOk returns a tuple with the MovedInQuarantineAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Bucket) GetMovedInQuarantineAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.MovedInQuarantineAt, true
+	return o.MovedInQuarantineAt.Get(), o.MovedInQuarantineAt.IsSet()
 }
 
 // SetMovedInQuarantineAt sets field value
 func (o *Bucket) SetMovedInQuarantineAt(v time.Time) {
-	o.MovedInQuarantineAt = v
+	o.MovedInQuarantineAt.Set(&v)
 }
 
 // GetStorageClass returns the StorageClass field value
@@ -471,14 +475,14 @@ func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize["disk_stats"] = o.DiskStats
 	toSerialize["type"] = o.Type
 	toSerialize["preset_id"] = o.PresetId.Get()
-	toSerialize["configurator_id"] = o.ConfiguratorId
+	toSerialize["configurator_id"] = o.ConfiguratorId.Get()
 	toSerialize["status"] = o.Status
 	toSerialize["object_amount"] = o.ObjectAmount
 	toSerialize["location"] = o.Location
 	toSerialize["hostname"] = o.Hostname
 	toSerialize["access_key"] = o.AccessKey
 	toSerialize["secret_key"] = o.SecretKey
-	toSerialize["moved_in_quarantine_at"] = o.MovedInQuarantineAt
+	toSerialize["moved_in_quarantine_at"] = o.MovedInQuarantineAt.Get()
 	toSerialize["storage_class"] = o.StorageClass
 	return toSerialize, nil
 }
