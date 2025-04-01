@@ -24,7 +24,8 @@ Name | Type | Description | Notes
 **CpuFrequency** | **string** | Частота ядер процессора сервера. | 
 **Ram** | **float32** | Размер (в Мб) ОЗУ сервера. | 
 **Disks** | [**[]VdsDisksInner**](VdsDisksInner.md) | Список дисков сервера. | 
-**AvatarId** | **NullableString** | ID аватара сервера. Описание методов работы с аватарами появится позднее. | 
+**AvatarId** | **NullableString** | ID аватара сервера. | 
+**AvatarLink** | **NullableString** | Ссылка на аватар сервера. | 
 **VncPass** | **string** | Пароль от VNC. | 
 **RootPass** | **NullableString** | Пароль root сервера или пароль Администратора для серверов Windows. | 
 **Image** | [**NullableVdsImage**](VdsImage.md) |  | 
@@ -37,7 +38,7 @@ Name | Type | Description | Notes
 
 ### NewVds
 
-`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, isMasterSsh bool, isDedicatedCpu bool, gpu float32, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, isQemuAgent bool, availabilityZone AvailabilityZone, ) *Vds`
+`func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, isMasterSsh bool, isDedicatedCpu bool, gpu float32, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, avatarLink NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, isQemuAgent bool, availabilityZone AvailabilityZone, ) *Vds`
 
 NewVds instantiates a new Vds object
 This constructor will assign default values to properties that have it defined,
@@ -522,6 +523,36 @@ SetAvatarId sets AvatarId field to given value.
 `func (o *Vds) UnsetAvatarId()`
 
 UnsetAvatarId ensures that no value is present for AvatarId, not even an explicit nil
+### GetAvatarLink
+
+`func (o *Vds) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *Vds) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *Vds) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *Vds) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *Vds) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
 ### GetVncPass
 
 `func (o *Vds) GetVncPass() string`

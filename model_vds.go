@@ -59,8 +59,11 @@ type Vds struct {
 	Ram float32 `json:"ram"`
 	// Список дисков сервера.
 	Disks []VdsDisksInner `json:"disks"`
-	// ID аватара сервера. Описание методов работы с аватарами появится позднее.
+	// ID аватара сервера.
+	// Deprecated
 	AvatarId NullableString `json:"avatar_id"`
+	// Ссылка на аватар сервера.
+	AvatarLink NullableString `json:"avatar_link"`
 	// Пароль от VNC.
 	VncPass string `json:"vnc_pass"`
 	// Пароль root сервера или пароль Администратора для серверов Windows.
@@ -79,7 +82,7 @@ type Vds struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, isMasterSsh bool, isDedicatedCpu bool, gpu float32, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, isQemuAgent bool, availabilityZone AvailabilityZone) *Vds {
+func NewVds(id float32, name string, comment string, createdAt string, os VdsOs, software NullableVdsSoftware, presetId NullableFloat32, location string, configuratorId NullableFloat32, bootMode string, status string, startAt NullableTime, isDdosGuard bool, isMasterSsh bool, isDedicatedCpu bool, gpu float32, cpu float32, cpuFrequency string, ram float32, disks []VdsDisksInner, avatarId NullableString, avatarLink NullableString, vncPass string, rootPass NullableString, image NullableVdsImage, networks []VdsNetworksInner, cloudInit NullableString, isQemuAgent bool, availabilityZone AvailabilityZone) *Vds {
 	this := Vds{}
 	this.Id = id
 	this.Name = name
@@ -102,6 +105,7 @@ func NewVds(id float32, name string, comment string, createdAt string, os VdsOs,
 	this.Ram = ram
 	this.Disks = disks
 	this.AvatarId = avatarId
+	this.AvatarLink = avatarLink
 	this.VncPass = vncPass
 	this.RootPass = rootPass
 	this.Image = image
@@ -610,6 +614,7 @@ func (o *Vds) SetDisks(v []VdsDisksInner) {
 
 // GetAvatarId returns the AvatarId field value
 // If the value is explicit nil, the zero value for string will be returned
+// Deprecated
 func (o *Vds) GetAvatarId() string {
 	if o == nil || o.AvatarId.Get() == nil {
 		var ret string
@@ -622,6 +627,7 @@ func (o *Vds) GetAvatarId() string {
 // GetAvatarIdOk returns a tuple with the AvatarId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *Vds) GetAvatarIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -630,8 +636,35 @@ func (o *Vds) GetAvatarIdOk() (*string, bool) {
 }
 
 // SetAvatarId sets field value
+// Deprecated
 func (o *Vds) SetAvatarId(v string) {
 	o.AvatarId.Set(&v)
+}
+
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Vds) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Vds) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *Vds) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
 }
 
 // GetVncPass returns the VncPass field value
@@ -839,6 +872,7 @@ func (o Vds) ToMap() (map[string]interface{}, error) {
 	toSerialize["ram"] = o.Ram
 	toSerialize["disks"] = o.Disks
 	toSerialize["avatar_id"] = o.AvatarId.Get()
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["vnc_pass"] = o.VncPass
 	toSerialize["root_pass"] = o.RootPass.Get()
 	toSerialize["image"] = o.Image.Get()

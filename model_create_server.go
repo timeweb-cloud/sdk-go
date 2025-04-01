@@ -35,7 +35,8 @@ type CreateServer struct {
 	Bandwidth *float32 `json:"bandwidth,omitempty"`
 	// Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным.
 	Name string `json:"name"`
-	// ID аватара сервера. Описание методов работы с аватарами появится позднее.
+	// ID аватара сервера.
+	// Deprecated
 	AvatarId *string `json:"avatar_id,omitempty"`
 	// Комментарий к облачному серверу. Максимальная длина — 255 символов.
 	Comment *string `json:"comment,omitempty"`
@@ -317,6 +318,7 @@ func (o *CreateServer) SetName(v string) {
 }
 
 // GetAvatarId returns the AvatarId field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateServer) GetAvatarId() string {
 	if o == nil || IsNil(o.AvatarId) {
 		var ret string
@@ -327,6 +329,7 @@ func (o *CreateServer) GetAvatarId() string {
 
 // GetAvatarIdOk returns a tuple with the AvatarId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateServer) GetAvatarIdOk() (*string, bool) {
 	if o == nil || IsNil(o.AvatarId) {
 		return nil, false
@@ -344,6 +347,7 @@ func (o *CreateServer) HasAvatarId() bool {
 }
 
 // SetAvatarId gets a reference to the given string and assigns it to the AvatarId field.
+// Deprecated
 func (o *CreateServer) SetAvatarId(v string) {
 	o.AvatarId = &v
 }
