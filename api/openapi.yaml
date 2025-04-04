@@ -47091,7 +47091,7 @@ components:
           example: false
           type: boolean
         network:
-          $ref: '#/components/schemas/network'
+          $ref: '#/components/schemas/create_server_network'
         cloud_init:
           description: Cloud-init скрипт
           example: '#cloud-config'
@@ -57226,6 +57226,34 @@ components:
       - cpu
       - disk
       - ram
+      type: object
+    create_server_network:
+      description: Параметры конфигурации приватной сети сервера
+      properties:
+        id:
+          description: ID сети
+          example: network-2fe8ab6ed82949d09d3db230337254a8
+          type: string
+        floating_ip:
+          description: Публичный IP
+          example: 192.168.0.0
+          type: string
+        local_ip:
+          description: Приватный IP
+          example: 192.168.0.4
+          type: string
+        ip:
+          deprecated: true
+          description: Приватный IP
+          example: 192.168.0.4
+          type: string
+        network_drive_ids:
+          description: Массив ID сетевых дисков
+          example:
+          - 8d014355-ffb8-41e0-8283-0f58e606c4ff
+          items:
+            type: string
+          type: array
       type: object
     update_server_configurator:
       description: Параметры конфигурации сервера. Нельзя передавать вместе с `preset_id`.

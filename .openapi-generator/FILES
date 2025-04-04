@@ -139,6 +139,7 @@ docs/CreateServerDisk201Response.md
 docs/CreateServerDiskBackup201Response.md
 docs/CreateServerDiskBackupRequest.md
 docs/CreateServerDiskRequest.md
+docs/CreateServerNetwork.md
 docs/CreateStorage201Response.md
 docs/CreateStorageRequest.md
 docs/CreateToken201Response.md
@@ -583,6 +584,7 @@ model_create_server_disk_201_response.go
 model_create_server_disk_backup_201_response.go
 model_create_server_disk_backup_request.go
 model_create_server_disk_request.go
+model_create_server_network.go
 model_create_storage_201_response.go
 model_create_storage_request.go
 model_create_token_201_response.go

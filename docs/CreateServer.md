@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **Comment** | Pointer to **string** | Комментарий к облачному серверу. Максимальная длина — 255 символов. | [optional] 
 **SshKeysIds** | Pointer to **[]float32** | Список SSH-ключей. | [optional] 
 **IsLocalNetwork** | Pointer to **bool** | Локальная сеть. | [optional] 
-**Network** | Pointer to [**Network**](Network.md) |  | [optional] 
+**Network** | Pointer to [**CreateServerNetwork**](CreateServerNetwork.md) |  | [optional] 
 **CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 
@@ -336,20 +336,20 @@ HasIsLocalNetwork returns a boolean if a field has been set.
 
 ### GetNetwork
 
-`func (o *CreateServer) GetNetwork() Network`
+`func (o *CreateServer) GetNetwork() CreateServerNetwork`
 
 GetNetwork returns the Network field if non-nil, zero value otherwise.
 
 ### GetNetworkOk
 
-`func (o *CreateServer) GetNetworkOk() (*Network, bool)`
+`func (o *CreateServer) GetNetworkOk() (*CreateServerNetwork, bool)`
 
 GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetwork
 
-`func (o *CreateServer) SetNetwork(v Network)`
+`func (o *CreateServer) SetNetwork(v CreateServerNetwork)`
 
 SetNetwork sets Network field to given value.
 

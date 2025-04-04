@@ -45,7 +45,7 @@ type CreateServer struct {
 	// Локальная сеть.
 	// Deprecated
 	IsLocalNetwork *bool `json:"is_local_network,omitempty"`
-	Network *Network `json:"network,omitempty"`
+	Network *CreateServerNetwork `json:"network,omitempty"`
 	// Cloud-init скрипт
 	CloudInit *string `json:"cloud_init,omitempty"`
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
@@ -452,9 +452,9 @@ func (o *CreateServer) SetIsLocalNetwork(v bool) {
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *CreateServer) GetNetwork() Network {
+func (o *CreateServer) GetNetwork() CreateServerNetwork {
 	if o == nil || IsNil(o.Network) {
-		var ret Network
+		var ret CreateServerNetwork
 		return ret
 	}
 	return *o.Network
@@ -462,7 +462,7 @@ func (o *CreateServer) GetNetwork() Network {
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateServer) GetNetworkOk() (*Network, bool) {
+func (o *CreateServer) GetNetworkOk() (*CreateServerNetwork, bool) {
 	if o == nil || IsNil(o.Network) {
 		return nil, false
 	}
@@ -478,8 +478,8 @@ func (o *CreateServer) HasNetwork() bool {
 	return false
 }
 
-// SetNetwork gets a reference to the given Network and assigns it to the Network field.
-func (o *CreateServer) SetNetwork(v Network) {
+// SetNetwork gets a reference to the given CreateServerNetwork and assigns it to the Network field.
+func (o *CreateServer) SetNetwork(v CreateServerNetwork) {
 	o.Network = &v
 }
 
