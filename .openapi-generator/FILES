@@ -291,6 +291,7 @@ docs/GetServerStatistics200ResponseCpuInner.md
 docs/GetServerStatistics200ResponseDiskInner.md
 docs/GetServerStatistics200ResponseNetworkTrafficInner.md
 docs/GetServerStatistics200ResponseRamInner.md
+docs/GetServerStatisticsNew200Response.md
 docs/GetServers200Response.md
 docs/GetServersPresets200Response.md
 docs/GetSoftware200Response.md
@@ -397,6 +398,9 @@ docs/ServersOsRequirements.md
 docs/ServersPreset.md
 docs/ServersSoftware.md
 docs/ServersSoftwareRequirements.md
+docs/ServersStatistics.md
+docs/ServersStatisticsListInner.md
+docs/ServersStatisticsMeta.md
 docs/SetLabels.md
 docs/SettingCondition.md
 docs/SpamFilterIsDisabled.md
@@ -726,6 +730,7 @@ model_get_server_statistics_200_response_cpu_inner.go
 model_get_server_statistics_200_response_disk_inner.go
 model_get_server_statistics_200_response_network_traffic_inner.go
 model_get_server_statistics_200_response_ram_inner.go
+model_get_server_statistics_new_200_response.go
 model_get_servers_200_response.go
 model_get_servers_presets_200_response.go
 model_get_software_200_response.go
@@ -823,6 +828,9 @@ model_servers_os_requirements.go
 model_servers_preset.go
 model_servers_software.go
 model_servers_software_requirements.go
+model_servers_statistics.go
+model_servers_statistics_list_inner.go
+model_servers_statistics_meta.go
 model_set_labels.go
 model_setting_condition.go
 model_spam_filter_is_disabled.go

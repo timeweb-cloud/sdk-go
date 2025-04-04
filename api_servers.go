@@ -3538,6 +3538,8 @@ GetServerStatistics Получение статистики сервера
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId ID облачного сервера.
  @return ApiGetServerStatisticsRequest
+
+Deprecated
 */
 func (a *ServersAPIService) GetServerStatistics(ctx context.Context, serverId int32) ApiGetServerStatisticsRequest {
 	return ApiGetServerStatisticsRequest{
@@ -3549,6 +3551,7 @@ func (a *ServersAPIService) GetServerStatistics(ctx context.Context, serverId in
 
 // Execute executes the request
 //  @return GetServerStatistics200Response
+// Deprecated
 func (a *ServersAPIService) GetServerStatisticsExecute(r ApiGetServerStatisticsRequest) (*GetServerStatistics200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -3580,6 +3583,200 @@ func (a *ServersAPIService) GetServerStatisticsExecute(r ApiGetServerStatisticsR
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "date_from", r.dateFrom, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "date_to", r.dateTo, "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetFinances403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v CreateDatabaseBackup409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetServerStatisticsNewRequest struct {
+	ctx context.Context
+	ApiService *ServersAPIService
+	serverId int32
+	timeFrom string
+	period string
+	keys string
+}
+
+func (r ApiGetServerStatisticsNewRequest) Execute() (*GetServerStatisticsNew200Response, *http.Response, error) {
+	return r.ApiService.GetServerStatisticsNewExecute(r)
+}
+
+/*
+GetServerStatisticsNew Получение статистики сервера
+
+Чтобы получить статистику сервера, отправьте GET-запрос на `/api/v1/servers/{server_id}/{time_from}/{period}/{keys}`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param serverId ID облачного сервера.
+ @param timeFrom Дата начала сбора статистики.
+ @param period Количество часов за период которых нужна статистика.
+ @param keys Ключи выбираемых видов статистики.
+ @return ApiGetServerStatisticsNewRequest
+*/
+func (a *ServersAPIService) GetServerStatisticsNew(ctx context.Context, serverId int32, timeFrom string, period string, keys string) ApiGetServerStatisticsNewRequest {
+	return ApiGetServerStatisticsNewRequest{
+		ApiService: a,
+		ctx: ctx,
+		serverId: serverId,
+		timeFrom: timeFrom,
+		period: period,
+		keys: keys,
+	}
+}
+
+// Execute executes the request
+//  @return GetServerStatisticsNew200Response
+func (a *ServersAPIService) GetServerStatisticsNewExecute(r ApiGetServerStatisticsNewRequest) (*GetServerStatisticsNew200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetServerStatisticsNew200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServersAPIService.GetServerStatisticsNew")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/servers/{server_id}/statistics/{time_from}/{period}/{keys}"
+	localVarPath = strings.Replace(localVarPath, "{"+"server_id"+"}", url.PathEscape(parameterValueToString(r.serverId, "serverId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"time_from"+"}", url.PathEscape(parameterValueToString(r.timeFrom, "timeFrom")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"period"+"}", url.PathEscape(parameterValueToString(r.period, "period")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"keys"+"}", url.PathEscape(parameterValueToString(r.keys, "keys")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.serverId < 1 {
+		return localVarReturnValue, nil, reportError("serverId must be greater than 1")
+	}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

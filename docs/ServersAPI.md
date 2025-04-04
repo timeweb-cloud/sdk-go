@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**GetServerIPs**](ServersAPI.md#GetServerIPs) | **Get** /api/v1/servers/{server_id}/ips | Получение списка IP-адресов сервера
 [**GetServerLogs**](ServersAPI.md#GetServerLogs) | **Get** /api/v1/servers/{server_id}/logs | Получение списка логов сервера
 [**GetServerStatistics**](ServersAPI.md#GetServerStatistics) | **Get** /api/v1/servers/{server_id}/statistics | Получение статистики сервера
+[**GetServerStatisticsNew**](ServersAPI.md#GetServerStatisticsNew) | **Get** /api/v1/servers/{server_id}/statistics/{time_from}/{period}/{keys} | Получение статистики сервера
 [**GetServers**](ServersAPI.md#GetServers) | **Get** /api/v1/servers | Получение списка серверов
 [**GetServersPresets**](ServersAPI.md#GetServersPresets) | **Get** /api/v1/presets/servers | Получение списка тарифов серверов
 [**GetSoftware**](ServersAPI.md#GetSoftware) | **Get** /api/v1/software/servers | Получение списка ПО из маркетплейса
@@ -1451,6 +1452,85 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetServerStatistics200Response**](GetServerStatistics200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetServerStatisticsNew
+
+> GetServerStatisticsNew200Response GetServerStatisticsNew(ctx, serverId, timeFrom, period, keys).Execute()
+
+Получение статистики сервера
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    timeFrom := "Wed Apr 02 2025 13:27:02 GMT+0300 (Москва, стандартное время)" // string | Дата начала сбора статистики.
+    period := "24" // string | Количество часов за период которых нужна статистика.
+    keys := "system.cpu.util;network.request;network.response" // string | Ключи выбираемых видов статистики.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ServersAPI.GetServerStatisticsNew(context.Background(), serverId, timeFrom, period, keys).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.GetServerStatisticsNew``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetServerStatisticsNew`: GetServerStatisticsNew200Response
+    fmt.Fprintf(os.Stdout, "Response from `ServersAPI.GetServerStatisticsNew`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**serverId** | **int32** | ID облачного сервера. | 
+**timeFrom** | **string** | Дата начала сбора статистики. | 
+**period** | **string** | Количество часов за период которых нужна статистика. | 
+**keys** | **string** | Ключи выбираемых видов статистики. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetServerStatisticsNewRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+
+### Return type
+
+[**GetServerStatisticsNew200Response**](GetServerStatisticsNew200Response.md)
 
 ### Authorization
 

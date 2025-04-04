@@ -302,6 +302,23 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ServersAPIService GetServerStatisticsNew", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+		var timeFrom string
+		var period string
+		var keys string
+
+		resp, httpRes, err := apiClient.ServersAPI.GetServerStatisticsNew(context.Background(), serverId, timeFrom, period, keys).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ServersAPIService GetServers", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
