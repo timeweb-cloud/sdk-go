@@ -17,6 +17,11 @@ Name | Type | Description | Notes
 **Timeout** | **float32** | Таймаут ответа балансировщика. | 
 **Fall** | **float32** | Порог количества ошибок. | 
 **Rise** | **float32** | Порог количества успешных ответов. | 
+**Maxconn** | Pointer to **float32** | Максимальное количество соединений. | [optional] 
+**ConnectTimeout** | Pointer to **float32** | Таймаут подключения. | [optional] 
+**ClientTimeout** | Pointer to **float32** | Таймаут клиента. | [optional] 
+**ServerTimeout** | Pointer to **float32** | Таймаут сервера. | [optional] 
+**HttprequestTimeout** | Pointer to **float32** | Таймаут HTTP запроса. | [optional] 
 **PresetId** | **float32** | ID тарифа. | 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
@@ -299,6 +304,131 @@ and a boolean to check if the value has been set.
 
 SetRise sets Rise field to given value.
 
+
+### GetMaxconn
+
+`func (o *CreateBalancer) GetMaxconn() float32`
+
+GetMaxconn returns the Maxconn field if non-nil, zero value otherwise.
+
+### GetMaxconnOk
+
+`func (o *CreateBalancer) GetMaxconnOk() (*float32, bool)`
+
+GetMaxconnOk returns a tuple with the Maxconn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxconn
+
+`func (o *CreateBalancer) SetMaxconn(v float32)`
+
+SetMaxconn sets Maxconn field to given value.
+
+### HasMaxconn
+
+`func (o *CreateBalancer) HasMaxconn() bool`
+
+HasMaxconn returns a boolean if a field has been set.
+
+### GetConnectTimeout
+
+`func (o *CreateBalancer) GetConnectTimeout() float32`
+
+GetConnectTimeout returns the ConnectTimeout field if non-nil, zero value otherwise.
+
+### GetConnectTimeoutOk
+
+`func (o *CreateBalancer) GetConnectTimeoutOk() (*float32, bool)`
+
+GetConnectTimeoutOk returns a tuple with the ConnectTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectTimeout
+
+`func (o *CreateBalancer) SetConnectTimeout(v float32)`
+
+SetConnectTimeout sets ConnectTimeout field to given value.
+
+### HasConnectTimeout
+
+`func (o *CreateBalancer) HasConnectTimeout() bool`
+
+HasConnectTimeout returns a boolean if a field has been set.
+
+### GetClientTimeout
+
+`func (o *CreateBalancer) GetClientTimeout() float32`
+
+GetClientTimeout returns the ClientTimeout field if non-nil, zero value otherwise.
+
+### GetClientTimeoutOk
+
+`func (o *CreateBalancer) GetClientTimeoutOk() (*float32, bool)`
+
+GetClientTimeoutOk returns a tuple with the ClientTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientTimeout
+
+`func (o *CreateBalancer) SetClientTimeout(v float32)`
+
+SetClientTimeout sets ClientTimeout field to given value.
+
+### HasClientTimeout
+
+`func (o *CreateBalancer) HasClientTimeout() bool`
+
+HasClientTimeout returns a boolean if a field has been set.
+
+### GetServerTimeout
+
+`func (o *CreateBalancer) GetServerTimeout() float32`
+
+GetServerTimeout returns the ServerTimeout field if non-nil, zero value otherwise.
+
+### GetServerTimeoutOk
+
+`func (o *CreateBalancer) GetServerTimeoutOk() (*float32, bool)`
+
+GetServerTimeoutOk returns a tuple with the ServerTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerTimeout
+
+`func (o *CreateBalancer) SetServerTimeout(v float32)`
+
+SetServerTimeout sets ServerTimeout field to given value.
+
+### HasServerTimeout
+
+`func (o *CreateBalancer) HasServerTimeout() bool`
+
+HasServerTimeout returns a boolean if a field has been set.
+
+### GetHttprequestTimeout
+
+`func (o *CreateBalancer) GetHttprequestTimeout() float32`
+
+GetHttprequestTimeout returns the HttprequestTimeout field if non-nil, zero value otherwise.
+
+### GetHttprequestTimeoutOk
+
+`func (o *CreateBalancer) GetHttprequestTimeoutOk() (*float32, bool)`
+
+GetHttprequestTimeoutOk returns a tuple with the HttprequestTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttprequestTimeout
+
+`func (o *CreateBalancer) SetHttprequestTimeout(v float32)`
+
+SetHttprequestTimeout sets HttprequestTimeout field to given value.
+
+### HasHttprequestTimeout
+
+`func (o *CreateBalancer) HasHttprequestTimeout() bool`
+
+HasHttprequestTimeout returns a boolean if a field has been set.
 
 ### GetPresetId
 

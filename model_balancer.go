@@ -47,6 +47,16 @@ type Balancer struct {
 	Proto string `json:"proto"`
 	// Порог количества успешных ответов.
 	Rise float32 `json:"rise"`
+	// Максимальное количество соединений.
+	Maxconn float32 `json:"maxconn"`
+	// Таймаут подключения.
+	ConnectTimeout float32 `json:"connect_timeout"`
+	// Таймаут клиента.
+	ClientTimeout float32 `json:"client_timeout"`
+	// Таймаут сервера.
+	ServerTimeout float32 `json:"server_timeout"`
+	// Таймаут HTTP запроса.
+	HttprequestTimeout float32 `json:"httprequest_timeout"`
 	// ID тарифа.
 	PresetId float32 `json:"preset_id"`
 	// Это логическое значение, которое показывает, требуется ли перенаправление на SSL.
@@ -71,7 +81,7 @@ type Balancer struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone) *Balancer {
+func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone) *Balancer {
 	this := Balancer{}
 	this.Id = id
 	this.Algo = algo
@@ -86,6 +96,11 @@ func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, int
 	this.Port = port
 	this.Proto = proto
 	this.Rise = rise
+	this.Maxconn = maxconn
+	this.ConnectTimeout = connectTimeout
+	this.ClientTimeout = clientTimeout
+	this.ServerTimeout = serverTimeout
+	this.HttprequestTimeout = httprequestTimeout
 	this.PresetId = presetId
 	this.IsSsl = isSsl
 	this.Status = status
@@ -423,6 +438,126 @@ func (o *Balancer) SetRise(v float32) {
 	o.Rise = v
 }
 
+// GetMaxconn returns the Maxconn field value
+func (o *Balancer) GetMaxconn() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Maxconn
+}
+
+// GetMaxconnOk returns a tuple with the Maxconn field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetMaxconnOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Maxconn, true
+}
+
+// SetMaxconn sets field value
+func (o *Balancer) SetMaxconn(v float32) {
+	o.Maxconn = v
+}
+
+// GetConnectTimeout returns the ConnectTimeout field value
+func (o *Balancer) GetConnectTimeout() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.ConnectTimeout
+}
+
+// GetConnectTimeoutOk returns a tuple with the ConnectTimeout field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetConnectTimeoutOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ConnectTimeout, true
+}
+
+// SetConnectTimeout sets field value
+func (o *Balancer) SetConnectTimeout(v float32) {
+	o.ConnectTimeout = v
+}
+
+// GetClientTimeout returns the ClientTimeout field value
+func (o *Balancer) GetClientTimeout() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.ClientTimeout
+}
+
+// GetClientTimeoutOk returns a tuple with the ClientTimeout field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetClientTimeoutOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClientTimeout, true
+}
+
+// SetClientTimeout sets field value
+func (o *Balancer) SetClientTimeout(v float32) {
+	o.ClientTimeout = v
+}
+
+// GetServerTimeout returns the ServerTimeout field value
+func (o *Balancer) GetServerTimeout() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.ServerTimeout
+}
+
+// GetServerTimeoutOk returns a tuple with the ServerTimeout field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetServerTimeoutOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ServerTimeout, true
+}
+
+// SetServerTimeout sets field value
+func (o *Balancer) SetServerTimeout(v float32) {
+	o.ServerTimeout = v
+}
+
+// GetHttprequestTimeout returns the HttprequestTimeout field value
+func (o *Balancer) GetHttprequestTimeout() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.HttprequestTimeout
+}
+
+// GetHttprequestTimeoutOk returns a tuple with the HttprequestTimeout field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetHttprequestTimeoutOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.HttprequestTimeout, true
+}
+
+// SetHttprequestTimeout sets field value
+func (o *Balancer) SetHttprequestTimeout(v float32) {
+	o.HttprequestTimeout = v
+}
+
 // GetPresetId returns the PresetId field value
 func (o *Balancer) GetPresetId() float32 {
 	if o == nil {
@@ -686,6 +821,11 @@ func (o Balancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["port"] = o.Port
 	toSerialize["proto"] = o.Proto
 	toSerialize["rise"] = o.Rise
+	toSerialize["maxconn"] = o.Maxconn
+	toSerialize["connect_timeout"] = o.ConnectTimeout
+	toSerialize["client_timeout"] = o.ClientTimeout
+	toSerialize["server_timeout"] = o.ServerTimeout
+	toSerialize["httprequest_timeout"] = o.HttprequestTimeout
 	toSerialize["preset_id"] = o.PresetId
 	toSerialize["is_ssl"] = o.IsSsl
 	toSerialize["status"] = o.Status

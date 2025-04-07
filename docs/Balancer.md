@@ -17,6 +17,11 @@ Name | Type | Description | Notes
 **Port** | **float32** | Порт балансировщика. | 
 **Proto** | **string** | Протокол. | 
 **Rise** | **float32** | Порог количества успешных ответов. | 
+**Maxconn** | **float32** | Максимальное количество соединений. | 
+**ConnectTimeout** | **float32** | Таймаут подключения. | 
+**ClientTimeout** | **float32** | Таймаут клиента. | 
+**ServerTimeout** | **float32** | Таймаут сервера. | 
+**HttprequestTimeout** | **float32** | Таймаут HTTP запроса. | 
 **PresetId** | **float32** | ID тарифа. | 
 **IsSsl** | **bool** | Это логическое значение, которое показывает, требуется ли перенаправление на SSL. | 
 **Status** | **string** | Статус балансировщика. | 
@@ -32,7 +37,7 @@ Name | Type | Description | Notes
 
 ### NewBalancer
 
-`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, ) *Balancer`
+`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, ) *Balancer`
 
 NewBalancer instantiates a new Balancer object
 This constructor will assign default values to properties that have it defined,
@@ -325,6 +330,106 @@ and a boolean to check if the value has been set.
 `func (o *Balancer) SetRise(v float32)`
 
 SetRise sets Rise field to given value.
+
+
+### GetMaxconn
+
+`func (o *Balancer) GetMaxconn() float32`
+
+GetMaxconn returns the Maxconn field if non-nil, zero value otherwise.
+
+### GetMaxconnOk
+
+`func (o *Balancer) GetMaxconnOk() (*float32, bool)`
+
+GetMaxconnOk returns a tuple with the Maxconn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxconn
+
+`func (o *Balancer) SetMaxconn(v float32)`
+
+SetMaxconn sets Maxconn field to given value.
+
+
+### GetConnectTimeout
+
+`func (o *Balancer) GetConnectTimeout() float32`
+
+GetConnectTimeout returns the ConnectTimeout field if non-nil, zero value otherwise.
+
+### GetConnectTimeoutOk
+
+`func (o *Balancer) GetConnectTimeoutOk() (*float32, bool)`
+
+GetConnectTimeoutOk returns a tuple with the ConnectTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectTimeout
+
+`func (o *Balancer) SetConnectTimeout(v float32)`
+
+SetConnectTimeout sets ConnectTimeout field to given value.
+
+
+### GetClientTimeout
+
+`func (o *Balancer) GetClientTimeout() float32`
+
+GetClientTimeout returns the ClientTimeout field if non-nil, zero value otherwise.
+
+### GetClientTimeoutOk
+
+`func (o *Balancer) GetClientTimeoutOk() (*float32, bool)`
+
+GetClientTimeoutOk returns a tuple with the ClientTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientTimeout
+
+`func (o *Balancer) SetClientTimeout(v float32)`
+
+SetClientTimeout sets ClientTimeout field to given value.
+
+
+### GetServerTimeout
+
+`func (o *Balancer) GetServerTimeout() float32`
+
+GetServerTimeout returns the ServerTimeout field if non-nil, zero value otherwise.
+
+### GetServerTimeoutOk
+
+`func (o *Balancer) GetServerTimeoutOk() (*float32, bool)`
+
+GetServerTimeoutOk returns a tuple with the ServerTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerTimeout
+
+`func (o *Balancer) SetServerTimeout(v float32)`
+
+SetServerTimeout sets ServerTimeout field to given value.
+
+
+### GetHttprequestTimeout
+
+`func (o *Balancer) GetHttprequestTimeout() float32`
+
+GetHttprequestTimeout returns the HttprequestTimeout field if non-nil, zero value otherwise.
+
+### GetHttprequestTimeoutOk
+
+`func (o *Balancer) GetHttprequestTimeoutOk() (*float32, bool)`
+
+GetHttprequestTimeoutOk returns a tuple with the HttprequestTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttprequestTimeout
+
+`func (o *Balancer) SetHttprequestTimeout(v float32)`
+
+SetHttprequestTimeout sets HttprequestTimeout field to given value.
 
 
 ### GetPresetId

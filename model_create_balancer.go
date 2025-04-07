@@ -46,6 +46,16 @@ type CreateBalancer struct {
 	Fall float32 `json:"fall"`
 	// Порог количества успешных ответов.
 	Rise float32 `json:"rise"`
+	// Максимальное количество соединений.
+	Maxconn *float32 `json:"maxconn,omitempty"`
+	// Таймаут подключения.
+	ConnectTimeout *float32 `json:"connect_timeout,omitempty"`
+	// Таймаут клиента.
+	ClientTimeout *float32 `json:"client_timeout,omitempty"`
+	// Таймаут сервера.
+	ServerTimeout *float32 `json:"server_timeout,omitempty"`
+	// Таймаут HTTP запроса.
+	HttprequestTimeout *float32 `json:"httprequest_timeout,omitempty"`
 	// ID тарифа.
 	PresetId float32 `json:"preset_id"`
 	Network *Network `json:"network,omitempty"`
@@ -395,6 +405,166 @@ func (o *CreateBalancer) SetRise(v float32) {
 	o.Rise = v
 }
 
+// GetMaxconn returns the Maxconn field value if set, zero value otherwise.
+func (o *CreateBalancer) GetMaxconn() float32 {
+	if o == nil || IsNil(o.Maxconn) {
+		var ret float32
+		return ret
+	}
+	return *o.Maxconn
+}
+
+// GetMaxconnOk returns a tuple with the Maxconn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetMaxconnOk() (*float32, bool) {
+	if o == nil || IsNil(o.Maxconn) {
+		return nil, false
+	}
+	return o.Maxconn, true
+}
+
+// HasMaxconn returns a boolean if a field has been set.
+func (o *CreateBalancer) HasMaxconn() bool {
+	if o != nil && !IsNil(o.Maxconn) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxconn gets a reference to the given float32 and assigns it to the Maxconn field.
+func (o *CreateBalancer) SetMaxconn(v float32) {
+	o.Maxconn = &v
+}
+
+// GetConnectTimeout returns the ConnectTimeout field value if set, zero value otherwise.
+func (o *CreateBalancer) GetConnectTimeout() float32 {
+	if o == nil || IsNil(o.ConnectTimeout) {
+		var ret float32
+		return ret
+	}
+	return *o.ConnectTimeout
+}
+
+// GetConnectTimeoutOk returns a tuple with the ConnectTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetConnectTimeoutOk() (*float32, bool) {
+	if o == nil || IsNil(o.ConnectTimeout) {
+		return nil, false
+	}
+	return o.ConnectTimeout, true
+}
+
+// HasConnectTimeout returns a boolean if a field has been set.
+func (o *CreateBalancer) HasConnectTimeout() bool {
+	if o != nil && !IsNil(o.ConnectTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectTimeout gets a reference to the given float32 and assigns it to the ConnectTimeout field.
+func (o *CreateBalancer) SetConnectTimeout(v float32) {
+	o.ConnectTimeout = &v
+}
+
+// GetClientTimeout returns the ClientTimeout field value if set, zero value otherwise.
+func (o *CreateBalancer) GetClientTimeout() float32 {
+	if o == nil || IsNil(o.ClientTimeout) {
+		var ret float32
+		return ret
+	}
+	return *o.ClientTimeout
+}
+
+// GetClientTimeoutOk returns a tuple with the ClientTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetClientTimeoutOk() (*float32, bool) {
+	if o == nil || IsNil(o.ClientTimeout) {
+		return nil, false
+	}
+	return o.ClientTimeout, true
+}
+
+// HasClientTimeout returns a boolean if a field has been set.
+func (o *CreateBalancer) HasClientTimeout() bool {
+	if o != nil && !IsNil(o.ClientTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientTimeout gets a reference to the given float32 and assigns it to the ClientTimeout field.
+func (o *CreateBalancer) SetClientTimeout(v float32) {
+	o.ClientTimeout = &v
+}
+
+// GetServerTimeout returns the ServerTimeout field value if set, zero value otherwise.
+func (o *CreateBalancer) GetServerTimeout() float32 {
+	if o == nil || IsNil(o.ServerTimeout) {
+		var ret float32
+		return ret
+	}
+	return *o.ServerTimeout
+}
+
+// GetServerTimeoutOk returns a tuple with the ServerTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetServerTimeoutOk() (*float32, bool) {
+	if o == nil || IsNil(o.ServerTimeout) {
+		return nil, false
+	}
+	return o.ServerTimeout, true
+}
+
+// HasServerTimeout returns a boolean if a field has been set.
+func (o *CreateBalancer) HasServerTimeout() bool {
+	if o != nil && !IsNil(o.ServerTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerTimeout gets a reference to the given float32 and assigns it to the ServerTimeout field.
+func (o *CreateBalancer) SetServerTimeout(v float32) {
+	o.ServerTimeout = &v
+}
+
+// GetHttprequestTimeout returns the HttprequestTimeout field value if set, zero value otherwise.
+func (o *CreateBalancer) GetHttprequestTimeout() float32 {
+	if o == nil || IsNil(o.HttprequestTimeout) {
+		var ret float32
+		return ret
+	}
+	return *o.HttprequestTimeout
+}
+
+// GetHttprequestTimeoutOk returns a tuple with the HttprequestTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetHttprequestTimeoutOk() (*float32, bool) {
+	if o == nil || IsNil(o.HttprequestTimeout) {
+		return nil, false
+	}
+	return o.HttprequestTimeout, true
+}
+
+// HasHttprequestTimeout returns a boolean if a field has been set.
+func (o *CreateBalancer) HasHttprequestTimeout() bool {
+	if o != nil && !IsNil(o.HttprequestTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttprequestTimeout gets a reference to the given float32 and assigns it to the HttprequestTimeout field.
+func (o *CreateBalancer) SetHttprequestTimeout(v float32) {
+	o.HttprequestTimeout = &v
+}
+
 // GetPresetId returns the PresetId field value
 func (o *CreateBalancer) GetPresetId() float32 {
 	if o == nil {
@@ -506,6 +676,21 @@ func (o CreateBalancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["timeout"] = o.Timeout
 	toSerialize["fall"] = o.Fall
 	toSerialize["rise"] = o.Rise
+	if !IsNil(o.Maxconn) {
+		toSerialize["maxconn"] = o.Maxconn
+	}
+	if !IsNil(o.ConnectTimeout) {
+		toSerialize["connect_timeout"] = o.ConnectTimeout
+	}
+	if !IsNil(o.ClientTimeout) {
+		toSerialize["client_timeout"] = o.ClientTimeout
+	}
+	if !IsNil(o.ServerTimeout) {
+		toSerialize["server_timeout"] = o.ServerTimeout
+	}
+	if !IsNil(o.HttprequestTimeout) {
+		toSerialize["httprequest_timeout"] = o.HttprequestTimeout
+	}
 	toSerialize["preset_id"] = o.PresetId
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
