@@ -17172,7 +17172,7 @@ paths:
           \t}\n}\n"
   /api/v1/servers/{server_id}/statistics/{time_from}/{period}/{keys}:
     get:
-      description: "Чтобы получить статистику сервера, отправьте GET-запрос на `/api/v1/servers/{server_id}/{time_from}/{period}/{keys}`."
+      description: "Чтобы получить статистику сервера, отправьте GET-запрос на `/api/v1/servers/{server_id}/statistics/{time_from}/{period}/{keys}`."
       operationId: getServerStatisticsNew
       parameters:
       - description: ID облачного сервера.
