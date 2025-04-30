@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **PresetId** | **float32** | ID тарифа. | 
 **IndexDir** | **NullableString** | Путь к директории с индексным файлом. Определен для приложений &#x60;type: frontend&#x60;. Для приложений &#x60;type: backend&#x60; всегда null. | 
 **BuildCmd** | **string** | Команда сборки приложения. | 
+**AvatarLink** | **NullableString** | Ссылка на аватар приложения. | 
 **RunCmd** | **NullableString** | Команда для запуска приложения. Определена для приложений &#x60;type: backend&#x60;. Для приложений &#x60;type: frontend&#x60; всегда null. | 
 **Configuration** | [**NullableAppConfiguration**](AppConfiguration.md) |  | 
 **DiskStatus** | [**NullableAppDiskStatus**](AppDiskStatus.md) |  | 
@@ -34,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewApp
 
-`func NewApp(id float32, type_ string, name string, status string, provider AppProvider, ip string, domains []AppDomainsInner, framework Frameworks, location string, repository Repository, envVersion NullableString, envs map[string]interface{}, branchName string, isAutoDeploy bool, commitSha string, comment string, presetId float32, indexDir NullableString, buildCmd string, runCmd NullableString, configuration NullableAppConfiguration, diskStatus NullableAppDiskStatus, isQemuAgent bool, language string, startTime time.Time, ) *App`
+`func NewApp(id float32, type_ string, name string, status string, provider AppProvider, ip string, domains []AppDomainsInner, framework Frameworks, location string, repository Repository, envVersion NullableString, envs map[string]interface{}, branchName string, isAutoDeploy bool, commitSha string, comment string, presetId float32, indexDir NullableString, buildCmd string, avatarLink NullableString, runCmd NullableString, configuration NullableAppConfiguration, diskStatus NullableAppDiskStatus, isQemuAgent bool, language string, startTime time.Time, ) *App`
 
 NewApp instantiates a new App object
 This constructor will assign default values to properties that have it defined,
@@ -449,6 +450,36 @@ and a boolean to check if the value has been set.
 SetBuildCmd sets BuildCmd field to given value.
 
 
+### GetAvatarLink
+
+`func (o *App) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *App) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *App) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *App) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *App) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
 ### GetRunCmd
 
 `func (o *App) GetRunCmd() string`

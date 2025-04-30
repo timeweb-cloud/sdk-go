@@ -447,12 +447,12 @@ docs/UpdateServerDiskRequest.md
 docs/UpdateServerIPRequest.md
 docs/UpdateServerNATRequest.md
 docs/UpdateServerOSBootModeRequest.md
+docs/UpdateSettings.md
 docs/UpdateStorageRequest.md
 docs/UpdateStorageUser200Response.md
 docs/UpdateStorageUserRequest.md
 docs/UpdateToken200Response.md
 docs/UpdateVpc.md
-docs/UpdeteSettings.md
 docs/UploadSuccessful.md
 docs/UploadSuccessfulResponse.md
 docs/UrlStatus.md
@@ -877,12 +877,12 @@ model_update_server_disk_request.go
 model_update_server_ip_request.go
 model_update_server_nat_request.go
 model_update_server_os_boot_mode_request.go
+model_update_settings.go
 model_update_storage_request.go
 model_update_storage_user_200_response.go
 model_update_storage_user_request.go
 model_update_token_200_response.go
 model_update_vpc.go
-model_updete_settings.go
 model_upload_successful.go
 model_upload_successful_response.go
 model_url_status.go

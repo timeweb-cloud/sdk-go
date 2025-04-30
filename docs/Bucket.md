@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Type** | **string** | Тип хранилища. | 
 **PresetId** | **NullableFloat32** | ID тарифа хранилища. | 
 **ConfiguratorId** | **NullableFloat32** | ID конфигуратора хранилища. | 
+**AvatarLink** | **NullableString** | Ссылка на аватар хранилища. | 
 **Status** | **string** | Статус хранилища. | 
 **ObjectAmount** | **float32** | Количество файлов в хранилище. | 
 **Location** | **string** | Регион хранилища. | 
@@ -24,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewBucket
 
-`func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, ) *Bucket`
+`func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, ) *Bucket`
 
 NewBucket instantiates a new Bucket object
 This constructor will assign default values to properties that have it defined,
@@ -204,6 +205,36 @@ SetConfiguratorId sets ConfiguratorId field to given value.
 `func (o *Bucket) UnsetConfiguratorId()`
 
 UnsetConfiguratorId ensures that no value is present for ConfiguratorId, not even an explicit nil
+### GetAvatarLink
+
+`func (o *Bucket) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *Bucket) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *Bucket) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *Bucket) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *Bucket) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
 ### GetStatus
 
 `func (o *Bucket) GetStatus() string`

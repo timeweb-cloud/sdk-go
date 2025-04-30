@@ -55,6 +55,8 @@ type App struct {
 	IndexDir NullableString `json:"index_dir"`
 	// Команда сборки приложения.
 	BuildCmd string `json:"build_cmd"`
+	// Ссылка на аватар приложения.
+	AvatarLink NullableString `json:"avatar_link"`
 	// Команда для запуска приложения. Определена для приложений `type: backend`. Для приложений `type: frontend` всегда null.
 	RunCmd NullableString `json:"run_cmd"`
 	Configuration NullableAppConfiguration `json:"configuration"`
@@ -71,7 +73,7 @@ type App struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApp(id float32, type_ string, name string, status string, provider AppProvider, ip string, domains []AppDomainsInner, framework Frameworks, location string, repository Repository, envVersion NullableString, envs map[string]interface{}, branchName string, isAutoDeploy bool, commitSha string, comment string, presetId float32, indexDir NullableString, buildCmd string, runCmd NullableString, configuration NullableAppConfiguration, diskStatus NullableAppDiskStatus, isQemuAgent bool, language string, startTime time.Time) *App {
+func NewApp(id float32, type_ string, name string, status string, provider AppProvider, ip string, domains []AppDomainsInner, framework Frameworks, location string, repository Repository, envVersion NullableString, envs map[string]interface{}, branchName string, isAutoDeploy bool, commitSha string, comment string, presetId float32, indexDir NullableString, buildCmd string, avatarLink NullableString, runCmd NullableString, configuration NullableAppConfiguration, diskStatus NullableAppDiskStatus, isQemuAgent bool, language string, startTime time.Time) *App {
 	this := App{}
 	this.Id = id
 	this.Type = type_
@@ -92,6 +94,7 @@ func NewApp(id float32, type_ string, name string, status string, provider AppPr
 	this.PresetId = presetId
 	this.IndexDir = indexDir
 	this.BuildCmd = buildCmd
+	this.AvatarLink = avatarLink
 	this.RunCmd = runCmd
 	this.Configuration = configuration
 	this.DiskStatus = diskStatus
@@ -569,6 +572,32 @@ func (o *App) SetBuildCmd(v string) {
 	o.BuildCmd = v
 }
 
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *App) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *App) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *App) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
+}
+
 // GetRunCmd returns the RunCmd field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *App) GetRunCmd() string {
@@ -748,6 +777,7 @@ func (o App) ToMap() (map[string]interface{}, error) {
 	toSerialize["preset_id"] = o.PresetId
 	toSerialize["index_dir"] = o.IndexDir.Get()
 	toSerialize["build_cmd"] = o.BuildCmd
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["run_cmd"] = o.RunCmd.Get()
 	toSerialize["configuration"] = o.Configuration.Get()
 	toSerialize["disk_status"] = o.DiskStatus.Get()

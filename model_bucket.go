@@ -34,6 +34,8 @@ type Bucket struct {
 	PresetId NullableFloat32 `json:"preset_id"`
 	// ID конфигуратора хранилища.
 	ConfiguratorId NullableFloat32 `json:"configurator_id"`
+	// Ссылка на аватар хранилища.
+	AvatarLink NullableString `json:"avatar_link"`
 	// Статус хранилища.
 	Status string `json:"status"`
 	// Количество файлов в хранилище.
@@ -56,7 +58,7 @@ type Bucket struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string) *Bucket {
+func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string) *Bucket {
 	this := Bucket{}
 	this.Id = id
 	this.Name = name
@@ -64,6 +66,7 @@ func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string,
 	this.Type = type_
 	this.PresetId = presetId
 	this.ConfiguratorId = configuratorId
+	this.AvatarLink = avatarLink
 	this.Status = status
 	this.ObjectAmount = objectAmount
 	this.Location = location
@@ -261,6 +264,32 @@ func (o *Bucket) GetConfiguratorIdOk() (*float32, bool) {
 // SetConfiguratorId sets field value
 func (o *Bucket) SetConfiguratorId(v float32) {
 	o.ConfiguratorId.Set(&v)
+}
+
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Bucket) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Bucket) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *Bucket) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
 }
 
 // GetStatus returns the Status field value
@@ -476,6 +505,7 @@ func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["preset_id"] = o.PresetId.Get()
 	toSerialize["configurator_id"] = o.ConfiguratorId.Get()
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["status"] = o.Status
 	toSerialize["object_amount"] = o.ObjectAmount
 	toSerialize["location"] = o.Location

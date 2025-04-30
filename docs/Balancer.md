@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **Status** | **string** | Статус балансировщика. | 
 **IsSticky** | **bool** | Это логическое значение, которое показывает, сохраняется ли сессия. | 
 **Timeout** | **float32** | Таймаут ответа балансировщика. | 
+**AvatarLink** | **NullableString** | Ссылка на аватар балансировщика. | 
 **IsUseProxy** | **bool** | Это логическое значение, которое показывает, выступает ли балансировщик в качестве прокси. | 
 **Rules** | [**[]Rule**](Rule.md) |  | 
 **Ips** | **[]string** | Список IP-адресов, привязанных к балансировщику | 
@@ -37,7 +38,7 @@ Name | Type | Description | Notes
 
 ### NewBalancer
 
-`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, ) *Balancer`
+`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, avatarLink NullableString, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, ) *Balancer`
 
 NewBalancer instantiates a new Balancer object
 This constructor will assign default values to properties that have it defined,
@@ -532,6 +533,36 @@ and a boolean to check if the value has been set.
 SetTimeout sets Timeout field to given value.
 
 
+### GetAvatarLink
+
+`func (o *Balancer) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *Balancer) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *Balancer) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *Balancer) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *Balancer) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
 ### GetIsUseProxy
 
 `func (o *Balancer) GetIsUseProxy() bool`

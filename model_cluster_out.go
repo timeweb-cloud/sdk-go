@@ -35,6 +35,8 @@ type ClusterOut struct {
 	K8sVersion string `json:"k8s_version"`
 	// Используемый сетевой драйвер
 	NetworkDriver string `json:"network_driver"`
+	// Ссылка на аватар кластера.
+	AvatarLink NullableString `json:"avatar_link"`
 	// Логическое значение, показывающее, включен ли Ingress
 	Ingress bool `json:"ingress"`
 	// ID тарифа мастер-ноды
@@ -55,7 +57,7 @@ type ClusterOut struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterOut(id int32, name string, createdAt time.Time, status string, description string, k8sVersion string, networkDriver string, ingress bool, presetId int32) *ClusterOut {
+func NewClusterOut(id int32, name string, createdAt time.Time, status string, description string, k8sVersion string, networkDriver string, avatarLink NullableString, ingress bool, presetId int32) *ClusterOut {
 	this := ClusterOut{}
 	this.Id = id
 	this.Name = name
@@ -64,6 +66,7 @@ func NewClusterOut(id int32, name string, createdAt time.Time, status string, de
 	this.Description = description
 	this.K8sVersion = k8sVersion
 	this.NetworkDriver = networkDriver
+	this.AvatarLink = avatarLink
 	this.Ingress = ingress
 	this.PresetId = presetId
 	var cpu int32 = 0
@@ -255,6 +258,32 @@ func (o *ClusterOut) GetNetworkDriverOk() (*string, bool) {
 // SetNetworkDriver sets field value
 func (o *ClusterOut) SetNetworkDriver(v string) {
 	o.NetworkDriver = v
+}
+
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ClusterOut) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ClusterOut) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *ClusterOut) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
 }
 
 // GetIngress returns the Ingress field value
@@ -482,6 +511,7 @@ func (o ClusterOut) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["k8s_version"] = o.K8sVersion
 	toSerialize["network_driver"] = o.NetworkDriver
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["ingress"] = o.Ingress
 	toSerialize["preset_id"] = o.PresetId
 	if !IsNil(o.Cpu) {

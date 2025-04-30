@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Expiration** | **string** | Дата окончания срока регистрации домена, для доменов без срока окончания регистрации будет приходить 0000-00-00. | 
 **Fqdn** | **string** | Полное имя домена. | 
 **Id** | **float32** | ID домена. | 
+**AvatarLink** | **NullableString** | Ссылка на аватар домена. | 
 **IsAutoprolongEnabled** | **NullableBool** | Это логическое значение, которое показывает, включено ли автопродление домена. | 
 **IsPremium** | **bool** | Это логическое значение, которое показывает, является ли домен премиальным. | 
 **IsProlongAllowed** | **bool** | Это логическое значение, которое показывает, можно ли сейчас продлить домен. | 
@@ -28,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewDomain
 
-`func NewDomain(allowedBuyPeriods []DomainAllowedBuyPeriodsInner, daysLeft float32, domainStatus string, expiration string, fqdn string, id float32, isAutoprolongEnabled NullableBool, isPremium bool, isProlongAllowed bool, isTechnical bool, isWhoisPrivacyEnabled NullableBool, linkedIp NullableString, paidTill NullableString, personId NullableFloat32, premiumProlongCost NullableFloat32, provider NullableString, requestStatus NullableString, subdomains []Subdomain, tldId NullableFloat32, ) *Domain`
+`func NewDomain(allowedBuyPeriods []DomainAllowedBuyPeriodsInner, daysLeft float32, domainStatus string, expiration string, fqdn string, id float32, avatarLink NullableString, isAutoprolongEnabled NullableBool, isPremium bool, isProlongAllowed bool, isTechnical bool, isWhoisPrivacyEnabled NullableBool, linkedIp NullableString, paidTill NullableString, personId NullableFloat32, premiumProlongCost NullableFloat32, provider NullableString, requestStatus NullableString, subdomains []Subdomain, tldId NullableFloat32, ) *Domain`
 
 NewDomain instantiates a new Domain object
 This constructor will assign default values to properties that have it defined,
@@ -163,6 +164,36 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
+### GetAvatarLink
+
+`func (o *Domain) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *Domain) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *Domain) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *Domain) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *Domain) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
 ### GetIsAutoprolongEnabled
 
 `func (o *Domain) GetIsAutoprolongEnabled() bool`

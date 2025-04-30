@@ -67,6 +67,8 @@ type Balancer struct {
 	IsSticky bool `json:"is_sticky"`
 	// Таймаут ответа балансировщика.
 	Timeout float32 `json:"timeout"`
+	// Ссылка на аватар балансировщика.
+	AvatarLink NullableString `json:"avatar_link"`
 	// Это логическое значение, которое показывает, выступает ли балансировщик в качестве прокси.
 	IsUseProxy bool `json:"is_use_proxy"`
 	Rules []Rule `json:"rules"`
@@ -81,7 +83,7 @@ type Balancer struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone) *Balancer {
+func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, avatarLink NullableString, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone) *Balancer {
 	this := Balancer{}
 	this.Id = id
 	this.Algo = algo
@@ -106,6 +108,7 @@ func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, int
 	this.Status = status
 	this.IsSticky = isSticky
 	this.Timeout = timeout
+	this.AvatarLink = avatarLink
 	this.IsUseProxy = isUseProxy
 	this.Rules = rules
 	this.Ips = ips
@@ -678,6 +681,32 @@ func (o *Balancer) SetTimeout(v float32) {
 	o.Timeout = v
 }
 
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Balancer) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Balancer) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *Balancer) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
+}
+
 // GetIsUseProxy returns the IsUseProxy field value
 func (o *Balancer) GetIsUseProxy() bool {
 	if o == nil {
@@ -831,6 +860,7 @@ func (o Balancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["is_sticky"] = o.IsSticky
 	toSerialize["timeout"] = o.Timeout
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["is_use_proxy"] = o.IsUseProxy
 	toSerialize["rules"] = o.Rules
 	toSerialize["ips"] = o.Ips

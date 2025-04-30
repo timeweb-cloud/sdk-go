@@ -3309,11 +3309,11 @@ type ApiUpdateAppSettingsRequest struct {
 	ctx context.Context
 	ApiService *AppsAPIService
 	appId string
-	updeteSettings *UpdeteSettings
+	updateSettings *UpdateSettings
 }
 
-func (r ApiUpdateAppSettingsRequest) UpdeteSettings(updeteSettings UpdeteSettings) ApiUpdateAppSettingsRequest {
-	r.updeteSettings = &updeteSettings
+func (r ApiUpdateAppSettingsRequest) UpdateSettings(updateSettings UpdateSettings) ApiUpdateAppSettingsRequest {
+	r.updateSettings = &updateSettings
 	return r
 }
 
@@ -3359,8 +3359,8 @@ func (a *AppsAPIService) UpdateAppSettingsExecute(r ApiUpdateAppSettingsRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updeteSettings == nil {
-		return localVarReturnValue, nil, reportError("updeteSettings is required and must be specified")
+	if r.updateSettings == nil {
+		return localVarReturnValue, nil, reportError("updateSettings is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3381,7 +3381,7 @@ func (a *AppsAPIService) UpdateAppSettingsExecute(r ApiUpdateAppSettingsRequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updeteSettings
+	localVarPostBody = r.updateSettings
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -33,6 +33,8 @@ type DatabaseCluster struct {
 	Type DbType `json:"type"`
 	// Тип хеширования кластера базы данных (mysql5 | mysql | postgres).
 	HashType NullableString `json:"hash_type"`
+	// Ссылка на аватар для базы данных.
+	AvatarLink NullableString `json:"avatar_link"`
 	// Порт
 	Port NullableInt32 `json:"port"`
 	// Текущий статус кластера базы данных.
@@ -49,7 +51,7 @@ type DatabaseCluster struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool) *DatabaseCluster {
+func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool) *DatabaseCluster {
 	this := DatabaseCluster{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -58,6 +60,7 @@ func NewDatabaseCluster(id float32, createdAt string, location NullableString, n
 	this.Networks = networks
 	this.Type = type_
 	this.HashType = hashType
+	this.AvatarLink = avatarLink
 	this.Port = port
 	this.Status = status
 	this.PresetId = presetId
@@ -247,6 +250,32 @@ func (o *DatabaseCluster) SetHashType(v string) {
 	o.HashType.Set(&v)
 }
 
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DatabaseCluster) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseCluster) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *DatabaseCluster) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
+}
+
 // GetPort returns the Port field value
 // If the value is explicit nil, the zero value for int32 will be returned
 func (o *DatabaseCluster) GetPort() int32 {
@@ -412,6 +441,7 @@ func (o DatabaseCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize["networks"] = o.Networks
 	toSerialize["type"] = o.Type
 	toSerialize["hash_type"] = o.HashType.Get()
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["port"] = o.Port.Get()
 	toSerialize["status"] = o.Status
 	toSerialize["preset_id"] = o.PresetId

@@ -32,6 +32,8 @@ type Domain struct {
 	Fqdn string `json:"fqdn"`
 	// ID домена.
 	Id float32 `json:"id"`
+	// Ссылка на аватар домена.
+	AvatarLink NullableString `json:"avatar_link"`
 	// Это логическое значение, которое показывает, включено ли автопродление домена.
 	IsAutoprolongEnabled NullableBool `json:"is_autoprolong_enabled"`
 	// Это логическое значение, которое показывает, является ли домен премиальным.
@@ -64,7 +66,7 @@ type Domain struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDomain(allowedBuyPeriods []DomainAllowedBuyPeriodsInner, daysLeft float32, domainStatus string, expiration string, fqdn string, id float32, isAutoprolongEnabled NullableBool, isPremium bool, isProlongAllowed bool, isTechnical bool, isWhoisPrivacyEnabled NullableBool, linkedIp NullableString, paidTill NullableString, personId NullableFloat32, premiumProlongCost NullableFloat32, provider NullableString, requestStatus NullableString, subdomains []Subdomain, tldId NullableFloat32) *Domain {
+func NewDomain(allowedBuyPeriods []DomainAllowedBuyPeriodsInner, daysLeft float32, domainStatus string, expiration string, fqdn string, id float32, avatarLink NullableString, isAutoprolongEnabled NullableBool, isPremium bool, isProlongAllowed bool, isTechnical bool, isWhoisPrivacyEnabled NullableBool, linkedIp NullableString, paidTill NullableString, personId NullableFloat32, premiumProlongCost NullableFloat32, provider NullableString, requestStatus NullableString, subdomains []Subdomain, tldId NullableFloat32) *Domain {
 	this := Domain{}
 	this.AllowedBuyPeriods = allowedBuyPeriods
 	this.DaysLeft = daysLeft
@@ -72,6 +74,7 @@ func NewDomain(allowedBuyPeriods []DomainAllowedBuyPeriodsInner, daysLeft float3
 	this.Expiration = expiration
 	this.Fqdn = fqdn
 	this.Id = id
+	this.AvatarLink = avatarLink
 	this.IsAutoprolongEnabled = isAutoprolongEnabled
 	this.IsPremium = isPremium
 	this.IsProlongAllowed = isProlongAllowed
@@ -238,6 +241,32 @@ func (o *Domain) GetIdOk() (*float32, bool) {
 // SetId sets field value
 func (o *Domain) SetId(v float32) {
 	o.Id = v
+}
+
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Domain) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Domain) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *Domain) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
 }
 
 // GetIsAutoprolongEnabled returns the IsAutoprolongEnabled field value
@@ -586,6 +615,7 @@ func (o Domain) ToMap() (map[string]interface{}, error) {
 	toSerialize["expiration"] = o.Expiration
 	toSerialize["fqdn"] = o.Fqdn
 	toSerialize["id"] = o.Id
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["is_autoprolong_enabled"] = o.IsAutoprolongEnabled.Get()
 	toSerialize["is_premium"] = o.IsPremium
 	toSerialize["is_prolong_allowed"] = o.IsProlongAllowed

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Description** | **string** | Описание | 
 **K8sVersion** | **string** | Версия Kubernetes | 
 **NetworkDriver** | **string** | Используемый сетевой драйвер | 
+**AvatarLink** | **NullableString** | Ссылка на аватар кластера. | 
 **Ingress** | **bool** | Логическое значение, показывающее, включен ли Ingress | 
 **PresetId** | **int32** | ID тарифа мастер-ноды | 
 **Cpu** | Pointer to **int32** | Общее количество ядер | [optional] [default to 0]
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewClusterOut
 
-`func NewClusterOut(id int32, name string, createdAt time.Time, status string, description string, k8sVersion string, networkDriver string, ingress bool, presetId int32, ) *ClusterOut`
+`func NewClusterOut(id int32, name string, createdAt time.Time, status string, description string, k8sVersion string, networkDriver string, avatarLink NullableString, ingress bool, presetId int32, ) *ClusterOut`
 
 NewClusterOut instantiates a new ClusterOut object
 This constructor will assign default values to properties that have it defined,
@@ -178,6 +179,36 @@ and a boolean to check if the value has been set.
 SetNetworkDriver sets NetworkDriver field to given value.
 
 
+### GetAvatarLink
+
+`func (o *ClusterOut) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *ClusterOut) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *ClusterOut) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *ClusterOut) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *ClusterOut) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
 ### GetIngress
 
 `func (o *ClusterOut) GetIngress() bool`

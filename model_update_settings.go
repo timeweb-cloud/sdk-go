@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdeteSettings type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdeteSettings{}
+// checks if the UpdateSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateSettings{}
 
-// UpdeteSettings struct for UpdeteSettings
-type UpdeteSettings struct {
+// UpdateSettings struct for UpdateSettings
+type UpdateSettings struct {
 	// Автоматический деплой.
 	IsAutoDeploy *bool `json:"is_auto_deploy,omitempty"`
 	// Команда сборки приложения.
@@ -45,25 +45,25 @@ type UpdeteSettings struct {
 	PresetId *float32 `json:"preset_id,omitempty"`
 }
 
-// NewUpdeteSettings instantiates a new UpdeteSettings object
+// NewUpdateSettings instantiates a new UpdateSettings object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdeteSettings() *UpdeteSettings {
-	this := UpdeteSettings{}
+func NewUpdateSettings() *UpdateSettings {
+	this := UpdateSettings{}
 	return &this
 }
 
-// NewUpdeteSettingsWithDefaults instantiates a new UpdeteSettings object
+// NewUpdateSettingsWithDefaults instantiates a new UpdateSettings object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdeteSettingsWithDefaults() *UpdeteSettings {
-	this := UpdeteSettings{}
+func NewUpdateSettingsWithDefaults() *UpdateSettings {
+	this := UpdateSettings{}
 	return &this
 }
 
 // GetIsAutoDeploy returns the IsAutoDeploy field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetIsAutoDeploy() bool {
+func (o *UpdateSettings) GetIsAutoDeploy() bool {
 	if o == nil || IsNil(o.IsAutoDeploy) {
 		var ret bool
 		return ret
@@ -73,7 +73,7 @@ func (o *UpdeteSettings) GetIsAutoDeploy() bool {
 
 // GetIsAutoDeployOk returns a tuple with the IsAutoDeploy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetIsAutoDeployOk() (*bool, bool) {
+func (o *UpdateSettings) GetIsAutoDeployOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsAutoDeploy) {
 		return nil, false
 	}
@@ -81,7 +81,7 @@ func (o *UpdeteSettings) GetIsAutoDeployOk() (*bool, bool) {
 }
 
 // HasIsAutoDeploy returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasIsAutoDeploy() bool {
+func (o *UpdateSettings) HasIsAutoDeploy() bool {
 	if o != nil && !IsNil(o.IsAutoDeploy) {
 		return true
 	}
@@ -90,12 +90,12 @@ func (o *UpdeteSettings) HasIsAutoDeploy() bool {
 }
 
 // SetIsAutoDeploy gets a reference to the given bool and assigns it to the IsAutoDeploy field.
-func (o *UpdeteSettings) SetIsAutoDeploy(v bool) {
+func (o *UpdateSettings) SetIsAutoDeploy(v bool) {
 	o.IsAutoDeploy = &v
 }
 
 // GetBuildCmd returns the BuildCmd field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetBuildCmd() string {
+func (o *UpdateSettings) GetBuildCmd() string {
 	if o == nil || IsNil(o.BuildCmd) {
 		var ret string
 		return ret
@@ -105,7 +105,7 @@ func (o *UpdeteSettings) GetBuildCmd() string {
 
 // GetBuildCmdOk returns a tuple with the BuildCmd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetBuildCmdOk() (*string, bool) {
+func (o *UpdateSettings) GetBuildCmdOk() (*string, bool) {
 	if o == nil || IsNil(o.BuildCmd) {
 		return nil, false
 	}
@@ -113,7 +113,7 @@ func (o *UpdeteSettings) GetBuildCmdOk() (*string, bool) {
 }
 
 // HasBuildCmd returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasBuildCmd() bool {
+func (o *UpdateSettings) HasBuildCmd() bool {
 	if o != nil && !IsNil(o.BuildCmd) {
 		return true
 	}
@@ -122,12 +122,12 @@ func (o *UpdeteSettings) HasBuildCmd() bool {
 }
 
 // SetBuildCmd gets a reference to the given string and assigns it to the BuildCmd field.
-func (o *UpdeteSettings) SetBuildCmd(v string) {
+func (o *UpdateSettings) SetBuildCmd(v string) {
 	o.BuildCmd = &v
 }
 
 // GetEnvs returns the Envs field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetEnvs() map[string]interface{} {
+func (o *UpdateSettings) GetEnvs() map[string]interface{} {
 	if o == nil || IsNil(o.Envs) {
 		var ret map[string]interface{}
 		return ret
@@ -137,7 +137,7 @@ func (o *UpdeteSettings) GetEnvs() map[string]interface{} {
 
 // GetEnvsOk returns a tuple with the Envs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetEnvsOk() (map[string]interface{}, bool) {
+func (o *UpdateSettings) GetEnvsOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Envs) {
 		return map[string]interface{}{}, false
 	}
@@ -145,7 +145,7 @@ func (o *UpdeteSettings) GetEnvsOk() (map[string]interface{}, bool) {
 }
 
 // HasEnvs returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasEnvs() bool {
+func (o *UpdateSettings) HasEnvs() bool {
 	if o != nil && !IsNil(o.Envs) {
 		return true
 	}
@@ -154,12 +154,12 @@ func (o *UpdeteSettings) HasEnvs() bool {
 }
 
 // SetEnvs gets a reference to the given map[string]interface{} and assigns it to the Envs field.
-func (o *UpdeteSettings) SetEnvs(v map[string]interface{}) {
+func (o *UpdateSettings) SetEnvs(v map[string]interface{}) {
 	o.Envs = v
 }
 
 // GetBranchName returns the BranchName field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetBranchName() string {
+func (o *UpdateSettings) GetBranchName() string {
 	if o == nil || IsNil(o.BranchName) {
 		var ret string
 		return ret
@@ -169,7 +169,7 @@ func (o *UpdeteSettings) GetBranchName() string {
 
 // GetBranchNameOk returns a tuple with the BranchName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetBranchNameOk() (*string, bool) {
+func (o *UpdateSettings) GetBranchNameOk() (*string, bool) {
 	if o == nil || IsNil(o.BranchName) {
 		return nil, false
 	}
@@ -177,7 +177,7 @@ func (o *UpdeteSettings) GetBranchNameOk() (*string, bool) {
 }
 
 // HasBranchName returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasBranchName() bool {
+func (o *UpdateSettings) HasBranchName() bool {
 	if o != nil && !IsNil(o.BranchName) {
 		return true
 	}
@@ -186,12 +186,12 @@ func (o *UpdeteSettings) HasBranchName() bool {
 }
 
 // SetBranchName gets a reference to the given string and assigns it to the BranchName field.
-func (o *UpdeteSettings) SetBranchName(v string) {
+func (o *UpdateSettings) SetBranchName(v string) {
 	o.BranchName = &v
 }
 
 // GetCommitSha returns the CommitSha field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetCommitSha() string {
+func (o *UpdateSettings) GetCommitSha() string {
 	if o == nil || IsNil(o.CommitSha) {
 		var ret string
 		return ret
@@ -201,7 +201,7 @@ func (o *UpdeteSettings) GetCommitSha() string {
 
 // GetCommitShaOk returns a tuple with the CommitSha field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetCommitShaOk() (*string, bool) {
+func (o *UpdateSettings) GetCommitShaOk() (*string, bool) {
 	if o == nil || IsNil(o.CommitSha) {
 		return nil, false
 	}
@@ -209,7 +209,7 @@ func (o *UpdeteSettings) GetCommitShaOk() (*string, bool) {
 }
 
 // HasCommitSha returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasCommitSha() bool {
+func (o *UpdateSettings) HasCommitSha() bool {
 	if o != nil && !IsNil(o.CommitSha) {
 		return true
 	}
@@ -218,12 +218,12 @@ func (o *UpdeteSettings) HasCommitSha() bool {
 }
 
 // SetCommitSha gets a reference to the given string and assigns it to the CommitSha field.
-func (o *UpdeteSettings) SetCommitSha(v string) {
+func (o *UpdateSettings) SetCommitSha(v string) {
 	o.CommitSha = &v
 }
 
 // GetEnvVersion returns the EnvVersion field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetEnvVersion() string {
+func (o *UpdateSettings) GetEnvVersion() string {
 	if o == nil || IsNil(o.EnvVersion) {
 		var ret string
 		return ret
@@ -233,7 +233,7 @@ func (o *UpdeteSettings) GetEnvVersion() string {
 
 // GetEnvVersionOk returns a tuple with the EnvVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetEnvVersionOk() (*string, bool) {
+func (o *UpdateSettings) GetEnvVersionOk() (*string, bool) {
 	if o == nil || IsNil(o.EnvVersion) {
 		return nil, false
 	}
@@ -241,7 +241,7 @@ func (o *UpdeteSettings) GetEnvVersionOk() (*string, bool) {
 }
 
 // HasEnvVersion returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasEnvVersion() bool {
+func (o *UpdateSettings) HasEnvVersion() bool {
 	if o != nil && !IsNil(o.EnvVersion) {
 		return true
 	}
@@ -250,12 +250,12 @@ func (o *UpdeteSettings) HasEnvVersion() bool {
 }
 
 // SetEnvVersion gets a reference to the given string and assigns it to the EnvVersion field.
-func (o *UpdeteSettings) SetEnvVersion(v string) {
+func (o *UpdateSettings) SetEnvVersion(v string) {
 	o.EnvVersion = &v
 }
 
 // GetIndexDir returns the IndexDir field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetIndexDir() string {
+func (o *UpdateSettings) GetIndexDir() string {
 	if o == nil || IsNil(o.IndexDir) {
 		var ret string
 		return ret
@@ -265,7 +265,7 @@ func (o *UpdeteSettings) GetIndexDir() string {
 
 // GetIndexDirOk returns a tuple with the IndexDir field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetIndexDirOk() (*string, bool) {
+func (o *UpdateSettings) GetIndexDirOk() (*string, bool) {
 	if o == nil || IsNil(o.IndexDir) {
 		return nil, false
 	}
@@ -273,7 +273,7 @@ func (o *UpdeteSettings) GetIndexDirOk() (*string, bool) {
 }
 
 // HasIndexDir returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasIndexDir() bool {
+func (o *UpdateSettings) HasIndexDir() bool {
 	if o != nil && !IsNil(o.IndexDir) {
 		return true
 	}
@@ -282,12 +282,12 @@ func (o *UpdeteSettings) HasIndexDir() bool {
 }
 
 // SetIndexDir gets a reference to the given string and assigns it to the IndexDir field.
-func (o *UpdeteSettings) SetIndexDir(v string) {
+func (o *UpdateSettings) SetIndexDir(v string) {
 	o.IndexDir = &v
 }
 
 // GetRunCmd returns the RunCmd field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetRunCmd() string {
+func (o *UpdateSettings) GetRunCmd() string {
 	if o == nil || IsNil(o.RunCmd) {
 		var ret string
 		return ret
@@ -297,7 +297,7 @@ func (o *UpdeteSettings) GetRunCmd() string {
 
 // GetRunCmdOk returns a tuple with the RunCmd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetRunCmdOk() (*string, bool) {
+func (o *UpdateSettings) GetRunCmdOk() (*string, bool) {
 	if o == nil || IsNil(o.RunCmd) {
 		return nil, false
 	}
@@ -305,7 +305,7 @@ func (o *UpdeteSettings) GetRunCmdOk() (*string, bool) {
 }
 
 // HasRunCmd returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasRunCmd() bool {
+func (o *UpdateSettings) HasRunCmd() bool {
 	if o != nil && !IsNil(o.RunCmd) {
 		return true
 	}
@@ -314,12 +314,12 @@ func (o *UpdeteSettings) HasRunCmd() bool {
 }
 
 // SetRunCmd gets a reference to the given string and assigns it to the RunCmd field.
-func (o *UpdeteSettings) SetRunCmd(v string) {
+func (o *UpdateSettings) SetRunCmd(v string) {
 	o.RunCmd = &v
 }
 
 // GetFramework returns the Framework field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetFramework() Frameworks {
+func (o *UpdateSettings) GetFramework() Frameworks {
 	if o == nil || IsNil(o.Framework) {
 		var ret Frameworks
 		return ret
@@ -329,7 +329,7 @@ func (o *UpdeteSettings) GetFramework() Frameworks {
 
 // GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetFrameworkOk() (*Frameworks, bool) {
+func (o *UpdateSettings) GetFrameworkOk() (*Frameworks, bool) {
 	if o == nil || IsNil(o.Framework) {
 		return nil, false
 	}
@@ -337,7 +337,7 @@ func (o *UpdeteSettings) GetFrameworkOk() (*Frameworks, bool) {
 }
 
 // HasFramework returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasFramework() bool {
+func (o *UpdateSettings) HasFramework() bool {
 	if o != nil && !IsNil(o.Framework) {
 		return true
 	}
@@ -346,12 +346,12 @@ func (o *UpdeteSettings) HasFramework() bool {
 }
 
 // SetFramework gets a reference to the given Frameworks and assigns it to the Framework field.
-func (o *UpdeteSettings) SetFramework(v Frameworks) {
+func (o *UpdateSettings) SetFramework(v Frameworks) {
 	o.Framework = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetName() string {
+func (o *UpdateSettings) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -361,7 +361,7 @@ func (o *UpdeteSettings) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetNameOk() (*string, bool) {
+func (o *UpdateSettings) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -369,7 +369,7 @@ func (o *UpdeteSettings) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasName() bool {
+func (o *UpdateSettings) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -378,12 +378,12 @@ func (o *UpdeteSettings) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *UpdeteSettings) SetName(v string) {
+func (o *UpdateSettings) SetName(v string) {
 	o.Name = &v
 }
 
 // GetComment returns the Comment field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetComment() string {
+func (o *UpdateSettings) GetComment() string {
 	if o == nil || IsNil(o.Comment) {
 		var ret string
 		return ret
@@ -393,7 +393,7 @@ func (o *UpdeteSettings) GetComment() string {
 
 // GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetCommentOk() (*string, bool) {
+func (o *UpdateSettings) GetCommentOk() (*string, bool) {
 	if o == nil || IsNil(o.Comment) {
 		return nil, false
 	}
@@ -401,7 +401,7 @@ func (o *UpdeteSettings) GetCommentOk() (*string, bool) {
 }
 
 // HasComment returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasComment() bool {
+func (o *UpdateSettings) HasComment() bool {
 	if o != nil && !IsNil(o.Comment) {
 		return true
 	}
@@ -410,12 +410,12 @@ func (o *UpdeteSettings) HasComment() bool {
 }
 
 // SetComment gets a reference to the given string and assigns it to the Comment field.
-func (o *UpdeteSettings) SetComment(v string) {
+func (o *UpdateSettings) SetComment(v string) {
 	o.Comment = &v
 }
 
 // GetPresetId returns the PresetId field value if set, zero value otherwise.
-func (o *UpdeteSettings) GetPresetId() float32 {
+func (o *UpdateSettings) GetPresetId() float32 {
 	if o == nil || IsNil(o.PresetId) {
 		var ret float32
 		return ret
@@ -425,7 +425,7 @@ func (o *UpdeteSettings) GetPresetId() float32 {
 
 // GetPresetIdOk returns a tuple with the PresetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdeteSettings) GetPresetIdOk() (*float32, bool) {
+func (o *UpdateSettings) GetPresetIdOk() (*float32, bool) {
 	if o == nil || IsNil(o.PresetId) {
 		return nil, false
 	}
@@ -433,7 +433,7 @@ func (o *UpdeteSettings) GetPresetIdOk() (*float32, bool) {
 }
 
 // HasPresetId returns a boolean if a field has been set.
-func (o *UpdeteSettings) HasPresetId() bool {
+func (o *UpdateSettings) HasPresetId() bool {
 	if o != nil && !IsNil(o.PresetId) {
 		return true
 	}
@@ -442,11 +442,11 @@ func (o *UpdeteSettings) HasPresetId() bool {
 }
 
 // SetPresetId gets a reference to the given float32 and assigns it to the PresetId field.
-func (o *UpdeteSettings) SetPresetId(v float32) {
+func (o *UpdateSettings) SetPresetId(v float32) {
 	o.PresetId = &v
 }
 
-func (o UpdeteSettings) MarshalJSON() ([]byte, error) {
+func (o UpdateSettings) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -454,7 +454,7 @@ func (o UpdeteSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdeteSettings) ToMap() (map[string]interface{}, error) {
+func (o UpdateSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.IsAutoDeploy) {
 		toSerialize["is_auto_deploy"] = o.IsAutoDeploy
@@ -495,38 +495,38 @@ func (o UpdeteSettings) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableUpdeteSettings struct {
-	value *UpdeteSettings
+type NullableUpdateSettings struct {
+	value *UpdateSettings
 	isSet bool
 }
 
-func (v NullableUpdeteSettings) Get() *UpdeteSettings {
+func (v NullableUpdateSettings) Get() *UpdateSettings {
 	return v.value
 }
 
-func (v *NullableUpdeteSettings) Set(val *UpdeteSettings) {
+func (v *NullableUpdateSettings) Set(val *UpdateSettings) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdeteSettings) IsSet() bool {
+func (v NullableUpdateSettings) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdeteSettings) Unset() {
+func (v *NullableUpdateSettings) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdeteSettings(val *UpdeteSettings) *NullableUpdeteSettings {
-	return &NullableUpdeteSettings{value: val, isSet: true}
+func NewNullableUpdateSettings(val *UpdateSettings) *NullableUpdateSettings {
+	return &NullableUpdateSettings{value: val, isSet: true}
 }
 
-func (v NullableUpdeteSettings) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdeteSettings) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

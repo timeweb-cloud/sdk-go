@@ -1359,7 +1359,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAppSettings
 
-> UpdateAppSettings200Response UpdateAppSettings(ctx, appId).UpdeteSettings(updeteSettings).Execute()
+> UpdateAppSettings200Response UpdateAppSettings(ctx, appId).UpdateSettings(updateSettings).Execute()
 
 Изменение настроек приложения
 
@@ -1379,11 +1379,11 @@ import (
 
 func main() {
     appId := "appId_example" // string | 
-    updeteSettings := *openapiclient.NewUpdeteSettings() // UpdeteSettings | 
+    updateSettings := *openapiclient.NewUpdateSettings() // UpdateSettings | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsAPI.UpdateAppSettings(context.Background(), appId).UpdeteSettings(updeteSettings).Execute()
+    resp, r, err := apiClient.AppsAPI.UpdateAppSettings(context.Background(), appId).UpdateSettings(updateSettings).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.UpdateAppSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1409,7 +1409,7 @@ Other parameters are passed through a pointer to a apiUpdateAppSettingsRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updeteSettings** | [**UpdeteSettings**](UpdeteSettings.md) |  | 
+ **updateSettings** | [**UpdateSettings**](UpdateSettings.md) |  | 
 
 ### Return type
 

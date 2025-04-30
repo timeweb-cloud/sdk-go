@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Networks** | [**[]DatabaseClusterNetworksInner**](DatabaseClusterNetworksInner.md) | Список сетей кластера базы данных. | 
 **Type** | [**DbType**](DbType.md) |  | 
 **HashType** | **NullableString** | Тип хеширования кластера базы данных (mysql5 | mysql | postgres). | 
+**AvatarLink** | **NullableString** | Ссылка на аватар для базы данных. | 
 **Port** | **NullableInt32** | Порт | 
 **Status** | **string** | Текущий статус кластера базы данных. | 
 **PresetId** | **int32** | ID тарифа. | 
@@ -22,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewDatabaseCluster
 
-`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool, ) *DatabaseCluster`
+`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool, ) *DatabaseCluster`
 
 NewDatabaseCluster instantiates a new DatabaseCluster object
 This constructor will assign default values to properties that have it defined,
@@ -197,6 +198,36 @@ SetHashType sets HashType field to given value.
 `func (o *DatabaseCluster) UnsetHashType()`
 
 UnsetHashType ensures that no value is present for HashType, not even an explicit nil
+### GetAvatarLink
+
+`func (o *DatabaseCluster) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *DatabaseCluster) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *DatabaseCluster) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *DatabaseCluster) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *DatabaseCluster) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
 ### GetPort
 
 `func (o *DatabaseCluster) GetPort() int32`
