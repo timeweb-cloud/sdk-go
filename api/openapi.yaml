@@ -39005,7 +39005,7 @@ paths:
           type: string
         style: simple
       - description: "Дата начала сбора статистики. Строка в формате ISO 8061, зак\
-          одированная в ASCII, пример: `2023-05-25%202023-05-25T14%3A35%3A38`"
+          одированная в ASCII, пример: `2023-05-25T14%3A35%3A38`"
         explode: true
         in: query
         name: date_from
@@ -39014,7 +39014,7 @@ paths:
           type: string
         style: form
       - description: "Дата окончания сбора статистики. Строка в формате ISO 8061,\
-          \ закодированная в ASCII, пример: `2023-05-26%202023-05-25T14%3A35%3A38`"
+          \ закодированная в ASCII, пример: `2023-05-25T14%3A35%3A38`"
         explode: true
         in: query
         name: date_to
@@ -50441,6 +50441,16 @@ components:
             \ `type: backend`. Не используется для приложений `type: frontend`."
           example: npm start
           type: string
+        system_dependencies:
+          description: Системные зависимости.
+          items:
+            example: php-mysql
+            type: string
+          type: array
+        project_id:
+          description: ID проекта.
+          example: 1
+          type: number
       required:
       - branch_name
       - build_cmd
@@ -50533,8 +50543,8 @@ components:
         provider_type:
           description: Тип провайдера.
           enum:
-          - Github
-          example: GitHub
+          - github
+          example: github
           type: string
         provider_token:
           description: "Токен доступа. <br> Для GitHub необходимо использовать 'Fine-grained\
@@ -50555,8 +50565,8 @@ components:
         provider_type:
           description: Тип провайдера.
           enum:
-          - Gitlab
-          example: GitLab
+          - gitlab
+          example: gitlab
           type: string
         provider_token:
           description: "Токен доступа. <br> Для GitLab необходимо использовать пер\

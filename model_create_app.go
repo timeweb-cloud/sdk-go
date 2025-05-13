@@ -49,6 +49,10 @@ type CreateApp struct {
 	IndexDir *string `json:"index_dir,omitempty"`
 	// Команда для запуска приложения. Обязательна для приложений `type: backend`. Не используется для приложений `type: frontend`.
 	RunCmd *string `json:"run_cmd,omitempty"`
+	// Системные зависимости.
+	SystemDependencies []string `json:"system_dependencies,omitempty"`
+	// ID проекта.
+	ProjectId *float32 `json:"project_id,omitempty"`
 }
 
 // NewCreateApp instantiates a new CreateApp object
@@ -471,6 +475,70 @@ func (o *CreateApp) SetRunCmd(v string) {
 	o.RunCmd = &v
 }
 
+// GetSystemDependencies returns the SystemDependencies field value if set, zero value otherwise.
+func (o *CreateApp) GetSystemDependencies() []string {
+	if o == nil || IsNil(o.SystemDependencies) {
+		var ret []string
+		return ret
+	}
+	return o.SystemDependencies
+}
+
+// GetSystemDependenciesOk returns a tuple with the SystemDependencies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateApp) GetSystemDependenciesOk() ([]string, bool) {
+	if o == nil || IsNil(o.SystemDependencies) {
+		return nil, false
+	}
+	return o.SystemDependencies, true
+}
+
+// HasSystemDependencies returns a boolean if a field has been set.
+func (o *CreateApp) HasSystemDependencies() bool {
+	if o != nil && !IsNil(o.SystemDependencies) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemDependencies gets a reference to the given []string and assigns it to the SystemDependencies field.
+func (o *CreateApp) SetSystemDependencies(v []string) {
+	o.SystemDependencies = v
+}
+
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *CreateApp) GetProjectId() float32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret float32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateApp) GetProjectIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *CreateApp) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
+func (o *CreateApp) SetProjectId(v float32) {
+	o.ProjectId = &v
+}
+
 func (o CreateApp) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -503,6 +571,12 @@ func (o CreateApp) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RunCmd) {
 		toSerialize["run_cmd"] = o.RunCmd
+	}
+	if !IsNil(o.SystemDependencies) {
+		toSerialize["system_dependencies"] = o.SystemDependencies
+	}
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
 	}
 	return toSerialize, nil
 }

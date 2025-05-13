@@ -49,7 +49,7 @@ import (
 )
 
 func main() {
-    addGithub := *openapiclient.NewAddGithub("GitHub", "ProviderToken_example") // AddGithub | 
+    addGithub := *openapiclient.NewAddGithub("github", "ProviderToken_example") // AddGithub | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -677,8 +677,8 @@ import (
 
 func main() {
     appId := "appId_example" // string | 
-    dateFrom := "dateFrom_example" // string | Дата начала сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: `2023-05-25%202023-05-25T14%3A35%3A38`
-    dateTo := "dateTo_example" // string | Дата окончания сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: `2023-05-26%202023-05-25T14%3A35%3A38`
+    dateFrom := "dateFrom_example" // string | Дата начала сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: `2023-05-25T14%3A35%3A38`
+    dateTo := "dateTo_example" // string | Дата окончания сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: `2023-05-25T14%3A35%3A38`
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -708,8 +708,8 @@ Other parameters are passed through a pointer to a apiGetAppStatisticsRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **dateFrom** | **string** | Дата начала сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-25%202023-05-25T14%3A35%3A38&#x60; | 
- **dateTo** | **string** | Дата окончания сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-26%202023-05-25T14%3A35%3A38&#x60; | 
+ **dateFrom** | **string** | Дата начала сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-25T14%3A35%3A38&#x60; | 
+ **dateTo** | **string** | Дата окончания сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-25T14%3A35%3A38&#x60; | 
 
 ### Return type
 

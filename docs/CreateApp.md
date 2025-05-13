@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **Framework** | [**Frameworks**](Frameworks.md) |  | 
 **IndexDir** | Pointer to **string** | Путь к директории с индексным файлом. Обязателен для приложений &#x60;type: frontend&#x60;. Не используется для приложений &#x60;type: backend&#x60;. Значение всегда должно начинаться с &#x60;/&#x60;. | [optional] 
 **RunCmd** | Pointer to **string** | Команда для запуска приложения. Обязательна для приложений &#x60;type: backend&#x60;. Не используется для приложений &#x60;type: frontend&#x60;. | [optional] 
+**SystemDependencies** | Pointer to **[]string** | Системные зависимости. | [optional] 
+**ProjectId** | Pointer to **float32** | ID проекта. | [optional] 
 
 ## Methods
 
@@ -358,6 +360,56 @@ SetRunCmd sets RunCmd field to given value.
 `func (o *CreateApp) HasRunCmd() bool`
 
 HasRunCmd returns a boolean if a field has been set.
+
+### GetSystemDependencies
+
+`func (o *CreateApp) GetSystemDependencies() []string`
+
+GetSystemDependencies returns the SystemDependencies field if non-nil, zero value otherwise.
+
+### GetSystemDependenciesOk
+
+`func (o *CreateApp) GetSystemDependenciesOk() (*[]string, bool)`
+
+GetSystemDependenciesOk returns a tuple with the SystemDependencies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemDependencies
+
+`func (o *CreateApp) SetSystemDependencies(v []string)`
+
+SetSystemDependencies sets SystemDependencies field to given value.
+
+### HasSystemDependencies
+
+`func (o *CreateApp) HasSystemDependencies() bool`
+
+HasSystemDependencies returns a boolean if a field has been set.
+
+### GetProjectId
+
+`func (o *CreateApp) GetProjectId() float32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *CreateApp) GetProjectIdOk() (*float32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *CreateApp) SetProjectId(v float32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *CreateApp) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
