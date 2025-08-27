@@ -31,7 +31,7 @@ type DedicatedServerPreset struct {
 	Cpu DedicatedServerPresetCpu `json:"cpu"`
 	Disk DedicatedServerPresetDisk `json:"disk"`
 	// Стоимость тарифа выделенного сервера
-	Price *float32 `json:"price,omitempty"`
+	Price float32 `json:"price"`
 	Memory DedicatedServerPresetMemory `json:"memory"`
 	// Локация.
 	Location string `json:"location"`
@@ -41,7 +41,7 @@ type DedicatedServerPreset struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, isPreInstalled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, memory DedicatedServerPresetMemory, location string) *DedicatedServerPreset {
+func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, isPreInstalled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, price float32, memory DedicatedServerPresetMemory, location string) *DedicatedServerPreset {
 	this := DedicatedServerPreset{}
 	this.Id = id
 	this.Description = description
@@ -49,6 +49,7 @@ func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool
 	this.IsPreInstalled = isPreInstalled
 	this.Cpu = cpu
 	this.Disk = disk
+	this.Price = price
 	this.Memory = memory
 	this.Location = location
 	return &this
@@ -206,36 +207,28 @@ func (o *DedicatedServerPreset) SetDisk(v DedicatedServerPresetDisk) {
 	o.Disk = v
 }
 
-// GetPrice returns the Price field value if set, zero value otherwise.
+// GetPrice returns the Price field value
 func (o *DedicatedServerPreset) GetPrice() float32 {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Price
+
+	return o.Price
 }
 
-// GetPriceOk returns a tuple with the Price field value if set, nil otherwise
+// GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
 func (o *DedicatedServerPreset) GetPriceOk() (*float32, bool) {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Price, true
+	return &o.Price, true
 }
 
-// HasPrice returns a boolean if a field has been set.
-func (o *DedicatedServerPreset) HasPrice() bool {
-	if o != nil && !IsNil(o.Price) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrice gets a reference to the given float32 and assigns it to the Price field.
+// SetPrice sets field value
 func (o *DedicatedServerPreset) SetPrice(v float32) {
-	o.Price = &v
+	o.Price = v
 }
 
 // GetMemory returns the Memory field value
@@ -302,9 +295,7 @@ func (o DedicatedServerPreset) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_pre_installed"] = o.IsPreInstalled
 	toSerialize["cpu"] = o.Cpu
 	toSerialize["disk"] = o.Disk
-	if !IsNil(o.Price) {
-		toSerialize["price"] = o.Price
-	}
+	toSerialize["price"] = o.Price
 	toSerialize["memory"] = o.Memory
 	toSerialize["location"] = o.Location
 	return toSerialize, nil

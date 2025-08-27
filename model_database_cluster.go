@@ -41,7 +41,7 @@ type DatabaseCluster struct {
 	Status string `json:"status"`
 	// ID тарифа.
 	PresetId int32 `json:"preset_id"`
-	DiskStats NullableDatabaseClusterDiskStats `json:"disk_stats"`
+	Disk NullableDatabaseClusterDisk `json:"disk,omitempty"`
 	ConfigParameters ConfigParameters `json:"config_parameters"`
 	// Доступность публичного IP-адреса
 	IsEnabledPublicNetwork bool `json:"is_enabled_public_network"`
@@ -51,7 +51,7 @@ type DatabaseCluster struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool) *DatabaseCluster {
+func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters ConfigParameters, isEnabledPublicNetwork bool) *DatabaseCluster {
 	this := DatabaseCluster{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -64,7 +64,6 @@ func NewDatabaseCluster(id float32, createdAt string, location NullableString, n
 	this.Port = port
 	this.Status = status
 	this.PresetId = presetId
-	this.DiskStats = diskStats
 	this.ConfigParameters = configParameters
 	this.IsEnabledPublicNetwork = isEnabledPublicNetwork
 	return &this
@@ -350,30 +349,46 @@ func (o *DatabaseCluster) SetPresetId(v int32) {
 	o.PresetId = v
 }
 
-// GetDiskStats returns the DiskStats field value
-// If the value is explicit nil, the zero value for DatabaseClusterDiskStats will be returned
-func (o *DatabaseCluster) GetDiskStats() DatabaseClusterDiskStats {
-	if o == nil || o.DiskStats.Get() == nil {
-		var ret DatabaseClusterDiskStats
+// GetDisk returns the Disk field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DatabaseCluster) GetDisk() DatabaseClusterDisk {
+	if o == nil || IsNil(o.Disk.Get()) {
+		var ret DatabaseClusterDisk
 		return ret
 	}
-
-	return *o.DiskStats.Get()
+	return *o.Disk.Get()
 }
 
-// GetDiskStatsOk returns a tuple with the DiskStats field value
+// GetDiskOk returns a tuple with the Disk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DatabaseCluster) GetDiskStatsOk() (*DatabaseClusterDiskStats, bool) {
+func (o *DatabaseCluster) GetDiskOk() (*DatabaseClusterDisk, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.DiskStats.Get(), o.DiskStats.IsSet()
+	return o.Disk.Get(), o.Disk.IsSet()
 }
 
-// SetDiskStats sets field value
-func (o *DatabaseCluster) SetDiskStats(v DatabaseClusterDiskStats) {
-	o.DiskStats.Set(&v)
+// HasDisk returns a boolean if a field has been set.
+func (o *DatabaseCluster) HasDisk() bool {
+	if o != nil && o.Disk.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDisk gets a reference to the given NullableDatabaseClusterDisk and assigns it to the Disk field.
+func (o *DatabaseCluster) SetDisk(v DatabaseClusterDisk) {
+	o.Disk.Set(&v)
+}
+// SetDiskNil sets the value for Disk to be an explicit nil
+func (o *DatabaseCluster) SetDiskNil() {
+	o.Disk.Set(nil)
+}
+
+// UnsetDisk ensures that no value is present for Disk, not even an explicit nil
+func (o *DatabaseCluster) UnsetDisk() {
+	o.Disk.Unset()
 }
 
 // GetConfigParameters returns the ConfigParameters field value
@@ -445,7 +460,9 @@ func (o DatabaseCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize["port"] = o.Port.Get()
 	toSerialize["status"] = o.Status
 	toSerialize["preset_id"] = o.PresetId
-	toSerialize["disk_stats"] = o.DiskStats.Get()
+	if o.Disk.IsSet() {
+		toSerialize["disk"] = o.Disk.Get()
+	}
 	toSerialize["config_parameters"] = o.ConfigParameters
 	toSerialize["is_enabled_public_network"] = o.IsEnabledPublicNetwork
 	return toSerialize, nil

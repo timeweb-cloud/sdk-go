@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **SoftwareId** | Pointer to **float32** | ID программного обеспечения сервера. | [optional] 
 **PresetId** | Pointer to **float32** | ID тарифа сервера. Нельзя передавать вместе с ключом &#x60;configurator&#x60;. | [optional] 
 **Bandwidth** | Pointer to **float32** | Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100. | [optional] 
-**Name** | **string** | Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным. | 
+**Name** | **string** | Имя облачного сервера. Максимальная длина — 255 символов. | 
 **AvatarId** | Pointer to **string** | ID аватара сервера. | [optional] 
 **Comment** | Pointer to **string** | Комментарий к облачному серверу. Максимальная длина — 255 символов. | [optional] 
 **SshKeysIds** | Pointer to **[]float32** | Список SSH-ключей. | [optional] 
@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Network** | Pointer to [**CreateServerNetwork**](CreateServerNetwork.md) |  | [optional] 
 **CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
+**ProjectId** | Pointer to **float32** | ID проекта. | [optional] 
 
 ## Methods
 
@@ -408,6 +409,31 @@ SetAvailabilityZone sets AvailabilityZone field to given value.
 `func (o *CreateServer) HasAvailabilityZone() bool`
 
 HasAvailabilityZone returns a boolean if a field has been set.
+
+### GetProjectId
+
+`func (o *CreateServer) GetProjectId() float32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *CreateServer) GetProjectIdOk() (*float32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *CreateServer) SetProjectId(v float32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *CreateServer) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

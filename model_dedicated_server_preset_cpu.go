@@ -26,17 +26,20 @@ type DedicatedServerPresetCpu struct {
 	DescriptionShort string `json:"description_short"`
 	// Количество ядер процессора выделенного сервера.
 	Count float32 `json:"count"`
+	// Производитель процессора выделенного сервера.
+	Vendor string `json:"vendor"`
 }
 
 // NewDedicatedServerPresetCpu instantiates a new DedicatedServerPresetCpu object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServerPresetCpu(description string, descriptionShort string, count float32) *DedicatedServerPresetCpu {
+func NewDedicatedServerPresetCpu(description string, descriptionShort string, count float32, vendor string) *DedicatedServerPresetCpu {
 	this := DedicatedServerPresetCpu{}
 	this.Description = description
 	this.DescriptionShort = descriptionShort
 	this.Count = count
+	this.Vendor = vendor
 	return &this
 }
 
@@ -120,6 +123,30 @@ func (o *DedicatedServerPresetCpu) SetCount(v float32) {
 	o.Count = v
 }
 
+// GetVendor returns the Vendor field value
+func (o *DedicatedServerPresetCpu) GetVendor() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Vendor
+}
+
+// GetVendorOk returns a tuple with the Vendor field value
+// and a boolean to check if the value has been set.
+func (o *DedicatedServerPresetCpu) GetVendorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Vendor, true
+}
+
+// SetVendor sets field value
+func (o *DedicatedServerPresetCpu) SetVendor(v string) {
+	o.Vendor = v
+}
+
 func (o DedicatedServerPresetCpu) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -133,6 +160,7 @@ func (o DedicatedServerPresetCpu) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["description_short"] = o.DescriptionShort
 	toSerialize["count"] = o.Count
+	toSerialize["vendor"] = o.Vendor
 	return toSerialize, nil
 }
 

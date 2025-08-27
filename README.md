@@ -274,6 +274,13 @@ Class | Method | HTTP request | Description
 *BalancersAPI* | [**GetBalancersPresets**](docs/BalancersAPI.md#getbalancerspresets) | **Get** /api/v1/presets/balancers | Получение списка тарифов для балансировщика
 *BalancersAPI* | [**UpdateBalancer**](docs/BalancersAPI.md#updatebalancer) | **Patch** /api/v1/balancers/{balancer_id} | Обновление балансировщика
 *BalancersAPI* | [**UpdateBalancerRule**](docs/BalancersAPI.md#updatebalancerrule) | **Patch** /api/v1/balancers/{balancer_id}/rules/{rule_id} | Обновление правила для балансировщика
+*ContainerRegistryAPI* | [**CreateRegistry**](docs/ContainerRegistryAPI.md#createregistry) | **Post** /api/v1/container-registry | Создание реестра
+*ContainerRegistryAPI* | [**DeleteRegistry**](docs/ContainerRegistryAPI.md#deleteregistry) | **Delete** /api/v1/container-registry/{registry_id} | Удаление реестра
+*ContainerRegistryAPI* | [**GetRegistries**](docs/ContainerRegistryAPI.md#getregistries) | **Get** /api/v1/container-registry | Получение списка реестров контейнеров
+*ContainerRegistryAPI* | [**GetRegistry**](docs/ContainerRegistryAPI.md#getregistry) | **Get** /api/v1/container-registry/{registry_id} | Получение информации о реестре
+*ContainerRegistryAPI* | [**GetRegistryPresets**](docs/ContainerRegistryAPI.md#getregistrypresets) | **Get** /api/v1/container-registry/presets | Получение списка тарифов
+*ContainerRegistryAPI* | [**GetRegistryRepositories**](docs/ContainerRegistryAPI.md#getregistryrepositories) | **Get** /api/v1/container-registry/{registry_id}/repositories | Получение списка репозиториев
+*ContainerRegistryAPI* | [**UpdateRegistry**](docs/ContainerRegistryAPI.md#updateregistry) | **Patch** /api/v1/container-registry/{registry_id} | Обновление информации о реестре
 *DatabasesAPI* | [**CreateDatabase**](docs/DatabasesAPI.md#createdatabase) | **Post** /api/v1/dbs | Создание базы данных
 *DatabasesAPI* | [**CreateDatabaseBackup**](docs/DatabasesAPI.md#createdatabasebackup) | **Post** /api/v1/dbs/{db_id}/backups | Создание бэкапа базы данных
 *DatabasesAPI* | [**CreateDatabaseCluster**](docs/DatabasesAPI.md#createdatabasecluster) | **Post** /api/v1/databases | Создание кластера базы данных
@@ -430,23 +437,17 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**UpdateProject**](docs/ProjectsAPI.md#updateproject) | **Put** /api/v1/projects/{project_id} | Изменение проекта
 *S3API* | [**AddStorageSubdomainCertificate**](docs/S3API.md#addstoragesubdomaincertificate) | **Post** /api/v1/storages/certificates/generate | Добавление сертификата для поддомена хранилища
 *S3API* | [**AddStorageSubdomains**](docs/S3API.md#addstoragesubdomains) | **Post** /api/v1/storages/buckets/{bucket_id}/subdomains | Добавление поддоменов для хранилища
-*S3API* | [**CopyStorageFile**](docs/S3API.md#copystoragefile) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/copy | Копирование файла/директории в хранилище
-*S3API* | [**CreateFolderInStorage**](docs/S3API.md#createfolderinstorage) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/mkdir | Создание директории в хранилище
 *S3API* | [**CreateStorage**](docs/S3API.md#createstorage) | **Post** /api/v1/storages/buckets | Создание хранилища
 *S3API* | [**DeleteStorage**](docs/S3API.md#deletestorage) | **Delete** /api/v1/storages/buckets/{bucket_id} | Удаление хранилища на аккаунте
-*S3API* | [**DeleteStorageFile**](docs/S3API.md#deletestoragefile) | **Delete** /api/v1/storages/buckets/{bucket_id}/object-manager/remove | Удаление файла/директории в хранилище
 *S3API* | [**DeleteStorageSubdomains**](docs/S3API.md#deletestoragesubdomains) | **Delete** /api/v1/storages/buckets/{bucket_id}/subdomains | Удаление поддоменов хранилища
-*S3API* | [**GetStorageFilesList**](docs/S3API.md#getstoragefileslist) | **Get** /api/v1/storages/buckets/{bucket_id}/object-manager/list | Получение списка файлов в хранилище по префиксу
 *S3API* | [**GetStorageSubdomains**](docs/S3API.md#getstoragesubdomains) | **Get** /api/v1/storages/buckets/{bucket_id}/subdomains | Получение списка поддоменов хранилища
 *S3API* | [**GetStorageTransferStatus**](docs/S3API.md#getstoragetransferstatus) | **Get** /api/v1/storages/buckets/{bucket_id}/transfer-status | Получение статуса переноса хранилища от стороннего S3 в Timeweb Cloud
 *S3API* | [**GetStorageUsers**](docs/S3API.md#getstorageusers) | **Get** /api/v1/storages/users | Получение списка пользователей хранилищ аккаунта
 *S3API* | [**GetStorages**](docs/S3API.md#getstorages) | **Get** /api/v1/storages/buckets | Получение списка хранилищ аккаунта
 *S3API* | [**GetStoragesPresets**](docs/S3API.md#getstoragespresets) | **Get** /api/v1/presets/storages | Получение списка тарифов для хранилищ
-*S3API* | [**RenameStorageFile**](docs/S3API.md#renamestoragefile) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/rename | Переименование файла/директории в хранилище
 *S3API* | [**TransferStorage**](docs/S3API.md#transferstorage) | **Post** /api/v1/storages/transfer | Перенос хранилища от стороннего провайдера S3 в Timeweb Cloud
 *S3API* | [**UpdateStorage**](docs/S3API.md#updatestorage) | **Patch** /api/v1/storages/buckets/{bucket_id} | Изменение хранилища на аккаунте
 *S3API* | [**UpdateStorageUser**](docs/S3API.md#updatestorageuser) | **Patch** /api/v1/storages/users/{user_id} | Изменение пароля пользователя-администратора хранилища
-*S3API* | [**UploadFileToStorage**](docs/S3API.md#uploadfiletostorage) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/upload | Загрузка файлов в хранилище
 *SSHAPI* | [**AddKeyToServer**](docs/SSHAPI.md#addkeytoserver) | **Post** /api/v1/servers/{server_id}/ssh-keys | Добавление SSH-ключей на сервер
 *SSHAPI* | [**CreateKey**](docs/SSHAPI.md#createkey) | **Post** /api/v1/ssh-keys | Создание SSH-ключа
 *SSHAPI* | [**DeleteKey**](docs/SSHAPI.md#deletekey) | **Delete** /api/v1/ssh-keys/{ssh_key_id} | Удаление SSH-ключа по ID
@@ -549,6 +550,8 @@ Class | Method | HTTP request | Description
  - [AvailableFrameworksFrontendFrameworksInner](docs/AvailableFrameworksFrontendFrameworksInner.md)
  - [Backup](docs/Backup.md)
  - [Balancer](docs/Balancer.md)
+ - [BalancerNetworksInner](docs/BalancerNetworksInner.md)
+ - [BalancerNetworksInnerIpsInner](docs/BalancerNetworksInnerIpsInner.md)
  - [BaseError](docs/BaseError.md)
  - [BindFloatingIp](docs/BindFloatingIp.md)
  - [Bonus](docs/Bonus.md)
@@ -556,9 +559,15 @@ Class | Method | HTTP request | Description
  - [Bucket](docs/Bucket.md)
  - [BucketDiskStats](docs/BucketDiskStats.md)
  - [BucketUser](docs/BucketUser.md)
+ - [BucketWebsiteConfig](docs/BucketWebsiteConfig.md)
+ - [BucketWebsiteConfigErrorPagesInner](docs/BucketWebsiteConfigErrorPagesInner.md)
  - [CheckDomain200Response](docs/CheckDomain200Response.md)
  - [ClusterEdit](docs/ClusterEdit.md)
  - [ClusterIn](docs/ClusterIn.md)
+ - [ClusterInClusterNetworkCidr](docs/ClusterInClusterNetworkCidr.md)
+ - [ClusterInConfiguration](docs/ClusterInConfiguration.md)
+ - [ClusterInMaintenanceSlot](docs/ClusterInMaintenanceSlot.md)
+ - [ClusterInOidcProvider](docs/ClusterInOidcProvider.md)
  - [ClusterOut](docs/ClusterOut.md)
  - [ClusterResponse](docs/ClusterResponse.md)
  - [Clusterk8s](docs/Clusterk8s.md)
@@ -566,7 +575,8 @@ Class | Method | HTTP request | Description
  - [Commit](docs/Commit.md)
  - [ComponentsSchemasBaseError](docs/ComponentsSchemasBaseError.md)
  - [ConfigParameters](docs/ConfigParameters.md)
- - [CopyStorageFileRequest](docs/CopyStorageFileRequest.md)
+ - [ContainerRegistryPresetsInner](docs/ContainerRegistryPresetsInner.md)
+ - [ContainerRegistryRepositoriesInner](docs/ContainerRegistryRepositoriesInner.md)
  - [CreateAdmin](docs/CreateAdmin.md)
  - [CreateApiKey](docs/CreateApiKey.md)
  - [CreateApp](docs/CreateApp.md)
@@ -596,7 +606,6 @@ Class | Method | HTTP request | Description
  - [CreateDomainRequest201Response](docs/CreateDomainRequest201Response.md)
  - [CreateFloatingIp](docs/CreateFloatingIp.md)
  - [CreateFloatingIp201Response](docs/CreateFloatingIp201Response.md)
- - [CreateFolderInStorageRequest](docs/CreateFolderInStorageRequest.md)
  - [CreateInstance](docs/CreateInstance.md)
  - [CreateKey201Response](docs/CreateKey201Response.md)
  - [CreateKeyRequest](docs/CreateKeyRequest.md)
@@ -618,6 +627,7 @@ Class | Method | HTTP request | Description
  - [CreateServerNetwork](docs/CreateServerNetwork.md)
  - [CreateStorage201Response](docs/CreateStorage201Response.md)
  - [CreateStorageRequest](docs/CreateStorageRequest.md)
+ - [CreateStorageRequestConfigurator](docs/CreateStorageRequestConfigurator.md)
  - [CreateToken201Response](docs/CreateToken201Response.md)
  - [CreateVPC201Response](docs/CreateVPC201Response.md)
  - [CreateVpc](docs/CreateVpc.md)
@@ -625,7 +635,7 @@ Class | Method | HTTP request | Description
  - [DatabaseAdmin](docs/DatabaseAdmin.md)
  - [DatabaseAdminInstancesInner](docs/DatabaseAdminInstancesInner.md)
  - [DatabaseCluster](docs/DatabaseCluster.md)
- - [DatabaseClusterDiskStats](docs/DatabaseClusterDiskStats.md)
+ - [DatabaseClusterDisk](docs/DatabaseClusterDisk.md)
  - [DatabaseClusterNetworksInner](docs/DatabaseClusterNetworksInner.md)
  - [DatabaseClusterNetworksInnerIpsInner](docs/DatabaseClusterNetworksInnerIpsInner.md)
  - [DatabaseInstance](docs/DatabaseInstance.md)
@@ -633,6 +643,7 @@ Class | Method | HTTP request | Description
  - [DatabaseTypeRequirements](docs/DatabaseTypeRequirements.md)
  - [Db](docs/Db.md)
  - [DbDiskStats](docs/DbDiskStats.md)
+ - [DbReplication](docs/DbReplication.md)
  - [DbType](docs/DbType.md)
  - [DedicatedServer](docs/DedicatedServer.md)
  - [DedicatedServerAdditionalService](docs/DedicatedServerAdditionalService.md)
@@ -652,7 +663,6 @@ Class | Method | HTTP request | Description
  - [DeleteServerIPRequest](docs/DeleteServerIPRequest.md)
  - [DeleteServiceResponse](docs/DeleteServiceResponse.md)
  - [DeleteStorage200Response](docs/DeleteStorage200Response.md)
- - [DeleteStorageFileRequest](docs/DeleteStorageFileRequest.md)
  - [Deploy](docs/Deploy.md)
  - [DeploySettingsInner](docs/DeploySettingsInner.md)
  - [DeployStatus](docs/DeployStatus.md)
@@ -767,7 +777,6 @@ Class | Method | HTTP request | Description
  - [GetServers200Response](docs/GetServers200Response.md)
  - [GetServersPresets200Response](docs/GetServersPresets200Response.md)
  - [GetSoftware200Response](docs/GetSoftware200Response.md)
- - [GetStorageFilesList200Response](docs/GetStorageFilesList200Response.md)
  - [GetStorageSubdomains200Response](docs/GetStorageSubdomains200Response.md)
  - [GetStorageTransferStatus200Response](docs/GetStorageTransferStatus200Response.md)
  - [GetStorageUsers200Response](docs/GetStorageUsers200Response.md)
@@ -789,6 +798,7 @@ Class | Method | HTTP request | Description
  - [ImageUrlAuth](docs/ImageUrlAuth.md)
  - [ImageUrlIn](docs/ImageUrlIn.md)
  - [ImagesOutResponse](docs/ImagesOutResponse.md)
+ - [IncreaseNodes](docs/IncreaseNodes.md)
  - [Invoice](docs/Invoice.md)
  - [K8SVersionsResponse](docs/K8SVersionsResponse.md)
  - [Location](docs/Location.md)
@@ -800,6 +810,7 @@ Class | Method | HTTP request | Description
  - [MailboxSpamFilter](docs/MailboxSpamFilter.md)
  - [MasterPresetOutApi](docs/MasterPresetOutApi.md)
  - [Meta](docs/Meta.md)
+ - [Meta1](docs/Meta1.md)
  - [MountNetworkDrive](docs/MountNetworkDrive.md)
  - [Network](docs/Network.md)
  - [NetworkDrive](docs/NetworkDrive.md)
@@ -809,7 +820,6 @@ Class | Method | HTTP request | Description
  - [NetworkDrivePresetWrite](docs/NetworkDrivePresetWrite.md)
  - [NetworkDriveServiceListInner](docs/NetworkDriveServiceListInner.md)
  - [NetworkDriversResponse](docs/NetworkDriversResponse.md)
- - [NodeCount](docs/NodeCount.md)
  - [NodeGroupIn](docs/NodeGroupIn.md)
  - [NodeGroupInConfiguration](docs/NodeGroupInConfiguration.md)
  - [NodeGroupOut](docs/NodeGroupOut.md)
@@ -834,10 +844,18 @@ Class | Method | HTTP request | Description
  - [Provider](docs/Provider.md)
  - [Providers](docs/Providers.md)
  - [Quota](docs/Quota.md)
+ - [ReduceNodes](docs/ReduceNodes.md)
  - [RefreshApiKey](docs/RefreshApiKey.md)
+ - [RegistriesResponse](docs/RegistriesResponse.md)
+ - [RegistryEdit](docs/RegistryEdit.md)
+ - [RegistryIn](docs/RegistryIn.md)
+ - [RegistryInConfiguration](docs/RegistryInConfiguration.md)
+ - [RegistryOut](docs/RegistryOut.md)
+ - [RegistryOutDiskStats](docs/RegistryOutDiskStats.md)
+ - [RegistryResponse](docs/RegistryResponse.md)
  - [RemoveCountries](docs/RemoveCountries.md)
  - [RemoveIps](docs/RemoveIps.md)
- - [RenameStorageFileRequest](docs/RenameStorageFileRequest.md)
+ - [RepositoriesResponse](docs/RepositoriesResponse.md)
  - [Repository](docs/Repository.md)
  - [Resource](docs/Resource.md)
  - [ResourceTransfer](docs/ResourceTransfer.md)
@@ -845,11 +863,10 @@ Class | Method | HTTP request | Description
  - [Resources](docs/Resources.md)
  - [ResourcesResponse](docs/ResourcesResponse.md)
  - [Rule](docs/Rule.md)
- - [S3Object](docs/S3Object.md)
- - [S3ObjectOwner](docs/S3ObjectOwner.md)
  - [S3Subdomain](docs/S3Subdomain.md)
  - [SchemasBaseError](docs/SchemasBaseError.md)
  - [SchemasMeta](docs/SchemasMeta.md)
+ - [SchemasPresetsResponse](docs/SchemasPresetsResponse.md)
  - [ServerBackup](docs/ServerBackup.md)
  - [ServerDisk](docs/ServerDisk.md)
  - [ServerIp](docs/ServerIp.md)
@@ -873,6 +890,7 @@ Class | Method | HTTP request | Description
  - [Status](docs/Status.md)
  - [StatusCompanyInfo](docs/StatusCompanyInfo.md)
  - [Subdomain](docs/Subdomain.md)
+ - [Tags](docs/Tags.md)
  - [TopLevelDomain](docs/TopLevelDomain.md)
  - [TopLevelDomainAllowedBuyPeriodsInner](docs/TopLevelDomainAllowedBuyPeriodsInner.md)
  - [TransferStatus](docs/TransferStatus.md)
@@ -911,6 +929,7 @@ Class | Method | HTTP request | Description
  - [UpdateServerOSBootModeRequest](docs/UpdateServerOSBootModeRequest.md)
  - [UpdateSettings](docs/UpdateSettings.md)
  - [UpdateStorageRequest](docs/UpdateStorageRequest.md)
+ - [UpdateStorageRequestConfigurator](docs/UpdateStorageRequestConfigurator.md)
  - [UpdateStorageUser200Response](docs/UpdateStorageUser200Response.md)
  - [UpdateStorageUserRequest](docs/UpdateStorageUserRequest.md)
  - [UpdateToken200Response](docs/UpdateToken200Response.md)

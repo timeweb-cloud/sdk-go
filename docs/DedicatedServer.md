@@ -29,12 +29,16 @@ Name | Type | Description | Notes
 **Location** | **string** | Локация сервера. | 
 **AutoinstallReady** | **float32** | Количество готовых к автоматической выдаче серверов. Если значение равно 0, сервер будет установлен через инженеров. | 
 **Password** | **NullableString** | Пароль root сервера или пароль Администратора для серверов Windows. | 
+**AvatarLink** | **NullableString** | Ссылка на аватар сервера. | 
+**IsPreInstalled** | **bool** | Это логическое значение, которое показывает, готов ли выделенный сервер к моментальной выдаче. | 
+**PresetId** | **int32** | ID тарифа сервера. | 
+**ProjectId** | **int32** | ID проекта | 
 
 ## Methods
 
 ### NewDedicatedServer
 
-`func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32, password NullableString, ) *DedicatedServer`
+`func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32, password NullableString, avatarLink NullableString, isPreInstalled bool, presetId int32, projectId int32, ) *DedicatedServer`
 
 NewDedicatedServer instantiates a new DedicatedServer object
 This constructor will assign default values to properties that have it defined,
@@ -689,6 +693,96 @@ SetPassword sets Password field to given value.
 `func (o *DedicatedServer) UnsetPassword()`
 
 UnsetPassword ensures that no value is present for Password, not even an explicit nil
+### GetAvatarLink
+
+`func (o *DedicatedServer) GetAvatarLink() string`
+
+GetAvatarLink returns the AvatarLink field if non-nil, zero value otherwise.
+
+### GetAvatarLinkOk
+
+`func (o *DedicatedServer) GetAvatarLinkOk() (*string, bool)`
+
+GetAvatarLinkOk returns a tuple with the AvatarLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvatarLink
+
+`func (o *DedicatedServer) SetAvatarLink(v string)`
+
+SetAvatarLink sets AvatarLink field to given value.
+
+
+### SetAvatarLinkNil
+
+`func (o *DedicatedServer) SetAvatarLinkNil(b bool)`
+
+ SetAvatarLinkNil sets the value for AvatarLink to be an explicit nil
+
+### UnsetAvatarLink
+`func (o *DedicatedServer) UnsetAvatarLink()`
+
+UnsetAvatarLink ensures that no value is present for AvatarLink, not even an explicit nil
+### GetIsPreInstalled
+
+`func (o *DedicatedServer) GetIsPreInstalled() bool`
+
+GetIsPreInstalled returns the IsPreInstalled field if non-nil, zero value otherwise.
+
+### GetIsPreInstalledOk
+
+`func (o *DedicatedServer) GetIsPreInstalledOk() (*bool, bool)`
+
+GetIsPreInstalledOk returns a tuple with the IsPreInstalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPreInstalled
+
+`func (o *DedicatedServer) SetIsPreInstalled(v bool)`
+
+SetIsPreInstalled sets IsPreInstalled field to given value.
+
+
+### GetPresetId
+
+`func (o *DedicatedServer) GetPresetId() int32`
+
+GetPresetId returns the PresetId field if non-nil, zero value otherwise.
+
+### GetPresetIdOk
+
+`func (o *DedicatedServer) GetPresetIdOk() (*int32, bool)`
+
+GetPresetIdOk returns a tuple with the PresetId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPresetId
+
+`func (o *DedicatedServer) SetPresetId(v int32)`
+
+SetPresetId sets PresetId field to given value.
+
+
+### GetProjectId
+
+`func (o *DedicatedServer) GetProjectId() int32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *DedicatedServer) GetProjectIdOk() (*int32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *DedicatedServer) SetProjectId(v int32)`
+
+SetProjectId sets ProjectId field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

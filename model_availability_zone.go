@@ -25,10 +25,11 @@ const (
 	SPB_2 AvailabilityZone = "spb-2"
 	SPB_3 AvailabilityZone = "spb-3"
 	SPB_4 AvailabilityZone = "spb-4"
+	MSK_1 AvailabilityZone = "msk-1"
 	NSK_1 AvailabilityZone = "nsk-1"
 	AMS_1 AvailabilityZone = "ams-1"
-	GDN_1 AvailabilityZone = "gdn-1"
 	ALA_1 AvailabilityZone = "ala-1"
+	FRA_1 AvailabilityZone = "fra-1"
 )
 
 // All allowed values of AvailabilityZone enum
@@ -37,10 +38,11 @@ var AllowedAvailabilityZoneEnumValues = []AvailabilityZone{
 	"spb-2",
 	"spb-3",
 	"spb-4",
+	"msk-1",
 	"nsk-1",
 	"ams-1",
-	"gdn-1",
 	"ala-1",
+	"fra-1",
 }
 
 func (v *AvailabilityZone) UnmarshalJSON(src []byte) error {

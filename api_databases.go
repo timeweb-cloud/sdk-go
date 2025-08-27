@@ -1132,7 +1132,7 @@ DeleteDatabaseBackup Удаление бэкапа базы данных
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dbId ID базы данных
- @param backupId ID резевной копии
+ @param backupId ID резервной копии
  @return ApiDeleteDatabaseBackupRequest
 */
 func (a *DatabasesAPIService) DeleteDatabaseBackup(ctx context.Context, dbId int32, backupId int32) ApiDeleteDatabaseBackupRequest {
@@ -2144,7 +2144,7 @@ GetDatabaseBackup Получение бэкапа базы данных
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dbId ID базы данных
- @param backupId ID резевной копии
+ @param backupId ID резервной копии
  @return ApiGetDatabaseBackupRequest
 */
 func (a *DatabasesAPIService) GetDatabaseBackup(ctx context.Context, dbId int32, backupId int32) ApiGetDatabaseBackupRequest {
@@ -4223,7 +4223,7 @@ RestoreDatabaseFromBackup Восстановление базы данных и�
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dbId ID базы данных
- @param backupId ID резевной копии
+ @param backupId ID резервной копии
  @return ApiRestoreDatabaseFromBackupRequest
 */
 func (a *DatabasesAPIService) RestoreDatabaseFromBackup(ctx context.Context, dbId int32, backupId int32) ApiRestoreDatabaseFromBackupRequest {

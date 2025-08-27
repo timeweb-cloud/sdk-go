@@ -47,32 +47,6 @@ func Test_openapi_S3APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test S3APIService CopyStorageFile", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var bucketId int32
-
-		httpRes, err := apiClient.S3API.CopyStorageFile(context.Background(), bucketId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test S3APIService CreateFolderInStorage", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var bucketId int32
-
-		httpRes, err := apiClient.S3API.CreateFolderInStorage(context.Background(), bucketId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test S3APIService CreateStorage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -99,19 +73,6 @@ func Test_openapi_S3APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test S3APIService DeleteStorageFile", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var bucketId int32
-
-		httpRes, err := apiClient.S3API.DeleteStorageFile(context.Background(), bucketId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test S3APIService DeleteStorageSubdomains", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -119,20 +80,6 @@ func Test_openapi_S3APIService(t *testing.T) {
 		var bucketId int32
 
 		resp, httpRes, err := apiClient.S3API.DeleteStorageSubdomains(context.Background(), bucketId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test S3APIService GetStorageFilesList", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var bucketId int32
-
-		resp, httpRes, err := apiClient.S3API.GetStorageFilesList(context.Background(), bucketId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -204,19 +151,6 @@ func Test_openapi_S3APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test S3APIService RenameStorageFile", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var bucketId int32
-
-		httpRes, err := apiClient.S3API.RenameStorageFile(context.Background(), bucketId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test S3APIService TransferStorage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -252,19 +186,6 @@ func Test_openapi_S3APIService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test S3APIService UploadFileToStorage", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var bucketId int32
-
-		httpRes, err := apiClient.S3API.UploadFileToStorage(context.Background(), bucketId).Execute()
-
-		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

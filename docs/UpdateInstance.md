@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Название инстанса базы данных | [optional] 
-**Description** | Pointer to **string** | Описанеие инстанса базы данных | [optional] 
+**Description** | Pointer to **string** | Описание инстанса базы данных | [optional] 
 
 ## Methods
 

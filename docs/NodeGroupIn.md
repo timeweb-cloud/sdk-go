@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **IsAutoscaling** | Pointer to **bool** | Автомасштабирование. Автоматическое увеличение и уменьшение количества нод в группе в зависимости от текущей нагрузки | [optional] 
 **MinSize** | Pointer to **int32** | Минимальное количество нод. Передавать в связке с параметрами &#x60;is_autoscaling&#x60; и &#x60;max_size&#x60; | [optional] 
 **MaxSize** | Pointer to **int32** | Максимальное количество нод. Передавать в связке с параметрами &#x60;is_autoscaling&#x60; и &#x60;min_size&#x60;. Максимальное количество нод ограничено тарифом кластера | [optional] 
+**IsAutohealing** | Pointer to **bool** | Автоматическое восстановление работоспособности вышедших из строя узлов | [optional] 
 
 ## Methods
 
@@ -221,6 +222,31 @@ SetMaxSize sets MaxSize field to given value.
 `func (o *NodeGroupIn) HasMaxSize() bool`
 
 HasMaxSize returns a boolean if a field has been set.
+
+### GetIsAutohealing
+
+`func (o *NodeGroupIn) GetIsAutohealing() bool`
+
+GetIsAutohealing returns the IsAutohealing field if non-nil, zero value otherwise.
+
+### GetIsAutohealingOk
+
+`func (o *NodeGroupIn) GetIsAutohealingOk() (*bool, bool)`
+
+GetIsAutohealingOk returns a tuple with the IsAutohealing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAutohealing
+
+`func (o *NodeGroupIn) SetIsAutohealing(v bool)`
+
+SetIsAutohealing sets IsAutohealing field to given value.
+
+### HasIsAutohealing
+
+`func (o *NodeGroupIn) HasIsAutohealing() bool`
+
+HasIsAutohealing returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -22,7 +22,7 @@ var _ MappedNullable = &UpdateInstance{}
 type UpdateInstance struct {
 	// Название инстанса базы данных
 	Name *string `json:"name,omitempty"`
-	// Описанеие инстанса базы данных
+	// Описание инстанса базы данных
 	Description *string `json:"description,omitempty"`
 }
 

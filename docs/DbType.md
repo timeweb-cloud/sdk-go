@@ -15,29 +15,27 @@
 
 * `POSTGRES17` (value: `"postgres17"`)
 
-* `REDIS` (value: `"redis"`)
-
 * `REDIS7` (value: `"redis7"`)
 
-* `MONGODB4` (value: `"mongodb4"`)
-
-* `MONGODB` (value: `"mongodb"`)
-
-* `MONGODB6` (value: `"mongodb6"`)
+* `REDIS8_1` (value: `"redis8_1"`)
 
 * `MONGODB7` (value: `"mongodb7"`)
 
+* `MONGODB8_0` (value: `"mongodb8_0"`)
+
 * `OPENSEARCH` (value: `"opensearch"`)
 
-* `KAFKA` (value: `"kafka"`)
-
-* `RABBITMQ` (value: `"rabbitmq"`)
+* `OPENSEARCH2_19` (value: `"opensearch2_19"`)
 
 * `CLICKHOUSE` (value: `"clickhouse"`)
 
 * `CLICKHOUSE24` (value: `"clickhouse24"`)
 
 * `CLICKHOUSE25` (value: `"clickhouse25"`)
+
+* `KAFKA` (value: `"kafka"`)
+
+* `RABBITMQ4_0` (value: `"rabbitmq4_0"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

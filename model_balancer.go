@@ -23,6 +23,8 @@ var _ MappedNullable = &Balancer{}
 type Balancer struct {
 	// ID для каждого экземпляра балансировщика. Автоматически генерируется при создании.
 	Id float32 `json:"id"`
+	// ID пользователя.
+	AccountId *string `json:"account_id,omitempty"`
 	// Алгоритм переключений балансировщика.
 	Algo string `json:"algo"`
 	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан балансировщик.
@@ -77,13 +79,17 @@ type Balancer struct {
 	// Географическое расположение балансировщика
 	Location string `json:"location"`
 	AvailabilityZone AvailabilityZone `json:"availability_zone"`
+	// ID проекта
+	ProjectId int32 `json:"project_id"`
+	// Список сетей сервера.
+	Networks []BalancerNetworksInner `json:"networks"`
 }
 
 // NewBalancer instantiates a new Balancer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, avatarLink NullableString, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone) *Balancer {
+func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, avatarLink NullableString, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, projectId int32, networks []BalancerNetworksInner) *Balancer {
 	this := Balancer{}
 	this.Id = id
 	this.Algo = algo
@@ -114,6 +120,8 @@ func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, int
 	this.Ips = ips
 	this.Location = location
 	this.AvailabilityZone = availabilityZone
+	this.ProjectId = projectId
+	this.Networks = networks
 	return &this
 }
 
@@ -147,6 +155,38 @@ func (o *Balancer) GetIdOk() (*float32, bool) {
 // SetId sets field value
 func (o *Balancer) SetId(v float32) {
 	o.Id = v
+}
+
+// GetAccountId returns the AccountId field value if set, zero value otherwise.
+func (o *Balancer) GetAccountId() string {
+	if o == nil || IsNil(o.AccountId) {
+		var ret string
+		return ret
+	}
+	return *o.AccountId
+}
+
+// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetAccountIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AccountId) {
+		return nil, false
+	}
+	return o.AccountId, true
+}
+
+// HasAccountId returns a boolean if a field has been set.
+func (o *Balancer) HasAccountId() bool {
+	if o != nil && !IsNil(o.AccountId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountId gets a reference to the given string and assigns it to the AccountId field.
+func (o *Balancer) SetAccountId(v string) {
+	o.AccountId = &v
 }
 
 // GetAlgo returns the Algo field value
@@ -827,6 +867,54 @@ func (o *Balancer) SetAvailabilityZone(v AvailabilityZone) {
 	o.AvailabilityZone = v
 }
 
+// GetProjectId returns the ProjectId field value
+func (o *Balancer) GetProjectId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetProjectIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProjectId, true
+}
+
+// SetProjectId sets field value
+func (o *Balancer) SetProjectId(v int32) {
+	o.ProjectId = v
+}
+
+// GetNetworks returns the Networks field value
+func (o *Balancer) GetNetworks() []BalancerNetworksInner {
+	if o == nil {
+		var ret []BalancerNetworksInner
+		return ret
+	}
+
+	return o.Networks
+}
+
+// GetNetworksOk returns a tuple with the Networks field value
+// and a boolean to check if the value has been set.
+func (o *Balancer) GetNetworksOk() ([]BalancerNetworksInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Networks, true
+}
+
+// SetNetworks sets field value
+func (o *Balancer) SetNetworks(v []BalancerNetworksInner) {
+	o.Networks = v
+}
+
 func (o Balancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -838,6 +926,9 @@ func (o Balancer) MarshalJSON() ([]byte, error) {
 func (o Balancer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.AccountId) {
+		toSerialize["account_id"] = o.AccountId
+	}
 	toSerialize["algo"] = o.Algo
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["fall"] = o.Fall
@@ -866,6 +957,8 @@ func (o Balancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["ips"] = o.Ips
 	toSerialize["location"] = o.Location
 	toSerialize["availability_zone"] = o.AvailabilityZone
+	toSerialize["project_id"] = o.ProjectId
+	toSerialize["networks"] = o.Networks
 	return toSerialize, nil
 }
 

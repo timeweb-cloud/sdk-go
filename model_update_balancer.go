@@ -20,7 +20,7 @@ var _ MappedNullable = &UpdateBalancer{}
 
 // UpdateBalancer struct for UpdateBalancer
 type UpdateBalancer struct {
-	// Удобочитаемое имя, установленное для балансировщика.
+	// Удобочитаемое имя, установленное для балансировщика. Должно быть уникальным в рамках аккаунта
 	Name *string `json:"name,omitempty"`
 	// Алгоритм переключений балансировщика.
 	Algo *string `json:"algo,omitempty"`

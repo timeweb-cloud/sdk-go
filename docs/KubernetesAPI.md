@@ -47,7 +47,7 @@ import (
 )
 
 func main() {
-    clusterIn := *openapiclient.NewClusterIn("Name_example", "K8sVersion_example", "NetworkDriver_example", int32(123)) // ClusterIn | 
+    clusterIn := *openapiclient.NewClusterIn("Name_example", "K8sVersion_example", "NetworkDriver_example") // ClusterIn | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1133,7 +1133,7 @@ Other parameters are passed through a pointer to a apiGetKubernetesPresetsReques
 
 ## IncreaseCountOfNodesInGroup
 
-> NodesResponse IncreaseCountOfNodesInGroup(ctx, clusterId, groupId).NodeCount(nodeCount).Execute()
+> NodesResponse IncreaseCountOfNodesInGroup(ctx, clusterId, groupId).IncreaseNodes(increaseNodes).Execute()
 
 Увеличение количества нод в группе на указанное количество
 
@@ -1154,11 +1154,11 @@ import (
 func main() {
     clusterId := int32(56) // int32 | ID кластера
     groupId := int32(56) // int32 | ID группы
-    nodeCount := *openapiclient.NewNodeCount(int32(2)) // NodeCount | 
+    increaseNodes := *openapiclient.NewIncreaseNodes(int32(2)) // IncreaseNodes | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.KubernetesAPI.IncreaseCountOfNodesInGroup(context.Background(), clusterId, groupId).NodeCount(nodeCount).Execute()
+    resp, r, err := apiClient.KubernetesAPI.IncreaseCountOfNodesInGroup(context.Background(), clusterId, groupId).IncreaseNodes(increaseNodes).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.IncreaseCountOfNodesInGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1186,7 +1186,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **nodeCount** | [**NodeCount**](NodeCount.md) |  | 
+ **increaseNodes** | [**IncreaseNodes**](IncreaseNodes.md) |  | 
 
 ### Return type
 
@@ -1208,7 +1208,7 @@ Name | Type | Description  | Notes
 
 ## ReduceCountOfNodesInGroup
 
-> ReduceCountOfNodesInGroup(ctx, clusterId, groupId).NodeCount(nodeCount).Execute()
+> ReduceCountOfNodesInGroup(ctx, clusterId, groupId).ReduceNodes(reduceNodes).Execute()
 
 Уменьшение количества нод в группе на указанное количество
 
@@ -1229,11 +1229,11 @@ import (
 func main() {
     clusterId := int32(56) // int32 | ID кластера
     groupId := int32(56) // int32 | ID группы
-    nodeCount := *openapiclient.NewNodeCount(int32(2)) // NodeCount | 
+    reduceNodes := *openapiclient.NewReduceNodes(int32(2)) // ReduceNodes | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.KubernetesAPI.ReduceCountOfNodesInGroup(context.Background(), clusterId, groupId).NodeCount(nodeCount).Execute()
+    r, err := apiClient.KubernetesAPI.ReduceCountOfNodesInGroup(context.Background(), clusterId, groupId).ReduceNodes(reduceNodes).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.ReduceCountOfNodesInGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1259,7 +1259,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **nodeCount** | [**NodeCount**](NodeCount.md) |  | 
+ **reduceNodes** | [**ReduceNodes**](ReduceNodes.md) |  | 
 
 ### Return type
 

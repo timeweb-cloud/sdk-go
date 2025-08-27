@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateDedicatedServer{}
 // CreateDedicatedServer struct for CreateDedicatedServer
 type CreateDedicatedServer struct {
 	// ID списка дополнительных услуг выделенного сервера.
-	PlanId float32 `json:"plan_id"`
+	PlanId *float32 `json:"plan_id,omitempty"`
 	// ID тарифа выделенного сервера.
 	PresetId float32 `json:"preset_id"`
 	// ID операционной системы, которая будет установлена на выделенный сервер.
@@ -46,9 +46,8 @@ type CreateDedicatedServer struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDedicatedServer(planId float32, presetId float32, paymentPeriod string, name string) *CreateDedicatedServer {
+func NewCreateDedicatedServer(presetId float32, paymentPeriod string, name string) *CreateDedicatedServer {
 	this := CreateDedicatedServer{}
-	this.PlanId = planId
 	this.PresetId = presetId
 	this.PaymentPeriod = paymentPeriod
 	this.Name = name
@@ -63,28 +62,36 @@ func NewCreateDedicatedServerWithDefaults() *CreateDedicatedServer {
 	return &this
 }
 
-// GetPlanId returns the PlanId field value
+// GetPlanId returns the PlanId field value if set, zero value otherwise.
 func (o *CreateDedicatedServer) GetPlanId() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.PlanId) {
 		var ret float32
 		return ret
 	}
-
-	return o.PlanId
+	return *o.PlanId
 }
 
-// GetPlanIdOk returns a tuple with the PlanId field value
+// GetPlanIdOk returns a tuple with the PlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateDedicatedServer) GetPlanIdOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PlanId) {
 		return nil, false
 	}
-	return &o.PlanId, true
+	return o.PlanId, true
 }
 
-// SetPlanId sets field value
+// HasPlanId returns a boolean if a field has been set.
+func (o *CreateDedicatedServer) HasPlanId() bool {
+	if o != nil && !IsNil(o.PlanId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlanId gets a reference to the given float32 and assigns it to the PlanId field.
 func (o *CreateDedicatedServer) SetPlanId(v float32) {
-	o.PlanId = v
+	o.PlanId = &v
 }
 
 // GetPresetId returns the PresetId field value
@@ -391,7 +398,9 @@ func (o CreateDedicatedServer) MarshalJSON() ([]byte, error) {
 
 func (o CreateDedicatedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["plan_id"] = o.PlanId
+	if !IsNil(o.PlanId) {
+		toSerialize["plan_id"] = o.PlanId
+	}
 	toSerialize["preset_id"] = o.PresetId
 	if o.OsId.IsSet() {
 		toSerialize["os_id"] = o.OsId.Get()

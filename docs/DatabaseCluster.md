@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Port** | **NullableInt32** | Порт | 
 **Status** | **string** | Текущий статус кластера базы данных. | 
 **PresetId** | **int32** | ID тарифа. | 
-**DiskStats** | [**NullableDatabaseClusterDiskStats**](DatabaseClusterDiskStats.md) |  | 
+**Disk** | Pointer to [**NullableDatabaseClusterDisk**](DatabaseClusterDisk.md) |  | [optional] 
 **ConfigParameters** | [**ConfigParameters**](ConfigParameters.md) |  | 
 **IsEnabledPublicNetwork** | **bool** | Доступность публичного IP-адреса | 
 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewDatabaseCluster
 
-`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, diskStats NullableDatabaseClusterDiskStats, configParameters ConfigParameters, isEnabledPublicNetwork bool, ) *DatabaseCluster`
+`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters ConfigParameters, isEnabledPublicNetwork bool, ) *DatabaseCluster`
 
 NewDatabaseCluster instantiates a new DatabaseCluster object
 This constructor will assign default values to properties that have it defined,
@@ -298,36 +298,41 @@ and a boolean to check if the value has been set.
 SetPresetId sets PresetId field to given value.
 
 
-### GetDiskStats
+### GetDisk
 
-`func (o *DatabaseCluster) GetDiskStats() DatabaseClusterDiskStats`
+`func (o *DatabaseCluster) GetDisk() DatabaseClusterDisk`
 
-GetDiskStats returns the DiskStats field if non-nil, zero value otherwise.
+GetDisk returns the Disk field if non-nil, zero value otherwise.
 
-### GetDiskStatsOk
+### GetDiskOk
 
-`func (o *DatabaseCluster) GetDiskStatsOk() (*DatabaseClusterDiskStats, bool)`
+`func (o *DatabaseCluster) GetDiskOk() (*DatabaseClusterDisk, bool)`
 
-GetDiskStatsOk returns a tuple with the DiskStats field if it's non-nil, zero value otherwise
+GetDiskOk returns a tuple with the Disk field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDiskStats
+### SetDisk
 
-`func (o *DatabaseCluster) SetDiskStats(v DatabaseClusterDiskStats)`
+`func (o *DatabaseCluster) SetDisk(v DatabaseClusterDisk)`
 
-SetDiskStats sets DiskStats field to given value.
+SetDisk sets Disk field to given value.
 
+### HasDisk
 
-### SetDiskStatsNil
+`func (o *DatabaseCluster) HasDisk() bool`
 
-`func (o *DatabaseCluster) SetDiskStatsNil(b bool)`
+HasDisk returns a boolean if a field has been set.
 
- SetDiskStatsNil sets the value for DiskStats to be an explicit nil
+### SetDiskNil
 
-### UnsetDiskStats
-`func (o *DatabaseCluster) UnsetDiskStats()`
+`func (o *DatabaseCluster) SetDiskNil(b bool)`
 
-UnsetDiskStats ensures that no value is present for DiskStats, not even an explicit nil
+ SetDiskNil sets the value for Disk to be an explicit nil
+
+### UnsetDisk
+`func (o *DatabaseCluster) UnsetDisk()`
+
+UnsetDisk ensures that no value is present for Disk, not even an explicit nil
 ### GetConfigParameters
 
 `func (o *DatabaseCluster) GetConfigParameters() ConfigParameters`

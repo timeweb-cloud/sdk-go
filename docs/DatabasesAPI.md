@@ -194,7 +194,7 @@ import (
 )
 
 func main() {
-    createCluster := *openapiclient.NewCreateCluster("default_db", openapiclient.db-type("mysql"), int32(5)) // CreateCluster | 
+    createCluster := *openapiclient.NewCreateCluster("default_db", openapiclient.db-type("mysql")) // CreateCluster | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -479,7 +479,7 @@ import (
 
 func main() {
     dbId := int32(56) // int32 | ID базы данных
-    backupId := int32(56) // int32 | ID резевной копии
+    backupId := int32(56) // int32 | ID резервной копии
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -498,7 +498,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **dbId** | **int32** | ID базы данных | 
-**backupId** | **int32** | ID резевной копии | 
+**backupId** | **int32** | ID резервной копии | 
 
 ### Other Parameters
 
@@ -906,7 +906,7 @@ import (
 
 func main() {
     dbId := int32(56) // int32 | ID базы данных
-    backupId := int32(56) // int32 | ID резевной копии
+    backupId := int32(56) // int32 | ID резервной копии
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -927,7 +927,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **dbId** | **int32** | ID базы данных | 
-**backupId** | **int32** | ID резевной копии | 
+**backupId** | **int32** | ID резервной копии | 
 
 ### Other Parameters
 
@@ -1728,7 +1728,7 @@ import (
 
 func main() {
     dbId := int32(56) // int32 | ID базы данных
-    backupId := int32(56) // int32 | ID резевной копии
+    backupId := int32(56) // int32 | ID резервной копии
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1747,7 +1747,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **dbId** | **int32** | ID базы данных | 
-**backupId** | **int32** | ID резевной копии | 
+**backupId** | **int32** | ID резервной копии | 
 
 ### Other Parameters
 

@@ -34,26 +34,31 @@ type ClusterIn struct {
 	IsIngress *bool `json:"is_ingress,omitempty"`
 	// Логическое значение, которое показывает, использовать ли Kubernetes Dashboard в кластере
 	IsK8sDashboard *bool `json:"is_k8s_dashboard,omitempty"`
-	// ID тарифа мастер-ноды
-	PresetId int32 `json:"preset_id"`
+	// ID тарифа мастер-ноды. Нельзя передавать вместе с `configuration`
+	PresetId *int32 `json:"preset_id,omitempty"`
+	Configuration *ClusterInConfiguration `json:"configuration,omitempty"`
+	// Количество мастер нод
+	MasterNodesCount *int32 `json:"master_nodes_count,omitempty"`
 	// Группы воркеров в кластере
 	WorkerGroups []NodeGroupIn `json:"worker_groups,omitempty"`
 	// ID приватной сети
 	NetworkId *string `json:"network_id,omitempty"`
 	// ID проекта
 	ProjectId *int32 `json:"project_id,omitempty"`
+	MaintenanceSlot *ClusterInMaintenanceSlot `json:"maintenance_slot,omitempty"`
+	OidcProvider *ClusterInOidcProvider `json:"oidc_provider,omitempty"`
+	ClusterNetworkCidr *ClusterInClusterNetworkCidr `json:"cluster_network_cidr,omitempty"`
 }
 
 // NewClusterIn instantiates a new ClusterIn object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterIn(name string, k8sVersion string, networkDriver string, presetId int32) *ClusterIn {
+func NewClusterIn(name string, k8sVersion string, networkDriver string) *ClusterIn {
 	this := ClusterIn{}
 	this.Name = name
 	this.K8sVersion = k8sVersion
 	this.NetworkDriver = networkDriver
-	this.PresetId = presetId
 	return &this
 }
 
@@ -265,28 +270,100 @@ func (o *ClusterIn) SetIsK8sDashboard(v bool) {
 	o.IsK8sDashboard = &v
 }
 
-// GetPresetId returns the PresetId field value
+// GetPresetId returns the PresetId field value if set, zero value otherwise.
 func (o *ClusterIn) GetPresetId() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.PresetId) {
 		var ret int32
 		return ret
 	}
-
-	return o.PresetId
+	return *o.PresetId
 }
 
-// GetPresetIdOk returns a tuple with the PresetId field value
+// GetPresetIdOk returns a tuple with the PresetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ClusterIn) GetPresetIdOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PresetId) {
 		return nil, false
 	}
-	return &o.PresetId, true
+	return o.PresetId, true
 }
 
-// SetPresetId sets field value
+// HasPresetId returns a boolean if a field has been set.
+func (o *ClusterIn) HasPresetId() bool {
+	if o != nil && !IsNil(o.PresetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresetId gets a reference to the given int32 and assigns it to the PresetId field.
 func (o *ClusterIn) SetPresetId(v int32) {
-	o.PresetId = v
+	o.PresetId = &v
+}
+
+// GetConfiguration returns the Configuration field value if set, zero value otherwise.
+func (o *ClusterIn) GetConfiguration() ClusterInConfiguration {
+	if o == nil || IsNil(o.Configuration) {
+		var ret ClusterInConfiguration
+		return ret
+	}
+	return *o.Configuration
+}
+
+// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterIn) GetConfigurationOk() (*ClusterInConfiguration, bool) {
+	if o == nil || IsNil(o.Configuration) {
+		return nil, false
+	}
+	return o.Configuration, true
+}
+
+// HasConfiguration returns a boolean if a field has been set.
+func (o *ClusterIn) HasConfiguration() bool {
+	if o != nil && !IsNil(o.Configuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguration gets a reference to the given ClusterInConfiguration and assigns it to the Configuration field.
+func (o *ClusterIn) SetConfiguration(v ClusterInConfiguration) {
+	o.Configuration = &v
+}
+
+// GetMasterNodesCount returns the MasterNodesCount field value if set, zero value otherwise.
+func (o *ClusterIn) GetMasterNodesCount() int32 {
+	if o == nil || IsNil(o.MasterNodesCount) {
+		var ret int32
+		return ret
+	}
+	return *o.MasterNodesCount
+}
+
+// GetMasterNodesCountOk returns a tuple with the MasterNodesCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterIn) GetMasterNodesCountOk() (*int32, bool) {
+	if o == nil || IsNil(o.MasterNodesCount) {
+		return nil, false
+	}
+	return o.MasterNodesCount, true
+}
+
+// HasMasterNodesCount returns a boolean if a field has been set.
+func (o *ClusterIn) HasMasterNodesCount() bool {
+	if o != nil && !IsNil(o.MasterNodesCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetMasterNodesCount gets a reference to the given int32 and assigns it to the MasterNodesCount field.
+func (o *ClusterIn) SetMasterNodesCount(v int32) {
+	o.MasterNodesCount = &v
 }
 
 // GetWorkerGroups returns the WorkerGroups field value if set, zero value otherwise.
@@ -385,6 +462,102 @@ func (o *ClusterIn) SetProjectId(v int32) {
 	o.ProjectId = &v
 }
 
+// GetMaintenanceSlot returns the MaintenanceSlot field value if set, zero value otherwise.
+func (o *ClusterIn) GetMaintenanceSlot() ClusterInMaintenanceSlot {
+	if o == nil || IsNil(o.MaintenanceSlot) {
+		var ret ClusterInMaintenanceSlot
+		return ret
+	}
+	return *o.MaintenanceSlot
+}
+
+// GetMaintenanceSlotOk returns a tuple with the MaintenanceSlot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterIn) GetMaintenanceSlotOk() (*ClusterInMaintenanceSlot, bool) {
+	if o == nil || IsNil(o.MaintenanceSlot) {
+		return nil, false
+	}
+	return o.MaintenanceSlot, true
+}
+
+// HasMaintenanceSlot returns a boolean if a field has been set.
+func (o *ClusterIn) HasMaintenanceSlot() bool {
+	if o != nil && !IsNil(o.MaintenanceSlot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaintenanceSlot gets a reference to the given ClusterInMaintenanceSlot and assigns it to the MaintenanceSlot field.
+func (o *ClusterIn) SetMaintenanceSlot(v ClusterInMaintenanceSlot) {
+	o.MaintenanceSlot = &v
+}
+
+// GetOidcProvider returns the OidcProvider field value if set, zero value otherwise.
+func (o *ClusterIn) GetOidcProvider() ClusterInOidcProvider {
+	if o == nil || IsNil(o.OidcProvider) {
+		var ret ClusterInOidcProvider
+		return ret
+	}
+	return *o.OidcProvider
+}
+
+// GetOidcProviderOk returns a tuple with the OidcProvider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterIn) GetOidcProviderOk() (*ClusterInOidcProvider, bool) {
+	if o == nil || IsNil(o.OidcProvider) {
+		return nil, false
+	}
+	return o.OidcProvider, true
+}
+
+// HasOidcProvider returns a boolean if a field has been set.
+func (o *ClusterIn) HasOidcProvider() bool {
+	if o != nil && !IsNil(o.OidcProvider) {
+		return true
+	}
+
+	return false
+}
+
+// SetOidcProvider gets a reference to the given ClusterInOidcProvider and assigns it to the OidcProvider field.
+func (o *ClusterIn) SetOidcProvider(v ClusterInOidcProvider) {
+	o.OidcProvider = &v
+}
+
+// GetClusterNetworkCidr returns the ClusterNetworkCidr field value if set, zero value otherwise.
+func (o *ClusterIn) GetClusterNetworkCidr() ClusterInClusterNetworkCidr {
+	if o == nil || IsNil(o.ClusterNetworkCidr) {
+		var ret ClusterInClusterNetworkCidr
+		return ret
+	}
+	return *o.ClusterNetworkCidr
+}
+
+// GetClusterNetworkCidrOk returns a tuple with the ClusterNetworkCidr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterIn) GetClusterNetworkCidrOk() (*ClusterInClusterNetworkCidr, bool) {
+	if o == nil || IsNil(o.ClusterNetworkCidr) {
+		return nil, false
+	}
+	return o.ClusterNetworkCidr, true
+}
+
+// HasClusterNetworkCidr returns a boolean if a field has been set.
+func (o *ClusterIn) HasClusterNetworkCidr() bool {
+	if o != nil && !IsNil(o.ClusterNetworkCidr) {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterNetworkCidr gets a reference to the given ClusterInClusterNetworkCidr and assigns it to the ClusterNetworkCidr field.
+func (o *ClusterIn) SetClusterNetworkCidr(v ClusterInClusterNetworkCidr) {
+	o.ClusterNetworkCidr = &v
+}
+
 func (o ClusterIn) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -410,7 +583,15 @@ func (o ClusterIn) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsK8sDashboard) {
 		toSerialize["is_k8s_dashboard"] = o.IsK8sDashboard
 	}
-	toSerialize["preset_id"] = o.PresetId
+	if !IsNil(o.PresetId) {
+		toSerialize["preset_id"] = o.PresetId
+	}
+	if !IsNil(o.Configuration) {
+		toSerialize["configuration"] = o.Configuration
+	}
+	if !IsNil(o.MasterNodesCount) {
+		toSerialize["master_nodes_count"] = o.MasterNodesCount
+	}
 	if !IsNil(o.WorkerGroups) {
 		toSerialize["worker_groups"] = o.WorkerGroups
 	}
@@ -419,6 +600,15 @@ func (o ClusterIn) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ProjectId) {
 		toSerialize["project_id"] = o.ProjectId
+	}
+	if !IsNil(o.MaintenanceSlot) {
+		toSerialize["maintenance_slot"] = o.MaintenanceSlot
+	}
+	if !IsNil(o.OidcProvider) {
+		toSerialize["oidc_provider"] = o.OidcProvider
+	}
+	if !IsNil(o.ClusterNetworkCidr) {
+		toSerialize["cluster_network_cidr"] = o.ClusterNetworkCidr
 	}
 	return toSerialize, nil
 }

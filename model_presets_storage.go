@@ -32,13 +32,17 @@ type PresetsStorage struct {
 	Price float32 `json:"price"`
 	// Географическое расположение тарифа.
 	Location string `json:"location"`
+	// Теги тарифа.
+	Tags []string `json:"tags"`
+	// Класс хранилища.
+	StorageClass string `json:"storage_class"`
 }
 
 // NewPresetsStorage instantiates a new PresetsStorage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPresetsStorage(id float32, description string, descriptionShort string, disk float32, price float32, location string) *PresetsStorage {
+func NewPresetsStorage(id float32, description string, descriptionShort string, disk float32, price float32, location string, tags []string, storageClass string) *PresetsStorage {
 	this := PresetsStorage{}
 	this.Id = id
 	this.Description = description
@@ -46,6 +50,8 @@ func NewPresetsStorage(id float32, description string, descriptionShort string, 
 	this.Disk = disk
 	this.Price = price
 	this.Location = location
+	this.Tags = tags
+	this.StorageClass = storageClass
 	return &this
 }
 
@@ -201,6 +207,54 @@ func (o *PresetsStorage) SetLocation(v string) {
 	o.Location = v
 }
 
+// GetTags returns the Tags field value
+func (o *PresetsStorage) GetTags() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value
+// and a boolean to check if the value has been set.
+func (o *PresetsStorage) GetTagsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// SetTags sets field value
+func (o *PresetsStorage) SetTags(v []string) {
+	o.Tags = v
+}
+
+// GetStorageClass returns the StorageClass field value
+func (o *PresetsStorage) GetStorageClass() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.StorageClass
+}
+
+// GetStorageClassOk returns a tuple with the StorageClass field value
+// and a boolean to check if the value has been set.
+func (o *PresetsStorage) GetStorageClassOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.StorageClass, true
+}
+
+// SetStorageClass sets field value
+func (o *PresetsStorage) SetStorageClass(v string) {
+	o.StorageClass = v
+}
+
 func (o PresetsStorage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -217,6 +271,8 @@ func (o PresetsStorage) ToMap() (map[string]interface{}, error) {
 	toSerialize["disk"] = o.Disk
 	toSerialize["price"] = o.Price
 	toSerialize["location"] = o.Location
+	toSerialize["tags"] = o.Tags
+	toSerialize["storage_class"] = o.StorageClass
 	return toSerialize, nil
 }
 

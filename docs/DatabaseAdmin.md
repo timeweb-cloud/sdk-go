@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана база данных. | 
 **Login** | **string** | Имя пользователя базы данных | 
 **Password** | **string** | Пароль пользователя базы данных | 
-**Description** | **string** | Описанеие пользователя базы данных | 
+**Description** | **string** | Описание пользователя базы данных | 
 **Host** | **NullableString** | Хост пользователя | 
 **Instances** | [**[]DatabaseAdminInstancesInner**](DatabaseAdminInstancesInner.md) |  | 
 

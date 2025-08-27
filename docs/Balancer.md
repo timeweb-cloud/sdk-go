@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **float32** | ID для каждого экземпляра балансировщика. Автоматически генерируется при создании. | 
+**AccountId** | Pointer to **string** | ID пользователя. | [optional] 
 **Algo** | **string** | Алгоритм переключений балансировщика. | 
 **CreatedAt** | **time.Time** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан балансировщик. | 
 **Fall** | **float32** | Порог количества ошибок. | 
@@ -33,12 +34,14 @@ Name | Type | Description | Notes
 **Ips** | **[]string** | Список IP-адресов, привязанных к балансировщику | 
 **Location** | **string** | Географическое расположение балансировщика | 
 **AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
+**ProjectId** | **int32** | ID проекта | 
+**Networks** | [**[]BalancerNetworksInner**](BalancerNetworksInner.md) | Список сетей сервера. | 
 
 ## Methods
 
 ### NewBalancer
 
-`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, avatarLink NullableString, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, ) *Balancer`
+`func NewBalancer(id float32, algo string, createdAt time.Time, fall float32, inter float32, ip NullableString, localIp NullableString, isKeepalive bool, name string, path string, port float32, proto string, rise float32, maxconn float32, connectTimeout float32, clientTimeout float32, serverTimeout float32, httprequestTimeout float32, presetId float32, isSsl bool, status string, isSticky bool, timeout float32, avatarLink NullableString, isUseProxy bool, rules []Rule, ips []string, location string, availabilityZone AvailabilityZone, projectId int32, networks []BalancerNetworksInner, ) *Balancer`
 
 NewBalancer instantiates a new Balancer object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +75,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetAccountId
+
+`func (o *Balancer) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *Balancer) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *Balancer) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+### HasAccountId
+
+`func (o *Balancer) HasAccountId() bool`
+
+HasAccountId returns a boolean if a field has been set.
 
 ### GetAlgo
 
@@ -661,6 +689,46 @@ and a boolean to check if the value has been set.
 `func (o *Balancer) SetAvailabilityZone(v AvailabilityZone)`
 
 SetAvailabilityZone sets AvailabilityZone field to given value.
+
+
+### GetProjectId
+
+`func (o *Balancer) GetProjectId() int32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *Balancer) GetProjectIdOk() (*int32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *Balancer) SetProjectId(v int32)`
+
+SetProjectId sets ProjectId field to given value.
+
+
+### GetNetworks
+
+`func (o *Balancer) GetNetworks() []BalancerNetworksInner`
+
+GetNetworks returns the Networks field if non-nil, zero value otherwise.
+
+### GetNetworksOk
+
+`func (o *Balancer) GetNetworksOk() (*[]BalancerNetworksInner, bool)`
+
+GetNetworksOk returns a tuple with the Networks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworks
+
+`func (o *Balancer) SetNetworks(v []BalancerNetworksInner)`
+
+SetNetworks sets Networks field to given value.
 
 
 

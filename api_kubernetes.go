@@ -2667,11 +2667,11 @@ type ApiIncreaseCountOfNodesInGroupRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	groupId int32
-	nodeCount *NodeCount
+	increaseNodes *IncreaseNodes
 }
 
-func (r ApiIncreaseCountOfNodesInGroupRequest) NodeCount(nodeCount NodeCount) ApiIncreaseCountOfNodesInGroupRequest {
-	r.nodeCount = &nodeCount
+func (r ApiIncreaseCountOfNodesInGroupRequest) IncreaseNodes(increaseNodes IncreaseNodes) ApiIncreaseCountOfNodesInGroupRequest {
+	r.increaseNodes = &increaseNodes
 	return r
 }
 
@@ -2720,8 +2720,8 @@ func (a *KubernetesAPIService) IncreaseCountOfNodesInGroupExecute(r ApiIncreaseC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.nodeCount == nil {
-		return localVarReturnValue, nil, reportError("nodeCount is required and must be specified")
+	if r.increaseNodes == nil {
+		return localVarReturnValue, nil, reportError("increaseNodes is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2742,7 +2742,7 @@ func (a *KubernetesAPIService) IncreaseCountOfNodesInGroupExecute(r ApiIncreaseC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.nodeCount
+	localVarPostBody = r.increaseNodes
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2850,11 +2850,11 @@ type ApiReduceCountOfNodesInGroupRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	groupId int32
-	nodeCount *NodeCount
+	reduceNodes *ReduceNodes
 }
 
-func (r ApiReduceCountOfNodesInGroupRequest) NodeCount(nodeCount NodeCount) ApiReduceCountOfNodesInGroupRequest {
-	r.nodeCount = &nodeCount
+func (r ApiReduceCountOfNodesInGroupRequest) ReduceNodes(reduceNodes ReduceNodes) ApiReduceCountOfNodesInGroupRequest {
+	r.reduceNodes = &reduceNodes
 	return r
 }
 
@@ -2901,8 +2901,8 @@ func (a *KubernetesAPIService) ReduceCountOfNodesInGroupExecute(r ApiReduceCount
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.nodeCount == nil {
-		return nil, reportError("nodeCount is required and must be specified")
+	if r.reduceNodes == nil {
+		return nil, reportError("reduceNodes is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2923,7 +2923,7 @@ func (a *KubernetesAPIService) ReduceCountOfNodesInGroupExecute(r ApiReduceCount
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.nodeCount
+	localVarPostBody = r.reduceNodes
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

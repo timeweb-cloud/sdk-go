@@ -26,19 +26,21 @@ type CreateStorageRequest struct {
 	Description *string `json:"description,omitempty"`
 	// Тип хранилища.
 	Type string `json:"type"`
-	// ID тарифа.
-	PresetId float32 `json:"preset_id"`
+	// ID тарифа. Нельзя передавать вместе с `configurator`.
+	PresetId *float32 `json:"preset_id,omitempty"`
+	Configurator *CreateStorageRequestConfigurator `json:"configurator,omitempty"`
+	// ID проекта.
+	ProjectId *float32 `json:"project_id,omitempty"`
 }
 
 // NewCreateStorageRequest instantiates a new CreateStorageRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateStorageRequest(name string, type_ string, presetId float32) *CreateStorageRequest {
+func NewCreateStorageRequest(name string, type_ string) *CreateStorageRequest {
 	this := CreateStorageRequest{}
 	this.Name = name
 	this.Type = type_
-	this.PresetId = presetId
 	return &this
 }
 
@@ -130,28 +132,100 @@ func (o *CreateStorageRequest) SetType(v string) {
 	o.Type = v
 }
 
-// GetPresetId returns the PresetId field value
+// GetPresetId returns the PresetId field value if set, zero value otherwise.
 func (o *CreateStorageRequest) GetPresetId() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.PresetId) {
 		var ret float32
 		return ret
 	}
-
-	return o.PresetId
+	return *o.PresetId
 }
 
-// GetPresetIdOk returns a tuple with the PresetId field value
+// GetPresetIdOk returns a tuple with the PresetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateStorageRequest) GetPresetIdOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PresetId) {
 		return nil, false
 	}
-	return &o.PresetId, true
+	return o.PresetId, true
 }
 
-// SetPresetId sets field value
+// HasPresetId returns a boolean if a field has been set.
+func (o *CreateStorageRequest) HasPresetId() bool {
+	if o != nil && !IsNil(o.PresetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresetId gets a reference to the given float32 and assigns it to the PresetId field.
 func (o *CreateStorageRequest) SetPresetId(v float32) {
-	o.PresetId = v
+	o.PresetId = &v
+}
+
+// GetConfigurator returns the Configurator field value if set, zero value otherwise.
+func (o *CreateStorageRequest) GetConfigurator() CreateStorageRequestConfigurator {
+	if o == nil || IsNil(o.Configurator) {
+		var ret CreateStorageRequestConfigurator
+		return ret
+	}
+	return *o.Configurator
+}
+
+// GetConfiguratorOk returns a tuple with the Configurator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateStorageRequest) GetConfiguratorOk() (*CreateStorageRequestConfigurator, bool) {
+	if o == nil || IsNil(o.Configurator) {
+		return nil, false
+	}
+	return o.Configurator, true
+}
+
+// HasConfigurator returns a boolean if a field has been set.
+func (o *CreateStorageRequest) HasConfigurator() bool {
+	if o != nil && !IsNil(o.Configurator) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurator gets a reference to the given CreateStorageRequestConfigurator and assigns it to the Configurator field.
+func (o *CreateStorageRequest) SetConfigurator(v CreateStorageRequestConfigurator) {
+	o.Configurator = &v
+}
+
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *CreateStorageRequest) GetProjectId() float32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret float32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateStorageRequest) GetProjectIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *CreateStorageRequest) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
+func (o *CreateStorageRequest) SetProjectId(v float32) {
+	o.ProjectId = &v
 }
 
 func (o CreateStorageRequest) MarshalJSON() ([]byte, error) {
@@ -169,7 +243,15 @@ func (o CreateStorageRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["type"] = o.Type
-	toSerialize["preset_id"] = o.PresetId
+	if !IsNil(o.PresetId) {
+		toSerialize["preset_id"] = o.PresetId
+	}
+	if !IsNil(o.Configurator) {
+		toSerialize["configurator"] = o.Configurator
+	}
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
+	}
 	return toSerialize, nil
 }
 

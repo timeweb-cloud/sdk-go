@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PresetId** | Pointer to **float32** | ID тарифа. | [optional] 
-**ConfiguratorId** | Pointer to **float32** | ID конфигуратора хранилища. | [optional] 
+**Configurator** | Pointer to [**UpdateStorageRequestConfigurator**](UpdateStorageRequestConfigurator.md) |  | [optional] 
 **BucketType** | Pointer to **string** | Тип хранилища. | [optional] 
 **Description** | Pointer to **string** | Комментарий к хранилищу. | [optional] 
 
@@ -53,30 +53,30 @@ SetPresetId sets PresetId field to given value.
 
 HasPresetId returns a boolean if a field has been set.
 
-### GetConfiguratorId
+### GetConfigurator
 
-`func (o *UpdateStorageRequest) GetConfiguratorId() float32`
+`func (o *UpdateStorageRequest) GetConfigurator() UpdateStorageRequestConfigurator`
 
-GetConfiguratorId returns the ConfiguratorId field if non-nil, zero value otherwise.
+GetConfigurator returns the Configurator field if non-nil, zero value otherwise.
 
-### GetConfiguratorIdOk
+### GetConfiguratorOk
 
-`func (o *UpdateStorageRequest) GetConfiguratorIdOk() (*float32, bool)`
+`func (o *UpdateStorageRequest) GetConfiguratorOk() (*UpdateStorageRequestConfigurator, bool)`
 
-GetConfiguratorIdOk returns a tuple with the ConfiguratorId field if it's non-nil, zero value otherwise
+GetConfiguratorOk returns a tuple with the Configurator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConfiguratorId
+### SetConfigurator
 
-`func (o *UpdateStorageRequest) SetConfiguratorId(v float32)`
+`func (o *UpdateStorageRequest) SetConfigurator(v UpdateStorageRequestConfigurator)`
 
-SetConfiguratorId sets ConfiguratorId field to given value.
+SetConfigurator sets Configurator field to given value.
 
-### HasConfiguratorId
+### HasConfigurator
 
-`func (o *UpdateStorageRequest) HasConfiguratorId() bool`
+`func (o *UpdateStorageRequest) HasConfigurator() bool`
 
-HasConfiguratorId returns a boolean if a field has been set.
+HasConfigurator returns a boolean if a field has been set.
 
 ### GetBucketType
 

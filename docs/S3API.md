@@ -6,23 +6,17 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddStorageSubdomainCertificate**](S3API.md#AddStorageSubdomainCertificate) | **Post** /api/v1/storages/certificates/generate | Добавление сертификата для поддомена хранилища
 [**AddStorageSubdomains**](S3API.md#AddStorageSubdomains) | **Post** /api/v1/storages/buckets/{bucket_id}/subdomains | Добавление поддоменов для хранилища
-[**CopyStorageFile**](S3API.md#CopyStorageFile) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/copy | Копирование файла/директории в хранилище
-[**CreateFolderInStorage**](S3API.md#CreateFolderInStorage) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/mkdir | Создание директории в хранилище
 [**CreateStorage**](S3API.md#CreateStorage) | **Post** /api/v1/storages/buckets | Создание хранилища
 [**DeleteStorage**](S3API.md#DeleteStorage) | **Delete** /api/v1/storages/buckets/{bucket_id} | Удаление хранилища на аккаунте
-[**DeleteStorageFile**](S3API.md#DeleteStorageFile) | **Delete** /api/v1/storages/buckets/{bucket_id}/object-manager/remove | Удаление файла/директории в хранилище
 [**DeleteStorageSubdomains**](S3API.md#DeleteStorageSubdomains) | **Delete** /api/v1/storages/buckets/{bucket_id}/subdomains | Удаление поддоменов хранилища
-[**GetStorageFilesList**](S3API.md#GetStorageFilesList) | **Get** /api/v1/storages/buckets/{bucket_id}/object-manager/list | Получение списка файлов в хранилище по префиксу
 [**GetStorageSubdomains**](S3API.md#GetStorageSubdomains) | **Get** /api/v1/storages/buckets/{bucket_id}/subdomains | Получение списка поддоменов хранилища
 [**GetStorageTransferStatus**](S3API.md#GetStorageTransferStatus) | **Get** /api/v1/storages/buckets/{bucket_id}/transfer-status | Получение статуса переноса хранилища от стороннего S3 в Timeweb Cloud
 [**GetStorageUsers**](S3API.md#GetStorageUsers) | **Get** /api/v1/storages/users | Получение списка пользователей хранилищ аккаунта
 [**GetStorages**](S3API.md#GetStorages) | **Get** /api/v1/storages/buckets | Получение списка хранилищ аккаунта
 [**GetStoragesPresets**](S3API.md#GetStoragesPresets) | **Get** /api/v1/presets/storages | Получение списка тарифов для хранилищ
-[**RenameStorageFile**](S3API.md#RenameStorageFile) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/rename | Переименование файла/директории в хранилище
 [**TransferStorage**](S3API.md#TransferStorage) | **Post** /api/v1/storages/transfer | Перенос хранилища от стороннего провайдера S3 в Timeweb Cloud
 [**UpdateStorage**](S3API.md#UpdateStorage) | **Patch** /api/v1/storages/buckets/{bucket_id} | Изменение хранилища на аккаунте
 [**UpdateStorageUser**](S3API.md#UpdateStorageUser) | **Patch** /api/v1/storages/users/{user_id} | Изменение пароля пользователя-администратора хранилища
-[**UploadFileToStorage**](S3API.md#UploadFileToStorage) | **Post** /api/v1/storages/buckets/{bucket_id}/object-manager/upload | Загрузка файлов в хранилище
 
 
 
@@ -162,146 +156,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CopyStorageFile
-
-> CopyStorageFile(ctx, bucketId).CopyStorageFileRequest(copyStorageFileRequest).Execute()
-
-Копирование файла/директории в хранилище
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    bucketId := int32(1051) // int32 | ID хранилища.
-    copyStorageFileRequest := *openapiclient.NewCopyStorageFileRequest("new_path", []string{"test1/test2"}) // CopyStorageFileRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.S3API.CopyStorageFile(context.Background(), bucketId).CopyStorageFileRequest(copyStorageFileRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `S3API.CopyStorageFile``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | ID хранилища. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCopyStorageFileRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **copyStorageFileRequest** | [**CopyStorageFileRequest**](CopyStorageFileRequest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateFolderInStorage
-
-> CreateFolderInStorage(ctx, bucketId).CreateFolderInStorageRequest(createFolderInStorageRequest).Execute()
-
-Создание директории в хранилище
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    bucketId := int32(1051) // int32 | ID хранилища.
-    createFolderInStorageRequest := *openapiclient.NewCreateFolderInStorageRequest("dir") // CreateFolderInStorageRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.S3API.CreateFolderInStorage(context.Background(), bucketId).CreateFolderInStorageRequest(createFolderInStorageRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `S3API.CreateFolderInStorage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | ID хранилища. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFolderInStorageRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **createFolderInStorageRequest** | [**CreateFolderInStorageRequest**](CreateFolderInStorageRequest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateStorage
 
 > CreateStorage201Response CreateStorage(ctx).CreateStorageRequest(createStorageRequest).Execute()
@@ -323,7 +177,7 @@ import (
 )
 
 func main() {
-    createStorageRequest := *openapiclient.NewCreateStorageRequest("test", "private", float32(1)) // CreateStorageRequest | 
+    createStorageRequest := *openapiclient.NewCreateStorageRequest("test", "private") // CreateStorageRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -442,78 +296,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteStorageFile
-
-> DeleteStorageFile(ctx, bucketId).DeleteStorageFileRequest(deleteStorageFileRequest).IsMultipart(isMultipart).Execute()
-
-Удаление файла/директории в хранилище
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    bucketId := int32(1051) // int32 | ID хранилища.
-    deleteStorageFileRequest := *openapiclient.NewDeleteStorageFileRequest([]string{"test1/test2"}) // DeleteStorageFileRequest | 
-    isMultipart := true // bool | Это логическое значение, которое используется для обозначения multipart-загрузки. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.S3API.DeleteStorageFile(context.Background(), bucketId).DeleteStorageFileRequest(deleteStorageFileRequest).IsMultipart(isMultipart).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `S3API.DeleteStorageFile``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | ID хранилища. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteStorageFileRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **deleteStorageFileRequest** | [**DeleteStorageFileRequest**](DeleteStorageFileRequest.md) |  | 
- **isMultipart** | **bool** | Это логическое значение, которое используется для обозначения multipart-загрузки. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteStorageSubdomains
 
 > AddStorageSubdomains200Response DeleteStorageSubdomains(ctx, bucketId).AddStorageSubdomainsRequest(addStorageSubdomainsRequest).Execute()
@@ -579,80 +361,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetStorageFilesList
-
-> GetStorageFilesList200Response GetStorageFilesList(ctx, bucketId).Prefix(prefix).IsMultipart(isMultipart).Execute()
-
-Получение списка файлов в хранилище по префиксу
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    bucketId := int32(1051) // int32 | ID хранилища.
-    prefix := "example" // string | Префикс для поиска файла. (optional)
-    isMultipart := true // bool | Это логическое значение, которое используется для обозначения multipart-загрузки. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.S3API.GetStorageFilesList(context.Background(), bucketId).Prefix(prefix).IsMultipart(isMultipart).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `S3API.GetStorageFilesList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetStorageFilesList`: GetStorageFilesList200Response
-    fmt.Fprintf(os.Stdout, "Response from `S3API.GetStorageFilesList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | ID хранилища. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetStorageFilesListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **prefix** | **string** | Префикс для поиска файла. | 
- **isMultipart** | **bool** | Это логическое значение, которое используется для обозначения multipart-загрузки. | 
-
-### Return type
-
-[**GetStorageFilesList200Response**](GetStorageFilesList200Response.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -983,76 +691,6 @@ Other parameters are passed through a pointer to a apiGetStoragesPresetsRequest 
 [[Back to README]](../README.md)
 
 
-## RenameStorageFile
-
-> RenameStorageFile(ctx, bucketId).RenameStorageFileRequest(renameStorageFileRequest).Execute()
-
-Переименование файла/директории в хранилище
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    bucketId := int32(1051) // int32 | ID хранилища.
-    renameStorageFileRequest := *openapiclient.NewRenameStorageFileRequest("new_filename", "old_filename") // RenameStorageFileRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.S3API.RenameStorageFile(context.Background(), bucketId).RenameStorageFileRequest(renameStorageFileRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `S3API.RenameStorageFile``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | ID хранилища. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRenameStorageFileRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **renameStorageFileRequest** | [**RenameStorageFileRequest**](RenameStorageFileRequest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## TransferStorage
 
 > TransferStorage(ctx).TransferStorageRequest(transferStorageRequest).Execute()
@@ -1254,78 +892,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UploadFileToStorage
-
-> UploadFileToStorage(ctx, bucketId).Files(files).Path(path).Execute()
-
-Загрузка файлов в хранилище
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    bucketId := int32(1051) // int32 | ID хранилища.
-    files := []*os.File{"TODO"} // []*os.File | 
-    path := "test1/tes2" // string | Путь до директории в хранилище (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.S3API.UploadFileToStorage(context.Background(), bucketId).Files(files).Path(path).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `S3API.UploadFileToStorage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**bucketId** | **int32** | ID хранилища. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUploadFileToStorageRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **files** | **[]*os.File** |  | 
- **path** | **string** | Путь до директории в хранилище | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

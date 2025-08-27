@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PlanId** | **float32** | ID списка дополнительных услуг выделенного сервера. | 
+**PlanId** | Pointer to **float32** | ID списка дополнительных услуг выделенного сервера. | [optional] 
 **PresetId** | **float32** | ID тарифа выделенного сервера. | 
 **OsId** | Pointer to **NullableFloat32** | ID операционной системы, которая будет установлена на выделенный сервер. | [optional] 
 **CpId** | Pointer to **NullableFloat32** | ID панели управления, которая будет установлена на выделенный сервер. | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCreateDedicatedServer
 
-`func NewCreateDedicatedServer(planId float32, presetId float32, paymentPeriod string, name string, ) *CreateDedicatedServer`
+`func NewCreateDedicatedServer(presetId float32, paymentPeriod string, name string, ) *CreateDedicatedServer`
 
 NewCreateDedicatedServer instantiates a new CreateDedicatedServer object
 This constructor will assign default values to properties that have it defined,
@@ -53,6 +53,11 @@ and a boolean to check if the value has been set.
 
 SetPlanId sets PlanId field to given value.
 
+### HasPlanId
+
+`func (o *CreateDedicatedServer) HasPlanId() bool`
+
+HasPlanId returns a boolean if a field has been set.
 
 ### GetPresetId
 

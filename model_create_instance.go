@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateInstance{}
 type CreateInstance struct {
 	// Название инстанса базы данных
 	Name string `json:"name"`
-	// Описанеие инстанса базы данных
+	// Описание инстанса базы данных
 	Description *string `json:"description,omitempty"`
 }
 

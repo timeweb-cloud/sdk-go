@@ -24,16 +24,22 @@ type DedicatedServerPresetDisk struct {
 	Description string `json:"description"`
 	// Количество дисков выделенного сервера.
 	Count float32 `json:"count"`
+	// Общий размер дисков выделенного сервера.
+	TotalSize float32 `json:"total_size"`
+	// Тип дисков выделенного сервера.
+	Type string `json:"type"`
 }
 
 // NewDedicatedServerPresetDisk instantiates a new DedicatedServerPresetDisk object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServerPresetDisk(description string, count float32) *DedicatedServerPresetDisk {
+func NewDedicatedServerPresetDisk(description string, count float32, totalSize float32, type_ string) *DedicatedServerPresetDisk {
 	this := DedicatedServerPresetDisk{}
 	this.Description = description
 	this.Count = count
+	this.TotalSize = totalSize
+	this.Type = type_
 	return &this
 }
 
@@ -93,6 +99,54 @@ func (o *DedicatedServerPresetDisk) SetCount(v float32) {
 	o.Count = v
 }
 
+// GetTotalSize returns the TotalSize field value
+func (o *DedicatedServerPresetDisk) GetTotalSize() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.TotalSize
+}
+
+// GetTotalSizeOk returns a tuple with the TotalSize field value
+// and a boolean to check if the value has been set.
+func (o *DedicatedServerPresetDisk) GetTotalSizeOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TotalSize, true
+}
+
+// SetTotalSize sets field value
+func (o *DedicatedServerPresetDisk) SetTotalSize(v float32) {
+	o.TotalSize = v
+}
+
+// GetType returns the Type field value
+func (o *DedicatedServerPresetDisk) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *DedicatedServerPresetDisk) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *DedicatedServerPresetDisk) SetType(v string) {
+	o.Type = v
+}
+
 func (o DedicatedServerPresetDisk) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,6 +159,8 @@ func (o DedicatedServerPresetDisk) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["description"] = o.Description
 	toSerialize["count"] = o.Count
+	toSerialize["total_size"] = o.TotalSize
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 

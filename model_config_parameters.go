@@ -18,7 +18,7 @@ import (
 // checks if the ConfigParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigParameters{}
 
-// ConfigParameters struct for ConfigParameters
+// ConfigParameters Параметры базы данных
 type ConfigParameters struct {
 	// Интервал между значениями столбцов с атрибутом `AUTO_INCREMENT` (`mysql5` | `mysql`).
 	AutoIncrementIncrement *string `json:"auto_increment_increment,omitempty"`

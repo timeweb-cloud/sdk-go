@@ -20,12 +20,15 @@ Name | Type | Description | Notes
 **SecretKey** | **string** | Секретный ключ доступа от хранилища. | 
 **MovedInQuarantineAt** | **NullableTime** | Дата перемещения в карантин. | 
 **StorageClass** | **string** | Класс хранилища. | 
+**ProjectId** | **float32** | ID проекта. | 
+**RateId** | **float32** | ID тарифа. | 
+**WebsiteConfig** | [**BucketWebsiteConfig**](BucketWebsiteConfig.md) |  | 
 
 ## Methods
 
 ### NewBucket
 
-`func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, ) *Bucket`
+`func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, projectId float32, rateId float32, websiteConfig BucketWebsiteConfig, ) *Bucket`
 
 NewBucket instantiates a new Bucket object
 This constructor will assign default values to properties that have it defined,
@@ -403,6 +406,66 @@ and a boolean to check if the value has been set.
 `func (o *Bucket) SetStorageClass(v string)`
 
 SetStorageClass sets StorageClass field to given value.
+
+
+### GetProjectId
+
+`func (o *Bucket) GetProjectId() float32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *Bucket) GetProjectIdOk() (*float32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *Bucket) SetProjectId(v float32)`
+
+SetProjectId sets ProjectId field to given value.
+
+
+### GetRateId
+
+`func (o *Bucket) GetRateId() float32`
+
+GetRateId returns the RateId field if non-nil, zero value otherwise.
+
+### GetRateIdOk
+
+`func (o *Bucket) GetRateIdOk() (*float32, bool)`
+
+GetRateIdOk returns a tuple with the RateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRateId
+
+`func (o *Bucket) SetRateId(v float32)`
+
+SetRateId sets RateId field to given value.
+
+
+### GetWebsiteConfig
+
+`func (o *Bucket) GetWebsiteConfig() BucketWebsiteConfig`
+
+GetWebsiteConfig returns the WebsiteConfig field if non-nil, zero value otherwise.
+
+### GetWebsiteConfigOk
+
+`func (o *Bucket) GetWebsiteConfigOk() (*BucketWebsiteConfig, bool)`
+
+GetWebsiteConfigOk returns a tuple with the WebsiteConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebsiteConfig
+
+`func (o *Bucket) SetWebsiteConfig(v BucketWebsiteConfig)`
+
+SetWebsiteConfig sets WebsiteConfig field to given value.
 
 
 

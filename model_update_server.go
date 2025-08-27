@@ -29,7 +29,7 @@ type UpdateServer struct {
 	PresetId *float32 `json:"preset_id,omitempty"`
 	// Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100.
 	Bandwidth *float32 `json:"bandwidth,omitempty"`
-	// Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным.
+	// Имя облачного сервера. Максимальная длина — 255 символов.
 	Name *string `json:"name,omitempty"`
 	// ID аватара сервера. Описание методов работы с аватарами появится позднее.
 	AvatarId *string `json:"avatar_id,omitempty"`

@@ -27,9 +27,14 @@ type CreateCluster struct {
 	Instance *CreateClusterInstance `json:"instance,omitempty"`
 	// Тип хеширования базы данных (mysql | postgres).
 	HashType *string `json:"hash_type,omitempty"`
-	// ID тарифа.
-	PresetId int32 `json:"preset_id"`
+	// ID тарифа. Нельзя передавать вместе с `configurator_id`
+	PresetId *int32 `json:"preset_id,omitempty"`
+	// ID конфигуратора. Нельзя передавать вместе с `preset_id`
+	ConfiguratorId *int32 `json:"configurator_id,omitempty"`
+	// ID проекта.
+	ProjectId *int32 `json:"project_id,omitempty"`
 	ConfigParameters *ConfigParameters `json:"config_parameters,omitempty"`
+	Replication *DbReplication `json:"replication,omitempty"`
 	Network *Network `json:"network,omitempty"`
 	// Описание кластера базы данных
 	Description *string `json:"description,omitempty"`
@@ -41,11 +46,10 @@ type CreateCluster struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCluster(name string, type_ DbType, presetId int32) *CreateCluster {
+func NewCreateCluster(name string, type_ DbType) *CreateCluster {
 	this := CreateCluster{}
 	this.Name = name
 	this.Type = type_
-	this.PresetId = presetId
 	return &this
 }
 
@@ -201,28 +205,100 @@ func (o *CreateCluster) SetHashType(v string) {
 	o.HashType = &v
 }
 
-// GetPresetId returns the PresetId field value
+// GetPresetId returns the PresetId field value if set, zero value otherwise.
 func (o *CreateCluster) GetPresetId() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.PresetId) {
 		var ret int32
 		return ret
 	}
-
-	return o.PresetId
+	return *o.PresetId
 }
 
-// GetPresetIdOk returns a tuple with the PresetId field value
+// GetPresetIdOk returns a tuple with the PresetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateCluster) GetPresetIdOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PresetId) {
 		return nil, false
 	}
-	return &o.PresetId, true
+	return o.PresetId, true
 }
 
-// SetPresetId sets field value
+// HasPresetId returns a boolean if a field has been set.
+func (o *CreateCluster) HasPresetId() bool {
+	if o != nil && !IsNil(o.PresetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresetId gets a reference to the given int32 and assigns it to the PresetId field.
 func (o *CreateCluster) SetPresetId(v int32) {
-	o.PresetId = v
+	o.PresetId = &v
+}
+
+// GetConfiguratorId returns the ConfiguratorId field value if set, zero value otherwise.
+func (o *CreateCluster) GetConfiguratorId() int32 {
+	if o == nil || IsNil(o.ConfiguratorId) {
+		var ret int32
+		return ret
+	}
+	return *o.ConfiguratorId
+}
+
+// GetConfiguratorIdOk returns a tuple with the ConfiguratorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetConfiguratorIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.ConfiguratorId) {
+		return nil, false
+	}
+	return o.ConfiguratorId, true
+}
+
+// HasConfiguratorId returns a boolean if a field has been set.
+func (o *CreateCluster) HasConfiguratorId() bool {
+	if o != nil && !IsNil(o.ConfiguratorId) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguratorId gets a reference to the given int32 and assigns it to the ConfiguratorId field.
+func (o *CreateCluster) SetConfiguratorId(v int32) {
+	o.ConfiguratorId = &v
+}
+
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *CreateCluster) GetProjectId() int32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret int32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetProjectIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *CreateCluster) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *CreateCluster) SetProjectId(v int32) {
+	o.ProjectId = &v
 }
 
 // GetConfigParameters returns the ConfigParameters field value if set, zero value otherwise.
@@ -255,6 +331,38 @@ func (o *CreateCluster) HasConfigParameters() bool {
 // SetConfigParameters gets a reference to the given ConfigParameters and assigns it to the ConfigParameters field.
 func (o *CreateCluster) SetConfigParameters(v ConfigParameters) {
 	o.ConfigParameters = &v
+}
+
+// GetReplication returns the Replication field value if set, zero value otherwise.
+func (o *CreateCluster) GetReplication() DbReplication {
+	if o == nil || IsNil(o.Replication) {
+		var ret DbReplication
+		return ret
+	}
+	return *o.Replication
+}
+
+// GetReplicationOk returns a tuple with the Replication field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetReplicationOk() (*DbReplication, bool) {
+	if o == nil || IsNil(o.Replication) {
+		return nil, false
+	}
+	return o.Replication, true
+}
+
+// HasReplication returns a boolean if a field has been set.
+func (o *CreateCluster) HasReplication() bool {
+	if o != nil && !IsNil(o.Replication) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplication gets a reference to the given DbReplication and assigns it to the Replication field.
+func (o *CreateCluster) SetReplication(v DbReplication) {
+	o.Replication = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
@@ -406,9 +514,20 @@ func (o CreateCluster) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HashType) {
 		toSerialize["hash_type"] = o.HashType
 	}
-	toSerialize["preset_id"] = o.PresetId
+	if !IsNil(o.PresetId) {
+		toSerialize["preset_id"] = o.PresetId
+	}
+	if !IsNil(o.ConfiguratorId) {
+		toSerialize["configurator_id"] = o.ConfiguratorId
+	}
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
+	}
 	if !IsNil(o.ConfigParameters) {
 		toSerialize["config_parameters"] = o.ConfigParameters
+	}
+	if !IsNil(o.Replication) {
+		toSerialize["replication"] = o.Replication
 	}
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network

@@ -7,6 +7,7 @@ api_account.go
 api_api_keys.go
 api_apps.go
 api_balancers.go
+api_container_registry.go
 api_databases.go
 api_dedicated_servers.go
 api_domains.go
@@ -72,6 +73,8 @@ docs/AvailableFrameworksBackendFrameworksInner.md
 docs/AvailableFrameworksFrontendFrameworksInner.md
 docs/Backup.md
 docs/Balancer.md
+docs/BalancerNetworksInner.md
+docs/BalancerNetworksInnerIpsInner.md
 docs/BalancersAPI.md
 docs/BaseError.md
 docs/BindFloatingIp.md
@@ -80,9 +83,15 @@ docs/Branch.md
 docs/Bucket.md
 docs/BucketDiskStats.md
 docs/BucketUser.md
+docs/BucketWebsiteConfig.md
+docs/BucketWebsiteConfigErrorPagesInner.md
 docs/CheckDomain200Response.md
 docs/ClusterEdit.md
 docs/ClusterIn.md
+docs/ClusterInClusterNetworkCidr.md
+docs/ClusterInConfiguration.md
+docs/ClusterInMaintenanceSlot.md
+docs/ClusterInOidcProvider.md
 docs/ClusterOut.md
 docs/ClusterResponse.md
 docs/Clusterk8s.md
@@ -90,7 +99,9 @@ docs/ClustersResponse.md
 docs/Commit.md
 docs/ComponentsSchemasBaseError.md
 docs/ConfigParameters.md
-docs/CopyStorageFileRequest.md
+docs/ContainerRegistryAPI.md
+docs/ContainerRegistryPresetsInner.md
+docs/ContainerRegistryRepositoriesInner.md
 docs/CreateAdmin.md
 docs/CreateApiKey.md
 docs/CreateApp.md
@@ -120,7 +131,6 @@ docs/CreateDomainMailboxRequest.md
 docs/CreateDomainRequest201Response.md
 docs/CreateFloatingIp.md
 docs/CreateFloatingIp201Response.md
-docs/CreateFolderInStorageRequest.md
 docs/CreateInstance.md
 docs/CreateKey201Response.md
 docs/CreateKeyRequest.md
@@ -142,6 +152,7 @@ docs/CreateServerDiskRequest.md
 docs/CreateServerNetwork.md
 docs/CreateStorage201Response.md
 docs/CreateStorageRequest.md
+docs/CreateStorageRequestConfigurator.md
 docs/CreateToken201Response.md
 docs/CreateVPC201Response.md
 docs/CreateVpc.md
@@ -149,7 +160,7 @@ docs/CreatedApiKey.md
 docs/DatabaseAdmin.md
 docs/DatabaseAdminInstancesInner.md
 docs/DatabaseCluster.md
-docs/DatabaseClusterDiskStats.md
+docs/DatabaseClusterDisk.md
 docs/DatabaseClusterNetworksInner.md
 docs/DatabaseClusterNetworksInnerIpsInner.md
 docs/DatabaseInstance.md
@@ -158,6 +169,7 @@ docs/DatabaseTypeRequirements.md
 docs/DatabasesAPI.md
 docs/Db.md
 docs/DbDiskStats.md
+docs/DbReplication.md
 docs/DbType.md
 docs/DedicatedServer.md
 docs/DedicatedServerAdditionalService.md
@@ -178,7 +190,6 @@ docs/DeleteServer200Response.md
 docs/DeleteServerIPRequest.md
 docs/DeleteServiceResponse.md
 docs/DeleteStorage200Response.md
-docs/DeleteStorageFileRequest.md
 docs/Deploy.md
 docs/DeploySettingsInner.md
 docs/DeployStatus.md
@@ -296,7 +307,6 @@ docs/GetServerStatisticsNew200Response.md
 docs/GetServers200Response.md
 docs/GetServersPresets200Response.md
 docs/GetSoftware200Response.md
-docs/GetStorageFilesList200Response.md
 docs/GetStorageSubdomains200Response.md
 docs/GetStorageTransferStatus200Response.md
 docs/GetStorageUsers200Response.md
@@ -319,6 +329,7 @@ docs/ImageUrlAuth.md
 docs/ImageUrlIn.md
 docs/ImagesAPI.md
 docs/ImagesOutResponse.md
+docs/IncreaseNodes.md
 docs/Invoice.md
 docs/K8SVersionsResponse.md
 docs/KubernetesAPI.md
@@ -333,6 +344,7 @@ docs/MailboxForwardingOutgoing.md
 docs/MailboxSpamFilter.md
 docs/MasterPresetOutApi.md
 docs/Meta.md
+docs/Meta1.md
 docs/MountNetworkDrive.md
 docs/Network.md
 docs/NetworkDrive.md
@@ -343,7 +355,6 @@ docs/NetworkDrivePresetWrite.md
 docs/NetworkDriveServiceListInner.md
 docs/NetworkDriversResponse.md
 docs/NetworkDrivesAPI.md
-docs/NodeCount.md
 docs/NodeGroupIn.md
 docs/NodeGroupInConfiguration.md
 docs/NodeGroupOut.md
@@ -369,10 +380,18 @@ docs/ProjectsAPI.md
 docs/Provider.md
 docs/Providers.md
 docs/Quota.md
+docs/ReduceNodes.md
 docs/RefreshApiKey.md
+docs/RegistriesResponse.md
+docs/RegistryEdit.md
+docs/RegistryIn.md
+docs/RegistryInConfiguration.md
+docs/RegistryOut.md
+docs/RegistryOutDiskStats.md
+docs/RegistryResponse.md
 docs/RemoveCountries.md
 docs/RemoveIps.md
-docs/RenameStorageFileRequest.md
+docs/RepositoriesResponse.md
 docs/Repository.md
 docs/Resource.md
 docs/ResourceTransfer.md
@@ -381,12 +400,11 @@ docs/Resources.md
 docs/ResourcesResponse.md
 docs/Rule.md
 docs/S3API.md
-docs/S3Object.md
-docs/S3ObjectOwner.md
 docs/S3Subdomain.md
 docs/SSHAPI.md
 docs/SchemasBaseError.md
 docs/SchemasMeta.md
+docs/SchemasPresetsResponse.md
 docs/ServerBackup.md
 docs/ServerDisk.md
 docs/ServerIp.md
@@ -411,6 +429,7 @@ docs/SshKeyUsedByInner.md
 docs/Status.md
 docs/StatusCompanyInfo.md
 docs/Subdomain.md
+docs/Tags.md
 docs/TopLevelDomain.md
 docs/TopLevelDomainAllowedBuyPeriodsInner.md
 docs/TransferStatus.md
@@ -449,6 +468,7 @@ docs/UpdateServerNATRequest.md
 docs/UpdateServerOSBootModeRequest.md
 docs/UpdateSettings.md
 docs/UpdateStorageRequest.md
+docs/UpdateStorageRequestConfigurator.md
 docs/UpdateStorageUser200Response.md
 docs/UpdateStorageUserRequest.md
 docs/UpdateToken200Response.md
@@ -518,6 +538,8 @@ model_available_frameworks_backend_frameworks_inner.go
 model_available_frameworks_frontend_frameworks_inner.go
 model_backup.go
 model_balancer.go
+model_balancer_networks_inner.go
+model_balancer_networks_inner_ips_inner.go
 model_base_error.go
 model_bind_floating_ip.go
 model_bonus.go
@@ -525,9 +547,15 @@ model_branch.go
 model_bucket.go
 model_bucket_disk_stats.go
 model_bucket_user.go
+model_bucket_website_config.go
+model_bucket_website_config_error_pages_inner.go
 model_check_domain_200_response.go
 model_cluster_edit.go
 model_cluster_in.go
+model_cluster_in_cluster_network_cidr.go
+model_cluster_in_configuration.go
+model_cluster_in_maintenance_slot.go
+model_cluster_in_oidc_provider.go
 model_cluster_out.go
 model_cluster_response.go
 model_clusterk8s.go
@@ -535,7 +563,8 @@ model_clusters_response.go
 model_commit.go
 model_components_schemas_base_error.go
 model_config_parameters.go
-model_copy_storage_file_request.go
+model_container_registry_presets_inner.go
+model_container_registry_repositories_inner.go
 model_create_admin.go
 model_create_api_key.go
 model_create_app.go
@@ -565,7 +594,6 @@ model_create_domain_mailbox_request.go
 model_create_domain_request_201_response.go
 model_create_floating_ip.go
 model_create_floating_ip_201_response.go
-model_create_folder_in_storage_request.go
 model_create_instance.go
 model_create_key_201_response.go
 model_create_key_request.go
@@ -587,6 +615,7 @@ model_create_server_disk_request.go
 model_create_server_network.go
 model_create_storage_201_response.go
 model_create_storage_request.go
+model_create_storage_request_configurator.go
 model_create_token_201_response.go
 model_create_vpc.go
 model_create_vpc_201_response.go
@@ -594,7 +623,7 @@ model_created_api_key.go
 model_database_admin.go
 model_database_admin_instances_inner.go
 model_database_cluster.go
-model_database_cluster_disk_stats.go
+model_database_cluster_disk.go
 model_database_cluster_networks_inner.go
 model_database_cluster_networks_inner_ips_inner.go
 model_database_instance.go
@@ -602,6 +631,7 @@ model_database_type.go
 model_database_type_requirements.go
 model_db.go
 model_db_disk_stats.go
+model_db_replication.go
 model_db_type.go
 model_dedicated_server.go
 model_dedicated_server_additional_service.go
@@ -621,7 +651,6 @@ model_delete_server_200_response.go
 model_delete_server_ip_request.go
 model_delete_service_response.go
 model_delete_storage_200_response.go
-model_delete_storage_file_request.go
 model_deploy.go
 model_deploy_settings_inner.go
 model_deploy_status.go
@@ -736,7 +765,6 @@ model_get_server_statistics_new_200_response.go
 model_get_servers_200_response.go
 model_get_servers_presets_200_response.go
 model_get_software_200_response.go
-model_get_storage_files_list_200_response.go
 model_get_storage_subdomains_200_response.go
 model_get_storage_transfer_status_200_response.go
 model_get_storage_users_200_response.go
@@ -758,6 +786,7 @@ model_image_update_api.go
 model_image_url_auth.go
 model_image_url_in.go
 model_images_out_response.go
+model_increase_nodes.go
 model_invoice.go
 model_k8_s_versions_response.go
 model_location.go
@@ -769,6 +798,7 @@ model_mailbox_forwarding_outgoing.go
 model_mailbox_spam_filter.go
 model_master_preset_out_api.go
 model_meta.go
+model_meta_1.go
 model_mount_network_drive.go
 model_network.go
 model_network_drive.go
@@ -778,7 +808,6 @@ model_network_drive_preset_read.go
 model_network_drive_preset_write.go
 model_network_drive_service_list_inner.go
 model_network_drivers_response.go
-model_node_count.go
 model_node_group_in.go
 model_node_group_in_configuration.go
 model_node_group_out.go
@@ -803,10 +832,18 @@ model_project_resource.go
 model_provider.go
 model_providers.go
 model_quota.go
+model_reduce_nodes.go
 model_refresh_api_key.go
+model_registries_response.go
+model_registry_edit.go
+model_registry_in.go
+model_registry_in_configuration.go
+model_registry_out.go
+model_registry_out_disk_stats.go
+model_registry_response.go
 model_remove_countries.go
 model_remove_ips.go
-model_rename_storage_file_request.go
+model_repositories_response.go
 model_repository.go
 model_resource.go
 model_resource_transfer.go
@@ -814,11 +851,10 @@ model_resource_type.go
 model_resources.go
 model_resources_response.go
 model_rule.go
-model_s3_object.go
-model_s3_object_owner.go
 model_s3_subdomain.go
 model_schemas_base_error.go
 model_schemas_meta.go
+model_schemas_presets_response.go
 model_server_backup.go
 model_server_disk.go
 model_server_ip.go
@@ -842,6 +878,7 @@ model_ssh_key_used_by_inner.go
 model_status.go
 model_status_company_info.go
 model_subdomain.go
+model_tags.go
 model_top_level_domain.go
 model_top_level_domain_allowed_buy_periods_inner.go
 model_transfer_status.go
@@ -879,6 +916,7 @@ model_update_server_nat_request.go
 model_update_server_os_boot_mode_request.go
 model_update_settings.go
 model_update_storage_request.go
+model_update_storage_request_configurator.go
 model_update_storage_user_200_response.go
 model_update_storage_user_request.go
 model_update_token_200_response.go
@@ -905,6 +943,7 @@ test/api_account_test.go
 test/api_api_keys_test.go
 test/api_apps_test.go
 test/api_balancers_test.go
+test/api_container_registry_test.go
 test/api_databases_test.go
 test/api_dedicated_servers_test.go
 test/api_domains_test.go

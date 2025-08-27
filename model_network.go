@@ -18,7 +18,7 @@ import (
 // checks if the Network type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Network{}
 
-// Network struct for Network
+// Network Сеть
 type Network struct {
 	// ID сети.
 	Id string `json:"id"`

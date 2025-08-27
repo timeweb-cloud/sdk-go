@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 **Disk** | **float32** | Описание диска хранилища. | 
 **Price** | **float32** | Стоимость тарифа хранилища. | 
 **Location** | **string** | Географическое расположение тарифа. | 
+**Tags** | **[]string** | Теги тарифа. | 
+**StorageClass** | **string** | Класс хранилища. | 
 
 ## Methods
 
 ### NewPresetsStorage
 
-`func NewPresetsStorage(id float32, description string, descriptionShort string, disk float32, price float32, location string, ) *PresetsStorage`
+`func NewPresetsStorage(id float32, description string, descriptionShort string, disk float32, price float32, location string, tags []string, storageClass string, ) *PresetsStorage`
 
 NewPresetsStorage instantiates a new PresetsStorage object
 This constructor will assign default values to properties that have it defined,
@@ -148,6 +150,46 @@ and a boolean to check if the value has been set.
 `func (o *PresetsStorage) SetLocation(v string)`
 
 SetLocation sets Location field to given value.
+
+
+### GetTags
+
+`func (o *PresetsStorage) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *PresetsStorage) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *PresetsStorage) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+
+### GetStorageClass
+
+`func (o *PresetsStorage) GetStorageClass() string`
+
+GetStorageClass returns the StorageClass field if non-nil, zero value otherwise.
+
+### GetStorageClassOk
+
+`func (o *PresetsStorage) GetStorageClassOk() (*string, bool)`
+
+GetStorageClassOk returns a tuple with the StorageClass field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClass
+
+`func (o *PresetsStorage) SetStorageClass(v string)`
+
+SetStorageClass sets StorageClass field to given value.
 
 
 

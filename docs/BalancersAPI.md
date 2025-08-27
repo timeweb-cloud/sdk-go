@@ -111,7 +111,7 @@ import (
 )
 
 func main() {
-    createBalancer := *openapiclient.NewCreateBalancer("Cute Quail", "roundrobin", true, true, true, true, "https", float32(80), "/", float32(10), float32(5), float32(3), float32(2), float32(5)) // CreateBalancer | 
+    createBalancer := *openapiclient.NewCreateBalancer("Cute Quail", "roundrobin", true, true, true, true, "https", float32(80), "/", float32(10), float32(5), float32(3), float32(2), float32(391)) // CreateBalancer | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

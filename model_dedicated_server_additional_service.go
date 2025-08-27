@@ -30,7 +30,7 @@ type DedicatedServerAdditionalService struct {
 	Description string `json:"description"`
 	// Краткое описание дополнительной услуги выделенного сервера.
 	ShortDescription string `json:"short_description"`
-	// Уникально имя дополнительной услуги выделенного сервера.
+	// Уникальное имя дополнительной услуги выделенного сервера.
 	Name string `json:"name"`
 }
 

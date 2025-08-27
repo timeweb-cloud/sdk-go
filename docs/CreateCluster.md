@@ -9,8 +9,11 @@ Name | Type | Description | Notes
 **Admin** | Pointer to [**CreateClusterAdmin**](CreateClusterAdmin.md) |  | [optional] 
 **Instance** | Pointer to [**CreateClusterInstance**](CreateClusterInstance.md) |  | [optional] 
 **HashType** | Pointer to **string** | Тип хеширования базы данных (mysql | postgres). | [optional] 
-**PresetId** | **int32** | ID тарифа. | 
+**PresetId** | Pointer to **int32** | ID тарифа. Нельзя передавать вместе с &#x60;configurator_id&#x60; | [optional] 
+**ConfiguratorId** | Pointer to **int32** | ID конфигуратора. Нельзя передавать вместе с &#x60;preset_id&#x60; | [optional] 
+**ProjectId** | Pointer to **int32** | ID проекта. | [optional] 
 **ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
+**Replication** | Pointer to [**DbReplication**](DbReplication.md) |  | [optional] 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
 **Description** | Pointer to **string** | Описание кластера базы данных | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
@@ -20,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewCreateCluster
 
-`func NewCreateCluster(name string, type_ DbType, presetId int32, ) *CreateCluster`
+`func NewCreateCluster(name string, type_ DbType, ) *CreateCluster`
 
 NewCreateCluster instantiates a new CreateCluster object
 This constructor will assign default values to properties that have it defined,
@@ -169,6 +172,61 @@ and a boolean to check if the value has been set.
 
 SetPresetId sets PresetId field to given value.
 
+### HasPresetId
+
+`func (o *CreateCluster) HasPresetId() bool`
+
+HasPresetId returns a boolean if a field has been set.
+
+### GetConfiguratorId
+
+`func (o *CreateCluster) GetConfiguratorId() int32`
+
+GetConfiguratorId returns the ConfiguratorId field if non-nil, zero value otherwise.
+
+### GetConfiguratorIdOk
+
+`func (o *CreateCluster) GetConfiguratorIdOk() (*int32, bool)`
+
+GetConfiguratorIdOk returns a tuple with the ConfiguratorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguratorId
+
+`func (o *CreateCluster) SetConfiguratorId(v int32)`
+
+SetConfiguratorId sets ConfiguratorId field to given value.
+
+### HasConfiguratorId
+
+`func (o *CreateCluster) HasConfiguratorId() bool`
+
+HasConfiguratorId returns a boolean if a field has been set.
+
+### GetProjectId
+
+`func (o *CreateCluster) GetProjectId() int32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *CreateCluster) GetProjectIdOk() (*int32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *CreateCluster) SetProjectId(v int32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *CreateCluster) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
 
 ### GetConfigParameters
 
@@ -194,6 +252,31 @@ SetConfigParameters sets ConfigParameters field to given value.
 `func (o *CreateCluster) HasConfigParameters() bool`
 
 HasConfigParameters returns a boolean if a field has been set.
+
+### GetReplication
+
+`func (o *CreateCluster) GetReplication() DbReplication`
+
+GetReplication returns the Replication field if non-nil, zero value otherwise.
+
+### GetReplicationOk
+
+`func (o *CreateCluster) GetReplicationOk() (*DbReplication, bool)`
+
+GetReplicationOk returns a tuple with the Replication field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplication
+
+`func (o *CreateCluster) SetReplication(v DbReplication)`
+
+SetReplication sets Replication field to given value.
+
+### HasReplication
+
+`func (o *CreateCluster) HasReplication() bool`
+
+HasReplication returns a boolean if a field has been set.
 
 ### GetNetwork
 

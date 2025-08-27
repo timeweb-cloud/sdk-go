@@ -182,6 +182,10 @@ tags:
     \ выделенные серверы, балансировщики нагрузки, базы данных и т.д.) таким образ\
     ом, чтобы они соответствовали приложениям, которые вы размещаете в облаке."
   name: Projects
+- description: "Реестр контейнеров (Container Registry) — это хранилище для Docker-о\
+    бразов. Он позволяет загружать, хранить и распространять образы, которые испол\
+    ьзуются при запуске контейнеров в Kubernetes и других окружениях."
+  name: Container Registry
 - description: "Токены API — это JWT-токены, с помощью которых вы можете получить\
     \ доступ к управлению вашей облачной инфраструктурой через API."
   name: API keys
@@ -10528,7 +10532,7 @@ paths:
         schema:
           type: integer
         style: simple
-      - description: ID резевной копии
+      - description: ID резервной копии
         explode: false
         in: path
         name: backup_id
@@ -10668,7 +10672,7 @@ paths:
         schema:
           type: integer
         style: simple
-      - description: ID резевной копии
+      - description: ID резервной копии
         explode: false
         in: path
         name: backup_id
@@ -10811,7 +10815,7 @@ paths:
         schema:
           type: integer
         style: simple
-      - description: ID резевной копии
+      - description: ID резервной копии
         explode: false
         in: path
         name: backup_id
@@ -13949,7 +13953,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NodeCount'
+              $ref: '#/components/schemas/ReduceNodes'
         required: true
       responses:
         "204":
@@ -14325,7 +14329,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NodeCount'
+              $ref: '#/components/schemas/IncreaseNodes'
         required: true
       responses:
         "201":
@@ -15157,6 +15161,999 @@ paths:
           \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
           import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
           \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/k8s/presets\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/container-registry:
+    get:
+      description: "Чтобы получить список реестров, отправьте GET-запрос на `/api/v1/container-registry`."
+      operationId: getRegistries
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response_id: 68c76353-f100-455b-a4e9-52734f877861
+                container_registry_list:
+                - id: 1
+                  name: b3dfb4d9-ambitious-waxwing
+                  description: new registry
+                  preset_id: 1939
+                  configurator_id: 0
+                  project_id: 1
+                  created_at: 2025-06-18T09:41:08.000Z
+                  updated_at: 2025-06-18T09:41:08.000Z
+                  disk_stats:
+                    size: 5
+                    used: 0
+              schema:
+                $ref: '#/components/schemas/RegistriesResponse'
+          description: Список реестров
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка реестров контейнеров
+      tags:
+      - Container Registry
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/container-registry"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/container-registry', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/container-registry', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/container-registry', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/container-registry');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/container-registry\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/container-registry\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: "Чтобы создать реестр, отправьте POST-запрос на `/api/v1/container-registry`."
+      operationId: createRegistry
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistryIn'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                response_id: ff694fd9-0b84-4ce2-99ce-467c79b3b06d
+                container_registry:
+                  id: 1047
+                  name: b3dfb4d9-ambitious-waxwing
+                  description: new registry
+                  preset_id: 1939
+                  configurator_id: 0
+                  project_id: 1
+                  created_at: 2025-06-18T08:39:16.000Z
+                  updated_at: 2025-06-18T08:39:16.000Z
+                  disk_stats:
+                    size: 5
+                    used: 0
+              schema:
+                $ref: '#/components/schemas/RegistryResponse'
+          description: Информация о реестре
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание реестра
+      tags:
+      - Container Registry
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"name": "b3dfb4d9-ambitious-waxwing", "preset_id": 1939}' \
+            "https://api.timeweb.cloud/api/v1/container-registry"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/container-registry', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{"name": "b3dfb4d9-ambitious-waxwing", "preset_id": 1939}',
+              body: JSON.stringify({
+                  'name': 'b3dfb4d9-ambitious-waxwing',
+                  'preset_id': 1939
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/container-registry',
+              // '{"name": "b3dfb4d9-ambitious-waxwing", "preset_id": 1939}',
+              {
+                  'name': 'b3dfb4d9-ambitious-waxwing',
+                  'preset_id': 1939
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              # Already added when you pass json=
+              # 'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'b3dfb4d9-ambitious-waxwing',
+              'preset_id': 1939,
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/container-registry', headers=headers, json=json_data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/container-registry');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"name": "b3dfb4d9-ambitious-waxwing", "preset_id": 1939}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"name\": \"b3dfb4d9-ambitious-waxwing\"\
+          , \"preset_id\": 1939}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/container-registry\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/container-registry\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\\"name\\\": \\\"b3dfb4d9-ambitious-waxwing\\\", \\\"preset_id\\\": 1939}\"\
+          );\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/container-registry/{registry_id}:
+    delete:
+      description: "Чтобы удалить реестр, отправьте DELETE-запрос в `/api/v1/container-registry/{registry_id}`"
+      operationId: deleteRegistry
+      parameters:
+      - description: ID реестра
+        explode: false
+        in: path
+        name: registry_id
+        required: true
+        schema:
+          description: ID реестра
+          title: Registry Id
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Реестр удален
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление реестра
+      tags:
+      - Container Registry
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/container-registry/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/container-registry/1', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/container-registry/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/container-registry/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/container-registry/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/container-registry/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/container-registry/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: "Чтобы получить информацию о реестре, отправьте GET-запрос в `/api/v1/container-registry/{registry_id}`"
+      operationId: getRegistry
+      parameters:
+      - description: ID реестра
+        explode: false
+        in: path
+        name: registry_id
+        required: true
+        schema:
+          description: ID реестр
+          title: Registry Id
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response_id: 68c76353-f100-455b-a4e9-52734f877861
+                container_registry:
+                  id: 1
+                  name: b3dfb4d9-ambitious-waxwing
+                  description: new registry
+                  preset_id: 1939
+                  configurator_id: 0
+                  project_id: 1
+                  created_at: 2025-06-18T09:41:08.000Z
+                  updated_at: 2025-06-18T09:41:08.000Z
+                  disk_stats:
+                    size: 5
+                    used: 0
+              schema:
+                $ref: '#/components/schemas/RegistryResponse'
+          description: Информация о реестре
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение информации о реестре
+      tags:
+      - Container Registry
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/container-registry/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/container-registry/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/container-registry/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/container-registry/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/container-registry/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/container-registry/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/container-registry/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    patch:
+      description: "Чтобы обновить информацию о реестре, отправьте PATCH-запрос в\
+        \ `/api/v1/container-registry/{registry_id}`"
+      operationId: updateRegistry
+      parameters:
+      - description: ID реестра
+        explode: false
+        in: path
+        name: registry_id
+        required: true
+        schema:
+          description: ID реестра
+          title: Registry Id
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistryEdit'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response_id: 68c76353-f100-455b-a4e9-52734f877861
+                container_registry:
+                  id: 1
+                  name: b3dfb4d9-ambitious-waxwing
+                  description: new registry
+                  preset_id: 1939
+                  configurator_id: 0
+                  project_id: 1
+                  created_at: 2025-06-18T09:41:08.000Z
+                  updated_at: 2025-06-18T09:41:08.000Z
+                  disk_stats:
+                    size: 5
+                    used: 0
+              schema:
+                $ref: '#/components/schemas/RegistryResponse'
+          description: Информация о реестре
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Обновление информации о реестре
+      tags:
+      - Container Registry
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"description": "new description"}' \
+            "https://api.timeweb.cloud/api/v1/container-registry/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/container-registry/1', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{"description": "new description"}',
+              body: JSON.stringify({
+                  'description': 'new description'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/container-registry/1',
+              // '{"description": "new description"}',
+              {
+                  'description': 'new description'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              # Already added when you pass json=
+              # 'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'description': 'new description',
+          }
+
+          response = requests.patch('https://api.timeweb.cloud/api/v1/container-registry/1', headers=headers, json=json_data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/container-registry/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"description": "new description"}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"description\": \"new description\"}`)\n\
+          \treq, err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/container-registry/1\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/container-registry/1\");\n\t\t\
+          HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"description\\\": \\\"new description\\\"}\");\n\t\
+          \twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/container-registry/presets:
+    get:
+      description: "Чтобы получить список тарифов, отправьте GET-запрос в `/api/v1/container-registry/presets`."
+      operationId: getRegistryPresets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schemas-PresetsResponse'
+          description: Список тарифов
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка тарифов
+      tags:
+      - Container Registry
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/container-registry/presets"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/container-registry/presets', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/container-registry/presets', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/container-registry/presets', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/container-registry/presets');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/container-registry/presets\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/container-registry/presets\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/container-registry/{registry_id}/repositories:
+    get:
+      description: "Чтобы получить список репозиториев, отправьте GET-запрос в `/api/v1/container-registry/{registry_id}/repositories`."
+      operationId: getRegistryRepositories
+      parameters:
+      - description: ID реестра
+        explode: false
+        in: path
+        name: registry_id
+        required: true
+        schema:
+          description: ID реестра
+          title: Registry Id
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoriesResponse'
+          description: Список репозиториев
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка репозиториев
+      tags:
+      - Container Registry
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/container-registry/1/repositories"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/container-registry/1/repositories', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/container-registry/1/repositories', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/container-registry/1/repositories', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/container-registry/1/repositories');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/container-registry/1/repositories\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/container-registry/1/repositories\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
           Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
@@ -17027,7 +18024,7 @@ paths:
           type: integer
         style: simple
       - description: "Дата начала сбора статистики. Строка в формате ISO 8061, зак\
-          одированная в ASCII, пример: `2023-05-25%202023-05-25T14%3A35%3A38`"
+          одированная в ASCII, пример: `2023-05-25T14%3A35%3A38`"
         explode: true
         in: query
         name: date_from
@@ -17036,7 +18033,7 @@ paths:
           type: string
         style: form
       - description: "Дата окончания сбора статистики. Строка в формате ISO 8061,\
-          \ закодированная в ASCII, пример: `2023-05-26%202023-05-25T14%3A35%3A38`"
+          \ закодированная в ASCII, пример: `2023-05-26T14%3A35%3A38`"
         explode: true
         in: query
         name: date_to
@@ -26756,1070 +27753,6 @@ paths:
           \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/storages/buckets/{bucket_id}/object-manager/list:
-    get:
-      description: "Чтобы получить список файлов в хранилище по префиксу, отправьт\
-        е GET-запрос на `/api/v1/storages/buckets/{bucket_id}/object-manager/list`."
-      operationId: getStorageFilesList
-      parameters:
-      - description: ID хранилища.
-        explode: false
-        in: path
-        name: bucket_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      - description: Префикс для поиска файла.
-        explode: true
-        in: query
-        name: prefix
-        required: false
-        schema:
-          example: example
-          type: string
-        style: form
-      - description: "Это логическое значение, которое используется для обозначени\
-          я multipart-загрузки."
-        explode: true
-        in: query
-        name: is_multipart
-        required: false
-        schema:
-          example: true
-          type: boolean
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getStorageFilesList_200_response'
-          description: Объект JSON c ключом `files`
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Получение списка файлов в хранилище по префиксу
-      tags:
-      - S3
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X GET \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/list"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/list', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.get('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/list', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.get('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/list', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/list');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/list\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/list\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/storages/buckets/{bucket_id}/object-manager/rename:
-    post:
-      description: "Чтобы переименовать файл/директорию в хранилище, отправьте POST-з\
-        апрос на `/api/v1/storages/buckets/{bucket_id}/object-manager/rename`."
-      operationId: renameStorageFile
-      parameters:
-      - description: ID хранилища.
-        explode: false
-        in: path
-        name: bucket_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/renameStorageFile_request'
-        required: true
-      responses:
-        "204":
-          description: Файл успешно переименован
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Переименование файла/директории в хранилище
-      tags:
-      - S3
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -d '{"new_filename":"new_name","old_filename":"old_name"}' \
-            "https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              body: JSON.stringify({
-                  'new_filename': 'new_name',
-                  'old_filename': 'old_name'
-              })
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename',
-              {
-                  'new_filename': 'new_name',
-                  'old_filename': 'old_name'
-              },
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          json_data = {
-              'new_filename': 'new_name',
-              'old_filename': 'old_name',
-          }
-
-          response = requests.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename',
-              headers=headers,
-              json=json_data,
-          )
-
-          # Note: json_data will not be serialized by requests
-          # exactly as it was in the original request.
-          #data = '{"new_filename":"new_name","old_filename":"old_name"}'
-          #response = requests.post(
-          #    'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename',
-          #    headers=headers,
-          #    data=data,
-          #)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"new_filename":"new_name","old_filename":"old_name"}');
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{\"new_filename\":\"new_name\",\"old_filename\"\
-          :\"old_name\"}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename\"\
-          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
-          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
-          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
-          \ URL(\"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/rename\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
-          \t\twriter.write(\"{\\\"new_filename\\\":\\\"new_name\\\",\\\"old_filename\\\
-          \":\\\"old_name\\\"}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\t\
-          httpConn.getOutputStream().close();\n\n\t\tInputStream responseStream =\
-          \ httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
-          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
-          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/storages/buckets/{bucket_id}/object-manager/remove:
-    delete:
-      description: "Чтобы удалить файл или директорию с вложениями, отправьте DELETE-з\
-        апрос на `/api/v1/storages/buckets/{bucket_id}/object-manager/remove`."
-      operationId: deleteStorageFile
-      parameters:
-      - description: ID хранилища.
-        explode: false
-        in: path
-        name: bucket_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      - description: "Это логическое значение, которое используется для обозначени\
-          я multipart-загрузки."
-        explode: true
-        in: query
-        name: is_multipart
-        required: false
-        schema:
-          example: true
-          type: boolean
-        style: form
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteStorageFile_request'
-        required: true
-      responses:
-        "204":
-          description: Задание на удаление отправлено
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Удаление файла/директории в хранилище
-      tags:
-      - S3
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X DELETE \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -d '{"source":["test1/test2"]}' \
-            "https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove', {
-              method: 'DELETE',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              body: JSON.stringify({
-                  'source': [
-                      'test1/test2'
-                  ]
-              })
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.delete('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              },
-              data: {
-                  'source': [
-                      'test1/test2'
-                  ]
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          json_data = {
-              'source': [
-                  'test1/test2',
-              ],
-          }
-
-          response = requests.delete(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove',
-              headers=headers,
-              json=json_data,
-          )
-
-          # Note: json_data will not be serialized by requests
-          # exactly as it was in the original request.
-          #data = '{"source":["test1/test2"]}'
-          #response = requests.delete(
-          #    'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove',
-          #    headers=headers,
-          #    data=data,
-          #)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"source":["test1/test2"]}');
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{\"source\":[\"test1/test2\"]}`)\n\treq,\
-          \ err := http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove\"\
-          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
-          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
-          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
-          \ URL(\"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/remove\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
-          \t\twriter.write(\"{\\\"source\\\":[\\\"test1/test2\\\"]}\");\n\t\twriter.flush();\n\
-          \t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
-          \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
-          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
-          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/storages/buckets/{bucket_id}/object-manager/copy:
-    post:
-      description: "Чтобы скопировать файла или директорию с вложениями, отправьте\
-        \ POST-запрос на `/api/v1/storages/buckets/{bucket_id}/object-manager/copy`."
-      operationId: copyStorageFile
-      parameters:
-      - description: ID хранилища.
-        explode: false
-        in: path
-        name: bucket_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/copyStorageFile_request'
-        required: true
-      responses:
-        "204":
-          description: Задание на копирование отправлено
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Копирование файла/директории в хранилище
-      tags:
-      - S3
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -d '{"destination":"new_path","source":["test1/test2"]}' \
-            "https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              body: JSON.stringify({
-                  'destination': 'new_path',
-                  'source': [
-                      'test1/test2'
-                  ]
-              })
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy',
-              {
-                  'destination': 'new_path',
-                  'source': [
-                      'test1/test2'
-                  ]
-              },
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          json_data = {
-              'destination': 'new_path',
-              'source': [
-                  'test1/test2',
-              ],
-          }
-
-          response = requests.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy',
-              headers=headers,
-              json=json_data,
-          )
-
-          # Note: json_data will not be serialized by requests
-          # exactly as it was in the original request.
-          #data = '{"destination":"new_path","source":["test1/test2"]}'
-          #response = requests.post(
-          #    'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy',
-          #    headers=headers,
-          #    data=data,
-          #)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"destination":"new_path","source":["test1/test2"]}');
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{\"destination\":\"new_path\",\"source\"\
-          :[\"test1/test2\"]}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy\"\
-          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
-          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
-          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
-          \ URL(\"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/copy\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
-          \t\twriter.write(\"{\\\"destination\\\":\\\"new_path\\\",\\\"source\\\"\
-          :[\\\"test1/test2\\\"]}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\
-          \thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
-          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
-          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
-          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/storages/buckets/{bucket_id}/object-manager/upload:
-    post:
-      description: "Чтобы загрузить файлы в хранилище, отправьте POST-запрос на `/api/v1/storages/buckets/{bucket_id}/object-manager/upload`."
-      operationId: uploadFileToStorage
-      parameters:
-      - description: ID хранилища.
-        explode: false
-        in: path
-        name: bucket_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      - description: Путь до директории в хранилище
-        explode: true
-        in: query
-        name: path
-        required: false
-        schema:
-          example: test1/tes2
-          type: string
-        style: form
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/uploadFileToStorage_request'
-        required: true
-      responses:
-        "204":
-          description: Файл успешно загружен
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Загрузка файлов в хранилище
-      tags:
-      - S3
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: multipart/form-data" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -F "files=@path/to/local/file.jpg" \
-            "https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/upload"
-      - lang: JavaScript
-        source: |
-          const form = new FormData();
-          form.append('files', File(['<data goes here>'], 'path/to/local/file.jpg'));
-
-          fetch('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/upload', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'multipart/form-data',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              body: form
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-          const FormData = require('form-data');
-          const fs = require('fs');
-
-          const form = new FormData();
-          form.append('files', fs.readFileSync('path/to/local/file.jpg'), 'path/to/local/file.jpg');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/upload',
-              form,
-              {
-                  headers: {
-                      ...form.getHeaders(),
-                      'Content-Type': 'multipart/form-data',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              # requests won't add a boundary if this header is set when you pass files=
-              # 'Content-Type': 'multipart/form-data',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          files = {
-              'files': open('path/to/local/file.jpg', 'rb'),
-          }
-
-          response = requests.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/upload',
-              headers=headers,
-              files=files,
-          )
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/upload');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: multipart/form-data',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, [
-              'files' => new CURLFile('path/to/local/file.jpg'),
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"bytes\"\n\t\"fmt\"\n\t\"io\"\n\t\"\
-          log\"\n\t\"mime/multipart\"\n\t\"net/http\"\n\t\"os\"\n\t\"path/filepath\"\
-          \n)\n\nfunc main() {\n\tform := new(bytes.Buffer)\n\twriter := multipart.NewWriter(form)\n\
-          \tfw, err := writer.CreateFormFile(\"path/to/local/file.jpg\", filepath.Base(\"\
-          path/to/local/file.jpg\"))\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\
-          \tfd, err := os.Open(\"path/to/local/file.jpg\")\n\tif err != nil {\n\t\t\
-          log.Fatal(err)\n\t}\n\tdefer fd.Close()\n\t_, err = io.Copy(fw, fd)\n\t\
-          if err != nil {\n\t\tlog.Fatal(err)\n\t}\n\n\twriter.Close()\n\n\tclient\
-          \ := &http.Client{}\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/upload\"\
-          , form)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Authorization\", \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\treq.Header.Set(\"\
-          Content-Type\", writer.FormDataContentType())\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/upload\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"multipart/form-data\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/storages/buckets/{bucket_id}/object-manager/mkdir:
-    post:
-      description: "Чтобы создать директорию в хранилище, отправьте POST-запрос на\
-        \ `/api/v1/storages/buckets/{bucket_id}/object-manager/mkdir`."
-      operationId: createFolderInStorage
-      parameters:
-      - description: ID хранилища.
-        explode: false
-        in: path
-        name: bucket_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createFolderInStorage_request'
-        required: true
-      responses:
-        "201":
-          description: Директория успешно создана
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/createDatabaseBackup_409_response'
-          description: Конфликт
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Создание директории в хранилище
-      tags:
-      - S3
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -d '{"dir_name":"dir"}' \
-            "https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              body: JSON.stringify({
-                  'dir_name': 'dir'
-              })
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir',
-              {
-                  'dir_name': 'dir'
-              },
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          json_data = {
-              'dir_name': 'dir',
-          }
-
-          response = requests.post(
-              'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir',
-              headers=headers,
-              json=json_data,
-          )
-
-          # Note: json_data will not be serialized by requests
-          # exactly as it was in the original request.
-          #data = '{"dir_name":"dir"}'
-          #response = requests.post(
-          #    'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir',
-          #    headers=headers,
-          #    data=data,
-          #)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"dir_name":"dir"}');
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{\"dir_name\":\"dir\"}`)\n\treq, err :=\
-          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir\"\
-          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
-          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
-          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
-          \ URL(\"https://api.timeweb.cloud/api/v1/storages/buckets/1051/object-manager/mkdir\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
-          \t\twriter.write(\"{\\\"dir_name\\\":\\\"dir\\\"}\");\n\t\twriter.flush();\n\
-          \t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
-          \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
-          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
-          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
   /api/v1/storages/certificates/generate:
     post:
@@ -42472,7 +42405,7 @@ components:
         type: integer
       style: simple
     backup-id:
-      description: ID резевной копии
+      description: ID резервной копии
       explode: false
       in: path
       name: backup_id
@@ -42568,37 +42501,6 @@ components:
         minimum: 1
         type: integer
       style: simple
-    prefix:
-      description: Префикс для поиска файла.
-      explode: true
-      in: query
-      name: prefix
-      required: false
-      schema:
-        example: example
-        type: string
-      style: form
-    multipart:
-      description: "Это логическое значение, которое используется для обозначения\
-        \ multipart-загрузки."
-      explode: true
-      in: query
-      name: is_multipart
-      required: false
-      schema:
-        example: true
-        type: boolean
-      style: form
-    path:
-      description: Путь до директории в хранилище
-      explode: true
-      in: query
-      name: path
-      required: false
-      schema:
-        example: test1/tes2
-        type: string
-      style: form
     api-key-id:
       description: ID токена
       explode: false
@@ -43884,10 +43786,11 @@ components:
       - spb-2
       - spb-3
       - spb-4
+      - msk-1
       - nsk-1
       - ams-1
-      - gdn-1
       - ala-1
+      - fra-1
       example: spb-1
       type: string
     balancer:
@@ -43908,9 +43811,29 @@ components:
           id: 1
           balancer_proto: https
           server_proto: https
+        networks:
+        - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+          id: network-154f7fddbc65468b96d53f600b67cb60
+          type: local
+          nat_mode: dnat_and_snat
+          ips:
+          - ip: 192.168.0.8
+            type: ipv4
+          - ip: 192.168.0.8
+            type: ipv4
+        - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+          id: network-154f7fddbc65468b96d53f600b67cb60
+          type: local
+          nat_mode: dnat_and_snat
+          ips:
+          - ip: 192.168.0.8
+            type: ipv4
+          - ip: 192.168.0.8
+            type: ipv4
         timeout: 5
         path: /
         fall: 3
+        project_id: 1
         is_ssl: true
         id: 1
         is_keepalive: true
@@ -43922,6 +43845,7 @@ components:
         ips: []
         server_timeout: 50000
         local_ip: 1.1.1.1
+        account_id: nv00000
         port: 80
         preset_id: 5
         proto: https
@@ -43938,6 +43862,10 @@ components:
             при создании.
           example: 1
           type: number
+        account_id:
+          description: ID пользователя.
+          example: nv00000
+          type: string
         algo:
           description: Алгоритм переключений балансировщика.
           enum:
@@ -44078,6 +44006,15 @@ components:
           type: string
         availability_zone:
           $ref: '#/components/schemas/availability-zone'
+        project_id:
+          description: ID проекта
+          example: 1
+          type: integer
+        networks:
+          description: Список сетей сервера.
+          items:
+            $ref: '#/components/schemas/balancer_networks_inner'
+          type: array
       required:
       - algo
       - availability_zone
@@ -44099,9 +44036,11 @@ components:
       - location
       - maxconn
       - name
+      - networks
       - path
       - port
       - preset_id
+      - project_id
       - proto
       - rise
       - rules
@@ -44110,6 +44049,7 @@ components:
       - timeout
       type: object
     network:
+      description: Сеть
       properties:
         id:
           description: ID сети.
@@ -44134,7 +44074,8 @@ components:
     create-balancer:
       properties:
         name:
-          description: "Удобочитаемое имя, установленное для балансировщика."
+          description: "Удобочитаемое имя, установленное для балансировщика. Должн\
+            о быть уникальным в рамках аккаунта"
           example: Cute Quail
           type: string
         algo:
@@ -44219,12 +44160,16 @@ components:
           type: number
         preset_id:
           description: ID тарифа.
-          example: 5
+          example: 391
           type: number
         network:
           $ref: '#/components/schemas/network'
         availability_zone:
           $ref: '#/components/schemas/availability-zone'
+        project_id:
+          description: ID проекта
+          example: 1
+          type: integer
       required:
       - algo
       - fall
@@ -44260,7 +44205,8 @@ components:
     update-balancer:
       properties:
         name:
-          description: "Удобочитаемое имя, установленное для балансировщика."
+          description: "Удобочитаемое имя, установленное для балансировщика. Должн\
+            о быть уникальным в рамках аккаунта"
           example: Cute Quail
           type: string
         algo:
@@ -44478,21 +44424,21 @@ components:
       - postgres15
       - postgres16
       - postgres17
-      - redis
       - redis7
-      - mongodb4
-      - mongodb
-      - mongodb6
+      - redis8_1
       - mongodb7
+      - mongodb8_0
       - opensearch
-      - kafka
-      - rabbitmq
+      - opensearch2_19
       - clickhouse
       - clickhouse24
       - clickhouse25
+      - kafka
+      - rabbitmq4_0
       example: mysql
       type: string
     config-parameters:
+      description: Параметры базы данных
       example:
         innodb_io_capacity: "200"
         shared_buffers: "128"
@@ -44712,11 +44658,11 @@ components:
           - ip: 0.0.0.0
             type: ipv4
         type: mysql
-        port: 3000
-        preset_id: 5
-        disk_stats:
+        disk:
           size: 10485760
           used: 486.11328125
+        port: 3000
+        preset_id: 5
         name: default_db
         location: ru-1
         id: 1
@@ -44739,9 +44685,9 @@ components:
           description: Локация сервера.
           enum:
           - ru-1
-          - ru-2
-          - pl-1
-          - kz-1
+          - ru-3
+          - nl-1
+          - de-1
           example: ru-1
           nullable: true
           type: string
@@ -44795,8 +44741,8 @@ components:
           description: ID тарифа.
           example: 5
           type: integer
-        disk_stats:
-          $ref: '#/components/schemas/database_cluster_disk_stats'
+        disk:
+          $ref: '#/components/schemas/database_cluster_disk'
         config_parameters:
           $ref: '#/components/schemas/config-parameters'
         is_enabled_public_network:
@@ -44819,6 +44765,13 @@ components:
       - status
       - type
       type: object
+    db-replication:
+      description: Репликация
+      properties:
+        count:
+          description: Количество реплик.
+          example: 1
+          type: number
     create-db-auto-backups:
       description: База данных
       properties:
@@ -44873,11 +44826,21 @@ components:
           example: caching_sha2
           type: string
         preset_id:
-          description: ID тарифа.
+          description: ID тарифа. Нельзя передавать вместе с `configurator_id`
+          example: 5
+          type: integer
+        configurator_id:
+          description: ID конфигуратора. Нельзя передавать вместе с `preset_id`
+          example: 5
+          type: integer
+        project_id:
+          description: ID проекта.
           example: 5
           type: integer
         config_parameters:
           $ref: '#/components/schemas/config-parameters'
+        replication:
+          $ref: '#/components/schemas/db-replication'
         network:
           $ref: '#/components/schemas/network'
         description:
@@ -44891,7 +44854,6 @@ components:
       required:
       - name
       - password
-      - preset_id
       - type
       type: object
     update-cluster:
@@ -44952,7 +44914,7 @@ components:
           example: bs.:L2f$Tm:SC~
           type: string
         description:
-          description: Описанеие пользователя базы данных
+          description: Описание пользователя базы данных
           example: description
           type: string
         host:
@@ -44988,7 +44950,7 @@ components:
           example: '%'
           type: string
         instance_id:
-          description: "ID инстанса базы данных для приминения привилегий. В данны\
+          description: "ID инстанса базы данных для применения привилегий. В данны\
             х момент поле доступно только для кластеров MySQL. Если поле не переда\
             но, то привилегии будут применены ко всем инстансам"
           example: 1476
@@ -45019,6 +44981,9 @@ components:
             - ALTER_ROUTINE
             - CREATE_ROUTINE
             - TRANSACTION
+            - SLOW_LOG
+            - TRIGGER
+            - CREATE_TEMPORARY_TABLES
             type: string
           type: array
         description:
@@ -45062,6 +45027,9 @@ components:
             - ALTER_ROUTINE
             - CREATE_ROUTINE
             - TRANSACTION
+            - SLOW_LOG
+            - TRIGGER
+            - CREATE_TEMPORARY_TABLES
             type: string
           type: array
         description:
@@ -45069,7 +45037,7 @@ components:
           example: description
           type: string
         instance_id:
-          description: "ID инстанса базы данных для приминения привилегий. В данны\
+          description: "ID инстанса базы данных для применения привилегий. В данны\
             х момент поле доступно только для кластеров MySQL. Если поле не переда\
             но, то привилегии будут применены ко всем инстансам"
           example: 1476
@@ -45115,7 +45083,7 @@ components:
           example: default_name
           type: string
         description:
-          description: Описанеие инстанса базы данных
+          description: Описание инстанса базы данных
           example: description
           type: string
       required:
@@ -45127,7 +45095,7 @@ components:
           example: default_name
           type: string
         description:
-          description: Описанеие инстанса базы данных
+          description: Описание инстанса базы данных
           example: description
           type: string
     database-type:
@@ -45299,7 +45267,7 @@ components:
           enum:
           - started
           - starting
-          - stoped
+          - stopped
           - no_paid
           example: started
           type: string
@@ -45567,6 +45535,7 @@ components:
         os_id: 44
         created_at: 2022-10-25T15:15:45Z
         cp_id: 16
+        avatar_link: https://urltoimage.com/avatars/image.png
         ipmi_login: ipmi_login
         additional_ip_addr_id:
         - 2
@@ -45575,10 +45544,12 @@ components:
         network_drive_id:
         - 12
         - 11
+        project_id: 6
         ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
         price: 5490
         id: 1
         ipmi_ip: 1.1.1.1
+        is_pre_installed: true
         autoinstall_ready: 2
         ip: 1.1.1.1
         bandwidth_id: 11
@@ -45586,6 +45557,7 @@ components:
         vnc_pass: vnc_pass
         hdd_description: 2 x 1 ТБ HDD
         ipmi_password: ipmi_password
+        preset_id: 0
         name: Cute Quail
         comment: Development Server
         location: ru-1
@@ -45742,9 +45714,26 @@ components:
           example: password
           nullable: true
           type: string
+        avatar_link:
+          description: Ссылка на аватар сервера.
+          example: https://urltoimage.com/avatars/image.png
+          nullable: true
+          type: string
+        is_pre_installed:
+          description: "Это логическое значение, которое показывает, готов ли выде\
+            ленный сервер к моментальной выдаче."
+          example: true
+          type: boolean
+        preset_id:
+          description: ID тарифа сервера.
+          type: integer
+        project_id:
+          description: ID проекта
+          type: integer
       required:
       - additional_ip_addr_id
       - autoinstall_ready
+      - avatar_link
       - bandwidth_id
       - comment
       - cp_id
@@ -45757,6 +45746,7 @@ components:
       - ipmi_login
       - ipmi_password
       - ipv6
+      - is_pre_installed
       - location
       - name
       - network_drive_id
@@ -45764,7 +45754,9 @@ components:
       - os_id
       - password
       - plan_id
+      - preset_id
       - price
+      - project_id
       - ram_description
       - status
       - vnc_pass
@@ -45832,14 +45824,15 @@ components:
       - location
       - name
       - payment_period
-      - plan_id
       - preset_id
     dedicated-server-preset:
       description: Выделенный сервер
       example:
         disk:
           count: 16
+          total_size: 2048
           description: 2 x 1 Тб NVMe
+          type: hdd
         memory:
           size: 65536
           count: 1
@@ -45848,6 +45841,7 @@ components:
         description: Gold 6208U / 64 / 1N
         cpu:
           description_short: Intel Xeon Gold 6208U
+          vendor: intel
           count: 16
           description: "Intel Xeon Gold 6208U\\r\\n    (16 ядер, 2.9-3.9 ГГц, 32 п\
             отока)"
@@ -45907,6 +45901,7 @@ components:
       - is_pre_installed
       - location
       - memory
+      - price
       type: object
     dedicated-server-additional-service:
       description: Дополнительная услуга для выделенного сервера
@@ -45947,7 +45942,7 @@ components:
           example: IPv6 адрес
           type: string
         name:
-          description: Уникально имя дополнительной услуги выделенного сервера.
+          description: Уникальное имя дополнительной услуги выделенного сервера.
           example: ipv6
           type: string
       required:
@@ -46056,6 +46051,7 @@ components:
           - spb-3
           - msk-1
           - ams-1
+          - fra-1
           type: string
         project_id:
           description: ID проекта
@@ -46201,6 +46197,10 @@ components:
             тарифом кластера
           minimum: 2
           type: integer
+        is_autohealing:
+          description: Автоматическое восстановление работоспособности вышедших из
+            строя узлов
+          type: boolean
       required:
       - name
       - node_count
@@ -46209,21 +46209,34 @@ components:
       example:
         name: Friendly Wiles
         description: Новый кластер кубернетес
-        k8s_version: v1.30.2+k0s.0
+        k8s_version: v1.33.1+k0s.0
         network_driver: kuberouter
         is_ingress: true
         is_k8s_dashboard: true
         preset_id: 403
+        configuration:
+          configurator_id: 57
+          disk: 1024
+          cpu: 8
+          ram: 8192
         worker_groups:
         - name: Новая группа нод
           preset_id: 399
           node_count: 1
           labels:
-            key: новая группа
-            value: группа
+          - key: key
+            value: value
           is_autoscaling: true
+          is_autohealing: false
           min_size: 2
           max_size: 10
+        maintenance_slot:
+          type: fixed_time
+          from: 12:00
+          to: 15:00
+        cluster_network_cidr:
+          pods_network: 10.244.0.0/16
+          services_network: 10.96.0.0/12
       properties:
         name:
           description: Название кластера
@@ -46240,6 +46253,7 @@ components:
           - spb-3
           - msk-1
           - ams-1
+          - fra-1
           type: string
         network_driver:
           description: Тип используемого сетевого драйвера в кластере
@@ -46258,7 +46272,12 @@ components:
             \ Dashboard в кластере"
           type: boolean
         preset_id:
-          description: ID тарифа мастер-ноды
+          description: ID тарифа мастер-ноды. Нельзя передавать вместе с `configuration`
+          type: integer
+        configuration:
+          $ref: '#/components/schemas/ClusterIn_configuration'
+        master_nodes_count:
+          description: Количество мастер нод
           type: integer
         worker_groups:
           description: Группы воркеров в кластере
@@ -46271,11 +46290,16 @@ components:
         project_id:
           description: ID проекта
           type: integer
+        maintenance_slot:
+          $ref: '#/components/schemas/ClusterIn_maintenance_slot'
+        oidc_provider:
+          $ref: '#/components/schemas/ClusterIn_oidc_provider'
+        cluster_network_cidr:
+          $ref: '#/components/schemas/ClusterIn_cluster_network_cidr'
       required:
       - k8s_version
       - name
       - network_driver
-      - preset_id
       title: ClusterIn
       type: object
     ClusterResponse:
@@ -46621,7 +46645,33 @@ components:
       - nodes
       title: NodesResponse
       type: object
-    NodeCount:
+    IncreaseNodes:
+      example:
+        count: 2
+        labels:
+        - key: key
+          value: value
+      properties:
+        count:
+          description: Количество нод
+          example: 2
+          minimum: 1
+          title: Count
+          type: integer
+        labels:
+          description: Лейблы добавляемых нод
+          example:
+          - key: key
+            value: value
+          items:
+            $ref: '#/components/schemas/SetLabels'
+          title: Labels
+          type: array
+      required:
+      - count
+      title: IncreaseNodes
+      type: object
+    ReduceNodes:
       example:
         count: 2
       properties:
@@ -46633,7 +46683,7 @@ components:
           type: integer
       required:
       - count
-      title: NodeCount
+      title: ReduceNodes
       type: object
     K8SVersionsResponse:
       example:
@@ -46846,6 +46896,229 @@ components:
       - k8s_presets
       - meta
       title: PresetsResponse
+      type: object
+    RegistryOut:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        preset_id: 6
+        project_id: 5
+        disk_stats:
+          size: 5
+          used: 2
+        name: name
+        description: description
+        created_at: 2000-01-23T04:56:07.000+00:00
+        configurator_id: 1
+        id: 0
+      properties:
+        id:
+          description: ID реестра
+          type: integer
+        name:
+          description: Название реестра
+          type: string
+        description:
+          description: Описание
+          type: string
+        preset_id:
+          description: ID тарифа
+          type: integer
+        configurator_id:
+          description: ID конфигуратора
+          type: integer
+        project_id:
+          description: ID проекта
+          type: integer
+        created_at:
+          description: Дата и время создания реестра в формате ISO8601
+          format: date-time
+          type: string
+        updated_at:
+          description: Дата и время обновления реестра в формате ISO8601
+          format: date-time
+          type: string
+        disk_stats:
+          $ref: '#/components/schemas/RegistryOut_disk_stats'
+      required:
+      - configurator_id
+      - created_at
+      - description
+      - disk_stats
+      - id
+      - name
+      - preset_id
+      - project_id
+      - updated_at
+      title: RegistryOut
+      type: object
+    RegistriesResponse:
+      example:
+        container_registry_list:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          preset_id: 6
+          project_id: 5
+          disk_stats:
+            size: 5
+            used: 2
+          name: name
+          description: description
+          created_at: 2000-01-23T04:56:07.000+00:00
+          configurator_id: 1
+          id: 0
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          preset_id: 6
+          project_id: 5
+          disk_stats:
+            size: 5
+            used: 2
+          name: name
+          description: description
+          created_at: 2000-01-23T04:56:07.000+00:00
+          configurator_id: 1
+          id: 0
+        response_id: response_id
+      properties:
+        response_id:
+          description: ID запроса
+          title: Response Id
+          type: string
+        container_registry_list:
+          description: Реестр контейнеров
+          items:
+            $ref: '#/components/schemas/RegistryOut'
+          title: Container Registry
+          type: array
+      required:
+      - container_registry
+      title: RegistriesResponse
+      type: object
+    RegistryIn:
+      example:
+        name: b3dfb4d9-ambitious-waxwing
+        description: Новый реестр контейнеров
+        preset_id: 1939
+      properties:
+        name:
+          description: "Имя реестра. Должно быть уникальным, от 3 до 48 символов,\
+            \ начинаться и заканчиваться буквой или числом, содержать только латин\
+            ские буквы в нижнем регистре, цифры и символ «-», без пробелов"
+          type: string
+        description:
+          description: Описание реестра
+          type: string
+        preset_id:
+          description: ID тарифа. Нельзя передавать вместе с `configuration`
+          type: integer
+        configuration:
+          $ref: '#/components/schemas/RegistryIn_configuration'
+        project_id:
+          description: ID проекта
+          type: integer
+      required:
+      - name
+      title: RegistryIn
+      type: object
+    RegistryResponse:
+      example:
+        response_id: response_id
+        container_registry:
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          preset_id: 6
+          project_id: 5
+          disk_stats:
+            size: 5
+            used: 2
+          name: name
+          description: description
+          created_at: 2000-01-23T04:56:07.000+00:00
+          configurator_id: 1
+          id: 0
+      properties:
+        response_id:
+          description: ID запроса
+          title: Response Id
+          type: string
+        container_registry:
+          $ref: '#/components/schemas/RegistryOut'
+      required:
+      - container_registry
+      title: RegistryResponse
+      type: object
+    RegistryEdit:
+      example:
+        preset_id: 1941
+        configuration:
+          disk: 6
+          id: 0
+        description: new description
+      properties:
+        description:
+          description: Новое описание реестра
+          example: new description
+          title: Description
+          type: string
+        preset_id:
+          description: ID тарифа. Нельзя передавать вместе с `configuration`
+          example: 1941
+          title: Preset Id
+          type: integer
+        configuration:
+          $ref: '#/components/schemas/RegistryIn_configuration'
+      title: RegistryEdit
+      type: object
+    schemas-PresetsResponse:
+      example:
+        container_registry_presets:
+        - id: 1939
+          description: Услуга container registry
+          description_short: Услуга container registry 5
+          disk: 5
+          price: 40
+          location: ru-1
+      properties:
+        response_id:
+          description: ID запроса
+          title: Response Id
+          type: string
+        container_registry_presets:
+          description: Массив тарифов container registry
+          items:
+            $ref: '#/components/schemas/Container_Registry_presets_inner'
+          title: Container Registry presets
+          type: array
+      required:
+      - container_registry_presets
+      - meta
+      title: PresetsResponse
+      type: object
+    RepositoriesResponse:
+      example:
+        response_id: 00c22071-bfc1-4a6b-9d17-e2bf7ec01efe
+        meta:
+          total: 1
+        container_registries_repositories:
+        - name: python
+          tags:
+            tag: latest
+            digest: sha256:123456789
+            size: 263
+      properties:
+        response_id:
+          description: ID запроса
+          title: Response Id
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta_1'
+        container_registries_repositories:
+          description: Массив тарифов container registry
+          items:
+            $ref: '#/components/schemas/Container_Registry_Repositories_inner'
+          title: Container Registry Repositories
+          type: array
+      required:
+      - container_registries_repositories
+      - meta
+      title: RepositoriesResponse
       type: object
     vds:
       description: Сервер
@@ -47160,8 +47433,7 @@ components:
           example: 200
           type: number
         name:
-          description: "Имя облачного сервера. Максимальная длина — 255 символов,\
-            \ имя должно быть уникальным."
+          description: Имя облачного сервера. Максимальная длина — 255 символов.
           example: name
           maxLength: 255
           type: string
@@ -47194,6 +47466,10 @@ components:
           type: string
         availability_zone:
           $ref: '#/components/schemas/availability-zone'
+        project_id:
+          description: ID проекта.
+          example: 1
+          type: number
       required:
       - name
     update-server:
@@ -47219,8 +47495,7 @@ components:
           example: 200
           type: number
         name:
-          description: "Имя облачного сервера. Максимальная длина — 255 символов,\
-            \ имя должно быть уникальным."
+          description: Имя облачного сервера. Максимальная длина — 255 символов.
           example: name
           maxLength: 255
           type: string
@@ -47819,12 +48094,22 @@ components:
       example:
         storage_class: cold
         moved_in_quarantine_at: 2025-01-01T12:00:00Z
+        rate_id: 1
         description: Bucket of awesome cats
+        website_config:
+          error_pages:
+          - code: 404
+            document: 404.html
+          - code: 404
+            document: 404.html
+          index_page: index.html
+          enabled: true
         avatar_link: https://urltoimage.com/avatars/image.png
         type: public
         secret_key: secret_key
         hostname: s3.twcstorage.ru
         preset_id: 389
+        project_id: 1
         disk_stats:
           size: 10485760
           used: 486.11328125
@@ -47914,6 +48199,16 @@ components:
           - hot
           example: cold
           type: string
+        project_id:
+          description: ID проекта.
+          example: 1
+          type: number
+        rate_id:
+          description: ID тарифа.
+          example: 1
+          type: number
+        website_config:
+          $ref: '#/components/schemas/bucket_website_config'
       required:
       - access_key
       - avatar_link
@@ -47926,10 +48221,13 @@ components:
       - name
       - object_amount
       - preset_id
+      - project_id
+      - rate_id
       - secret_key
       - status
       - storage_class
       - type
+      - website_config
       type: object
     clusterk8s:
       description: Кластер
@@ -48054,10 +48352,14 @@ components:
       example:
         description_short: Start
         disk: 30
+        storage_class: hot
         price: 100
         description: Услуга Хранилище S3
         location: ru-1
         id: 2377
+        tags:
+        - s3_ru-1_hot
+        - s3_ru-1_hot
       properties:
         id:
           description: ID для каждого экземпляра тарифа хранилища.
@@ -48083,9 +48385,20 @@ components:
           description: Географическое расположение тарифа.
           enum:
           - ru-1
-          - pl-1
-          - kz-1
           example: ru-1
+          type: string
+        tags:
+          description: Теги тарифа.
+          items:
+            example: s3_ru-1_hot
+            type: string
+          type: array
+        storage_class:
+          description: Класс хранилища.
+          enum:
+          - cold
+          - hot
+          example: hot
           type: string
       required:
       - description
@@ -48094,6 +48407,8 @@ components:
       - id
       - location
       - price
+      - storage_class
+      - tags
       type: object
     bucket-user:
       description: Пользователь хранилища
@@ -48239,61 +48554,6 @@ components:
       required:
       - status
       - subdomain
-      type: object
-    s3-object:
-      description: An object consists of data and its descriptive metadata.
-      example:
-        owner:
-          id: id
-          display_name: display_name
-        storage_class: Default
-        size: 21403
-        checksum_algorithm: []
-        etag: d41d8cd98f00b204e9800998ecf8427e
-        type: file
-        last_modified: 2000-01-23T04:56:07.000+00:00
-        key: test.jpg
-      properties:
-        key:
-          description: Название файла или папки.
-          example: test.jpg
-          minLength: 1
-          type: string
-        last_modified:
-          description: "Значение времени, указанное в комбинированном формате даты\
-            \ и времени ISO8601, которое представляет, когда была сделана последня\
-            я модификация файла или папки."
-          format: date-time
-          type: string
-        etag:
-          description: Тег.
-          example: d41d8cd98f00b204e9800998ecf8427e
-          type: string
-        size:
-          description: Размер (в байтах) файла или папки.
-          example: 21403
-          type: integer
-        storage_class:
-          description: Класс хранилища.
-          example: Default
-          type: string
-        checksum_algorithm:
-          description: Алгоритм
-          example: []
-          items:
-            type: string
-          type: array
-        owner:
-          $ref: '#/components/schemas/s3_object_owner'
-        type:
-          description: Тип (файл или папка).
-          enum:
-          - file
-          - directory
-          example: file
-          type: string
-      required:
-      - type
       type: object
     api-key:
       description: Токен.
@@ -51339,9 +51599,29 @@ components:
             id: 1
             balancer_proto: https
             server_proto: https
+          networks:
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
           timeout: 5
           path: /
           fall: 3
+          project_id: 1
           is_ssl: true
           id: 1
           is_keepalive: true
@@ -51353,6 +51633,7 @@ components:
           ips: []
           server_timeout: 50000
           local_ip: 1.1.1.1
+          account_id: nv00000
           port: 80
           preset_id: 5
           proto: https
@@ -51378,9 +51659,29 @@ components:
             id: 1
             balancer_proto: https
             server_proto: https
+          networks:
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
           timeout: 5
           path: /
           fall: 3
+          project_id: 1
           is_ssl: true
           id: 1
           is_keepalive: true
@@ -51392,6 +51693,7 @@ components:
           ips: []
           server_timeout: 50000
           local_ip: 1.1.1.1
+          account_id: nv00000
           port: 80
           preset_id: 5
           proto: https
@@ -51433,9 +51735,29 @@ components:
             id: 1
             balancer_proto: https
             server_proto: https
+          networks:
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
           timeout: 5
           path: /
           fall: 3
+          project_id: 1
           is_ssl: true
           id: 1
           is_keepalive: true
@@ -51447,6 +51769,7 @@ components:
           ips: []
           server_timeout: 50000
           local_ip: 1.1.1.1
+          account_id: nv00000
           port: 80
           preset_id: 5
           proto: https
@@ -51622,11 +51945,11 @@ components:
             - ip: 0.0.0.0
               type: ipv4
           type: mysql
-          port: 3000
-          preset_id: 5
-          disk_stats:
+          disk:
             size: 10485760
             used: 486.11328125
+          port: 3000
+          preset_id: 5
           name: default_db
           location: ru-1
           id: 1
@@ -51678,11 +52001,11 @@ components:
             - ip: 0.0.0.0
               type: ipv4
           type: mysql
-          port: 3000
-          preset_id: 5
-          disk_stats:
+          disk:
             size: 10485760
             used: 486.11328125
+          port: 3000
+          preset_id: 5
           name: default_db
           location: ru-1
           id: 1
@@ -51750,11 +52073,11 @@ components:
             - ip: 0.0.0.0
               type: ipv4
           type: mysql
-          port: 3000
-          preset_id: 5
-          disk_stats:
+          disk:
             size: 10485760
             used: 486.11328125
+          port: 3000
+          preset_id: 5
           name: default_db
           location: ru-1
           id: 1
@@ -52249,6 +52572,7 @@ components:
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
+          avatar_link: https://urltoimage.com/avatars/image.png
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
@@ -52257,10 +52581,12 @@ components:
           network_drive_id:
           - 12
           - 11
+          project_id: 6
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
           id: 1
           ipmi_ip: 1.1.1.1
+          is_pre_installed: true
           autoinstall_ready: 2
           ip: 1.1.1.1
           bandwidth_id: 11
@@ -52268,6 +52594,7 @@ components:
           vnc_pass: vnc_pass
           hdd_description: 2 x 1 ТБ HDD
           ipmi_password: ipmi_password
+          preset_id: 0
           name: Cute Quail
           comment: Development Server
           location: ru-1
@@ -52278,6 +52605,7 @@ components:
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
+          avatar_link: https://urltoimage.com/avatars/image.png
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
@@ -52286,10 +52614,12 @@ components:
           network_drive_id:
           - 12
           - 11
+          project_id: 6
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
           id: 1
           ipmi_ip: 1.1.1.1
+          is_pre_installed: true
           autoinstall_ready: 2
           ip: 1.1.1.1
           bandwidth_id: 11
@@ -52297,6 +52627,7 @@ components:
           vnc_pass: vnc_pass
           hdd_description: 2 x 1 ТБ HDD
           ipmi_password: ipmi_password
+          preset_id: 0
           name: Cute Quail
           comment: Development Server
           location: ru-1
@@ -52321,6 +52652,7 @@ components:
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
+          avatar_link: https://urltoimage.com/avatars/image.png
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
@@ -52329,10 +52661,12 @@ components:
           network_drive_id:
           - 12
           - 11
+          project_id: 6
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
           id: 1
           ipmi_ip: 1.1.1.1
+          is_pre_installed: true
           autoinstall_ready: 2
           ip: 1.1.1.1
           bandwidth_id: 11
@@ -52340,6 +52674,7 @@ components:
           vnc_pass: vnc_pass
           hdd_description: 2 x 1 ТБ HDD
           ipmi_password: ipmi_password
+          preset_id: 0
           name: Cute Quail
           comment: Development Server
           location: ru-1
@@ -52374,7 +52709,9 @@ components:
         dedicated_servers_presets:
         - disk:
             count: 16
+            total_size: 2048
             description: 2 x 1 Тб NVMe
+            type: hdd
           memory:
             size: 65536
             count: 1
@@ -52383,6 +52720,7 @@ components:
           description: Gold 6208U / 64 / 1N
           cpu:
             description_short: Intel Xeon Gold 6208U
+            vendor: intel
             count: 16
             description: "Intel Xeon Gold 6208U\\r\\n    (16 ядер, 2.9-3.9 ГГц, 32\
               \ потока)"
@@ -52392,7 +52730,9 @@ components:
           is_pre_installed: true
         - disk:
             count: 16
+            total_size: 2048
             description: 2 x 1 Тб NVMe
+            type: hdd
           memory:
             size: 65536
             count: 1
@@ -52401,6 +52741,7 @@ components:
           description: Gold 6208U / 64 / 1N
           cpu:
             description_short: Intel Xeon Gold 6208U
+            vendor: intel
             count: 16
             description: "Intel Xeon Gold 6208U\\r\\n    (16 ядер, 2.9-3.9 ГГц, 32\
               \ потока)"
@@ -53502,9 +53843,29 @@ components:
             id: 1
             balancer_proto: https
             server_proto: https
+          networks:
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
           timeout: 5
           path: /
           fall: 3
+          project_id: 1
           is_ssl: true
           id: 1
           is_keepalive: true
@@ -53516,6 +53877,7 @@ components:
           ips: []
           server_timeout: 50000
           local_ip: 1.1.1.1
+          account_id: nv00000
           port: 80
           preset_id: 5
           proto: https
@@ -53541,9 +53903,29 @@ components:
             id: 1
             balancer_proto: https
             server_proto: https
+          networks:
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
           timeout: 5
           path: /
           fall: 3
+          project_id: 1
           is_ssl: true
           id: 1
           is_keepalive: true
@@ -53555,6 +53937,7 @@ components:
           ips: []
           server_timeout: 50000
           local_ip: 1.1.1.1
+          account_id: nv00000
           port: 80
           preset_id: 5
           proto: https
@@ -53614,12 +53997,22 @@ components:
         buckets:
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
+          rate_id: 1
           description: Bucket of awesome cats
+          website_config:
+            error_pages:
+            - code: 404
+              document: 404.html
+            - code: 404
+              document: 404.html
+            index_page: index.html
+            enabled: true
           avatar_link: https://urltoimage.com/avatars/image.png
           type: public
           secret_key: secret_key
           hostname: s3.twcstorage.ru
           preset_id: 389
+          project_id: 1
           disk_stats:
             size: 10485760
             used: 486.11328125
@@ -53632,12 +54025,22 @@ components:
           status: created
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
+          rate_id: 1
           description: Bucket of awesome cats
+          website_config:
+            error_pages:
+            - code: 404
+              document: 404.html
+            - code: 404
+              document: 404.html
+            index_page: index.html
+            enabled: true
           avatar_link: https://urltoimage.com/avatars/image.png
           type: public
           secret_key: secret_key
           hostname: s3.twcstorage.ru
           preset_id: 389
+          project_id: 1
           disk_stats:
             size: 10485760
             used: 486.11328125
@@ -54050,6 +54453,7 @@ components:
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
+          avatar_link: https://urltoimage.com/avatars/image.png
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
@@ -54058,10 +54462,12 @@ components:
           network_drive_id:
           - 12
           - 11
+          project_id: 6
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
           id: 1
           ipmi_ip: 1.1.1.1
+          is_pre_installed: true
           autoinstall_ready: 2
           ip: 1.1.1.1
           bandwidth_id: 11
@@ -54069,6 +54475,7 @@ components:
           vnc_pass: vnc_pass
           hdd_description: 2 x 1 ТБ HDD
           ipmi_password: ipmi_password
+          preset_id: 0
           name: Cute Quail
           comment: Development Server
           location: ru-1
@@ -54079,6 +54486,7 @@ components:
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
+          avatar_link: https://urltoimage.com/avatars/image.png
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
@@ -54087,10 +54495,12 @@ components:
           network_drive_id:
           - 12
           - 11
+          project_id: 6
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
           id: 1
           ipmi_ip: 1.1.1.1
+          is_pre_installed: true
           autoinstall_ready: 2
           ip: 1.1.1.1
           bandwidth_id: 11
@@ -54098,6 +54508,7 @@ components:
           vnc_pass: vnc_pass
           hdd_description: 2 x 1 ТБ HDD
           ipmi_password: ipmi_password
+          preset_id: 0
           name: Cute Quail
           comment: Development Server
           location: ru-1
@@ -54416,9 +54827,29 @@ components:
             id: 1
             balancer_proto: https
             server_proto: https
+          networks:
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
           timeout: 5
           path: /
           fall: 3
+          project_id: 1
           is_ssl: true
           id: 1
           is_keepalive: true
@@ -54430,6 +54861,7 @@ components:
           ips: []
           server_timeout: 50000
           local_ip: 1.1.1.1
+          account_id: nv00000
           port: 80
           preset_id: 5
           proto: https
@@ -54455,9 +54887,29 @@ components:
             id: 1
             balancer_proto: https
             server_proto: https
+          networks:
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
+          - port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+            id: network-154f7fddbc65468b96d53f600b67cb60
+            type: local
+            nat_mode: dnat_and_snat
+            ips:
+            - ip: 192.168.0.8
+              type: ipv4
+            - ip: 192.168.0.8
+              type: ipv4
           timeout: 5
           path: /
           fall: 3
+          project_id: 1
           is_ssl: true
           id: 1
           is_keepalive: true
@@ -54469,6 +54921,7 @@ components:
           ips: []
           server_timeout: 50000
           local_ip: 1.1.1.1
+          account_id: nv00000
           port: 80
           preset_id: 5
           proto: https
@@ -54484,12 +54937,22 @@ components:
         buckets:
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
+          rate_id: 1
           description: Bucket of awesome cats
+          website_config:
+            error_pages:
+            - code: 404
+              document: 404.html
+            - code: 404
+              document: 404.html
+            index_page: index.html
+            enabled: true
           avatar_link: https://urltoimage.com/avatars/image.png
           type: public
           secret_key: secret_key
           hostname: s3.twcstorage.ru
           preset_id: 389
+          project_id: 1
           disk_stats:
             size: 10485760
             used: 486.11328125
@@ -54502,12 +54965,22 @@ components:
           status: created
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
+          rate_id: 1
           description: Bucket of awesome cats
+          website_config:
+            error_pages:
+            - code: 404
+              document: 404.html
+            - code: 404
+              document: 404.html
+            index_page: index.html
+            enabled: true
           avatar_link: https://urltoimage.com/avatars/image.png
           type: public
           secret_key: secret_key
           hostname: s3.twcstorage.ru
           preset_id: 389
+          project_id: 1
           disk_stats:
             size: 10485760
             used: 486.11328125
@@ -54523,6 +54996,7 @@ components:
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
+          avatar_link: https://urltoimage.com/avatars/image.png
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
@@ -54531,10 +55005,12 @@ components:
           network_drive_id:
           - 12
           - 11
+          project_id: 6
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
           id: 1
           ipmi_ip: 1.1.1.1
+          is_pre_installed: true
           autoinstall_ready: 2
           ip: 1.1.1.1
           bandwidth_id: 11
@@ -54542,6 +55018,7 @@ components:
           vnc_pass: vnc_pass
           hdd_description: 2 x 1 ТБ HDD
           ipmi_password: ipmi_password
+          preset_id: 0
           name: Cute Quail
           comment: Development Server
           location: ru-1
@@ -54552,6 +55029,7 @@ components:
           os_id: 44
           created_at: 2022-10-25T15:15:45Z
           cp_id: 16
+          avatar_link: https://urltoimage.com/avatars/image.png
           ipmi_login: ipmi_login
           additional_ip_addr_id:
           - 2
@@ -54560,10 +55038,12 @@ components:
           network_drive_id:
           - 12
           - 11
+          project_id: 6
           ipv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
           price: 5490
           id: 1
           ipmi_ip: 1.1.1.1
+          is_pre_installed: true
           autoinstall_ready: 2
           ip: 1.1.1.1
           bandwidth_id: 11
@@ -54571,6 +55051,7 @@ components:
           vnc_pass: vnc_pass
           hdd_description: 2 x 1 ТБ HDD
           ipmi_password: ipmi_password
+          preset_id: 0
           name: Cute Quail
           comment: Development Server
           location: ru-1
@@ -54640,6 +55121,18 @@ components:
       - meta
       - servers
       type: object
+    createStorage_request_configurator:
+      description: Параметры конфигурации хранилища. Нельзя передавать вместе с `preset_id`.
+      properties:
+        disk:
+          description: Размер диска в МБ..
+          example: 1024
+          type: number
+        id:
+          description: ID конфигуратора хранилища.
+          example: 73
+          type: number
+      type: object
     createStorage_request:
       properties:
         name:
@@ -54662,12 +55155,17 @@ components:
           example: private
           type: string
         preset_id:
-          description: ID тарифа.
+          description: ID тарифа. Нельзя передавать вместе с `configurator`.
+          example: 1
+          type: number
+        configurator:
+          $ref: '#/components/schemas/createStorage_request_configurator'
+        project_id:
+          description: ID проекта.
           example: 1
           type: number
       required:
       - name
-      - preset_id
       - type
       type: object
     createStorage_201_response:
@@ -54675,12 +55173,22 @@ components:
         bucket:
           storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
+          rate_id: 1
           description: Bucket of awesome cats
+          website_config:
+            error_pages:
+            - code: 404
+              document: 404.html
+            - code: 404
+              document: 404.html
+            index_page: index.html
+            enabled: true
           avatar_link: https://urltoimage.com/avatars/image.png
           type: public
           secret_key: secret_key
           hostname: s3.twcstorage.ru
           preset_id: 389
+          project_id: 1
           disk_stats:
             size: 10485760
             used: 486.11328125
@@ -54708,16 +55216,26 @@ components:
       required:
       - bucket_delete
       type: object
+    updateStorage_request_configurator:
+      description: Параметры конфигурации хранилища.
+      properties:
+        disk:
+          description: Размер диска в МБ.
+          example: 1024
+          type: number
+        id:
+          description: ID конфигуратора хранилища.
+          example: 73
+          type: number
+      type: object
     updateStorage_request:
       properties:
         preset_id:
           description: ID тарифа.
           example: 1
           type: number
-        configurator_id:
-          description: ID конфигуратора хранилища.
-          example: 55
-          type: number
+        configurator:
+          $ref: '#/components/schemas/updateStorage_request_configurator'
         bucket_type:
           description: Тип хранилища.
           enum:
@@ -54737,16 +55255,24 @@ components:
         storages_presets:
         - description_short: Start
           disk: 30
+          storage_class: hot
           price: 100
           description: Услуга Хранилище S3
           location: ru-1
           id: 2377
+          tags:
+          - s3_ru-1_hot
+          - s3_ru-1_hot
         - description_short: Start
           disk: 30
+          storage_class: hot
           price: 100
           description: Услуга Хранилище S3
           location: ru-1
           id: 2377
+          tags:
+          - s3_ru-1_hot
+          - s3_ru-1_hot
         meta:
           total: 10
       properties:
@@ -54920,105 +55446,6 @@ components:
       required:
       - meta
       - subdomains
-      type: object
-    getStorageFilesList_200_response:
-      example:
-        meta:
-          total: 10
-        files:
-        - owner:
-            id: id
-            display_name: display_name
-          storage_class: Default
-          size: 21403
-          checksum_algorithm: []
-          etag: d41d8cd98f00b204e9800998ecf8427e
-          type: file
-          last_modified: 2000-01-23T04:56:07.000+00:00
-          key: test.jpg
-        - owner:
-            id: id
-            display_name: display_name
-          storage_class: Default
-          size: 21403
-          checksum_algorithm: []
-          etag: d41d8cd98f00b204e9800998ecf8427e
-          type: file
-          last_modified: 2000-01-23T04:56:07.000+00:00
-          key: test.jpg
-      properties:
-        files:
-          items:
-            $ref: '#/components/schemas/s3-object'
-          type: array
-        meta:
-          $ref: '#/components/schemas/meta'
-      required:
-      - files
-      - meta
-      type: object
-    renameStorageFile_request:
-      properties:
-        new_filename:
-          description: "Новое название файла или папки. Названия папок должны быть\
-            \ указаны с \"/\" в конце, например: \"dirname/\"."
-          example: new_filename
-          type: string
-        old_filename:
-          description: "Старое название файла или папки. Названия папок должны быт\
-            ь указаны с \"/\" в конце, например: \"dirname/\"."
-          example: old_filename
-          type: string
-      required:
-      - new_filename
-      - old_filename
-      type: object
-    deleteStorageFile_request:
-      properties:
-        source:
-          items:
-            example: test1/test2
-            type: string
-          type: array
-      required:
-      - source
-      type: object
-    copyStorageFile_request:
-      properties:
-        destination:
-          description: Новый путь до файлов.
-          example: new_path
-          type: string
-        source:
-          items:
-            description: "Путь до файла или папки, содержимое которой нужно скопир\
-              овать. Название папки должно быть указано с \"/\" в конце, например\
-              : \"dirname/\"."
-            example: test1/test2
-            type: string
-          type: array
-      required:
-      - destination
-      - source
-      type: object
-    uploadFileToStorage_request:
-      properties:
-        files:
-          items:
-            format: binary
-            type: string
-          type: array
-      required:
-      - files
-      type: object
-    createFolderInStorage_request:
-      properties:
-        dir_name:
-          description: Название директории.
-          example: dir
-          type: string
-      required:
-      - dir_name
       type: object
     addStorageSubdomainCertificate_request:
       properties:
@@ -56860,6 +57287,66 @@ components:
       - sms
       - telegram
       type: object
+    balancer_networks_inner_ips_inner:
+      example:
+        ip: 192.168.0.8
+        type: ipv4
+      properties:
+        type:
+          description: Тип IP-адреса сети
+          enum:
+          - ipv4
+          - ipv6
+          example: ipv4
+          type: string
+        ip:
+          description: IP-адрес сети.
+          example: 192.168.0.8
+          type: string
+    balancer_networks_inner:
+      example:
+        port_id: e68d584a-1749-44c4-ae14-0a435302b8d3
+        id: network-154f7fddbc65468b96d53f600b67cb60
+        type: local
+        nat_mode: dnat_and_snat
+        ips:
+        - ip: 192.168.0.8
+          type: ipv4
+        - ip: 192.168.0.8
+          type: ipv4
+      properties:
+        id:
+          description: ID сети. Есть только у приватных сетей.
+          example: network-154f7fddbc65468b96d53f600b67cb60
+          type: string
+        type:
+          description: Тип сети.
+          enum:
+          - public
+          - local
+          example: local
+          type: string
+        nat_mode:
+          description: Тип преобразования сетевых адресов.
+          enum:
+          - dnat_and_snat
+          - snat
+          - no_nat
+          example: dnat_and_snat
+          type: string
+        port_id:
+          description: ID порта.
+          example: e68d584a-1749-44c4-ae14-0a435302b8d3
+          type: string
+        ips:
+          description: Список IP-адресов сети.
+          items:
+            $ref: '#/components/schemas/balancer_networks_inner_ips_inner'
+          nullable: true
+          type: array
+      required:
+      - ips
+      - type
     database_cluster_networks_inner_ips_inner:
       example:
         ip: 0.0.0.0
@@ -56904,7 +57391,7 @@ components:
       required:
       - ips
       - type
-    database_cluster_disk_stats:
+    database_cluster_disk:
       description: Статистика использования диска кластера базы данных.
       example:
         size: 10485760
@@ -57019,6 +57506,9 @@ components:
             - ALTER_ROUTINE
             - CREATE_ROUTINE
             - TRANSACTION
+            - SLOW_LOG
+            - TRIGGER
+            - CREATE_TEMPORARY_TABLES
             type: string
           type: array
       required:
@@ -57069,6 +57559,7 @@ components:
         ."
       example:
         description_short: Intel Xeon Gold 6208U
+        vendor: intel
         count: 16
         description: "Intel Xeon Gold 6208U\\r\\n    (16 ядер, 2.9-3.9 ГГц, 32 пот\
           ока)"
@@ -57086,16 +57577,23 @@ components:
           description: Количество ядер процессора выделенного сервера.
           example: 16
           type: number
+        vendor:
+          description: Производитель процессора выделенного сервера.
+          example: intel
+          type: string
       required:
       - count
       - description
       - description_short
+      - vendor
       type: object
     dedicated_server_preset_disk:
       description: "Объект, содержащий информацию о диске выделенного сервера."
       example:
         count: 16
+        total_size: 2048
         description: 2 x 1 Тб NVMe
+        type: hdd
       properties:
         description:
           description: Описание характеристик диска выделенного сервера.
@@ -57105,9 +57603,19 @@ components:
           description: Количество дисков выделенного сервера.
           example: 16
           type: number
+        total_size:
+          description: Общий размер дисков выделенного сервера.
+          example: 2048
+          type: number
+        type:
+          description: Тип дисков выделенного сервера.
+          example: hdd
+          type: string
       required:
       - count
       - description
+      - total_size
+      - type
       type: object
     dedicated_server_preset_memory:
       description: "Объект, содержащий информацию об ОЗУ выделенного сервера."
@@ -57149,11 +57657,213 @@ components:
         ram:
           description: Размер ОЗУ сервера в МБ
           type: integer
+        gpu:
+          description: Количество видеокарт
+          type: integer
       required:
       - configurator_id
       - cpu
       - disk
       - ram
+      type: object
+    ClusterIn_configuration:
+      description: Параметры конфигурации мастер-ноды. Нельзя передавать вместе с
+        `preset_id`.
+      properties:
+        configurator_id:
+          description: ID конфигуратора мастер-ноды
+          type: integer
+        disk:
+          description: Размер диска в МБ
+          type: integer
+        cpu:
+          description: Количество ядер процессора
+          type: integer
+        ram:
+          description: Размер ОЗУ сервера в МБ
+          type: integer
+      required:
+      - configurator_id
+      - cpu
+      - disk
+      - ram
+      type: object
+    ClusterIn_maintenance_slot:
+      description: Окно обслуживания кластера
+      properties:
+        type:
+          description: В любое время или в заданное время. При значении `fixed_time`
+            поля `from` и `to` являются обязательными. Минимально допустимый временной
+            интервал — 3 часа. Время задается в часовом поясе UTC.
+          enum:
+          - any_time
+          - fixed_time
+          type: string
+        from:
+          description: Интервал времени с. Время должно быть в формате HH:MM (24 часа)
+          type: string
+        to:
+          description: Интервал времени до. Время должно быть в формате HH:MM (24
+            часа)
+          type: string
+      required:
+      - type
+      type: object
+    ClusterIn_oidc_provider:
+      description: OIDC-провайдер
+      properties:
+        name:
+          description: Название создаваемого подключения. Используется только для
+            идентификации и не влияет на остальные параметры
+          type: string
+        issuer_url:
+          description: "Адрес OIDC-провайдера, используемый для аутентификации пол\
+            ьзователей, запрашивающих доступ к кластеру"
+          type: string
+        client_id:
+          description: "Идентификатор сервиса, выданный OIDC-провайдером, от имени\
+            \ которого осуществляется запрос к ресурсам"
+          type: string
+        username_claim:
+          description: "Поле в JSON Web Token (JWT), используемое для идентификаци\
+            и пользователя"
+          type: string
+        groups_claim:
+          description: "Поле в JSON Web Token (JWT), содержащее названии группы, к\
+            \ которой принадлежит пользователь"
+          type: string
+      required:
+      - client_id
+      - issuer_url
+      - name
+      type: object
+    ClusterIn_cluster_network_cidr:
+      description: Определяет сетевые диапазоны (CIDR) для подов (pods_network) и
+        сервисов (services_network) в Kubernetes-кластере.
+      properties:
+        pods_network:
+          description: "Диапазон адресов подов. Подсеть должна принадлежать диапаз\
+            онам 10.0.0.0/x, 192.168.0.0/x, 172.16.0.0/x. Максимальный размер для\
+            \ подов CIDR 10.0.0.0/x - /8, 192.168.0.0/x - /16, 172.16.0.0/x - /12,\
+            \ минимальный CIDR в этих диапазонах - /28."
+          type: string
+        services_network:
+          description: "Диапазон адресов сервисов. Подсеть должна принадлежать диа\
+            пазонам 10.0.0.0/x, 192.168.0.0/x, 172.16.0.0/x. Максимальный размер CIDR\
+            \ для сервисов 10.0.0.0/x - /12, 192.168.0.0/x - /16, 172.16.0.0/x - /12,\
+            \ минимальный CIDR в этих диапазонах - /28."
+          type: string
+      type: object
+    RegistryOut_disk_stats:
+      description: Конфигурация диска
+      example:
+        size: 5
+        used: 2
+      properties:
+        size:
+          description: Размер диска
+          type: integer
+        used:
+          description: Используемый размер
+          type: integer
+      required:
+      - size
+      - used
+      type: object
+    RegistryIn_configuration:
+      description: Параметры конфигурации. Нельзя передавать вместе с `preset_id`.
+      example:
+        disk: 6
+        id: 0
+      properties:
+        id:
+          description: ID конфигуратора
+          type: integer
+        disk:
+          description: Размер диска в ГБ
+          type: integer
+      required:
+      - disk
+      - id
+      type: object
+    Container_Registry_presets_inner:
+      properties:
+        id:
+          description: ID тарифа
+          title: Id
+          type: integer
+        description:
+          description: Описание тарифа
+          title: Description
+          type: string
+        description_short:
+          description: Краткое описание тарифа
+          title: Description Short
+          type: string
+        disk:
+          description: Количество пространства в ГБ
+          title: Disk
+          type: integer
+        price:
+          description: Стоимость
+          title: Price
+          type: number
+        location:
+          description: Локация
+          title: Location
+          type: string
+      required:
+      - cpu
+      - description
+      - description_short
+      - disk
+      - id
+      - network
+      - price
+      - ram
+      type: object
+    Meta_1:
+      properties:
+        total:
+          description: Число элементов в результате
+          title: Total
+          type: integer
+      required:
+      - total
+      title: Meta
+      type: object
+    Tags:
+      description: Теги
+      properties:
+        tag:
+          description: Тег
+          title: Tag
+          type: string
+        digest:
+          description: Digest
+          title: Digest
+          type: string
+        size:
+          description: Размер
+          title: Size
+          type: integer
+      required:
+      - digest
+      - size
+      - tag
+      title: Tags
+      type: object
+    Container_Registry_Repositories_inner:
+      properties:
+        name:
+          description: Название репозитория
+          title: Name
+          type: string
+        tags:
+          $ref: '#/components/schemas/Tags'
+      required:
+      - name
+      - tags
       type: object
     vds_os:
       description: Операционная система сервера.
@@ -57655,6 +58365,45 @@ components:
       - size
       - used
       type: object
+    bucket_website_config_error_pages_inner:
+      example:
+        code: 404
+        document: 404.html
+      properties:
+        code:
+          description: Код ошибки.
+          example: 404
+          type: number
+        document:
+          description: Страница сайта.
+          example: 404.html
+          type: string
+      type: object
+    bucket_website_config:
+      description: Позволяет разместить статический веб-сайт используя файлы бакета
+      example:
+        error_pages:
+        - code: 404
+          document: 404.html
+        - code: 404
+          document: 404.html
+        index_page: index.html
+        enabled: true
+      properties:
+        enabled:
+          description: Включено ли сайтовое хранилище.
+          example: true
+          type: boolean
+        index_page:
+          description: Страница сайта.
+          example: index.html
+          type: string
+        error_pages:
+          description: Страницы ошибок.
+          items:
+            $ref: '#/components/schemas/bucket_website_config_error_pages_inner'
+          type: array
+      type: object
     transfer_status_errors_inner:
       example:
         try: 1
@@ -57671,19 +58420,6 @@ components:
       required:
       - try
       - value
-      type: object
-    s3_object_owner:
-      description: Информация о владельце файла или папки.
-      example:
-        id: id
-        display_name: display_name
-      properties:
-        id:
-          description: ID владельца файла.
-          type: string
-        display_name:
-          description: Имя владельца файла.
-          type: string
       type: object
     mailbox_auto_reply:
       description: Автоответчик на входящие письма

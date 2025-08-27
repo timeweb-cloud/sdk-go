@@ -28,7 +28,7 @@ type DatabaseAdmin struct {
 	Login string `json:"login"`
 	// Пароль пользователя базы данных
 	Password string `json:"password"`
-	// Описанеие пользователя базы данных
+	// Описание пользователя базы данных
 	Description string `json:"description"`
 	// Хост пользователя
 	Host NullableString `json:"host"`

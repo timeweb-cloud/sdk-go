@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-    createDedicatedServer := *openapiclient.NewCreateDedicatedServer(float32(2377), float32(81), "P1M", "name") // CreateDedicatedServer | 
+    createDedicatedServer := *openapiclient.NewCreateDedicatedServer(float32(81), "P1M", "name") // CreateDedicatedServer | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

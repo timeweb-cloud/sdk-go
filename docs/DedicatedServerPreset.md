@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **IsPreInstalled** | **bool** | Это логическое значение, которое показывает, готов ли выделенный сервер к моментальной выдаче. | 
 **Cpu** | [**DedicatedServerPresetCpu**](DedicatedServerPresetCpu.md) |  | 
 **Disk** | [**DedicatedServerPresetDisk**](DedicatedServerPresetDisk.md) |  | 
-**Price** | Pointer to **float32** | Стоимость тарифа выделенного сервера | [optional] 
+**Price** | **float32** | Стоимость тарифа выделенного сервера | 
 **Memory** | [**DedicatedServerPresetMemory**](DedicatedServerPresetMemory.md) |  | 
 **Location** | **string** | Локация. | 
 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewDedicatedServerPreset
 
-`func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, isPreInstalled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, memory DedicatedServerPresetMemory, location string, ) *DedicatedServerPreset`
+`func NewDedicatedServerPreset(id float32, description string, isIpmiEnabled bool, isPreInstalled bool, cpu DedicatedServerPresetCpu, disk DedicatedServerPresetDisk, price float32, memory DedicatedServerPresetMemory, location string, ) *DedicatedServerPreset`
 
 NewDedicatedServerPreset instantiates a new DedicatedServerPreset object
 This constructor will assign default values to properties that have it defined,
@@ -172,11 +172,6 @@ and a boolean to check if the value has been set.
 
 SetPrice sets Price field to given value.
 
-### HasPrice
-
-`func (o *DedicatedServerPreset) HasPrice() bool`
-
-HasPrice returns a boolean if a field has been set.
 
 ### GetMemory
 

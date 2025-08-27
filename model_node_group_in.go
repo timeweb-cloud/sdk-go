@@ -35,6 +35,8 @@ type NodeGroupIn struct {
 	MinSize *int32 `json:"min-size,omitempty"`
 	// Максимальное количество нод. Передавать в связке с параметрами `is_autoscaling` и `min_size`. Максимальное количество нод ограничено тарифом кластера
 	MaxSize *int32 `json:"max-size,omitempty"`
+	// Автоматическое восстановление работоспособности вышедших из строя узлов
+	IsAutohealing *bool `json:"is_autohealing,omitempty"`
 }
 
 // NewNodeGroupIn instantiates a new NodeGroupIn object
@@ -296,6 +298,38 @@ func (o *NodeGroupIn) SetMaxSize(v int32) {
 	o.MaxSize = &v
 }
 
+// GetIsAutohealing returns the IsAutohealing field value if set, zero value otherwise.
+func (o *NodeGroupIn) GetIsAutohealing() bool {
+	if o == nil || IsNil(o.IsAutohealing) {
+		var ret bool
+		return ret
+	}
+	return *o.IsAutohealing
+}
+
+// GetIsAutohealingOk returns a tuple with the IsAutohealing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeGroupIn) GetIsAutohealingOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsAutohealing) {
+		return nil, false
+	}
+	return o.IsAutohealing, true
+}
+
+// HasIsAutohealing returns a boolean if a field has been set.
+func (o *NodeGroupIn) HasIsAutohealing() bool {
+	if o != nil && !IsNil(o.IsAutohealing) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAutohealing gets a reference to the given bool and assigns it to the IsAutohealing field.
+func (o *NodeGroupIn) SetIsAutohealing(v bool) {
+	o.IsAutohealing = &v
+}
+
 func (o NodeGroupIn) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -325,6 +359,9 @@ func (o NodeGroupIn) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MaxSize) {
 		toSerialize["max-size"] = o.MaxSize
+	}
+	if !IsNil(o.IsAutohealing) {
+		toSerialize["is_autohealing"] = o.IsAutohealing
 	}
 	return toSerialize, nil
 }

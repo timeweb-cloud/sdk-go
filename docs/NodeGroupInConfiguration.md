@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Disk** | **int32** | Размер диска в МБ | 
 **Cpu** | **int32** | Количество ядер процессора | 
 **Ram** | **int32** | Размер ОЗУ сервера в МБ | 
+**Gpu** | Pointer to **int32** | Количество видеокарт | [optional] 
 
 ## Methods
 
@@ -107,6 +108,31 @@ and a boolean to check if the value has been set.
 
 SetRam sets Ram field to given value.
 
+
+### GetGpu
+
+`func (o *NodeGroupInConfiguration) GetGpu() int32`
+
+GetGpu returns the Gpu field if non-nil, zero value otherwise.
+
+### GetGpuOk
+
+`func (o *NodeGroupInConfiguration) GetGpuOk() (*int32, bool)`
+
+GetGpuOk returns a tuple with the Gpu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpu
+
+`func (o *NodeGroupInConfiguration) SetGpu(v int32)`
+
+SetGpu sets Gpu field to given value.
+
+### HasGpu
+
+`func (o *NodeGroupInConfiguration) HasGpu() bool`
+
+HasGpu returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

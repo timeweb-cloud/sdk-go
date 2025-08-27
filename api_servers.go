@@ -3514,13 +3514,13 @@ type ApiGetServerStatisticsRequest struct {
 	dateTo *string
 }
 
-// Дата начала сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-25%202023-05-25T14%3A35%3A38&#x60;
+// Дата начала сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-25T14%3A35%3A38&#x60;
 func (r ApiGetServerStatisticsRequest) DateFrom(dateFrom string) ApiGetServerStatisticsRequest {
 	r.dateFrom = &dateFrom
 	return r
 }
 
-// Дата окончания сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-26%202023-05-25T14%3A35%3A38&#x60;
+// Дата окончания сбора статистики. Строка в формате ISO 8061, закодированная в ASCII, пример: &#x60;2023-05-26T14%3A35%3A38&#x60;
 func (r ApiGetServerStatisticsRequest) DateTo(dateTo string) ApiGetServerStatisticsRequest {
 	r.dateTo = &dateTo
 	return r

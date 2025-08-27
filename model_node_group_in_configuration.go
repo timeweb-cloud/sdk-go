@@ -28,6 +28,8 @@ type NodeGroupInConfiguration struct {
 	Cpu int32 `json:"cpu"`
 	// Размер ОЗУ сервера в МБ
 	Ram int32 `json:"ram"`
+	// Количество видеокарт
+	Gpu *int32 `json:"gpu,omitempty"`
 }
 
 // NewNodeGroupInConfiguration instantiates a new NodeGroupInConfiguration object
@@ -147,6 +149,38 @@ func (o *NodeGroupInConfiguration) SetRam(v int32) {
 	o.Ram = v
 }
 
+// GetGpu returns the Gpu field value if set, zero value otherwise.
+func (o *NodeGroupInConfiguration) GetGpu() int32 {
+	if o == nil || IsNil(o.Gpu) {
+		var ret int32
+		return ret
+	}
+	return *o.Gpu
+}
+
+// GetGpuOk returns a tuple with the Gpu field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeGroupInConfiguration) GetGpuOk() (*int32, bool) {
+	if o == nil || IsNil(o.Gpu) {
+		return nil, false
+	}
+	return o.Gpu, true
+}
+
+// HasGpu returns a boolean if a field has been set.
+func (o *NodeGroupInConfiguration) HasGpu() bool {
+	if o != nil && !IsNil(o.Gpu) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpu gets a reference to the given int32 and assigns it to the Gpu field.
+func (o *NodeGroupInConfiguration) SetGpu(v int32) {
+	o.Gpu = &v
+}
+
 func (o NodeGroupInConfiguration) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -161,6 +195,9 @@ func (o NodeGroupInConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize["disk"] = o.Disk
 	toSerialize["cpu"] = o.Cpu
 	toSerialize["ram"] = o.Ram
+	if !IsNil(o.Gpu) {
+		toSerialize["gpu"] = o.Gpu
+	}
 	return toSerialize, nil
 }
 

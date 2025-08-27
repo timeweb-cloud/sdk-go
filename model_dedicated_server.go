@@ -71,13 +71,21 @@ type DedicatedServer struct {
 	AutoinstallReady float32 `json:"autoinstall_ready"`
 	// Пароль root сервера или пароль Администратора для серверов Windows.
 	Password NullableString `json:"password"`
+	// Ссылка на аватар сервера.
+	AvatarLink NullableString `json:"avatar_link"`
+	// Это логическое значение, которое показывает, готов ли выделенный сервер к моментальной выдаче.
+	IsPreInstalled bool `json:"is_pre_installed"`
+	// ID тарифа сервера.
+	PresetId int32 `json:"preset_id"`
+	// ID проекта
+	ProjectId int32 `json:"project_id"`
 }
 
 // NewDedicatedServer instantiates a new DedicatedServer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32, password NullableString) *DedicatedServer {
+func NewDedicatedServer(id float32, cpuDescription string, hddDescription string, ramDescription string, createdAt time.Time, ip NullableString, ipmiIp NullableString, ipmiLogin NullableString, ipmiPassword NullableString, ipv6 NullableString, nodeId NullableFloat32, name string, comment string, vncPass NullableString, status string, osId NullableFloat32, cpId NullableFloat32, bandwidthId NullableFloat32, networkDriveId []float32, additionalIpAddrId []float32, planId NullableFloat32, price float32, location string, autoinstallReady float32, password NullableString, avatarLink NullableString, isPreInstalled bool, presetId int32, projectId int32) *DedicatedServer {
 	this := DedicatedServer{}
 	this.Id = id
 	this.CpuDescription = cpuDescription
@@ -104,6 +112,10 @@ func NewDedicatedServer(id float32, cpuDescription string, hddDescription string
 	this.Location = location
 	this.AutoinstallReady = autoinstallReady
 	this.Password = password
+	this.AvatarLink = avatarLink
+	this.IsPreInstalled = isPreInstalled
+	this.PresetId = presetId
+	this.ProjectId = projectId
 	return &this
 }
 
@@ -743,6 +755,104 @@ func (o *DedicatedServer) SetPassword(v string) {
 	o.Password.Set(&v)
 }
 
+// GetAvatarLink returns the AvatarLink field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DedicatedServer) GetAvatarLink() string {
+	if o == nil || o.AvatarLink.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.AvatarLink.Get()
+}
+
+// GetAvatarLinkOk returns a tuple with the AvatarLink field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DedicatedServer) GetAvatarLinkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AvatarLink.Get(), o.AvatarLink.IsSet()
+}
+
+// SetAvatarLink sets field value
+func (o *DedicatedServer) SetAvatarLink(v string) {
+	o.AvatarLink.Set(&v)
+}
+
+// GetIsPreInstalled returns the IsPreInstalled field value
+func (o *DedicatedServer) GetIsPreInstalled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsPreInstalled
+}
+
+// GetIsPreInstalledOk returns a tuple with the IsPreInstalled field value
+// and a boolean to check if the value has been set.
+func (o *DedicatedServer) GetIsPreInstalledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsPreInstalled, true
+}
+
+// SetIsPreInstalled sets field value
+func (o *DedicatedServer) SetIsPreInstalled(v bool) {
+	o.IsPreInstalled = v
+}
+
+// GetPresetId returns the PresetId field value
+func (o *DedicatedServer) GetPresetId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.PresetId
+}
+
+// GetPresetIdOk returns a tuple with the PresetId field value
+// and a boolean to check if the value has been set.
+func (o *DedicatedServer) GetPresetIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PresetId, true
+}
+
+// SetPresetId sets field value
+func (o *DedicatedServer) SetPresetId(v int32) {
+	o.PresetId = v
+}
+
+// GetProjectId returns the ProjectId field value
+func (o *DedicatedServer) GetProjectId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value
+// and a boolean to check if the value has been set.
+func (o *DedicatedServer) GetProjectIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProjectId, true
+}
+
+// SetProjectId sets field value
+func (o *DedicatedServer) SetProjectId(v int32) {
+	o.ProjectId = v
+}
+
 func (o DedicatedServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -782,6 +892,10 @@ func (o DedicatedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize["location"] = o.Location
 	toSerialize["autoinstall_ready"] = o.AutoinstallReady
 	toSerialize["password"] = o.Password.Get()
+	toSerialize["avatar_link"] = o.AvatarLink.Get()
+	toSerialize["is_pre_installed"] = o.IsPreInstalled
+	toSerialize["preset_id"] = o.PresetId
+	toSerialize["project_id"] = o.ProjectId
 	return toSerialize, nil
 }
 

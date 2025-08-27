@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateBalancer{}
 
 // CreateBalancer struct for CreateBalancer
 type CreateBalancer struct {
-	// Удобочитаемое имя, установленное для балансировщика.
+	// Удобочитаемое имя, установленное для балансировщика. Должно быть уникальным в рамках аккаунта
 	Name string `json:"name"`
 	// Алгоритм переключений балансировщика.
 	Algo string `json:"algo"`
@@ -60,6 +60,8 @@ type CreateBalancer struct {
 	PresetId float32 `json:"preset_id"`
 	Network *Network `json:"network,omitempty"`
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
+	// ID проекта
+	ProjectId *int32 `json:"project_id,omitempty"`
 }
 
 // NewCreateBalancer instantiates a new CreateBalancer object
@@ -653,6 +655,38 @@ func (o *CreateBalancer) SetAvailabilityZone(v AvailabilityZone) {
 	o.AvailabilityZone = &v
 }
 
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *CreateBalancer) GetProjectId() int32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret int32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetProjectIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *CreateBalancer) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *CreateBalancer) SetProjectId(v int32) {
+	o.ProjectId = &v
+}
+
 func (o CreateBalancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -697,6 +731,9 @@ func (o CreateBalancer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AvailabilityZone) {
 		toSerialize["availability_zone"] = o.AvailabilityZone
+	}
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
 	}
 	return toSerialize, nil
 }

@@ -7,13 +7,15 @@ Name | Type | Description | Notes
 **Name** | **string** | Название хранилища. | 
 **Description** | Pointer to **string** | Комментарий к хранилищу. | [optional] 
 **Type** | **string** | Тип хранилища. | 
-**PresetId** | **float32** | ID тарифа. | 
+**PresetId** | Pointer to **float32** | ID тарифа. Нельзя передавать вместе с &#x60;configurator&#x60;. | [optional] 
+**Configurator** | Pointer to [**CreateStorageRequestConfigurator**](CreateStorageRequestConfigurator.md) |  | [optional] 
+**ProjectId** | Pointer to **float32** | ID проекта. | [optional] 
 
 ## Methods
 
 ### NewCreateStorageRequest
 
-`func NewCreateStorageRequest(name string, type_ string, presetId float32, ) *CreateStorageRequest`
+`func NewCreateStorageRequest(name string, type_ string, ) *CreateStorageRequest`
 
 NewCreateStorageRequest instantiates a new CreateStorageRequest object
 This constructor will assign default values to properties that have it defined,
@@ -112,6 +114,61 @@ and a boolean to check if the value has been set.
 
 SetPresetId sets PresetId field to given value.
 
+### HasPresetId
+
+`func (o *CreateStorageRequest) HasPresetId() bool`
+
+HasPresetId returns a boolean if a field has been set.
+
+### GetConfigurator
+
+`func (o *CreateStorageRequest) GetConfigurator() CreateStorageRequestConfigurator`
+
+GetConfigurator returns the Configurator field if non-nil, zero value otherwise.
+
+### GetConfiguratorOk
+
+`func (o *CreateStorageRequest) GetConfiguratorOk() (*CreateStorageRequestConfigurator, bool)`
+
+GetConfiguratorOk returns a tuple with the Configurator field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurator
+
+`func (o *CreateStorageRequest) SetConfigurator(v CreateStorageRequestConfigurator)`
+
+SetConfigurator sets Configurator field to given value.
+
+### HasConfigurator
+
+`func (o *CreateStorageRequest) HasConfigurator() bool`
+
+HasConfigurator returns a boolean if a field has been set.
+
+### GetProjectId
+
+`func (o *CreateStorageRequest) GetProjectId() float32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *CreateStorageRequest) GetProjectIdOk() (*float32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *CreateStorageRequest) SetProjectId(v float32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *CreateStorageRequest) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -27,18 +27,17 @@ const (
 	POSTGRES15 DbType = "postgres15"
 	POSTGRES16 DbType = "postgres16"
 	POSTGRES17 DbType = "postgres17"
-	REDIS DbType = "redis"
 	REDIS7 DbType = "redis7"
-	MONGODB4 DbType = "mongodb4"
-	MONGODB DbType = "mongodb"
-	MONGODB6 DbType = "mongodb6"
+	REDIS8_1 DbType = "redis8_1"
 	MONGODB7 DbType = "mongodb7"
+	MONGODB8_0 DbType = "mongodb8_0"
 	OPENSEARCH DbType = "opensearch"
-	KAFKA DbType = "kafka"
-	RABBITMQ DbType = "rabbitmq"
+	OPENSEARCH2_19 DbType = "opensearch2_19"
 	CLICKHOUSE DbType = "clickhouse"
 	CLICKHOUSE24 DbType = "clickhouse24"
 	CLICKHOUSE25 DbType = "clickhouse25"
+	KAFKA DbType = "kafka"
+	RABBITMQ4_0 DbType = "rabbitmq4_0"
 )
 
 // All allowed values of DbType enum
@@ -49,18 +48,17 @@ var AllowedDbTypeEnumValues = []DbType{
 	"postgres15",
 	"postgres16",
 	"postgres17",
-	"redis",
 	"redis7",
-	"mongodb4",
-	"mongodb",
-	"mongodb6",
+	"redis8_1",
 	"mongodb7",
+	"mongodb8_0",
 	"opensearch",
-	"kafka",
-	"rabbitmq",
+	"opensearch2_19",
 	"clickhouse",
 	"clickhouse24",
 	"clickhouse25",
+	"kafka",
+	"rabbitmq4_0",
 }
 
 func (v *DbType) UnmarshalJSON(src []byte) error {

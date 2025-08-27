@@ -33,7 +33,7 @@ type CreateServer struct {
 	PresetId *float32 `json:"preset_id,omitempty"`
 	// Пропускная способность тарифа. Доступные значения от 100 до 1000 с шагом 100.
 	Bandwidth *float32 `json:"bandwidth,omitempty"`
-	// Имя облачного сервера. Максимальная длина — 255 символов, имя должно быть уникальным.
+	// Имя облачного сервера. Максимальная длина — 255 символов.
 	Name string `json:"name"`
 	// ID аватара сервера.
 	// Deprecated
@@ -49,6 +49,8 @@ type CreateServer struct {
 	// Cloud-init скрипт
 	CloudInit *string `json:"cloud_init,omitempty"`
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
+	// ID проекта.
+	ProjectId *float32 `json:"project_id,omitempty"`
 }
 
 // NewCreateServer instantiates a new CreateServer object
@@ -547,6 +549,38 @@ func (o *CreateServer) SetAvailabilityZone(v AvailabilityZone) {
 	o.AvailabilityZone = &v
 }
 
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *CreateServer) GetProjectId() float32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret float32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateServer) GetProjectIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *CreateServer) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
+func (o *CreateServer) SetProjectId(v float32) {
+	o.ProjectId = &v
+}
+
 func (o CreateServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -599,6 +633,9 @@ func (o CreateServer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AvailabilityZone) {
 		toSerialize["availability_zone"] = o.AvailabilityZone
+	}
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
 	}
 	return toSerialize, nil
 }

@@ -52,13 +52,18 @@ type Bucket struct {
 	MovedInQuarantineAt NullableTime `json:"moved_in_quarantine_at"`
 	// Класс хранилища.
 	StorageClass string `json:"storage_class"`
+	// ID проекта.
+	ProjectId float32 `json:"project_id"`
+	// ID тарифа.
+	RateId float32 `json:"rate_id"`
+	WebsiteConfig BucketWebsiteConfig `json:"website_config"`
 }
 
 // NewBucket instantiates a new Bucket object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string) *Bucket {
+func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, projectId float32, rateId float32, websiteConfig BucketWebsiteConfig) *Bucket {
 	this := Bucket{}
 	this.Id = id
 	this.Name = name
@@ -75,6 +80,9 @@ func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string,
 	this.SecretKey = secretKey
 	this.MovedInQuarantineAt = movedInQuarantineAt
 	this.StorageClass = storageClass
+	this.ProjectId = projectId
+	this.RateId = rateId
+	this.WebsiteConfig = websiteConfig
 	return &this
 }
 
@@ -486,6 +494,78 @@ func (o *Bucket) SetStorageClass(v string) {
 	o.StorageClass = v
 }
 
+// GetProjectId returns the ProjectId field value
+func (o *Bucket) GetProjectId() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value
+// and a boolean to check if the value has been set.
+func (o *Bucket) GetProjectIdOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProjectId, true
+}
+
+// SetProjectId sets field value
+func (o *Bucket) SetProjectId(v float32) {
+	o.ProjectId = v
+}
+
+// GetRateId returns the RateId field value
+func (o *Bucket) GetRateId() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.RateId
+}
+
+// GetRateIdOk returns a tuple with the RateId field value
+// and a boolean to check if the value has been set.
+func (o *Bucket) GetRateIdOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RateId, true
+}
+
+// SetRateId sets field value
+func (o *Bucket) SetRateId(v float32) {
+	o.RateId = v
+}
+
+// GetWebsiteConfig returns the WebsiteConfig field value
+func (o *Bucket) GetWebsiteConfig() BucketWebsiteConfig {
+	if o == nil {
+		var ret BucketWebsiteConfig
+		return ret
+	}
+
+	return o.WebsiteConfig
+}
+
+// GetWebsiteConfigOk returns a tuple with the WebsiteConfig field value
+// and a boolean to check if the value has been set.
+func (o *Bucket) GetWebsiteConfigOk() (*BucketWebsiteConfig, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.WebsiteConfig, true
+}
+
+// SetWebsiteConfig sets field value
+func (o *Bucket) SetWebsiteConfig(v BucketWebsiteConfig) {
+	o.WebsiteConfig = v
+}
+
 func (o Bucket) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -514,6 +594,9 @@ func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize["secret_key"] = o.SecretKey
 	toSerialize["moved_in_quarantine_at"] = o.MovedInQuarantineAt.Get()
 	toSerialize["storage_class"] = o.StorageClass
+	toSerialize["project_id"] = o.ProjectId
+	toSerialize["rate_id"] = o.RateId
+	toSerialize["website_config"] = o.WebsiteConfig
 	return toSerialize, nil
 }
 

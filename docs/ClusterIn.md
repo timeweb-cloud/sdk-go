@@ -11,16 +11,21 @@ Name | Type | Description | Notes
 **NetworkDriver** | **string** | Тип используемого сетевого драйвера в кластере | 
 **IsIngress** | Pointer to **bool** | Логическое значение, которое показывает, использовать ли Ingress в кластере | [optional] 
 **IsK8sDashboard** | Pointer to **bool** | Логическое значение, которое показывает, использовать ли Kubernetes Dashboard в кластере | [optional] 
-**PresetId** | **int32** | ID тарифа мастер-ноды | 
+**PresetId** | Pointer to **int32** | ID тарифа мастер-ноды. Нельзя передавать вместе с &#x60;configuration&#x60; | [optional] 
+**Configuration** | Pointer to [**ClusterInConfiguration**](ClusterInConfiguration.md) |  | [optional] 
+**MasterNodesCount** | Pointer to **int32** | Количество мастер нод | [optional] 
 **WorkerGroups** | Pointer to [**[]NodeGroupIn**](NodeGroupIn.md) | Группы воркеров в кластере | [optional] 
 **NetworkId** | Pointer to **string** | ID приватной сети | [optional] 
 **ProjectId** | Pointer to **int32** | ID проекта | [optional] 
+**MaintenanceSlot** | Pointer to [**ClusterInMaintenanceSlot**](ClusterInMaintenanceSlot.md) |  | [optional] 
+**OidcProvider** | Pointer to [**ClusterInOidcProvider**](ClusterInOidcProvider.md) |  | [optional] 
+**ClusterNetworkCidr** | Pointer to [**ClusterInClusterNetworkCidr**](ClusterInClusterNetworkCidr.md) |  | [optional] 
 
 ## Methods
 
 ### NewClusterIn
 
-`func NewClusterIn(name string, k8sVersion string, networkDriver string, presetId int32, ) *ClusterIn`
+`func NewClusterIn(name string, k8sVersion string, networkDriver string, ) *ClusterIn`
 
 NewClusterIn instantiates a new ClusterIn object
 This constructor will assign default values to properties that have it defined,
@@ -214,6 +219,61 @@ and a boolean to check if the value has been set.
 
 SetPresetId sets PresetId field to given value.
 
+### HasPresetId
+
+`func (o *ClusterIn) HasPresetId() bool`
+
+HasPresetId returns a boolean if a field has been set.
+
+### GetConfiguration
+
+`func (o *ClusterIn) GetConfiguration() ClusterInConfiguration`
+
+GetConfiguration returns the Configuration field if non-nil, zero value otherwise.
+
+### GetConfigurationOk
+
+`func (o *ClusterIn) GetConfigurationOk() (*ClusterInConfiguration, bool)`
+
+GetConfigurationOk returns a tuple with the Configuration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguration
+
+`func (o *ClusterIn) SetConfiguration(v ClusterInConfiguration)`
+
+SetConfiguration sets Configuration field to given value.
+
+### HasConfiguration
+
+`func (o *ClusterIn) HasConfiguration() bool`
+
+HasConfiguration returns a boolean if a field has been set.
+
+### GetMasterNodesCount
+
+`func (o *ClusterIn) GetMasterNodesCount() int32`
+
+GetMasterNodesCount returns the MasterNodesCount field if non-nil, zero value otherwise.
+
+### GetMasterNodesCountOk
+
+`func (o *ClusterIn) GetMasterNodesCountOk() (*int32, bool)`
+
+GetMasterNodesCountOk returns a tuple with the MasterNodesCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMasterNodesCount
+
+`func (o *ClusterIn) SetMasterNodesCount(v int32)`
+
+SetMasterNodesCount sets MasterNodesCount field to given value.
+
+### HasMasterNodesCount
+
+`func (o *ClusterIn) HasMasterNodesCount() bool`
+
+HasMasterNodesCount returns a boolean if a field has been set.
 
 ### GetWorkerGroups
 
@@ -289,6 +349,81 @@ SetProjectId sets ProjectId field to given value.
 `func (o *ClusterIn) HasProjectId() bool`
 
 HasProjectId returns a boolean if a field has been set.
+
+### GetMaintenanceSlot
+
+`func (o *ClusterIn) GetMaintenanceSlot() ClusterInMaintenanceSlot`
+
+GetMaintenanceSlot returns the MaintenanceSlot field if non-nil, zero value otherwise.
+
+### GetMaintenanceSlotOk
+
+`func (o *ClusterIn) GetMaintenanceSlotOk() (*ClusterInMaintenanceSlot, bool)`
+
+GetMaintenanceSlotOk returns a tuple with the MaintenanceSlot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaintenanceSlot
+
+`func (o *ClusterIn) SetMaintenanceSlot(v ClusterInMaintenanceSlot)`
+
+SetMaintenanceSlot sets MaintenanceSlot field to given value.
+
+### HasMaintenanceSlot
+
+`func (o *ClusterIn) HasMaintenanceSlot() bool`
+
+HasMaintenanceSlot returns a boolean if a field has been set.
+
+### GetOidcProvider
+
+`func (o *ClusterIn) GetOidcProvider() ClusterInOidcProvider`
+
+GetOidcProvider returns the OidcProvider field if non-nil, zero value otherwise.
+
+### GetOidcProviderOk
+
+`func (o *ClusterIn) GetOidcProviderOk() (*ClusterInOidcProvider, bool)`
+
+GetOidcProviderOk returns a tuple with the OidcProvider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOidcProvider
+
+`func (o *ClusterIn) SetOidcProvider(v ClusterInOidcProvider)`
+
+SetOidcProvider sets OidcProvider field to given value.
+
+### HasOidcProvider
+
+`func (o *ClusterIn) HasOidcProvider() bool`
+
+HasOidcProvider returns a boolean if a field has been set.
+
+### GetClusterNetworkCidr
+
+`func (o *ClusterIn) GetClusterNetworkCidr() ClusterInClusterNetworkCidr`
+
+GetClusterNetworkCidr returns the ClusterNetworkCidr field if non-nil, zero value otherwise.
+
+### GetClusterNetworkCidrOk
+
+`func (o *ClusterIn) GetClusterNetworkCidrOk() (*ClusterInClusterNetworkCidr, bool)`
+
+GetClusterNetworkCidrOk returns a tuple with the ClusterNetworkCidr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterNetworkCidr
+
+`func (o *ClusterIn) SetClusterNetworkCidr(v ClusterInClusterNetworkCidr)`
+
+SetClusterNetworkCidr sets ClusterNetworkCidr field to given value.
+
+### HasClusterNetworkCidr
+
+`func (o *ClusterIn) HasClusterNetworkCidr() bool`
+
+HasClusterNetworkCidr returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
