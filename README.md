@@ -389,6 +389,7 @@ Class | Method | HTTP request | Description
 *KubernetesAPI* | [**IncreaseCountOfNodesInGroup**](docs/KubernetesAPI.md#increasecountofnodesingroup) | **Post** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Увеличение количества нод в группе на указанное количество
 *KubernetesAPI* | [**ReduceCountOfNodesInGroup**](docs/KubernetesAPI.md#reducecountofnodesingroup) | **Delete** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Уменьшение количества нод в группе на указанное количество
 *KubernetesAPI* | [**UpdateCluster**](docs/KubernetesAPI.md#updatecluster) | **Patch** /api/v1/k8s/clusters/{cluster_id} | Обновление информации о кластере
+*KubernetesAPI* | [**UpdateClusterVersion**](docs/KubernetesAPI.md#updateclusterversion) | **Patch** /api/v1/k8s/clusters/{cluster_id}/versions/update | Обновление версии кластера
 *LocationsAPI* | [**GetLocations**](docs/LocationsAPI.md#getlocations) | **Get** /api/v2/locations | Получение списка локаций
 *MailAPI* | [**CreateDomainMailbox**](docs/MailAPI.md#createdomainmailbox) | **Post** /api/v1/mail/domains/{domain} | Создание почтового ящика
 *MailAPI* | [**CreateMultipleDomainMailboxes**](docs/MailAPI.md#createmultipledomainmailboxes) | **Post** /api/v1/mail/domains/{domain}/batch | Множественное создание почтовых ящиков
@@ -570,6 +571,7 @@ Class | Method | HTTP request | Description
  - [ClusterInOidcProvider](docs/ClusterInOidcProvider.md)
  - [ClusterOut](docs/ClusterOut.md)
  - [ClusterResponse](docs/ClusterResponse.md)
+ - [ClusterVersionEdit](docs/ClusterVersionEdit.md)
  - [Clusterk8s](docs/Clusterk8s.md)
  - [ClustersResponse](docs/ClustersResponse.md)
  - [Commit](docs/Commit.md)

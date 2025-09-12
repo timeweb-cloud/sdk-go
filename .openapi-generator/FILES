@@ -94,6 +94,7 @@ docs/ClusterInMaintenanceSlot.md
 docs/ClusterInOidcProvider.md
 docs/ClusterOut.md
 docs/ClusterResponse.md
+docs/ClusterVersionEdit.md
 docs/Clusterk8s.md
 docs/ClustersResponse.md
 docs/Commit.md
@@ -558,6 +559,7 @@ model_cluster_in_maintenance_slot.go
 model_cluster_in_oidc_provider.go
 model_cluster_out.go
 model_cluster_response.go
+model_cluster_version_edit.go
 model_clusterk8s.go
 model_clusters_response.go
 model_commit.go

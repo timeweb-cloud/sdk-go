@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**IncreaseCountOfNodesInGroup**](KubernetesAPI.md#IncreaseCountOfNodesInGroup) | **Post** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Увеличение количества нод в группе на указанное количество
 [**ReduceCountOfNodesInGroup**](KubernetesAPI.md#ReduceCountOfNodesInGroup) | **Delete** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Уменьшение количества нод в группе на указанное количество
 [**UpdateCluster**](KubernetesAPI.md#UpdateCluster) | **Patch** /api/v1/k8s/clusters/{cluster_id} | Обновление информации о кластере
+[**UpdateClusterVersion**](KubernetesAPI.md#UpdateClusterVersion) | **Patch** /api/v1/k8s/clusters/{cluster_id}/versions/update | Обновление версии кластера
 
 
 
@@ -1336,6 +1337,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ClusterResponse**](ClusterResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateClusterVersion
+
+> UpdateClusterVersion(ctx, clusterId).ClusterVersionEdit(clusterVersionEdit).Execute()
+
+Обновление версии кластера
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    clusterId := int32(56) // int32 | ID кластера
+    clusterVersionEdit := *openapiclient.NewClusterVersionEdit() // ClusterVersionEdit | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.KubernetesAPI.UpdateClusterVersion(context.Background(), clusterId).ClusterVersionEdit(clusterVersionEdit).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.UpdateClusterVersion``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** | ID кластера | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateClusterVersionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **clusterVersionEdit** | [**ClusterVersionEdit**](ClusterVersionEdit.md) |  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 

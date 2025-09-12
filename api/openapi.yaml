@@ -14941,6 +14941,169 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/k8s/clusters/{cluster_id}/versions/update:
+    patch:
+      description: "Чтобы обновить версию кластера, отправьте PATCH-запрос в `/api/v1/k8s/clusters/{cluster_id}/versions/update`"
+      operationId: updateClusterVersion
+      parameters:
+      - description: ID кластера
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: ID кластера
+          title: Cluster Id
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterVersionEdit'
+        required: true
+      responses:
+        "200":
+          description: Версия обновлена
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Обновление версии кластера
+      tags:
+      - Kubernetes
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"k8s_version": "v1.33.3+k0s.0"}' \
+            "https://api.timeweb.cloud/api/v1/k8s/clusters/1/versions/update"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/k8s/clusters/1/versions/update', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{"k8s_version": "v1.33.3+k0s.0"}',
+              body: JSON.stringify({
+                  'k8s_version': 'v1.33.3+k0s.0'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/k8s/clusters/1/versions/update',
+              // '{"k8s_version": "v1.33.3+k0s.0"}',
+              {
+                  'k8s_version': 'v1.33.3+k0s.0'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              # Already added when you pass json=
+              # 'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'k8s_version': 'v1.33.3+k0s.0',
+          }
+
+          response = requests.patch('https://api.timeweb.cloud/api/v1/k8s/clusters/1/versions/update', headers=headers, json=json_data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/k8s/clusters/1/versions/update');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"k8s_version": "v1.33.3+k0s.0"}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"k8s_version\": \"v1.33.3+k0s.0\"}`)\n\
+          \treq, err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/k8s/clusters/1/versions/update\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/k8s/clusters/1/versions/update\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"k8s_version\\\": \\\"v1.33.3+k0s.0\\\"}\");\n\t\t\
+          writer.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v1/k8s/network-drivers:
     get:
       description: "Чтобы получить список сетевых драйверов k8s, отправьте GET-зап\
@@ -52798,6 +52961,17 @@ components:
           $ref: '#/components/schemas/delete-service-response'
       required:
       - cluster_delete
+      type: object
+    ClusterVersionEdit:
+      example:
+        k8s_version: v1.33.4+k0s.0
+      properties:
+        k8s_version:
+          description: Новая версия кластера
+          example: v1.33.4+k0s.0
+          title: k8s version
+          type: string
+      title: ClusterVersionEdit
       type: object
     getServers_200_response:
       example:

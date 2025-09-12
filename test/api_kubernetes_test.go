@@ -281,4 +281,17 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KubernetesAPIService UpdateClusterVersion", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+
+		httpRes, err := apiClient.KubernetesAPI.UpdateClusterVersion(context.Background(), clusterId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }
