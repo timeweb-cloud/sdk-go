@@ -15,132 +15,180 @@ import (
 	"encoding/json"
 )
 
-// checks if the ClusterEdit type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ClusterEdit{}
+// checks if the ClusterEditOidcProvider type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ClusterEditOidcProvider{}
 
-// ClusterEdit struct for ClusterEdit
-type ClusterEdit struct {
-	// Новое название кластера
-	Name *string `json:"name,omitempty"`
-	// Новое описание кластера
-	Description *string `json:"description,omitempty"`
-	OidcProvider *ClusterEditOidcProvider `json:"oidc_provider,omitempty"`
+// ClusterEditOidcProvider OIDC-провайдер
+type ClusterEditOidcProvider struct {
+	// Название создаваемого подключения. Используется только для идентификации и не влияет на остальные параметры
+	Name string `json:"name"`
+	// Адрес OIDC-провайдера, используемый для аутентификации пользователей, запрашивающих доступ к кластеру
+	IssuerUrl string `json:"issuer_url"`
+	// Идентификатор сервиса, выданный OIDC-провайдером, от имени которого осуществляется запрос к ресурсам
+	ClientId string `json:"client_id"`
+	// Поле в JSON Web Token (JWT), используемое для идентификации пользователя
+	UsernameClaim *string `json:"username_claim,omitempty"`
+	// Поле в JSON Web Token (JWT), содержащее названии группы, к которой принадлежит пользователь
+	GroupsClaim *string `json:"groups_claim,omitempty"`
 }
 
-// NewClusterEdit instantiates a new ClusterEdit object
+// NewClusterEditOidcProvider instantiates a new ClusterEditOidcProvider object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterEdit() *ClusterEdit {
-	this := ClusterEdit{}
+func NewClusterEditOidcProvider(name string, issuerUrl string, clientId string) *ClusterEditOidcProvider {
+	this := ClusterEditOidcProvider{}
+	this.Name = name
+	this.IssuerUrl = issuerUrl
+	this.ClientId = clientId
 	return &this
 }
 
-// NewClusterEditWithDefaults instantiates a new ClusterEdit object
+// NewClusterEditOidcProviderWithDefaults instantiates a new ClusterEditOidcProvider object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewClusterEditWithDefaults() *ClusterEdit {
-	this := ClusterEdit{}
+func NewClusterEditOidcProviderWithDefaults() *ClusterEditOidcProvider {
+	this := ClusterEditOidcProvider{}
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *ClusterEdit) GetName() string {
-	if o == nil || IsNil(o.Name) {
+// GetName returns the Name field value
+func (o *ClusterEditOidcProvider) GetName() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *ClusterEdit) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+func (o *ClusterEditOidcProvider) GetNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ClusterEdit) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
+// SetName sets field value
+func (o *ClusterEditOidcProvider) SetName(v string) {
+	o.Name = v
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *ClusterEdit) SetName(v string) {
-	o.Name = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *ClusterEdit) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+// GetIssuerUrl returns the IssuerUrl field value
+func (o *ClusterEditOidcProvider) GetIssuerUrl() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.IssuerUrl
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetIssuerUrlOk returns a tuple with the IssuerUrl field value
 // and a boolean to check if the value has been set.
-func (o *ClusterEdit) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+func (o *ClusterEditOidcProvider) GetIssuerUrlOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.IssuerUrl, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *ClusterEdit) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
+// SetIssuerUrl sets field value
+func (o *ClusterEditOidcProvider) SetIssuerUrl(v string) {
+	o.IssuerUrl = v
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *ClusterEdit) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetOidcProvider returns the OidcProvider field value if set, zero value otherwise.
-func (o *ClusterEdit) GetOidcProvider() ClusterEditOidcProvider {
-	if o == nil || IsNil(o.OidcProvider) {
-		var ret ClusterEditOidcProvider
+// GetClientId returns the ClientId field value
+func (o *ClusterEditOidcProvider) GetClientId() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.OidcProvider
+
+	return o.ClientId
 }
 
-// GetOidcProviderOk returns a tuple with the OidcProvider field value if set, nil otherwise
+// GetClientIdOk returns a tuple with the ClientId field value
 // and a boolean to check if the value has been set.
-func (o *ClusterEdit) GetOidcProviderOk() (*ClusterEditOidcProvider, bool) {
-	if o == nil || IsNil(o.OidcProvider) {
+func (o *ClusterEditOidcProvider) GetClientIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OidcProvider, true
+	return &o.ClientId, true
 }
 
-// HasOidcProvider returns a boolean if a field has been set.
-func (o *ClusterEdit) HasOidcProvider() bool {
-	if o != nil && !IsNil(o.OidcProvider) {
+// SetClientId sets field value
+func (o *ClusterEditOidcProvider) SetClientId(v string) {
+	o.ClientId = v
+}
+
+// GetUsernameClaim returns the UsernameClaim field value if set, zero value otherwise.
+func (o *ClusterEditOidcProvider) GetUsernameClaim() string {
+	if o == nil || IsNil(o.UsernameClaim) {
+		var ret string
+		return ret
+	}
+	return *o.UsernameClaim
+}
+
+// GetUsernameClaimOk returns a tuple with the UsernameClaim field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterEditOidcProvider) GetUsernameClaimOk() (*string, bool) {
+	if o == nil || IsNil(o.UsernameClaim) {
+		return nil, false
+	}
+	return o.UsernameClaim, true
+}
+
+// HasUsernameClaim returns a boolean if a field has been set.
+func (o *ClusterEditOidcProvider) HasUsernameClaim() bool {
+	if o != nil && !IsNil(o.UsernameClaim) {
 		return true
 	}
 
 	return false
 }
 
-// SetOidcProvider gets a reference to the given ClusterEditOidcProvider and assigns it to the OidcProvider field.
-func (o *ClusterEdit) SetOidcProvider(v ClusterEditOidcProvider) {
-	o.OidcProvider = &v
+// SetUsernameClaim gets a reference to the given string and assigns it to the UsernameClaim field.
+func (o *ClusterEditOidcProvider) SetUsernameClaim(v string) {
+	o.UsernameClaim = &v
 }
 
-func (o ClusterEdit) MarshalJSON() ([]byte, error) {
+// GetGroupsClaim returns the GroupsClaim field value if set, zero value otherwise.
+func (o *ClusterEditOidcProvider) GetGroupsClaim() string {
+	if o == nil || IsNil(o.GroupsClaim) {
+		var ret string
+		return ret
+	}
+	return *o.GroupsClaim
+}
+
+// GetGroupsClaimOk returns a tuple with the GroupsClaim field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterEditOidcProvider) GetGroupsClaimOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupsClaim) {
+		return nil, false
+	}
+	return o.GroupsClaim, true
+}
+
+// HasGroupsClaim returns a boolean if a field has been set.
+func (o *ClusterEditOidcProvider) HasGroupsClaim() bool {
+	if o != nil && !IsNil(o.GroupsClaim) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupsClaim gets a reference to the given string and assigns it to the GroupsClaim field.
+func (o *ClusterEditOidcProvider) SetGroupsClaim(v string) {
+	o.GroupsClaim = &v
+}
+
+func (o ClusterEditOidcProvider) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -148,52 +196,52 @@ func (o ClusterEdit) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ClusterEdit) ToMap() (map[string]interface{}, error) {
+func (o ClusterEditOidcProvider) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	toSerialize["name"] = o.Name
+	toSerialize["issuer_url"] = o.IssuerUrl
+	toSerialize["client_id"] = o.ClientId
+	if !IsNil(o.UsernameClaim) {
+		toSerialize["username_claim"] = o.UsernameClaim
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.OidcProvider) {
-		toSerialize["oidc_provider"] = o.OidcProvider
+	if !IsNil(o.GroupsClaim) {
+		toSerialize["groups_claim"] = o.GroupsClaim
 	}
 	return toSerialize, nil
 }
 
-type NullableClusterEdit struct {
-	value *ClusterEdit
+type NullableClusterEditOidcProvider struct {
+	value *ClusterEditOidcProvider
 	isSet bool
 }
 
-func (v NullableClusterEdit) Get() *ClusterEdit {
+func (v NullableClusterEditOidcProvider) Get() *ClusterEditOidcProvider {
 	return v.value
 }
 
-func (v *NullableClusterEdit) Set(val *ClusterEdit) {
+func (v *NullableClusterEditOidcProvider) Set(val *ClusterEditOidcProvider) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableClusterEdit) IsSet() bool {
+func (v NullableClusterEditOidcProvider) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableClusterEdit) Unset() {
+func (v *NullableClusterEditOidcProvider) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableClusterEdit(val *ClusterEdit) *NullableClusterEdit {
-	return &NullableClusterEdit{value: val, isSet: true}
+func NewNullableClusterEditOidcProvider(val *ClusterEditOidcProvider) *NullableClusterEditOidcProvider {
+	return &NullableClusterEditOidcProvider{value: val, isSet: true}
 }
 
-func (v NullableClusterEdit) MarshalJSON() ([]byte, error) {
+func (v NullableClusterEditOidcProvider) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableClusterEdit) UnmarshalJSON(src []byte) error {
+func (v *NullableClusterEditOidcProvider) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

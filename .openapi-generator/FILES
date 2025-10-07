@@ -87,6 +87,7 @@ docs/BucketWebsiteConfig.md
 docs/BucketWebsiteConfigErrorPagesInner.md
 docs/CheckDomain200Response.md
 docs/ClusterEdit.md
+docs/ClusterEditOidcProvider.md
 docs/ClusterIn.md
 docs/ClusterInClusterNetworkCidr.md
 docs/ClusterInConfiguration.md
@@ -552,6 +553,7 @@ model_bucket_website_config.go
 model_bucket_website_config_error_pages_inner.go
 model_check_domain_200_response.go
 model_cluster_edit.go
+model_cluster_edit_oidc_provider.go
 model_cluster_in.go
 model_cluster_in_cluster_network_cidr.go
 model_cluster_in_configuration.go

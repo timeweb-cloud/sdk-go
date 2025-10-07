@@ -15264,10 +15264,10 @@ paths:
           curl -X GET \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/k8s/presets"
+            "https://api.timeweb.cloud/api/v1/presets/k8s"
       - lang: JavaScript
         source: |
-          fetch('https://api.timeweb.cloud/api/v1/k8s/presets', {
+          fetch('https://api.timeweb.cloud/api/v1/presets/k8s', {
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
@@ -15277,7 +15277,7 @@ paths:
         source: |
           const axios = require('axios');
 
-          const response = await axios.get('https://api.timeweb.cloud/api/v1/k8s/presets', {
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/presets/k8s', {
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
@@ -15293,12 +15293,12 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          response = requests.get('https://api.timeweb.cloud/api/v1/k8s/presets', headers=headers)
+          response = requests.get('https://api.timeweb.cloud/api/v1/presets/k8s', headers=headers)
       - lang: PHP
         source: |
           <?php
           $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/k8s/presets');
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/presets/k8s');
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
           curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -15312,7 +15312,7 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/k8s/presets\"\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/presets/k8s\"\
           , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -15323,7 +15323,7 @@ paths:
         source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
           \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
           import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/k8s/presets\"\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/presets/k8s\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
           Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
@@ -46497,13 +46497,27 @@ components:
       type: object
     ClusterEdit:
       example:
+        oidc_provider:
+          name: oidc_provider
+          issuer_url: https://oidc-provider.com
+          client_id: client-id
+          username_claim: sub
+          groups_claim: groups
+        name: new name
         description: new description
       properties:
+        name:
+          description: Новое название кластера
+          example: new name
+          title: Name
+          type: string
         description:
           description: Новое описание кластера
           example: new description
           title: Description
           type: string
+        oidc_provider:
+          $ref: '#/components/schemas/ClusterEdit_oidc_provider'
       title: ClusterEdit
       type: object
     Resource:
@@ -57927,6 +57941,40 @@ components:
             \ для сервисов 10.0.0.0/x - /12, 192.168.0.0/x - /16, 172.16.0.0/x - /12,\
             \ минимальный CIDR в этих диапазонах - /28."
           type: string
+      type: object
+    ClusterEdit_oidc_provider:
+      description: OIDC-провайдер
+      example:
+        name: oidc_provider
+        issuer_url: https://oidc-provider.com
+        client_id: client-id
+        username_claim: sub
+        groups_claim: groups
+      properties:
+        name:
+          description: Название создаваемого подключения. Используется только для
+            идентификации и не влияет на остальные параметры
+          type: string
+        issuer_url:
+          description: "Адрес OIDC-провайдера, используемый для аутентификации пол\
+            ьзователей, запрашивающих доступ к кластеру"
+          type: string
+        client_id:
+          description: "Идентификатор сервиса, выданный OIDC-провайдером, от имени\
+            \ которого осуществляется запрос к ресурсам"
+          type: string
+        username_claim:
+          description: "Поле в JSON Web Token (JWT), используемое для идентификаци\
+            и пользователя"
+          type: string
+        groups_claim:
+          description: "Поле в JSON Web Token (JWT), содержащее названии группы, к\
+            \ которой принадлежит пользователь"
+          type: string
+      required:
+      - client_id
+      - issuer_url
+      - name
       type: object
     RegistryOut_disk_stats:
       description: Конфигурация диска
