@@ -18,6 +18,7 @@ api_kubernetes.go
 api_locations.go
 api_mail.go
 api_network_drives.go
+api_payments.go
 api_projects.go
 api_s3.go
 api_servers.go
@@ -141,6 +142,7 @@ docs/CreateMultipleDomainMailboxesRequest.md
 docs/CreateMultipleDomainMailboxesRequestMailboxesInner.md
 docs/CreateNetworkDrive.md
 docs/CreateNetworkDrive201Response.md
+docs/CreatePayment.md
 docs/CreateProject.md
 docs/CreateProject201Response.md
 docs/CreateRule.md
@@ -234,6 +236,7 @@ docs/ForwardingOutgoingIsEnabled.md
 docs/Frameworks.md
 docs/Free.md
 docs/GetAccountStatus200Response.md
+docs/GetAccountStatus403Response.md
 docs/GetAllProjectResources200Response.md
 docs/GetAppDeploys200Response.md
 docs/GetAppLogs200Response.md
@@ -270,13 +273,13 @@ docs/GetDomains200Response.md
 docs/GetFinances200Response.md
 docs/GetFinances400Response.md
 docs/GetFinances401Response.md
-docs/GetFinances403Response.md
 docs/GetFinances429Response.md
 docs/GetFinances500Response.md
 docs/GetFloatingIps200Response.md
 docs/GetImage404Response.md
 docs/GetKey200Response.md
 docs/GetKeys200Response.md
+docs/GetLinkCardPayment200Response.md
 docs/GetLocations200Response.md
 docs/GetMailQuota200Response.md
 docs/GetMailboxes200Response.md
@@ -308,6 +311,8 @@ docs/GetServerStatistics200ResponseRamInner.md
 docs/GetServerStatisticsNew200Response.md
 docs/GetServers200Response.md
 docs/GetServersPresets200Response.md
+docs/GetServicePrices200Response.md
+docs/GetServicePrices200ResponseMeta.md
 docs/GetSoftware200Response.md
 docs/GetStorageSubdomains200Response.md
 docs/GetStorageTransferStatus200Response.md
@@ -332,6 +337,7 @@ docs/ImageUrlIn.md
 docs/ImagesAPI.md
 docs/ImagesOutResponse.md
 docs/IncreaseNodes.md
+docs/InfoServicePrice.md
 docs/Invoice.md
 docs/K8SVersionsResponse.md
 docs/KubernetesAPI.md
@@ -369,6 +375,8 @@ docs/NotificationSettingChannel.md
 docs/NotificationSettingChannels.md
 docs/NotificationSettingType.md
 docs/OS.md
+docs/PaymentType.md
+docs/PaymentsAPI.md
 docs/PerformActionOnBackupRequest.md
 docs/PerformActionOnServerRequest.md
 docs/Policy.md
@@ -422,6 +430,12 @@ docs/ServersSoftwareRequirements.md
 docs/ServersStatistics.md
 docs/ServersStatisticsListInner.md
 docs/ServersStatisticsMeta.md
+docs/ServiceCostType.md
+docs/ServicePrice.md
+docs/ServicePriceConfiguration.md
+docs/ServicePriceType.md
+docs/ServiceServicePrice.md
+docs/ServiceServicePriceNodeGroupsInner.md
 docs/SetLabels.md
 docs/SettingCondition.md
 docs/SpamFilterIsDisabled.md
@@ -606,6 +620,7 @@ model_create_multiple_domain_mailboxes_request.go
 model_create_multiple_domain_mailboxes_request_mailboxes_inner.go
 model_create_network_drive.go
 model_create_network_drive_201_response.go
+model_create_payment.go
 model_create_project.go
 model_create_project_201_response.go
 model_create_rule.go
@@ -694,6 +709,7 @@ model_forwarding_outgoing_is_enabled.go
 model_frameworks.go
 model_free.go
 model_get_account_status_200_response.go
+model_get_account_status_403_response.go
 model_get_all_project_resources_200_response.go
 model_get_app_deploys_200_response.go
 model_get_app_logs_200_response.go
@@ -730,13 +746,13 @@ model_get_domains_200_response.go
 model_get_finances_200_response.go
 model_get_finances_400_response.go
 model_get_finances_401_response.go
-model_get_finances_403_response.go
 model_get_finances_429_response.go
 model_get_finances_500_response.go
 model_get_floating_ips_200_response.go
 model_get_image_404_response.go
 model_get_key_200_response.go
 model_get_keys_200_response.go
+model_get_link_card_payment_200_response.go
 model_get_locations_200_response.go
 model_get_mail_quota_200_response.go
 model_get_mailboxes_200_response.go
@@ -768,6 +784,8 @@ model_get_server_statistics_200_response_ram_inner.go
 model_get_server_statistics_new_200_response.go
 model_get_servers_200_response.go
 model_get_servers_presets_200_response.go
+model_get_service_prices_200_response.go
+model_get_service_prices_200_response_meta.go
 model_get_software_200_response.go
 model_get_storage_subdomains_200_response.go
 model_get_storage_transfer_status_200_response.go
@@ -791,6 +809,7 @@ model_image_url_auth.go
 model_image_url_in.go
 model_images_out_response.go
 model_increase_nodes.go
+model_info_service_price.go
 model_invoice.go
 model_k8_s_versions_response.go
 model_location.go
@@ -824,6 +843,7 @@ model_notification_setting_channel.go
 model_notification_setting_channels.go
 model_notification_setting_type.go
 model_os.go
+model_payment_type.go
 model_perform_action_on_backup_request.go
 model_perform_action_on_server_request.go
 model_policy.go
@@ -873,6 +893,12 @@ model_servers_software_requirements.go
 model_servers_statistics.go
 model_servers_statistics_list_inner.go
 model_servers_statistics_meta.go
+model_service_cost_type.go
+model_service_price.go
+model_service_price_configuration.go
+model_service_price_type.go
+model_service_service_price.go
+model_service_service_price_node_groups_inner.go
 model_set_labels.go
 model_setting_condition.go
 model_spam_filter_is_disabled.go
@@ -958,6 +984,7 @@ test/api_kubernetes_test.go
 test/api_locations_test.go
 test/api_mail_test.go
 test/api_network_drives_test.go
+test/api_payments_test.go
 test/api_projects_test.go
 test/api_s3_test.go
 test/api_servers_test.go

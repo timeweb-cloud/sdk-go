@@ -286,7 +286,7 @@ func (a *ContainerRegistryAPIService) DeleteRegistryExecute(r ApiDeleteRegistryR
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -587,7 +587,7 @@ func (a *ContainerRegistryAPIService) GetRegistryExecute(r ApiGetRegistryRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1054,7 +1054,7 @@ func (a *ContainerRegistryAPIService) UpdateRegistryExecute(r ApiUpdateRegistryR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

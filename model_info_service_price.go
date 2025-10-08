@@ -12,168 +12,302 @@ Contact: info@timeweb.cloud
 package openapi
 
 import (
-	"bytes"
-	"context"
-	"io"
-	"net/http"
-	"net/url"
+	"encoding/json"
 )
 
+// checks if the InfoServicePrice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InfoServicePrice{}
 
-// LocationsAPIService LocationsAPI service
-type LocationsAPIService service
-
-type ApiGetLocationsRequest struct {
-	ctx context.Context
-	ApiService *LocationsAPIService
+// InfoServicePrice Дополнительная информация о сервисе
+type InfoServicePrice struct {
+	// Название сервиса
+	Name *string `json:"name,omitempty"`
+	// Описание сервиса
+	Description *string `json:"description,omitempty"`
+	// Флаг, указывающий, подключен ли сервис
+	IsMounted *bool `json:"is_mounted,omitempty"`
+	// Размер в ГБ
+	Size *float32 `json:"size,omitempty"`
+	// Тип кластера базы данных
+	Type *string `json:"type,omitempty"`
+	// Количество
+	Count *float32 `json:"count,omitempty"`
 }
 
-func (r ApiGetLocationsRequest) Execute() (*GetLocations200Response, *http.Response, error) {
-	return r.ApiService.GetLocationsExecute(r)
+// NewInfoServicePrice instantiates a new InfoServicePrice object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewInfoServicePrice() *InfoServicePrice {
+	this := InfoServicePrice{}
+	return &this
 }
 
-/*
-GetLocations Получение списка локаций
-
-Чтобы получить список локаций, отправьте GET-запрос на `/api/v2/locations`.
-
- Тело ответа будет представлять собой объект JSON с ключом `locations`.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLocationsRequest
-*/
-func (a *LocationsAPIService) GetLocations(ctx context.Context) ApiGetLocationsRequest {
-	return ApiGetLocationsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
+// NewInfoServicePriceWithDefaults instantiates a new InfoServicePrice object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewInfoServicePriceWithDefaults() *InfoServicePrice {
+	this := InfoServicePrice{}
+	return &this
 }
 
-// Execute executes the request
-//  @return GetLocations200Response
-func (a *LocationsAPIService) GetLocationsExecute(r ApiGetLocationsRequest) (*GetLocations200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetLocations200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocations")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *InfoServicePrice) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
 	}
-
-	localVarPath := localBasePath + "/api/v2/locations"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v GetFinances400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v GetFinances401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetAccountStatus403Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v GetFinances429Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v GetFinances500Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return *o.Name
 }
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InfoServicePrice) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *InfoServicePrice) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *InfoServicePrice) SetName(v string) {
+	o.Name = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *InfoServicePrice) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InfoServicePrice) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *InfoServicePrice) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *InfoServicePrice) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetIsMounted returns the IsMounted field value if set, zero value otherwise.
+func (o *InfoServicePrice) GetIsMounted() bool {
+	if o == nil || IsNil(o.IsMounted) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMounted
+}
+
+// GetIsMountedOk returns a tuple with the IsMounted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InfoServicePrice) GetIsMountedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMounted) {
+		return nil, false
+	}
+	return o.IsMounted, true
+}
+
+// HasIsMounted returns a boolean if a field has been set.
+func (o *InfoServicePrice) HasIsMounted() bool {
+	if o != nil && !IsNil(o.IsMounted) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMounted gets a reference to the given bool and assigns it to the IsMounted field.
+func (o *InfoServicePrice) SetIsMounted(v bool) {
+	o.IsMounted = &v
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *InfoServicePrice) GetSize() float32 {
+	if o == nil || IsNil(o.Size) {
+		var ret float32
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InfoServicePrice) GetSizeOk() (*float32, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *InfoServicePrice) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given float32 and assigns it to the Size field.
+func (o *InfoServicePrice) SetSize(v float32) {
+	o.Size = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *InfoServicePrice) GetType() string {
+	if o == nil || IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InfoServicePrice) GetTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *InfoServicePrice) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *InfoServicePrice) SetType(v string) {
+	o.Type = &v
+}
+
+// GetCount returns the Count field value if set, zero value otherwise.
+func (o *InfoServicePrice) GetCount() float32 {
+	if o == nil || IsNil(o.Count) {
+		var ret float32
+		return ret
+	}
+	return *o.Count
+}
+
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InfoServicePrice) GetCountOk() (*float32, bool) {
+	if o == nil || IsNil(o.Count) {
+		return nil, false
+	}
+	return o.Count, true
+}
+
+// HasCount returns a boolean if a field has been set.
+func (o *InfoServicePrice) HasCount() bool {
+	if o != nil && !IsNil(o.Count) {
+		return true
+	}
+
+	return false
+}
+
+// SetCount gets a reference to the given float32 and assigns it to the Count field.
+func (o *InfoServicePrice) SetCount(v float32) {
+	o.Count = &v
+}
+
+func (o InfoServicePrice) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o InfoServicePrice) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.IsMounted) {
+		toSerialize["is_mounted"] = o.IsMounted
+	}
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Count) {
+		toSerialize["count"] = o.Count
+	}
+	return toSerialize, nil
+}
+
+type NullableInfoServicePrice struct {
+	value *InfoServicePrice
+	isSet bool
+}
+
+func (v NullableInfoServicePrice) Get() *InfoServicePrice {
+	return v.value
+}
+
+func (v *NullableInfoServicePrice) Set(val *InfoServicePrice) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableInfoServicePrice) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableInfoServicePrice) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableInfoServicePrice(val *InfoServicePrice) *NullableInfoServicePrice {
+	return &NullableInfoServicePrice{value: val, isSet: true}
+}
+
+func (v NullableInfoServicePrice) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableInfoServicePrice) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
+

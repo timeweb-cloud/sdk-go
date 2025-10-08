@@ -150,7 +150,7 @@ func (a *ServersAPIService) AddServerIPExecute(r ApiAddServerIPRequest) (*AddSer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -332,7 +332,7 @@ func (a *ServersAPIService) CloneServerExecute(r ApiCloneServerRequest) (*Create
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -509,7 +509,7 @@ func (a *ServersAPIService) CreateServerExecute(r ApiCreateServerRequest) (*Crea
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -688,7 +688,7 @@ func (a *ServersAPIService) CreateServerDiskExecute(r ApiCreateServerDiskRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -887,7 +887,7 @@ func (a *ServersAPIService) CreateServerDiskBackupExecute(r ApiCreateServerDiskB
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1079,7 +1079,7 @@ func (a *ServersAPIService) DeleteServerExecute(r ApiDeleteServerRequest) (*Dele
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1266,7 +1266,7 @@ func (a *ServersAPIService) DeleteServerDiskExecute(r ApiDeleteServerDiskRequest
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1451,7 +1451,7 @@ func (a *ServersAPIService) DeleteServerDiskBackupExecute(r ApiDeleteServerDiskB
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1633,7 +1633,7 @@ func (a *ServersAPIService) DeleteServerIPExecute(r ApiDeleteServerIPRequest) (*
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1801,7 +1801,7 @@ func (a *ServersAPIService) GetConfiguratorsExecute(r ApiGetConfiguratorsRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1956,7 +1956,7 @@ func (a *ServersAPIService) GetOsListExecute(r ApiGetOsListRequest) (*GetOsList2
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2127,7 +2127,7 @@ func (a *ServersAPIService) GetServerExecute(r ApiGetServerRequest) (*CreateServ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2316,7 +2316,7 @@ func (a *ServersAPIService) GetServerDiskExecute(r ApiGetServerDiskRequest) (*Cr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2505,7 +2505,7 @@ func (a *ServersAPIService) GetServerDiskAutoBackupSettingsExecute(r ApiGetServe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2692,7 +2692,7 @@ func (a *ServersAPIService) GetServerDiskBackupExecute(r ApiGetServerDiskBackupR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2872,7 +2872,7 @@ func (a *ServersAPIService) GetServerDiskBackupsExecute(r ApiGetServerDiskBackup
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3043,7 +3043,7 @@ func (a *ServersAPIService) GetServerDisksExecute(r ApiGetServerDisksRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3226,7 +3226,7 @@ func (a *ServersAPIService) GetServerIPsExecute(r ApiGetServerIPsRequest) (*GetS
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3438,7 +3438,7 @@ func (a *ServersAPIService) GetServerLogsExecute(r ApiGetServerLogsRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3645,7 +3645,7 @@ func (a *ServersAPIService) GetServerStatisticsExecute(r ApiGetServerStatisticsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3839,7 +3839,7 @@ func (a *ServersAPIService) GetServerStatisticsNewExecute(r ApiGetServerStatisti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4036,7 +4036,7 @@ func (a *ServersAPIService) GetServersExecute(r ApiGetServersRequest) (*GetServe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4202,7 +4202,7 @@ func (a *ServersAPIService) GetServersPresetsExecute(r ApiGetServersPresetsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4357,7 +4357,7 @@ func (a *ServersAPIService) GetSoftwareExecute(r ApiGetSoftwareRequest) (*GetSof
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4526,7 +4526,7 @@ func (a *ServersAPIService) HardShutdownServerExecute(r ApiHardShutdownServerReq
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4857,7 +4857,7 @@ func (a *ServersAPIService) PerformActionOnBackupExecute(r ApiPerformActionOnBac
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5039,7 +5039,7 @@ func (a *ServersAPIService) PerformActionOnServerExecute(r ApiPerformActionOnSer
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5210,7 +5210,7 @@ func (a *ServersAPIService) RebootServerExecute(r ApiRebootServerRequest) (*http
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5519,7 +5519,7 @@ func (a *ServersAPIService) ShutdownServerExecute(r ApiShutdownServerRequest) (*
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5841,7 +5841,7 @@ func (a *ServersAPIService) UpdateServerExecute(r ApiUpdateServerRequest) (*Crea
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6038,7 +6038,7 @@ func (a *ServersAPIService) UpdateServerDiskExecute(r ApiUpdateServerDiskRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6236,7 +6236,7 @@ func (a *ServersAPIService) UpdateServerDiskAutoBackupSettingsExecute(r ApiUpdat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6429,7 +6429,7 @@ func (a *ServersAPIService) UpdateServerDiskBackupExecute(r ApiUpdateServerDiskB
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6611,7 +6611,7 @@ func (a *ServersAPIService) UpdateServerIPExecute(r ApiUpdateServerIPRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6799,7 +6799,7 @@ func (a *ServersAPIService) UpdateServerNATExecute(r ApiUpdateServerNATRequest) 
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6979,7 +6979,7 @@ func (a *ServersAPIService) UpdateServerOSBootModeExecute(r ApiUpdateServerOSBoo
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

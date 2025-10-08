@@ -11,7 +11,6 @@ Method | HTTP request | Description
 [**GetAccountStatus**](AccountAPI.md#GetAccountStatus) | **Get** /api/v1/account/status | Получение статуса аккаунта
 [**GetAuthAccessSettings**](AccountAPI.md#GetAuthAccessSettings) | **Get** /api/v1/auth/access | Получить информацию о ограничениях авторизации пользователя
 [**GetCountries**](AccountAPI.md#GetCountries) | **Get** /api/v1/auth/access/countries | Получение списка стран
-[**GetFinances**](AccountAPI.md#GetFinances) | **Get** /api/v1/account/finances | Получение платежной информации
 [**GetNotificationSettings**](AccountAPI.md#GetNotificationSettings) | **Get** /api/v1/account/notification-settings | Получение настроек уведомлений аккаунта
 [**UpdateAuthRestrictionsByCountries**](AccountAPI.md#UpdateAuthRestrictionsByCountries) | **Post** /api/v1/auth/access/countries/enabled | Включение/отключение ограничений по стране
 [**UpdateAuthRestrictionsByIP**](AccountAPI.md#UpdateAuthRestrictionsByIP) | **Post** /api/v1/auth/access/ips/enabled | Включение/отключение ограничений по IP-адресу
@@ -451,67 +450,6 @@ Other parameters are passed through a pointer to a apiGetCountriesRequest struct
 ### Return type
 
 [**GetCountries200Response**](GetCountries200Response.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetFinances
-
-> GetFinances200Response GetFinances(ctx).Execute()
-
-Получение платежной информации
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountAPI.GetFinances(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.GetFinances``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetFinances`: GetFinances200Response
-    fmt.Fprintf(os.Stdout, "Response from `AccountAPI.GetFinances`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetFinancesRequest struct via the builder pattern
-
-
-### Return type
-
-[**GetFinances200Response**](GetFinances200Response.md)
 
 ### Authorization
 

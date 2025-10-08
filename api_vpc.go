@@ -142,7 +142,7 @@ func (a *VPCAPIService) CreateVPCExecute(r ApiCreateVPCRequest) (*CreateVPC201Re
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -308,7 +308,7 @@ func (a *VPCAPIService) DeleteVPCExecute(r ApiDeleteVPCRequest) (*http.Response,
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -467,7 +467,7 @@ func (a *VPCAPIService) GetVPCExecute(r ApiGetVPCRequest) (*CreateVPC201Response
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -635,7 +635,7 @@ func (a *VPCAPIService) GetVPCPortsExecute(r ApiGetVPCPortsRequest) (*GetVPCPort
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -803,7 +803,7 @@ func (a *VPCAPIService) GetVPCServicesExecute(r ApiGetVPCServicesRequest) (*GetV
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -967,7 +967,7 @@ func (a *VPCAPIService) GetVPCsExecute(r ApiGetVPCsRequest) (*GetVPCs200Response
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1146,7 +1146,7 @@ func (a *VPCAPIService) UpdateVPCsExecute(r ApiUpdateVPCsRequest) (*CreateVPC201
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetFinances403Response
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -12,168 +12,191 @@ Contact: info@timeweb.cloud
 package openapi
 
 import (
-	"bytes"
-	"context"
-	"io"
-	"net/http"
-	"net/url"
+	"encoding/json"
 )
 
+// checks if the ServicePriceConfiguration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ServicePriceConfiguration{}
 
-// LocationsAPIService LocationsAPI service
-type LocationsAPIService service
-
-type ApiGetLocationsRequest struct {
-	ctx context.Context
-	ApiService *LocationsAPIService
+// ServicePriceConfiguration Конфигурация сервиса
+type ServicePriceConfiguration struct {
+	// Количество ядер процессора
+	Cpu *float32 `json:"cpu,omitempty"`
+	// Объем оперативной памяти в МБ
+	Ram *float32 `json:"ram,omitempty"`
+	// Объем дискового пространства в ГБ
+	Disk *float32 `json:"disk,omitempty"`
 }
 
-func (r ApiGetLocationsRequest) Execute() (*GetLocations200Response, *http.Response, error) {
-	return r.ApiService.GetLocationsExecute(r)
+// NewServicePriceConfiguration instantiates a new ServicePriceConfiguration object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewServicePriceConfiguration() *ServicePriceConfiguration {
+	this := ServicePriceConfiguration{}
+	return &this
 }
 
-/*
-GetLocations Получение списка локаций
-
-Чтобы получить список локаций, отправьте GET-запрос на `/api/v2/locations`.
-
- Тело ответа будет представлять собой объект JSON с ключом `locations`.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLocationsRequest
-*/
-func (a *LocationsAPIService) GetLocations(ctx context.Context) ApiGetLocationsRequest {
-	return ApiGetLocationsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
+// NewServicePriceConfigurationWithDefaults instantiates a new ServicePriceConfiguration object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewServicePriceConfigurationWithDefaults() *ServicePriceConfiguration {
+	this := ServicePriceConfiguration{}
+	return &this
 }
 
-// Execute executes the request
-//  @return GetLocations200Response
-func (a *LocationsAPIService) GetLocationsExecute(r ApiGetLocationsRequest) (*GetLocations200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetLocations200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocations")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+// GetCpu returns the Cpu field value if set, zero value otherwise.
+func (o *ServicePriceConfiguration) GetCpu() float32 {
+	if o == nil || IsNil(o.Cpu) {
+		var ret float32
+		return ret
 	}
-
-	localVarPath := localBasePath + "/api/v2/locations"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v GetFinances400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v GetFinances401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetAccountStatus403Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v GetFinances429Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v GetFinances500Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return *o.Cpu
 }
+
+// GetCpuOk returns a tuple with the Cpu field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServicePriceConfiguration) GetCpuOk() (*float32, bool) {
+	if o == nil || IsNil(o.Cpu) {
+		return nil, false
+	}
+	return o.Cpu, true
+}
+
+// HasCpu returns a boolean if a field has been set.
+func (o *ServicePriceConfiguration) HasCpu() bool {
+	if o != nil && !IsNil(o.Cpu) {
+		return true
+	}
+
+	return false
+}
+
+// SetCpu gets a reference to the given float32 and assigns it to the Cpu field.
+func (o *ServicePriceConfiguration) SetCpu(v float32) {
+	o.Cpu = &v
+}
+
+// GetRam returns the Ram field value if set, zero value otherwise.
+func (o *ServicePriceConfiguration) GetRam() float32 {
+	if o == nil || IsNil(o.Ram) {
+		var ret float32
+		return ret
+	}
+	return *o.Ram
+}
+
+// GetRamOk returns a tuple with the Ram field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServicePriceConfiguration) GetRamOk() (*float32, bool) {
+	if o == nil || IsNil(o.Ram) {
+		return nil, false
+	}
+	return o.Ram, true
+}
+
+// HasRam returns a boolean if a field has been set.
+func (o *ServicePriceConfiguration) HasRam() bool {
+	if o != nil && !IsNil(o.Ram) {
+		return true
+	}
+
+	return false
+}
+
+// SetRam gets a reference to the given float32 and assigns it to the Ram field.
+func (o *ServicePriceConfiguration) SetRam(v float32) {
+	o.Ram = &v
+}
+
+// GetDisk returns the Disk field value if set, zero value otherwise.
+func (o *ServicePriceConfiguration) GetDisk() float32 {
+	if o == nil || IsNil(o.Disk) {
+		var ret float32
+		return ret
+	}
+	return *o.Disk
+}
+
+// GetDiskOk returns a tuple with the Disk field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServicePriceConfiguration) GetDiskOk() (*float32, bool) {
+	if o == nil || IsNil(o.Disk) {
+		return nil, false
+	}
+	return o.Disk, true
+}
+
+// HasDisk returns a boolean if a field has been set.
+func (o *ServicePriceConfiguration) HasDisk() bool {
+	if o != nil && !IsNil(o.Disk) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisk gets a reference to the given float32 and assigns it to the Disk field.
+func (o *ServicePriceConfiguration) SetDisk(v float32) {
+	o.Disk = &v
+}
+
+func (o ServicePriceConfiguration) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ServicePriceConfiguration) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Cpu) {
+		toSerialize["cpu"] = o.Cpu
+	}
+	if !IsNil(o.Ram) {
+		toSerialize["ram"] = o.Ram
+	}
+	if !IsNil(o.Disk) {
+		toSerialize["disk"] = o.Disk
+	}
+	return toSerialize, nil
+}
+
+type NullableServicePriceConfiguration struct {
+	value *ServicePriceConfiguration
+	isSet bool
+}
+
+func (v NullableServicePriceConfiguration) Get() *ServicePriceConfiguration {
+	return v.value
+}
+
+func (v *NullableServicePriceConfiguration) Set(val *ServicePriceConfiguration) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableServicePriceConfiguration) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableServicePriceConfiguration) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableServicePriceConfiguration(val *ServicePriceConfiguration) *NullableServicePriceConfiguration {
+	return &NullableServicePriceConfiguration{value: val, isSet: true}
+}
+
+func (v NullableServicePriceConfiguration) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableServicePriceConfiguration) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
+

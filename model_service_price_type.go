@@ -13,200 +13,136 @@ package openapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// checks if the GetFinances403Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetFinances403Response{}
+// ServicePriceType Тип сервиса
+type ServicePriceType string
 
-// GetFinances403Response struct for GetFinances403Response
-type GetFinances403Response struct {
-	// Короткий идентификатор, соответствующий возвращаемому коду состояния HTTP.
-	StatusCode float32 `json:"status_code"`
-	// Сообщение, предоставляющее дополнительную информацию об ошибке, в том числе сведения, помогающие устранить ее, когда это возможно.
-	Message *string `json:"message,omitempty"`
-	// Краткое описание ошибки HTTP на основе статуса.
-	ErrorCode string `json:"error_code"`
-	// ID запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
-	ResponseId string `json:"response_id"`
+// List of service-price-type
+const (
+	SERVER ServicePriceType = "server"
+	DEDICATED_SERVER ServicePriceType = "dedicated_server"
+	S3 ServicePriceType = "s3"
+	S3_OUTGOING_TRAFFIC ServicePriceType = "s3_outgoing_traffic"
+	K8S ServicePriceType = "k8s"
+	DATABASE ServicePriceType = "database"
+	BALANCER ServicePriceType = "balancer"
+	VPN ServicePriceType = "vpn"
+	MAIL ServicePriceType = "mail"
+	IMAGE ServicePriceType = "image"
+	FLOATING_IP ServicePriceType = "floating_ip"
+	FLOATING_IP_WITH_DDOS_GUARD ServicePriceType = "floating_ip_with_ddos_guard"
+	APP_FRONTEND ServicePriceType = "app_frontend"
+	APP_BACKEND ServicePriceType = "app_backend"
+	NETWORK_DRIVE ServicePriceType = "network_drive"
+	CONTAINER_REGISTRY ServicePriceType = "container_registry"
+	ROUTER ServicePriceType = "router"
+	VMWARE ServicePriceType = "vmware"
+	ADDITIONAL_DRIVE ServicePriceType = "additional_drive"
+	BACKUP ServicePriceType = "backup"
+)
+
+// All allowed values of ServicePriceType enum
+var AllowedServicePriceTypeEnumValues = []ServicePriceType{
+	"server",
+	"dedicated_server",
+	"s3",
+	"s3_outgoing_traffic",
+	"k8s",
+	"database",
+	"balancer",
+	"vpn",
+	"mail",
+	"image",
+	"floating_ip",
+	"floating_ip_with_ddos_guard",
+	"app_frontend",
+	"app_backend",
+	"network_drive",
+	"container_registry",
+	"router",
+	"vmware",
+	"additional_drive",
+	"backup",
 }
 
-// NewGetFinances403Response instantiates a new GetFinances403Response object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewGetFinances403Response(statusCode float32, errorCode string, responseId string) *GetFinances403Response {
-	this := GetFinances403Response{}
-	this.StatusCode = statusCode
-	this.ErrorCode = errorCode
-	this.ResponseId = responseId
-	return &this
-}
-
-// NewGetFinances403ResponseWithDefaults instantiates a new GetFinances403Response object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewGetFinances403ResponseWithDefaults() *GetFinances403Response {
-	this := GetFinances403Response{}
-	return &this
-}
-
-// GetStatusCode returns the StatusCode field value
-func (o *GetFinances403Response) GetStatusCode() float32 {
-	if o == nil {
-		var ret float32
-		return ret
+func (v *ServicePriceType) UnmarshalJSON(src []byte) error {
+	var value string
+	err := json.Unmarshal(src, &value)
+	if err != nil {
+		return err
+	}
+	enumTypeValue := ServicePriceType(value)
+	for _, existing := range AllowedServicePriceTypeEnumValues {
+		if existing == enumTypeValue {
+			*v = enumTypeValue
+			return nil
+		}
 	}
 
-	return o.StatusCode
+	return fmt.Errorf("%+v is not a valid ServicePriceType", value)
 }
 
-// GetStatusCodeOk returns a tuple with the StatusCode field value
-// and a boolean to check if the value has been set.
-func (o *GetFinances403Response) GetStatusCodeOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
+// NewServicePriceTypeFromValue returns a pointer to a valid ServicePriceType
+// for the value passed as argument, or an error if the value passed is not allowed by the enum
+func NewServicePriceTypeFromValue(v string) (*ServicePriceType, error) {
+	ev := ServicePriceType(v)
+	if ev.IsValid() {
+		return &ev, nil
+	} else {
+		return nil, fmt.Errorf("invalid value '%v' for ServicePriceType: valid values are %v", v, AllowedServicePriceTypeEnumValues)
 	}
-	return &o.StatusCode, true
 }
 
-// SetStatusCode sets field value
-func (o *GetFinances403Response) SetStatusCode(v float32) {
-	o.StatusCode = v
-}
-
-// GetMessage returns the Message field value if set, zero value otherwise.
-func (o *GetFinances403Response) GetMessage() string {
-	if o == nil || IsNil(o.Message) {
-		var ret string
-		return ret
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v ServicePriceType) IsValid() bool {
+	for _, existing := range AllowedServicePriceTypeEnumValues {
+		if existing == v {
+			return true
+		}
 	}
-	return *o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetFinances403Response) GetMessageOk() (*string, bool) {
-	if o == nil || IsNil(o.Message) {
-		return nil, false
-	}
-	return o.Message, true
-}
-
-// HasMessage returns a boolean if a field has been set.
-func (o *GetFinances403Response) HasMessage() bool {
-	if o != nil && !IsNil(o.Message) {
-		return true
-	}
-
 	return false
 }
 
-// SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *GetFinances403Response) SetMessage(v string) {
-	o.Message = &v
+// Ptr returns reference to service-price-type value
+func (v ServicePriceType) Ptr() *ServicePriceType {
+	return &v
 }
 
-// GetErrorCode returns the ErrorCode field value
-func (o *GetFinances403Response) GetErrorCode() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ErrorCode
-}
-
-// GetErrorCodeOk returns a tuple with the ErrorCode field value
-// and a boolean to check if the value has been set.
-func (o *GetFinances403Response) GetErrorCodeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ErrorCode, true
-}
-
-// SetErrorCode sets field value
-func (o *GetFinances403Response) SetErrorCode(v string) {
-	o.ErrorCode = v
-}
-
-// GetResponseId returns the ResponseId field value
-func (o *GetFinances403Response) GetResponseId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResponseId
-}
-
-// GetResponseIdOk returns a tuple with the ResponseId field value
-// and a boolean to check if the value has been set.
-func (o *GetFinances403Response) GetResponseIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResponseId, true
-}
-
-// SetResponseId sets field value
-func (o *GetFinances403Response) SetResponseId(v string) {
-	o.ResponseId = v
-}
-
-func (o GetFinances403Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o GetFinances403Response) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["status_code"] = o.StatusCode
-	if !IsNil(o.Message) {
-		toSerialize["message"] = o.Message
-	}
-	toSerialize["error_code"] = o.ErrorCode
-	toSerialize["response_id"] = o.ResponseId
-	return toSerialize, nil
-}
-
-type NullableGetFinances403Response struct {
-	value *GetFinances403Response
+type NullableServicePriceType struct {
+	value *ServicePriceType
 	isSet bool
 }
 
-func (v NullableGetFinances403Response) Get() *GetFinances403Response {
+func (v NullableServicePriceType) Get() *ServicePriceType {
 	return v.value
 }
 
-func (v *NullableGetFinances403Response) Set(val *GetFinances403Response) {
+func (v *NullableServicePriceType) Set(val *ServicePriceType) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetFinances403Response) IsSet() bool {
+func (v NullableServicePriceType) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetFinances403Response) Unset() {
+func (v *NullableServicePriceType) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetFinances403Response(val *GetFinances403Response) *NullableGetFinances403Response {
-	return &NullableGetFinances403Response{value: val, isSet: true}
+func NewNullableServicePriceType(val *ServicePriceType) *NullableServicePriceType {
+	return &NullableServicePriceType{value: val, isSet: true}
 }
 
-func (v NullableGetFinances403Response) MarshalJSON() ([]byte, error) {
+func (v NullableServicePriceType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetFinances403Response) UnmarshalJSON(src []byte) error {
+func (v *NullableServicePriceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

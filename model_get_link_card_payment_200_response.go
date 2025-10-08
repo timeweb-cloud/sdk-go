@@ -12,168 +12,136 @@ Contact: info@timeweb.cloud
 package openapi
 
 import (
-	"bytes"
-	"context"
-	"io"
-	"net/http"
-	"net/url"
+	"encoding/json"
 )
 
+// checks if the GetLinkCardPayment200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetLinkCardPayment200Response{}
 
-// LocationsAPIService LocationsAPI service
-type LocationsAPIService service
-
-type ApiGetLocationsRequest struct {
-	ctx context.Context
-	ApiService *LocationsAPIService
+// GetLinkCardPayment200Response struct for GetLinkCardPayment200Response
+type GetLinkCardPayment200Response struct {
+	// URL для подтверждения оплаты
+	ConfirmationUrl string `json:"confirmation_url"`
+	// ID запроса, который можно указывать при обращении в службу технической поддержки, чтобы помочь определить проблему.
+	ResponseId string `json:"response_id"`
 }
 
-func (r ApiGetLocationsRequest) Execute() (*GetLocations200Response, *http.Response, error) {
-	return r.ApiService.GetLocationsExecute(r)
+// NewGetLinkCardPayment200Response instantiates a new GetLinkCardPayment200Response object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewGetLinkCardPayment200Response(confirmationUrl string, responseId string) *GetLinkCardPayment200Response {
+	this := GetLinkCardPayment200Response{}
+	this.ConfirmationUrl = confirmationUrl
+	this.ResponseId = responseId
+	return &this
 }
 
-/*
-GetLocations Получение списка локаций
-
-Чтобы получить список локаций, отправьте GET-запрос на `/api/v2/locations`.
-
- Тело ответа будет представлять собой объект JSON с ключом `locations`.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLocationsRequest
-*/
-func (a *LocationsAPIService) GetLocations(ctx context.Context) ApiGetLocationsRequest {
-	return ApiGetLocationsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
+// NewGetLinkCardPayment200ResponseWithDefaults instantiates a new GetLinkCardPayment200Response object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewGetLinkCardPayment200ResponseWithDefaults() *GetLinkCardPayment200Response {
+	this := GetLinkCardPayment200Response{}
+	return &this
 }
 
-// Execute executes the request
-//  @return GetLocations200Response
-func (a *LocationsAPIService) GetLocationsExecute(r ApiGetLocationsRequest) (*GetLocations200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetLocations200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocations")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+// GetConfirmationUrl returns the ConfirmationUrl field value
+func (o *GetLinkCardPayment200Response) GetConfirmationUrl() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	localVarPath := localBasePath + "/api/v2/locations"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v GetFinances400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v GetFinances401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v GetAccountStatus403Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v GetFinances429Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v GetFinances500Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return o.ConfirmationUrl
 }
+
+// GetConfirmationUrlOk returns a tuple with the ConfirmationUrl field value
+// and a boolean to check if the value has been set.
+func (o *GetLinkCardPayment200Response) GetConfirmationUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ConfirmationUrl, true
+}
+
+// SetConfirmationUrl sets field value
+func (o *GetLinkCardPayment200Response) SetConfirmationUrl(v string) {
+	o.ConfirmationUrl = v
+}
+
+// GetResponseId returns the ResponseId field value
+func (o *GetLinkCardPayment200Response) GetResponseId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResponseId
+}
+
+// GetResponseIdOk returns a tuple with the ResponseId field value
+// and a boolean to check if the value has been set.
+func (o *GetLinkCardPayment200Response) GetResponseIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResponseId, true
+}
+
+// SetResponseId sets field value
+func (o *GetLinkCardPayment200Response) SetResponseId(v string) {
+	o.ResponseId = v
+}
+
+func (o GetLinkCardPayment200Response) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GetLinkCardPayment200Response) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["confirmation_url"] = o.ConfirmationUrl
+	toSerialize["response_id"] = o.ResponseId
+	return toSerialize, nil
+}
+
+type NullableGetLinkCardPayment200Response struct {
+	value *GetLinkCardPayment200Response
+	isSet bool
+}
+
+func (v NullableGetLinkCardPayment200Response) Get() *GetLinkCardPayment200Response {
+	return v.value
+}
+
+func (v *NullableGetLinkCardPayment200Response) Set(val *GetLinkCardPayment200Response) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableGetLinkCardPayment200Response) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableGetLinkCardPayment200Response) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableGetLinkCardPayment200Response(val *GetLinkCardPayment200Response) *NullableGetLinkCardPayment200Response {
+	return &NullableGetLinkCardPayment200Response{value: val, isSet: true}
+}
+
+func (v NullableGetLinkCardPayment200Response) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableGetLinkCardPayment200Response) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
+

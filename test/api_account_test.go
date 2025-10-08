@@ -106,18 +106,6 @@ func Test_openapi_AccountAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AccountAPIService GetFinances", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.AccountAPI.GetFinances(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test AccountAPIService GetNotificationSettings", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

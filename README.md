@@ -235,7 +235,6 @@ Class | Method | HTTP request | Description
 *AccountAPI* | [**GetAccountStatus**](docs/AccountAPI.md#getaccountstatus) | **Get** /api/v1/account/status | Получение статуса аккаунта
 *AccountAPI* | [**GetAuthAccessSettings**](docs/AccountAPI.md#getauthaccesssettings) | **Get** /api/v1/auth/access | Получить информацию о ограничениях авторизации пользователя
 *AccountAPI* | [**GetCountries**](docs/AccountAPI.md#getcountries) | **Get** /api/v1/auth/access/countries | Получение списка стран
-*AccountAPI* | [**GetFinances**](docs/AccountAPI.md#getfinances) | **Get** /api/v1/account/finances | Получение платежной информации
 *AccountAPI* | [**GetNotificationSettings**](docs/AccountAPI.md#getnotificationsettings) | **Get** /api/v1/account/notification-settings | Получение настроек уведомлений аккаунта
 *AccountAPI* | [**UpdateAuthRestrictionsByCountries**](docs/AccountAPI.md#updateauthrestrictionsbycountries) | **Post** /api/v1/auth/access/countries/enabled | Включение/отключение ограничений по стране
 *AccountAPI* | [**UpdateAuthRestrictionsByIP**](docs/AccountAPI.md#updateauthrestrictionsbyip) | **Post** /api/v1/auth/access/ips/enabled | Включение/отключение ограничений по IP-адресу
@@ -411,6 +410,9 @@ Class | Method | HTTP request | Description
 *NetworkDrivesAPI* | [**MountNetworkDrive**](docs/NetworkDrivesAPI.md#mountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/mount | Подключить сетевой диск к сервису
 *NetworkDrivesAPI* | [**UnmountNetworkDrive**](docs/NetworkDrivesAPI.md#unmountnetworkdrive) | **Post** /api/v1/network-drives/{network_drive_id}/unmount | Отключить сетевой диск от сервиса
 *NetworkDrivesAPI* | [**UpdateNetworkDrive**](docs/NetworkDrivesAPI.md#updatenetworkdrive) | **Patch** /api/v1/network-drives/{network_drive_id} | Изменение сетевого диска по ID
+*PaymentsAPI* | [**GetFinances**](docs/PaymentsAPI.md#getfinances) | **Get** /api/v1/account/finances | Получение платежной информации
+*PaymentsAPI* | [**GetLinkCardPayment**](docs/PaymentsAPI.md#getlinkcardpayment) | **Post** /api/v1/account/payment-link | Получение ссылки на оплату
+*PaymentsAPI* | [**GetServicePrices**](docs/PaymentsAPI.md#getserviceprices) | **Get** /api/v1/account/services/cost | Получение стоимости сервисов
 *ProjectsAPI* | [**AddBalancerToProject**](docs/ProjectsAPI.md#addbalancertoproject) | **Post** /api/v1/projects/{project_id}/resources/balancers | Добавление балансировщика в проект
 *ProjectsAPI* | [**AddClusterToProject**](docs/ProjectsAPI.md#addclustertoproject) | **Post** /api/v1/projects/{project_id}/resources/clusters | Добавление кластера в проект
 *ProjectsAPI* | [**AddDatabaseToProject**](docs/ProjectsAPI.md#adddatabasetoproject) | **Post** /api/v1/projects/{project_id}/resources/databases | Добавление базы данных в проект
@@ -617,6 +619,7 @@ Class | Method | HTTP request | Description
  - [CreateMultipleDomainMailboxesRequestMailboxesInner](docs/CreateMultipleDomainMailboxesRequestMailboxesInner.md)
  - [CreateNetworkDrive](docs/CreateNetworkDrive.md)
  - [CreateNetworkDrive201Response](docs/CreateNetworkDrive201Response.md)
+ - [CreatePayment](docs/CreatePayment.md)
  - [CreateProject](docs/CreateProject.md)
  - [CreateProject201Response](docs/CreateProject201Response.md)
  - [CreateRule](docs/CreateRule.md)
@@ -705,6 +708,7 @@ Class | Method | HTTP request | Description
  - [Frameworks](docs/Frameworks.md)
  - [Free](docs/Free.md)
  - [GetAccountStatus200Response](docs/GetAccountStatus200Response.md)
+ - [GetAccountStatus403Response](docs/GetAccountStatus403Response.md)
  - [GetAllProjectResources200Response](docs/GetAllProjectResources200Response.md)
  - [GetAppDeploys200Response](docs/GetAppDeploys200Response.md)
  - [GetAppLogs200Response](docs/GetAppLogs200Response.md)
@@ -741,13 +745,13 @@ Class | Method | HTTP request | Description
  - [GetFinances200Response](docs/GetFinances200Response.md)
  - [GetFinances400Response](docs/GetFinances400Response.md)
  - [GetFinances401Response](docs/GetFinances401Response.md)
- - [GetFinances403Response](docs/GetFinances403Response.md)
  - [GetFinances429Response](docs/GetFinances429Response.md)
  - [GetFinances500Response](docs/GetFinances500Response.md)
  - [GetFloatingIps200Response](docs/GetFloatingIps200Response.md)
  - [GetImage404Response](docs/GetImage404Response.md)
  - [GetKey200Response](docs/GetKey200Response.md)
  - [GetKeys200Response](docs/GetKeys200Response.md)
+ - [GetLinkCardPayment200Response](docs/GetLinkCardPayment200Response.md)
  - [GetLocations200Response](docs/GetLocations200Response.md)
  - [GetMailQuota200Response](docs/GetMailQuota200Response.md)
  - [GetMailboxes200Response](docs/GetMailboxes200Response.md)
@@ -779,6 +783,8 @@ Class | Method | HTTP request | Description
  - [GetServerStatisticsNew200Response](docs/GetServerStatisticsNew200Response.md)
  - [GetServers200Response](docs/GetServers200Response.md)
  - [GetServersPresets200Response](docs/GetServersPresets200Response.md)
+ - [GetServicePrices200Response](docs/GetServicePrices200Response.md)
+ - [GetServicePrices200ResponseMeta](docs/GetServicePrices200ResponseMeta.md)
  - [GetSoftware200Response](docs/GetSoftware200Response.md)
  - [GetStorageSubdomains200Response](docs/GetStorageSubdomains200Response.md)
  - [GetStorageTransferStatus200Response](docs/GetStorageTransferStatus200Response.md)
@@ -802,6 +808,7 @@ Class | Method | HTTP request | Description
  - [ImageUrlIn](docs/ImageUrlIn.md)
  - [ImagesOutResponse](docs/ImagesOutResponse.md)
  - [IncreaseNodes](docs/IncreaseNodes.md)
+ - [InfoServicePrice](docs/InfoServicePrice.md)
  - [Invoice](docs/Invoice.md)
  - [K8SVersionsResponse](docs/K8SVersionsResponse.md)
  - [Location](docs/Location.md)
@@ -835,6 +842,7 @@ Class | Method | HTTP request | Description
  - [NotificationSettingChannels](docs/NotificationSettingChannels.md)
  - [NotificationSettingType](docs/NotificationSettingType.md)
  - [OS](docs/OS.md)
+ - [PaymentType](docs/PaymentType.md)
  - [PerformActionOnBackupRequest](docs/PerformActionOnBackupRequest.md)
  - [PerformActionOnServerRequest](docs/PerformActionOnServerRequest.md)
  - [Policy](docs/Policy.md)
@@ -884,6 +892,12 @@ Class | Method | HTTP request | Description
  - [ServersStatistics](docs/ServersStatistics.md)
  - [ServersStatisticsListInner](docs/ServersStatisticsListInner.md)
  - [ServersStatisticsMeta](docs/ServersStatisticsMeta.md)
+ - [ServiceCostType](docs/ServiceCostType.md)
+ - [ServicePrice](docs/ServicePrice.md)
+ - [ServicePriceConfiguration](docs/ServicePriceConfiguration.md)
+ - [ServicePriceType](docs/ServicePriceType.md)
+ - [ServiceServicePrice](docs/ServiceServicePrice.md)
+ - [ServiceServicePriceNodeGroupsInner](docs/ServiceServicePriceNodeGroupsInner.md)
  - [SetLabels](docs/SetLabels.md)
  - [SettingCondition](docs/SettingCondition.md)
  - [SpamFilterIsDisabled](docs/SpamFilterIsDisabled.md)
