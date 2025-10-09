@@ -142,7 +142,6 @@ docs/CreateMultipleDomainMailboxesRequest.md
 docs/CreateMultipleDomainMailboxesRequestMailboxesInner.md
 docs/CreateNetworkDrive.md
 docs/CreateNetworkDrive201Response.md
-docs/CreatePayment.md
 docs/CreateProject.md
 docs/CreateProject201Response.md
 docs/CreateRule.md
@@ -279,7 +278,6 @@ docs/GetFloatingIps200Response.md
 docs/GetImage404Response.md
 docs/GetKey200Response.md
 docs/GetKeys200Response.md
-docs/GetLinkCardPayment200Response.md
 docs/GetLocations200Response.md
 docs/GetMailQuota200Response.md
 docs/GetMailboxes200Response.md
@@ -375,7 +373,6 @@ docs/NotificationSettingChannel.md
 docs/NotificationSettingChannels.md
 docs/NotificationSettingType.md
 docs/OS.md
-docs/PaymentType.md
 docs/PaymentsAPI.md
 docs/PerformActionOnBackupRequest.md
 docs/PerformActionOnServerRequest.md
@@ -620,7 +617,6 @@ model_create_multiple_domain_mailboxes_request.go
 model_create_multiple_domain_mailboxes_request_mailboxes_inner.go
 model_create_network_drive.go
 model_create_network_drive_201_response.go
-model_create_payment.go
 model_create_project.go
 model_create_project_201_response.go
 model_create_rule.go
@@ -752,7 +748,6 @@ model_get_floating_ips_200_response.go
 model_get_image_404_response.go
 model_get_key_200_response.go
 model_get_keys_200_response.go
-model_get_link_card_payment_200_response.go
 model_get_locations_200_response.go
 model_get_mail_quota_200_response.go
 model_get_mailboxes_200_response.go
@@ -843,7 +838,6 @@ model_notification_setting_channel.go
 model_notification_setting_channels.go
 model_notification_setting_type.go
 model_os.go
-model_payment_type.go
 model_perform_action_on_backup_request.go
 model_perform_action_on_server_request.go
 model_policy.go
