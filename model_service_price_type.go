@@ -28,7 +28,6 @@ const (
 	K8S ServicePriceType = "k8s"
 	DATABASE ServicePriceType = "database"
 	BALANCER ServicePriceType = "balancer"
-	VPN ServicePriceType = "vpn"
 	MAIL ServicePriceType = "mail"
 	IMAGE ServicePriceType = "image"
 	FLOATING_IP ServicePriceType = "floating_ip"
@@ -52,7 +51,6 @@ var AllowedServicePriceTypeEnumValues = []ServicePriceType{
 	"k8s",
 	"database",
 	"balancer",
-	"vpn",
 	"mail",
 	"image",
 	"floating_ip",

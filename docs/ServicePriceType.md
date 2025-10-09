@@ -17,8 +17,6 @@
 
 * `BALANCER` (value: `"balancer"`)
 
-* `VPN` (value: `"vpn"`)
-
 * `MAIL` (value: `"mail"`)
 
 * `IMAGE` (value: `"image"`)
