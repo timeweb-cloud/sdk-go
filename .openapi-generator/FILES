@@ -111,6 +111,7 @@ docs/CreateApp.md
 docs/CreateApp201Response.md
 docs/CreateBalancer.md
 docs/CreateBalancer200Response.md
+docs/CreateBalancerCertificates.md
 docs/CreateBalancerRule200Response.md
 docs/CreateCluster.md
 docs/CreateClusterAdmin.md
@@ -586,6 +587,7 @@ model_create_app.go
 model_create_app_201_response.go
 model_create_balancer.go
 model_create_balancer_200_response.go
+model_create_balancer_certificates.go
 model_create_balancer_rule_200_response.go
 model_create_cluster.go
 model_create_cluster_admin.go

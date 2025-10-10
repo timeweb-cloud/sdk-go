@@ -62,6 +62,7 @@ type CreateBalancer struct {
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 	// ID проекта
 	ProjectId *int32 `json:"project_id,omitempty"`
+	Certificates *CreateBalancerCertificates `json:"certificates,omitempty"`
 }
 
 // NewCreateBalancer instantiates a new CreateBalancer object
@@ -687,6 +688,38 @@ func (o *CreateBalancer) SetProjectId(v int32) {
 	o.ProjectId = &v
 }
 
+// GetCertificates returns the Certificates field value if set, zero value otherwise.
+func (o *CreateBalancer) GetCertificates() CreateBalancerCertificates {
+	if o == nil || IsNil(o.Certificates) {
+		var ret CreateBalancerCertificates
+		return ret
+	}
+	return *o.Certificates
+}
+
+// GetCertificatesOk returns a tuple with the Certificates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateBalancer) GetCertificatesOk() (*CreateBalancerCertificates, bool) {
+	if o == nil || IsNil(o.Certificates) {
+		return nil, false
+	}
+	return o.Certificates, true
+}
+
+// HasCertificates returns a boolean if a field has been set.
+func (o *CreateBalancer) HasCertificates() bool {
+	if o != nil && !IsNil(o.Certificates) {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificates gets a reference to the given CreateBalancerCertificates and assigns it to the Certificates field.
+func (o *CreateBalancer) SetCertificates(v CreateBalancerCertificates) {
+	o.Certificates = &v
+}
+
 func (o CreateBalancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -734,6 +767,9 @@ func (o CreateBalancer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ProjectId) {
 		toSerialize["project_id"] = o.ProjectId
+	}
+	if !IsNil(o.Certificates) {
+		toSerialize["certificates"] = o.Certificates
 	}
 	return toSerialize, nil
 }

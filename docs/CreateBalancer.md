@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 **ProjectId** | Pointer to **int32** | ID проекта | [optional] 
+**Certificates** | Pointer to [**CreateBalancerCertificates**](CreateBalancerCertificates.md) |  | [optional] 
 
 ## Methods
 
@@ -525,6 +526,31 @@ SetProjectId sets ProjectId field to given value.
 `func (o *CreateBalancer) HasProjectId() bool`
 
 HasProjectId returns a boolean if a field has been set.
+
+### GetCertificates
+
+`func (o *CreateBalancer) GetCertificates() CreateBalancerCertificates`
+
+GetCertificates returns the Certificates field if non-nil, zero value otherwise.
+
+### GetCertificatesOk
+
+`func (o *CreateBalancer) GetCertificatesOk() (*CreateBalancerCertificates, bool)`
+
+GetCertificatesOk returns a tuple with the Certificates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificates
+
+`func (o *CreateBalancer) SetCertificates(v CreateBalancerCertificates)`
+
+SetCertificates sets Certificates field to given value.
+
+### HasCertificates
+
+`func (o *CreateBalancer) HasCertificates() bool`
+
+HasCertificates returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

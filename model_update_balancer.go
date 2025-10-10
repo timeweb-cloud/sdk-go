@@ -56,6 +56,9 @@ type UpdateBalancer struct {
 	ServerTimeout *float32 `json:"server_timeout,omitempty"`
 	// Таймаут HTTP запроса.
 	HttprequestTimeout *float32 `json:"httprequest_timeout,omitempty"`
+	// Комментарий к балансировщику.
+	Comment *string `json:"comment,omitempty"`
+	Certificates *CreateBalancerCertificates `json:"certificates,omitempty"`
 }
 
 // NewUpdateBalancer instantiates a new UpdateBalancer object
@@ -651,6 +654,70 @@ func (o *UpdateBalancer) SetHttprequestTimeout(v float32) {
 	o.HttprequestTimeout = &v
 }
 
+// GetComment returns the Comment field value if set, zero value otherwise.
+func (o *UpdateBalancer) GetComment() string {
+	if o == nil || IsNil(o.Comment) {
+		var ret string
+		return ret
+	}
+	return *o.Comment
+}
+
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateBalancer) GetCommentOk() (*string, bool) {
+	if o == nil || IsNil(o.Comment) {
+		return nil, false
+	}
+	return o.Comment, true
+}
+
+// HasComment returns a boolean if a field has been set.
+func (o *UpdateBalancer) HasComment() bool {
+	if o != nil && !IsNil(o.Comment) {
+		return true
+	}
+
+	return false
+}
+
+// SetComment gets a reference to the given string and assigns it to the Comment field.
+func (o *UpdateBalancer) SetComment(v string) {
+	o.Comment = &v
+}
+
+// GetCertificates returns the Certificates field value if set, zero value otherwise.
+func (o *UpdateBalancer) GetCertificates() CreateBalancerCertificates {
+	if o == nil || IsNil(o.Certificates) {
+		var ret CreateBalancerCertificates
+		return ret
+	}
+	return *o.Certificates
+}
+
+// GetCertificatesOk returns a tuple with the Certificates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateBalancer) GetCertificatesOk() (*CreateBalancerCertificates, bool) {
+	if o == nil || IsNil(o.Certificates) {
+		return nil, false
+	}
+	return o.Certificates, true
+}
+
+// HasCertificates returns a boolean if a field has been set.
+func (o *UpdateBalancer) HasCertificates() bool {
+	if o != nil && !IsNil(o.Certificates) {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificates gets a reference to the given CreateBalancerCertificates and assigns it to the Certificates field.
+func (o *UpdateBalancer) SetCertificates(v CreateBalancerCertificates) {
+	o.Certificates = &v
+}
+
 func (o UpdateBalancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -714,6 +781,12 @@ func (o UpdateBalancer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.HttprequestTimeout) {
 		toSerialize["httprequest_timeout"] = o.HttprequestTimeout
+	}
+	if !IsNil(o.Comment) {
+		toSerialize["comment"] = o.Comment
+	}
+	if !IsNil(o.Certificates) {
+		toSerialize["certificates"] = o.Certificates
 	}
 	return toSerialize, nil
 }

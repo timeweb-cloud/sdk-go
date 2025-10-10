@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **ClientTimeout** | Pointer to **float32** | Таймаут клиента. | [optional] 
 **ServerTimeout** | Pointer to **float32** | Таймаут сервера. | [optional] 
 **HttprequestTimeout** | Pointer to **float32** | Таймаут HTTP запроса. | [optional] 
+**Comment** | Pointer to **string** | Комментарий к балансировщику. | [optional] 
+**Certificates** | Pointer to [**CreateBalancerCertificates**](CreateBalancerCertificates.md) |  | [optional] 
 
 ## Methods
 
@@ -491,6 +493,56 @@ SetHttprequestTimeout sets HttprequestTimeout field to given value.
 `func (o *UpdateBalancer) HasHttprequestTimeout() bool`
 
 HasHttprequestTimeout returns a boolean if a field has been set.
+
+### GetComment
+
+`func (o *UpdateBalancer) GetComment() string`
+
+GetComment returns the Comment field if non-nil, zero value otherwise.
+
+### GetCommentOk
+
+`func (o *UpdateBalancer) GetCommentOk() (*string, bool)`
+
+GetCommentOk returns a tuple with the Comment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComment
+
+`func (o *UpdateBalancer) SetComment(v string)`
+
+SetComment sets Comment field to given value.
+
+### HasComment
+
+`func (o *UpdateBalancer) HasComment() bool`
+
+HasComment returns a boolean if a field has been set.
+
+### GetCertificates
+
+`func (o *UpdateBalancer) GetCertificates() CreateBalancerCertificates`
+
+GetCertificates returns the Certificates field if non-nil, zero value otherwise.
+
+### GetCertificatesOk
+
+`func (o *UpdateBalancer) GetCertificatesOk() (*CreateBalancerCertificates, bool)`
+
+GetCertificatesOk returns a tuple with the Certificates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificates
+
+`func (o *UpdateBalancer) SetCertificates(v CreateBalancerCertificates)`
+
+SetCertificates sets Certificates field to given value.
+
+### HasCertificates
+
+`func (o *UpdateBalancer) HasCertificates() bool`
+
+HasCertificates returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

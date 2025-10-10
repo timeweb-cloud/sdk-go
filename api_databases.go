@@ -208,6 +208,13 @@ type ApiCreateDatabaseBackupRequest struct {
 	ctx context.Context
 	ApiService *DatabasesAPIService
 	dbId int32
+	comment *string
+}
+
+// Описание бэкапа
+func (r ApiCreateDatabaseBackupRequest) Comment(comment string) ApiCreateDatabaseBackupRequest {
+	r.comment = &comment
+	return r
 }
 
 func (r ApiCreateDatabaseBackupRequest) Execute() (*CreateDatabaseBackup201Response, *http.Response, error) {
@@ -254,6 +261,9 @@ func (a *DatabasesAPIService) CreateDatabaseBackupExecute(r ApiCreateDatabaseBac
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.comment != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "comment", r.comment, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

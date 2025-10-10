@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 
 ## CreateDatabaseBackup
 
-> CreateDatabaseBackup201Response CreateDatabaseBackup(ctx, dbId).Execute()
+> CreateDatabaseBackup201Response CreateDatabaseBackup(ctx, dbId).Comment(comment).Execute()
 
 Создание бэкапа базы данных
 
@@ -125,10 +125,11 @@ import (
 
 func main() {
     dbId := int32(56) // int32 | ID базы данных
+    comment := "comment_example" // string | Описание бэкапа (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DatabasesAPI.CreateDatabaseBackup(context.Background(), dbId).Execute()
+    resp, r, err := apiClient.DatabasesAPI.CreateDatabaseBackup(context.Background(), dbId).Comment(comment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.CreateDatabaseBackup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -154,6 +155,7 @@ Other parameters are passed through a pointer to a apiCreateDatabaseBackupReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **comment** | **string** | Описание бэкапа | 
 
 ### Return type
 
