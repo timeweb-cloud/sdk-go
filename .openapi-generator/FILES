@@ -4,6 +4,7 @@
 README.md
 api/openapi.yaml
 api_account.go
+api_ai_agents.go
 api_api_keys.go
 api_apps.go
 api_balancers.go
@@ -14,6 +15,7 @@ api_domains.go
 api_firewall.go
 api_floating_ip.go
 api_images.go
+api_knowledge_bases.go
 api_kubernetes.go
 api_locations.go
 api_mail.go
@@ -26,6 +28,7 @@ api_ssh.go
 api_vpc.go
 client.go
 configuration.go
+docs/AIAgentsAPI.md
 docs/APIKeysAPI.md
 docs/AccountAPI.md
 docs/AddBalancerToProject200Response.md
@@ -54,7 +57,12 @@ docs/AddStorageSubdomains200Response.md
 docs/AddStorageSubdomainsRequest.md
 docs/AddStorageToProjectRequest.md
 docs/AddSubdomain201Response.md
+docs/AddTokenPackage.md
 docs/AddedSubdomain.md
+docs/Agent.md
+docs/AgentModelSettings.md
+docs/AgentSettings.md
+docs/AgentSettingsWidget.md
 docs/ApiKey.md
 docs/App.md
 docs/AppConfiguration.md
@@ -106,6 +114,8 @@ docs/ContainerRegistryAPI.md
 docs/ContainerRegistryPresetsInner.md
 docs/ContainerRegistryRepositoriesInner.md
 docs/CreateAdmin.md
+docs/CreateAgent.md
+docs/CreateAgent201Response.md
 docs/CreateApiKey.md
 docs/CreateApp.md
 docs/CreateApp201Response.md
@@ -138,6 +148,8 @@ docs/CreateFloatingIp201Response.md
 docs/CreateInstance.md
 docs/CreateKey201Response.md
 docs/CreateKeyRequest.md
+docs/CreateKnowledgebase.md
+docs/CreateKnowledgebase201Response.md
 docs/CreateMultipleDomainMailboxes201Response.md
 docs/CreateMultipleDomainMailboxesRequest.md
 docs/CreateMultipleDomainMailboxesRequestMailboxesInner.md
@@ -199,6 +211,9 @@ docs/DeploySettingsInner.md
 docs/DeployStatus.md
 docs/DnsRecord.md
 docs/DnsRecordData.md
+docs/Document.md
+docs/DocumentStatusInfo.md
+docs/DocumentStatusInfoDetails.md
 docs/Domain.md
 docs/DomainAllowedBuyPeriodsInner.md
 docs/DomainInfo.md
@@ -237,6 +252,10 @@ docs/Frameworks.md
 docs/Free.md
 docs/GetAccountStatus200Response.md
 docs/GetAccountStatus403Response.md
+docs/GetAgentStatistics200Response.md
+docs/GetAgentStatistics200ResponseMeta.md
+docs/GetAgents200Response.md
+docs/GetAgents200ResponseMeta.md
 docs/GetAllProjectResources200Response.md
 docs/GetAppDeploys200Response.md
 docs/GetAppLogs200Response.md
@@ -279,6 +298,9 @@ docs/GetFloatingIps200Response.md
 docs/GetImage404Response.md
 docs/GetKey200Response.md
 docs/GetKeys200Response.md
+docs/GetKnowledgebaseStatistics200Response.md
+docs/GetKnowledgebases200Response.md
+docs/GetKnowledgebases200ResponseMeta.md
 docs/GetLocations200Response.md
 docs/GetMailQuota200Response.md
 docs/GetMailboxes200Response.md
@@ -339,6 +361,8 @@ docs/IncreaseNodes.md
 docs/InfoServicePrice.md
 docs/Invoice.md
 docs/K8SVersionsResponse.md
+docs/KnowledgeBasesAPI.md
+docs/Knowledgebase.md
 docs/KubernetesAPI.md
 docs/Location.md
 docs/LocationDto.md
@@ -444,6 +468,7 @@ docs/Status.md
 docs/StatusCompanyInfo.md
 docs/Subdomain.md
 docs/Tags.md
+docs/TokenStatistic.md
 docs/TopLevelDomain.md
 docs/TopLevelDomainAllowedBuyPeriodsInner.md
 docs/TransferStatus.md
@@ -451,6 +476,8 @@ docs/TransferStatusErrorsInner.md
 docs/TransferStorageRequest.md
 docs/URLType.md
 docs/UpdateAdmin.md
+docs/UpdateAgent.md
+docs/UpdateAgentSettings.md
 docs/UpdateAppSettings200Response.md
 docs/UpdateAuthRestrictionsByCountriesRequest.md
 docs/UpdateBalancer.md
@@ -465,6 +492,7 @@ docs/UpdateDomainNameServersNameServersInner.md
 docs/UpdateFloatingIp.md
 docs/UpdateInstance.md
 docs/UpdateKeyRequest.md
+docs/UpdateKnowledgebase.md
 docs/UpdateMailQuotaRequest.md
 docs/UpdateMailbox.md
 docs/UpdateNetworkDrive.md
@@ -487,6 +515,7 @@ docs/UpdateStorageUser200Response.md
 docs/UpdateStorageUserRequest.md
 docs/UpdateToken200Response.md
 docs/UpdateVpc.md
+docs/UploadFilesToKnowledgebase200Response.md
 docs/UploadSuccessful.md
 docs/UploadSuccessfulResponse.md
 docs/UrlStatus.md
@@ -533,7 +562,12 @@ model_add_storage_subdomains_200_response.go
 model_add_storage_subdomains_request.go
 model_add_storage_to_project_request.go
 model_add_subdomain_201_response.go
+model_add_token_package.go
 model_added_subdomain.go
+model_agent.go
+model_agent_model_settings.go
+model_agent_settings.go
+model_agent_settings_widget.go
 model_api_key.go
 model_app.go
 model_app_configuration.go
@@ -582,6 +616,8 @@ model_config_parameters.go
 model_container_registry_presets_inner.go
 model_container_registry_repositories_inner.go
 model_create_admin.go
+model_create_agent.go
+model_create_agent_201_response.go
 model_create_api_key.go
 model_create_app.go
 model_create_app_201_response.go
@@ -614,6 +650,8 @@ model_create_floating_ip_201_response.go
 model_create_instance.go
 model_create_key_201_response.go
 model_create_key_request.go
+model_create_knowledgebase.go
+model_create_knowledgebase_201_response.go
 model_create_multiple_domain_mailboxes_201_response.go
 model_create_multiple_domain_mailboxes_request.go
 model_create_multiple_domain_mailboxes_request_mailboxes_inner.go
@@ -673,6 +711,9 @@ model_deploy_settings_inner.go
 model_deploy_status.go
 model_dns_record.go
 model_dns_record_data.go
+model_document.go
+model_document_status_info.go
+model_document_status_info_details.go
 model_domain.go
 model_domain_allowed_buy_periods_inner.go
 model_domain_info.go
@@ -708,6 +749,10 @@ model_frameworks.go
 model_free.go
 model_get_account_status_200_response.go
 model_get_account_status_403_response.go
+model_get_agent_statistics_200_response.go
+model_get_agent_statistics_200_response_meta.go
+model_get_agents_200_response.go
+model_get_agents_200_response_meta.go
 model_get_all_project_resources_200_response.go
 model_get_app_deploys_200_response.go
 model_get_app_logs_200_response.go
@@ -750,6 +795,9 @@ model_get_floating_ips_200_response.go
 model_get_image_404_response.go
 model_get_key_200_response.go
 model_get_keys_200_response.go
+model_get_knowledgebase_statistics_200_response.go
+model_get_knowledgebases_200_response.go
+model_get_knowledgebases_200_response_meta.go
 model_get_locations_200_response.go
 model_get_mail_quota_200_response.go
 model_get_mailboxes_200_response.go
@@ -809,6 +857,7 @@ model_increase_nodes.go
 model_info_service_price.go
 model_invoice.go
 model_k8_s_versions_response.go
+model_knowledgebase.go
 model_location.go
 model_location_dto.go
 model_mailbox.go
@@ -905,12 +954,15 @@ model_status.go
 model_status_company_info.go
 model_subdomain.go
 model_tags.go
+model_token_statistic.go
 model_top_level_domain.go
 model_top_level_domain_allowed_buy_periods_inner.go
 model_transfer_status.go
 model_transfer_status_errors_inner.go
 model_transfer_storage_request.go
 model_update_admin.go
+model_update_agent.go
+model_update_agent_settings.go
 model_update_app_settings_200_response.go
 model_update_auth_restrictions_by_countries_request.go
 model_update_balancer.go
@@ -925,6 +977,7 @@ model_update_domain_name_servers_name_servers_inner.go
 model_update_floating_ip.go
 model_update_instance.go
 model_update_key_request.go
+model_update_knowledgebase.go
 model_update_mail_quota_request.go
 model_update_mailbox.go
 model_update_network_drive.go
@@ -947,6 +1000,7 @@ model_update_storage_user_200_response.go
 model_update_storage_user_request.go
 model_update_token_200_response.go
 model_update_vpc.go
+model_upload_files_to_knowledgebase_200_response.go
 model_upload_successful.go
 model_upload_successful_response.go
 model_url_status.go
@@ -966,6 +1020,7 @@ model_vpc_service.go
 model_worker_preset_out_api.go
 response.go
 test/api_account_test.go
+test/api_ai_agents_test.go
 test/api_api_keys_test.go
 test/api_apps_test.go
 test/api_balancers_test.go
@@ -976,6 +1031,7 @@ test/api_domains_test.go
 test/api_firewall_test.go
 test/api_floating_ip_test.go
 test/api_images_test.go
+test/api_knowledge_bases_test.go
 test/api_kubernetes_test.go
 test/api_locations_test.go
 test/api_mail_test.go

@@ -138,6 +138,10 @@ tags:
     оты с базами данных.</br></br> Подробнее об облачных базах данных – в нашей <a\
     \ href='https://timeweb.cloud/docs/dbaas' target='_blank'>базе знаний</a>."
   name: Databases
+- description: "Базы знаний — это хранилища документов и информации, которые могут\
+    \ быть использованы AI агентами для предоставления более точных и контекстно-з\
+    ависимых ответов."
+  name: Knowledge Bases
 - description: Балансировщик позволяет распределять входящий трафик между несколькими
     серверами для повышения доступности и отказоустойчивости вашего сервиса.</br></br>
     Подробнее о балансировщике нагрузки – в нашей <a href='https://timeweb.cloud/docs/load-balancer'
@@ -192,6 +196,10 @@ tags:
 - description: "Токены API — это JWT-токены, с помощью которых вы можете получить\
     \ доступ к управлению вашей облачной инфраструктурой через API."
   name: API keys
+- description: "AI Агенты — это интеллектуальные помощники на основе больших языко\
+    вых моделей (LLM), которые могут отвечать на вопросы пользователей, использова\
+    ть базы знаний и выполнять различные задачи."
+  name: AI Agents
 - description: "Apps - Облачные приложения позволяют автоматически выполнять проце\
     сс сборки и развертывания при каждом обновлении кода в Github, Gitlab или Bitbucket.\
     \ </br></br> Подробнее об Apps – в нашей <a href='https://timeweb.cloud/docs/apps'\
@@ -42587,6 +42595,3103 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/cloud-ai/agents:
+    get:
+      description: |-
+        Чтобы получить список AI агентов, отправьте GET-запрос на `/api/v1/cloud-ai/agents`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `agents`.
+      operationId: getAgents
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAgents_200_response'
+          description: Объект JSON c ключами `agents` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка AI агентов
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/agents"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/agents', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/agents', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/agents', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/agents');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/agents\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/agents\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: |-
+        Чтобы создать AI агента, отправьте POST-запрос на `/api/v1/cloud-ai/agents`, задав необходимые атрибуты.
+
+        Агент будет создан с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о созданном агенте.
+      operationId: createAgent
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-agent'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createAgent_201_response'
+          description: Объект JSON c ключом `agent`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание AI агента
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"name":"Мой агент","access_type":"private","model_id":1,"token_package_id":1,"settings":{}}' \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/agents"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/agents', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'name': '\u041C\u043E\u0439 \u0430\u0433\u0435\u043D\u0442',
+                  'access_type': 'private',
+                  'model_id': 1,
+                  'token_package_id': 1,
+                  'settings': {}
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/agents',
+              {
+                  'name': '\u041C\u043E\u0439 \u0430\u0433\u0435\u043D\u0442',
+                  'access_type': 'private',
+                  'model_id': 1,
+                  'token_package_id': 1,
+                  'settings': {}
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'Мой агент',
+              'access_type': 'private',
+              'model_id': 1,
+              'token_package_id': 1,
+              'settings': {},
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cloud-ai/agents', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"name":"Мой агент","access_type":"private","model_id":1,"token_package_id":1,"settings":{}}'.encode()
+          #response = requests.post('https://api.timeweb.cloud/api/v1/cloud-ai/agents', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/agents');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"name\":\"Мой агент\",\"access_type\":\"private\",\"model_id\":1,\"token_package_id\":1,\"settings\":{}}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"name\":\"Мой агент\",\"access_type\"\
+          :\"private\",\"model_id\":1,\"token_package_id\":1,\"settings\":{}}`)\n\t\
+          req, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cloud-ai/agents\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/agents\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\\"name\\\":\\\"Мой агент\\\",\\\"access_type\\\":\\\"private\\\",\\\"\
+          model_id\\\":1,\\\"token_package_id\\\":1,\\\"settings\\\":{}}\");\n\t\t\
+          writer.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/agents/{id}:
+    delete:
+      description: "Чтобы удалить AI агента, отправьте DELETE-запрос на `/api/v1/cloud-ai/agents/{id}`."
+      operationId: deleteAgent
+      parameters:
+      - description: ID агента
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: AI агент успешно удален
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление AI агента
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/agents/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: "Чтобы получить информацию об AI агенте, отправьте GET-запрос н\
+        а `/api/v1/cloud-ai/agents/{id}`."
+      operationId: getAgent
+      parameters:
+      - description: ID агента
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createAgent_201_response'
+          description: Объект JSON c ключом `agent`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение AI агента
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/agents/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    patch:
+      description: "Чтобы обновить AI агента, отправьте PATCH-запрос на `/api/v1/cloud-ai/agents/{id}`."
+      operationId: updateAgent
+      parameters:
+      - description: ID агента
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update-agent'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createAgent_201_response'
+          description: Объект JSON c ключом `agent`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Обновление AI агента
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"name":"Обновленное имя"}' \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/agents/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'name': '\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u0435 \u0438\u043C\u044F'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1',
+              {
+                  'name': '\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u0435 \u0438\u043C\u044F'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'Обновленное имя',
+          }
+
+          response = requests.patch('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"name":"Обновленное имя"}'.encode()
+          #response = requests.patch('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"name\":\"Обновленное имя\"}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"name\":\"Обновленное имя\"}`)\n\treq,\
+          \ err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          PATCH\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\\"name\\\":\\\"Обновленное имя\\\"}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/agents/{id}/statistic:
+    get:
+      description: |-
+        Чтобы получить статистику использования токенов AI агента, отправьте GET-запрос на `/api/v1/cloud-ai/agents/{id}/statistic`.
+
+        Можно указать временной диапазон и интервал агрегации.
+      operationId: getAgentStatistics
+      parameters:
+      - description: ID агента
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: Начало временного диапазона (ISO 8601)
+        explode: true
+        in: query
+        name: startTime
+        required: false
+        schema:
+          example: 2024-10-01T00:00:00Z
+          format: date-time
+          type: string
+        style: form
+      - description: Конец временного диапазона (ISO 8601)
+        explode: true
+        in: query
+        name: endTime
+        required: false
+        schema:
+          example: 2024-10-16T23:59:59.999Z
+          format: date-time
+          type: string
+        style: form
+      - description: Интервал в минутах (по умолчанию 60)
+        explode: true
+        in: query
+        name: interval
+        required: false
+        schema:
+          default: 60
+          example: 60
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAgentStatistics_200_response'
+          description: Объект JSON c ключами `agent_statistics` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение статистики использования токенов агента
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/statistic?interval=3600"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/statistic?interval=3600', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/statistic', {
+              params: {
+                  'interval': '3600'
+              },
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          params = {
+              'interval': '3600',
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/statistic', params=params, headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/statistic?interval=3600');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/statistic?interval=3600\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/statistic?interval=3600\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/agents/{id}/add-additional-token-package:
+    post:
+      description: "Чтобы добавить дополнительный пакет токенов для AI агента, отп\
+        равьте POST-запрос на `/api/v1/cloud-ai/agents/{id}/add-additional-token-package`."
+      operationId: addAdditionalTokenPackage
+      parameters:
+      - description: ID агента
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/add-token-package'
+        required: false
+      responses:
+        "204":
+          description: Дополнительный пакет токенов успешно добавлен
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Добавление дополнительного пакета токенов
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"count":1}' \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'count': 1
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package',
+              {
+                  'count': 1
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'count': 1,
+          }
+
+          response = requests.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package',
+              headers=headers,
+              json=json_data,
+          )
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"count":1}'
+          #response = requests.post(
+          #    'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package',
+          #    headers=headers,
+          #    data=data,
+          #)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"count":1}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"count\":1}`)\n\treq, err := http.NewRequest(\"\
+          POST\", \"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/agents/1/add-additional-token-package\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"count\\\":1}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases:
+    get:
+      description: |-
+        Чтобы получить список баз знаний, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `knowledgebases`.
+      operationId: getKnowledgebases
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getKnowledgebases_200_response'
+          description: Объект JSON c ключами `knowledgebases` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка баз знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: |-
+        Чтобы создать базу знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases`, задав необходимые атрибуты.
+
+        База знаний будет создана с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о созданной базе знаний.
+      operationId: createKnowledgebase
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-knowledgebase'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createKnowledgebase_201_response'
+          description: Объект JSON c ключом `knowledgebase`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"name":"Моя база знаний","dbaas_preset_id":1,"network_id":"net_123","token_package_id":1}' \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'name': '\u041C\u043E\u044F \u0431\u0430\u0437\u0430 \u0437\u043D\u0430\u043D\u0438\u0439',
+                  'dbaas_preset_id': 1,
+                  'network_id': 'net_123',
+                  'token_package_id': 1
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases',
+              {
+                  'name': '\u041C\u043E\u044F \u0431\u0430\u0437\u0430 \u0437\u043D\u0430\u043D\u0438\u0439',
+                  'dbaas_preset_id': 1,
+                  'network_id': 'net_123',
+                  'token_package_id': 1
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'Моя база знаний',
+              'dbaas_preset_id': 1,
+              'network_id': 'net_123',
+              'token_package_id': 1,
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"name":"Моя база знаний","dbaas_preset_id":1,"network_id":"net_123","token_package_id":1}'.encode()
+          #response = requests.post('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"name\":\"Моя база знаний\",\"dbaas_preset_id\":1,\"network_id\":\"net_123\",\"token_package_id\":1}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"name\":\"Моя база знаний\",\"dbaas_preset_id\"\
+          :1,\"network_id\":\"net_123\",\"token_package_id\":1}`)\n\treq, err := http.NewRequest(\"\
+          POST\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases\", data)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\"\
+          , \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
+          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases\");\n\t\
+          \tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"name\\\":\\\"Моя база знаний\\\",\\\"dbaas_preset_id\\\
+          \":1,\\\"network_id\\\":\\\"net_123\\\",\\\"token_package_id\\\":1}\");\n\
+          \t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}:
+    delete:
+      description: "Чтобы удалить базу знаний, отправьте DELETE-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}`."
+      operationId: deleteKnowledgebase
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: База знаний успешно удалена
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: "Чтобы получить информацию о базе знаний, отправьте GET-запрос\
+        \ на `/api/v1/cloud-ai/knowledge-bases/{id}`."
+      operationId: getKnowledgebase
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createKnowledgebase_201_response'
+          description: Объект JSON c ключом `knowledgebase`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    patch:
+      description: "Чтобы обновить базу знаний, отправьте PATCH-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}`."
+      operationId: updateKnowledgebase
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update-knowledgebase'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createKnowledgebase_201_response'
+          description: Объект JSON c ключом `knowledgebase`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Обновление базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"name":"Обновленное имя"}' \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'name': '\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u0435 \u0438\u043C\u044F'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1',
+              {
+                  'name': '\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u0435 \u0438\u043C\u044F'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'Обновленное имя',
+          }
+
+          response = requests.patch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"name":"Обновленное имя"}'.encode()
+          #response = requests.patch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"name\":\"Обновленное имя\"}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"name\":\"Обновленное имя\"}`)\n\treq,\
+          \ err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1\");\n\
+          \t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"name\\\":\\\"Обновленное имя\\\"}\");\n\t\twriter.flush();\n\
+          \t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
+          \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id}:
+    delete:
+      description: "Чтобы отвязать базу знаний от AI агента, отправьте DELETE-запр\
+        ос на `/api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id}`."
+      operationId: unlinkKnowledgebaseFromAgent
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID агента
+        explode: false
+        in: path
+        name: agent_id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: База знаний успешно отвязана от агента
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Отвязка базы знаний от агента
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: "Чтобы привязать базу знаний к AI агенту, отправьте POST-запрос\
+        \ на `/api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id}`."
+      operationId: linkKnowledgebaseToAgent
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID агента
+        explode: false
+        in: path
+        name: agent_id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: База знаний успешно привязана к агенту
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Привязка базы знаний к агенту
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/link/2\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}/add-additional-token-package:
+    post:
+      description: "Чтобы добавить дополнительный пакет токенов для базы знаний, о\
+        тправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/add-additional-token-package`."
+      operationId: addAdditionalTokenPackageToKnowledgebase
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/add-token-package'
+        required: false
+      responses:
+        "204":
+          description: Дополнительный пакет токенов успешно добавлен
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Добавление дополнительного пакета токенов
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"count":1}' \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'count': 1
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package',
+              {
+                  'count': 1
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'count': 1,
+          }
+
+          response = requests.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package',
+              headers=headers,
+              json=json_data,
+          )
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"count":1}'
+          #response = requests.post(
+          #    'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package',
+          #    headers=headers,
+          #    data=data,
+          #)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"count":1}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"count\":1}`)\n\treq, err := http.NewRequest(\"\
+          POST\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/add-additional-token-package\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"count\\\":1}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}/upload:
+    post:
+      description: |-
+        Чтобы загрузить файлы в базу знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/upload` с файлами в формате multipart/form-data.
+
+        Поддерживаемые форматы: CSV, XML, Markdown (md), HTML, TXT. JSON не поддерживается.
+        Максимум 10 файлов, до 10 МБ каждый.
+      operationId: uploadFilesToKnowledgebase
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/uploadFilesToKnowledgebase_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/uploadFilesToKnowledgebase_200_response'
+          description: Объект JSON c ключом `uploaded_files`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Загрузка файлов в базу знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -F "files=@document1.pdf" \
+            -F "files=@document2.txt" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload"
+      - lang: JavaScript
+        source: |
+          const form = new FormData();
+          form.append('files', File(['<data goes here>'], 'document1.pdf'));
+          form.append('files', File(['<data goes here>'], 'document2.txt'));
+
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload', {
+              method: 'POST',
+              headers: {
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: form
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+          const FormData = require('form-data');
+          const fs = require('fs');
+
+          const form = new FormData();
+          form.append('files', fs.readFileSync('document1.pdf'), 'document1.pdf');
+          form.append('files', fs.readFileSync('document2.txt'), 'document2.txt');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload',
+              form,
+              {
+                  headers: {
+                      ...form.getHeaders(),
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          files = [
+              ('files', open('document1.pdf', 'rb')),
+              ('files', open('document2.txt', 'rb')),
+          ]
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload', headers=headers, files=files)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, [
+              'files' => new CURLFile('document1.pdf'),
+              'files' => new CURLFile('document2.txt'),
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"bytes\"\n\t\"fmt\"\n\t\"io\"\n\t\"\
+          log\"\n\t\"mime/multipart\"\n\t\"net/http\"\n\t\"os\"\n\t\"path/filepath\"\
+          \n)\n\nfunc main() {\n\tform := new(bytes.Buffer)\n\twriter := multipart.NewWriter(form)\n\
+          \tfw, err := writer.CreateFormFile(\"document1.pdf\", filepath.Base(\"document1.pdf\"\
+          ))\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tfd, err := os.Open(\"\
+          document1.pdf\")\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer fd.Close()\n\
+          \t_, err = io.Copy(fw, fd)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\
+          \n\tfw, err = writer.CreateFormFile(\"document2.txt\", filepath.Base(\"\
+          document2.txt\"))\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tfd, err\
+          \ = os.Open(\"document2.txt\")\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t\
+          }\n\tdefer fd.Close()\n\t_, err = io.Copy(fw, fd)\n\tif err != nil {\n\t\
+          \tlog.Fatal(err)\n\t}\n\n\twriter.Close()\n\n\tclient := &http.Client{}\n\
+          \treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload\"\
+          , form)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Authorization\", \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\treq.Header.Set(\"\
+          Content-Type\", writer.FormDataContentType())\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}:
+    delete:
+      description: "Чтобы удалить документ из базы знаний, отправьте DELETE-запрос\
+        \ на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}`."
+      operationId: deleteDocument
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID документа
+        explode: false
+        in: path
+        name: document_id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Документ успешно удален
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление документа из базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/download:
+    get:
+      description: "Чтобы скачать документ из базы знаний, отправьте GET-запрос на\
+        \ `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/download`."
+      operationId: downloadDocument
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID документа
+        explode: false
+        in: path
+        name: document_id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: Файл документа
+          headers:
+            Content-Type:
+              description: MIME тип файла
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Content-Disposition:
+              description: Attachment с именем файла
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Content-Length:
+              description: Размер файла в байтах
+              explode: false
+              schema:
+                type: number
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Скачивание документа из базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -o downloaded_file.pdf \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/download"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/download', {
+              headers: {
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/download', {
+              headers: {
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/download', headers=headers)
+
+          with open('downloaded_file.pdf', 'wb') as f:
+              f.write(response.content)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/download');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/download\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Authorization\", \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp,\
+          \ err := client.Do(req)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\t\
+          defer resp.Body.Close()\n\tbodyText, err := io.ReadAll(resp.Body)\n\tif\
+          \ err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n\
+          }\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/download\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/reindex:
+    post:
+      description: "Чтобы переиндексировать документ в базе знаний, отправьте POST-з\
+        апрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/reindex`."
+      operationId: reindexDocument
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID документа
+        explode: false
+        in: path
+        name: document_id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Переиндексация документа начата
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Переиндексация документа
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/reindex"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/reindex', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/reindex',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/reindex', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/reindex');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/reindex\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/documents/1/reindex\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/knowledge-bases/{id}/statistic:
+    get:
+      description: |-
+        Чтобы получить статистику использования токенов базы знаний, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/statistic`.
+
+        Можно указать временной диапазон и интервал агрегации.
+      operationId: getKnowledgebaseStatistics
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: Начало временного диапазона (ISO 8601)
+        explode: true
+        in: query
+        name: startTime
+        required: false
+        schema:
+          example: 2024-10-01T00:00:00Z
+          format: date-time
+          type: string
+        style: form
+      - description: Конец временного диапазона (ISO 8601)
+        explode: true
+        in: query
+        name: endTime
+        required: false
+        schema:
+          example: 2024-10-16T23:59:59.999Z
+          format: date-time
+          type: string
+        style: form
+      - description: Интервал в минутах (по умолчанию 60)
+        explode: true
+        in: query
+        name: interval
+        required: false
+        schema:
+          default: 60
+          example: 60
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getKnowledgebaseStatistics_200_response'
+          description: Объект JSON c ключами `knowledgebase_statistics` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение статистики использования токенов базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/statistic?interval=3600"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/statistic?interval=3600', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/statistic', {
+              params: {
+                  'interval': '3600'
+              },
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          params = {
+              'interval': '3600',
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/statistic', params=params, headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/statistic?interval=3600');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/statistic?interval=3600\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/statistic?interval=3600\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
 components:
   parameters:
     limit:
@@ -43003,6 +46108,50 @@ components:
         description: ID сетевого диска
         example: 87fa289f-1513-4c4d-8d49-5707f411f14b
         type: string
+      style: simple
+    agent-id:
+      description: ID агента
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        example: 1
+        minimum: 1
+        type: integer
+      style: simple
+    knowledgebase-id:
+      description: ID базы знаний
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        example: 1
+        minimum: 1
+        type: integer
+      style: simple
+    agent-id-2:
+      description: ID агента
+      explode: false
+      in: path
+      name: agent_id
+      required: true
+      schema:
+        example: 1
+        minimum: 1
+        type: integer
+      style: simple
+    document-id:
+      description: ID документа
+      explode: false
+      in: path
+      name: document_id
+      required: true
+      schema:
+        example: 1
+        minimum: 1
+        type: integer
       style: simple
   responses:
     "400":
@@ -51800,6 +54949,573 @@ components:
       - step
       - type
       - write
+    agent-model-settings:
+      description: Настройки модели агента
+      example:
+        top_p: 0.9
+        frequency_penalty: 0
+        max_tokens: 1000
+        presence_penalty: 0
+        temperature: 0.7
+      properties:
+        temperature:
+          description: Контролирует случайность вывода модели.
+          example: 0.7
+          type: number
+        top_p:
+          description: Контролирует разнообразие вывода модели.
+          example: 0.9
+          type: number
+        max_tokens:
+          description: Максимальное количество токенов в выводе.
+          example: 1000
+          type: number
+        frequency_penalty:
+          description: Положительные значения штрафуют новые токены на основе их существующей
+            частоты.
+          example: 0
+          type: number
+        presence_penalty:
+          description: "Положительные значения штрафуют новые токены на основе тог\
+            о, встречались ли они в тексте ранее."
+          example: 0
+          type: number
+      type: object
+    agent:
+      description: AI Agent
+      example:
+        settings:
+          widget:
+            icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+            signature: AI Ассистент
+            name: Помощник поддержки
+            whitelist_domains:
+            - example.com
+            - subdomain.example.com
+            welcome_message: Здравствуйте! Чем могу помочь?
+            primary_color: '#7177F8'
+            chat_position: bottom_right
+            font: "Inter, Arial, sans-serif"
+          model:
+            top_p: 0.9
+            frequency_penalty: 0
+            max_tokens: 1000
+            presence_penalty: 0
+            temperature: 0.7
+          refine_query: true
+          system_prompt: system_prompt
+        access_type: private
+        knowledge_bases_ids:
+        - 1
+        - 2
+        - 3
+        description: Помощник для ответов на вопросы
+        token_package_id: 1
+        created_at: 2024-10-16T10:00:00Z
+        model_id: 1
+        remaining_tokens: 95000
+        subscription_renewal_date: 2025-01-01T00:00:00Z
+        used_tokens: 5000
+        name: Мой AI помощник
+        total_tokens: 100000
+        provider_id: 1
+        access_id: 1
+        id: 1
+        status: active
+      properties:
+        id:
+          description: Уникальный идентификатор агента
+          example: 1
+          type: number
+        name:
+          description: Название агента
+          example: Мой AI помощник
+          type: string
+        description:
+          description: Описание агента
+          example: Помощник для ответов на вопросы
+          type: string
+        model_id:
+          description: ID модели
+          example: 1
+          type: number
+        provider_id:
+          description: ID провайдера
+          example: 1
+          type: number
+        settings:
+          $ref: '#/components/schemas/agent_settings'
+        status:
+          description: Статус агента
+          enum:
+          - active
+          - blocked
+          - deleted
+          - suspended
+          example: active
+          type: string
+        access_type:
+          description: Тип доступа к агенту
+          enum:
+          - public
+          - private
+          example: private
+          type: string
+        total_tokens:
+          description: Всего токенов выделено агенту
+          example: 100000
+          type: number
+        used_tokens:
+          description: Использовано токенов
+          example: 5000
+          type: number
+        remaining_tokens:
+          description: Осталось токенов
+          example: 95000
+          type: number
+        token_package_id:
+          description: ID пакета токенов
+          example: 1
+          type: number
+        subscription_renewal_date:
+          description: Дата обновления подписки
+          example: 2025-01-01T00:00:00Z
+          format: date-time
+          type: string
+        knowledge_bases_ids:
+          description: "ID баз знаний, связанных с агентом"
+          example:
+          - 1
+          - 2
+          - 3
+          items:
+            type: number
+          type: array
+        access_id:
+          description: ID доступа
+          example: 1
+          type: number
+        created_at:
+          description: Дата создания агента
+          example: 2024-10-16T10:00:00Z
+          format: date-time
+          type: string
+      required:
+      - access_id
+      - access_type
+      - created_at
+      - description
+      - id
+      - knowledge_bases_ids
+      - model_id
+      - name
+      - provider_id
+      - remaining_tokens
+      - settings
+      - status
+      - subscription_renewal_date
+      - token_package_id
+      - total_tokens
+      - used_tokens
+      type: object
+    create-agent:
+      description: Данные для создания AI агента
+      properties:
+        name:
+          description: Название агента
+          example: Мой AI помощник
+          type: string
+        description:
+          description: Описание агента
+          example: Помощник для ответов на вопросы
+          type: string
+        access_type:
+          description: Тип доступа к агенту
+          enum:
+          - public
+          - private
+          example: private
+          type: string
+        model_id:
+          description: ID модели
+          example: 1
+          type: number
+        token_package_id:
+          description: ID пакета токенов
+          example: 1
+          type: number
+        settings:
+          $ref: '#/components/schemas/agent_settings'
+        project_id:
+          description: ID проекта
+          example: 1
+          type: number
+      required:
+      - access_type
+      - model_id
+      - name
+      - settings
+      - token_package_id
+      type: object
+    update-agent:
+      description: Данные для обновления AI агента
+      properties:
+        name:
+          description: Название агента
+          example: Мой AI помощник
+          type: string
+        description:
+          description: Описание агента
+          example: Помощник для ответов на вопросы
+          type: string
+        access_type:
+          description: Тип доступа к агенту
+          enum:
+          - public
+          - private
+          example: private
+          type: string
+        status:
+          description: Статус агента
+          enum:
+          - active
+          - suspended
+          example: active
+          type: string
+        token_package_id:
+          description: ID пакета токенов
+          example: 1
+          type: number
+        settings:
+          $ref: '#/components/schemas/update_agent_settings'
+        project_id:
+          description: ID проекта
+          example: 1
+          type: number
+      type: object
+    token-statistic:
+      description: Точка статистики использования токенов
+      example:
+        time: 2025-07-24T11:08:00Z
+        ingoing_tokens: 150
+        outgoing_tokens: 250
+      properties:
+        time:
+          description: Время точки статистики
+          example: 2025-07-24T11:08:00Z
+          format: date-time
+          type: string
+        ingoing_tokens:
+          description: Количество входящих токенов (промпты)
+          example: 150
+          type: number
+        outgoing_tokens:
+          description: Количество исходящих токенов (ответы)
+          example: 250
+          type: number
+      required:
+      - ingoing_tokens
+      - outgoing_tokens
+      - time
+      type: object
+    add-token-package:
+      description: Данные для добавления дополнительного пакета токенов
+      properties:
+        count:
+          description: Количество пакетов для добавления (от 1 до 100)
+          example: 1
+          maximum: 100
+          minimum: 1
+          type: number
+      type: object
+    document-status-info:
+      description: Детальная информация о текущем состоянии документа в базе знаний
+      example:
+        error_code: INSUFFICIENT_TOKENS
+        details:
+          started_at: 2024-01-01T12:00:00Z
+          progress: 45
+          current_stage: parsing
+        type: indexed
+        timestamp: 2024-01-01T12:00:00Z
+      nullable: true
+      properties:
+        type:
+          description: Тип статуса документа
+          enum:
+          - new
+          - indexing
+          - indexed
+          - error
+          example: indexed
+          type: string
+        timestamp:
+          description: Время записи информации (ISO string)
+          example: 2024-01-01T12:00:00Z
+          format: date-time
+          type: string
+        error_code:
+          description: "Код ошибки (только для type: 'error')"
+          enum:
+          - INSUFFICIENT_TOKENS
+          - CRITICAL_BALANCE
+          - NEGATIVE_BALANCE
+          - INDEXING_ERROR
+          example: INSUFFICIENT_TOKENS
+          type: string
+        details:
+          $ref: '#/components/schemas/document_status_info_details'
+      required:
+      - timestamp
+      - type
+      type: object
+    document:
+      description: Документ в базе знаний
+      example:
+        size: 1024000
+        updated_at: 2024-10-16T10:00:00Z
+        indexing_version: v1.0
+        status_info:
+          error_code: INSUFFICIENT_TOKENS
+          details:
+            started_at: 2024-01-01T12:00:00Z
+            progress: 45
+            current_stage: parsing
+          type: indexed
+          timestamp: 2024-01-01T12:00:00Z
+        name: документация.pdf
+        created_at: 2024-10-16T10:00:00Z
+        id: 1
+        status: indexed
+      properties:
+        id:
+          description: Уникальный идентификатор документа
+          example: 1
+          type: number
+        name:
+          description: Название документа
+          example: документация.pdf
+          type: string
+        size:
+          description: Размер документа в байтах
+          example: 1024000
+          type: number
+        status:
+          description: Статус индексации документа
+          enum:
+          - new
+          - indexed
+          - indexing
+          - error
+          example: indexed
+          type: string
+        indexing_version:
+          description: Версия индексации
+          example: v1.0
+          nullable: true
+          type: string
+        status_info:
+          $ref: '#/components/schemas/document-status-info'
+        created_at:
+          description: Дата создания документа
+          example: 2024-10-16T10:00:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: Дата обновления документа
+          example: 2024-10-16T10:00:00Z
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - id
+      - name
+      - size
+      - status
+      - updated_at
+      type: object
+    knowledgebase:
+      description: База знаний
+      example:
+        last_sync: 2024-10-16T10:00:00Z
+        documents:
+        - size: 1024000
+          updated_at: 2024-10-16T10:00:00Z
+          indexing_version: v1.0
+          status_info:
+            error_code: INSUFFICIENT_TOKENS
+            details:
+              started_at: 2024-01-01T12:00:00Z
+              progress: 45
+              current_stage: parsing
+            type: indexed
+            timestamp: 2024-01-01T12:00:00Z
+          name: документация.pdf
+          created_at: 2024-10-16T10:00:00Z
+          id: 1
+          status: indexed
+        - size: 1024000
+          updated_at: 2024-10-16T10:00:00Z
+          indexing_version: v1.0
+          status_info:
+            error_code: INSUFFICIENT_TOKENS
+            details:
+              started_at: 2024-01-01T12:00:00Z
+              progress: 45
+              current_stage: parsing
+            type: indexed
+            timestamp: 2024-01-01T12:00:00Z
+          name: документация.pdf
+          created_at: 2024-10-16T10:00:00Z
+          id: 1
+          status: indexed
+        description: База знаний с документацией
+        token_package_id: 1
+        created_at: 2024-10-16T10:00:00Z
+        dbaas_id: 123
+        remaining_tokens: 95000
+        agents_ids:
+        - 1
+        - 2
+        - 3
+        subscription_renewal_date: 2025-01-01T00:00:00Z
+        used_tokens: 5000
+        name: Моя база знаний
+        total_tokens: 100000
+        id: 1
+        status: active
+      properties:
+        id:
+          description: Уникальный идентификатор базы знаний
+          example: 1
+          type: number
+        name:
+          description: Название базы знаний
+          example: Моя база знаний
+          type: string
+        description:
+          description: Описание базы знаний
+          example: База знаний с документацией
+          nullable: true
+          type: string
+        dbaas_id:
+          description: ID базы данных (opensearch или qdrant)
+          example: 123
+          type: number
+        status:
+          description: Статус базы знаний
+          enum:
+          - active
+          - blocked
+          - creating
+          - deleted
+          example: active
+          type: string
+        last_sync:
+          description: Дата последней синхронизации
+          example: 2024-10-16T10:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        total_tokens:
+          description: Всего токенов выделено
+          example: 100000
+          type: number
+        used_tokens:
+          description: Использовано токенов
+          example: 5000
+          type: number
+        remaining_tokens:
+          description: Осталось токенов
+          example: 95000
+          type: number
+        token_package_id:
+          description: ID пакета токенов
+          example: 1
+          type: number
+        subscription_renewal_date:
+          description: Дата обновления подписки
+          example: 2025-01-01T00:00:00Z
+          format: date-time
+          type: string
+        documents:
+          description: Документы в базе знаний
+          items:
+            $ref: '#/components/schemas/document'
+          type: array
+        agents_ids:
+          description: "ID агентов, связанных с базой знаний"
+          example:
+          - 1
+          - 2
+          - 3
+          items:
+            type: number
+          type: array
+        created_at:
+          description: Дата создания базы знаний
+          example: 2024-10-16T10:00:00Z
+          format: date-time
+          type: string
+      required:
+      - agents_ids
+      - created_at
+      - dbaas_id
+      - documents
+      - id
+      - name
+      - remaining_tokens
+      - status
+      - subscription_renewal_date
+      - token_package_id
+      - total_tokens
+      - used_tokens
+      type: object
+    create-knowledgebase:
+      description: Данные для создания базы знаний
+      properties:
+        name:
+          description: Название базы знаний
+          example: Моя база знаний
+          type: string
+        description:
+          description: Описание базы знаний
+          example: База знаний с документацией
+          type: string
+        dbaas_preset_id:
+          description: ID пресета базы данных
+          example: 1
+          type: number
+        network_id:
+          description: ID сети
+          example: net_12345
+          type: string
+        token_package_id:
+          description: ID пакета токенов
+          example: 1
+          type: number
+        project_id:
+          description: ID проекта
+          example: 1
+          type: number
+      required:
+      - dbaas_preset_id
+      - name
+      - network_id
+      - token_package_id
+      type: object
+    update-knowledgebase:
+      description: Данные для обновления базы знаний
+      properties:
+        name:
+          description: Название базы знаний
+          example: Моя база знаний
+          type: string
+        description:
+          description: Описание базы знаний
+          example: База знаний с документацией
+          type: string
+      type: object
     getFinances_200_response:
       example:
         finances:
@@ -57857,6 +61573,413 @@ components:
       - meta
       - network_drive_presets
       type: object
+    getAgents_200_response_meta:
+      example:
+        total: 5
+      properties:
+        total:
+          description: Общее количество агентов
+          example: 5
+          type: number
+      required:
+      - total
+      type: object
+    getAgents_200_response:
+      example:
+        meta:
+          total: 5
+        agents:
+        - settings:
+            widget:
+              icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+              signature: AI Ассистент
+              name: Помощник поддержки
+              whitelist_domains:
+              - example.com
+              - subdomain.example.com
+              welcome_message: Здравствуйте! Чем могу помочь?
+              primary_color: '#7177F8'
+              chat_position: bottom_right
+              font: "Inter, Arial, sans-serif"
+            model:
+              top_p: 0.9
+              frequency_penalty: 0
+              max_tokens: 1000
+              presence_penalty: 0
+              temperature: 0.7
+            refine_query: true
+            system_prompt: system_prompt
+          access_type: private
+          knowledge_bases_ids:
+          - 1
+          - 2
+          - 3
+          description: Помощник для ответов на вопросы
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          model_id: 1
+          remaining_tokens: 95000
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Мой AI помощник
+          total_tokens: 100000
+          provider_id: 1
+          access_id: 1
+          id: 1
+          status: active
+        - settings:
+            widget:
+              icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+              signature: AI Ассистент
+              name: Помощник поддержки
+              whitelist_domains:
+              - example.com
+              - subdomain.example.com
+              welcome_message: Здравствуйте! Чем могу помочь?
+              primary_color: '#7177F8'
+              chat_position: bottom_right
+              font: "Inter, Arial, sans-serif"
+            model:
+              top_p: 0.9
+              frequency_penalty: 0
+              max_tokens: 1000
+              presence_penalty: 0
+              temperature: 0.7
+            refine_query: true
+            system_prompt: system_prompt
+          access_type: private
+          knowledge_bases_ids:
+          - 1
+          - 2
+          - 3
+          description: Помощник для ответов на вопросы
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          model_id: 1
+          remaining_tokens: 95000
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Мой AI помощник
+          total_tokens: 100000
+          provider_id: 1
+          access_id: 1
+          id: 1
+          status: active
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/agent'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getAgents_200_response_meta'
+      required:
+      - agents
+      - meta
+      type: object
+    createAgent_201_response:
+      example:
+        agent:
+          settings:
+            widget:
+              icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+              signature: AI Ассистент
+              name: Помощник поддержки
+              whitelist_domains:
+              - example.com
+              - subdomain.example.com
+              welcome_message: Здравствуйте! Чем могу помочь?
+              primary_color: '#7177F8'
+              chat_position: bottom_right
+              font: "Inter, Arial, sans-serif"
+            model:
+              top_p: 0.9
+              frequency_penalty: 0
+              max_tokens: 1000
+              presence_penalty: 0
+              temperature: 0.7
+            refine_query: true
+            system_prompt: system_prompt
+          access_type: private
+          knowledge_bases_ids:
+          - 1
+          - 2
+          - 3
+          description: Помощник для ответов на вопросы
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          model_id: 1
+          remaining_tokens: 95000
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Мой AI помощник
+          total_tokens: 100000
+          provider_id: 1
+          access_id: 1
+          id: 1
+          status: active
+      properties:
+        agent:
+          $ref: '#/components/schemas/agent'
+      required:
+      - agent
+      type: object
+    getAgentStatistics_200_response_meta:
+      example:
+        total: 24
+      properties:
+        total:
+          description: Количество полученных временных отрезков
+          example: 24
+          type: number
+      required:
+      - total
+      type: object
+    getAgentStatistics_200_response:
+      example:
+        meta:
+          total: 24
+        agent_statistics:
+        - time: 2025-07-24T11:08:00Z
+          ingoing_tokens: 150
+          outgoing_tokens: 250
+        - time: 2025-07-24T11:08:00Z
+          ingoing_tokens: 150
+          outgoing_tokens: 250
+      properties:
+        agent_statistics:
+          items:
+            $ref: '#/components/schemas/token-statistic'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getAgentStatistics_200_response_meta'
+      required:
+      - agent_statistics
+      - meta
+      type: object
+    getKnowledgebases_200_response_meta:
+      example:
+        total: 3
+      properties:
+        total:
+          description: Общее количество баз знаний
+          example: 3
+          type: number
+      required:
+      - total
+      type: object
+    getKnowledgebases_200_response:
+      example:
+        knowledgebases:
+        - last_sync: 2024-10-16T10:00:00Z
+          documents:
+          - size: 1024000
+            updated_at: 2024-10-16T10:00:00Z
+            indexing_version: v1.0
+            status_info:
+              error_code: INSUFFICIENT_TOKENS
+              details:
+                started_at: 2024-01-01T12:00:00Z
+                progress: 45
+                current_stage: parsing
+              type: indexed
+              timestamp: 2024-01-01T12:00:00Z
+            name: документация.pdf
+            created_at: 2024-10-16T10:00:00Z
+            id: 1
+            status: indexed
+          - size: 1024000
+            updated_at: 2024-10-16T10:00:00Z
+            indexing_version: v1.0
+            status_info:
+              error_code: INSUFFICIENT_TOKENS
+              details:
+                started_at: 2024-01-01T12:00:00Z
+                progress: 45
+                current_stage: parsing
+              type: indexed
+              timestamp: 2024-01-01T12:00:00Z
+            name: документация.pdf
+            created_at: 2024-10-16T10:00:00Z
+            id: 1
+            status: indexed
+          description: База знаний с документацией
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          dbaas_id: 123
+          remaining_tokens: 95000
+          agents_ids:
+          - 1
+          - 2
+          - 3
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Моя база знаний
+          total_tokens: 100000
+          id: 1
+          status: active
+        - last_sync: 2024-10-16T10:00:00Z
+          documents:
+          - size: 1024000
+            updated_at: 2024-10-16T10:00:00Z
+            indexing_version: v1.0
+            status_info:
+              error_code: INSUFFICIENT_TOKENS
+              details:
+                started_at: 2024-01-01T12:00:00Z
+                progress: 45
+                current_stage: parsing
+              type: indexed
+              timestamp: 2024-01-01T12:00:00Z
+            name: документация.pdf
+            created_at: 2024-10-16T10:00:00Z
+            id: 1
+            status: indexed
+          - size: 1024000
+            updated_at: 2024-10-16T10:00:00Z
+            indexing_version: v1.0
+            status_info:
+              error_code: INSUFFICIENT_TOKENS
+              details:
+                started_at: 2024-01-01T12:00:00Z
+                progress: 45
+                current_stage: parsing
+              type: indexed
+              timestamp: 2024-01-01T12:00:00Z
+            name: документация.pdf
+            created_at: 2024-10-16T10:00:00Z
+            id: 1
+            status: indexed
+          description: База знаний с документацией
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          dbaas_id: 123
+          remaining_tokens: 95000
+          agents_ids:
+          - 1
+          - 2
+          - 3
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Моя база знаний
+          total_tokens: 100000
+          id: 1
+          status: active
+        meta:
+          total: 3
+      properties:
+        knowledgebases:
+          items:
+            $ref: '#/components/schemas/knowledgebase'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getKnowledgebases_200_response_meta'
+      required:
+      - knowledgebases
+      - meta
+      type: object
+    createKnowledgebase_201_response:
+      example:
+        knowledgebase:
+          last_sync: 2024-10-16T10:00:00Z
+          documents:
+          - size: 1024000
+            updated_at: 2024-10-16T10:00:00Z
+            indexing_version: v1.0
+            status_info:
+              error_code: INSUFFICIENT_TOKENS
+              details:
+                started_at: 2024-01-01T12:00:00Z
+                progress: 45
+                current_stage: parsing
+              type: indexed
+              timestamp: 2024-01-01T12:00:00Z
+            name: документация.pdf
+            created_at: 2024-10-16T10:00:00Z
+            id: 1
+            status: indexed
+          - size: 1024000
+            updated_at: 2024-10-16T10:00:00Z
+            indexing_version: v1.0
+            status_info:
+              error_code: INSUFFICIENT_TOKENS
+              details:
+                started_at: 2024-01-01T12:00:00Z
+                progress: 45
+                current_stage: parsing
+              type: indexed
+              timestamp: 2024-01-01T12:00:00Z
+            name: документация.pdf
+            created_at: 2024-10-16T10:00:00Z
+            id: 1
+            status: indexed
+          description: База знаний с документацией
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          dbaas_id: 123
+          remaining_tokens: 95000
+          agents_ids:
+          - 1
+          - 2
+          - 3
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Моя база знаний
+          total_tokens: 100000
+          id: 1
+          status: active
+      properties:
+        knowledgebase:
+          $ref: '#/components/schemas/knowledgebase'
+      required:
+      - knowledgebase
+      type: object
+    uploadFilesToKnowledgebase_request:
+      properties:
+        files:
+          description: "Файлы для загрузки (максимум 10 файлов, 10 МБ каждый)"
+          items:
+            format: binary
+            type: string
+          type: array
+      required:
+      - files
+      type: object
+    uploadFilesToKnowledgebase_200_response:
+      example:
+        uploaded_files:
+        - uploaded_files
+        - uploaded_files
+      properties:
+        uploaded_files:
+          description: Список загруженных файлов
+          items:
+            type: string
+          type: array
+      required:
+      - uploaded_files
+      type: object
+    getKnowledgebaseStatistics_200_response:
+      example:
+        knowledgebase_statistics:
+        - time: 2025-07-24T11:08:00Z
+          ingoing_tokens: 150
+          outgoing_tokens: 250
+        - time: 2025-07-24T11:08:00Z
+          ingoing_tokens: 150
+          outgoing_tokens: 250
+        meta:
+          total: 24
+      properties:
+        knowledgebase_statistics:
+          items:
+            $ref: '#/components/schemas/token-statistic'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getAgentStatistics_200_response_meta'
+      required:
+      - knowledgebase_statistics
+      - meta
+      type: object
     service_service_price_node_groups_inner:
       example:
         cost: 500
@@ -59717,6 +63840,146 @@ components:
         max:
           description: Запись IOPS
           example: 15000
+          type: number
+      type: object
+    agent_settings_widget:
+      description: Настройки виджета
+      example:
+        icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+        signature: AI Ассистент
+        name: Помощник поддержки
+        whitelist_domains:
+        - example.com
+        - subdomain.example.com
+        welcome_message: Здравствуйте! Чем могу помочь?
+        primary_color: '#7177F8'
+        chat_position: bottom_right
+        font: "Inter, Arial, sans-serif"
+      properties:
+        whitelist_domains:
+          description: Массив разрешенных доменов для виджета
+          example:
+          - example.com
+          - subdomain.example.com
+          items:
+            type: string
+          type: array
+        name:
+          description: Отображаемое имя агента в виджете
+          example: Помощник поддержки
+          type: string
+        signature:
+          description: "Подпись/подзаголовок, отображаемый под именем агента в вид\
+            жете"
+          example: AI Ассистент
+          type: string
+        welcome_message:
+          description: "Приветственное сообщение, показываемое при открытии виджет\
+            а"
+          example: Здравствуйте! Чем могу помочь?
+          type: string
+        primary_color:
+          description: "Основной цвет виджета (hex-код цвета в формате #RRGGBB)"
+          example: '#7177F8'
+          type: string
+        font:
+          description: Семейство шрифтов для виджета
+          example: "Inter, Arial, sans-serif"
+          type: string
+        icon_url:
+          description: URL иконки виджета
+          example: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+          type: string
+        chat_position:
+          description: Позиция виджета чата на странице
+          enum:
+          - bottom_right
+          - bottom_left
+          - top_right
+          - top_left
+          example: bottom_right
+          type: string
+      required:
+      - chat_position
+      - font
+      - name
+      - primary_color
+      - welcome_message
+      - whitelist_domains
+      type: object
+    agent_settings:
+      description: Настройки агента
+      example:
+        widget:
+          icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+          signature: AI Ассистент
+          name: Помощник поддержки
+          whitelist_domains:
+          - example.com
+          - subdomain.example.com
+          welcome_message: Здравствуйте! Чем могу помочь?
+          primary_color: '#7177F8'
+          chat_position: bottom_right
+          font: "Inter, Arial, sans-serif"
+        model:
+          top_p: 0.9
+          frequency_penalty: 0
+          max_tokens: 1000
+          presence_penalty: 0
+          temperature: 0.7
+        refine_query: true
+        system_prompt: system_prompt
+      properties:
+        model:
+          $ref: '#/components/schemas/agent-model-settings'
+        system_prompt:
+          description: Системный промпт
+          type: string
+        refine_query:
+          description: Уточнять ли запрос перед обработкой
+          type: boolean
+        widget:
+          $ref: '#/components/schemas/agent_settings_widget'
+      required:
+      - model
+      - refine_query
+      - system_prompt
+      type: object
+    update_agent_settings:
+      description: Настройки агента
+      properties:
+        model:
+          $ref: '#/components/schemas/agent-model-settings'
+        system_prompt:
+          description: Системный промпт
+          type: string
+        refine_query:
+          description: Уточнять ли запрос перед обработкой
+          type: boolean
+        widget:
+          $ref: '#/components/schemas/agent_settings_widget'
+      type: object
+    document_status_info_details:
+      description: "Дополнительные детали, зависящие от типа статуса"
+      example:
+        started_at: 2024-01-01T12:00:00Z
+        progress: 45
+        current_stage: parsing
+      properties:
+        started_at:
+          description: Время начала индексации
+          example: 2024-01-01T12:00:00Z
+          format: date-time
+          type: string
+        current_stage:
+          description: Текущий этап индексации
+          example: parsing
+          type: string
+        progress:
+          description: Прогресс в процентах (0-100)
+          example: 45
+          maximum: 100
+          minimum: 0
           type: number
       type: object
   securitySchemes:

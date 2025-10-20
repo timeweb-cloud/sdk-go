@@ -50,6 +50,8 @@ type APIClient struct {
 
 	// API Services
 
+	AIAgentsAPI *AIAgentsAPIService
+
 	APIKeysAPI *APIKeysAPIService
 
 	AccountAPI *AccountAPIService
@@ -71,6 +73,8 @@ type APIClient struct {
 	FloatingIPAPI *FloatingIPAPIService
 
 	ImagesAPI *ImagesAPIService
+
+	KnowledgeBasesAPI *KnowledgeBasesAPIService
 
 	KubernetesAPI *KubernetesAPIService
 
@@ -109,6 +113,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AIAgentsAPI = (*AIAgentsAPIService)(&c.common)
 	c.APIKeysAPI = (*APIKeysAPIService)(&c.common)
 	c.AccountAPI = (*AccountAPIService)(&c.common)
 	c.AppsAPI = (*AppsAPIService)(&c.common)
@@ -120,6 +125,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FirewallAPI = (*FirewallAPIService)(&c.common)
 	c.FloatingIPAPI = (*FloatingIPAPIService)(&c.common)
 	c.ImagesAPI = (*ImagesAPIService)(&c.common)
+	c.KnowledgeBasesAPI = (*KnowledgeBasesAPIService)(&c.common)
 	c.KubernetesAPI = (*KubernetesAPIService)(&c.common)
 	c.LocationsAPI = (*LocationsAPIService)(&c.common)
 	c.MailAPI = (*MailAPIService)(&c.common)
