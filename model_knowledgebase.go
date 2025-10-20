@@ -27,7 +27,7 @@ type Knowledgebase struct {
 	Name string `json:"name"`
 	// Описание базы знаний
 	Description NullableString `json:"description,omitempty"`
-	// ID базы данных (opensearch или qdrant)
+	// ID базы данных opensearch
 	DbaasId float32 `json:"dbaas_id"`
 	// Статус базы знаний
 	Status string `json:"status"`

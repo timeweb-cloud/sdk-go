@@ -55399,7 +55399,7 @@ components:
           nullable: true
           type: string
         dbaas_id:
-          description: ID базы данных (opensearch или qdrant)
+          description: ID базы данных opensearch
           example: 123
           type: number
         status:
