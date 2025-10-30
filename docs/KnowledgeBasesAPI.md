@@ -10,8 +10,10 @@ Method | HTTP request | Description
 [**DeleteKnowledgebase**](KnowledgeBasesAPI.md#DeleteKnowledgebase) | **Delete** /api/v1/cloud-ai/knowledge-bases/{id} | Удаление базы знаний
 [**DownloadDocument**](KnowledgeBasesAPI.md#DownloadDocument) | **Get** /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/download | Скачивание документа из базы знаний
 [**GetKnowledgebase**](KnowledgeBasesAPI.md#GetKnowledgebase) | **Get** /api/v1/cloud-ai/knowledge-bases/{id} | Получение базы знаний
+[**GetKnowledgebaseDocumentsV2**](KnowledgeBasesAPI.md#GetKnowledgebaseDocumentsV2) | **Get** /api/v2/cloud-ai/knowledge-bases/{id}/documents | Получение списка документов базы знаний
 [**GetKnowledgebaseStatistics**](KnowledgeBasesAPI.md#GetKnowledgebaseStatistics) | **Get** /api/v1/cloud-ai/knowledge-bases/{id}/statistic | Получение статистики использования токенов базы знаний
 [**GetKnowledgebases**](KnowledgeBasesAPI.md#GetKnowledgebases) | **Get** /api/v1/cloud-ai/knowledge-bases | Получение списка баз знаний
+[**GetKnowledgebasesV2**](KnowledgeBasesAPI.md#GetKnowledgebasesV2) | **Get** /api/v2/cloud-ai/knowledge-bases | Получение списка баз знаний (v2)
 [**LinkKnowledgebaseToAgent**](KnowledgeBasesAPI.md#LinkKnowledgebaseToAgent) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id} | Привязка базы знаний к агенту
 [**ReindexDocument**](KnowledgeBasesAPI.md#ReindexDocument) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/reindex | Переиндексация документа
 [**UnlinkKnowledgebaseFromAgent**](KnowledgeBasesAPI.md#UnlinkKnowledgebaseFromAgent) | **Delete** /api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id} | Отвязка базы знаний от агента
@@ -438,6 +440,84 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetKnowledgebaseDocumentsV2
+
+> GetKnowledgebaseDocumentsV2200Response GetKnowledgebaseDocumentsV2(ctx, id).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
+
+Получение списка документов базы знаний
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := int32(1) // int32 | ID базы знаний
+    limit := int32(20) // int32 | Количество документов на странице (по умолчанию: 10, максимум: 100) (optional) (default to 10)
+    offset := int32(0) // int32 | Количество документов для пропуска (по умолчанию: 0) (optional) (default to 0)
+    sortBy := "indexing_timestamp" // string | Поле для сортировки (по умолчанию: indexing_timestamp - время последней индексации документа) (optional) (default to "indexing_timestamp")
+    sortOrder := "DESC" // string | Порядок сортировки (по умолчанию: DESC) (optional) (default to "DESC")
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseDocumentsV2(context.Background(), id).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.GetKnowledgebaseDocumentsV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKnowledgebaseDocumentsV2`: GetKnowledgebaseDocumentsV2200Response
+    fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.GetKnowledgebaseDocumentsV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | ID базы знаний | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKnowledgebaseDocumentsV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** | Количество документов на странице (по умолчанию: 10, максимум: 100) | [default to 10]
+ **offset** | **int32** | Количество документов для пропуска (по умолчанию: 0) | [default to 0]
+ **sortBy** | **string** | Поле для сортировки (по умолчанию: indexing_timestamp - время последней индексации документа) | [default to &quot;indexing_timestamp&quot;]
+ **sortOrder** | **string** | Порядок сортировки (по умолчанию: DESC) | [default to &quot;DESC&quot;]
+
+### Return type
+
+[**GetKnowledgebaseDocumentsV2200Response**](GetKnowledgebaseDocumentsV2200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetKnowledgebaseStatistics
 
 > GetKnowledgebaseStatistics200Response GetKnowledgebaseStatistics(ctx, id).StartTime(startTime).EndTime(endTime).Interval(interval).Execute()
@@ -561,6 +641,67 @@ Other parameters are passed through a pointer to a apiGetKnowledgebasesRequest s
 ### Return type
 
 [**GetKnowledgebases200Response**](GetKnowledgebases200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKnowledgebasesV2
+
+> GetKnowledgebasesV2200Response GetKnowledgebasesV2(ctx).Execute()
+
+Получение списка баз знаний (v2)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.KnowledgeBasesAPI.GetKnowledgebasesV2(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.GetKnowledgebasesV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKnowledgebasesV2`: GetKnowledgebasesV2200Response
+    fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.GetKnowledgebasesV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKnowledgebasesV2Request struct via the builder pattern
+
+
+### Return type
+
+[**GetKnowledgebasesV2200Response**](GetKnowledgebasesV2200Response.md)
 
 ### Authorization
 

@@ -103,6 +103,20 @@ func Test_openapi_KnowledgeBasesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KnowledgeBasesAPIService GetKnowledgebaseDocumentsV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseDocumentsV2(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KnowledgeBasesAPIService GetKnowledgebaseStatistics", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -122,6 +136,18 @@ func Test_openapi_KnowledgeBasesAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.KnowledgeBasesAPI.GetKnowledgebases(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KnowledgeBasesAPIService GetKnowledgebasesV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.KnowledgeBasesAPI.GetKnowledgebasesV2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

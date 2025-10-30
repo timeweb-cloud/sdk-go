@@ -43682,8 +43682,140 @@ paths:
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v2/cloud-ai/knowledge-bases:
+    get:
+      description: |-
+        Чтобы получить список баз знаний, отправьте GET-запрос на `/api/v2/cloud-ai/knowledge-bases`.
+
+        Версия API v2 возвращает оптимизированный ответ с количеством документов вместо полного списка документов.
+
+        Тело ответа будет представлять собой объект JSON с ключом `knowledgebases`.
+      operationId: getKnowledgebasesV2
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getKnowledgebasesV2_200_response'
+          description: Объект JSON c ключами `knowledgebases` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка баз знаний (v2)
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v1/cloud-ai/knowledge-bases:
     get:
+      deprecated: true
       description: |-
         Чтобы получить список баз знаний, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases`.
 
@@ -45055,6 +45187,212 @@ paths:
           \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/knowledge-bases/1/upload\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v2/cloud-ai/knowledge-bases/{id}/documents:
+    get:
+      description: |-
+        Чтобы получить список документов базы знаний, отправьте GET-запрос на `/api/v2/cloud-ai/knowledge-bases/{id}/documents`.
+
+        Тело ответа будет представлять собой объект JSON с ключами `knowledgebase_documents` и `meta`.
+      operationId: getKnowledgebaseDocumentsV2
+      parameters:
+      - description: ID базы знаний
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          minimum: 1
+          type: integer
+        style: simple
+      - description: "Количество документов на странице (по умолчанию: 10, максиму\
+          м: 100)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          example: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Количество документов для пропуска (по умолчанию: 0)"
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          example: 0
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Поле для сортировки (по умолчанию: indexing_timestamp - врем\
+          я последней индексации документа)"
+        explode: true
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          default: indexing_timestamp
+          enum:
+          - name
+          - size
+          - status
+          - indexing_timestamp
+          example: indexing_timestamp
+          type: string
+        style: form
+      - description: "Порядок сортировки (по умолчанию: DESC)"
+        explode: true
+        in: query
+        name: sort_order
+        required: false
+        schema:
+          default: DESC
+          enum:
+          - ASC
+          - DESC
+          example: DESC
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getKnowledgebaseDocumentsV2_200_response'
+          description: Объект JSON c ключами `knowledgebase_documents` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка документов базы знаний
+      tags:
+      - Knowledge Bases
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases/1/documents?limit=20&offset=0&sort_by=indexing_timestamp&sort_order=DESC"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases/1/documents?limit=20&offset=0&sort_by=indexing_timestamp&sort_order=DESC', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases/1/documents', {
+              params: {
+                  'limit': '20',
+                  'offset': '0',
+                  'sort_by': 'indexing_timestamp',
+                  'sort_order': 'DESC'
+              },
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          params = {
+              'limit': '20',
+              'offset': '0',
+              'sort_by': 'indexing_timestamp',
+              'sort_order': 'DESC',
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases/1/documents', params=params, headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases/1/documents?limit=20&offset=0&sort_by=indexing_timestamp&sort_order=DESC');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases/1/documents?limit=20&offset=0&sort_by=indexing_timestamp&sort_order=DESC\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/cloud-ai/knowledge-bases/1/documents?limit=20&offset=0&sort_by=indexing_timestamp&sort_order=DESC\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
           Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
           \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
           \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
@@ -55228,6 +55566,112 @@ components:
           minimum: 1
           type: number
       type: object
+    knowledgebase-v2:
+      description: База знаний (версия API v2)
+      example:
+        last_sync: 2024-10-16T10:00:00Z
+        description: База знаний с документацией
+        token_package_id: 1
+        created_at: 2024-10-16T10:00:00Z
+        dbaas_id: 123
+        remaining_tokens: 95000
+        agents_ids:
+        - 1
+        - 2
+        - 3
+        subscription_renewal_date: 2025-01-01T00:00:00Z
+        used_tokens: 5000
+        name: Моя база знаний
+        total_tokens: 100000
+        id: 1
+        documents_count: 15
+        status: active
+      properties:
+        id:
+          description: Уникальный идентификатор базы знаний
+          example: 1
+          type: number
+        name:
+          description: Название базы знаний
+          example: Моя база знаний
+          type: string
+        description:
+          description: Описание базы знаний
+          example: База знаний с документацией
+          nullable: true
+          type: string
+        dbaas_id:
+          description: ID базы данных opensearch
+          example: 123
+          type: number
+        status:
+          description: Статус базы знаний
+          enum:
+          - active
+          - blocked
+          - creating
+          - deleted
+          example: active
+          type: string
+        last_sync:
+          description: Дата последней синхронизации
+          example: 2024-10-16T10:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        total_tokens:
+          description: Всего токенов выделено
+          example: 100000
+          type: number
+        used_tokens:
+          description: Использовано токенов
+          example: 5000
+          type: number
+        remaining_tokens:
+          description: Осталось токенов
+          example: 95000
+          type: number
+        token_package_id:
+          description: ID пакета токенов
+          example: 1
+          type: number
+        subscription_renewal_date:
+          description: Дата обновления подписки
+          example: 2025-01-01T00:00:00Z
+          format: date-time
+          type: string
+        documents_count:
+          description: Общее количество документов в базе знаний
+          example: 15
+          type: number
+        agents_ids:
+          description: "ID агентов, связанных с базой знаний"
+          example:
+          - 1
+          - 2
+          - 3
+          items:
+            type: number
+          type: array
+        created_at:
+          description: Дата создания базы знаний
+          example: 2024-10-16T10:00:00Z
+          format: date-time
+          type: string
+      required:
+      - agents_ids
+      - created_at
+      - dbaas_id
+      - documents_count
+      - id
+      - name
+      - remaining_tokens
+      - status
+      - subscription_renewal_date
+      - token_package_id
+      - total_tokens
+      - used_tokens
+      type: object
     document-status-info:
       description: Детальная информация о текущем состоянии документа в базе знаний
       example:
@@ -61756,7 +62200,7 @@ components:
       - agent_statistics
       - meta
       type: object
-    getKnowledgebases_200_response_meta:
+    getKnowledgebasesV2_200_response_meta:
       example:
         total: 3
       properties:
@@ -61766,6 +62210,56 @@ components:
           type: number
       required:
       - total
+      type: object
+    getKnowledgebasesV2_200_response:
+      example:
+        knowledgebases:
+        - last_sync: 2024-10-16T10:00:00Z
+          description: База знаний с документацией
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          dbaas_id: 123
+          remaining_tokens: 95000
+          agents_ids:
+          - 1
+          - 2
+          - 3
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Моя база знаний
+          total_tokens: 100000
+          id: 1
+          documents_count: 15
+          status: active
+        - last_sync: 2024-10-16T10:00:00Z
+          description: База знаний с документацией
+          token_package_id: 1
+          created_at: 2024-10-16T10:00:00Z
+          dbaas_id: 123
+          remaining_tokens: 95000
+          agents_ids:
+          - 1
+          - 2
+          - 3
+          subscription_renewal_date: 2025-01-01T00:00:00Z
+          used_tokens: 5000
+          name: Моя база знаний
+          total_tokens: 100000
+          id: 1
+          documents_count: 15
+          status: active
+        meta:
+          total: 3
+      properties:
+        knowledgebases:
+          items:
+            $ref: '#/components/schemas/knowledgebase-v2'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getKnowledgebasesV2_200_response_meta'
+      required:
+      - knowledgebases
+      - meta
       type: object
     getKnowledgebases_200_response:
       example:
@@ -61872,7 +62366,7 @@ components:
             $ref: '#/components/schemas/knowledgebase'
           type: array
         meta:
-          $ref: '#/components/schemas/getKnowledgebases_200_response_meta'
+          $ref: '#/components/schemas/getKnowledgebasesV2_200_response_meta'
       required:
       - knowledgebases
       - meta
@@ -61957,6 +62451,78 @@ components:
           type: array
       required:
       - uploaded_files
+      type: object
+    getKnowledgebaseDocumentsV2_200_response_meta:
+      example:
+        total: 150
+        offset: 0
+        limit: 20
+      properties:
+        total:
+          description: Общее количество документов
+          example: 150
+          type: number
+        limit:
+          description: Количество документов на странице
+          example: 20
+          type: number
+        offset:
+          description: Количество пропущенных документов
+          example: 0
+          type: number
+      required:
+      - limit
+      - offset
+      - total
+      type: object
+    getKnowledgebaseDocumentsV2_200_response:
+      example:
+        knowledgebase_documents:
+        - size: 1024000
+          updated_at: 2024-10-16T10:00:00Z
+          indexing_version: v1.0
+          status_info:
+            error_code: INSUFFICIENT_TOKENS
+            details:
+              started_at: 2024-01-01T12:00:00Z
+              progress: 45
+              current_stage: parsing
+            type: indexed
+            timestamp: 2024-01-01T12:00:00Z
+          name: документация.pdf
+          created_at: 2024-10-16T10:00:00Z
+          id: 1
+          status: indexed
+        - size: 1024000
+          updated_at: 2024-10-16T10:00:00Z
+          indexing_version: v1.0
+          status_info:
+            error_code: INSUFFICIENT_TOKENS
+            details:
+              started_at: 2024-01-01T12:00:00Z
+              progress: 45
+              current_stage: parsing
+            type: indexed
+            timestamp: 2024-01-01T12:00:00Z
+          name: документация.pdf
+          created_at: 2024-10-16T10:00:00Z
+          id: 1
+          status: indexed
+        meta:
+          total: 150
+          offset: 0
+          limit: 20
+      properties:
+        knowledgebase_documents:
+          description: Список документов
+          items:
+            $ref: '#/components/schemas/document'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getKnowledgebaseDocumentsV2_200_response_meta'
+      required:
+      - knowledgebase_documents
+      - meta
       type: object
     getKnowledgebaseStatistics_200_response:
       example:

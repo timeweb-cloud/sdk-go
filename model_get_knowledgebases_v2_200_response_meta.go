@@ -15,83 +15,58 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetKnowledgebases200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetKnowledgebases200Response{}
+// checks if the GetKnowledgebasesV2200ResponseMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetKnowledgebasesV2200ResponseMeta{}
 
-// GetKnowledgebases200Response struct for GetKnowledgebases200Response
-type GetKnowledgebases200Response struct {
-	Knowledgebases []Knowledgebase `json:"knowledgebases"`
-	Meta GetKnowledgebasesV2200ResponseMeta `json:"meta"`
+// GetKnowledgebasesV2200ResponseMeta struct for GetKnowledgebasesV2200ResponseMeta
+type GetKnowledgebasesV2200ResponseMeta struct {
+	// Общее количество баз знаний
+	Total float32 `json:"total"`
 }
 
-// NewGetKnowledgebases200Response instantiates a new GetKnowledgebases200Response object
+// NewGetKnowledgebasesV2200ResponseMeta instantiates a new GetKnowledgebasesV2200ResponseMeta object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetKnowledgebases200Response(knowledgebases []Knowledgebase, meta GetKnowledgebasesV2200ResponseMeta) *GetKnowledgebases200Response {
-	this := GetKnowledgebases200Response{}
-	this.Knowledgebases = knowledgebases
-	this.Meta = meta
+func NewGetKnowledgebasesV2200ResponseMeta(total float32) *GetKnowledgebasesV2200ResponseMeta {
+	this := GetKnowledgebasesV2200ResponseMeta{}
+	this.Total = total
 	return &this
 }
 
-// NewGetKnowledgebases200ResponseWithDefaults instantiates a new GetKnowledgebases200Response object
+// NewGetKnowledgebasesV2200ResponseMetaWithDefaults instantiates a new GetKnowledgebasesV2200ResponseMeta object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetKnowledgebases200ResponseWithDefaults() *GetKnowledgebases200Response {
-	this := GetKnowledgebases200Response{}
+func NewGetKnowledgebasesV2200ResponseMetaWithDefaults() *GetKnowledgebasesV2200ResponseMeta {
+	this := GetKnowledgebasesV2200ResponseMeta{}
 	return &this
 }
 
-// GetKnowledgebases returns the Knowledgebases field value
-func (o *GetKnowledgebases200Response) GetKnowledgebases() []Knowledgebase {
+// GetTotal returns the Total field value
+func (o *GetKnowledgebasesV2200ResponseMeta) GetTotal() float32 {
 	if o == nil {
-		var ret []Knowledgebase
+		var ret float32
 		return ret
 	}
 
-	return o.Knowledgebases
+	return o.Total
 }
 
-// GetKnowledgebasesOk returns a tuple with the Knowledgebases field value
+// GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *GetKnowledgebases200Response) GetKnowledgebasesOk() ([]Knowledgebase, bool) {
+func (o *GetKnowledgebasesV2200ResponseMeta) GetTotalOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Knowledgebases, true
+	return &o.Total, true
 }
 
-// SetKnowledgebases sets field value
-func (o *GetKnowledgebases200Response) SetKnowledgebases(v []Knowledgebase) {
-	o.Knowledgebases = v
+// SetTotal sets field value
+func (o *GetKnowledgebasesV2200ResponseMeta) SetTotal(v float32) {
+	o.Total = v
 }
 
-// GetMeta returns the Meta field value
-func (o *GetKnowledgebases200Response) GetMeta() GetKnowledgebasesV2200ResponseMeta {
-	if o == nil {
-		var ret GetKnowledgebasesV2200ResponseMeta
-		return ret
-	}
-
-	return o.Meta
-}
-
-// GetMetaOk returns a tuple with the Meta field value
-// and a boolean to check if the value has been set.
-func (o *GetKnowledgebases200Response) GetMetaOk() (*GetKnowledgebasesV2200ResponseMeta, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Meta, true
-}
-
-// SetMeta sets field value
-func (o *GetKnowledgebases200Response) SetMeta(v GetKnowledgebasesV2200ResponseMeta) {
-	o.Meta = v
-}
-
-func (o GetKnowledgebases200Response) MarshalJSON() ([]byte, error) {
+func (o GetKnowledgebasesV2200ResponseMeta) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -99,45 +74,44 @@ func (o GetKnowledgebases200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetKnowledgebases200Response) ToMap() (map[string]interface{}, error) {
+func (o GetKnowledgebasesV2200ResponseMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["knowledgebases"] = o.Knowledgebases
-	toSerialize["meta"] = o.Meta
+	toSerialize["total"] = o.Total
 	return toSerialize, nil
 }
 
-type NullableGetKnowledgebases200Response struct {
-	value *GetKnowledgebases200Response
+type NullableGetKnowledgebasesV2200ResponseMeta struct {
+	value *GetKnowledgebasesV2200ResponseMeta
 	isSet bool
 }
 
-func (v NullableGetKnowledgebases200Response) Get() *GetKnowledgebases200Response {
+func (v NullableGetKnowledgebasesV2200ResponseMeta) Get() *GetKnowledgebasesV2200ResponseMeta {
 	return v.value
 }
 
-func (v *NullableGetKnowledgebases200Response) Set(val *GetKnowledgebases200Response) {
+func (v *NullableGetKnowledgebasesV2200ResponseMeta) Set(val *GetKnowledgebasesV2200ResponseMeta) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetKnowledgebases200Response) IsSet() bool {
+func (v NullableGetKnowledgebasesV2200ResponseMeta) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetKnowledgebases200Response) Unset() {
+func (v *NullableGetKnowledgebasesV2200ResponseMeta) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetKnowledgebases200Response(val *GetKnowledgebases200Response) *NullableGetKnowledgebases200Response {
-	return &NullableGetKnowledgebases200Response{value: val, isSet: true}
+func NewNullableGetKnowledgebasesV2200ResponseMeta(val *GetKnowledgebasesV2200ResponseMeta) *NullableGetKnowledgebasesV2200ResponseMeta {
+	return &NullableGetKnowledgebasesV2200ResponseMeta{value: val, isSet: true}
 }
 
-func (v NullableGetKnowledgebases200Response) MarshalJSON() ([]byte, error) {
+func (v NullableGetKnowledgebasesV2200ResponseMeta) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetKnowledgebases200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableGetKnowledgebasesV2200ResponseMeta) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

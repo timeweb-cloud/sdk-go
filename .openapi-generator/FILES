@@ -298,9 +298,12 @@ docs/GetFloatingIps200Response.md
 docs/GetImage404Response.md
 docs/GetKey200Response.md
 docs/GetKeys200Response.md
+docs/GetKnowledgebaseDocumentsV2200Response.md
+docs/GetKnowledgebaseDocumentsV2200ResponseMeta.md
 docs/GetKnowledgebaseStatistics200Response.md
 docs/GetKnowledgebases200Response.md
-docs/GetKnowledgebases200ResponseMeta.md
+docs/GetKnowledgebasesV2200Response.md
+docs/GetKnowledgebasesV2200ResponseMeta.md
 docs/GetLocations200Response.md
 docs/GetMailQuota200Response.md
 docs/GetMailboxes200Response.md
@@ -363,6 +366,7 @@ docs/Invoice.md
 docs/K8SVersionsResponse.md
 docs/KnowledgeBasesAPI.md
 docs/Knowledgebase.md
+docs/KnowledgebaseV2.md
 docs/KubernetesAPI.md
 docs/Location.md
 docs/LocationDto.md
@@ -795,9 +799,12 @@ model_get_floating_ips_200_response.go
 model_get_image_404_response.go
 model_get_key_200_response.go
 model_get_keys_200_response.go
+model_get_knowledgebase_documents_v2_200_response.go
+model_get_knowledgebase_documents_v2_200_response_meta.go
 model_get_knowledgebase_statistics_200_response.go
 model_get_knowledgebases_200_response.go
-model_get_knowledgebases_200_response_meta.go
+model_get_knowledgebases_v2_200_response.go
+model_get_knowledgebases_v2_200_response_meta.go
 model_get_locations_200_response.go
 model_get_mail_quota_200_response.go
 model_get_mailboxes_200_response.go
@@ -858,6 +865,7 @@ model_info_service_price.go
 model_invoice.go
 model_k8_s_versions_response.go
 model_knowledgebase.go
+model_knowledgebase_v2.go
 model_location.go
 model_location_dto.go
 model_mailbox.go
