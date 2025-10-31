@@ -9,12 +9,11 @@ Method | HTTP request | Description
 [**DeleteMailbox**](MailAPI.md#DeleteMailbox) | **Delete** /api/v1/mail/domains/{domain}/mailboxes/{mailbox} | Удаление почтового ящика
 [**GetDomainMailInfo**](MailAPI.md#GetDomainMailInfo) | **Get** /api/v1/mail/domains/{domain}/info | Получение почтовой информации о домене
 [**GetDomainMailboxes**](MailAPI.md#GetDomainMailboxes) | **Get** /api/v1/mail/domains/{domain} | Получение списка почтовых ящиков домена
-[**GetMailQuota**](MailAPI.md#GetMailQuota) | **Get** /api/v1/mail/quota | Получение квоты почты аккаунта
 [**GetMailbox**](MailAPI.md#GetMailbox) | **Get** /api/v1/mail/domains/{domain}/mailboxes/{mailbox} | Получение почтового ящика
 [**GetMailboxes**](MailAPI.md#GetMailboxes) | **Get** /api/v1/mail | Получение списка почтовых ящиков аккаунта
 [**UpdateDomainMailInfo**](MailAPI.md#UpdateDomainMailInfo) | **Patch** /api/v1/mail/domains/{domain}/info | Изменение почтовой информации о домене
-[**UpdateMailQuota**](MailAPI.md#UpdateMailQuota) | **Patch** /api/v1/mail/quota | Изменение квоты почты аккаунта
 [**UpdateMailbox**](MailAPI.md#UpdateMailbox) | **Patch** /api/v1/mail/domains/{domain}/mailboxes/{mailbox} | Изменение почтового ящика
+[**UpdateMailboxV2**](MailAPI.md#UpdateMailboxV2) | **Patch** /api/v2/mail/domains/{domain}/mailboxes/{mailbox} | Изменение почтового ящика
 
 
 
@@ -379,67 +378,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetMailQuota
-
-> GetMailQuota200Response GetMailQuota(ctx).Execute()
-
-Получение квоты почты аккаунта
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MailAPI.GetMailQuota(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MailAPI.GetMailQuota``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetMailQuota`: GetMailQuota200Response
-    fmt.Fprintf(os.Stdout, "Response from `MailAPI.GetMailQuota`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetMailQuotaRequest struct via the builder pattern
-
-
-### Return type
-
-[**GetMailQuota200Response**](GetMailQuota200Response.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetMailbox
 
 > CreateDomainMailbox201Response GetMailbox(ctx, domain, mailbox).Execute()
@@ -655,72 +593,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateMailQuota
-
-> GetMailQuota200Response UpdateMailQuota(ctx).UpdateMailQuotaRequest(updateMailQuotaRequest).Execute()
-
-Изменение квоты почты аккаунта
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    updateMailQuotaRequest := *openapiclient.NewUpdateMailQuotaRequest(float32(6144)) // UpdateMailQuotaRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MailAPI.UpdateMailQuota(context.Background()).UpdateMailQuotaRequest(updateMailQuotaRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MailAPI.UpdateMailQuota``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateMailQuota`: GetMailQuota200Response
-    fmt.Fprintf(os.Stdout, "Response from `MailAPI.UpdateMailQuota`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateMailQuotaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **updateMailQuotaRequest** | [**UpdateMailQuotaRequest**](UpdateMailQuotaRequest.md) |  | 
-
-### Return type
-
-[**GetMailQuota200Response**](GetMailQuota200Response.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateMailbox
 
 > CreateDomainMailbox201Response UpdateMailbox(ctx, domain, mailbox).UpdateMailbox(updateMailbox).Execute()
@@ -781,6 +653,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateDomainMailbox201Response**](CreateDomainMailbox201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateMailboxV2
+
+> UpdateMailboxV2200Response UpdateMailboxV2(ctx, domain, mailbox).UpdateMailboxV2(updateMailboxV2).Execute()
+
+Изменение почтового ящика
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    domain := "somedomain.ru" // string | Полное имя домена
+    mailbox := "mailbox" // string | Название почтового ящика
+    updateMailboxV2 := *openapiclient.NewUpdateMailboxV2() // UpdateMailboxV2 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MailAPI.UpdateMailboxV2(context.Background(), domain, mailbox).UpdateMailboxV2(updateMailboxV2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MailAPI.UpdateMailboxV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateMailboxV2`: UpdateMailboxV2200Response
+    fmt.Fprintf(os.Stdout, "Response from `MailAPI.UpdateMailboxV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**domain** | **string** | Полное имя домена | 
+**mailbox** | **string** | Название почтового ящика | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateMailboxV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateMailboxV2** | [**UpdateMailboxV2**](UpdateMailboxV2.md) |  | 
+
+### Return type
+
+[**UpdateMailboxV2200Response**](UpdateMailboxV2200Response.md)
 
 ### Authorization
 

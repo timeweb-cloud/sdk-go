@@ -15,58 +15,119 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateMailQuotaRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateMailQuotaRequest{}
+// checks if the ForwardIsEnabled type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ForwardIsEnabled{}
 
-// UpdateMailQuotaRequest struct for UpdateMailQuotaRequest
-type UpdateMailQuotaRequest struct {
-	// Общее количество места на почте (в Мб).
-	Total float32 `json:"total"`
+// ForwardIsEnabled struct for ForwardIsEnabled
+type ForwardIsEnabled struct {
+	// Включена ли пересылка входящих писем
+	IsEnabled bool `json:"is_enabled"`
+	// Список адресов для пересылки. \\  Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+	ForwardList []string `json:"forward_list"`
+	// Оставлять ли копии входящих писем в почтовом ящике (не удалять). \\  Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+	IsLeaveMessages *bool `json:"is_leave_messages,omitempty"`
 }
 
-// NewUpdateMailQuotaRequest instantiates a new UpdateMailQuotaRequest object
+// NewForwardIsEnabled instantiates a new ForwardIsEnabled object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateMailQuotaRequest(total float32) *UpdateMailQuotaRequest {
-	this := UpdateMailQuotaRequest{}
-	this.Total = total
+func NewForwardIsEnabled(isEnabled bool, forwardList []string) *ForwardIsEnabled {
+	this := ForwardIsEnabled{}
+	this.IsEnabled = isEnabled
+	this.ForwardList = forwardList
 	return &this
 }
 
-// NewUpdateMailQuotaRequestWithDefaults instantiates a new UpdateMailQuotaRequest object
+// NewForwardIsEnabledWithDefaults instantiates a new ForwardIsEnabled object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateMailQuotaRequestWithDefaults() *UpdateMailQuotaRequest {
-	this := UpdateMailQuotaRequest{}
+func NewForwardIsEnabledWithDefaults() *ForwardIsEnabled {
+	this := ForwardIsEnabled{}
 	return &this
 }
 
-// GetTotal returns the Total field value
-func (o *UpdateMailQuotaRequest) GetTotal() float32 {
+// GetIsEnabled returns the IsEnabled field value
+func (o *ForwardIsEnabled) GetIsEnabled() bool {
 	if o == nil {
-		var ret float32
+		var ret bool
 		return ret
 	}
 
-	return o.Total
+	return o.IsEnabled
 }
 
-// GetTotalOk returns a tuple with the Total field value
+// GetIsEnabledOk returns a tuple with the IsEnabled field value
 // and a boolean to check if the value has been set.
-func (o *UpdateMailQuotaRequest) GetTotalOk() (*float32, bool) {
+func (o *ForwardIsEnabled) GetIsEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Total, true
+	return &o.IsEnabled, true
 }
 
-// SetTotal sets field value
-func (o *UpdateMailQuotaRequest) SetTotal(v float32) {
-	o.Total = v
+// SetIsEnabled sets field value
+func (o *ForwardIsEnabled) SetIsEnabled(v bool) {
+	o.IsEnabled = v
 }
 
-func (o UpdateMailQuotaRequest) MarshalJSON() ([]byte, error) {
+// GetForwardList returns the ForwardList field value
+func (o *ForwardIsEnabled) GetForwardList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.ForwardList
+}
+
+// GetForwardListOk returns a tuple with the ForwardList field value
+// and a boolean to check if the value has been set.
+func (o *ForwardIsEnabled) GetForwardListOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ForwardList, true
+}
+
+// SetForwardList sets field value
+func (o *ForwardIsEnabled) SetForwardList(v []string) {
+	o.ForwardList = v
+}
+
+// GetIsLeaveMessages returns the IsLeaveMessages field value if set, zero value otherwise.
+func (o *ForwardIsEnabled) GetIsLeaveMessages() bool {
+	if o == nil || IsNil(o.IsLeaveMessages) {
+		var ret bool
+		return ret
+	}
+	return *o.IsLeaveMessages
+}
+
+// GetIsLeaveMessagesOk returns a tuple with the IsLeaveMessages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForwardIsEnabled) GetIsLeaveMessagesOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsLeaveMessages) {
+		return nil, false
+	}
+	return o.IsLeaveMessages, true
+}
+
+// HasIsLeaveMessages returns a boolean if a field has been set.
+func (o *ForwardIsEnabled) HasIsLeaveMessages() bool {
+	if o != nil && !IsNil(o.IsLeaveMessages) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsLeaveMessages gets a reference to the given bool and assigns it to the IsLeaveMessages field.
+func (o *ForwardIsEnabled) SetIsLeaveMessages(v bool) {
+	o.IsLeaveMessages = &v
+}
+
+func (o ForwardIsEnabled) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -74,44 +135,48 @@ func (o UpdateMailQuotaRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateMailQuotaRequest) ToMap() (map[string]interface{}, error) {
+func (o ForwardIsEnabled) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["total"] = o.Total
+	toSerialize["is_enabled"] = o.IsEnabled
+	toSerialize["forward_list"] = o.ForwardList
+	if !IsNil(o.IsLeaveMessages) {
+		toSerialize["is_leave_messages"] = o.IsLeaveMessages
+	}
 	return toSerialize, nil
 }
 
-type NullableUpdateMailQuotaRequest struct {
-	value *UpdateMailQuotaRequest
+type NullableForwardIsEnabled struct {
+	value *ForwardIsEnabled
 	isSet bool
 }
 
-func (v NullableUpdateMailQuotaRequest) Get() *UpdateMailQuotaRequest {
+func (v NullableForwardIsEnabled) Get() *ForwardIsEnabled {
 	return v.value
 }
 
-func (v *NullableUpdateMailQuotaRequest) Set(val *UpdateMailQuotaRequest) {
+func (v *NullableForwardIsEnabled) Set(val *ForwardIsEnabled) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateMailQuotaRequest) IsSet() bool {
+func (v NullableForwardIsEnabled) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateMailQuotaRequest) Unset() {
+func (v *NullableForwardIsEnabled) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateMailQuotaRequest(val *UpdateMailQuotaRequest) *NullableUpdateMailQuotaRequest {
-	return &NullableUpdateMailQuotaRequest{value: val, isSet: true}
+func NewNullableForwardIsEnabled(val *ForwardIsEnabled) *NullableForwardIsEnabled {
+	return &NullableForwardIsEnabled{value: val, isSet: true}
 }
 
-func (v NullableUpdateMailQuotaRequest) MarshalJSON() ([]byte, error) {
+func (v NullableForwardIsEnabled) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateMailQuotaRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableForwardIsEnabled) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

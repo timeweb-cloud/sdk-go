@@ -76,6 +76,8 @@ docs/AppsPresetsFrontendPresetsInner.md
 docs/AutoBackup.md
 docs/AutoReplyIsDisabled.md
 docs/AutoReplyIsEnabled.md
+docs/AutoreplyIsDisabled.md
+docs/AutoreplyIsEnabled.md
 docs/AvailabilityZone.md
 docs/AvailableFrameworks.md
 docs/AvailableFrameworksBackendFrameworksInner.md
@@ -244,6 +246,8 @@ docs/FirewallRuleProtocol.md
 docs/FirewallRulesOutResponse.md
 docs/FloatingIPAPI.md
 docs/FloatingIp.md
+docs/ForwardIsDisabled.md
+docs/ForwardIsEnabled.md
 docs/ForwardingIncomingIsDisabled.md
 docs/ForwardingIncomingIsEnabled.md
 docs/ForwardingOutgoingIsDisabled.md
@@ -305,7 +309,6 @@ docs/GetKnowledgebases200Response.md
 docs/GetKnowledgebasesV2200Response.md
 docs/GetKnowledgebasesV2200ResponseMeta.md
 docs/GetLocations200Response.md
-docs/GetMailQuota200Response.md
 docs/GetMailboxes200Response.md
 docs/GetNetworkDrives200Response.md
 docs/GetNetworkDrivesAvailableResources200Response.md
@@ -376,6 +379,7 @@ docs/Mailbox.md
 docs/MailboxAutoReply.md
 docs/MailboxForwardingIncoming.md
 docs/MailboxForwardingOutgoing.md
+docs/MailboxResponse.md
 docs/MailboxSpamFilter.md
 docs/MasterPresetOutApi.md
 docs/Meta.md
@@ -402,6 +406,8 @@ docs/NotificationSettingChannel.md
 docs/NotificationSettingChannels.md
 docs/NotificationSettingType.md
 docs/OS.md
+docs/OutgoingIsDisabled.md
+docs/OutgoingIsEnabled.md
 docs/PaymentsAPI.md
 docs/PerformActionOnBackupRequest.md
 docs/PerformActionOnServerRequest.md
@@ -415,7 +421,6 @@ docs/ProjectResource.md
 docs/ProjectsAPI.md
 docs/Provider.md
 docs/Providers.md
-docs/Quota.md
 docs/ReduceNodes.md
 docs/RefreshApiKey.md
 docs/RegistriesResponse.md
@@ -466,6 +471,8 @@ docs/SetLabels.md
 docs/SettingCondition.md
 docs/SpamFilterIsDisabled.md
 docs/SpamFilterIsEnabled.md
+docs/SpamProtectionIsDisabled.md
+docs/SpamProtectionIsEnabled.md
 docs/SshKey.md
 docs/SshKeyUsedByInner.md
 docs/Status.md
@@ -497,8 +504,9 @@ docs/UpdateFloatingIp.md
 docs/UpdateInstance.md
 docs/UpdateKeyRequest.md
 docs/UpdateKnowledgebase.md
-docs/UpdateMailQuotaRequest.md
 docs/UpdateMailbox.md
+docs/UpdateMailboxV2.md
+docs/UpdateMailboxV2200Response.md
 docs/UpdateNetworkDrive.md
 docs/UpdateNotificationSettingsRequest.md
 docs/UpdateNotificationSettingsRequestSettingsInner.md
@@ -584,6 +592,8 @@ model_apps_presets_frontend_presets_inner.go
 model_auto_backup.go
 model_auto_reply_is_disabled.go
 model_auto_reply_is_enabled.go
+model_autoreply_is_disabled.go
+model_autoreply_is_enabled.go
 model_availability_zone.go
 model_available_frameworks.go
 model_available_frameworks_backend_frameworks_inner.go
@@ -745,6 +755,8 @@ model_firewall_rule_out_response.go
 model_firewall_rule_protocol.go
 model_firewall_rules_out_response.go
 model_floating_ip.go
+model_forward_is_disabled.go
+model_forward_is_enabled.go
 model_forwarding_incoming_is_disabled.go
 model_forwarding_incoming_is_enabled.go
 model_forwarding_outgoing_is_disabled.go
@@ -806,7 +818,6 @@ model_get_knowledgebases_200_response.go
 model_get_knowledgebases_v2_200_response.go
 model_get_knowledgebases_v2_200_response_meta.go
 model_get_locations_200_response.go
-model_get_mail_quota_200_response.go
 model_get_mailboxes_200_response.go
 model_get_network_drives_200_response.go
 model_get_network_drives_available_resources_200_response.go
@@ -872,6 +883,7 @@ model_mailbox.go
 model_mailbox_auto_reply.go
 model_mailbox_forwarding_incoming.go
 model_mailbox_forwarding_outgoing.go
+model_mailbox_response.go
 model_mailbox_spam_filter.go
 model_master_preset_out_api.go
 model_meta.go
@@ -897,6 +909,8 @@ model_notification_setting_channel.go
 model_notification_setting_channels.go
 model_notification_setting_type.go
 model_os.go
+model_outgoing_is_disabled.go
+model_outgoing_is_enabled.go
 model_perform_action_on_backup_request.go
 model_perform_action_on_server_request.go
 model_policy.go
@@ -908,7 +922,6 @@ model_project.go
 model_project_resource.go
 model_provider.go
 model_providers.go
-model_quota.go
 model_reduce_nodes.go
 model_refresh_api_key.go
 model_registries_response.go
@@ -956,6 +969,8 @@ model_set_labels.go
 model_setting_condition.go
 model_spam_filter_is_disabled.go
 model_spam_filter_is_enabled.go
+model_spam_protection_is_disabled.go
+model_spam_protection_is_enabled.go
 model_ssh_key.go
 model_ssh_key_used_by_inner.go
 model_status.go
@@ -986,8 +1001,9 @@ model_update_floating_ip.go
 model_update_instance.go
 model_update_key_request.go
 model_update_knowledgebase.go
-model_update_mail_quota_request.go
 model_update_mailbox.go
+model_update_mailbox_v2.go
+model_update_mailbox_v2_200_response.go
 model_update_network_drive.go
 model_update_notification_settings_request.go
 model_update_notification_settings_request_settings_inner.go

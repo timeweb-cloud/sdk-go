@@ -15,85 +15,57 @@ import (
 	"encoding/json"
 )
 
-// checks if the Quota type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Quota{}
+// checks if the UpdateMailboxV2200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateMailboxV2200Response{}
 
-// Quota Почтовая квота
-type Quota struct {
-	// Общее количество места на почте (в Мб).
-	Total float32 `json:"total"`
-	// Занятое место на почте (в Мб).
-	Used float32 `json:"used"`
+// UpdateMailboxV2200Response struct for UpdateMailboxV2200Response
+type UpdateMailboxV2200Response struct {
+	Mailbox MailboxResponse `json:"mailbox"`
 }
 
-// NewQuota instantiates a new Quota object
+// NewUpdateMailboxV2200Response instantiates a new UpdateMailboxV2200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQuota(total float32, used float32) *Quota {
-	this := Quota{}
-	this.Total = total
-	this.Used = used
+func NewUpdateMailboxV2200Response(mailbox MailboxResponse) *UpdateMailboxV2200Response {
+	this := UpdateMailboxV2200Response{}
+	this.Mailbox = mailbox
 	return &this
 }
 
-// NewQuotaWithDefaults instantiates a new Quota object
+// NewUpdateMailboxV2200ResponseWithDefaults instantiates a new UpdateMailboxV2200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewQuotaWithDefaults() *Quota {
-	this := Quota{}
+func NewUpdateMailboxV2200ResponseWithDefaults() *UpdateMailboxV2200Response {
+	this := UpdateMailboxV2200Response{}
 	return &this
 }
 
-// GetTotal returns the Total field value
-func (o *Quota) GetTotal() float32 {
+// GetMailbox returns the Mailbox field value
+func (o *UpdateMailboxV2200Response) GetMailbox() MailboxResponse {
 	if o == nil {
-		var ret float32
+		var ret MailboxResponse
 		return ret
 	}
 
-	return o.Total
+	return o.Mailbox
 }
 
-// GetTotalOk returns a tuple with the Total field value
+// GetMailboxOk returns a tuple with the Mailbox field value
 // and a boolean to check if the value has been set.
-func (o *Quota) GetTotalOk() (*float32, bool) {
+func (o *UpdateMailboxV2200Response) GetMailboxOk() (*MailboxResponse, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Total, true
+	return &o.Mailbox, true
 }
 
-// SetTotal sets field value
-func (o *Quota) SetTotal(v float32) {
-	o.Total = v
+// SetMailbox sets field value
+func (o *UpdateMailboxV2200Response) SetMailbox(v MailboxResponse) {
+	o.Mailbox = v
 }
 
-// GetUsed returns the Used field value
-func (o *Quota) GetUsed() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.Used
-}
-
-// GetUsedOk returns a tuple with the Used field value
-// and a boolean to check if the value has been set.
-func (o *Quota) GetUsedOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Used, true
-}
-
-// SetUsed sets field value
-func (o *Quota) SetUsed(v float32) {
-	o.Used = v
-}
-
-func (o Quota) MarshalJSON() ([]byte, error) {
+func (o UpdateMailboxV2200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -101,45 +73,44 @@ func (o Quota) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Quota) ToMap() (map[string]interface{}, error) {
+func (o UpdateMailboxV2200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["total"] = o.Total
-	toSerialize["used"] = o.Used
+	toSerialize["mailbox"] = o.Mailbox
 	return toSerialize, nil
 }
 
-type NullableQuota struct {
-	value *Quota
+type NullableUpdateMailboxV2200Response struct {
+	value *UpdateMailboxV2200Response
 	isSet bool
 }
 
-func (v NullableQuota) Get() *Quota {
+func (v NullableUpdateMailboxV2200Response) Get() *UpdateMailboxV2200Response {
 	return v.value
 }
 
-func (v *NullableQuota) Set(val *Quota) {
+func (v *NullableUpdateMailboxV2200Response) Set(val *UpdateMailboxV2200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableQuota) IsSet() bool {
+func (v NullableUpdateMailboxV2200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableQuota) Unset() {
+func (v *NullableUpdateMailboxV2200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableQuota(val *Quota) *NullableQuota {
-	return &NullableQuota{value: val, isSet: true}
+func NewNullableUpdateMailboxV2200Response(val *UpdateMailboxV2200Response) *NullableUpdateMailboxV2200Response {
+	return &NullableUpdateMailboxV2200Response{value: val, isSet: true}
 }
 
-func (v NullableQuota) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateMailboxV2200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableQuota) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateMailboxV2200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

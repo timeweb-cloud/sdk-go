@@ -92,18 +92,6 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test MailAPIService GetMailQuota", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.MailAPI.GetMailQuota(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test MailAPIService GetMailbox", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -145,18 +133,6 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test MailAPIService UpdateMailQuota", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.MailAPI.UpdateMailQuota(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test MailAPIService UpdateMailbox", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -165,6 +141,21 @@ func Test_openapi_MailAPIService(t *testing.T) {
 		var mailbox string
 
 		resp, httpRes, err := apiClient.MailAPI.UpdateMailbox(context.Background(), domain, mailbox).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MailAPIService UpdateMailboxV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var domain string
+		var mailbox string
+
+		resp, httpRes, err := apiClient.MailAPI.UpdateMailboxV2(context.Background(), domain, mailbox).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

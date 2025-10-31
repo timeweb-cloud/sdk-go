@@ -30232,275 +30232,6 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/mail/quota:
-    get:
-      description: "Чтобы получить квоту почты аккаунта, отправьте GET-запрос на `/api/v1/mail/quota`."
-      operationId: getMailQuota
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getMailQuota_200_response'
-          description: Ответ будет представлять собой объект JSON c ключом `quota`.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Получение квоты почты аккаунта
-      tags:
-      - Mail
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X GET \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/mail/quota"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/mail/quota', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.get('https://api.timeweb.cloud/api/v1/mail/quota', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.get('https://api.timeweb.cloud/api/v1/mail/quota', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/mail/quota');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/mail/quota\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/mail/quota\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-    patch:
-      description: "Чтобы получить инфомацию по квоте почты аккаунта, отправьте GET-з\
-        апрос на `/api/v1/mail/quota`."
-      operationId: updateMailQuota
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateMailQuota_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getMailQuota_200_response'
-          description: Ответ будет представлять собой объект JSON c ключом `quota`.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Изменение квоты почты аккаунта
-      tags:
-      - Mail
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X PATCH \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -d '{"total": 1024}' \
-            "https://api.timeweb.cloud/api/v1/mail/quota"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/mail/quota', {
-              method: 'PATCH',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              // body: '{"total": 1024}',
-              body: JSON.stringify({
-                  'total': 1024
-              })
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.patch(
-              'https://api.timeweb.cloud/api/v1/mail/quota',
-              // '{"total": 1024}',
-              {
-                  'total': 1024
-              },
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              # Already added when you pass json=
-              # 'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          json_data = {
-              'total': 1024,
-          }
-
-          response = requests.patch('https://api.timeweb.cloud/api/v1/mail/quota', headers=headers, json=json_data)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/mail/quota');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"total": 1024}');
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`{\"total\": 1024}`)\n\treq, err := http.NewRequest(\"\
-          PATCH\", \"https://api.timeweb.cloud/api/v1/mail/quota\", data)\n\tif err\
-          \ != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\",\
-          \ \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
-          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
-          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
-          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
-          \ URL(\"https://api.timeweb.cloud/api/v1/mail/quota\");\n\t\tHttpURLConnection\
-          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
-          PATCH\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
-          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
-          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
-          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
-          {\\\"total\\\": 1024}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\t\
-          httpConn.getOutputStream().close();\n\n\t\tInputStream responseStream =\
-          \ httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
-          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
-          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
   /api/v1/mail/domains/{domain}:
     get:
       description: "Чтобы получить список почтовых ящиков домена, отправьте GET-за\
@@ -31582,6 +31313,7 @@ paths:
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
     patch:
+      deprecated: true
       description: "Чтобы изменить почтовый ящик, отправьте PATCH-запрос на `/api/v1/mail/domains/{domain}/mailboxes/{mailbox}`."
       operationId: updateMailbox
       parameters:
@@ -31750,6 +31482,233 @@ paths:
           \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v2/mail/domains/{domain}/mailboxes/{mailbox}:
+    patch:
+      description: "Чтобы изменить почтовый ящик, отправьте PATCH-запрос на `/api/v2/mail/domains/{domain}/mailboxes/{mailbox}`."
+      operationId: updateMailboxV2
+      parameters:
+      - description: Полное имя домена
+        explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          example: somedomain.ru
+          type: string
+        style: simple
+      - description: Название почтового ящика
+        explode: false
+        in: path
+        name: mailbox
+        required: true
+        schema:
+          example: mailbox
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update-mailbox-v2'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateMailboxV2_200_response'
+          description: Ответ будет представлять собой объект JSON c ключом `mailbox`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Изменение почтового ящика
+      tags:
+      - Mail
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+              "comment": "Рабочая почта",
+              "password": "NewPass123!",
+              "owner_full_name": "Иванов Иван Иванович",
+              "spam_protection_settings": {
+                "is_enabled": true,
+                "filter_action": "directory",
+                "white_list": ["trusted@example.com"]
+              },
+              "forward_settings": {
+                "is_enabled": true,
+                "forward_list": ["forward@example.com"],
+                "is_leave_messages": false
+              },
+              "autoreply_settings": {
+                "is_enabled": true,
+                "autoreply_message": "<div style='margin: 0'><p>Спасибо за письмо</p></div>",
+                "autoreply_subject": "Автоответчик"
+              },
+              "outgoing_settings": {
+                "is_enabled": true,
+                "outgoing_email": "outgoing@example.com"
+              }
+            }' \
+            "https://api.timeweb.cloud/api/v2/mail/domains/{domain}/mailboxes/{mailbox}"
+      - lang: JavaScript
+        source: |
+          fetch('http://0><p>Спасибо за письмо</p></div>",\n      "autoreply_subject": "Автоответчик"\n    },\n    "outgoing_settings": {\n      "is_enabled": true,\n      "outgoing_email": "outgoing@example.com"\n    }\n  }', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: '{\n    "comment": "Рабочая почта",\n    "password": "NewPass123!",\n    "owner_full_name": "Иванов Иван Иванович",\n    "spam_protection_settings": {\n      "is_enabled": true,\n      "filter_action": "directory",\n      "white_list": ["trusted@example.com"]\n    },\n    "forward_settings": {\n      "is_enabled": true,\n      "forward_list": ["forward@example.com"],\n      "is_leave_messages": false\n    },\n    "autoreply_settings": {\n      "is_enabled": true,\n      "autoreply_message": "<div style=margin:'
+          });
+          fetch('https://api.timeweb.cloud/api/v2/mail/domains/{domain}/mailboxes/{mailbox}', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer $TIMEWEB_CLOUD_TOKEN'
+              },
+              body: '{\n    "comment": "Рабочая почта",\n    "password": "NewPass123!",\n    "owner_full_name": "Иванов Иван Иванович",\n    "spam_protection_settings": {\n      "is_enabled": true,\n      "filter_action": "directory",\n      "white_list": ["trusted@example.com"]\n    },\n    "forward_settings": {\n      "is_enabled": true,\n      "forward_list": ["forward@example.com"],\n      "is_leave_messages": false\n    },\n    "autoreply_settings": {\n      "is_enabled": true,\n      "autoreply_message": "<div style=margin:'
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'http://0><p>Спасибо за письмо</p></div>",\n      "autoreply_subject": "Автоответчик"\n    },\n    "outgoing_settings": {\n      "is_enabled": true,\n      "outgoing_email": "outgoing@example.com"\n    }\n  }',
+              '{\n    "comment": "Рабочая почта",\n    "password": "NewPass123!",\n    "owner_full_name": "Иванов Иван Иванович",\n    "spam_protection_settings": {\n      "is_enabled": true,\n      "filter_action": "directory",\n      "white_list": ["trusted@example.com"]\n    },\n    "forward_settings": {\n      "is_enabled": true,\n      "forward_list": ["forward@example.com"],\n      "is_leave_messages": false\n    },\n    "autoreply_settings": {\n      "is_enabled": true,\n      "autoreply_message": "<div style=margin:',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          data = '{\n    "comment": "Рабочая почта",\n    "password": "NewPass123!",\n    "owner_full_name": "Иванов Иван Иванович",\n    "spam_protection_settings": {\n      "is_enabled": true,\n      "filter_action": "directory",\n      "white_list": ["trusted@example.com"]\n    },\n    "forward_settings": {\n      "is_enabled": true,\n      "forward_list": ["forward@example.com"],\n      "is_leave_messages": false\n    },\n    "autoreply_settings": {\n      "is_enabled": true,\n      "autoreply_message": "<div style=margin:'.encode()
+
+          response = requests.patch(
+              'http://0><p>Спасибо за письмо</p></div>",\n      "autoreply_subject": "Автоответчик"\n    },\n    "outgoing_settings": {\n      "is_enabled": true,\n      "outgoing_email": "outgoing@example.com"\n    }\n  }',
+              headers=headers,
+              data=data,
+          )
+          response = requests.patch(
+              'https://api.timeweb.cloud/api/v2/mail/domains/{domain}/mailboxes/{mailbox}',
+              headers=headers,
+              data=data,
+          )
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, "http://0><p>Спасибо за письмо</p></div>\",\n      \"autoreply_subject\": \"Автоответчик\"\n    },\n    \"outgoing_settings\": {\n      \"is_enabled\": true,\n      \"outgoing_email\": \"outgoing@example.com\"\n    }\n  }");
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n    \"comment\": \"Рабочая почта\",\n    \"password\": \"NewPass123!\",\n    \"owner_full_name\": \"Иванов Иван Иванович\",\n    \"spam_protection_settings\": {\n      \"is_enabled\": true,\n      \"filter_action\": \"directory\",\n      \"white_list\": [\"trusted@example.com\"]\n    },\n    \"forward_settings\": {\n      \"is_enabled\": true,\n      \"forward_list\": [\"forward@example.com\"],\n      \"is_leave_messages\": false\n    },\n    \"autoreply_settings\": {\n      \"is_enabled\": true,\n      \"autoreply_message\": \"<div style=margin:");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n    \"comment\": \"Рабочая почта\",\n\
+          \    \"password\": \"NewPass123!\",\n    \"owner_full_name\": \"Иванов И\
+          ван Иванович\",\n    \"spam_protection_settings\": {\n      \"is_enabled\"\
+          : true,\n      \"filter_action\": \"directory\",\n      \"white_list\":\
+          \ [\"trusted@example.com\"]\n    },\n    \"forward_settings\": {\n     \
+          \ \"is_enabled\": true,\n      \"forward_list\": [\"forward@example.com\"\
+          ],\n      \"is_leave_messages\": false\n    },\n    \"autoreply_settings\"\
+          : {\n      \"is_enabled\": true,\n      \"autoreply_message\": \"<div style=margin:`)\n\
+          \treq, err := http.NewRequest(\"PATCH\", \"http://0><p>Спасибо за письмо\
+          </p></div>\\\",\\n      \\\"autoreply_subject\\\": \\\"Автоответчик\\\"\\\
+          n    },\\n    \\\"outgoing_settings\\\": {\\n      \\\"is_enabled\\\": true,\\\
+          n      \\\"outgoing_email\\\": \\\"outgoing@example.com\\\"\\n    }\\n \
+          \ }\", data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"http://0><p>Спасибо за письмо</p></div>\\\",\\n      \\\"autoreply_subject\\\
+          \": \\\"Автоответчик\\\"\\n    },\\n    \\\"outgoing_settings\\\": {\\n\
+          \      \\\"is_enabled\\\": true,\\n      \\\"outgoing_email\\\": \\\"outgoing@example.com\\\
+          \"\\n    }\\n  }\");\n\t\tHttpURLConnection httpConn = (HttpURLConnection)\
+          \ url.openConnection();\n\t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\
+          \thttpConn.setRequestProperty(\"Content-Type\", \"application/json\");\n\
+          \t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n    \\\"comment\\\": \\\"Рабочая почта\\\",\\n    \\\"password\\\":\
+          \ \\\"NewPass123!\\\",\\n    \\\"owner_full_name\\\": \\\"Иванов Иван Ив\
+          анович\\\",\\n    \\\"spam_protection_settings\\\": {\\n      \\\"is_enabled\\\
+          \": true,\\n      \\\"filter_action\\\": \\\"directory\\\",\\n      \\\"\
+          white_list\\\": [\\\"trusted@example.com\\\"]\\n    },\\n    \\\"forward_settings\\\
+          \": {\\n      \\\"is_enabled\\\": true,\\n      \\\"forward_list\\\": [\\\
+          \"forward@example.com\\\"],\\n      \\\"is_leave_messages\\\": false\\n\
+          \    },\\n    \\\"autoreply_settings\\\": {\\n      \\\"is_enabled\\\":\
+          \ true,\\n      \\\"autoreply_message\\\": \\\"<div style=margin:\");\n\t\
+          \twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
   /api/v1/domains:
     get:
@@ -46518,6 +46477,12 @@ components:
           schema:
             $ref: '#/components/schemas/getFinances_400_response'
       description: Некорректный запрос
+    not-found:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/getImage_404_response'
+      description: Не найдено
     unauthorized:
       content:
         application/json:
@@ -46530,12 +46495,6 @@ components:
           schema:
             $ref: '#/components/schemas/getAccountStatus_403_response'
       description: Запрещено
-    not-found:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/getImage_404_response'
-      description: Не найдено
     too-many-requests:
       content:
         application/json:
@@ -52912,24 +52871,6 @@ components:
       - spam_filter
       - usage_space
       type: object
-    quota:
-      description: Почтовая квота
-      example:
-        total: 1024
-        used: 512
-      properties:
-        total:
-          description: Общее количество места на почте (в Мб).
-          example: 1024
-          type: number
-        used:
-          description: Занятое место на почте (в Мб).
-          example: 512
-          type: number
-      required:
-      - total
-      - used
-      type: object
     domain-info:
       description: Почтовая информация о домене
       example:
@@ -53152,6 +53093,279 @@ components:
         password:
           description: Пароль почтового ящика
           example: ps3-1asZa
+          type: string
+      type: object
+    spam-protection-is-enabled:
+      properties:
+        is_enabled:
+          description: Включен ли спам-фильтр
+          example: true
+          type: boolean
+        filter_action:
+          description: |-
+            Что делать с письмами, которые попадают в спам. \
+             Параметры: \
+             `directory` - переместить в папку спам; \
+             `label` - пометить письмо; \
+             Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+          enum:
+          - directory
+          - label
+          example: directory
+          type: string
+        white_list:
+          description: |-
+            Белый список адресов от которых письма не будут попадать в спам. \
+             Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+          example:
+          - trusted@example.com
+          items:
+            type: string
+          type: array
+      required:
+      - is_enabled
+      title: Если защита от спама включена
+      type: object
+    spam-protection-is-disabled:
+      properties:
+        is_enabled:
+          description: Включен ли спам-фильтр
+          example: false
+          type: boolean
+      required:
+      - is_enabled
+      title: Если защита от спама выключена
+      type: object
+    forward-is-enabled:
+      properties:
+        is_enabled:
+          description: Включена ли пересылка входящих писем
+          example: true
+          type: boolean
+        forward_list:
+          description: |-
+            Список адресов для пересылки. \
+             Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+          example:
+          - forward@example.com
+          items:
+            type: string
+          type: array
+        is_leave_messages:
+          description: |-
+            Оставлять ли копии входящих писем в почтовом ящике (не удалять). \
+             Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+          example: false
+          type: boolean
+      required:
+      - forward_list
+      - is_enabled
+      title: Если пересылка включена
+      type: object
+    forward-is-disabled:
+      properties:
+        is_enabled:
+          description: Включена ли пересылка входящих писем
+          example: false
+          type: boolean
+      required:
+      - is_enabled
+      title: Если пересылка выключена
+      type: object
+    autoreply-is-enabled:
+      properties:
+        is_enabled:
+          description: Включен ли автоответчик на входящие письма
+          example: true
+          type: boolean
+        autoreply_message:
+          description: |-
+            Сообщение автоответчика на входящие письма. \
+             Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+          example: "<div style='margin: 0'><p>Спасибо за ваше письмо. Я отсутствую\
+            \ и отвечу позже.</p></div>"
+          type: string
+        autoreply_subject:
+          description: |-
+            Тема сообщения автоответчика на входящие письма. \
+             Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+          example: Автоматический ответ
+          type: string
+      required:
+      - is_enabled
+      title: Если автоответчик включен
+      type: object
+    autoreply-is-disabled:
+      properties:
+        is_enabled:
+          description: Включен ли автоответчик на входящие письма
+          example: false
+          type: boolean
+      required:
+      - is_enabled
+      title: Если автоответчик выключен
+      type: object
+    outgoing-is-enabled:
+      properties:
+        is_enabled:
+          description: Включена ли пересылка исходящих писем
+          example: true
+          type: boolean
+        outgoing_email:
+          description: |-
+            Адрес для пересылки исходящих писем. \
+             Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+          example: outgoing@example.com
+          type: string
+      required:
+      - is_enabled
+      - outgoing_email
+      title: Если контроль исходящей почты включен
+      type: object
+    outgoing-is-disabled:
+      properties:
+        is_enabled:
+          description: Включена ли пересылка исходящих писем
+          example: false
+          type: boolean
+      required:
+      - is_enabled
+      title: Если контроль исходящей почты выключен
+      type: object
+    update-mailbox-v2:
+      description: Обновление почтового ящика
+      properties:
+        password:
+          description: Пароль почтового ящика
+          example: SecurePass123!
+          maxLength: 30
+          minLength: 8
+          type: string
+        comment:
+          description: Комментарий к почтовому ящику
+          example: Рабочая почта
+          type: string
+        owner_full_name:
+          description: ФИО владельца почтового ящика
+          example: Иванов Иван Иванович
+          type: string
+        spam_protection_settings:
+          $ref: '#/components/schemas/spam-protection-is-enabled'
+        forward_settings:
+          $ref: '#/components/schemas/forward-is-enabled'
+        autoreply_settings:
+          $ref: '#/components/schemas/autoreply-is-enabled'
+        outgoing_settings:
+          $ref: '#/components/schemas/outgoing-is-enabled'
+      type: object
+    mailbox-response:
+      example:
+        autoreply_subject: Автоматический ответ
+        filter_action: directory
+        leave_messages: false
+        fqdn: example.ru
+        forward_list:
+        - forward@example.com
+        autoreply_status: true
+        autoreply_message: "<div style='margin: 0'><p>Спасибо за письмо</p></div>"
+        dovecot: true
+        filter_status: true
+        owner_full_name: Иванов Иван Иванович
+        white_list:
+        - trusted@example.com
+        password: ""
+        outgoing_email: outgoing@example.com
+        mailbox: user
+        forward_status: true
+        idn_name: example.ru
+        comment: Рабочая почта
+        outgoing_control: true
+        webmail: true
+      properties:
+        idn_name:
+          description: IDN имя домена
+          example: example.ru
+          type: string
+        autoreply_message:
+          description: Сообщение автоответчика
+          example: "<div style='margin: 0'><p>Спасибо за письмо</p></div>"
+          type: string
+        autoreply_status:
+          description: Статус автоответчика
+          example: true
+          type: boolean
+        autoreply_subject:
+          description: Тема автоответчика
+          example: Автоматический ответ
+          type: string
+        comment:
+          description: Комментарий
+          example: Рабочая почта
+          type: string
+        filter_action:
+          description: Действие фильтра спама
+          enum:
+          - directory
+          - label
+          example: directory
+          type: string
+        filter_status:
+          description: Статус фильтра спама
+          example: true
+          type: boolean
+        forward_list:
+          description: Список адресов для пересылки
+          example:
+          - forward@example.com
+          items:
+            type: string
+          type: array
+        forward_status:
+          description: Статус пересылки
+          example: true
+          type: boolean
+        outgoing_control:
+          description: Контроль исходящей почты
+          example: true
+          type: boolean
+        outgoing_email:
+          description: Email для исходящих писем
+          example: outgoing@example.com
+          type: string
+        password:
+          description: Пароль (обычно пустая строка в ответе)
+          example: ""
+          type: string
+        white_list:
+          description: Белый список адресов
+          example:
+          - trusted@example.com
+          items:
+            type: string
+          type: array
+        webmail:
+          description: Доступ к веб-почте
+          example: true
+          type: boolean
+        dovecot:
+          description: Использование Dovecot
+          example: true
+          type: boolean
+        fqdn:
+          description: Полное доменное имя
+          example: example.ru
+          type: string
+        leave_messages:
+          description: Оставлять копии писем при пересылке
+          example: false
+          type: boolean
+        mailbox:
+          description: Имя почтового ящика
+          example: user
+          type: string
+        owner_full_name:
+          description: ФИО владельца
+          example: Иванов Иван Иванович
           type: string
       type: object
     domain-payment-period:
@@ -60519,26 +60733,6 @@ components:
       - mailboxes
       - meta
       type: object
-    getMailQuota_200_response:
-      example:
-        quota:
-          total: 1024
-          used: 512
-      properties:
-        quota:
-          $ref: '#/components/schemas/quota'
-      required:
-      - quota
-      type: object
-    updateMailQuota_request:
-      properties:
-        total:
-          description: Общее количество места на почте (в Мб).
-          example: 6144
-          type: number
-      required:
-      - total
-      type: object
     createDomainMailbox_request:
       properties:
         mailbox:
@@ -60712,6 +60906,36 @@ components:
           type: string
       required:
       - email
+      type: object
+    updateMailboxV2_200_response:
+      example:
+        mailbox:
+          autoreply_subject: Автоматический ответ
+          filter_action: directory
+          leave_messages: false
+          fqdn: example.ru
+          forward_list:
+          - forward@example.com
+          autoreply_status: true
+          autoreply_message: "<div style='margin: 0'><p>Спасибо за письмо</p></div>"
+          dovecot: true
+          filter_status: true
+          owner_full_name: Иванов Иван Иванович
+          white_list:
+          - trusted@example.com
+          password: ""
+          outgoing_email: outgoing@example.com
+          mailbox: user
+          forward_status: true
+          idn_name: example.ru
+          comment: Рабочая почта
+          outgoing_control: true
+          webmail: true
+      properties:
+        mailbox:
+          $ref: '#/components/schemas/mailbox-response'
+      required:
+      - mailbox
       type: object
     getDomains_200_response:
       example:

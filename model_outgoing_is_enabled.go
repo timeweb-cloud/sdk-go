@@ -15,57 +15,85 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetMailQuota200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetMailQuota200Response{}
+// checks if the OutgoingIsEnabled type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OutgoingIsEnabled{}
 
-// GetMailQuota200Response struct for GetMailQuota200Response
-type GetMailQuota200Response struct {
-	Quota Quota `json:"quota"`
+// OutgoingIsEnabled struct for OutgoingIsEnabled
+type OutgoingIsEnabled struct {
+	// Включена ли пересылка исходящих писем
+	IsEnabled bool `json:"is_enabled"`
+	// Адрес для пересылки исходящих писем. \\  Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+	OutgoingEmail string `json:"outgoing_email"`
 }
 
-// NewGetMailQuota200Response instantiates a new GetMailQuota200Response object
+// NewOutgoingIsEnabled instantiates a new OutgoingIsEnabled object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetMailQuota200Response(quota Quota) *GetMailQuota200Response {
-	this := GetMailQuota200Response{}
-	this.Quota = quota
+func NewOutgoingIsEnabled(isEnabled bool, outgoingEmail string) *OutgoingIsEnabled {
+	this := OutgoingIsEnabled{}
+	this.IsEnabled = isEnabled
+	this.OutgoingEmail = outgoingEmail
 	return &this
 }
 
-// NewGetMailQuota200ResponseWithDefaults instantiates a new GetMailQuota200Response object
+// NewOutgoingIsEnabledWithDefaults instantiates a new OutgoingIsEnabled object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetMailQuota200ResponseWithDefaults() *GetMailQuota200Response {
-	this := GetMailQuota200Response{}
+func NewOutgoingIsEnabledWithDefaults() *OutgoingIsEnabled {
+	this := OutgoingIsEnabled{}
 	return &this
 }
 
-// GetQuota returns the Quota field value
-func (o *GetMailQuota200Response) GetQuota() Quota {
+// GetIsEnabled returns the IsEnabled field value
+func (o *OutgoingIsEnabled) GetIsEnabled() bool {
 	if o == nil {
-		var ret Quota
+		var ret bool
 		return ret
 	}
 
-	return o.Quota
+	return o.IsEnabled
 }
 
-// GetQuotaOk returns a tuple with the Quota field value
+// GetIsEnabledOk returns a tuple with the IsEnabled field value
 // and a boolean to check if the value has been set.
-func (o *GetMailQuota200Response) GetQuotaOk() (*Quota, bool) {
+func (o *OutgoingIsEnabled) GetIsEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Quota, true
+	return &o.IsEnabled, true
 }
 
-// SetQuota sets field value
-func (o *GetMailQuota200Response) SetQuota(v Quota) {
-	o.Quota = v
+// SetIsEnabled sets field value
+func (o *OutgoingIsEnabled) SetIsEnabled(v bool) {
+	o.IsEnabled = v
 }
 
-func (o GetMailQuota200Response) MarshalJSON() ([]byte, error) {
+// GetOutgoingEmail returns the OutgoingEmail field value
+func (o *OutgoingIsEnabled) GetOutgoingEmail() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OutgoingEmail
+}
+
+// GetOutgoingEmailOk returns a tuple with the OutgoingEmail field value
+// and a boolean to check if the value has been set.
+func (o *OutgoingIsEnabled) GetOutgoingEmailOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OutgoingEmail, true
+}
+
+// SetOutgoingEmail sets field value
+func (o *OutgoingIsEnabled) SetOutgoingEmail(v string) {
+	o.OutgoingEmail = v
+}
+
+func (o OutgoingIsEnabled) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -73,44 +101,45 @@ func (o GetMailQuota200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetMailQuota200Response) ToMap() (map[string]interface{}, error) {
+func (o OutgoingIsEnabled) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["quota"] = o.Quota
+	toSerialize["is_enabled"] = o.IsEnabled
+	toSerialize["outgoing_email"] = o.OutgoingEmail
 	return toSerialize, nil
 }
 
-type NullableGetMailQuota200Response struct {
-	value *GetMailQuota200Response
+type NullableOutgoingIsEnabled struct {
+	value *OutgoingIsEnabled
 	isSet bool
 }
 
-func (v NullableGetMailQuota200Response) Get() *GetMailQuota200Response {
+func (v NullableOutgoingIsEnabled) Get() *OutgoingIsEnabled {
 	return v.value
 }
 
-func (v *NullableGetMailQuota200Response) Set(val *GetMailQuota200Response) {
+func (v *NullableOutgoingIsEnabled) Set(val *OutgoingIsEnabled) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetMailQuota200Response) IsSet() bool {
+func (v NullableOutgoingIsEnabled) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetMailQuota200Response) Unset() {
+func (v *NullableOutgoingIsEnabled) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetMailQuota200Response(val *GetMailQuota200Response) *NullableGetMailQuota200Response {
-	return &NullableGetMailQuota200Response{value: val, isSet: true}
+func NewNullableOutgoingIsEnabled(val *OutgoingIsEnabled) *NullableOutgoingIsEnabled {
+	return &NullableOutgoingIsEnabled{value: val, isSet: true}
 }
 
-func (v NullableGetMailQuota200Response) MarshalJSON() ([]byte, error) {
+func (v NullableOutgoingIsEnabled) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetMailQuota200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableOutgoingIsEnabled) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
