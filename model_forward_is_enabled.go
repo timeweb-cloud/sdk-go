@@ -24,7 +24,7 @@ type ForwardIsEnabled struct {
 	IsEnabled bool `json:"is_enabled"`
 	// Список адресов для пересылки. \\  Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
 	ForwardList []string `json:"forward_list"`
-	// Оставлять ли копии входящих писем в почтовом ящике (не удалять). \\  Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
+	// Оставлять ли копии входящих писем в почтовом ящике (не удалять). \\  При `is_leave_messages`: `true`— копии входящих писем не сохраняются и будут удаляться. \\  При `is_leave_messages`: `false` — копии входящих писем сохраняются. \\ \\  Если передан параметр `is_enabled`: `false`, то значение передавать нельзя
 	IsLeaveMessages *bool `json:"is_leave_messages,omitempty"`
 }
 
