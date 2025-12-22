@@ -47119,9 +47119,6 @@ components:
           $ref: '#/components/schemas/Location'
         os:
           $ref: '#/components/schemas/OS'
-        hostname:
-          description: Сетевое имя сервера
-          type: string
       required:
       - location
       - os
@@ -51408,6 +51405,9 @@ components:
           description: ID проекта.
           example: 1
           type: number
+        hostname:
+          description: Сетевое имя сервера
+          type: string
       required:
       - name
     update-server:

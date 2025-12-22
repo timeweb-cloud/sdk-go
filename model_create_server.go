@@ -51,6 +51,8 @@ type CreateServer struct {
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 	// ID проекта.
 	ProjectId *float32 `json:"project_id,omitempty"`
+	// Сетевое имя сервера
+	Hostname *string `json:"hostname,omitempty"`
 }
 
 // NewCreateServer instantiates a new CreateServer object
@@ -581,6 +583,38 @@ func (o *CreateServer) SetProjectId(v float32) {
 	o.ProjectId = &v
 }
 
+// GetHostname returns the Hostname field value if set, zero value otherwise.
+func (o *CreateServer) GetHostname() string {
+	if o == nil || IsNil(o.Hostname) {
+		var ret string
+		return ret
+	}
+	return *o.Hostname
+}
+
+// GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateServer) GetHostnameOk() (*string, bool) {
+	if o == nil || IsNil(o.Hostname) {
+		return nil, false
+	}
+	return o.Hostname, true
+}
+
+// HasHostname returns a boolean if a field has been set.
+func (o *CreateServer) HasHostname() bool {
+	if o != nil && !IsNil(o.Hostname) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostname gets a reference to the given string and assigns it to the Hostname field.
+func (o *CreateServer) SetHostname(v string) {
+	o.Hostname = &v
+}
+
 func (o CreateServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -636,6 +670,9 @@ func (o CreateServer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ProjectId) {
 		toSerialize["project_id"] = o.ProjectId
+	}
+	if !IsNil(o.Hostname) {
+		toSerialize["hostname"] = o.Hostname
 	}
 	return toSerialize, nil
 }

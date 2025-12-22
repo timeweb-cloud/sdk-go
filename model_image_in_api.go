@@ -30,8 +30,6 @@ type ImageInAPI struct {
 	UploadUrl *string `json:"upload_url,omitempty"`
 	Location Location `json:"location"`
 	Os OS `json:"os"`
-	// Сетевое имя сервера
-	Hostname *string `json:"hostname,omitempty"`
 }
 
 // NewImageInAPI instantiates a new ImageInAPI object
@@ -229,38 +227,6 @@ func (o *ImageInAPI) SetOs(v OS) {
 	o.Os = v
 }
 
-// GetHostname returns the Hostname field value if set, zero value otherwise.
-func (o *ImageInAPI) GetHostname() string {
-	if o == nil || IsNil(o.Hostname) {
-		var ret string
-		return ret
-	}
-	return *o.Hostname
-}
-
-// GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ImageInAPI) GetHostnameOk() (*string, bool) {
-	if o == nil || IsNil(o.Hostname) {
-		return nil, false
-	}
-	return o.Hostname, true
-}
-
-// HasHostname returns a boolean if a field has been set.
-func (o *ImageInAPI) HasHostname() bool {
-	if o != nil && !IsNil(o.Hostname) {
-		return true
-	}
-
-	return false
-}
-
-// SetHostname gets a reference to the given string and assigns it to the Hostname field.
-func (o *ImageInAPI) SetHostname(v string) {
-	o.Hostname = &v
-}
-
 func (o ImageInAPI) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -285,9 +251,6 @@ func (o ImageInAPI) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["location"] = o.Location
 	toSerialize["os"] = o.Os
-	if !IsNil(o.Hostname) {
-		toSerialize["hostname"] = o.Hostname
-	}
 	return toSerialize, nil
 }
 

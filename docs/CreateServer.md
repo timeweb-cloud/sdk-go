@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 **ProjectId** | Pointer to **float32** | ID проекта. | [optional] 
+**Hostname** | Pointer to **string** | Сетевое имя сервера | [optional] 
 
 ## Methods
 
@@ -434,6 +435,31 @@ SetProjectId sets ProjectId field to given value.
 `func (o *CreateServer) HasProjectId() bool`
 
 HasProjectId returns a boolean if a field has been set.
+
+### GetHostname
+
+`func (o *CreateServer) GetHostname() string`
+
+GetHostname returns the Hostname field if non-nil, zero value otherwise.
+
+### GetHostnameOk
+
+`func (o *CreateServer) GetHostnameOk() (*string, bool)`
+
+GetHostnameOk returns a tuple with the Hostname field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostname
+
+`func (o *CreateServer) SetHostname(v string)`
+
+SetHostname sets Hostname field to given value.
+
+### HasHostname
+
+`func (o *CreateServer) HasHostname() bool`
+
+HasHostname returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

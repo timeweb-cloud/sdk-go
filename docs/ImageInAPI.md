@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **UploadUrl** | Pointer to **string** | Ссылка для загрузки образа. | [optional] 
 **Location** | [**Location**](Location.md) |  | 
 **Os** | [**OS**](OS.md) |  | 
-**Hostname** | Pointer to **string** | Сетевое имя сервера | [optional] 
 
 ## Methods
 
@@ -170,31 +169,6 @@ and a boolean to check if the value has been set.
 
 SetOs sets Os field to given value.
 
-
-### GetHostname
-
-`func (o *ImageInAPI) GetHostname() string`
-
-GetHostname returns the Hostname field if non-nil, zero value otherwise.
-
-### GetHostnameOk
-
-`func (o *ImageInAPI) GetHostnameOk() (*string, bool)`
-
-GetHostnameOk returns a tuple with the Hostname field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHostname
-
-`func (o *ImageInAPI) SetHostname(v string)`
-
-SetHostname sets Hostname field to given value.
-
-### HasHostname
-
-`func (o *ImageInAPI) HasHostname() bool`
-
-HasHostname returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
