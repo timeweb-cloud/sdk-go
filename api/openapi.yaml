@@ -47119,6 +47119,9 @@ components:
           $ref: '#/components/schemas/Location'
         os:
           $ref: '#/components/schemas/OS'
+        hostname:
+          description: Сетевое имя сервера
+          type: string
       required:
       - location
       - os
