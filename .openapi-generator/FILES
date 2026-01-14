@@ -5,6 +5,7 @@ README.md
 api/openapi.yaml
 api_account.go
 api_ai_agents.go
+api_ai_models.go
 api_api_keys.go
 api_apps.go
 api_balancers.go
@@ -29,6 +30,7 @@ api_vpc.go
 client.go
 configuration.go
 docs/AIAgentsAPI.md
+docs/AIModelsAPI.md
 docs/APIKeysAPI.md
 docs/AccountAPI.md
 docs/AddBalancerToProject200Response.md
@@ -260,6 +262,8 @@ docs/GetAgentStatistics200Response.md
 docs/GetAgentStatistics200ResponseMeta.md
 docs/GetAgents200Response.md
 docs/GetAgents200ResponseMeta.md
+docs/GetAgentsTokenPackages200Response.md
+docs/GetAgentsTokenPackages200ResponseMeta.md
 docs/GetAllProjectResources200Response.md
 docs/GetAppDeploys200Response.md
 docs/GetAppLogs200Response.md
@@ -310,6 +314,8 @@ docs/GetKnowledgebasesV2200Response.md
 docs/GetKnowledgebasesV2200ResponseMeta.md
 docs/GetLocations200Response.md
 docs/GetMailboxes200Response.md
+docs/GetModels200Response.md
+docs/GetModels200ResponseMeta.md
 docs/GetNetworkDrives200Response.md
 docs/GetNetworkDrivesAvailableResources200Response.md
 docs/GetNetworkDrivesPresets200Response.md
@@ -384,6 +390,11 @@ docs/MailboxSpamFilter.md
 docs/MasterPresetOutApi.md
 docs/Meta.md
 docs/Meta1.md
+docs/Model.md
+docs/ModelParamsInfo.md
+docs/ModelParamsInfoMaxTokens.md
+docs/ModelParamsInfoReasoningEffort.md
+docs/ModelParamsInfoTemperature.md
 docs/MountNetworkDrive.md
 docs/Network.md
 docs/NetworkDrive.md
@@ -479,6 +490,7 @@ docs/Status.md
 docs/StatusCompanyInfo.md
 docs/Subdomain.md
 docs/Tags.md
+docs/TokenPackage.md
 docs/TokenStatistic.md
 docs/TopLevelDomain.md
 docs/TopLevelDomainAllowedBuyPeriodsInner.md
@@ -769,6 +781,8 @@ model_get_agent_statistics_200_response.go
 model_get_agent_statistics_200_response_meta.go
 model_get_agents_200_response.go
 model_get_agents_200_response_meta.go
+model_get_agents_token_packages_200_response.go
+model_get_agents_token_packages_200_response_meta.go
 model_get_all_project_resources_200_response.go
 model_get_app_deploys_200_response.go
 model_get_app_logs_200_response.go
@@ -819,6 +833,8 @@ model_get_knowledgebases_v2_200_response.go
 model_get_knowledgebases_v2_200_response_meta.go
 model_get_locations_200_response.go
 model_get_mailboxes_200_response.go
+model_get_models_200_response.go
+model_get_models_200_response_meta.go
 model_get_network_drives_200_response.go
 model_get_network_drives_available_resources_200_response.go
 model_get_network_drives_presets_200_response.go
@@ -888,6 +904,11 @@ model_mailbox_spam_filter.go
 model_master_preset_out_api.go
 model_meta.go
 model_meta_1.go
+model_model.go
+model_model_params_info.go
+model_model_params_info_max_tokens.go
+model_model_params_info_reasoning_effort.go
+model_model_params_info_temperature.go
 model_mount_network_drive.go
 model_network.go
 model_network_drive.go
@@ -977,6 +998,7 @@ model_status.go
 model_status_company_info.go
 model_subdomain.go
 model_tags.go
+model_token_package.go
 model_token_statistic.go
 model_top_level_domain.go
 model_top_level_domain_allowed_buy_periods_inner.go
@@ -1045,6 +1067,7 @@ model_worker_preset_out_api.go
 response.go
 test/api_account_test.go
 test/api_ai_agents_test.go
+test/api_ai_models_test.go
 test/api_api_keys_test.go
 test/api_apps_test.go
 test/api_balancers_test.go

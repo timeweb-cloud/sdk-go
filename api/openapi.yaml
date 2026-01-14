@@ -200,6 +200,10 @@ tags:
     вых моделей (LLM), которые могут отвечать на вопросы пользователей, использова\
     ть базы знаний и выполнять различные задачи."
   name: AI Agents
+- description: "AI Модели — это языковые модели и модели для эмбеддингов, которые\
+    \ используются AI агентами и базами знаний для обработки запросов и генерации\
+    \ ответов."
+  name: AI Models
 - description: "Apps - Облачные приложения позволяют автоматически выполнять проце\
     сс сборки и развертывания при каждом обновлении кода в Github, Gitlab или Bitbucket.\
     \ </br></br> Подробнее об Apps – в нашей <a href='https://timeweb.cloud/docs/apps'\
@@ -45989,6 +45993,396 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/cloud-ai/models:
+    get:
+      description: |-
+        Чтобы получить список доступных AI моделей, отправьте GET-запрос на `/api/v1/cloud-ai/models`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `models`.
+      operationId: getModels
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getModels_200_response'
+          description: Объект JSON c ключами `models` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка моделей
+      tags:
+      - AI Models
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/models"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/models', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/models', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/models', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/models');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/models\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/models\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/token-packages/agents:
+    get:
+      description: |-
+        Чтобы получить список доступных пакетов токенов для AI агентов, отправьте GET-запрос на `/api/v1/cloud-ai/token-packages/agents`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `token_packages`.
+      operationId: getAgentsTokenPackages
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAgentsTokenPackages_200_response'
+          description: Объект JSON c ключами `token_packages` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка пакетов токенов для агентов
+      tags:
+      - AI Models
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/agents"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/agents', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/agents', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/agents', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/agents');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/agents\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/agents\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/token-packages/knowledge-bases:
+    get:
+      description: |-
+        Чтобы получить список доступных пакетов токенов для баз знаний, отправьте GET-запрос на `/api/v1/cloud-ai/token-packages/knowledge-bases`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `token_packages`.
+      operationId: getKnowledgebasesTokenPackages
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAgentsTokenPackages_200_response'
+          description: Объект JSON c ключами `token_packages` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка пакетов токенов для баз знаний
+      tags:
+      - AI Models
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/knowledge-bases"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/knowledge-bases', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/knowledge-bases', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/knowledge-bases', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/knowledge-bases');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/knowledge-bases\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cloud-ai/token-packages/knowledge-bases\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
 components:
   parameters:
     limit:
@@ -56180,6 +56574,130 @@ components:
           example: База знаний с документацией
           type: string
       type: object
+    model:
+      description: Модель AI
+      example:
+        name: gpt-4o
+        provider_id: 1
+        params_info:
+          temperature:
+            type: number
+            min: 0
+            max: 2
+            default: 1
+            description: Контролирует случайность вывода модели
+          max_tokens:
+            type: number
+            min: 1
+            max: 128000
+            default: 4096
+            description: Максимальное количество токенов в выводе
+        id: 1
+        type: llm
+        version: 2024-08-06
+      properties:
+        id:
+          description: Уникальный идентификатор модели
+          example: 1
+          type: number
+        provider_id:
+          description: "ID провайдера, который предоставляет модель"
+          example: 1
+          type: number
+        name:
+          description: Название модели
+          example: gpt-4o
+          type: string
+        type:
+          description: "Тип модели (llm - языковая модель, embedding - модель для\
+            \ эмбеддингов)"
+          enum:
+          - llm
+          - embedding
+          example: llm
+          type: string
+        version:
+          description: Версия модели
+          example: 2024-08-06
+          type: string
+        params_info:
+          $ref: '#/components/schemas/model_params_info'
+      required:
+      - id
+      - name
+      - provider_id
+      - type
+      - version
+      type: object
+    token-package:
+      description: Пакет токенов
+      example:
+        price: 500
+        name: Базовый пакет
+        token_amount: 100000
+        duration_days: 30
+        id: 1
+        model_id: 1
+        package_type: base
+        type: agent
+        is_available: true
+      properties:
+        id:
+          description: Уникальный идентификатор пакета
+          example: 1
+          type: number
+        model_id:
+          description: "ID модели, к которой применяется пакет токенов"
+          example: 1
+          type: number
+        name:
+          description: Название пакета токенов
+          example: Базовый пакет
+          type: string
+        package_type:
+          description: "Тип пакета (base - базовый, additional - дополнительный, promo\
+            \ - промо)"
+          enum:
+          - base
+          - additional
+          - promo
+          example: base
+          type: string
+        type:
+          description: "Тип сущности, к которой относится пакет (agent - агент, knowledgebase\
+            \ - база знаний)"
+          enum:
+          - agent
+          - knowledgebase
+          example: agent
+          type: string
+        token_amount:
+          description: Количество токенов в пакете
+          example: 100000
+          type: number
+        price:
+          description: Цена пакета в целых единицах
+          example: 500
+          type: number
+        duration_days:
+          description: Продолжительность пакета в днях (null для дополнительных пакетов)
+          example: 30
+          nullable: true
+          type: number
+        is_available:
+          description: "Флаг, указывающий доступность пакета"
+          example: true
+          type: boolean
+      required:
+      - id
+      - is_available
+      - model_id
+      - name
+      - package_type
+      - price
+      - token_amount
+      - type
+      type: object
     getFinances_200_response:
       example:
         finances:
@@ -62776,6 +63294,114 @@ components:
       - knowledgebase_statistics
       - meta
       type: object
+    getModels_200_response_meta:
+      example:
+        total: 10
+      properties:
+        total:
+          description: Общее количество моделей
+          example: 10
+          type: number
+      required:
+      - total
+      type: object
+    getModels_200_response:
+      example:
+        models:
+        - name: gpt-4o
+          provider_id: 1
+          params_info:
+            temperature:
+              type: number
+              min: 0
+              max: 2
+              default: 1
+              description: Контролирует случайность вывода модели
+            max_tokens:
+              type: number
+              min: 1
+              max: 128000
+              default: 4096
+              description: Максимальное количество токенов в выводе
+          id: 1
+          type: llm
+          version: 2024-08-06
+        - name: gpt-4o
+          provider_id: 1
+          params_info:
+            temperature:
+              type: number
+              min: 0
+              max: 2
+              default: 1
+              description: Контролирует случайность вывода модели
+            max_tokens:
+              type: number
+              min: 1
+              max: 128000
+              default: 4096
+              description: Максимальное количество токенов в выводе
+          id: 1
+          type: llm
+          version: 2024-08-06
+        meta:
+          total: 10
+      properties:
+        models:
+          items:
+            $ref: '#/components/schemas/model'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getModels_200_response_meta'
+      required:
+      - meta
+      - models
+      type: object
+    getAgentsTokenPackages_200_response_meta:
+      example:
+        total: 5
+      properties:
+        total:
+          description: Общее количество пакетов токенов
+          example: 5
+          type: number
+      required:
+      - total
+      type: object
+    getAgentsTokenPackages_200_response:
+      example:
+        meta:
+          total: 5
+        token_packages:
+        - price: 500
+          name: Базовый пакет
+          token_amount: 100000
+          duration_days: 30
+          id: 1
+          model_id: 1
+          package_type: base
+          type: agent
+          is_available: true
+        - price: 500
+          name: Базовый пакет
+          token_amount: 100000
+          duration_days: 30
+          id: 1
+          model_id: 1
+          package_type: base
+          type: agent
+          is_available: true
+      properties:
+        token_packages:
+          items:
+            $ref: '#/components/schemas/token-package'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getAgentsTokenPackages_200_response_meta'
+      required:
+      - meta
+      - token_packages
+      type: object
     service_service_price_node_groups_inner:
       example:
         cost: 500
@@ -64777,6 +65403,90 @@ components:
           maximum: 100
           minimum: 0
           type: number
+      type: object
+    model_params_info_temperature:
+      description: Параметр температуры
+      properties:
+        type:
+          example: number
+          type: string
+        min:
+          example: 0
+          type: number
+        max:
+          example: 2
+          type: number
+        default:
+          example: 1
+          type: number
+        description:
+          example: Контролирует случайность вывода модели
+          type: string
+      type: object
+    model_params_info_max_tokens:
+      description: Максимальное количество токенов
+      properties:
+        type:
+          example: number
+          type: string
+        min:
+          example: 1
+          type: number
+        max:
+          example: 128000
+          type: number
+        default:
+          example: 4096
+          type: number
+        description:
+          example: Максимальное количество токенов в выводе
+          type: string
+      type: object
+    model_params_info_reasoning_effort:
+      description: Уровень усилий рассуждения
+      properties:
+        type:
+          example: enum
+          type: string
+        enum:
+          example:
+          - none
+          - low
+          - medium
+          - high
+          items:
+            type: string
+          type: array
+        default:
+          example: none
+          type: string
+        description:
+          example: Уровень усилий рассуждения
+          type: string
+      type: object
+    model_params_info:
+      description: Информация о доступных параметрах модели с их ограничениями
+      example:
+        temperature:
+          type: number
+          min: 0
+          max: 2
+          default: 1
+          description: Контролирует случайность вывода модели
+        max_tokens:
+          type: number
+          min: 1
+          max: 128000
+          default: 4096
+          description: Максимальное количество токенов в выводе
+      nullable: true
+      properties:
+        temperature:
+          $ref: '#/components/schemas/model_params_info_temperature'
+        max_tokens:
+          $ref: '#/components/schemas/model_params_info_max_tokens'
+        reasoning_effort:
+          $ref: '#/components/schemas/model_params_info_reasoning_effort'
       type: object
   securitySchemes:
     Bearer:
