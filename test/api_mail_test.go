@@ -36,6 +36,20 @@ func Test_openapi_MailAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test MailAPIService CreateDomainMailboxV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var domain string
+
+		resp, httpRes, err := apiClient.MailAPI.CreateDomainMailboxV2(context.Background(), domain).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MailAPIService CreateMultipleDomainMailboxes", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -43,6 +57,20 @@ func Test_openapi_MailAPIService(t *testing.T) {
 		var domain string
 
 		resp, httpRes, err := apiClient.MailAPI.CreateMultipleDomainMailboxes(context.Background(), domain).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MailAPIService CreateMultipleDomainMailboxesV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var domain string
+
+		resp, httpRes, err := apiClient.MailAPI.CreateMultipleDomainMailboxesV2(context.Background(), domain).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -60,6 +88,18 @@ func Test_openapi_MailAPIService(t *testing.T) {
 		httpRes, err := apiClient.MailAPI.DeleteMailbox(context.Background(), domain, mailbox).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MailAPIService GetAllMailboxesV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.MailAPI.GetAllMailboxesV2(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -100,6 +140,21 @@ func Test_openapi_MailAPIService(t *testing.T) {
 		var mailbox string
 
 		resp, httpRes, err := apiClient.MailAPI.GetMailbox(context.Background(), domain, mailbox).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MailAPIService GetMailboxV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var domain string
+		var mailbox string
+
+		resp, httpRes, err := apiClient.MailAPI.GetMailboxV2(context.Background(), domain, mailbox).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

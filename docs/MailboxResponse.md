@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **ForwardStatus** | Pointer to **bool** | Статус пересылки | [optional] 
 **OutgoingControl** | Pointer to **bool** | Контроль исходящей почты | [optional] 
 **OutgoingEmail** | Pointer to **string** | Email для исходящих писем | [optional] 
-**Password** | Pointer to **string** | Пароль (обычно пустая строка в ответе) | [optional] 
+**Password** | Pointer to **string** | Пароль (пустая строка в ответе) | [optional] 
 **WhiteList** | Pointer to **[]string** | Белый список адресов | [optional] 
 **Webmail** | Pointer to **bool** | Доступ к веб-почте | [optional] 
 **Dovecot** | Pointer to **bool** | Использование Dovecot | [optional] 

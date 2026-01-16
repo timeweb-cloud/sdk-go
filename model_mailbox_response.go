@@ -42,7 +42,7 @@ type MailboxResponse struct {
 	OutgoingControl *bool `json:"outgoing_control,omitempty"`
 	// Email для исходящих писем
 	OutgoingEmail *string `json:"outgoing_email,omitempty"`
-	// Пароль (обычно пустая строка в ответе)
+	// Пароль (пустая строка в ответе)
 	Password *string `json:"password,omitempty"`
 	// Белый список адресов
 	WhiteList []string `json:"white_list,omitempty"`

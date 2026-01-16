@@ -146,6 +146,8 @@ docs/CreateDomainDNSRecord201Response.md
 docs/CreateDomainDNSRecordV2201Response.md
 docs/CreateDomainMailbox201Response.md
 docs/CreateDomainMailboxRequest.md
+docs/CreateDomainMailboxV2201Response.md
+docs/CreateDomainMailboxV2Request.md
 docs/CreateDomainRequest201Response.md
 docs/CreateFloatingIp.md
 docs/CreateFloatingIp201Response.md
@@ -157,6 +159,8 @@ docs/CreateKnowledgebase201Response.md
 docs/CreateMultipleDomainMailboxes201Response.md
 docs/CreateMultipleDomainMailboxesRequest.md
 docs/CreateMultipleDomainMailboxesRequestMailboxesInner.md
+docs/CreateMultipleDomainMailboxesV2201Response.md
+docs/CreateMultipleDomainMailboxesV2RequestInner.md
 docs/CreateNetworkDrive.md
 docs/CreateNetworkDrive201Response.md
 docs/CreateProject.md
@@ -266,6 +270,7 @@ docs/GetAgents200Response.md
 docs/GetAgents200ResponseMeta.md
 docs/GetAgentsTokenPackages200Response.md
 docs/GetAgentsTokenPackages200ResponseMeta.md
+docs/GetAllMailboxesV2200Response.md
 docs/GetAllProjectResources200Response.md
 docs/GetAppDeploys200Response.md
 docs/GetAppLogs200Response.md
@@ -389,6 +394,8 @@ docs/MailboxForwardingIncoming.md
 docs/MailboxForwardingOutgoing.md
 docs/MailboxResponse.md
 docs/MailboxSpamFilter.md
+docs/MailboxV2.md
+docs/MailboxesBatchV2.md
 docs/MasterPresetOutApi.md
 docs/Meta.md
 docs/Meta1.md
@@ -674,6 +681,8 @@ model_create_domain_dns_record_201_response.go
 model_create_domain_dns_record_v2_201_response.go
 model_create_domain_mailbox_201_response.go
 model_create_domain_mailbox_request.go
+model_create_domain_mailbox_v2_201_response.go
+model_create_domain_mailbox_v2_request.go
 model_create_domain_request_201_response.go
 model_create_floating_ip.go
 model_create_floating_ip_201_response.go
@@ -685,6 +694,8 @@ model_create_knowledgebase_201_response.go
 model_create_multiple_domain_mailboxes_201_response.go
 model_create_multiple_domain_mailboxes_request.go
 model_create_multiple_domain_mailboxes_request_mailboxes_inner.go
+model_create_multiple_domain_mailboxes_v2_201_response.go
+model_create_multiple_domain_mailboxes_v2_request_inner.go
 model_create_network_drive.go
 model_create_network_drive_201_response.go
 model_create_project.go
@@ -789,6 +800,7 @@ model_get_agents_200_response.go
 model_get_agents_200_response_meta.go
 model_get_agents_token_packages_200_response.go
 model_get_agents_token_packages_200_response_meta.go
+model_get_all_mailboxes_v2_200_response.go
 model_get_all_project_resources_200_response.go
 model_get_app_deploys_200_response.go
 model_get_app_logs_200_response.go
@@ -907,6 +919,8 @@ model_mailbox_forwarding_incoming.go
 model_mailbox_forwarding_outgoing.go
 model_mailbox_response.go
 model_mailbox_spam_filter.go
+model_mailbox_v2.go
+model_mailboxes_batch_v2.go
 model_master_preset_out_api.go
 model_meta.go
 model_meta_1.go

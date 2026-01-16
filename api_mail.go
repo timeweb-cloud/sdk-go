@@ -48,6 +48,8 @@ CreateDomainMailbox Создание почтового ящика
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param domain Полное имя домена
  @return ApiCreateDomainMailboxRequest
+
+Deprecated
 */
 func (a *MailAPIService) CreateDomainMailbox(ctx context.Context, domain string) ApiCreateDomainMailboxRequest {
 	return ApiCreateDomainMailboxRequest{
@@ -59,6 +61,7 @@ func (a *MailAPIService) CreateDomainMailbox(ctx context.Context, domain string)
 
 // Execute executes the request
 //  @return CreateDomainMailbox201Response
+// Deprecated
 func (a *MailAPIService) CreateDomainMailboxExecute(r ApiCreateDomainMailboxRequest) (*CreateDomainMailbox201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -203,6 +206,196 @@ func (a *MailAPIService) CreateDomainMailboxExecute(r ApiCreateDomainMailboxRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateDomainMailboxV2Request struct {
+	ctx context.Context
+	ApiService *MailAPIService
+	domain string
+	createDomainMailboxV2Request *CreateDomainMailboxV2Request
+}
+
+func (r ApiCreateDomainMailboxV2Request) CreateDomainMailboxV2Request(createDomainMailboxV2Request CreateDomainMailboxV2Request) ApiCreateDomainMailboxV2Request {
+	r.createDomainMailboxV2Request = &createDomainMailboxV2Request
+	return r
+}
+
+func (r ApiCreateDomainMailboxV2Request) Execute() (*CreateDomainMailboxV2201Response, *http.Response, error) {
+	return r.ApiService.CreateDomainMailboxV2Execute(r)
+}
+
+/*
+CreateDomainMailboxV2 Создание почтового ящика
+
+Чтобы создать почтовый ящик, отправьте POST-запрос на `/api/v2/mail/domains/{domain}`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param domain Полное имя домена
+ @return ApiCreateDomainMailboxV2Request
+*/
+func (a *MailAPIService) CreateDomainMailboxV2(ctx context.Context, domain string) ApiCreateDomainMailboxV2Request {
+	return ApiCreateDomainMailboxV2Request{
+		ApiService: a,
+		ctx: ctx,
+		domain: domain,
+	}
+}
+
+// Execute executes the request
+//  @return CreateDomainMailboxV2201Response
+func (a *MailAPIService) CreateDomainMailboxV2Execute(r ApiCreateDomainMailboxV2Request) (*CreateDomainMailboxV2201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateDomainMailboxV2201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MailAPIService.CreateDomainMailboxV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/mail/domains/{domain}"
+	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createDomainMailboxV2Request == nil {
+		return localVarReturnValue, nil, reportError("createDomainMailboxV2Request is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createDomainMailboxV2Request
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v CreateDatabaseBackup409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateMultipleDomainMailboxesRequest struct {
 	ctx context.Context
 	ApiService *MailAPIService
@@ -227,6 +420,8 @@ CreateMultipleDomainMailboxes Множественное создание поч
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param domain Полное имя домена
  @return ApiCreateMultipleDomainMailboxesRequest
+
+Deprecated
 */
 func (a *MailAPIService) CreateMultipleDomainMailboxes(ctx context.Context, domain string) ApiCreateMultipleDomainMailboxesRequest {
 	return ApiCreateMultipleDomainMailboxesRequest{
@@ -238,6 +433,7 @@ func (a *MailAPIService) CreateMultipleDomainMailboxes(ctx context.Context, doma
 
 // Execute executes the request
 //  @return CreateMultipleDomainMailboxes201Response
+// Deprecated
 func (a *MailAPIService) CreateMultipleDomainMailboxesExecute(r ApiCreateMultipleDomainMailboxesRequest) (*CreateMultipleDomainMailboxes201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -280,6 +476,185 @@ func (a *MailAPIService) CreateMultipleDomainMailboxesExecute(r ApiCreateMultipl
 	}
 	// body params
 	localVarPostBody = r.createMultipleDomainMailboxesRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateMultipleDomainMailboxesV2Request struct {
+	ctx context.Context
+	ApiService *MailAPIService
+	domain string
+	createMultipleDomainMailboxesV2RequestInner *[]CreateMultipleDomainMailboxesV2RequestInner
+}
+
+func (r ApiCreateMultipleDomainMailboxesV2Request) CreateMultipleDomainMailboxesV2RequestInner(createMultipleDomainMailboxesV2RequestInner []CreateMultipleDomainMailboxesV2RequestInner) ApiCreateMultipleDomainMailboxesV2Request {
+	r.createMultipleDomainMailboxesV2RequestInner = &createMultipleDomainMailboxesV2RequestInner
+	return r
+}
+
+func (r ApiCreateMultipleDomainMailboxesV2Request) Execute() (*CreateMultipleDomainMailboxesV2201Response, *http.Response, error) {
+	return r.ApiService.CreateMultipleDomainMailboxesV2Execute(r)
+}
+
+/*
+CreateMultipleDomainMailboxesV2 Множественное создание почтовых ящиков
+
+Чтобы создать несколько почтовых ящиков одновременно, отправьте POST-запрос на `/api/v2/mail/domains/{domain}/batch`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param domain Полное имя домена
+ @return ApiCreateMultipleDomainMailboxesV2Request
+*/
+func (a *MailAPIService) CreateMultipleDomainMailboxesV2(ctx context.Context, domain string) ApiCreateMultipleDomainMailboxesV2Request {
+	return ApiCreateMultipleDomainMailboxesV2Request{
+		ApiService: a,
+		ctx: ctx,
+		domain: domain,
+	}
+}
+
+// Execute executes the request
+//  @return CreateMultipleDomainMailboxesV2201Response
+func (a *MailAPIService) CreateMultipleDomainMailboxesV2Execute(r ApiCreateMultipleDomainMailboxesV2Request) (*CreateMultipleDomainMailboxesV2201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateMultipleDomainMailboxesV2201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MailAPIService.CreateMultipleDomainMailboxesV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/mail/domains/{domain}/batch"
+	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createMultipleDomainMailboxesV2RequestInner == nil {
+		return localVarReturnValue, nil, reportError("createMultipleDomainMailboxesV2RequestInner is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createMultipleDomainMailboxesV2RequestInner
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -543,6 +918,189 @@ func (a *MailAPIService) DeleteMailboxExecute(r ApiDeleteMailboxRequest) (*http.
 	return localVarHTTPResponse, nil
 }
 
+type ApiGetAllMailboxesV2Request struct {
+	ctx context.Context
+	ApiService *MailAPIService
+	limit *int32
+	offset *int32
+	search *string
+}
+
+// Обозначает количество записей, которое необходимо вернуть.
+func (r ApiGetAllMailboxesV2Request) Limit(limit int32) ApiGetAllMailboxesV2Request {
+	r.limit = &limit
+	return r
+}
+
+// Указывает на смещение относительно начала списка.
+func (r ApiGetAllMailboxesV2Request) Offset(offset int32) ApiGetAllMailboxesV2Request {
+	r.offset = &offset
+	return r
+}
+
+// Поиск почтового ящика по названию
+func (r ApiGetAllMailboxesV2Request) Search(search string) ApiGetAllMailboxesV2Request {
+	r.search = &search
+	return r
+}
+
+func (r ApiGetAllMailboxesV2Request) Execute() (*GetAllMailboxesV2200Response, *http.Response, error) {
+	return r.ApiService.GetAllMailboxesV2Execute(r)
+}
+
+/*
+GetAllMailboxesV2 Получение списка всех почтовых ящиков аккаунта
+
+Чтобы получить список всех почтовых ящиков, отправьте GET-запрос на `/api/v2/mail`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAllMailboxesV2Request
+*/
+func (a *MailAPIService) GetAllMailboxesV2(ctx context.Context) ApiGetAllMailboxesV2Request {
+	return ApiGetAllMailboxesV2Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetAllMailboxesV2200Response
+func (a *MailAPIService) GetAllMailboxesV2Execute(r ApiGetAllMailboxesV2Request) (*GetAllMailboxesV2200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetAllMailboxesV2200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MailAPIService.GetAllMailboxesV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/mail"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetDomainMailInfoRequest struct {
 	ctx context.Context
 	ApiService *MailAPIService
@@ -561,6 +1119,8 @@ GetDomainMailInfo Получение почтовой информации о д
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param domain Полное имя домена
  @return ApiGetDomainMailInfoRequest
+
+Deprecated
 */
 func (a *MailAPIService) GetDomainMailInfo(ctx context.Context, domain string) ApiGetDomainMailInfoRequest {
 	return ApiGetDomainMailInfoRequest{
@@ -572,6 +1132,7 @@ func (a *MailAPIService) GetDomainMailInfo(ctx context.Context, domain string) A
 
 // Execute executes the request
 //  @return GetDomainMailInfo200Response
+// Deprecated
 func (a *MailAPIService) GetDomainMailInfoExecute(r ApiGetDomainMailInfoRequest) (*GetDomainMailInfo200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -929,6 +1490,8 @@ GetMailbox Получение почтового ящика
  @param domain Полное имя домена
  @param mailbox Название почтового ящика
  @return ApiGetMailboxRequest
+
+Deprecated
 */
 func (a *MailAPIService) GetMailbox(ctx context.Context, domain string, mailbox string) ApiGetMailboxRequest {
 	return ApiGetMailboxRequest{
@@ -941,6 +1504,7 @@ func (a *MailAPIService) GetMailbox(ctx context.Context, domain string, mailbox 
 
 // Execute executes the request
 //  @return CreateDomainMailbox201Response
+// Deprecated
 func (a *MailAPIService) GetMailboxExecute(r ApiGetMailboxRequest) (*CreateDomainMailbox201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -955,6 +1519,178 @@ func (a *MailAPIService) GetMailboxExecute(r ApiGetMailboxRequest) (*CreateDomai
 	}
 
 	localVarPath := localBasePath + "/api/v1/mail/domains/{domain}/mailboxes/{mailbox}"
+	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"mailbox"+"}", url.PathEscape(parameterValueToString(r.mailbox, "mailbox")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetMailboxV2Request struct {
+	ctx context.Context
+	ApiService *MailAPIService
+	domain string
+	mailbox string
+}
+
+func (r ApiGetMailboxV2Request) Execute() (*CreateDomainMailboxV2201Response, *http.Response, error) {
+	return r.ApiService.GetMailboxV2Execute(r)
+}
+
+/*
+GetMailboxV2 Получение почтового ящика
+
+Чтобы получить почтовый ящик, отправьте GET-запрос на `/api/v2/mail/domains/{domain}/mailboxes/{mailbox}`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param domain Полное имя домена
+ @param mailbox Название почтового ящика
+ @return ApiGetMailboxV2Request
+*/
+func (a *MailAPIService) GetMailboxV2(ctx context.Context, domain string, mailbox string) ApiGetMailboxV2Request {
+	return ApiGetMailboxV2Request{
+		ApiService: a,
+		ctx: ctx,
+		domain: domain,
+		mailbox: mailbox,
+	}
+}
+
+// Execute executes the request
+//  @return CreateDomainMailboxV2201Response
+func (a *MailAPIService) GetMailboxV2Execute(r ApiGetMailboxV2Request) (*CreateDomainMailboxV2201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateDomainMailboxV2201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MailAPIService.GetMailboxV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/mail/domains/{domain}/mailboxes/{mailbox}"
 	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"mailbox"+"}", url.PathEscape(parameterValueToString(r.mailbox, "mailbox")), -1)
 
@@ -1118,6 +1854,8 @@ GetMailboxes Получение списка почтовых ящиков ак�
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMailboxesRequest
+
+Deprecated
 */
 func (a *MailAPIService) GetMailboxes(ctx context.Context) ApiGetMailboxesRequest {
 	return ApiGetMailboxesRequest{
@@ -1128,6 +1866,7 @@ func (a *MailAPIService) GetMailboxes(ctx context.Context) ApiGetMailboxesReques
 
 // Execute executes the request
 //  @return GetMailboxes200Response
+// Deprecated
 func (a *MailAPIService) GetMailboxesExecute(r ApiGetMailboxesRequest) (*GetMailboxes200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1288,6 +2027,8 @@ UpdateDomainMailInfo Изменение почтовой информации о
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param domain Полное имя домена
  @return ApiUpdateDomainMailInfoRequest
+
+Deprecated
 */
 func (a *MailAPIService) UpdateDomainMailInfo(ctx context.Context, domain string) ApiUpdateDomainMailInfoRequest {
 	return ApiUpdateDomainMailInfoRequest{
@@ -1299,6 +2040,7 @@ func (a *MailAPIService) UpdateDomainMailInfo(ctx context.Context, domain string
 
 // Execute executes the request
 //  @return GetDomainMailInfo200Response
+// Deprecated
 func (a *MailAPIService) UpdateDomainMailInfoExecute(r ApiUpdateDomainMailInfoRequest) (*GetDomainMailInfo200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
