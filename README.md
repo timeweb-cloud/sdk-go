@@ -331,9 +331,11 @@ Class | Method | HTTP request | Description
 *DomainsAPI* | [**AddSubdomain**](docs/DomainsAPI.md#addsubdomain) | **Post** /api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn} | Добавление поддомена
 *DomainsAPI* | [**CheckDomain**](docs/DomainsAPI.md#checkdomain) | **Get** /api/v1/check-domain/{fqdn} | Проверить, доступен ли домен для регистрации
 *DomainsAPI* | [**CreateDomainDNSRecord**](docs/DomainsAPI.md#createdomaindnsrecord) | **Post** /api/v1/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
+*DomainsAPI* | [**CreateDomainDNSRecordV2**](docs/DomainsAPI.md#createdomaindnsrecordv2) | **Post** /api/v2/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
 *DomainsAPI* | [**CreateDomainRequest**](docs/DomainsAPI.md#createdomainrequest) | **Post** /api/v1/domains-requests | Создание заявки на регистрацию/продление/трансфер домена
 *DomainsAPI* | [**DeleteDomain**](docs/DomainsAPI.md#deletedomain) | **Delete** /api/v1/domains/{fqdn} | Удаление домена
 *DomainsAPI* | [**DeleteDomainDNSRecord**](docs/DomainsAPI.md#deletedomaindnsrecord) | **Delete** /api/v1/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
+*DomainsAPI* | [**DeleteDomainDNSRecordV2**](docs/DomainsAPI.md#deletedomaindnsrecordv2) | **Delete** /api/v2/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
 *DomainsAPI* | [**DeleteSubdomain**](docs/DomainsAPI.md#deletesubdomain) | **Delete** /api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn} | Удаление поддомена
 *DomainsAPI* | [**GetDomain**](docs/DomainsAPI.md#getdomain) | **Get** /api/v1/domains/{fqdn} | Получение информации о домене
 *DomainsAPI* | [**GetDomainDNSRecords**](docs/DomainsAPI.md#getdomaindnsrecords) | **Get** /api/v1/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
@@ -346,6 +348,7 @@ Class | Method | HTTP request | Description
 *DomainsAPI* | [**GetTLDs**](docs/DomainsAPI.md#gettlds) | **Get** /api/v1/tlds | Получить информацию о доменных зонах
 *DomainsAPI* | [**UpdateDomainAutoProlongation**](docs/DomainsAPI.md#updatedomainautoprolongation) | **Patch** /api/v1/domains/{fqdn} | Включение/выключение автопродления домена
 *DomainsAPI* | [**UpdateDomainDNSRecord**](docs/DomainsAPI.md#updatedomaindnsrecord) | **Patch** /api/v1/domains/{fqdn}/dns-records/{record_id} | Обновить информацию о DNS-записи домена или поддомена
+*DomainsAPI* | [**UpdateDomainDNSRecordV2**](docs/DomainsAPI.md#updatedomaindnsrecordv2) | **Patch** /api/v2/domains/{fqdn}/dns-records/{record_id} | Обновить информацию о DNS-записи домена или поддомена
 *DomainsAPI* | [**UpdateDomainNameServers**](docs/DomainsAPI.md#updatedomainnameservers) | **Put** /api/v1/domains/{fqdn}/name-servers | Изменение name-серверов домена
 *DomainsAPI* | [**UpdateDomainRequest**](docs/DomainsAPI.md#updatedomainrequest) | **Patch** /api/v1/domains-requests/{request_id} | Оплата/обновление заявки на регистрацию/продление/трансфер домена
 *FirewallAPI* | [**AddResourceToGroup**](docs/FirewallAPI.md#addresourcetogroup) | **Post** /api/v1/firewall/groups/{group_id}/resources/{resource_id} | Линковка ресурса в firewall group
@@ -638,7 +641,9 @@ Class | Method | HTTP request | Description
  - [CreateDeploy201Response](docs/CreateDeploy201Response.md)
  - [CreateDeployRequest](docs/CreateDeployRequest.md)
  - [CreateDns](docs/CreateDns.md)
+ - [CreateDnsV2](docs/CreateDnsV2.md)
  - [CreateDomainDNSRecord201Response](docs/CreateDomainDNSRecord201Response.md)
+ - [CreateDomainDNSRecordV2201Response](docs/CreateDomainDNSRecordV2201Response.md)
  - [CreateDomainMailbox201Response](docs/CreateDomainMailbox201Response.md)
  - [CreateDomainMailboxRequest](docs/CreateDomainMailboxRequest.md)
  - [CreateDomainRequest201Response](docs/CreateDomainRequest201Response.md)
@@ -708,6 +713,8 @@ Class | Method | HTTP request | Description
  - [DeployStatus](docs/DeployStatus.md)
  - [DnsRecord](docs/DnsRecord.md)
  - [DnsRecordData](docs/DnsRecordData.md)
+ - [DnsRecordV2](docs/DnsRecordV2.md)
+ - [DnsRecordV2Data](docs/DnsRecordV2Data.md)
  - [Document](docs/Document.md)
  - [DocumentStatusInfo](docs/DocumentStatusInfo.md)
  - [DocumentStatusInfoDetails](docs/DocumentStatusInfoDetails.md)

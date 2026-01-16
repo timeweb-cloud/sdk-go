@@ -143,7 +143,9 @@ docs/CreateDedicatedServer201Response.md
 docs/CreateDeploy201Response.md
 docs/CreateDeployRequest.md
 docs/CreateDns.md
+docs/CreateDnsV2.md
 docs/CreateDomainDNSRecord201Response.md
+docs/CreateDomainDNSRecordV2201Response.md
 docs/CreateDomainMailbox201Response.md
 docs/CreateDomainMailboxRequest.md
 docs/CreateDomainRequest201Response.md
@@ -215,6 +217,8 @@ docs/DeploySettingsInner.md
 docs/DeployStatus.md
 docs/DnsRecord.md
 docs/DnsRecordData.md
+docs/DnsRecordV2.md
+docs/DnsRecordV2Data.md
 docs/Document.md
 docs/DocumentStatusInfo.md
 docs/DocumentStatusInfoDetails.md
@@ -667,7 +671,9 @@ model_create_dedicated_server_201_response.go
 model_create_deploy_201_response.go
 model_create_deploy_request.go
 model_create_dns.go
+model_create_dns_v2.go
 model_create_domain_dns_record_201_response.go
+model_create_domain_dns_record_v2_201_response.go
 model_create_domain_mailbox_201_response.go
 model_create_domain_mailbox_request.go
 model_create_domain_request_201_response.go
@@ -737,6 +743,8 @@ model_deploy_settings_inner.go
 model_deploy_status.go
 model_dns_record.go
 model_dns_record_data.go
+model_dns_record_v2.go
+model_dns_record_v2_data.go
 model_document.go
 model_document_status_info.go
 model_document_status_info_details.go

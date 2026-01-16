@@ -505,6 +505,8 @@ DNS-запись будет добавлена с использованием �
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fqdn Полное имя домена или поддомена.
  @return ApiCreateDomainDNSRecordRequest
+
+Deprecated
 */
 func (a *DomainsAPIService) CreateDomainDNSRecord(ctx context.Context, fqdn string) ApiCreateDomainDNSRecordRequest {
 	return ApiCreateDomainDNSRecordRequest{
@@ -516,6 +518,7 @@ func (a *DomainsAPIService) CreateDomainDNSRecord(ctx context.Context, fqdn stri
 
 // Execute executes the request
 //  @return CreateDomainDNSRecord201Response
+// Deprecated
 func (a *DomainsAPIService) CreateDomainDNSRecordExecute(r ApiCreateDomainDNSRecordRequest) (*CreateDomainDNSRecord201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -604,6 +607,187 @@ func (a *DomainsAPIService) CreateDomainDNSRecordExecute(r ApiCreateDomainDNSRec
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateDomainDNSRecordV2Request struct {
+	ctx context.Context
+	ApiService *DomainsAPIService
+	fqdn string
+	createDnsV2 *CreateDnsV2
+}
+
+func (r ApiCreateDomainDNSRecordV2Request) CreateDnsV2(createDnsV2 CreateDnsV2) ApiCreateDomainDNSRecordV2Request {
+	r.createDnsV2 = &createDnsV2
+	return r
+}
+
+func (r ApiCreateDomainDNSRecordV2Request) Execute() (*CreateDomainDNSRecordV2201Response, *http.Response, error) {
+	return r.ApiService.CreateDomainDNSRecordV2Execute(r)
+}
+
+/*
+CreateDomainDNSRecordV2 Добавить информацию о DNS-записи для домена или поддомена
+
+Чтобы добавить информацию о DNS-записи для домена или поддомена, отправьте запрос POST на `/api/v2/domains/{fqdn}/dns-records`, задав необходимые атрибуты.
+
+DNS-запись будет добавлена с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о добавленной DNS-записи.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param fqdn Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+ @return ApiCreateDomainDNSRecordV2Request
+*/
+func (a *DomainsAPIService) CreateDomainDNSRecordV2(ctx context.Context, fqdn string) ApiCreateDomainDNSRecordV2Request {
+	return ApiCreateDomainDNSRecordV2Request{
+		ApiService: a,
+		ctx: ctx,
+		fqdn: fqdn,
+	}
+}
+
+// Execute executes the request
+//  @return CreateDomainDNSRecordV2201Response
+func (a *DomainsAPIService) CreateDomainDNSRecordV2Execute(r ApiCreateDomainDNSRecordV2Request) (*CreateDomainDNSRecordV2201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateDomainDNSRecordV2201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.CreateDomainDNSRecordV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/domains/{fqdn}/dns-records"
+	localVarPath = strings.Replace(localVarPath, "{"+"fqdn"+"}", url.PathEscape(parameterValueToString(r.fqdn, "fqdn")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createDnsV2 == nil {
+		return localVarReturnValue, nil, reportError("createDnsV2 is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createDnsV2
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v CreateDatabaseBackup409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -992,6 +1176,8 @@ DeleteDomainDNSRecord Удалить информацию о DNS-записи д
  @param fqdn Полное имя домена или поддомена.
  @param recordId ID DNS-записи домена или поддомена.
  @return ApiDeleteDomainDNSRecordRequest
+
+Deprecated
 */
 func (a *DomainsAPIService) DeleteDomainDNSRecord(ctx context.Context, fqdn string, recordId int32) ApiDeleteDomainDNSRecordRequest {
 	return ApiDeleteDomainDNSRecordRequest{
@@ -1003,6 +1189,7 @@ func (a *DomainsAPIService) DeleteDomainDNSRecord(ctx context.Context, fqdn stri
 }
 
 // Execute executes the request
+// Deprecated
 func (a *DomainsAPIService) DeleteDomainDNSRecordExecute(r ApiDeleteDomainDNSRecordRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
@@ -1016,6 +1203,156 @@ func (a *DomainsAPIService) DeleteDomainDNSRecordExecute(r ApiDeleteDomainDNSRec
 	}
 
 	localVarPath := localBasePath + "/api/v1/domains/{fqdn}/dns-records/{record_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"fqdn"+"}", url.PathEscape(parameterValueToString(r.fqdn, "fqdn")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"record_id"+"}", url.PathEscape(parameterValueToString(r.recordId, "recordId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteDomainDNSRecordV2Request struct {
+	ctx context.Context
+	ApiService *DomainsAPIService
+	fqdn string
+	recordId int32
+}
+
+func (r ApiDeleteDomainDNSRecordV2Request) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteDomainDNSRecordV2Execute(r)
+}
+
+/*
+DeleteDomainDNSRecordV2 Удалить информацию о DNS-записи для домена или поддомена
+
+Чтобы удалить информацию о DNS-записи для домена или поддомена, отправьте запрос DELETE на `/api/v2/domains/{fqdn}/dns-records/{record_id}`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param fqdn Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+ @param recordId ID DNS-записи домена или поддомена.
+ @return ApiDeleteDomainDNSRecordV2Request
+*/
+func (a *DomainsAPIService) DeleteDomainDNSRecordV2(ctx context.Context, fqdn string, recordId int32) ApiDeleteDomainDNSRecordV2Request {
+	return ApiDeleteDomainDNSRecordV2Request{
+		ApiService: a,
+		ctx: ctx,
+		fqdn: fqdn,
+		recordId: recordId,
+	}
+}
+
+// Execute executes the request
+func (a *DomainsAPIService) DeleteDomainDNSRecordV2Execute(r ApiDeleteDomainDNSRecordV2Request) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.DeleteDomainDNSRecordV2")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/domains/{fqdn}/dns-records/{record_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"fqdn"+"}", url.PathEscape(parameterValueToString(r.fqdn, "fqdn")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"record_id"+"}", url.PathEscape(parameterValueToString(r.recordId, "recordId")), -1)
 
@@ -2990,6 +3327,8 @@ DNS-запись будет обновлена с использованием �
  @param fqdn Полное имя домена или поддомена.
  @param recordId ID DNS-записи домена или поддомена.
  @return ApiUpdateDomainDNSRecordRequest
+
+Deprecated
 */
 func (a *DomainsAPIService) UpdateDomainDNSRecord(ctx context.Context, fqdn string, recordId int32) ApiUpdateDomainDNSRecordRequest {
 	return ApiUpdateDomainDNSRecordRequest{
@@ -3002,6 +3341,7 @@ func (a *DomainsAPIService) UpdateDomainDNSRecord(ctx context.Context, fqdn stri
 
 // Execute executes the request
 //  @return CreateDomainDNSRecord201Response
+// Deprecated
 func (a *DomainsAPIService) UpdateDomainDNSRecordExecute(r ApiUpdateDomainDNSRecordRequest) (*CreateDomainDNSRecord201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
@@ -3091,6 +3431,191 @@ func (a *DomainsAPIService) UpdateDomainDNSRecordExecute(r ApiUpdateDomainDNSRec
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateDomainDNSRecordV2Request struct {
+	ctx context.Context
+	ApiService *DomainsAPIService
+	fqdn string
+	recordId int32
+	createDnsV2 *CreateDnsV2
+}
+
+func (r ApiUpdateDomainDNSRecordV2Request) CreateDnsV2(createDnsV2 CreateDnsV2) ApiUpdateDomainDNSRecordV2Request {
+	r.createDnsV2 = &createDnsV2
+	return r
+}
+
+func (r ApiUpdateDomainDNSRecordV2Request) Execute() (*CreateDomainDNSRecordV2201Response, *http.Response, error) {
+	return r.ApiService.UpdateDomainDNSRecordV2Execute(r)
+}
+
+/*
+UpdateDomainDNSRecordV2 Обновить информацию о DNS-записи домена или поддомена
+
+Чтобы обновить информацию о DNS-записи для домена или поддомена, отправьте запрос PATCH на `/api/v2/domains/{fqdn}/dns-records/{record_id}`, задав необходимые атрибуты.
+
+DNS-запись будет обновлена с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией об обновленной DNS-записи.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param fqdn Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+ @param recordId ID DNS-записи домена или поддомена.
+ @return ApiUpdateDomainDNSRecordV2Request
+*/
+func (a *DomainsAPIService) UpdateDomainDNSRecordV2(ctx context.Context, fqdn string, recordId int32) ApiUpdateDomainDNSRecordV2Request {
+	return ApiUpdateDomainDNSRecordV2Request{
+		ApiService: a,
+		ctx: ctx,
+		fqdn: fqdn,
+		recordId: recordId,
+	}
+}
+
+// Execute executes the request
+//  @return CreateDomainDNSRecordV2201Response
+func (a *DomainsAPIService) UpdateDomainDNSRecordV2Execute(r ApiUpdateDomainDNSRecordV2Request) (*CreateDomainDNSRecordV2201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateDomainDNSRecordV2201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.UpdateDomainDNSRecordV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/domains/{fqdn}/dns-records/{record_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"fqdn"+"}", url.PathEscape(parameterValueToString(r.fqdn, "fqdn")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"record_id"+"}", url.PathEscape(parameterValueToString(r.recordId, "recordId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createDnsV2 == nil {
+		return localVarReturnValue, nil, reportError("createDnsV2 is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createDnsV2
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v CreateDatabaseBackup409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

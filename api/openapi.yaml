@@ -32321,6 +32321,662 @@ paths:
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v2/domains/{fqdn}/dns-records:
+    post:
+      description: |-
+        Чтобы добавить информацию о DNS-записи для домена или поддомена, отправьте запрос POST на `/api/v2/domains/{fqdn}/dns-records`, задав необходимые атрибуты.
+
+        DNS-запись будет добавлена с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о добавленной DNS-записи.
+      operationId: createDomainDNSRecordV2
+      parameters:
+      - description: "Полное имя домена или поддомена. Для создания записи на осно\
+          вном домене передайте имя домена (например, `somedomain.ru`). Для создан\
+          ия записи на поддомене передайте полное доменное имя включая поддомен (н\
+          апример, `sub.somedomain.ru`)."
+        explode: false
+        in: path
+        name: fqdn
+        required: true
+        schema:
+          example: somedomain.ru
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-dns-v2'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                A запись:
+                  summary: A запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: A
+                      fqdn: somedomain.ru
+                      data:
+                        value: 192.168.1.0
+                        subdomain: sub
+                      ttl: 600
+                AAAA запись:
+                  summary: AAAA запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: AAAA
+                      fqdn: somedomain.ru
+                      data:
+                        value: 2001:db8::1
+                        subdomain: sub
+                      ttl: 600
+                TXT запись:
+                  summary: TXT запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: TXT
+                      fqdn: somedomain.ru
+                      data:
+                        value: value
+                        subdomain: sub
+                      ttl: 600
+                CNAME запись:
+                  summary: CNAME запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: CNAME
+                      fqdn: somedomain.ru
+                      data:
+                        value: somedomain.ru
+                        subdomain: sub
+                      ttl: 600
+                MX запись:
+                  summary: MX запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: MX
+                      fqdn: somedomain.ru
+                      data:
+                        value: somedomain.ru
+                        priority: 10
+                        subdomain: sub
+                      ttl: 600
+                SRV запись:
+                  summary: SRV запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: SRV
+                      fqdn: somedomain.ru
+                      data:
+                        service: _sip
+                        protocol: _TCP
+                        priority: 10
+                        port: 993
+                        host: somedomain.ru
+                        subdomain: sub
+                      ttl: 600
+              schema:
+                $ref: '#/components/schemas/createDomainDNSRecordV2_201_response'
+          description: Ответ будет представлять собой объект JSON c ключом `dns_record`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Добавить информацию о DNS-записи для домена или поддомена
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"type":"A","value":"192.168.1.0","ttl":600}' \
+            "https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'type': 'A',
+                  'value': '192.168.1.0',
+                  'ttl': 600
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records',
+              {
+                  'type': 'A',
+                  'value': '192.168.1.0',
+                  'ttl': 600
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'type': 'A',
+              'value': '192.168.1.0',
+              'ttl': 600,
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"type":"A","value":"192.168.1.0","ttl":600}'
+          #response = requests.post('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"type":"A","value":"192.168.1.0","ttl":600}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"type\":\"A\",\"value\":\"192.168.1.0\"\
+          ,\"ttl\":600}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"type\\\":\\\"A\\\",\\\"value\\\":\\\"192.168.1.0\\\
+          \",\\\"ttl\\\":600}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\t\
+          httpConn.getOutputStream().close();\n\n\t\tInputStream responseStream =\
+          \ httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v2/domains/{fqdn}/dns-records/{record_id}:
+    delete:
+      description: "Чтобы удалить информацию о DNS-записи для домена или поддомена\
+        , отправьте запрос DELETE на `/api/v2/domains/{fqdn}/dns-records/{record_id}`."
+      operationId: deleteDomainDNSRecordV2
+      parameters:
+      - description: "Полное имя домена или поддомена. Для создания записи на осно\
+          вном домене передайте имя домена (например, `somedomain.ru`). Для создан\
+          ия записи на поддомене передайте полное доменное имя включая поддомен (н\
+          апример, `sub.somedomain.ru`)."
+        explode: false
+        in: path
+        name: fqdn
+        required: true
+        schema:
+          example: somedomain.ru
+          type: string
+        style: simple
+      - description: ID DNS-записи домена или поддомена.
+        explode: false
+        in: path
+        name: record_id
+        required: true
+        schema:
+          example: 123
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Информация о DNS-записи успешно удалена.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удалить информацию о DNS-записи для домена или поддомена
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    patch:
+      description: |-
+        Чтобы обновить информацию о DNS-записи для домена или поддомена, отправьте запрос PATCH на `/api/v2/domains/{fqdn}/dns-records/{record_id}`, задав необходимые атрибуты.
+
+        DNS-запись будет обновлена с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией об обновленной DNS-записи.
+      operationId: updateDomainDNSRecordV2
+      parameters:
+      - description: "Полное имя домена или поддомена. Для создания записи на осно\
+          вном домене передайте имя домена (например, `somedomain.ru`). Для создан\
+          ия записи на поддомене передайте полное доменное имя включая поддомен (н\
+          апример, `sub.somedomain.ru`)."
+        explode: false
+        in: path
+        name: fqdn
+        required: true
+        schema:
+          example: somedomain.ru
+          type: string
+        style: simple
+      - description: ID DNS-записи домена или поддомена.
+        explode: false
+        in: path
+        name: record_id
+        required: true
+        schema:
+          example: 123
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-dns-v2'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                A запись:
+                  summary: A запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: A
+                      fqdn: somedomain.ru
+                      data:
+                        value: 192.168.1.0
+                        subdomain: sub
+                      ttl: 600
+                AAAA запись:
+                  summary: AAAA запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: AAAA
+                      fqdn: somedomain.ru
+                      data:
+                        value: 2001:db8::1
+                        subdomain: sub
+                      ttl: 600
+                TXT запись:
+                  summary: TXT запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: TXT
+                      fqdn: somedomain.ru
+                      data:
+                        value: value
+                        subdomain: sub
+                      ttl: 600
+                CNAME запись:
+                  summary: CNAME запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: CNAME
+                      fqdn: somedomain.ru
+                      data:
+                        value: somedomain.ru
+                        subdomain: sub
+                      ttl: 600
+                MX запись:
+                  summary: MX запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: MX
+                      fqdn: somedomain.ru
+                      data:
+                        value: somedomain.ru
+                        priority: 10
+                        subdomain: sub
+                      ttl: 600
+                SRV запись:
+                  summary: SRV запись
+                  value:
+                    dns_record:
+                      id: 123
+                      type: SRV
+                      fqdn: somedomain.ru
+                      data:
+                        service: _sip
+                        protocol: _TCP
+                        priority: 10
+                        port: 993
+                        host: somedomain.ru
+                        subdomain: sub
+                      ttl: 600
+              schema:
+                $ref: '#/components/schemas/createDomainDNSRecordV2_201_response'
+          description: Ответ будет представлять собой объект JSON c ключом `dns_record`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Обновить информацию о DNS-записи домена или поддомена
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"type":"A","value":"192.168.1.0","ttl":600}' \
+            "https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'type': 'A',
+                  'value': '192.168.1.0',
+                  'ttl': 600
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123',
+              {
+                  'type': 'A',
+                  'value': '192.168.1.0',
+                  'ttl': 600
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'type': 'A',
+              'value': '192.168.1.0',
+              'ttl': 600,
+          }
+
+          response = requests.patch(
+              'https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123',
+              headers=headers,
+              json=json_data,
+          )
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"type":"A","value":"192.168.1.0","ttl":600}'
+          #response = requests.patch('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, '{"type":"A","value":"192.168.1.0","ttl":600}');
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"type\":\"A\",\"value\":\"192.168.1.0\"\
+          ,\"ttl\":600}`)\n\treq, err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records/123\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\\"type\\\":\\\"A\\\",\\\"value\\\":\\\"192.168.1.0\\\
+          \",\\\"ttl\\\":600}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\t\
+          httpConn.getOutputStream().close();\n\n\t\tInputStream responseStream =\
+          \ httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v1/domains/{fqdn}/dns-records:
     get:
       description: "Чтобы получить информацию обо всех пользовательских DNS-запися\
@@ -32472,6 +33128,7 @@ paths:
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
     post:
+      deprecated: true
       description: |-
         Чтобы добавить информацию о DNS-записи для домена или поддомена, отправьте запрос POST на `/api/v1/domains/{fqdn}/dns-records`, задав необходимые атрибуты.
 
@@ -32640,6 +33297,7 @@ paths:
           \t}\n}\n"
   /api/v1/domains/{fqdn}/dns-records/{record_id}:
     delete:
+      deprecated: true
       description: "Чтобы удалить информацию о DNS-записи для домена или поддомена\
         , отправьте запрос DELETE на `/api/v1/domains/{fqdn}/dns-records/{record_id}`."
       operationId: deleteDomainDNSRecord
@@ -32776,6 +33434,7 @@ paths:
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
     patch:
+      deprecated: true
       description: |-
         Чтобы обновить информацию о DNS-записи для домена или поддомена, отправьте запрос PATCH на `/api/v1/domains/{fqdn}/dns-records/{record_id}`, задав необходимые атрибуты.
 
@@ -46674,8 +47333,11 @@ components:
         example: somedomain.ru
         type: string
       style: simple
-    domain-subdomain-fqdn:
-      description: Полное имя домена или поддомена.
+    domain-subdomain-fqdn-create-dns:
+      description: "Полное имя домена или поддомена. Для создания записи на основн\
+        ом домене передайте имя домена (например, `somedomain.ru`). Для создания з\
+        аписи на поддомене передайте полное доменное имя включая поддомен (наприме\
+        р, `sub.somedomain.ru`)."
       explode: false
       in: path
       name: fqdn
@@ -46693,6 +47355,16 @@ components:
       schema:
         example: 123
         type: integer
+      style: simple
+    domain-subdomain-fqdn:
+      description: Полное имя домена или поддомена.
+      explode: false
+      in: path
+      name: fqdn
+      required: true
+      schema:
+        example: somedomain.ru
+        type: string
       style: simple
     subdomain-fqdn:
       description: Полное имя поддомена.
@@ -53993,6 +54665,72 @@ components:
           example: 192.168.1.1
           nullable: true
           type: string
+      type: object
+    create-dns-v2:
+      properties:
+        type:
+          description: Тип DNS-записи.
+          enum:
+          - A
+          type: string
+        value:
+          description: IPv4 адрес.
+          example: 192.168.1.0
+          type: string
+        ttl:
+          description: Время жизни DNS-записи в секундах.
+          example: 600
+          type: number
+      required:
+      - type
+      - value
+      title: A запись
+      type: object
+    dns-record-v2:
+      description: DNS-запись.
+      example:
+        data:
+          protocol: _TCP
+          port: 993
+          service: _sip
+          host: somedomain.ru
+          subdomain: sub
+          priority: 10
+          value: 192.168.1.0
+        fqdn: somedomain.ru
+        id: 123
+        type: A
+        ttl: 600
+      properties:
+        type:
+          description: Тип DNS-записи.
+          enum:
+          - TXT
+          - SRV
+          - CNAME
+          - AAAA
+          - MX
+          - A
+          example: A
+          type: string
+        id:
+          description: ID DNS-записи.
+          example: 123
+          nullable: true
+          type: number
+        fqdn:
+          description: Полное имя основного домена.
+          example: somedomain.ru
+          type: string
+        data:
+          $ref: '#/components/schemas/dns_record_v2_data'
+        ttl:
+          description: Время жизни DNS-записи.
+          example: 600
+          type: number
+      required:
+      - data
+      - type
       type: object
     dns-record:
       description: DNS-запись.
@@ -61616,6 +62354,27 @@ components:
       required:
       - domain
       type: object
+    createDomainDNSRecordV2_201_response:
+      example:
+        dns_record:
+          data:
+            protocol: _TCP
+            port: 993
+            service: _sip
+            host: somedomain.ru
+            subdomain: sub
+            priority: 10
+            value: 192.168.1.0
+          fqdn: somedomain.ru
+          id: 123
+          type: A
+          ttl: 600
+      properties:
+        dns_record:
+          $ref: '#/components/schemas/dns-record-v2'
+      required:
+      - dns_record
+      type: object
     getDomainDNSRecords_200_response:
       example:
         dns_records:
@@ -64805,6 +65564,51 @@ components:
       required:
       - period
       - price
+      type: object
+    dns_record_v2_data:
+      description: Данные DNS-записи. Состав полей зависит от типа записи.
+      example:
+        protocol: _TCP
+        port: 993
+        service: _sip
+        host: somedomain.ru
+        subdomain: sub
+        priority: 10
+        value: 192.168.1.0
+      properties:
+        priority:
+          description: Приоритет DNS-записи (для MX и SRV записей).
+          example: 10
+          type: number
+        subdomain:
+          description: "Имя поддомена (только поддомен без основного домена, напри\
+            мер `sub` для `sub.example.com`). Для записей на основном домене это п\
+            оле отсутствует в ответе."
+          example: sub
+          nullable: true
+          type: string
+        value:
+          description: "Значение DNS-записи (для A, AAAA, TXT, CNAME, MX записей)."
+          example: 192.168.1.0
+          type: string
+        host:
+          description: "Каноническое имя хоста, предоставляющего сервис (для SRV з\
+            аписей)."
+          example: somedomain.ru
+          type: string
+        port:
+          description: "TCP или UDP порт, на котором работает сервис (для SRV запи\
+            сей)."
+          example: 993
+          type: number
+        service:
+          description: Имя сервиса (для SRV записей).
+          example: _sip
+          type: string
+        protocol:
+          description: Протокол (для SRV записей).
+          example: _TCP
+          type: string
       type: object
     dns_record_data:
       description: Данные DNS-записи.

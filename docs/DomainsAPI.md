@@ -8,9 +8,11 @@ Method | HTTP request | Description
 [**AddSubdomain**](DomainsAPI.md#AddSubdomain) | **Post** /api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn} | Добавление поддомена
 [**CheckDomain**](DomainsAPI.md#CheckDomain) | **Get** /api/v1/check-domain/{fqdn} | Проверить, доступен ли домен для регистрации
 [**CreateDomainDNSRecord**](DomainsAPI.md#CreateDomainDNSRecord) | **Post** /api/v1/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
+[**CreateDomainDNSRecordV2**](DomainsAPI.md#CreateDomainDNSRecordV2) | **Post** /api/v2/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
 [**CreateDomainRequest**](DomainsAPI.md#CreateDomainRequest) | **Post** /api/v1/domains-requests | Создание заявки на регистрацию/продление/трансфер домена
 [**DeleteDomain**](DomainsAPI.md#DeleteDomain) | **Delete** /api/v1/domains/{fqdn} | Удаление домена
 [**DeleteDomainDNSRecord**](DomainsAPI.md#DeleteDomainDNSRecord) | **Delete** /api/v1/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
+[**DeleteDomainDNSRecordV2**](DomainsAPI.md#DeleteDomainDNSRecordV2) | **Delete** /api/v2/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
 [**DeleteSubdomain**](DomainsAPI.md#DeleteSubdomain) | **Delete** /api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn} | Удаление поддомена
 [**GetDomain**](DomainsAPI.md#GetDomain) | **Get** /api/v1/domains/{fqdn} | Получение информации о домене
 [**GetDomainDNSRecords**](DomainsAPI.md#GetDomainDNSRecords) | **Get** /api/v1/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
@@ -23,6 +25,7 @@ Method | HTTP request | Description
 [**GetTLDs**](DomainsAPI.md#GetTLDs) | **Get** /api/v1/tlds | Получить информацию о доменных зонах
 [**UpdateDomainAutoProlongation**](DomainsAPI.md#UpdateDomainAutoProlongation) | **Patch** /api/v1/domains/{fqdn} | Включение/выключение автопродления домена
 [**UpdateDomainDNSRecord**](DomainsAPI.md#UpdateDomainDNSRecord) | **Patch** /api/v1/domains/{fqdn}/dns-records/{record_id} | Обновить информацию о DNS-записи домена или поддомена
+[**UpdateDomainDNSRecordV2**](DomainsAPI.md#UpdateDomainDNSRecordV2) | **Patch** /api/v2/domains/{fqdn}/dns-records/{record_id} | Обновить информацию о DNS-записи домена или поддомена
 [**UpdateDomainNameServers**](DomainsAPI.md#UpdateDomainNameServers) | **Put** /api/v1/domains/{fqdn}/name-servers | Изменение name-серверов домена
 [**UpdateDomainRequest**](DomainsAPI.md#UpdateDomainRequest) | **Patch** /api/v1/domains-requests/{request_id} | Оплата/обновление заявки на регистрацию/продление/трансфер домена
 
@@ -311,6 +314,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateDomainDNSRecordV2
+
+> CreateDomainDNSRecordV2201Response CreateDomainDNSRecordV2(ctx, fqdn).CreateDnsV2(createDnsV2).Execute()
+
+Добавить информацию о DNS-записи для домена или поддомена
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+    createDnsV2 := *openapiclient.NewCreateDnsV2("Type_example", "192.168.1.0") // CreateDnsV2 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DomainsAPI.CreateDomainDNSRecordV2(context.Background(), fqdn).CreateDnsV2(createDnsV2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.CreateDomainDNSRecordV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateDomainDNSRecordV2`: CreateDomainDNSRecordV2201Response
+    fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.CreateDomainDNSRecordV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;). | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateDomainDNSRecordV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createDnsV2** | [**CreateDnsV2**](CreateDnsV2.md) |  | 
+
+### Return type
+
+[**CreateDomainDNSRecordV2201Response**](CreateDomainDNSRecordV2201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateDomainRequest
 
 > CreateDomainRequest201Response CreateDomainRequest(ctx).DomainRegister(domainRegister).Execute()
@@ -491,6 +566,77 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteDomainDNSRecordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDomainDNSRecordV2
+
+> DeleteDomainDNSRecordV2(ctx, fqdn, recordId).Execute()
+
+Удалить информацию о DNS-записи для домена или поддомена
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+    recordId := int32(123) // int32 | ID DNS-записи домена или поддомена.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.DomainsAPI.DeleteDomainDNSRecordV2(context.Background(), fqdn, recordId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DeleteDomainDNSRecordV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;). | 
+**recordId** | **int32** | ID DNS-записи домена или поддомена. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDomainDNSRecordV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1357,6 +1503,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateDomainDNSRecord201Response**](CreateDomainDNSRecord201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateDomainDNSRecordV2
+
+> CreateDomainDNSRecordV2201Response UpdateDomainDNSRecordV2(ctx, fqdn, recordId).CreateDnsV2(createDnsV2).Execute()
+
+Обновить информацию о DNS-записи домена или поддомена
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+    recordId := int32(123) // int32 | ID DNS-записи домена или поддомена.
+    createDnsV2 := *openapiclient.NewCreateDnsV2("Type_example", "192.168.1.0") // CreateDnsV2 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DomainsAPI.UpdateDomainDNSRecordV2(context.Background(), fqdn, recordId).CreateDnsV2(createDnsV2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.UpdateDomainDNSRecordV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateDomainDNSRecordV2`: CreateDomainDNSRecordV2201Response
+    fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.UpdateDomainDNSRecordV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;). | 
+**recordId** | **int32** | ID DNS-записи домена или поддомена. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateDomainDNSRecordV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **createDnsV2** | [**CreateDnsV2**](CreateDnsV2.md) |  | 
+
+### Return type
+
+[**CreateDomainDNSRecordV2201Response**](CreateDomainDNSRecordV2201Response.md)
 
 ### Authorization
 

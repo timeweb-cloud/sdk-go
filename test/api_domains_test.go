@@ -78,6 +78,20 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DomainsAPIService CreateDomainDNSRecordV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var fqdn string
+
+		resp, httpRes, err := apiClient.DomainsAPI.CreateDomainDNSRecordV2(context.Background(), fqdn).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DomainsAPIService CreateDomainRequest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -111,6 +125,20 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 		var recordId int32
 
 		httpRes, err := apiClient.DomainsAPI.DeleteDomainDNSRecord(context.Background(), fqdn, recordId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService DeleteDomainDNSRecordV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var fqdn string
+		var recordId int32
+
+		httpRes, err := apiClient.DomainsAPI.DeleteDomainDNSRecordV2(context.Background(), fqdn, recordId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -273,6 +301,21 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 		var recordId int32
 
 		resp, httpRes, err := apiClient.DomainsAPI.UpdateDomainDNSRecord(context.Background(), fqdn, recordId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService UpdateDomainDNSRecordV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var fqdn string
+		var recordId int32
+
+		resp, httpRes, err := apiClient.DomainsAPI.UpdateDomainDNSRecordV2(context.Background(), fqdn, recordId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
