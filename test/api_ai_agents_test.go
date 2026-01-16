@@ -100,6 +100,42 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIAgentsAPIService GetAgentsTokenPackages", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentsTokenPackages(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService GetKnowledgebasesTokenPackages", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetKnowledgebasesTokenPackages(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService GetModels", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetModels(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AIAgentsAPIService UpdateAgent", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

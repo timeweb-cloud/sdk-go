@@ -10,6 +10,9 @@ Method | HTTP request | Description
 [**GetAgent**](AIAgentsAPI.md#GetAgent) | **Get** /api/v1/cloud-ai/agents/{id} | Получение AI агента
 [**GetAgentStatistics**](AIAgentsAPI.md#GetAgentStatistics) | **Get** /api/v1/cloud-ai/agents/{id}/statistic | Получение статистики использования токенов агента
 [**GetAgents**](AIAgentsAPI.md#GetAgents) | **Get** /api/v1/cloud-ai/agents | Получение списка AI агентов
+[**GetAgentsTokenPackages**](AIAgentsAPI.md#GetAgentsTokenPackages) | **Get** /api/v1/cloud-ai/token-packages/agents | Получение списка пакетов токенов для агентов
+[**GetKnowledgebasesTokenPackages**](AIAgentsAPI.md#GetKnowledgebasesTokenPackages) | **Get** /api/v1/cloud-ai/token-packages/knowledge-bases | Получение списка пакетов токенов для баз знаний
+[**GetModels**](AIAgentsAPI.md#GetModels) | **Get** /api/v1/cloud-ai/models | Получение списка моделей
 [**UpdateAgent**](AIAgentsAPI.md#UpdateAgent) | **Patch** /api/v1/cloud-ai/agents/{id} | Обновление AI агента
 
 
@@ -411,6 +414,189 @@ Other parameters are passed through a pointer to a apiGetAgentsRequest struct vi
 ### Return type
 
 [**GetAgents200Response**](GetAgents200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAgentsTokenPackages
+
+> GetAgentsTokenPackages200Response GetAgentsTokenPackages(ctx).Execute()
+
+Получение списка пакетов токенов для агентов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AIAgentsAPI.GetAgentsTokenPackages(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.GetAgentsTokenPackages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetAgentsTokenPackages`: GetAgentsTokenPackages200Response
+    fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.GetAgentsTokenPackages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAgentsTokenPackagesRequest struct via the builder pattern
+
+
+### Return type
+
+[**GetAgentsTokenPackages200Response**](GetAgentsTokenPackages200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKnowledgebasesTokenPackages
+
+> GetAgentsTokenPackages200Response GetKnowledgebasesTokenPackages(ctx).Execute()
+
+Получение списка пакетов токенов для баз знаний
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AIAgentsAPI.GetKnowledgebasesTokenPackages(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.GetKnowledgebasesTokenPackages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKnowledgebasesTokenPackages`: GetAgentsTokenPackages200Response
+    fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.GetKnowledgebasesTokenPackages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKnowledgebasesTokenPackagesRequest struct via the builder pattern
+
+
+### Return type
+
+[**GetAgentsTokenPackages200Response**](GetAgentsTokenPackages200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetModels
+
+> GetModels200Response GetModels(ctx).Execute()
+
+Получение списка моделей
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AIAgentsAPI.GetModels(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.GetModels``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetModels`: GetModels200Response
+    fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.GetModels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetModelsRequest struct via the builder pattern
+
+
+### Return type
+
+[**GetModels200Response**](GetModels200Response.md)
 
 ### Authorization
 

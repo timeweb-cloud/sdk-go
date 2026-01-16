@@ -5,7 +5,6 @@ README.md
 api/openapi.yaml
 api_account.go
 api_ai_agents.go
-api_ai_models.go
 api_api_keys.go
 api_apps.go
 api_balancers.go
@@ -30,7 +29,6 @@ api_vpc.go
 client.go
 configuration.go
 docs/AIAgentsAPI.md
-docs/AIModelsAPI.md
 docs/APIKeysAPI.md
 docs/AccountAPI.md
 docs/AddBalancerToProject200Response.md
@@ -1075,7 +1073,6 @@ model_worker_preset_out_api.go
 response.go
 test/api_account_test.go
 test/api_ai_agents_test.go
-test/api_ai_models_test.go
 test/api_api_keys_test.go
 test/api_apps_test.go
 test/api_balancers_test.go

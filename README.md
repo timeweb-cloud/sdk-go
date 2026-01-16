@@ -229,10 +229,10 @@ Class | Method | HTTP request | Description
 *AIAgentsAPI* | [**GetAgent**](docs/AIAgentsAPI.md#getagent) | **Get** /api/v1/cloud-ai/agents/{id} | Получение AI агента
 *AIAgentsAPI* | [**GetAgentStatistics**](docs/AIAgentsAPI.md#getagentstatistics) | **Get** /api/v1/cloud-ai/agents/{id}/statistic | Получение статистики использования токенов агента
 *AIAgentsAPI* | [**GetAgents**](docs/AIAgentsAPI.md#getagents) | **Get** /api/v1/cloud-ai/agents | Получение списка AI агентов
+*AIAgentsAPI* | [**GetAgentsTokenPackages**](docs/AIAgentsAPI.md#getagentstokenpackages) | **Get** /api/v1/cloud-ai/token-packages/agents | Получение списка пакетов токенов для агентов
+*AIAgentsAPI* | [**GetKnowledgebasesTokenPackages**](docs/AIAgentsAPI.md#getknowledgebasestokenpackages) | **Get** /api/v1/cloud-ai/token-packages/knowledge-bases | Получение списка пакетов токенов для баз знаний
+*AIAgentsAPI* | [**GetModels**](docs/AIAgentsAPI.md#getmodels) | **Get** /api/v1/cloud-ai/models | Получение списка моделей
 *AIAgentsAPI* | [**UpdateAgent**](docs/AIAgentsAPI.md#updateagent) | **Patch** /api/v1/cloud-ai/agents/{id} | Обновление AI агента
-*AIModelsAPI* | [**GetAgentsTokenPackages**](docs/AIModelsAPI.md#getagentstokenpackages) | **Get** /api/v1/cloud-ai/token-packages/agents | Получение списка пакетов токенов для агентов
-*AIModelsAPI* | [**GetKnowledgebasesTokenPackages**](docs/AIModelsAPI.md#getknowledgebasestokenpackages) | **Get** /api/v1/cloud-ai/token-packages/knowledge-bases | Получение списка пакетов токенов для баз знаний
-*AIModelsAPI* | [**GetModels**](docs/AIModelsAPI.md#getmodels) | **Get** /api/v1/cloud-ai/models | Получение списка моделей
 *APIKeysAPI* | [**CreateToken**](docs/APIKeysAPI.md#createtoken) | **Post** /api/v1/auth/api-keys | Создание токена
 *APIKeysAPI* | [**DeleteToken**](docs/APIKeysAPI.md#deletetoken) | **Delete** /api/v1/auth/api-keys/{token_id} | Удалить токен
 *APIKeysAPI* | [**GetTokens**](docs/APIKeysAPI.md#gettokens) | **Get** /api/v1/auth/api-keys | Получение списка выпущенных токенов

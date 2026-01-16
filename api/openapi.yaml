@@ -200,10 +200,6 @@ tags:
     вых моделей (LLM), которые могут отвечать на вопросы пользователей, использова\
     ть базы знаний и выполнять различные задачи."
   name: AI Agents
-- description: "AI Модели — это языковые модели и модели для эмбеддингов, которые\
-    \ используются AI агентами и базами знаний для обработки запросов и генерации\
-    \ ответов."
-  name: AI Models
 - description: "Apps - Облачные приложения позволяют автоматически выполнять проце\
     сс сборки и развертывания при каждом обновлении кода в Github, Gitlab или Bitbucket.\
     \ </br></br> Подробнее об Apps – в нашей <a href='https://timeweb.cloud/docs/apps'\
@@ -46705,7 +46701,7 @@ paths:
           description: Внутренняя ошибка сервера
       summary: Получение списка моделей
       tags:
-      - AI Models
+      - AI Agents
       x-codeSamples:
       - lang: cURL
         label: cURL
@@ -46835,7 +46831,7 @@ paths:
           description: Внутренняя ошибка сервера
       summary: Получение списка пакетов токенов для агентов
       tags:
-      - AI Models
+      - AI Agents
       x-codeSamples:
       - lang: cURL
         label: cURL
@@ -46965,7 +46961,7 @@ paths:
           description: Внутренняя ошибка сервера
       summary: Получение списка пакетов токенов для баз знаний
       tags:
-      - AI Models
+      - AI Agents
       x-codeSamples:
       - lang: cURL
         label: cURL
