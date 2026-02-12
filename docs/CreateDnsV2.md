@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | Тип DNS-записи. | 
 **Value** | **string** | IPv4 адрес. | 
 **Ttl** | Pointer to **float32** | Время жизни DNS-записи в секундах. | [optional] 
+**AppId** | Pointer to **float32** | Идентификатор приложения в App Platform, к которому будет привязан домен или поддомен. | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetTtl sets Ttl field to given value.
 `func (o *CreateDnsV2) HasTtl() bool`
 
 HasTtl returns a boolean if a field has been set.
+
+### GetAppId
+
+`func (o *CreateDnsV2) GetAppId() float32`
+
+GetAppId returns the AppId field if non-nil, zero value otherwise.
+
+### GetAppIdOk
+
+`func (o *CreateDnsV2) GetAppIdOk() (*float32, bool)`
+
+GetAppIdOk returns a tuple with the AppId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppId
+
+`func (o *CreateDnsV2) SetAppId(v float32)`
+
+SetAppId sets AppId field to given value.
+
+### HasAppId
+
+`func (o *CreateDnsV2) HasAppId() bool`
+
+HasAppId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -55547,6 +55547,11 @@ components:
           description: Время жизни DNS-записи в секундах.
           example: 600
           type: number
+        app_id:
+          description: "Идентификатор приложения в App Platform, к которому будет\
+            \ привязан домен или поддомен."
+          example: 1
+          type: number
       required:
       - type
       - value

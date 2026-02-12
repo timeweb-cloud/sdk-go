@@ -26,6 +26,8 @@ type CreateDnsV2 struct {
 	Value string `json:"value"`
 	// Время жизни DNS-записи в секундах.
 	Ttl *float32 `json:"ttl,omitempty"`
+	// Идентификатор приложения в App Platform, к которому будет привязан домен или поддомен.
+	AppId *float32 `json:"app_id,omitempty"`
 }
 
 // NewCreateDnsV2 instantiates a new CreateDnsV2 object
@@ -127,6 +129,38 @@ func (o *CreateDnsV2) SetTtl(v float32) {
 	o.Ttl = &v
 }
 
+// GetAppId returns the AppId field value if set, zero value otherwise.
+func (o *CreateDnsV2) GetAppId() float32 {
+	if o == nil || IsNil(o.AppId) {
+		var ret float32
+		return ret
+	}
+	return *o.AppId
+}
+
+// GetAppIdOk returns a tuple with the AppId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDnsV2) GetAppIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.AppId) {
+		return nil, false
+	}
+	return o.AppId, true
+}
+
+// HasAppId returns a boolean if a field has been set.
+func (o *CreateDnsV2) HasAppId() bool {
+	if o != nil && !IsNil(o.AppId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAppId gets a reference to the given float32 and assigns it to the AppId field.
+func (o *CreateDnsV2) SetAppId(v float32) {
+	o.AppId = &v
+}
+
 func (o CreateDnsV2) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -141,6 +175,9 @@ func (o CreateDnsV2) ToMap() (map[string]interface{}, error) {
 	toSerialize["value"] = o.Value
 	if !IsNil(o.Ttl) {
 		toSerialize["ttl"] = o.Ttl
+	}
+	if !IsNil(o.AppId) {
+		toSerialize["app_id"] = o.AppId
 	}
 	return toSerialize, nil
 }
