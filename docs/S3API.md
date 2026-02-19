@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**CreateStorage**](S3API.md#CreateStorage) | **Post** /api/v1/storages/buckets | Создание хранилища
 [**DeleteStorage**](S3API.md#DeleteStorage) | **Delete** /api/v1/storages/buckets/{bucket_id} | Удаление хранилища на аккаунте
 [**DeleteStorageSubdomains**](S3API.md#DeleteStorageSubdomains) | **Delete** /api/v1/storages/buckets/{bucket_id}/subdomains | Удаление поддоменов хранилища
+[**GetStorage**](S3API.md#GetStorage) | **Get** /api/v1/storages/buckets/{bucket_id} | Получение хранилища по ID
 [**GetStorageSubdomains**](S3API.md#GetStorageSubdomains) | **Get** /api/v1/storages/buckets/{bucket_id}/subdomains | Получение списка поддоменов хранилища
 [**GetStorageTransferStatus**](S3API.md#GetStorageTransferStatus) | **Get** /api/v1/storages/buckets/{bucket_id}/transfer-status | Получение статуса переноса хранилища от стороннего S3 в Timeweb Cloud
 [**GetStorageUsers**](S3API.md#GetStorageUsers) | **Get** /api/v1/storages/users | Получение списка пользователей хранилищ аккаунта
@@ -361,6 +362,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorage
+
+> CreateStorage201Response GetStorage(ctx, bucketId).Execute()
+
+Получение хранилища по ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    bucketId := int32(1051) // int32 | ID хранилища.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.S3API.GetStorage(context.Background(), bucketId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `S3API.GetStorage``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorage`: CreateStorage201Response
+    fmt.Fprintf(os.Stdout, "Response from `S3API.GetStorage`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**bucketId** | **int32** | ID хранилища. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CreateStorage201Response**](CreateStorage201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

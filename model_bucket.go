@@ -26,7 +26,7 @@ type Bucket struct {
 	// Удобочитаемое имя, установленное для хранилища.
 	Name string `json:"name"`
 	// Комментарий к хранилищу.
-	Description *string `json:"description,omitempty"`
+	Description string `json:"description"`
 	DiskStats BucketDiskStats `json:"disk_stats"`
 	// Тип хранилища.
 	Type string `json:"type"`
@@ -56,17 +56,20 @@ type Bucket struct {
 	ProjectId float32 `json:"project_id"`
 	// ID тарифа.
 	RateId float32 `json:"rate_id"`
-	WebsiteConfig BucketWebsiteConfig `json:"website_config"`
+	WebsiteConfig NullableBucketWebsiteConfig `json:"website_config"`
+	// Разрешено ли автоматическое повышение тарифа.
+	IsAllowAutoUpgrade bool `json:"is_allow_auto_upgrade"`
 }
 
 // NewBucket instantiates a new Bucket object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, projectId float32, rateId float32, websiteConfig BucketWebsiteConfig) *Bucket {
+func NewBucket(id float32, name string, description string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, projectId float32, rateId float32, websiteConfig NullableBucketWebsiteConfig, isAllowAutoUpgrade bool) *Bucket {
 	this := Bucket{}
 	this.Id = id
 	this.Name = name
+	this.Description = description
 	this.DiskStats = diskStats
 	this.Type = type_
 	this.PresetId = presetId
@@ -83,6 +86,7 @@ func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string,
 	this.ProjectId = projectId
 	this.RateId = rateId
 	this.WebsiteConfig = websiteConfig
+	this.IsAllowAutoUpgrade = isAllowAutoUpgrade
 	return &this
 }
 
@@ -142,36 +146,28 @@ func (o *Bucket) SetName(v string) {
 	o.Name = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *Bucket) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *Bucket) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *Bucket) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *Bucket) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
 // GetDiskStats returns the DiskStats field value
@@ -543,27 +539,53 @@ func (o *Bucket) SetRateId(v float32) {
 }
 
 // GetWebsiteConfig returns the WebsiteConfig field value
+// If the value is explicit nil, the zero value for BucketWebsiteConfig will be returned
 func (o *Bucket) GetWebsiteConfig() BucketWebsiteConfig {
-	if o == nil {
+	if o == nil || o.WebsiteConfig.Get() == nil {
 		var ret BucketWebsiteConfig
 		return ret
 	}
 
-	return o.WebsiteConfig
+	return *o.WebsiteConfig.Get()
 }
 
 // GetWebsiteConfigOk returns a tuple with the WebsiteConfig field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Bucket) GetWebsiteConfigOk() (*BucketWebsiteConfig, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.WebsiteConfig, true
+	return o.WebsiteConfig.Get(), o.WebsiteConfig.IsSet()
 }
 
 // SetWebsiteConfig sets field value
 func (o *Bucket) SetWebsiteConfig(v BucketWebsiteConfig) {
-	o.WebsiteConfig = v
+	o.WebsiteConfig.Set(&v)
+}
+
+// GetIsAllowAutoUpgrade returns the IsAllowAutoUpgrade field value
+func (o *Bucket) GetIsAllowAutoUpgrade() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsAllowAutoUpgrade
+}
+
+// GetIsAllowAutoUpgradeOk returns a tuple with the IsAllowAutoUpgrade field value
+// and a boolean to check if the value has been set.
+func (o *Bucket) GetIsAllowAutoUpgradeOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsAllowAutoUpgrade, true
+}
+
+// SetIsAllowAutoUpgrade sets field value
+func (o *Bucket) SetIsAllowAutoUpgrade(v bool) {
+	o.IsAllowAutoUpgrade = v
 }
 
 func (o Bucket) MarshalJSON() ([]byte, error) {
@@ -578,9 +600,7 @@ func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
+	toSerialize["description"] = o.Description
 	toSerialize["disk_stats"] = o.DiskStats
 	toSerialize["type"] = o.Type
 	toSerialize["preset_id"] = o.PresetId.Get()
@@ -596,7 +616,8 @@ func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize["storage_class"] = o.StorageClass
 	toSerialize["project_id"] = o.ProjectId
 	toSerialize["rate_id"] = o.RateId
-	toSerialize["website_config"] = o.WebsiteConfig
+	toSerialize["website_config"] = o.WebsiteConfig.Get()
+	toSerialize["is_allow_auto_upgrade"] = o.IsAllowAutoUpgrade
 	return toSerialize, nil
 }
 

@@ -473,6 +473,7 @@ Class | Method | HTTP request | Description
 *S3API* | [**CreateStorage**](docs/S3API.md#createstorage) | **Post** /api/v1/storages/buckets | Создание хранилища
 *S3API* | [**DeleteStorage**](docs/S3API.md#deletestorage) | **Delete** /api/v1/storages/buckets/{bucket_id} | Удаление хранилища на аккаунте
 *S3API* | [**DeleteStorageSubdomains**](docs/S3API.md#deletestoragesubdomains) | **Delete** /api/v1/storages/buckets/{bucket_id}/subdomains | Удаление поддоменов хранилища
+*S3API* | [**GetStorage**](docs/S3API.md#getstorage) | **Get** /api/v1/storages/buckets/{bucket_id} | Получение хранилища по ID
 *S3API* | [**GetStorageSubdomains**](docs/S3API.md#getstoragesubdomains) | **Get** /api/v1/storages/buckets/{bucket_id}/subdomains | Получение списка поддоменов хранилища
 *S3API* | [**GetStorageTransferStatus**](docs/S3API.md#getstoragetransferstatus) | **Get** /api/v1/storages/buckets/{bucket_id}/transfer-status | Получение статуса переноса хранилища от стороннего S3 в Timeweb Cloud
 *S3API* | [**GetStorageUsers**](docs/S3API.md#getstorageusers) | **Get** /api/v1/storages/users | Получение списка пользователей хранилищ аккаунта

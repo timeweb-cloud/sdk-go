@@ -26653,6 +26653,142 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+    get:
+      description: "Чтобы получить хранилище по ID, отправьте GET-запрос на `/api/v1/storages/buckets/{bucket_id}`."
+      operationId: getStorage
+      parameters:
+      - description: ID хранилища.
+        explode: false
+        in: path
+        name: bucket_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createStorage_201_response'
+          description: Объект JSON c ключом `bucket`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение хранилища по ID
+      tags:
+      - S3
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/storages/buckets/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/storages/buckets/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/storages/buckets/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/storages/buckets/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/storages/buckets/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/storages/buckets/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/storages/buckets/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
     patch:
       description: "Чтобы изменить хранилище, отправьте PATCH-запрос на `/api/v1/storages/buckets/{bucket_id}`."
       operationId: updateStorage
@@ -53755,6 +53891,7 @@ components:
         storage_class: cold
         moved_in_quarantine_at: 2025-01-01T12:00:00Z
         rate_id: 1
+        is_allow_auto_upgrade: false
         description: Bucket of awesome cats
         website_config:
           error_pages:
@@ -53773,8 +53910,9 @@ components:
         disk_stats:
           size: 10485760
           used: 486.11328125
+          is_unlimited: false
         access_key: access_key
-        name: Cute Quail
+        name: c372805f-72c7-416c-918d-ac78c2dde306
         configurator_id: 55
         location: ru-1
         id: 1
@@ -53788,7 +53926,7 @@ components:
           type: number
         name:
           description: "Удобочитаемое имя, установленное для хранилища."
-          example: Cute Quail
+          example: c372805f-72c7-416c-918d-ac78c2dde306
           type: string
         description:
           description: Комментарий к хранилищу.
@@ -53869,13 +54007,19 @@ components:
           type: number
         website_config:
           $ref: '#/components/schemas/bucket_website_config'
+        is_allow_auto_upgrade:
+          description: Разрешено ли автоматическое повышение тарифа.
+          example: false
+          type: boolean
       required:
       - access_key
       - avatar_link
       - configurator_id
+      - description
       - disk_stats
       - hostname
       - id
+      - is_allow_auto_upgrade
       - location
       - moved_in_quarantine_at
       - name
@@ -61111,6 +61255,7 @@ components:
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
           rate_id: 1
+          is_allow_auto_upgrade: false
           description: Bucket of awesome cats
           website_config:
             error_pages:
@@ -61129,8 +61274,9 @@ components:
           disk_stats:
             size: 10485760
             used: 486.11328125
+            is_unlimited: false
           access_key: access_key
-          name: Cute Quail
+          name: c372805f-72c7-416c-918d-ac78c2dde306
           configurator_id: 55
           location: ru-1
           id: 1
@@ -61139,6 +61285,7 @@ components:
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
           rate_id: 1
+          is_allow_auto_upgrade: false
           description: Bucket of awesome cats
           website_config:
             error_pages:
@@ -61157,8 +61304,9 @@ components:
           disk_stats:
             size: 10485760
             used: 486.11328125
+            is_unlimited: false
           access_key: access_key
-          name: Cute Quail
+          name: c372805f-72c7-416c-918d-ac78c2dde306
           configurator_id: 55
           location: ru-1
           id: 1
@@ -62051,6 +62199,7 @@ components:
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
           rate_id: 1
+          is_allow_auto_upgrade: false
           description: Bucket of awesome cats
           website_config:
             error_pages:
@@ -62069,8 +62218,9 @@ components:
           disk_stats:
             size: 10485760
             used: 486.11328125
+            is_unlimited: false
           access_key: access_key
-          name: Cute Quail
+          name: c372805f-72c7-416c-918d-ac78c2dde306
           configurator_id: 55
           location: ru-1
           id: 1
@@ -62079,6 +62229,7 @@ components:
         - storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
           rate_id: 1
+          is_allow_auto_upgrade: false
           description: Bucket of awesome cats
           website_config:
             error_pages:
@@ -62097,8 +62248,9 @@ components:
           disk_stats:
             size: 10485760
             used: 486.11328125
+            is_unlimited: false
           access_key: access_key
-          name: Cute Quail
+          name: c372805f-72c7-416c-918d-ac78c2dde306
           configurator_id: 55
           location: ru-1
           id: 1
@@ -62287,6 +62439,7 @@ components:
           storage_class: cold
           moved_in_quarantine_at: 2025-01-01T12:00:00Z
           rate_id: 1
+          is_allow_auto_upgrade: false
           description: Bucket of awesome cats
           website_config:
             error_pages:
@@ -62305,8 +62458,9 @@ components:
           disk_stats:
             size: 10485760
             used: 486.11328125
+            is_unlimited: false
           access_key: access_key
-          name: Cute Quail
+          name: c372805f-72c7-416c-918d-ac78c2dde306
           configurator_id: 55
           location: ru-1
           id: 1
@@ -66469,16 +66623,22 @@ components:
       example:
         size: 10485760
         used: 486.11328125
+        is_unlimited: false
       properties:
         size:
-          description: Размер (в Кб) диска хранилища.
+          description: Размер (в Кб) диска хранилища включенного в тариф.
           example: 10485760
           type: number
         used:
           description: Размер (в Кб) использованного пространства диска хранилища.
           example: 486.11328125
           type: number
+        is_unlimited:
+          description: Признак безлимитного размера хранилища.
+          example: false
+          type: boolean
       required:
+      - is_unlimited
       - size
       - used
       type: object
@@ -66492,7 +66652,7 @@ components:
           example: 404
           type: number
         document:
-          description: Страница сайта.
+          description: Страница сайта.
           example: 404.html
           type: string
       type: object
@@ -66506,6 +66666,7 @@ components:
           document: 404.html
         index_page: index.html
         enabled: true
+      nullable: true
       properties:
         enabled:
           description: Включено ли сайтовое хранилище.

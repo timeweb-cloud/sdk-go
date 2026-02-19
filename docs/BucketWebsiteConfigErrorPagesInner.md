@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Code** | Pointer to **float32** | Код ошибки. | [optional] 
-**Document** | Pointer to **string** | Страница сайта. | [optional] 
+**Document** | Pointer to **string** | Страница сайта. | [optional] 
 
 ## Methods
 

@@ -4,14 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Size** | **float32** | Размер (в Кб) диска хранилища. | 
+**Size** | **float32** | Размер (в Кб) диска хранилища включенного в тариф. | 
 **Used** | **float32** | Размер (в Кб) использованного пространства диска хранилища. | 
+**IsUnlimited** | **bool** | Признак безлимитного размера хранилища. | 
 
 ## Methods
 
 ### NewBucketDiskStats
 
-`func NewBucketDiskStats(size float32, used float32, ) *BucketDiskStats`
+`func NewBucketDiskStats(size float32, used float32, isUnlimited bool, ) *BucketDiskStats`
 
 NewBucketDiskStats instantiates a new BucketDiskStats object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *BucketDiskStats) SetUsed(v float32)`
 
 SetUsed sets Used field to given value.
+
+
+### GetIsUnlimited
+
+`func (o *BucketDiskStats) GetIsUnlimited() bool`
+
+GetIsUnlimited returns the IsUnlimited field if non-nil, zero value otherwise.
+
+### GetIsUnlimitedOk
+
+`func (o *BucketDiskStats) GetIsUnlimitedOk() (*bool, bool)`
+
+GetIsUnlimitedOk returns a tuple with the IsUnlimited field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUnlimited
+
+`func (o *BucketDiskStats) SetIsUnlimited(v bool)`
+
+SetIsUnlimited sets IsUnlimited field to given value.
 
 
 

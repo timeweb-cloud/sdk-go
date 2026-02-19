@@ -87,6 +87,20 @@ func Test_openapi_S3APIService(t *testing.T) {
 
 	})
 
+	t.Run("Test S3APIService GetStorage", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var bucketId int32
+
+		resp, httpRes, err := apiClient.S3API.GetStorage(context.Background(), bucketId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test S3APIService GetStorageSubdomains", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

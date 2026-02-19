@@ -20,20 +20,23 @@ var _ MappedNullable = &BucketDiskStats{}
 
 // BucketDiskStats Статистика использования диска хранилища.
 type BucketDiskStats struct {
-	// Размер (в Кб) диска хранилища.
+	// Размер (в Кб) диска хранилища включенного в тариф.
 	Size float32 `json:"size"`
 	// Размер (в Кб) использованного пространства диска хранилища.
 	Used float32 `json:"used"`
+	// Признак безлимитного размера хранилища.
+	IsUnlimited bool `json:"is_unlimited"`
 }
 
 // NewBucketDiskStats instantiates a new BucketDiskStats object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBucketDiskStats(size float32, used float32) *BucketDiskStats {
+func NewBucketDiskStats(size float32, used float32, isUnlimited bool) *BucketDiskStats {
 	this := BucketDiskStats{}
 	this.Size = size
 	this.Used = used
+	this.IsUnlimited = isUnlimited
 	return &this
 }
 
@@ -93,6 +96,30 @@ func (o *BucketDiskStats) SetUsed(v float32) {
 	o.Used = v
 }
 
+// GetIsUnlimited returns the IsUnlimited field value
+func (o *BucketDiskStats) GetIsUnlimited() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsUnlimited
+}
+
+// GetIsUnlimitedOk returns a tuple with the IsUnlimited field value
+// and a boolean to check if the value has been set.
+func (o *BucketDiskStats) GetIsUnlimitedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsUnlimited, true
+}
+
+// SetIsUnlimited sets field value
+func (o *BucketDiskStats) SetIsUnlimited(v bool) {
+	o.IsUnlimited = v
+}
+
 func (o BucketDiskStats) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,6 +132,7 @@ func (o BucketDiskStats) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["size"] = o.Size
 	toSerialize["used"] = o.Used
+	toSerialize["is_unlimited"] = o.IsUnlimited
 	return toSerialize, nil
 }
 

@@ -22,7 +22,7 @@ var _ MappedNullable = &BucketWebsiteConfigErrorPagesInner{}
 type BucketWebsiteConfigErrorPagesInner struct {
 	// Код ошибки.
 	Code *float32 `json:"code,omitempty"`
-	// Страница сайта.
+	// Страница сайта.
 	Document *string `json:"document,omitempty"`
 }
 

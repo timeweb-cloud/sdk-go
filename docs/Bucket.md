@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **float32** | ID для каждого экземпляра хранилища. Автоматически генерируется при создании. | 
 **Name** | **string** | Удобочитаемое имя, установленное для хранилища. | 
-**Description** | Pointer to **string** | Комментарий к хранилищу. | [optional] 
+**Description** | **string** | Комментарий к хранилищу. | 
 **DiskStats** | [**BucketDiskStats**](BucketDiskStats.md) |  | 
 **Type** | **string** | Тип хранилища. | 
 **PresetId** | **NullableFloat32** | ID тарифа хранилища. | 
@@ -22,13 +22,14 @@ Name | Type | Description | Notes
 **StorageClass** | **string** | Класс хранилища. | 
 **ProjectId** | **float32** | ID проекта. | 
 **RateId** | **float32** | ID тарифа. | 
-**WebsiteConfig** | [**BucketWebsiteConfig**](BucketWebsiteConfig.md) |  | 
+**WebsiteConfig** | [**NullableBucketWebsiteConfig**](BucketWebsiteConfig.md) |  | 
+**IsAllowAutoUpgrade** | **bool** | Разрешено ли автоматическое повышение тарифа. | 
 
 ## Methods
 
 ### NewBucket
 
-`func NewBucket(id float32, name string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, projectId float32, rateId float32, websiteConfig BucketWebsiteConfig, ) *Bucket`
+`func NewBucket(id float32, name string, description string, diskStats BucketDiskStats, type_ string, presetId NullableFloat32, configuratorId NullableFloat32, avatarLink NullableString, status string, objectAmount float32, location string, hostname string, accessKey string, secretKey string, movedInQuarantineAt NullableTime, storageClass string, projectId float32, rateId float32, websiteConfig NullableBucketWebsiteConfig, isAllowAutoUpgrade bool, ) *Bucket`
 
 NewBucket instantiates a new Bucket object
 This constructor will assign default values to properties that have it defined,
@@ -102,11 +103,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *Bucket) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### GetDiskStats
 
@@ -466,6 +462,36 @@ and a boolean to check if the value has been set.
 `func (o *Bucket) SetWebsiteConfig(v BucketWebsiteConfig)`
 
 SetWebsiteConfig sets WebsiteConfig field to given value.
+
+
+### SetWebsiteConfigNil
+
+`func (o *Bucket) SetWebsiteConfigNil(b bool)`
+
+ SetWebsiteConfigNil sets the value for WebsiteConfig to be an explicit nil
+
+### UnsetWebsiteConfig
+`func (o *Bucket) UnsetWebsiteConfig()`
+
+UnsetWebsiteConfig ensures that no value is present for WebsiteConfig, not even an explicit nil
+### GetIsAllowAutoUpgrade
+
+`func (o *Bucket) GetIsAllowAutoUpgrade() bool`
+
+GetIsAllowAutoUpgrade returns the IsAllowAutoUpgrade field if non-nil, zero value otherwise.
+
+### GetIsAllowAutoUpgradeOk
+
+`func (o *Bucket) GetIsAllowAutoUpgradeOk() (*bool, bool)`
+
+GetIsAllowAutoUpgradeOk returns a tuple with the IsAllowAutoUpgrade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAllowAutoUpgrade
+
+`func (o *Bucket) SetIsAllowAutoUpgrade(v bool)`
+
+SetIsAllowAutoUpgrade sets IsAllowAutoUpgrade field to given value.
 
 
 
