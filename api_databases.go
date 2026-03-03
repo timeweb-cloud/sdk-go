@@ -4051,6 +4051,13 @@ func (a *DatabasesAPIService) GetDatabasesExecute(r ApiGetDatabasesRequest) (*Ge
 type ApiGetDatabasesPresetsRequest struct {
 	ctx context.Context
 	ApiService *DatabasesAPIService
+	dbId *int32
+}
+
+// ID базы данных
+func (r ApiGetDatabasesPresetsRequest) DbId(dbId int32) ApiGetDatabasesPresetsRequest {
+	r.dbId = &dbId
+	return r
 }
 
 func (r ApiGetDatabasesPresetsRequest) Execute() (*GetDatabasesPresets200Response, *http.Response, error) {
@@ -4095,6 +4102,9 @@ func (a *DatabasesAPIService) GetDatabasesPresetsExecute(r ApiGetDatabasesPreset
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.dbId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "db_id", r.dbId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

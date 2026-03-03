@@ -1649,7 +1649,7 @@ Name | Type | Description  | Notes
 
 ## GetDatabasesPresets
 
-> GetDatabasesPresets200Response GetDatabasesPresets(ctx).Execute()
+> GetDatabasesPresets200Response GetDatabasesPresets(ctx).DbId(dbId).Execute()
 
 Получение списка тарифов для баз данных
 
@@ -1668,10 +1668,11 @@ import (
 )
 
 func main() {
+    dbId := int32(56) // int32 | ID базы данных (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DatabasesAPI.GetDatabasesPresets(context.Background()).Execute()
+    resp, r, err := apiClient.DatabasesAPI.GetDatabasesPresets(context.Background()).DbId(dbId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabasesPresets``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1683,12 +1684,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetDatabasesPresetsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dbId** | **int32** | ID базы данных | 
 
 ### Return type
 

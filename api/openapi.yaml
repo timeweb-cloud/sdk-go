@@ -11087,6 +11087,15 @@ paths:
 
          Тело ответа будет представлять собой объект JSON с ключом `databases_presets`.
       operationId: getDatabasesPresets
+      parameters:
+      - description: ID базы данных
+        explode: true
+        in: query
+        name: db_id
+        required: false
+        schema:
+          type: integer
+        style: form
       responses:
         "200":
           content:
