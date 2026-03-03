@@ -313,7 +313,7 @@ Class | Method | HTTP request | Description
 *DatabasesAPI* | [**GetDatabaseUser**](docs/DatabasesAPI.md#getdatabaseuser) | **Get** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Получение пользователя базы данных
 *DatabasesAPI* | [**GetDatabaseUsers**](docs/DatabasesAPI.md#getdatabaseusers) | **Get** /api/v1/databases/{db_cluster_id}/admins | Получение списка пользователей базы данных
 *DatabasesAPI* | [**GetDatabases**](docs/DatabasesAPI.md#getdatabases) | **Get** /api/v1/dbs | Получение списка всех баз данных
-*DatabasesAPI* | [**GetDatabasesPresets**](docs/DatabasesAPI.md#getdatabasespresets) | **Get** /api/v1/presets/dbs | Получение списка тарифов для баз данных
+*DatabasesAPI* | [**GetDatabasesPresets**](docs/DatabasesAPI.md#getdatabasespresets) | **Get** /api/v2/presets/dbs | Получение списка тарифов для баз данных
 *DatabasesAPI* | [**RestoreDatabaseFromBackup**](docs/DatabasesAPI.md#restoredatabasefrombackup) | **Put** /api/v1/dbs/{db_id}/backups/{backup_id} | Восстановление базы данных из бэкапа
 *DatabasesAPI* | [**UpdateDatabase**](docs/DatabasesAPI.md#updatedatabase) | **Patch** /api/v1/dbs/{db_id} | Обновление базы данных
 *DatabasesAPI* | [**UpdateDatabaseAutoBackupsSettings**](docs/DatabasesAPI.md#updatedatabaseautobackupssettings) | **Patch** /api/v1/dbs/{db_id}/auto-backups | Изменение настроек автобэкапов базы данных

@@ -4060,7 +4060,7 @@ func (r ApiGetDatabasesPresetsRequest) Execute() (*GetDatabasesPresets200Respons
 /*
 GetDatabasesPresets Получение списка тарифов для баз данных
 
-Чтобы получить список тарифов для баз данных, отправьте GET-запрос на `/api/v1/presets/dbs`.
+Чтобы получить список тарифов для баз данных, отправьте GET-запрос на `/api/v2/presets/dbs`.
 
  Тело ответа будет представлять собой объект JSON с ключом `databases_presets`.
 
@@ -4089,7 +4089,7 @@ func (a *DatabasesAPIService) GetDatabasesPresetsExecute(r ApiGetDatabasesPreset
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/presets/dbs"
+	localVarPath := localBasePath + "/api/v2/presets/dbs"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -27,7 +27,7 @@ Method | HTTP request | Description
 [**GetDatabaseUser**](DatabasesAPI.md#GetDatabaseUser) | **Get** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Получение пользователя базы данных
 [**GetDatabaseUsers**](DatabasesAPI.md#GetDatabaseUsers) | **Get** /api/v1/databases/{db_cluster_id}/admins | Получение списка пользователей базы данных
 [**GetDatabases**](DatabasesAPI.md#GetDatabases) | **Get** /api/v1/dbs | Получение списка всех баз данных
-[**GetDatabasesPresets**](DatabasesAPI.md#GetDatabasesPresets) | **Get** /api/v1/presets/dbs | Получение списка тарифов для баз данных
+[**GetDatabasesPresets**](DatabasesAPI.md#GetDatabasesPresets) | **Get** /api/v2/presets/dbs | Получение списка тарифов для баз данных
 [**RestoreDatabaseFromBackup**](DatabasesAPI.md#RestoreDatabaseFromBackup) | **Put** /api/v1/dbs/{db_id}/backups/{backup_id} | Восстановление базы данных из бэкапа
 [**UpdateDatabase**](DatabasesAPI.md#UpdateDatabase) | **Patch** /api/v1/dbs/{db_id} | Обновление базы данных
 [**UpdateDatabaseAutoBackupsSettings**](DatabasesAPI.md#UpdateDatabaseAutoBackupsSettings) | **Patch** /api/v1/dbs/{db_id}/auto-backups | Изменение настроек автобэкапов базы данных
