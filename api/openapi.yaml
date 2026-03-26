@@ -58339,6 +58339,7 @@ components:
     model:
       description: Модель AI
       example:
+        is_deprecated: false
         name: gpt-4o
         provider_id: 1
         params_info:
@@ -58354,8 +58355,10 @@ components:
             max: 128000
             default: 4096
             description: Максимальное количество токенов в выводе
+        is_reasoning: false
         id: 1
         type: llm
+        public_name: GPT 4o
         version: 2024-08-06
       properties:
         id:
@@ -58370,6 +58373,10 @@ components:
           description: Название модели
           example: gpt-4o
           type: string
+        public_name:
+          description: Публичное имя модели
+          example: GPT 4o
+          type: string
         type:
           description: "Тип модели (llm - языковая модель, embedding - модель для\
             \ эмбеддингов)"
@@ -58378,6 +58385,14 @@ components:
           - embedding
           example: llm
           type: string
+        is_deprecated:
+          description: "Признак, что модель устарела"
+          example: false
+          type: boolean
+        is_reasoning:
+          description: Признак поддержки режима рассуждения
+          example: false
+          type: boolean
         version:
           description: Версия модели
           example: 2024-08-06
@@ -58386,8 +58401,11 @@ components:
           $ref: '#/components/schemas/model_params_info'
       required:
       - id
+      - is_deprecated
+      - is_reasoning
       - name
       - provider_id
+      - public_name
       - type
       - version
       type: object
@@ -65335,7 +65353,8 @@ components:
     getModels_200_response:
       example:
         models:
-        - name: gpt-4o
+        - is_deprecated: false
+          name: gpt-4o
           provider_id: 1
           params_info:
             temperature:
@@ -65350,10 +65369,13 @@ components:
               max: 128000
               default: 4096
               description: Максимальное количество токенов в выводе
+          is_reasoning: false
           id: 1
           type: llm
+          public_name: GPT 4o
           version: 2024-08-06
-        - name: gpt-4o
+        - is_deprecated: false
+          name: gpt-4o
           provider_id: 1
           params_info:
             temperature:
@@ -65368,8 +65390,10 @@ components:
               max: 128000
               default: 4096
               description: Максимальное количество токенов в выводе
+          is_reasoning: false
           id: 1
           type: llm
+          public_name: GPT 4o
           version: 2024-08-06
         meta:
           total: 10

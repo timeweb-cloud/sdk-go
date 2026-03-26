@@ -7,7 +7,10 @@ Name | Type | Description | Notes
 **Id** | **float32** | Уникальный идентификатор модели | 
 **ProviderId** | **float32** | ID провайдера, который предоставляет модель | 
 **Name** | **string** | Название модели | 
+**PublicName** | **string** | Публичное имя модели | 
 **Type** | **string** | Тип модели (llm - языковая модель, embedding - модель для эмбеддингов) | 
+**IsDeprecated** | **bool** | Признак, что модель устарела | 
+**IsReasoning** | **bool** | Признак поддержки режима рассуждения | 
 **Version** | **string** | Версия модели | 
 **ParamsInfo** | Pointer to [**NullableModelParamsInfo**](ModelParamsInfo.md) |  | [optional] 
 
@@ -15,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewModel
 
-`func NewModel(id float32, providerId float32, name string, type_ string, version string, ) *Model`
+`func NewModel(id float32, providerId float32, name string, publicName string, type_ string, isDeprecated bool, isReasoning bool, version string, ) *Model`
 
 NewModel instantiates a new Model object
 This constructor will assign default values to properties that have it defined,
@@ -90,6 +93,26 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
+### GetPublicName
+
+`func (o *Model) GetPublicName() string`
+
+GetPublicName returns the PublicName field if non-nil, zero value otherwise.
+
+### GetPublicNameOk
+
+`func (o *Model) GetPublicNameOk() (*string, bool)`
+
+GetPublicNameOk returns a tuple with the PublicName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPublicName
+
+`func (o *Model) SetPublicName(v string)`
+
+SetPublicName sets PublicName field to given value.
+
+
 ### GetType
 
 `func (o *Model) GetType() string`
@@ -108,6 +131,46 @@ and a boolean to check if the value has been set.
 `func (o *Model) SetType(v string)`
 
 SetType sets Type field to given value.
+
+
+### GetIsDeprecated
+
+`func (o *Model) GetIsDeprecated() bool`
+
+GetIsDeprecated returns the IsDeprecated field if non-nil, zero value otherwise.
+
+### GetIsDeprecatedOk
+
+`func (o *Model) GetIsDeprecatedOk() (*bool, bool)`
+
+GetIsDeprecatedOk returns a tuple with the IsDeprecated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeprecated
+
+`func (o *Model) SetIsDeprecated(v bool)`
+
+SetIsDeprecated sets IsDeprecated field to given value.
+
+
+### GetIsReasoning
+
+`func (o *Model) GetIsReasoning() bool`
+
+GetIsReasoning returns the IsReasoning field if non-nil, zero value otherwise.
+
+### GetIsReasoningOk
+
+`func (o *Model) GetIsReasoningOk() (*bool, bool)`
+
+GetIsReasoningOk returns a tuple with the IsReasoning field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsReasoning
+
+`func (o *Model) SetIsReasoning(v bool)`
+
+SetIsReasoning sets IsReasoning field to given value.
 
 
 ### GetVersion

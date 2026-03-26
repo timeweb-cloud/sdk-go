@@ -26,8 +26,14 @@ type Model struct {
 	ProviderId float32 `json:"provider_id"`
 	// Название модели
 	Name string `json:"name"`
+	// Публичное имя модели
+	PublicName string `json:"public_name"`
 	// Тип модели (llm - языковая модель, embedding - модель для эмбеддингов)
 	Type string `json:"type"`
+	// Признак, что модель устарела
+	IsDeprecated bool `json:"is_deprecated"`
+	// Признак поддержки режима рассуждения
+	IsReasoning bool `json:"is_reasoning"`
 	// Версия модели
 	Version string `json:"version"`
 	ParamsInfo NullableModelParamsInfo `json:"params_info,omitempty"`
@@ -37,12 +43,15 @@ type Model struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModel(id float32, providerId float32, name string, type_ string, version string) *Model {
+func NewModel(id float32, providerId float32, name string, publicName string, type_ string, isDeprecated bool, isReasoning bool, version string) *Model {
 	this := Model{}
 	this.Id = id
 	this.ProviderId = providerId
 	this.Name = name
+	this.PublicName = publicName
 	this.Type = type_
+	this.IsDeprecated = isDeprecated
+	this.IsReasoning = isReasoning
 	this.Version = version
 	return &this
 }
@@ -127,6 +136,30 @@ func (o *Model) SetName(v string) {
 	o.Name = v
 }
 
+// GetPublicName returns the PublicName field value
+func (o *Model) GetPublicName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.PublicName
+}
+
+// GetPublicNameOk returns a tuple with the PublicName field value
+// and a boolean to check if the value has been set.
+func (o *Model) GetPublicNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PublicName, true
+}
+
+// SetPublicName sets field value
+func (o *Model) SetPublicName(v string) {
+	o.PublicName = v
+}
+
 // GetType returns the Type field value
 func (o *Model) GetType() string {
 	if o == nil {
@@ -149,6 +182,54 @@ func (o *Model) GetTypeOk() (*string, bool) {
 // SetType sets field value
 func (o *Model) SetType(v string) {
 	o.Type = v
+}
+
+// GetIsDeprecated returns the IsDeprecated field value
+func (o *Model) GetIsDeprecated() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsDeprecated
+}
+
+// GetIsDeprecatedOk returns a tuple with the IsDeprecated field value
+// and a boolean to check if the value has been set.
+func (o *Model) GetIsDeprecatedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsDeprecated, true
+}
+
+// SetIsDeprecated sets field value
+func (o *Model) SetIsDeprecated(v bool) {
+	o.IsDeprecated = v
+}
+
+// GetIsReasoning returns the IsReasoning field value
+func (o *Model) GetIsReasoning() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsReasoning
+}
+
+// GetIsReasoningOk returns a tuple with the IsReasoning field value
+// and a boolean to check if the value has been set.
+func (o *Model) GetIsReasoningOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsReasoning, true
+}
+
+// SetIsReasoning sets field value
+func (o *Model) SetIsReasoning(v bool) {
+	o.IsReasoning = v
 }
 
 // GetVersion returns the Version field value
@@ -230,7 +311,10 @@ func (o Model) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["provider_id"] = o.ProviderId
 	toSerialize["name"] = o.Name
+	toSerialize["public_name"] = o.PublicName
 	toSerialize["type"] = o.Type
+	toSerialize["is_deprecated"] = o.IsDeprecated
+	toSerialize["is_reasoning"] = o.IsReasoning
 	toSerialize["version"] = o.Version
 	if o.ParamsInfo.IsSet() {
 		toSerialize["params_info"] = o.ParamsInfo.Get()
