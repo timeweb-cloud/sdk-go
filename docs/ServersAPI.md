@@ -33,6 +33,7 @@ Method | HTTP request | Description
 [**PerformActionOnBackup**](ServersAPI.md#PerformActionOnBackup) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/action | Выполнение действия над бэкапом диска сервера
 [**PerformActionOnServer**](ServersAPI.md#PerformActionOnServer) | **Post** /api/v1/servers/{server_id}/action | Выполнение действия над сервером
 [**RebootServer**](ServersAPI.md#RebootServer) | **Post** /api/v1/servers/{server_id}/reboot | Перезагрузка сервера
+[**RebootServerHard**](ServersAPI.md#RebootServerHard) | **Post** /api/v1/servers/{server_id}/hard-reboot | Принудительная перезагрузка сервера
 [**ResetServerPassword**](ServersAPI.md#ResetServerPassword) | **Post** /api/v1/servers/{server_id}/reset-password | Сброс пароля сервера
 [**ShutdownServer**](ServersAPI.md#ShutdownServer) | **Post** /api/v1/servers/{server_id}/shutdown | Выключение сервера
 [**StartServer**](ServersAPI.md#StartServer) | **Post** /api/v1/servers/{server_id}/start | Запуск сервера
@@ -2062,6 +2063,74 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiRebootServerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RebootServerHard
+
+> RebootServerHard(ctx, serverId).Execute()
+
+Принудительная перезагрузка сервера
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    serverId := int32(1051) // int32 | ID облачного сервера.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ServersAPI.RebootServerHard(context.Background(), serverId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.RebootServerHard``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**serverId** | **int32** | ID облачного сервера. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRebootServerHardRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

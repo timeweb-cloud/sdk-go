@@ -518,6 +518,7 @@ Class | Method | HTTP request | Description
 *ServersAPI* | [**PerformActionOnBackup**](docs/ServersAPI.md#performactiononbackup) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/action | Выполнение действия над бэкапом диска сервера
 *ServersAPI* | [**PerformActionOnServer**](docs/ServersAPI.md#performactiononserver) | **Post** /api/v1/servers/{server_id}/action | Выполнение действия над сервером
 *ServersAPI* | [**RebootServer**](docs/ServersAPI.md#rebootserver) | **Post** /api/v1/servers/{server_id}/reboot | Перезагрузка сервера
+*ServersAPI* | [**RebootServerHard**](docs/ServersAPI.md#rebootserverhard) | **Post** /api/v1/servers/{server_id}/hard-reboot | Принудительная перезагрузка сервера
 *ServersAPI* | [**ResetServerPassword**](docs/ServersAPI.md#resetserverpassword) | **Post** /api/v1/servers/{server_id}/reset-password | Сброс пароля сервера
 *ServersAPI* | [**ShutdownServer**](docs/ServersAPI.md#shutdownserver) | **Post** /api/v1/servers/{server_id}/shutdown | Выключение сервера
 *ServersAPI* | [**StartServer**](docs/ServersAPI.md#startserver) | **Post** /api/v1/servers/{server_id}/start | Запуск сервера
