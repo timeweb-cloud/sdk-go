@@ -15470,6 +15470,663 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/k8s/clusters/{cluster_id}/addons-configs:
+    get:
+      description: "Чтобы получить список конфигураций дополнений, отправьте GET-з\
+        апрос в `/api/v1/k8s/clusters/{cluster_id}/addons-configs`."
+      operationId: getKubernetesAddonsConfig
+      parameters:
+      - description: ID кластера
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: ID кластера
+          title: Cluster Id
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddonsConfigResponse'
+          description: Список конфигураций дополнений
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка конфигураций дополнений
+      tags:
+      - Kubernetes
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons-configs"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons-configs', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons-configs', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons-configs', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons-configs');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons-configs\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons-configs\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/k8s/clusters/{cluster_id}/addons:
+    get:
+      description: "Чтобы получить список установленных дополнений, отправьте GET-з\
+        апрос в `/api/v1/k8s/clusters/{cluster_id}/addons`."
+      operationId: getKubernetesAddons
+      parameters:
+      - description: ID кластера
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: ID кластера
+          title: Cluster Id
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddonsResponse'
+          description: Список установленных дополнений
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка установленных дополнений
+      tags:
+      - Kubernetes
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: "Чтобы установить дополнение, отправьте POST-запрос в `/api/v1/k8s/clusters/{cluster_id}/addons`."
+      operationId: postKubernetesAddons
+      parameters:
+      - description: ID кластера
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: ID кластера
+          title: Cluster Id
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterIn_1'
+        required: true
+      responses:
+        "201":
+          description: Дополнение установлено
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Установка дополнения
+      tags:
+      - Kubernetes
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/k8s/clusters/{cluster_id}/addons/{addon_id}:
+    delete:
+      description: "Чтобы удалить дополнение, отправьте DELETE-запрос в `/api/v1/k8s/clusters/{cluster_id}/addons/{addon_id}`."
+      operationId: deleteKubernetesAddons
+      parameters:
+      - description: ID кластера
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: ID кластера
+          title: Cluster Id
+          type: integer
+        style: simple
+      - description: ID аддона
+        explode: false
+        in: path
+        name: addon_id
+        required: true
+        schema:
+          description: ID аддона
+          title: Addon Id
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Дополнение удалено
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление дополнения
+      tags:
+      - Kubernetes
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: "Чтобы обновить конфигурацию дополнения, отправьте POST-запрос\
+        \ в `/api/v1/k8s/clusters/{cluster_id}/addons/{addon_id}`."
+      operationId: postKubernetesAddonsUpdate
+      parameters:
+      - description: ID кластера
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: ID кластера
+          title: Cluster Id
+          type: integer
+        style: simple
+      - description: ID аддона
+        explode: false
+        in: path
+        name: addon_id
+        required: true
+        schema:
+          description: ID аддона
+          title: Addon Id
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterIn_1'
+        required: true
+      responses:
+        "201":
+          description: Дополнение Обновлено
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Изменение конфигурации дополнения
+      tags:
+      - Kubernetes
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/k8s/clusters/1/addons/1\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v1/container-registry:
     get:
       description: "Чтобы получить список реестров, отправьте GET-запрос на `/api/v1/container-registry`."
@@ -51693,6 +52350,7 @@ components:
         plan_id:
           description: ID списка дополнительных услуг выделенного сервера.
           example: 2377
+          nullable: true
           type: number
         preset_id:
           description: ID тарифа выделенного сервера.
@@ -51714,6 +52372,7 @@ components:
           description: "ID интернет-канала, который будет установлен на выделенный\
             \ сервер."
           example: 483
+          nullable: true
           type: number
         network_drive_id:
           description: "ID сетевого диска, который будет установлен на выделенный\
@@ -51746,9 +52405,14 @@ components:
             символов.
           example: comment
           maxLength: 255
+          nullable: true
           type: string
+        project_id:
+          description: "ID проекта, в который будет добавлен выделенный сервер."
+          example: 1
+          nullable: true
+          type: number
       required:
-      - location
       - name
       - payment_period
       - preset_id
@@ -52837,6 +53501,185 @@ components:
       - k8s_presets
       - meta
       title: PresetsResponse
+      type: object
+    AddonConfigOut:
+      example:
+        yaml_config: yaml_config
+        id: 1
+        type: dbaas-operator
+        version: 1.0.0
+        dependencies:
+        - dependencies
+        - dependencies
+      properties:
+        id:
+          description: ID конфигурации дополнения
+          example: 1
+          title: Id
+          type: integer
+        type:
+          description: Тип дополнения
+          example: dbaas-operator
+          title: Type
+          type: string
+        version:
+          description: Версия дополнения
+          example: 1.0.0
+          title: Version
+          type: string
+        dependencies:
+          description: Зависимости дополнения
+          items:
+            type: string
+          title: Dependencies
+          type: array
+        yaml_config:
+          description: YAML конфигурации дополнения
+          title: Yaml Config
+          type: string
+      required:
+      - dependencies
+      - id
+      - type
+      - version
+      - yaml_config
+      title: AddonConfigOut
+      type: object
+    AddonsConfigResponse:
+      example:
+        k8s_addons:
+        - yaml_config: yaml_config
+          id: 1
+          type: dbaas-operator
+          version: 1.0.0
+          dependencies:
+          - dependencies
+          - dependencies
+        - yaml_config: yaml_config
+          id: 1
+          type: dbaas-operator
+          version: 1.0.0
+          dependencies:
+          - dependencies
+          - dependencies
+        response_id: response_id
+        meta:
+          total: 0
+      properties:
+        response_id:
+          description: ID запроса
+          title: Response Id
+          type: string
+        meta:
+          $ref: '#/components/schemas/schemas-Meta'
+        k8s_addons:
+          description: Массив конфигураций дополнений k8s
+          items:
+            $ref: '#/components/schemas/AddonConfigOut'
+          title: K8S Addons
+          type: array
+      required:
+      - k8s_addons
+      - meta
+      title: AddonsConfigResponse
+      type: object
+    AddonOut:
+      example:
+        yaml_config: yaml_config
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 1
+        type: dbaas-operator
+        config_type: config_type
+        version: 1.0.0
+        config: "{}"
+        status: active
+      properties:
+        id:
+          description: ID дополнения
+          example: 1
+          title: Id
+          type: integer
+        type:
+          description: Тип дополнения
+          example: dbaas-operator
+          title: Type
+          type: string
+        status:
+          description: Статус дополнения
+          example: active
+          title: Status
+          type: string
+        created_at:
+          description: Дата и время создания дополнения в формате ISO8601
+          format: date-time
+          title: Created at
+          type: string
+        version:
+          description: Версия дополнения
+          example: 1.0.0
+          title: Version
+          type: string
+        config:
+          description: Дополнительная конфигурация дополнения
+          title: Config
+          type: object
+        yaml_config:
+          description: Yaml конфигурация дополнения
+          title: Yaml Config
+          type: string
+        config_type:
+          description: Тип конфигурации дополнения
+          title: Config Type
+          type: string
+      required:
+      - config_type
+      - created_at
+      - id
+      - status
+      - type
+      - version
+      - yaml_config
+      title: AddonOut
+      type: object
+    AddonsResponse:
+      example:
+        addons:
+        - yaml_config: yaml_config
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 1
+          type: dbaas-operator
+          config_type: config_type
+          version: 1.0.0
+          config: "{}"
+          status: active
+        - yaml_config: yaml_config
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 1
+          type: dbaas-operator
+          config_type: config_type
+          version: 1.0.0
+          config: "{}"
+          status: active
+        response_id: response_id
+        meta:
+          total: 0
+      properties:
+        response_id:
+          description: ID запроса
+          title: Response Id
+          type: string
+        meta:
+          $ref: '#/components/schemas/schemas-Meta'
+        addons:
+          description: Массив дополнений k8s
+          items:
+            $ref: '#/components/schemas/AddonOut'
+          title: K8S Addons
+          type: array
+      required:
+      - addons
+      - meta
+      title: AddonsResponse
       type: object
     RegistryOut:
       example:
@@ -60221,6 +61064,50 @@ components:
           title: k8s version
           type: string
       title: ClusterVersionEdit
+      type: object
+    ClusterIn_1:
+      properties:
+        type:
+          description: Тип дополнения
+          example: ingress
+          type: string
+        config_type:
+          description: Тип конфигурации дополнения
+          enum:
+          - basic
+          - custom
+          example: basic
+          type: string
+        yaml_config:
+          description: YAML-конфигурация дополнения
+          example: |-
+            controller:
+              kind: DaemonSet
+              replicaCount: 1
+              service:
+                enabled: false
+              hostNetwork: true
+              hostPort:
+                enabled: true
+                ports:
+                  http: 80
+                  https: 443
+              ingressClassResource:
+                name: nginx
+                default: true
+              admissionWebhooks:
+                enabled: false
+          type: string
+        version:
+          description: Версия дополнения
+          example: 4.12.1
+          type: string
+      required:
+      - config_type
+      - type
+      - version
+      - yaml_config
+      title: ClusterIn
       type: object
     getServers_200_response:
       example:

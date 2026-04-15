@@ -90,6 +90,20 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KubernetesAPIService DeleteKubernetesAddons", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var addonId int32
+
+		httpRes, err := apiClient.KubernetesAPI.DeleteKubernetesAddons(context.Background(), clusterId, addonId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KubernetesAPIService GetCluster", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -226,6 +240,34 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KubernetesAPIService GetKubernetesAddons", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+
+		resp, httpRes, err := apiClient.KubernetesAPI.GetKubernetesAddons(context.Background(), clusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService GetKubernetesAddonsConfig", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+
+		resp, httpRes, err := apiClient.KubernetesAPI.GetKubernetesAddonsConfig(context.Background(), clusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KubernetesAPIService GetKubernetesPresets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -249,6 +291,33 @@ func Test_openapi_KubernetesAPIService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService PostKubernetesAddons", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+
+		httpRes, err := apiClient.KubernetesAPI.PostKubernetesAddons(context.Background(), clusterId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService PostKubernetesAddonsUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var addonId int32
+
+		httpRes, err := apiClient.KubernetesAPI.PostKubernetesAddonsUpdate(context.Background(), clusterId, addonId).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

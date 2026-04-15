@@ -15,454 +15,166 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateDedicatedServer type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateDedicatedServer{}
+// checks if the AddonConfigOut type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AddonConfigOut{}
 
-// CreateDedicatedServer struct for CreateDedicatedServer
-type CreateDedicatedServer struct {
-	// ID списка дополнительных услуг выделенного сервера.
-	PlanId NullableFloat32 `json:"plan_id,omitempty"`
-	// ID тарифа выделенного сервера.
-	PresetId float32 `json:"preset_id"`
-	// ID операционной системы, которая будет установлена на выделенный сервер.
-	OsId NullableFloat32 `json:"os_id,omitempty"`
-	// ID панели управления, которая будет установлена на выделенный сервер.
-	CpId NullableFloat32 `json:"cp_id,omitempty"`
-	// ID интернет-канала, который будет установлен на выделенный сервер.
-	BandwidthId NullableFloat32 `json:"bandwidth_id,omitempty"`
-	// ID сетевого диска, который будет установлен на выделенный сервер.
-	NetworkDriveId *float32 `json:"network_drive_id,omitempty"`
-	// ID дополнительного IP-адреса, который будет установлен на выделенный сервер.
-	AdditionalIpAddrId NullableFloat32 `json:"additional_ip_addr_id,omitempty"`
-	// Период оплаты.
-	PaymentPeriod string `json:"payment_period"`
-	// Удобочитаемое имя выделенного сервера. Максимальная длина — 255 символов, имя должно быть уникальным.
-	Name string `json:"name"`
-	// Комментарий к выделенному серверу. Максимальная длина — 255 символов.
-	Comment NullableString `json:"comment,omitempty"`
-	// ID проекта, в который будет добавлен выделенный сервер.
-	ProjectId NullableFloat32 `json:"project_id,omitempty"`
+// AddonConfigOut struct for AddonConfigOut
+type AddonConfigOut struct {
+	// ID конфигурации дополнения
+	Id int32 `json:"id"`
+	// Тип дополнения
+	Type string `json:"type"`
+	// Версия дополнения
+	Version string `json:"version"`
+	// Зависимости дополнения
+	Dependencies []string `json:"dependencies"`
+	// YAML конфигурации дополнения
+	YamlConfig string `json:"yaml_config"`
 }
 
-// NewCreateDedicatedServer instantiates a new CreateDedicatedServer object
+// NewAddonConfigOut instantiates a new AddonConfigOut object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDedicatedServer(presetId float32, paymentPeriod string, name string) *CreateDedicatedServer {
-	this := CreateDedicatedServer{}
-	this.PresetId = presetId
-	this.PaymentPeriod = paymentPeriod
-	this.Name = name
+func NewAddonConfigOut(id int32, type_ string, version string, dependencies []string, yamlConfig string) *AddonConfigOut {
+	this := AddonConfigOut{}
+	this.Id = id
+	this.Type = type_
+	this.Version = version
+	this.Dependencies = dependencies
+	this.YamlConfig = yamlConfig
 	return &this
 }
 
-// NewCreateDedicatedServerWithDefaults instantiates a new CreateDedicatedServer object
+// NewAddonConfigOutWithDefaults instantiates a new AddonConfigOut object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateDedicatedServerWithDefaults() *CreateDedicatedServer {
-	this := CreateDedicatedServer{}
+func NewAddonConfigOutWithDefaults() *AddonConfigOut {
+	this := AddonConfigOut{}
 	return &this
 }
 
-// GetPlanId returns the PlanId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDedicatedServer) GetPlanId() float32 {
-	if o == nil || IsNil(o.PlanId.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.PlanId.Get()
-}
-
-// GetPlanIdOk returns a tuple with the PlanId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDedicatedServer) GetPlanIdOk() (*float32, bool) {
+// GetId returns the Id field value
+func (o *AddonConfigOut) GetId() int32 {
 	if o == nil {
-		return nil, false
-	}
-	return o.PlanId.Get(), o.PlanId.IsSet()
-}
-
-// HasPlanId returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasPlanId() bool {
-	if o != nil && o.PlanId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPlanId gets a reference to the given NullableFloat32 and assigns it to the PlanId field.
-func (o *CreateDedicatedServer) SetPlanId(v float32) {
-	o.PlanId.Set(&v)
-}
-// SetPlanIdNil sets the value for PlanId to be an explicit nil
-func (o *CreateDedicatedServer) SetPlanIdNil() {
-	o.PlanId.Set(nil)
-}
-
-// UnsetPlanId ensures that no value is present for PlanId, not even an explicit nil
-func (o *CreateDedicatedServer) UnsetPlanId() {
-	o.PlanId.Unset()
-}
-
-// GetPresetId returns the PresetId field value
-func (o *CreateDedicatedServer) GetPresetId() float32 {
-	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
-	return o.PresetId
+	return o.Id
 }
 
-// GetPresetIdOk returns a tuple with the PresetId field value
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *CreateDedicatedServer) GetPresetIdOk() (*float32, bool) {
+func (o *AddonConfigOut) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PresetId, true
+	return &o.Id, true
 }
 
-// SetPresetId sets field value
-func (o *CreateDedicatedServer) SetPresetId(v float32) {
-	o.PresetId = v
+// SetId sets field value
+func (o *AddonConfigOut) SetId(v int32) {
+	o.Id = v
 }
 
-// GetOsId returns the OsId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDedicatedServer) GetOsId() float32 {
-	if o == nil || IsNil(o.OsId.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.OsId.Get()
-}
-
-// GetOsIdOk returns a tuple with the OsId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDedicatedServer) GetOsIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.OsId.Get(), o.OsId.IsSet()
-}
-
-// HasOsId returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasOsId() bool {
-	if o != nil && o.OsId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetOsId gets a reference to the given NullableFloat32 and assigns it to the OsId field.
-func (o *CreateDedicatedServer) SetOsId(v float32) {
-	o.OsId.Set(&v)
-}
-// SetOsIdNil sets the value for OsId to be an explicit nil
-func (o *CreateDedicatedServer) SetOsIdNil() {
-	o.OsId.Set(nil)
-}
-
-// UnsetOsId ensures that no value is present for OsId, not even an explicit nil
-func (o *CreateDedicatedServer) UnsetOsId() {
-	o.OsId.Unset()
-}
-
-// GetCpId returns the CpId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDedicatedServer) GetCpId() float32 {
-	if o == nil || IsNil(o.CpId.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.CpId.Get()
-}
-
-// GetCpIdOk returns a tuple with the CpId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDedicatedServer) GetCpIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.CpId.Get(), o.CpId.IsSet()
-}
-
-// HasCpId returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasCpId() bool {
-	if o != nil && o.CpId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCpId gets a reference to the given NullableFloat32 and assigns it to the CpId field.
-func (o *CreateDedicatedServer) SetCpId(v float32) {
-	o.CpId.Set(&v)
-}
-// SetCpIdNil sets the value for CpId to be an explicit nil
-func (o *CreateDedicatedServer) SetCpIdNil() {
-	o.CpId.Set(nil)
-}
-
-// UnsetCpId ensures that no value is present for CpId, not even an explicit nil
-func (o *CreateDedicatedServer) UnsetCpId() {
-	o.CpId.Unset()
-}
-
-// GetBandwidthId returns the BandwidthId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDedicatedServer) GetBandwidthId() float32 {
-	if o == nil || IsNil(o.BandwidthId.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.BandwidthId.Get()
-}
-
-// GetBandwidthIdOk returns a tuple with the BandwidthId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDedicatedServer) GetBandwidthIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.BandwidthId.Get(), o.BandwidthId.IsSet()
-}
-
-// HasBandwidthId returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasBandwidthId() bool {
-	if o != nil && o.BandwidthId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetBandwidthId gets a reference to the given NullableFloat32 and assigns it to the BandwidthId field.
-func (o *CreateDedicatedServer) SetBandwidthId(v float32) {
-	o.BandwidthId.Set(&v)
-}
-// SetBandwidthIdNil sets the value for BandwidthId to be an explicit nil
-func (o *CreateDedicatedServer) SetBandwidthIdNil() {
-	o.BandwidthId.Set(nil)
-}
-
-// UnsetBandwidthId ensures that no value is present for BandwidthId, not even an explicit nil
-func (o *CreateDedicatedServer) UnsetBandwidthId() {
-	o.BandwidthId.Unset()
-}
-
-// GetNetworkDriveId returns the NetworkDriveId field value if set, zero value otherwise.
-func (o *CreateDedicatedServer) GetNetworkDriveId() float32 {
-	if o == nil || IsNil(o.NetworkDriveId) {
-		var ret float32
-		return ret
-	}
-	return *o.NetworkDriveId
-}
-
-// GetNetworkDriveIdOk returns a tuple with the NetworkDriveId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDedicatedServer) GetNetworkDriveIdOk() (*float32, bool) {
-	if o == nil || IsNil(o.NetworkDriveId) {
-		return nil, false
-	}
-	return o.NetworkDriveId, true
-}
-
-// HasNetworkDriveId returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasNetworkDriveId() bool {
-	if o != nil && !IsNil(o.NetworkDriveId) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetworkDriveId gets a reference to the given float32 and assigns it to the NetworkDriveId field.
-func (o *CreateDedicatedServer) SetNetworkDriveId(v float32) {
-	o.NetworkDriveId = &v
-}
-
-// GetAdditionalIpAddrId returns the AdditionalIpAddrId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDedicatedServer) GetAdditionalIpAddrId() float32 {
-	if o == nil || IsNil(o.AdditionalIpAddrId.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.AdditionalIpAddrId.Get()
-}
-
-// GetAdditionalIpAddrIdOk returns a tuple with the AdditionalIpAddrId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDedicatedServer) GetAdditionalIpAddrIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AdditionalIpAddrId.Get(), o.AdditionalIpAddrId.IsSet()
-}
-
-// HasAdditionalIpAddrId returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasAdditionalIpAddrId() bool {
-	if o != nil && o.AdditionalIpAddrId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAdditionalIpAddrId gets a reference to the given NullableFloat32 and assigns it to the AdditionalIpAddrId field.
-func (o *CreateDedicatedServer) SetAdditionalIpAddrId(v float32) {
-	o.AdditionalIpAddrId.Set(&v)
-}
-// SetAdditionalIpAddrIdNil sets the value for AdditionalIpAddrId to be an explicit nil
-func (o *CreateDedicatedServer) SetAdditionalIpAddrIdNil() {
-	o.AdditionalIpAddrId.Set(nil)
-}
-
-// UnsetAdditionalIpAddrId ensures that no value is present for AdditionalIpAddrId, not even an explicit nil
-func (o *CreateDedicatedServer) UnsetAdditionalIpAddrId() {
-	o.AdditionalIpAddrId.Unset()
-}
-
-// GetPaymentPeriod returns the PaymentPeriod field value
-func (o *CreateDedicatedServer) GetPaymentPeriod() string {
+// GetType returns the Type field value
+func (o *AddonConfigOut) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PaymentPeriod
+	return o.Type
 }
 
-// GetPaymentPeriodOk returns a tuple with the PaymentPeriod field value
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDedicatedServer) GetPaymentPeriodOk() (*string, bool) {
+func (o *AddonConfigOut) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PaymentPeriod, true
+	return &o.Type, true
 }
 
-// SetPaymentPeriod sets field value
-func (o *CreateDedicatedServer) SetPaymentPeriod(v string) {
-	o.PaymentPeriod = v
+// SetType sets field value
+func (o *AddonConfigOut) SetType(v string) {
+	o.Type = v
 }
 
-// GetName returns the Name field value
-func (o *CreateDedicatedServer) GetName() string {
+// GetVersion returns the Version field value
+func (o *AddonConfigOut) GetVersion() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Name
+	return o.Version
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *CreateDedicatedServer) GetNameOk() (*string, bool) {
+func (o *AddonConfigOut) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.Version, true
 }
 
-// SetName sets field value
-func (o *CreateDedicatedServer) SetName(v string) {
-	o.Name = v
+// SetVersion sets field value
+func (o *AddonConfigOut) SetVersion(v string) {
+	o.Version = v
 }
 
-// GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDedicatedServer) GetComment() string {
-	if o == nil || IsNil(o.Comment.Get()) {
+// GetDependencies returns the Dependencies field value
+func (o *AddonConfigOut) GetDependencies() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Dependencies
+}
+
+// GetDependenciesOk returns a tuple with the Dependencies field value
+// and a boolean to check if the value has been set.
+func (o *AddonConfigOut) GetDependenciesOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Dependencies, true
+}
+
+// SetDependencies sets field value
+func (o *AddonConfigOut) SetDependencies(v []string) {
+	o.Dependencies = v
+}
+
+// GetYamlConfig returns the YamlConfig field value
+func (o *AddonConfigOut) GetYamlConfig() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Comment.Get()
+
+	return o.YamlConfig
 }
 
-// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// GetYamlConfigOk returns a tuple with the YamlConfig field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDedicatedServer) GetCommentOk() (*string, bool) {
+func (o *AddonConfigOut) GetYamlConfigOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Comment.Get(), o.Comment.IsSet()
+	return &o.YamlConfig, true
 }
 
-// HasComment returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasComment() bool {
-	if o != nil && o.Comment.IsSet() {
-		return true
-	}
-
-	return false
+// SetYamlConfig sets field value
+func (o *AddonConfigOut) SetYamlConfig(v string) {
+	o.YamlConfig = v
 }
 
-// SetComment gets a reference to the given NullableString and assigns it to the Comment field.
-func (o *CreateDedicatedServer) SetComment(v string) {
-	o.Comment.Set(&v)
-}
-// SetCommentNil sets the value for Comment to be an explicit nil
-func (o *CreateDedicatedServer) SetCommentNil() {
-	o.Comment.Set(nil)
-}
-
-// UnsetComment ensures that no value is present for Comment, not even an explicit nil
-func (o *CreateDedicatedServer) UnsetComment() {
-	o.Comment.Unset()
-}
-
-// GetProjectId returns the ProjectId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDedicatedServer) GetProjectId() float32 {
-	if o == nil || IsNil(o.ProjectId.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.ProjectId.Get()
-}
-
-// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDedicatedServer) GetProjectIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ProjectId.Get(), o.ProjectId.IsSet()
-}
-
-// HasProjectId returns a boolean if a field has been set.
-func (o *CreateDedicatedServer) HasProjectId() bool {
-	if o != nil && o.ProjectId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetProjectId gets a reference to the given NullableFloat32 and assigns it to the ProjectId field.
-func (o *CreateDedicatedServer) SetProjectId(v float32) {
-	o.ProjectId.Set(&v)
-}
-// SetProjectIdNil sets the value for ProjectId to be an explicit nil
-func (o *CreateDedicatedServer) SetProjectIdNil() {
-	o.ProjectId.Set(nil)
-}
-
-// UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
-func (o *CreateDedicatedServer) UnsetProjectId() {
-	o.ProjectId.Unset()
-}
-
-func (o CreateDedicatedServer) MarshalJSON() ([]byte, error) {
+func (o AddonConfigOut) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -470,70 +182,48 @@ func (o CreateDedicatedServer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateDedicatedServer) ToMap() (map[string]interface{}, error) {
+func (o AddonConfigOut) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.PlanId.IsSet() {
-		toSerialize["plan_id"] = o.PlanId.Get()
-	}
-	toSerialize["preset_id"] = o.PresetId
-	if o.OsId.IsSet() {
-		toSerialize["os_id"] = o.OsId.Get()
-	}
-	if o.CpId.IsSet() {
-		toSerialize["cp_id"] = o.CpId.Get()
-	}
-	if o.BandwidthId.IsSet() {
-		toSerialize["bandwidth_id"] = o.BandwidthId.Get()
-	}
-	if !IsNil(o.NetworkDriveId) {
-		toSerialize["network_drive_id"] = o.NetworkDriveId
-	}
-	if o.AdditionalIpAddrId.IsSet() {
-		toSerialize["additional_ip_addr_id"] = o.AdditionalIpAddrId.Get()
-	}
-	toSerialize["payment_period"] = o.PaymentPeriod
-	toSerialize["name"] = o.Name
-	if o.Comment.IsSet() {
-		toSerialize["comment"] = o.Comment.Get()
-	}
-	if o.ProjectId.IsSet() {
-		toSerialize["project_id"] = o.ProjectId.Get()
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["type"] = o.Type
+	toSerialize["version"] = o.Version
+	toSerialize["dependencies"] = o.Dependencies
+	toSerialize["yaml_config"] = o.YamlConfig
 	return toSerialize, nil
 }
 
-type NullableCreateDedicatedServer struct {
-	value *CreateDedicatedServer
+type NullableAddonConfigOut struct {
+	value *AddonConfigOut
 	isSet bool
 }
 
-func (v NullableCreateDedicatedServer) Get() *CreateDedicatedServer {
+func (v NullableAddonConfigOut) Get() *AddonConfigOut {
 	return v.value
 }
 
-func (v *NullableCreateDedicatedServer) Set(val *CreateDedicatedServer) {
+func (v *NullableAddonConfigOut) Set(val *AddonConfigOut) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateDedicatedServer) IsSet() bool {
+func (v NullableAddonConfigOut) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateDedicatedServer) Unset() {
+func (v *NullableAddonConfigOut) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateDedicatedServer(val *CreateDedicatedServer) *NullableCreateDedicatedServer {
-	return &NullableCreateDedicatedServer{value: val, isSet: true}
+func NewNullableAddonConfigOut(val *AddonConfigOut) *NullableAddonConfigOut {
+	return &NullableAddonConfigOut{value: val, isSet: true}
 }
 
-func (v NullableCreateDedicatedServer) MarshalJSON() ([]byte, error) {
+func (v NullableAddonConfigOut) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateDedicatedServer) UnmarshalJSON(src []byte) error {
+func (v *NullableAddonConfigOut) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

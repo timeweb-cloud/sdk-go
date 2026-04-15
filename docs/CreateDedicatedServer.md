@@ -4,16 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PlanId** | Pointer to **float32** | ID списка дополнительных услуг выделенного сервера. | [optional] 
+**PlanId** | Pointer to **NullableFloat32** | ID списка дополнительных услуг выделенного сервера. | [optional] 
 **PresetId** | **float32** | ID тарифа выделенного сервера. | 
 **OsId** | Pointer to **NullableFloat32** | ID операционной системы, которая будет установлена на выделенный сервер. | [optional] 
 **CpId** | Pointer to **NullableFloat32** | ID панели управления, которая будет установлена на выделенный сервер. | [optional] 
-**BandwidthId** | Pointer to **float32** | ID интернет-канала, который будет установлен на выделенный сервер. | [optional] 
+**BandwidthId** | Pointer to **NullableFloat32** | ID интернет-канала, который будет установлен на выделенный сервер. | [optional] 
 **NetworkDriveId** | Pointer to **float32** | ID сетевого диска, который будет установлен на выделенный сервер. | [optional] 
 **AdditionalIpAddrId** | Pointer to **NullableFloat32** | ID дополнительного IP-адреса, который будет установлен на выделенный сервер. | [optional] 
 **PaymentPeriod** | **string** | Период оплаты. | 
 **Name** | **string** | Удобочитаемое имя выделенного сервера. Максимальная длина — 255 символов, имя должно быть уникальным. | 
-**Comment** | Pointer to **string** | Комментарий к выделенному серверу. Максимальная длина — 255 символов. | [optional] 
+**Comment** | Pointer to **NullableString** | Комментарий к выделенному серверу. Максимальная длина — 255 символов. | [optional] 
+**ProjectId** | Pointer to **NullableFloat32** | ID проекта, в который будет добавлен выделенный сервер. | [optional] 
 
 ## Methods
 
@@ -59,6 +60,16 @@ SetPlanId sets PlanId field to given value.
 
 HasPlanId returns a boolean if a field has been set.
 
+### SetPlanIdNil
+
+`func (o *CreateDedicatedServer) SetPlanIdNil(b bool)`
+
+ SetPlanIdNil sets the value for PlanId to be an explicit nil
+
+### UnsetPlanId
+`func (o *CreateDedicatedServer) UnsetPlanId()`
+
+UnsetPlanId ensures that no value is present for PlanId, not even an explicit nil
 ### GetPresetId
 
 `func (o *CreateDedicatedServer) GetPresetId() float32`
@@ -174,6 +185,16 @@ SetBandwidthId sets BandwidthId field to given value.
 
 HasBandwidthId returns a boolean if a field has been set.
 
+### SetBandwidthIdNil
+
+`func (o *CreateDedicatedServer) SetBandwidthIdNil(b bool)`
+
+ SetBandwidthIdNil sets the value for BandwidthId to be an explicit nil
+
+### UnsetBandwidthId
+`func (o *CreateDedicatedServer) UnsetBandwidthId()`
+
+UnsetBandwidthId ensures that no value is present for BandwidthId, not even an explicit nil
 ### GetNetworkDriveId
 
 `func (o *CreateDedicatedServer) GetNetworkDriveId() float32`
@@ -299,6 +320,51 @@ SetComment sets Comment field to given value.
 
 HasComment returns a boolean if a field has been set.
 
+### SetCommentNil
+
+`func (o *CreateDedicatedServer) SetCommentNil(b bool)`
+
+ SetCommentNil sets the value for Comment to be an explicit nil
+
+### UnsetComment
+`func (o *CreateDedicatedServer) UnsetComment()`
+
+UnsetComment ensures that no value is present for Comment, not even an explicit nil
+### GetProjectId
+
+`func (o *CreateDedicatedServer) GetProjectId() float32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *CreateDedicatedServer) GetProjectIdOk() (*float32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *CreateDedicatedServer) SetProjectId(v float32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *CreateDedicatedServer) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
+
+### SetProjectIdNil
+
+`func (o *CreateDedicatedServer) SetProjectIdNil(b bool)`
+
+ SetProjectIdNil sets the value for ProjectId to be an explicit nil
+
+### UnsetProjectId
+`func (o *CreateDedicatedServer) UnsetProjectId()`
+
+UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

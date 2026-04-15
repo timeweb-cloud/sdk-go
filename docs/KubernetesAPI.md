@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**DeleteCluster**](KubernetesAPI.md#DeleteCluster) | **Delete** /api/v1/k8s/clusters/{cluster_id} | Удаление кластера
 [**DeleteClusterNode**](KubernetesAPI.md#DeleteClusterNode) | **Delete** /api/v1/k8s/clusters/{cluster_id}/nodes/{node_id} | Удаление ноды
 [**DeleteClusterNodeGroup**](KubernetesAPI.md#DeleteClusterNodeGroup) | **Delete** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id} | Удаление группы нод
+[**DeleteKubernetesAddons**](KubernetesAPI.md#DeleteKubernetesAddons) | **Delete** /api/v1/k8s/clusters/{cluster_id}/addons/{addon_id} | Удаление дополнения
 [**GetCluster**](KubernetesAPI.md#GetCluster) | **Get** /api/v1/k8s/clusters/{cluster_id} | Получение информации о кластере
 [**GetClusterKubeconfig**](KubernetesAPI.md#GetClusterKubeconfig) | **Get** /api/v1/k8s/clusters/{cluster_id}/kubeconfig | Получение файла kubeconfig
 [**GetClusterNodeGroup**](KubernetesAPI.md#GetClusterNodeGroup) | **Get** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id} | Получение информации о группе нод
@@ -19,8 +20,12 @@ Method | HTTP request | Description
 [**GetClusters**](KubernetesAPI.md#GetClusters) | **Get** /api/v1/k8s/clusters | Получение списка кластеров
 [**GetK8SNetworkDrivers**](KubernetesAPI.md#GetK8SNetworkDrivers) | **Get** /api/v1/k8s/network-drivers | Получение списка сетевых драйверов k8s
 [**GetK8SVersions**](KubernetesAPI.md#GetK8SVersions) | **Get** /api/v1/k8s/k8s-versions | Получение списка версий k8s
+[**GetKubernetesAddons**](KubernetesAPI.md#GetKubernetesAddons) | **Get** /api/v1/k8s/clusters/{cluster_id}/addons | Получение списка установленных дополнений
+[**GetKubernetesAddonsConfig**](KubernetesAPI.md#GetKubernetesAddonsConfig) | **Get** /api/v1/k8s/clusters/{cluster_id}/addons-configs | Получение списка конфигураций дополнений
 [**GetKubernetesPresets**](KubernetesAPI.md#GetKubernetesPresets) | **Get** /api/v1/presets/k8s | Получение списка тарифов
 [**IncreaseCountOfNodesInGroup**](KubernetesAPI.md#IncreaseCountOfNodesInGroup) | **Post** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Увеличение количества нод в группе на указанное количество
+[**PostKubernetesAddons**](KubernetesAPI.md#PostKubernetesAddons) | **Post** /api/v1/k8s/clusters/{cluster_id}/addons | Установка дополнения
+[**PostKubernetesAddonsUpdate**](KubernetesAPI.md#PostKubernetesAddonsUpdate) | **Post** /api/v1/k8s/clusters/{cluster_id}/addons/{addon_id} | Изменение конфигурации дополнения
 [**ReduceCountOfNodesInGroup**](KubernetesAPI.md#ReduceCountOfNodesInGroup) | **Delete** /api/v1/k8s/clusters/{cluster_id}/groups/{group_id}/nodes | Уменьшение количества нод в группе на указанное количество
 [**UpdateCluster**](KubernetesAPI.md#UpdateCluster) | **Patch** /api/v1/k8s/clusters/{cluster_id} | Обновление информации о кластере
 [**UpdateClusterVersion**](KubernetesAPI.md#UpdateClusterVersion) | **Patch** /api/v1/k8s/clusters/{cluster_id}/versions/update | Обновление версии кластера
@@ -356,6 +361,77 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteClusterNodeGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteKubernetesAddons
+
+> DeleteKubernetesAddons(ctx, clusterId, addonId).Execute()
+
+Удаление дополнения
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    clusterId := int32(56) // int32 | ID кластера
+    addonId := int32(56) // int32 | ID аддона
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.KubernetesAPI.DeleteKubernetesAddons(context.Background(), clusterId, addonId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.DeleteKubernetesAddons``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** | ID кластера | 
+**addonId** | **int32** | ID аддона | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteKubernetesAddonsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1071,6 +1147,146 @@ Other parameters are passed through a pointer to a apiGetK8SVersionsRequest stru
 [[Back to README]](../README.md)
 
 
+## GetKubernetesAddons
+
+> AddonsResponse GetKubernetesAddons(ctx, clusterId).Execute()
+
+Получение списка установленных дополнений
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    clusterId := int32(56) // int32 | ID кластера
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.KubernetesAPI.GetKubernetesAddons(context.Background(), clusterId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetKubernetesAddons``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesAddons`: AddonsResponse
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetKubernetesAddons`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** | ID кластера | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesAddonsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AddonsResponse**](AddonsResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKubernetesAddonsConfig
+
+> AddonsConfigResponse GetKubernetesAddonsConfig(ctx, clusterId).Execute()
+
+Получение списка конфигураций дополнений
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    clusterId := int32(56) // int32 | ID кластера
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.KubernetesAPI.GetKubernetesAddonsConfig(context.Background(), clusterId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.GetKubernetesAddonsConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesAddonsConfig`: AddonsConfigResponse
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.GetKubernetesAddonsConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** | ID кластера | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesAddonsConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AddonsConfigResponse**](AddonsConfigResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetKubernetesPresets
 
 > PresetsResponse GetKubernetesPresets(ctx).Execute()
@@ -1192,6 +1408,179 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**NodesResponse**](NodesResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostKubernetesAddons
+
+> PostKubernetesAddons(ctx, clusterId).ClusterIn1(clusterIn1).Execute()
+
+Установка дополнения
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    clusterId := int32(56) // int32 | ID кластера
+    clusterIn1 := *openapiclient.NewClusterIn1("ingress", "basic", "controller:
+  kind: DaemonSet
+  replicaCount: 1
+  service:
+    enabled: false
+  hostNetwork: true
+  hostPort:
+    enabled: true
+    ports:
+      http: 80
+      https: 443
+  ingressClassResource:
+    name: nginx
+    default: true
+  admissionWebhooks:
+    enabled: false", "4.12.1") // ClusterIn1 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.KubernetesAPI.PostKubernetesAddons(context.Background(), clusterId).ClusterIn1(clusterIn1).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.PostKubernetesAddons``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** | ID кластера | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPostKubernetesAddonsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **clusterIn1** | [**ClusterIn1**](ClusterIn1.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostKubernetesAddonsUpdate
+
+> PostKubernetesAddonsUpdate(ctx, clusterId, addonId).ClusterIn1(clusterIn1).Execute()
+
+Изменение конфигурации дополнения
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    clusterId := int32(56) // int32 | ID кластера
+    addonId := int32(56) // int32 | ID аддона
+    clusterIn1 := *openapiclient.NewClusterIn1("ingress", "basic", "controller:
+  kind: DaemonSet
+  replicaCount: 1
+  service:
+    enabled: false
+  hostNetwork: true
+  hostPort:
+    enabled: true
+    ports:
+      http: 80
+      https: 443
+  ingressClassResource:
+    name: nginx
+    default: true
+  admissionWebhooks:
+    enabled: false", "4.12.1") // ClusterIn1 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.KubernetesAPI.PostKubernetesAddonsUpdate(context.Background(), clusterId, addonId).ClusterIn1(clusterIn1).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.PostKubernetesAddonsUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** | ID кластера | 
+**addonId** | **int32** | ID аддона | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPostKubernetesAddonsUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **clusterIn1** | [**ClusterIn1**](ClusterIn1.md) |  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 
