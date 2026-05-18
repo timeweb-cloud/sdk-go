@@ -31,8 +31,10 @@ type ClusterIn struct {
 	// Тип используемого сетевого драйвера в кластере
 	NetworkDriver string `json:"network_driver"`
 	// Логическое значение, которое показывает, использовать ли Ingress в кластере
+	// Deprecated
 	IsIngress *bool `json:"is_ingress,omitempty"`
 	// Логическое значение, которое показывает, использовать ли Kubernetes Dashboard в кластере
+	// Deprecated
 	IsK8sDashboard *bool `json:"is_k8s_dashboard,omitempty"`
 	// ID тарифа мастер-ноды. Нельзя передавать вместе с `configuration`
 	PresetId *int32 `json:"preset_id,omitempty"`
@@ -207,6 +209,7 @@ func (o *ClusterIn) SetNetworkDriver(v string) {
 }
 
 // GetIsIngress returns the IsIngress field value if set, zero value otherwise.
+// Deprecated
 func (o *ClusterIn) GetIsIngress() bool {
 	if o == nil || IsNil(o.IsIngress) {
 		var ret bool
@@ -217,6 +220,7 @@ func (o *ClusterIn) GetIsIngress() bool {
 
 // GetIsIngressOk returns a tuple with the IsIngress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ClusterIn) GetIsIngressOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsIngress) {
 		return nil, false
@@ -234,11 +238,13 @@ func (o *ClusterIn) HasIsIngress() bool {
 }
 
 // SetIsIngress gets a reference to the given bool and assigns it to the IsIngress field.
+// Deprecated
 func (o *ClusterIn) SetIsIngress(v bool) {
 	o.IsIngress = &v
 }
 
 // GetIsK8sDashboard returns the IsK8sDashboard field value if set, zero value otherwise.
+// Deprecated
 func (o *ClusterIn) GetIsK8sDashboard() bool {
 	if o == nil || IsNil(o.IsK8sDashboard) {
 		var ret bool
@@ -249,6 +255,7 @@ func (o *ClusterIn) GetIsK8sDashboard() bool {
 
 // GetIsK8sDashboardOk returns a tuple with the IsK8sDashboard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ClusterIn) GetIsK8sDashboardOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsK8sDashboard) {
 		return nil, false
@@ -266,6 +273,7 @@ func (o *ClusterIn) HasIsK8sDashboard() bool {
 }
 
 // SetIsK8sDashboard gets a reference to the given bool and assigns it to the IsK8sDashboard field.
+// Deprecated
 func (o *ClusterIn) SetIsK8sDashboard(v bool) {
 	o.IsK8sDashboard = &v
 }

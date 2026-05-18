@@ -52046,8 +52046,6 @@ components:
         description: Новый кластер кубернетес
         k8s_version: v1.33.1+k0s.0
         network_driver: kuberouter
-        is_ingress: true
-        is_k8s_dashboard: true
         preset_id: 403
         configuration:
           configurator_id: 57
@@ -52099,10 +52097,12 @@ components:
           - cilium
           type: string
         is_ingress:
+          deprecated: true
           description: "Логическое значение, которое показывает, использовать ли Ingress\
             \ в кластере"
           type: boolean
         is_k8s_dashboard:
+          deprecated: true
           description: "Логическое значение, которое показывает, использовать ли Kubernetes\
             \ Dashboard в кластере"
           type: boolean
