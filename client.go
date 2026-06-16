@@ -86,6 +86,8 @@ type APIClient struct {
 
 	ProjectsAPI *ProjectsAPIService
 
+	RoutersAPI *RoutersAPIService
+
 	S3API *S3APIService
 
 	SSHAPI *SSHAPIService
@@ -129,6 +131,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.NetworkDrivesAPI = (*NetworkDrivesAPIService)(&c.common)
 	c.PaymentsAPI = (*PaymentsAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
+	c.RoutersAPI = (*RoutersAPIService)(&c.common)
 	c.S3API = (*S3APIService)(&c.common)
 	c.SSHAPI = (*SSHAPIService)(&c.common)
 	c.ServersAPI = (*ServersAPIService)(&c.common)
