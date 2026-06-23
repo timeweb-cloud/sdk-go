@@ -30,6 +30,8 @@ type DatabaseCluster struct {
 	Name string `json:"name"`
 	// Список сетей кластера базы данных.
 	Networks []DatabaseClusterNetworksInner `json:"networks"`
+	// Использование IPv6 адреса.
+	IsPublicIpv6 *bool `json:"is_public_ipv6,omitempty"`
 	Type DbType `json:"type"`
 	// Тип хеширования кластера базы данных (mysql5 | mysql | postgres).
 	HashType NullableString `json:"hash_type"`
@@ -197,6 +199,38 @@ func (o *DatabaseCluster) GetNetworksOk() ([]DatabaseClusterNetworksInner, bool)
 // SetNetworks sets field value
 func (o *DatabaseCluster) SetNetworks(v []DatabaseClusterNetworksInner) {
 	o.Networks = v
+}
+
+// GetIsPublicIpv6 returns the IsPublicIpv6 field value if set, zero value otherwise.
+func (o *DatabaseCluster) GetIsPublicIpv6() bool {
+	if o == nil || IsNil(o.IsPublicIpv6) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPublicIpv6
+}
+
+// GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetIsPublicIpv6Ok() (*bool, bool) {
+	if o == nil || IsNil(o.IsPublicIpv6) {
+		return nil, false
+	}
+	return o.IsPublicIpv6, true
+}
+
+// HasIsPublicIpv6 returns a boolean if a field has been set.
+func (o *DatabaseCluster) HasIsPublicIpv6() bool {
+	if o != nil && !IsNil(o.IsPublicIpv6) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPublicIpv6 gets a reference to the given bool and assigns it to the IsPublicIpv6 field.
+func (o *DatabaseCluster) SetIsPublicIpv6(v bool) {
+	o.IsPublicIpv6 = &v
 }
 
 // GetType returns the Type field value
@@ -454,6 +488,9 @@ func (o DatabaseCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize["location"] = o.Location.Get()
 	toSerialize["name"] = o.Name
 	toSerialize["networks"] = o.Networks
+	if !IsNil(o.IsPublicIpv6) {
+		toSerialize["is_public_ipv6"] = o.IsPublicIpv6
+	}
 	toSerialize["type"] = o.Type
 	toSerialize["hash_type"] = o.HashType.Get()
 	toSerialize["avatar_link"] = o.AvatarLink.Get()

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
 **Replication** | Pointer to [**DbReplication**](DbReplication.md) |  | [optional] 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
+**IsPublicIpv6** | Pointer to **bool** | Использование IPv6 адреса. | [optional] 
 **Description** | Pointer to **string** | Описание кластера базы данных | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 **AutoBackups** | Pointer to [**CreateDbAutoBackups**](CreateDbAutoBackups.md) |  | [optional] 
@@ -302,6 +303,31 @@ SetNetwork sets Network field to given value.
 `func (o *CreateCluster) HasNetwork() bool`
 
 HasNetwork returns a boolean if a field has been set.
+
+### GetIsPublicIpv6
+
+`func (o *CreateCluster) GetIsPublicIpv6() bool`
+
+GetIsPublicIpv6 returns the IsPublicIpv6 field if non-nil, zero value otherwise.
+
+### GetIsPublicIpv6Ok
+
+`func (o *CreateCluster) GetIsPublicIpv6Ok() (*bool, bool)`
+
+GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPublicIpv6
+
+`func (o *CreateCluster) SetIsPublicIpv6(v bool)`
+
+SetIsPublicIpv6 sets IsPublicIpv6 field to given value.
+
+### HasIsPublicIpv6
+
+`func (o *CreateCluster) HasIsPublicIpv6() bool`
+
+HasIsPublicIpv6 returns a boolean if a field has been set.
 
 ### GetDescription
 

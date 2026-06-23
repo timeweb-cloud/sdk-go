@@ -36,6 +36,8 @@ type CreateCluster struct {
 	ConfigParameters *ConfigParameters `json:"config_parameters,omitempty"`
 	Replication *DbReplication `json:"replication,omitempty"`
 	Network *Network `json:"network,omitempty"`
+	// Использование IPv6 адреса.
+	IsPublicIpv6 *bool `json:"is_public_ipv6,omitempty"`
 	// Описание кластера базы данных
 	Description *string `json:"description,omitempty"`
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
@@ -397,6 +399,38 @@ func (o *CreateCluster) SetNetwork(v Network) {
 	o.Network = &v
 }
 
+// GetIsPublicIpv6 returns the IsPublicIpv6 field value if set, zero value otherwise.
+func (o *CreateCluster) GetIsPublicIpv6() bool {
+	if o == nil || IsNil(o.IsPublicIpv6) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPublicIpv6
+}
+
+// GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetIsPublicIpv6Ok() (*bool, bool) {
+	if o == nil || IsNil(o.IsPublicIpv6) {
+		return nil, false
+	}
+	return o.IsPublicIpv6, true
+}
+
+// HasIsPublicIpv6 returns a boolean if a field has been set.
+func (o *CreateCluster) HasIsPublicIpv6() bool {
+	if o != nil && !IsNil(o.IsPublicIpv6) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPublicIpv6 gets a reference to the given bool and assigns it to the IsPublicIpv6 field.
+func (o *CreateCluster) SetIsPublicIpv6(v bool) {
+	o.IsPublicIpv6 = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CreateCluster) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -531,6 +565,9 @@ func (o CreateCluster) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
+	}
+	if !IsNil(o.IsPublicIpv6) {
+		toSerialize["is_public_ipv6"] = o.IsPublicIpv6
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description

@@ -28,6 +28,8 @@ type UpdateCluster struct {
 	Description *string `json:"description,omitempty"`
 	// Доступность публичного IP-адреса
 	IsEnabledPublicNetwork *bool `json:"is_enabled_public_network,omitempty"`
+	// Использование IPv6 адреса.
+	IsPublicIpv6 *bool `json:"is_public_ipv6,omitempty"`
 }
 
 // NewUpdateCluster instantiates a new UpdateCluster object
@@ -175,6 +177,38 @@ func (o *UpdateCluster) SetIsEnabledPublicNetwork(v bool) {
 	o.IsEnabledPublicNetwork = &v
 }
 
+// GetIsPublicIpv6 returns the IsPublicIpv6 field value if set, zero value otherwise.
+func (o *UpdateCluster) GetIsPublicIpv6() bool {
+	if o == nil || IsNil(o.IsPublicIpv6) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPublicIpv6
+}
+
+// GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCluster) GetIsPublicIpv6Ok() (*bool, bool) {
+	if o == nil || IsNil(o.IsPublicIpv6) {
+		return nil, false
+	}
+	return o.IsPublicIpv6, true
+}
+
+// HasIsPublicIpv6 returns a boolean if a field has been set.
+func (o *UpdateCluster) HasIsPublicIpv6() bool {
+	if o != nil && !IsNil(o.IsPublicIpv6) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPublicIpv6 gets a reference to the given bool and assigns it to the IsPublicIpv6 field.
+func (o *UpdateCluster) SetIsPublicIpv6(v bool) {
+	o.IsPublicIpv6 = &v
+}
+
 func (o UpdateCluster) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -196,6 +230,9 @@ func (o UpdateCluster) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsEnabledPublicNetwork) {
 		toSerialize["is_enabled_public_network"] = o.IsEnabledPublicNetwork
+	}
+	if !IsNil(o.IsPublicIpv6) {
+		toSerialize["is_public_ipv6"] = o.IsPublicIpv6
 	}
 	return toSerialize, nil
 }

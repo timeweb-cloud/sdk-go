@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Location** | **NullableString** | Локация сервера. | 
 **Name** | **string** | Название кластера базы данных. | 
 **Networks** | [**[]DatabaseClusterNetworksInner**](DatabaseClusterNetworksInner.md) | Список сетей кластера базы данных. | 
+**IsPublicIpv6** | Pointer to **bool** | Использование IPv6 адреса. | [optional] 
 **Type** | [**DbType**](DbType.md) |  | 
 **HashType** | **NullableString** | Тип хеширования кластера базы данных (mysql5 | mysql | postgres). | 
 **AvatarLink** | **NullableString** | Ссылка на аватар для базы данных. | 
@@ -147,6 +148,31 @@ and a boolean to check if the value has been set.
 
 SetNetworks sets Networks field to given value.
 
+
+### GetIsPublicIpv6
+
+`func (o *DatabaseCluster) GetIsPublicIpv6() bool`
+
+GetIsPublicIpv6 returns the IsPublicIpv6 field if non-nil, zero value otherwise.
+
+### GetIsPublicIpv6Ok
+
+`func (o *DatabaseCluster) GetIsPublicIpv6Ok() (*bool, bool)`
+
+GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPublicIpv6
+
+`func (o *DatabaseCluster) SetIsPublicIpv6(v bool)`
+
+SetIsPublicIpv6 sets IsPublicIpv6 field to given value.
+
+### HasIsPublicIpv6
+
+`func (o *DatabaseCluster) HasIsPublicIpv6() bool`
+
+HasIsPublicIpv6 returns a boolean if a field has been set.
 
 ### GetType
 

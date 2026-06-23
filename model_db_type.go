@@ -27,12 +27,12 @@ const (
 	POSTGRES15 DbType = "postgres15"
 	POSTGRES16 DbType = "postgres16"
 	POSTGRES17 DbType = "postgres17"
+	POSTGRES18 DbType = "postgres18"
 	VALKEY7 DbType = "valkey7"
 	VALKEY8_1 DbType = "valkey8_1"
 	VALKEY9_1 DbType = "valkey9_1"
 	MONGODB7 DbType = "mongodb7"
 	MONGODB8_0 DbType = "mongodb8_0"
-	OPENSEARCH DbType = "opensearch"
 	OPENSEARCH2_19 DbType = "opensearch2_19"
 	CLICKHOUSE DbType = "clickhouse"
 	CLICKHOUSE24 DbType = "clickhouse24"
@@ -49,12 +49,12 @@ var AllowedDbTypeEnumValues = []DbType{
 	"postgres15",
 	"postgres16",
 	"postgres17",
+	"postgres18",
 	"valkey7",
 	"valkey8_1",
 	"valkey9_1",
 	"mongodb7",
 	"mongodb8_0",
-	"opensearch",
 	"opensearch2_19",
 	"clickhouse",
 	"clickhouse24",
