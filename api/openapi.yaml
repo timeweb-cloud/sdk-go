@@ -54182,8 +54182,9 @@ components:
       - postgres15
       - postgres16
       - postgres17
-      - redis7
-      - redis8_1
+      - valkey7
+      - valkey8_1
+      - valkey9_1
       - mongodb7
       - mongodb8_0
       - opensearch

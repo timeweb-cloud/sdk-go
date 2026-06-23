@@ -15,9 +15,11 @@
 
 * `POSTGRES17` (value: `"postgres17"`)
 
-* `REDIS7` (value: `"redis7"`)
+* `VALKEY7` (value: `"valkey7"`)
 
-* `REDIS8_1` (value: `"redis8_1"`)
+* `VALKEY8_1` (value: `"valkey8_1"`)
+
+* `VALKEY9_1` (value: `"valkey9_1"`)
 
 * `MONGODB7` (value: `"mongodb7"`)
 
