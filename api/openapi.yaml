@@ -9279,750 +9279,6 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/dbs:
-    get:
-      deprecated: true
-      description: |-
-        Чтобы получить список всех баз данных на вашем аккаунте, отправьте GET-запрос на `/api/v1/dbs`.
-
-         Тело ответа будет представлять собой объект JSON с ключом `dbs`.
-      operationId: getDatabases
-      parameters:
-      - description: "Обозначает количество записей, которое необходимо вернуть."
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          default: 100
-          type: integer
-        style: form
-      - description: Указывает на смещение относительно начала списка.
-        explode: true
-        in: query
-        name: offset
-        required: false
-        schema:
-          default: 0
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getDatabases_200_response'
-          description: Ответ будет представлять собой объект JSON c ключом `dbs`.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Получение списка всех баз данных
-      tags:
-      - Databases
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X GET \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/dbs"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/dbs', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.get('https://api.timeweb.cloud/api/v1/dbs', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.get('https://api.timeweb.cloud/api/v1/dbs', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/dbs');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/dbs\", nil)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\"\
-          , \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
-          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/dbs\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-    post:
-      deprecated: true
-      description: |-
-        Чтобы создать базу данных на вашем аккаунте, отправьте POST-запрос на `/api/v1/dbs`, задав необходимые атрибуты.
-
-        База данных будет создана с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о созданной базе данных.
-      operationId: createDatabase
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/create-db'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/createDatabase_201_response'
-          description: Ответ будет представлять собой объект JSON c ключом `db`.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Создание базы данных
-      tags:
-      - Databases
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/db"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/db', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/db',
-              '',
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.post('https://api.timeweb.cloud/api/v1/db', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/db');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/db\", nil)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\"\
-          , \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
-          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/db\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/dbs/{db_id}:
-    delete:
-      deprecated: true
-      description: |
-        Чтобы удалить базу данных, отправьте запрос DELETE в `api/v1/dbs/{db_id}`.
-      operationId: deleteDatabase
-      parameters:
-      - description: ID базы данных
-        explode: false
-        in: path
-        name: db_id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      - description: "Хеш, который совместно с кодом авторизации надо отправить дл\
-          я удаления, если включено подтверждение удаления сервисов через Телеграм\
-          ."
-        explode: true
-        in: query
-        name: hash
-        required: false
-        schema:
-          example: 15095f25-aac3-4d60-a788-96cb5136f186
-          type: string
-        style: form
-      - description: |-
-          Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.
-
-          При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true`
-        explode: true
-        in: query
-        name: code
-        required: false
-        schema:
-          example: "0000"
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/deleteDatabase_200_response'
-          description: Объект JSON c ключом `database_delete`
-        "204":
-          description: База данных успешно удалена.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Удаление базы данных
-      tags:
-      - Databases
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X DELETE \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/dbs/1051"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/dbs/1051', {
-              method: 'DELETE',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.delete('https://api.timeweb.cloud/api/v1/dbs/1051', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.delete('https://api.timeweb.cloud/api/v1/dbs/1051', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/dbs/1051');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/dbs/1051\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/dbs/1051\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-    get:
-      deprecated: true
-      description: |
-        Чтобы отобразить информацию об отдельной базе данных, отправьте запрос GET на `api/v1/dbs/{db_id}`.
-      operationId: getDatabase
-      parameters:
-      - description: ID базы данных
-        explode: false
-        in: path
-        name: db_id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/createDatabase_201_response'
-          description: Ответ будет представлять собой объект JSON с ключом `db`.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Получение базы данных
-      tags:
-      - Databases
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X GET \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/dbs/1051"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/dbs/1051', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.get('https://api.timeweb.cloud/api/v1/dbs/1051', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.get('https://api.timeweb.cloud/api/v1/dbs/1051', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/dbs/1051');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/dbs/1051\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/dbs/1051\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-    patch:
-      deprecated: true
-      description: |
-        Чтобы обновить только определенные атрибуты базы данных, отправьте запрос PATCH в `api/v1/dbs/{db_id}`.
-      operationId: updateDatabase
-      parameters:
-      - description: ID базы данных
-        explode: false
-        in: path
-        name: db_id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/update-db'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/createDatabase_201_response'
-          description: Ответ будет представлять собой объект JSON с ключом `db`.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Обновление базы данных
-      tags:
-      - Databases
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X PATCH \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            -d '${DATA}' \
-            "https://api.timeweb.cloud/api/v1/dbs/1051"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/dbs/1051', {
-              method: 'PATCH',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              },
-              body: '${DATA}'
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.patch(
-              'https://api.timeweb.cloud/api/v1/dbs/1051',
-              '${DATA}',
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          data = '${DATA}'
-
-          response = requests.patch('https://api.timeweb.cloud/api/v1/dbs/1051', headers=headers, data=data)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/dbs/1051');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, '${DATA}');
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
-          \tvar data = strings.NewReader(`${DATA}`)\n\treq, err := http.NewRequest(\"\
-          PATCH\", \"https://api.timeweb.cloud/api/v1/dbs/1051\", data)\n\tif err\
-          \ != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\",\
-          \ \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
-          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
-          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
-          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
-          \ URL(\"https://api.timeweb.cloud/api/v1/dbs/1051\");\n\t\tHttpURLConnection\
-          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
-          PATCH\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
-          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
-          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
-          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
-          ${DATA}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
   /api/v1/dbs/{db_id}/auto-backups:
     get:
       description: "Чтобы получить список настроек автобэкапов базы данных, отправ\
@@ -54722,9 +53978,8 @@ components:
           example: '%'
           type: string
         instance_id:
-          description: "ID инстанса базы данных для применения привилегий. В данны\
-            х момент поле доступно только для кластеров MySQL. Если поле не переда\
-            но, то привилегии будут применены ко всем инстансам"
+          description: "ID инстанса базы данных для применения привилегий. Если по\
+            ле не передано, то привилегии будут применены ко всем инстансам"
           example: 1476
           type: number
         privileges:
@@ -54732,30 +53987,72 @@ components:
           items:
             enum:
             - ALTER
+            - ALTER_TABLE
+            - ALTER_VIEW
             - CREATE_VIEW
+            - CREATE_DICTIONARY
+            - CREATE_FUNCTION
+            - CREATE_TABLE
             - CREATE
             - DELETE
             - DROP
+            - DROP_TABLE
+            - DROP_VIEW
+            - DROP_DICTIONARY
             - EVENT
             - INDEX
             - INSERT
             - LOCK_TABLES
             - REFERENCES
             - SELECT
+            - SHOW
             - SHOW_VIEW
             - TRUNCATE
+            - TRIGGER
             - UPDATE
             - READ
             - WRITE
-            - CONNECTION
-            - FAST
-            - readWrite
+            - READ_WRITE
+            - DB_ADMIN
             - ALTER_ROUTINE
             - CREATE_ROUTINE
-            - TRANSACTION
-            - SLOW_LOG
-            - TRIGGER
             - CREATE_TEMPORARY_TABLES
+            - TEMPORARY
+            - CONFIGURE
+            - READ_DASHBOARD
+            - WRITE_DASHBOARD
+            - DESCRIBE
+            - OPTIMIZE
+            - EXECUTE
+            - CREATEDB
+            - CREATEROLE
+            - CREATE_DB
+            - CREATE_USER
+            - PROCESS
+            - SLOW_LOG
+            - CREATE_TEMPORARY_TABLE
+            - ADMIN
+            - BITMAP
+            - BLOCKING
+            - CONNECTION
+            - DANGEROUS
+            - GEO
+            - HASH
+            - HYPERLOGLOG
+            - FAST
+            - KEYSPACE
+            - LIST
+            - PUBSUB
+            - SCRIPTING
+            - SET
+            - SORTEDSET
+            - SLOW
+            - STREAM
+            - STRING
+            - TRANSACTION
+            - dictGet
+            - dbAdmin
+            - readWrite
             type: string
           type: array
         description:
@@ -54778,30 +54075,72 @@ components:
           items:
             enum:
             - ALTER
+            - ALTER_TABLE
+            - ALTER_VIEW
             - CREATE_VIEW
+            - CREATE_DICTIONARY
+            - CREATE_FUNCTION
+            - CREATE_TABLE
             - CREATE
             - DELETE
             - DROP
+            - DROP_TABLE
+            - DROP_VIEW
+            - DROP_DICTIONARY
             - EVENT
             - INDEX
             - INSERT
             - LOCK_TABLES
             - REFERENCES
             - SELECT
+            - SHOW
             - SHOW_VIEW
             - TRUNCATE
+            - TRIGGER
             - UPDATE
             - READ
             - WRITE
-            - CONNECTION
-            - FAST
-            - readWrite
+            - READ_WRITE
+            - DB_ADMIN
             - ALTER_ROUTINE
             - CREATE_ROUTINE
-            - TRANSACTION
-            - SLOW_LOG
-            - TRIGGER
             - CREATE_TEMPORARY_TABLES
+            - TEMPORARY
+            - CONFIGURE
+            - READ_DASHBOARD
+            - WRITE_DASHBOARD
+            - DESCRIBE
+            - OPTIMIZE
+            - EXECUTE
+            - CREATEDB
+            - CREATEROLE
+            - CREATE_DB
+            - CREATE_USER
+            - PROCESS
+            - SLOW_LOG
+            - CREATE_TEMPORARY_TABLE
+            - ADMIN
+            - BITMAP
+            - BLOCKING
+            - CONNECTION
+            - DANGEROUS
+            - GEO
+            - HASH
+            - HYPERLOGLOG
+            - FAST
+            - KEYSPACE
+            - LIST
+            - PUBSUB
+            - SCRIPTING
+            - SET
+            - SORTEDSET
+            - SLOW
+            - STREAM
+            - STRING
+            - TRANSACTION
+            - dictGet
+            - dbAdmin
+            - readWrite
             type: string
           type: array
         description:
@@ -54809,9 +54148,8 @@ components:
           example: description
           type: string
         instance_id:
-          description: "ID инстанса базы данных для применения привилегий. В данны\
-            х момент поле доступно только для кластеров MySQL. Если поле не переда\
-            но, то привилегии будут применены ко всем инстансам"
+          description: "ID инстанса базы данных для применения привилегий. Если по\
+            ле не передано, то привилегии будут применены ко всем инстансам"
           example: 1476
           type: number
       type: object
@@ -54912,230 +54250,6 @@ components:
       - name
       - type
       - version
-      type: object
-    db:
-      description: База данных
-      example:
-        availability_zone: spb-1
-        config_parameters:
-          innodb_io_capacity: "200"
-          shared_buffers: "128"
-          join_collapse_limit: "8"
-          auto_increment_increment: "1"
-          bgwriter_lru_maxpages: "100"
-          max_prepared_transactions: "0"
-          innodb_purge_threads: "4"
-          lock_timeout: "0"
-          auto_increment_offset: "1"
-          temp_buffers: "8"
-          innodb_thread_concurrency: "0"
-          autovacuum_analyze_scale_factor: "0.0001"
-          idle_in_transaction_session_timeout: "0"
-          query_cache_size: "0"
-          innodb_read_io_threads: "4"
-          max_connections: "1"
-          innodb_write_io_threads: "4"
-          max_allowed_packet: "16777216"
-          join_buffer_size: "262144"
-          bgwriter_delay: "200"
-          idle_session_timeout: "0"
-          max_heap_table_size: "16777216"
-          deadlock_timeout: "100"
-          sql_mode: STRICT_TRANS_TABLES
-          gin_pending_list_limit: "4194304"
-          query_cache_type: "0"
-          wal_buffers: "16"
-          work_mem: "4"
-        ip: 127.0.0.1
-        created_at: 2021-02-25T11:04:15Z
-        login: test_user
-        type: mysql
-        is_only_local_ip_access: false
-        local_ip: 127.0.0.1
-        password: password
-        account_id: cp78562
-        port: 3000
-        preset_id: 5
-        disk_stats:
-          size: 10485760
-          used: 486.11328125
-        name: default_db
-        host: test.ru
-        location: ru-1
-        id: 1
-        hash_type: caching_sha2
-        status: started
-      properties:
-        id:
-          description: ID для каждого экземпляра базы данных. Автоматически генерируется
-            при создании.
-          example: 1
-          type: number
-        created_at:
-          description: "Значение времени, указанное в комбинированном формате даты\
-            \ и времени ISO8601, которое представляет, когда была создана база дан\
-            ных."
-          example: 2021-02-25T11:04:15Z
-          type: string
-        account_id:
-          description: ID пользователя.
-          example: cp78562
-          type: string
-        login:
-          description: Логин для подключения к базе данных.
-          example: test_user
-          type: string
-        location:
-          description: Локация сервера.
-          enum:
-          - ru-1
-          - ru-2
-          - pl-1
-          - kz-1
-          example: ru-1
-          type: string
-        password:
-          description: Пароль для подключения к базе данных.
-          example: password
-          type: string
-        name:
-          description: Название базы данных.
-          example: default_db
-          type: string
-        host:
-          description: Хост.
-          example: test.ru
-          nullable: true
-          type: string
-        type:
-          $ref: '#/components/schemas/db-type'
-        hash_type:
-          description: Тип хеширования базы данных (mysql5 | mysql | postgres).
-          enum:
-          - caching_sha2
-          - mysql_native
-          - null
-          example: caching_sha2
-          nullable: true
-          type: string
-        port:
-          description: Порт
-          example: 3000
-          type: integer
-        ip:
-          description: IP-адрес сетевого интерфейса IPv4.
-          example: 127.0.0.1
-          format: ipv4
-          nullable: true
-          type: string
-        local_ip:
-          description: IP-адрес локального сетевого интерфейса IPv4.
-          example: 127.0.0.1
-          format: ipv4
-          nullable: true
-          type: string
-        status:
-          description: Текущий статус базы данных.
-          enum:
-          - started
-          - starting
-          - stopped
-          - no_paid
-          example: started
-          type: string
-        preset_id:
-          description: ID тарифа.
-          example: 5
-          type: integer
-        disk_stats:
-          $ref: '#/components/schemas/db_disk_stats'
-        config_parameters:
-          $ref: '#/components/schemas/config-parameters'
-        is_only_local_ip_access:
-          description: "Это логическое значение, которое показывает, доступна ли б\
-            аза данных только по локальному IP адресу."
-          example: false
-          type: boolean
-        availability_zone:
-          $ref: '#/components/schemas/availability-zone'
-      required:
-      - account_id
-      - availability_zone
-      - config_parameters
-      - created_at
-      - disk_stats
-      - hash_type
-      - host
-      - id
-      - ip
-      - is_only_local_ip_access
-      - local_ip
-      - login
-      - name
-      - password
-      - port
-      - preset_id
-      - status
-      - type
-      type: object
-    create-db:
-      properties:
-        login:
-          description: Логин для подключения к базе данных.
-          example: test_user
-          type: string
-        password:
-          description: Пароль для подключения к базе данных.
-          example: password
-          type: string
-        name:
-          description: Название базы данных.
-          example: default_db
-          type: string
-        type:
-          $ref: '#/components/schemas/db-type'
-        hash_type:
-          description: Тип хеширования базы данных (mysql5 | mysql | postgres).
-          enum:
-          - caching_sha2
-          - mysql_native
-          example: caching_sha2
-          type: string
-        preset_id:
-          description: ID тарифа.
-          example: 5
-          type: integer
-        config_parameters:
-          $ref: '#/components/schemas/config-parameters'
-        network:
-          $ref: '#/components/schemas/network'
-      required:
-      - name
-      - password
-      - preset_id
-      - type
-      type: object
-    update-db:
-      description: Дополнительные параметры конфигурации базы данных.
-      properties:
-        password:
-          description: Пароль для подключения к базе данных.
-          example: password
-          type: string
-        name:
-          description: Название базы данных.
-          example: default_db
-          type: string
-        preset_id:
-          description: ID тарифа.
-          example: 5
-          type: integer
-        config_parameters:
-          $ref: '#/components/schemas/config-parameters'
-        is_external_ip:
-          description: Использовать или нет внешний IP.
-          example: true
-          type: boolean
       type: object
     auto-backup:
       example:
@@ -59440,6 +58554,171 @@ components:
       - preset_id
       - ram
       - status
+      type: object
+    db:
+      description: База данных
+      example:
+        availability_zone: spb-1
+        config_parameters:
+          innodb_io_capacity: "200"
+          shared_buffers: "128"
+          join_collapse_limit: "8"
+          auto_increment_increment: "1"
+          bgwriter_lru_maxpages: "100"
+          max_prepared_transactions: "0"
+          innodb_purge_threads: "4"
+          lock_timeout: "0"
+          auto_increment_offset: "1"
+          temp_buffers: "8"
+          innodb_thread_concurrency: "0"
+          autovacuum_analyze_scale_factor: "0.0001"
+          idle_in_transaction_session_timeout: "0"
+          query_cache_size: "0"
+          innodb_read_io_threads: "4"
+          max_connections: "1"
+          innodb_write_io_threads: "4"
+          max_allowed_packet: "16777216"
+          join_buffer_size: "262144"
+          bgwriter_delay: "200"
+          idle_session_timeout: "0"
+          max_heap_table_size: "16777216"
+          deadlock_timeout: "100"
+          sql_mode: STRICT_TRANS_TABLES
+          gin_pending_list_limit: "4194304"
+          query_cache_type: "0"
+          wal_buffers: "16"
+          work_mem: "4"
+        ip: 127.0.0.1
+        created_at: 2021-02-25T11:04:15Z
+        login: test_user
+        type: mysql
+        is_only_local_ip_access: false
+        local_ip: 127.0.0.1
+        password: password
+        account_id: cp78562
+        port: 3000
+        preset_id: 5
+        disk_stats:
+          size: 10485760
+          used: 486.11328125
+        name: default_db
+        host: test.ru
+        location: ru-1
+        id: 1
+        hash_type: caching_sha2
+        status: started
+      properties:
+        id:
+          description: ID для каждого экземпляра базы данных. Автоматически генерируется
+            при создании.
+          example: 1
+          type: number
+        created_at:
+          description: "Значение времени, указанное в комбинированном формате даты\
+            \ и времени ISO8601, которое представляет, когда была создана база дан\
+            ных."
+          example: 2021-02-25T11:04:15Z
+          type: string
+        account_id:
+          description: ID пользователя.
+          example: cp78562
+          type: string
+        login:
+          description: Логин для подключения к базе данных.
+          example: test_user
+          type: string
+        location:
+          description: Локация сервера.
+          enum:
+          - ru-1
+          - ru-2
+          - pl-1
+          - kz-1
+          example: ru-1
+          type: string
+        password:
+          description: Пароль для подключения к базе данных.
+          example: password
+          type: string
+        name:
+          description: Название базы данных.
+          example: default_db
+          type: string
+        host:
+          description: Хост.
+          example: test.ru
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/db-type'
+        hash_type:
+          description: Тип хеширования базы данных (mysql5 | mysql | postgres).
+          enum:
+          - caching_sha2
+          - mysql_native
+          - null
+          example: caching_sha2
+          nullable: true
+          type: string
+        port:
+          description: Порт
+          example: 3000
+          type: integer
+        ip:
+          description: IP-адрес сетевого интерфейса IPv4.
+          example: 127.0.0.1
+          format: ipv4
+          nullable: true
+          type: string
+        local_ip:
+          description: IP-адрес локального сетевого интерфейса IPv4.
+          example: 127.0.0.1
+          format: ipv4
+          nullable: true
+          type: string
+        status:
+          description: Текущий статус базы данных.
+          enum:
+          - started
+          - starting
+          - stopped
+          - no_paid
+          example: started
+          type: string
+        preset_id:
+          description: ID тарифа.
+          example: 5
+          type: integer
+        disk_stats:
+          $ref: '#/components/schemas/db_disk_stats'
+        config_parameters:
+          $ref: '#/components/schemas/config-parameters'
+        is_only_local_ip_access:
+          description: "Это логическое значение, которое показывает, доступна ли б\
+            аза данных только по локальному IP адресу."
+          example: false
+          type: boolean
+        availability_zone:
+          $ref: '#/components/schemas/availability-zone'
+      required:
+      - account_id
+      - availability_zone
+      - config_parameters
+      - created_at
+      - disk_stats
+      - hash_type
+      - host
+      - id
+      - ip
+      - is_only_local_ip_access
+      - local_ip
+      - login
+      - name
+      - password
+      - port
+      - preset_id
+      - status
+      - type
       type: object
     resource-transfer:
       properties:
@@ -64612,189 +63891,6 @@ components:
       required:
       - meta
       - types
-      type: object
-    getDatabases_200_response:
-      example:
-        dbs:
-        - availability_zone: spb-1
-          config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
-            innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
-            innodb_write_io_threads: "4"
-            max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
-            max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
-          ip: 127.0.0.1
-          created_at: 2021-02-25T11:04:15Z
-          login: test_user
-          type: mysql
-          is_only_local_ip_access: false
-          local_ip: 127.0.0.1
-          password: password
-          account_id: cp78562
-          port: 3000
-          preset_id: 5
-          disk_stats:
-            size: 10485760
-            used: 486.11328125
-          name: default_db
-          host: test.ru
-          location: ru-1
-          id: 1
-          hash_type: caching_sha2
-          status: started
-        - availability_zone: spb-1
-          config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
-            innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
-            innodb_write_io_threads: "4"
-            max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
-            max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
-          ip: 127.0.0.1
-          created_at: 2021-02-25T11:04:15Z
-          login: test_user
-          type: mysql
-          is_only_local_ip_access: false
-          local_ip: 127.0.0.1
-          password: password
-          account_id: cp78562
-          port: 3000
-          preset_id: 5
-          disk_stats:
-            size: 10485760
-            used: 486.11328125
-          name: default_db
-          host: test.ru
-          location: ru-1
-          id: 1
-          hash_type: caching_sha2
-          status: started
-        meta:
-          total: 10
-      properties:
-        meta:
-          $ref: '#/components/schemas/meta'
-        dbs:
-          items:
-            $ref: '#/components/schemas/db'
-          type: array
-      required:
-      - dbs
-      - meta
-      type: object
-    createDatabase_201_response:
-      example:
-        db:
-          availability_zone: spb-1
-          config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
-            innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
-            innodb_write_io_threads: "4"
-            max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
-            max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
-          ip: 127.0.0.1
-          created_at: 2021-02-25T11:04:15Z
-          login: test_user
-          type: mysql
-          is_only_local_ip_access: false
-          local_ip: 127.0.0.1
-          password: password
-          account_id: cp78562
-          port: 3000
-          preset_id: 5
-          disk_stats:
-            size: 10485760
-            used: 486.11328125
-          name: default_db
-          host: test.ru
-          location: ru-1
-          id: 1
-          hash_type: caching_sha2
-          status: started
-      properties:
-        db:
-          $ref: '#/components/schemas/db'
-      required:
-      - db
-      type: object
-    deleteDatabase_200_response:
-      example:
-        database_delete:
-          is_moved_in_quarantine: false
-          hash: 15095f25-aac3-4d60-a788-96cb5136f186
-      properties:
-        database_delete:
-          $ref: '#/components/schemas/delete-service-response'
-      required:
-      - database_delete
       type: object
     getDatabaseAutoBackupsSettings_200_response:
       example:
@@ -70788,27 +69884,72 @@ components:
           items:
             enum:
             - ALTER
+            - ALTER_TABLE
+            - ALTER_VIEW
             - CREATE_VIEW
+            - CREATE_DICTIONARY
+            - CREATE_FUNCTION
+            - CREATE_TABLE
             - CREATE
             - DELETE
             - DROP
+            - DROP_TABLE
+            - DROP_VIEW
+            - DROP_DICTIONARY
             - EVENT
             - INDEX
             - INSERT
             - LOCK_TABLES
             - REFERENCES
             - SELECT
+            - SHOW
             - SHOW_VIEW
             - TRUNCATE
+            - TRIGGER
             - UPDATE
             - READ
             - WRITE
-            - CONNECTION
-            - FAST
-            - readWrite
+            - READ_WRITE
+            - DB_ADMIN
             - ALTER_ROUTINE
             - CREATE_ROUTINE
+            - CREATE_TEMPORARY_TABLES
+            - TEMPORARY
+            - CONFIGURE
+            - READ_DASHBOARD
+            - WRITE_DASHBOARD
+            - DESCRIBE
+            - OPTIMIZE
+            - EXECUTE
+            - CREATEDB
+            - CREATEROLE
+            - CREATE_DB
+            - CREATE_USER
+            - PROCESS
+            - SLOW_LOG
+            - CREATE_TEMPORARY_TABLE
+            - ADMIN
+            - BITMAP
+            - BLOCKING
+            - CONNECTION
+            - DANGEROUS
+            - GEO
+            - HASH
+            - HYPERLOGLOG
+            - FAST
+            - KEYSPACE
+            - LIST
+            - PUBSUB
+            - SCRIPTING
+            - SET
+            - SORTEDSET
+            - SLOW
+            - STREAM
+            - STRING
             - TRANSACTION
+            - dictGet
+            - dbAdmin
+            - readWrite
             type: string
           type: array
         description:
@@ -70842,30 +69983,72 @@ components:
           items:
             enum:
             - ALTER
+            - ALTER_TABLE
+            - ALTER_VIEW
             - CREATE_VIEW
+            - CREATE_DICTIONARY
+            - CREATE_FUNCTION
+            - CREATE_TABLE
             - CREATE
             - DELETE
             - DROP
+            - DROP_TABLE
+            - DROP_VIEW
+            - DROP_DICTIONARY
             - EVENT
             - INDEX
             - INSERT
             - LOCK_TABLES
             - REFERENCES
             - SELECT
+            - SHOW
             - SHOW_VIEW
             - TRUNCATE
+            - TRIGGER
             - UPDATE
             - READ
             - WRITE
-            - CONNECTION
-            - FAST
-            - readWrite
+            - READ_WRITE
+            - DB_ADMIN
             - ALTER_ROUTINE
             - CREATE_ROUTINE
-            - TRANSACTION
-            - SLOW_LOG
-            - TRIGGER
             - CREATE_TEMPORARY_TABLES
+            - TEMPORARY
+            - CONFIGURE
+            - READ_DASHBOARD
+            - WRITE_DASHBOARD
+            - DESCRIBE
+            - OPTIMIZE
+            - EXECUTE
+            - CREATEDB
+            - CREATEROLE
+            - CREATE_DB
+            - CREATE_USER
+            - PROCESS
+            - SLOW_LOG
+            - CREATE_TEMPORARY_TABLE
+            - ADMIN
+            - BITMAP
+            - BLOCKING
+            - CONNECTION
+            - DANGEROUS
+            - GEO
+            - HASH
+            - HYPERLOGLOG
+            - FAST
+            - KEYSPACE
+            - LIST
+            - PUBSUB
+            - SCRIPTING
+            - SET
+            - SORTEDSET
+            - SLOW
+            - STREAM
+            - STRING
+            - TRANSACTION
+            - dictGet
+            - dbAdmin
+            - readWrite
             type: string
           type: array
       required:
@@ -70891,25 +70074,6 @@ components:
           description: Минимальный объем дискового пространства.
           example: 1024
           type: number
-      type: object
-    db_disk_stats:
-      description: Статистика использования диска базы данных.
-      example:
-        size: 10485760
-        used: 486.11328125
-      nullable: true
-      properties:
-        size:
-          description: Размер (в Кб) диска базы данных.
-          example: 10485760
-          type: number
-        used:
-          description: Размер (в Кб) использованного пространства диска базы данных.
-          example: 486.11328125
-          type: number
-      required:
-      - size
-      - used
       type: object
     dedicated_server_preset_cpu:
       description: "Объект, содержащий информацию о процессоре выделенного сервера\
@@ -71994,6 +71158,25 @@ components:
           items:
             $ref: '#/components/schemas/bucket_website_config_error_pages_inner'
           type: array
+      type: object
+    db_disk_stats:
+      description: Статистика использования диска базы данных.
+      example:
+        size: 10485760
+        used: 486.11328125
+      nullable: true
+      properties:
+        size:
+          description: Размер (в Кб) диска базы данных.
+          example: 10485760
+          type: number
+        used:
+          description: Размер (в Кб) использованного пространства диска базы данных.
+          example: 486.11328125
+          type: number
+      required:
+      - size
+      - used
       type: object
     transfer_status_errors_inner:
       example:

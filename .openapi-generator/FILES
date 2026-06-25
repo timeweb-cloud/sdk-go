@@ -136,13 +136,11 @@ docs/CreateBalancerRule200Response.md
 docs/CreateCluster.md
 docs/CreateClusterAdmin.md
 docs/CreateClusterInstance.md
-docs/CreateDatabase201Response.md
 docs/CreateDatabaseBackup201Response.md
 docs/CreateDatabaseBackup409Response.md
 docs/CreateDatabaseCluster201Response.md
 docs/CreateDatabaseInstance201Response.md
 docs/CreateDatabaseUser201Response.md
-docs/CreateDb.md
 docs/CreateDbAutoBackups.md
 docs/CreateDedicatedServer.md
 docs/CreateDedicatedServer201Response.md
@@ -212,7 +210,6 @@ docs/DeleteBalancer200Response.md
 docs/DeleteCluster200Response.md
 docs/DeleteCountriesFromAllowedList200Response.md
 docs/DeleteCountriesFromAllowedListRequest.md
-docs/DeleteDatabase200Response.md
 docs/DeleteDatabaseCluster200Response.md
 docs/DeleteIPsFromAllowedList200Response.md
 docs/DeleteIPsFromAllowedListRequest.md
@@ -302,7 +299,6 @@ docs/GetDatabaseClusterTypes200Response.md
 docs/GetDatabaseClusters200Response.md
 docs/GetDatabaseInstances200Response.md
 docs/GetDatabaseUsers200Response.md
-docs/GetDatabases200Response.md
 docs/GetDatabasesPresets200Response.md
 docs/GetDedicatedServerPresetAdditionalServices200Response.md
 docs/GetDedicatedServers200Response.md
@@ -555,7 +551,6 @@ docs/UpdateAppSettings200Response.md
 docs/UpdateAuthRestrictionsByCountriesRequest.md
 docs/UpdateBalancer.md
 docs/UpdateCluster.md
-docs/UpdateDb.md
 docs/UpdateDedicatedServerRequest.md
 docs/UpdateDomain.md
 docs/UpdateDomainAutoProlongation200Response.md
@@ -712,13 +707,11 @@ model_create_balancer_rule_200_response.go
 model_create_cluster.go
 model_create_cluster_admin.go
 model_create_cluster_instance.go
-model_create_database_201_response.go
 model_create_database_backup_201_response.go
 model_create_database_backup_409_response.go
 model_create_database_cluster_201_response.go
 model_create_database_instance_201_response.go
 model_create_database_user_201_response.go
-model_create_db.go
 model_create_db_auto_backups.go
 model_create_dedicated_server.go
 model_create_dedicated_server_201_response.go
@@ -786,7 +779,6 @@ model_delete_balancer_200_response.go
 model_delete_cluster_200_response.go
 model_delete_countries_from_allowed_list_200_response.go
 model_delete_countries_from_allowed_list_request.go
-model_delete_database_200_response.go
 model_delete_database_cluster_200_response.go
 model_delete_ips_from_allowed_list_200_response.go
 model_delete_ips_from_allowed_list_request.go
@@ -873,7 +865,6 @@ model_get_database_cluster_types_200_response.go
 model_get_database_clusters_200_response.go
 model_get_database_instances_200_response.go
 model_get_database_users_200_response.go
-model_get_databases_200_response.go
 model_get_databases_presets_200_response.go
 model_get_dedicated_server_preset_additional_services_200_response.go
 model_get_dedicated_servers_200_response.go
@@ -1113,7 +1104,6 @@ model_update_app_settings_200_response.go
 model_update_auth_restrictions_by_countries_request.go
 model_update_balancer.go
 model_update_cluster.go
-model_update_db.go
 model_update_dedicated_server_request.go
 model_update_domain.go
 model_update_domain_auto_prolongation_200_response.go

@@ -22,18 +22,6 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test DatabasesAPIService CreateDatabase", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.DatabasesAPI.CreateDatabase(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test DatabasesAPIService CreateDatabaseBackup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -81,20 +69,6 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 		var dbClusterId int32
 
 		resp, httpRes, err := apiClient.DatabasesAPI.CreateDatabaseUser(context.Background(), dbClusterId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test DatabasesAPIService DeleteDatabase", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var dbId int32
-
-		resp, httpRes, err := apiClient.DatabasesAPI.DeleteDatabase(context.Background(), dbId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -154,20 +128,6 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 		httpRes, err := apiClient.DatabasesAPI.DeleteDatabaseUser(context.Background(), dbClusterId, adminId).Execute()
 
 		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test DatabasesAPIService GetDatabase", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var dbId int32
-
-		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabase(context.Background(), dbId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -323,18 +283,6 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DatabasesAPIService GetDatabases", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabases(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test DatabasesAPIService GetDatabasesPresets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -357,20 +305,6 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 		httpRes, err := apiClient.DatabasesAPI.RestoreDatabaseFromBackup(context.Background(), dbId, backupId).Execute()
 
 		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test DatabasesAPIService UpdateDatabase", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var dbId int32
-
-		resp, httpRes, err := apiClient.DatabasesAPI.UpdateDatabase(context.Background(), dbId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

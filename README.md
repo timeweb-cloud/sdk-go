@@ -285,17 +285,14 @@ Class | Method | HTTP request | Description
 *ContainerRegistryAPI* | [**GetRegistryPresets**](docs/ContainerRegistryAPI.md#getregistrypresets) | **Get** /api/v1/container-registry/presets | Получение списка тарифов
 *ContainerRegistryAPI* | [**GetRegistryRepositories**](docs/ContainerRegistryAPI.md#getregistryrepositories) | **Get** /api/v1/container-registry/{registry_id}/repositories | Получение списка репозиториев
 *ContainerRegistryAPI* | [**UpdateRegistry**](docs/ContainerRegistryAPI.md#updateregistry) | **Patch** /api/v1/container-registry/{registry_id} | Обновление информации о реестре
-*DatabasesAPI* | [**CreateDatabase**](docs/DatabasesAPI.md#createdatabase) | **Post** /api/v1/dbs | Создание базы данных
 *DatabasesAPI* | [**CreateDatabaseBackup**](docs/DatabasesAPI.md#createdatabasebackup) | **Post** /api/v1/dbs/{db_id}/backups | Создание бэкапа базы данных
 *DatabasesAPI* | [**CreateDatabaseCluster**](docs/DatabasesAPI.md#createdatabasecluster) | **Post** /api/v1/databases | Создание кластера базы данных
 *DatabasesAPI* | [**CreateDatabaseInstance**](docs/DatabasesAPI.md#createdatabaseinstance) | **Post** /api/v1/databases/{db_cluster_id}/instances | Создание инстанса базы данных
 *DatabasesAPI* | [**CreateDatabaseUser**](docs/DatabasesAPI.md#createdatabaseuser) | **Post** /api/v1/databases/{db_cluster_id}/admins | Создание пользователя базы данных
-*DatabasesAPI* | [**DeleteDatabase**](docs/DatabasesAPI.md#deletedatabase) | **Delete** /api/v1/dbs/{db_id} | Удаление базы данных
 *DatabasesAPI* | [**DeleteDatabaseBackup**](docs/DatabasesAPI.md#deletedatabasebackup) | **Delete** /api/v1/dbs/{db_id}/backups/{backup_id} | Удаление бэкапа базы данных
 *DatabasesAPI* | [**DeleteDatabaseCluster**](docs/DatabasesAPI.md#deletedatabasecluster) | **Delete** /api/v1/databases/{db_cluster_id} | Удаление кластера базы данных
 *DatabasesAPI* | [**DeleteDatabaseInstance**](docs/DatabasesAPI.md#deletedatabaseinstance) | **Delete** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Удаление инстанса базы данных
 *DatabasesAPI* | [**DeleteDatabaseUser**](docs/DatabasesAPI.md#deletedatabaseuser) | **Delete** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Удаление пользователя базы данных
-*DatabasesAPI* | [**GetDatabase**](docs/DatabasesAPI.md#getdatabase) | **Get** /api/v1/dbs/{db_id} | Получение базы данных
 *DatabasesAPI* | [**GetDatabaseAutoBackupsSettings**](docs/DatabasesAPI.md#getdatabaseautobackupssettings) | **Get** /api/v1/dbs/{db_id}/auto-backups | Получение настроек автобэкапов базы данных
 *DatabasesAPI* | [**GetDatabaseBackup**](docs/DatabasesAPI.md#getdatabasebackup) | **Get** /api/v1/dbs/{db_id}/backups/{backup_id} | Получение бэкапа базы данных
 *DatabasesAPI* | [**GetDatabaseBackups**](docs/DatabasesAPI.md#getdatabasebackups) | **Get** /api/v1/dbs/{db_id}/backups | Список бэкапов базы данных
@@ -307,10 +304,8 @@ Class | Method | HTTP request | Description
 *DatabasesAPI* | [**GetDatabaseParameters**](docs/DatabasesAPI.md#getdatabaseparameters) | **Get** /api/v1/dbs/parameters | Получение списка параметров баз данных
 *DatabasesAPI* | [**GetDatabaseUser**](docs/DatabasesAPI.md#getdatabaseuser) | **Get** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Получение пользователя базы данных
 *DatabasesAPI* | [**GetDatabaseUsers**](docs/DatabasesAPI.md#getdatabaseusers) | **Get** /api/v1/databases/{db_cluster_id}/admins | Получение списка пользователей базы данных
-*DatabasesAPI* | [**GetDatabases**](docs/DatabasesAPI.md#getdatabases) | **Get** /api/v1/dbs | Получение списка всех баз данных
 *DatabasesAPI* | [**GetDatabasesPresets**](docs/DatabasesAPI.md#getdatabasespresets) | **Get** /api/v2/presets/dbs | Получение списка тарифов для баз данных
 *DatabasesAPI* | [**RestoreDatabaseFromBackup**](docs/DatabasesAPI.md#restoredatabasefrombackup) | **Put** /api/v1/dbs/{db_id}/backups/{backup_id} | Восстановление базы данных из бэкапа
-*DatabasesAPI* | [**UpdateDatabase**](docs/DatabasesAPI.md#updatedatabase) | **Patch** /api/v1/dbs/{db_id} | Обновление базы данных
 *DatabasesAPI* | [**UpdateDatabaseAutoBackupsSettings**](docs/DatabasesAPI.md#updatedatabaseautobackupssettings) | **Patch** /api/v1/dbs/{db_id}/auto-backups | Изменение настроек автобэкапов базы данных
 *DatabasesAPI* | [**UpdateDatabaseCluster**](docs/DatabasesAPI.md#updatedatabasecluster) | **Patch** /api/v1/databases/{db_cluster_id} | Изменение кластера базы данных
 *DatabasesAPI* | [**UpdateDatabaseInstance**](docs/DatabasesAPI.md#updatedatabaseinstance) | **Patch** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Изменение инстанса базы данных
@@ -666,13 +661,11 @@ Class | Method | HTTP request | Description
  - [CreateCluster](docs/CreateCluster.md)
  - [CreateClusterAdmin](docs/CreateClusterAdmin.md)
  - [CreateClusterInstance](docs/CreateClusterInstance.md)
- - [CreateDatabase201Response](docs/CreateDatabase201Response.md)
  - [CreateDatabaseBackup201Response](docs/CreateDatabaseBackup201Response.md)
  - [CreateDatabaseBackup409Response](docs/CreateDatabaseBackup409Response.md)
  - [CreateDatabaseCluster201Response](docs/CreateDatabaseCluster201Response.md)
  - [CreateDatabaseInstance201Response](docs/CreateDatabaseInstance201Response.md)
  - [CreateDatabaseUser201Response](docs/CreateDatabaseUser201Response.md)
- - [CreateDb](docs/CreateDb.md)
  - [CreateDbAutoBackups](docs/CreateDbAutoBackups.md)
  - [CreateDedicatedServer](docs/CreateDedicatedServer.md)
  - [CreateDedicatedServer201Response](docs/CreateDedicatedServer201Response.md)
@@ -740,7 +733,6 @@ Class | Method | HTTP request | Description
  - [DeleteCluster200Response](docs/DeleteCluster200Response.md)
  - [DeleteCountriesFromAllowedList200Response](docs/DeleteCountriesFromAllowedList200Response.md)
  - [DeleteCountriesFromAllowedListRequest](docs/DeleteCountriesFromAllowedListRequest.md)
- - [DeleteDatabase200Response](docs/DeleteDatabase200Response.md)
  - [DeleteDatabaseCluster200Response](docs/DeleteDatabaseCluster200Response.md)
  - [DeleteIPsFromAllowedList200Response](docs/DeleteIPsFromAllowedList200Response.md)
  - [DeleteIPsFromAllowedListRequest](docs/DeleteIPsFromAllowedListRequest.md)
@@ -827,7 +819,6 @@ Class | Method | HTTP request | Description
  - [GetDatabaseClusters200Response](docs/GetDatabaseClusters200Response.md)
  - [GetDatabaseInstances200Response](docs/GetDatabaseInstances200Response.md)
  - [GetDatabaseUsers200Response](docs/GetDatabaseUsers200Response.md)
- - [GetDatabases200Response](docs/GetDatabases200Response.md)
  - [GetDatabasesPresets200Response](docs/GetDatabasesPresets200Response.md)
  - [GetDedicatedServerPresetAdditionalServices200Response](docs/GetDedicatedServerPresetAdditionalServices200Response.md)
  - [GetDedicatedServers200Response](docs/GetDedicatedServers200Response.md)
@@ -1068,7 +1059,6 @@ Class | Method | HTTP request | Description
  - [UpdateAuthRestrictionsByCountriesRequest](docs/UpdateAuthRestrictionsByCountriesRequest.md)
  - [UpdateBalancer](docs/UpdateBalancer.md)
  - [UpdateCluster](docs/UpdateCluster.md)
- - [UpdateDb](docs/UpdateDb.md)
  - [UpdateDedicatedServerRequest](docs/UpdateDedicatedServerRequest.md)
  - [UpdateDomain](docs/UpdateDomain.md)
  - [UpdateDomainAutoProlongation200Response](docs/UpdateDomainAutoProlongation200Response.md)
