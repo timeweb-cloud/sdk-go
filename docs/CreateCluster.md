@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **PresetId** | Pointer to **int32** | ID тарифа. Нельзя передавать вместе с &#x60;configurator_id&#x60; | [optional] 
 **ConfiguratorId** | Pointer to **int32** | ID конфигуратора. Нельзя передавать вместе с &#x60;preset_id&#x60; | [optional] 
 **ProjectId** | Pointer to **int32** | ID проекта. | [optional] 
-**ConfigParameters** | Pointer to [**ConfigParameters**](ConfigParameters.md) |  | [optional] 
+**ConfigParameters** | Pointer to [**Mysql**](Mysql.md) |  | [optional] 
 **Replication** | Pointer to [**DbReplication**](DbReplication.md) |  | [optional] 
 **Network** | Pointer to [**Network**](Network.md) |  | [optional] 
 **IsPublicIpv6** | Pointer to **bool** | Использование IPv6 адреса. | [optional] 
@@ -231,20 +231,20 @@ HasProjectId returns a boolean if a field has been set.
 
 ### GetConfigParameters
 
-`func (o *CreateCluster) GetConfigParameters() ConfigParameters`
+`func (o *CreateCluster) GetConfigParameters() Mysql`
 
 GetConfigParameters returns the ConfigParameters field if non-nil, zero value otherwise.
 
 ### GetConfigParametersOk
 
-`func (o *CreateCluster) GetConfigParametersOk() (*ConfigParameters, bool)`
+`func (o *CreateCluster) GetConfigParametersOk() (*Mysql, bool)`
 
 GetConfigParametersOk returns a tuple with the ConfigParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfigParameters
 
-`func (o *CreateCluster) SetConfigParameters(v ConfigParameters)`
+`func (o *CreateCluster) SetConfigParameters(v Mysql)`
 
 SetConfigParameters sets ConfigParameters field to given value.
 

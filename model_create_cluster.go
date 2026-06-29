@@ -33,7 +33,7 @@ type CreateCluster struct {
 	ConfiguratorId *int32 `json:"configurator_id,omitempty"`
 	// ID проекта.
 	ProjectId *int32 `json:"project_id,omitempty"`
-	ConfigParameters *ConfigParameters `json:"config_parameters,omitempty"`
+	ConfigParameters *Mysql `json:"config_parameters,omitempty"`
 	Replication *DbReplication `json:"replication,omitempty"`
 	Network *Network `json:"network,omitempty"`
 	// Использование IPv6 адреса.
@@ -304,9 +304,9 @@ func (o *CreateCluster) SetProjectId(v int32) {
 }
 
 // GetConfigParameters returns the ConfigParameters field value if set, zero value otherwise.
-func (o *CreateCluster) GetConfigParameters() ConfigParameters {
+func (o *CreateCluster) GetConfigParameters() Mysql {
 	if o == nil || IsNil(o.ConfigParameters) {
-		var ret ConfigParameters
+		var ret Mysql
 		return ret
 	}
 	return *o.ConfigParameters
@@ -314,7 +314,7 @@ func (o *CreateCluster) GetConfigParameters() ConfigParameters {
 
 // GetConfigParametersOk returns a tuple with the ConfigParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCluster) GetConfigParametersOk() (*ConfigParameters, bool) {
+func (o *CreateCluster) GetConfigParametersOk() (*Mysql, bool) {
 	if o == nil || IsNil(o.ConfigParameters) {
 		return nil, false
 	}
@@ -330,8 +330,8 @@ func (o *CreateCluster) HasConfigParameters() bool {
 	return false
 }
 
-// SetConfigParameters gets a reference to the given ConfigParameters and assigns it to the ConfigParameters field.
-func (o *CreateCluster) SetConfigParameters(v ConfigParameters) {
+// SetConfigParameters gets a reference to the given Mysql and assigns it to the ConfigParameters field.
+func (o *CreateCluster) SetConfigParameters(v Mysql) {
 	o.ConfigParameters = &v
 }
 

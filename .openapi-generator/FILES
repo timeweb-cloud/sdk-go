@@ -121,6 +121,8 @@ docs/Commit.md
 docs/ComponentsSchemasBaseError.md
 docs/ComponentsSchemasMeta.md
 docs/ConfigParameters.md
+docs/ConfigParametersMysql.md
+docs/ConfigParametersPostgres.md
 docs/ContainerRegistryAPI.md
 docs/ContainerRegistryPresetsInner.md
 docs/ContainerRegistryRepositoriesInner.md
@@ -411,6 +413,7 @@ docs/ModelParamsInfoMaxTokens.md
 docs/ModelParamsInfoReasoningEffort.md
 docs/ModelParamsInfoTemperature.md
 docs/MountNetworkDrive.md
+docs/Mysql.md
 docs/NatIn.md
 docs/Network.md
 docs/NetworkDrive.md
@@ -444,6 +447,7 @@ docs/PaymentsAPI.md
 docs/PerformActionOnBackupRequest.md
 docs/PerformActionOnServerRequest.md
 docs/Policy.md
+docs/Postgres.md
 docs/PresetsBalancer.md
 docs/PresetsDbs.md
 docs/PresetsResponse.md
@@ -693,6 +697,8 @@ model_commit.go
 model_components_schemas_base_error.go
 model_components_schemas_meta.go
 model_config_parameters.go
+model_config_parameters_mysql.go
+model_config_parameters_postgres.go
 model_container_registry_presets_inner.go
 model_container_registry_repositories_inner.go
 model_create_admin.go
@@ -972,6 +978,7 @@ model_model_params_info_max_tokens.go
 model_model_params_info_reasoning_effort.go
 model_model_params_info_temperature.go
 model_mount_network_drive.go
+model_mysql.go
 model_nat_in.go
 model_network.go
 model_network_drive.go
@@ -1003,6 +1010,7 @@ model_outgoing_is_enabled.go
 model_perform_action_on_backup_request.go
 model_perform_action_on_server_request.go
 model_policy.go
+model_postgres.go
 model_presets_balancer.go
 model_presets_dbs.go
 model_presets_response.go

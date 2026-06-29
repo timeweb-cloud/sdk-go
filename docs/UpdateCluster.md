@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Название кластера базы данных. | [optional] 
 **PresetId** | Pointer to **int32** | ID тарифа. | [optional] 
+**ConfigParameters** | Pointer to [**Mysql**](Mysql.md) |  | [optional] 
 **Description** | Pointer to **string** | Описание кластера базы данных | [optional] 
 **IsEnabledPublicNetwork** | Pointer to **bool** | Доступность публичного IP-адреса | [optional] 
 **IsPublicIpv6** | Pointer to **bool** | Использование IPv6 адреса. | [optional] 
@@ -78,6 +79,31 @@ SetPresetId sets PresetId field to given value.
 `func (o *UpdateCluster) HasPresetId() bool`
 
 HasPresetId returns a boolean if a field has been set.
+
+### GetConfigParameters
+
+`func (o *UpdateCluster) GetConfigParameters() Mysql`
+
+GetConfigParameters returns the ConfigParameters field if non-nil, zero value otherwise.
+
+### GetConfigParametersOk
+
+`func (o *UpdateCluster) GetConfigParametersOk() (*Mysql, bool)`
+
+GetConfigParametersOk returns a tuple with the ConfigParameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigParameters
+
+`func (o *UpdateCluster) SetConfigParameters(v Mysql)`
+
+SetConfigParameters sets ConfigParameters field to given value.
+
+### HasConfigParameters
+
+`func (o *UpdateCluster) HasConfigParameters() bool`
+
+HasConfigParameters returns a boolean if a field has been set.
 
 ### GetDescription
 

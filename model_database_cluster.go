@@ -44,7 +44,7 @@ type DatabaseCluster struct {
 	// ID тарифа.
 	PresetId int32 `json:"preset_id"`
 	Disk NullableDatabaseClusterDisk `json:"disk,omitempty"`
-	ConfigParameters ConfigParameters `json:"config_parameters"`
+	ConfigParameters Mysql `json:"config_parameters"`
 	// Доступность публичного IP-адреса
 	IsEnabledPublicNetwork bool `json:"is_enabled_public_network"`
 }
@@ -53,7 +53,7 @@ type DatabaseCluster struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters ConfigParameters, isEnabledPublicNetwork bool) *DatabaseCluster {
+func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters Mysql, isEnabledPublicNetwork bool) *DatabaseCluster {
 	this := DatabaseCluster{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -426,9 +426,9 @@ func (o *DatabaseCluster) UnsetDisk() {
 }
 
 // GetConfigParameters returns the ConfigParameters field value
-func (o *DatabaseCluster) GetConfigParameters() ConfigParameters {
+func (o *DatabaseCluster) GetConfigParameters() Mysql {
 	if o == nil {
-		var ret ConfigParameters
+		var ret Mysql
 		return ret
 	}
 
@@ -437,7 +437,7 @@ func (o *DatabaseCluster) GetConfigParameters() ConfigParameters {
 
 // GetConfigParametersOk returns a tuple with the ConfigParameters field value
 // and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetConfigParametersOk() (*ConfigParameters, bool) {
+func (o *DatabaseCluster) GetConfigParametersOk() (*Mysql, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -445,7 +445,7 @@ func (o *DatabaseCluster) GetConfigParametersOk() (*ConfigParameters, bool) {
 }
 
 // SetConfigParameters sets field value
-func (o *DatabaseCluster) SetConfigParameters(v ConfigParameters) {
+func (o *DatabaseCluster) SetConfigParameters(v Mysql) {
 	o.ConfigParameters = v
 }
 

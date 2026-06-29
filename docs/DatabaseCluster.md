@@ -17,14 +17,14 @@ Name | Type | Description | Notes
 **Status** | **string** | Текущий статус кластера базы данных. | 
 **PresetId** | **int32** | ID тарифа. | 
 **Disk** | Pointer to [**NullableDatabaseClusterDisk**](DatabaseClusterDisk.md) |  | [optional] 
-**ConfigParameters** | [**ConfigParameters**](ConfigParameters.md) |  | 
+**ConfigParameters** | [**Mysql**](Mysql.md) |  | 
 **IsEnabledPublicNetwork** | **bool** | Доступность публичного IP-адреса | 
 
 ## Methods
 
 ### NewDatabaseCluster
 
-`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters ConfigParameters, isEnabledPublicNetwork bool, ) *DatabaseCluster`
+`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters Mysql, isEnabledPublicNetwork bool, ) *DatabaseCluster`
 
 NewDatabaseCluster instantiates a new DatabaseCluster object
 This constructor will assign default values to properties that have it defined,
@@ -361,20 +361,20 @@ HasDisk returns a boolean if a field has been set.
 UnsetDisk ensures that no value is present for Disk, not even an explicit nil
 ### GetConfigParameters
 
-`func (o *DatabaseCluster) GetConfigParameters() ConfigParameters`
+`func (o *DatabaseCluster) GetConfigParameters() Mysql`
 
 GetConfigParameters returns the ConfigParameters field if non-nil, zero value otherwise.
 
 ### GetConfigParametersOk
 
-`func (o *DatabaseCluster) GetConfigParametersOk() (*ConfigParameters, bool)`
+`func (o *DatabaseCluster) GetConfigParametersOk() (*Mysql, bool)`
 
 GetConfigParametersOk returns a tuple with the ConfigParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfigParameters
 
-`func (o *DatabaseCluster) SetConfigParameters(v ConfigParameters)`
+`func (o *DatabaseCluster) SetConfigParameters(v Mysql)`
 
 SetConfigParameters sets ConfigParameters field to given value.
 

@@ -1162,7 +1162,7 @@ Name | Type | Description  | Notes
 
 ## GetDatabaseParameters
 
-> map[string][]string GetDatabaseParameters(ctx).Execute()
+> ConfigParameters GetDatabaseParameters(ctx).Execute()
 
 Получение списка параметров баз данных
 
@@ -1189,7 +1189,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseParameters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetDatabaseParameters`: map[string][]string
+    // response from `GetDatabaseParameters`: ConfigParameters
     fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseParameters`: %v\n", resp)
 }
 ```
@@ -1205,7 +1205,7 @@ Other parameters are passed through a pointer to a apiGetDatabaseParametersReque
 
 ### Return type
 
-[**map[string][]string**](array.md)
+[**ConfigParameters**](ConfigParameters.md)
 
 ### Authorization
 

@@ -9157,11 +9157,7 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  items:
-                    type: string
-                  type: array
-                type: object
+                $ref: '#/components/schemas/config-parameters'
           description: Ответ будет представлять собой объект JSON c типами баз данных
             и их параметров.
         "400":
@@ -53452,211 +53448,803 @@ components:
       - rabbitmq4_0
       example: mysql
       type: string
-    config-parameters:
-      description: Параметры базы данных
+    mysql:
+      description: Параметры MySQL (`mysql5` | `mysql` | `mysql8_4`)
       example:
-        innodb_io_capacity: "200"
-        shared_buffers: "128"
-        join_collapse_limit: "8"
-        auto_increment_increment: "1"
-        bgwriter_lru_maxpages: "100"
-        max_prepared_transactions: "0"
-        innodb_purge_threads: "4"
-        lock_timeout: "0"
-        auto_increment_offset: "1"
-        temp_buffers: "8"
+        wait_timeout: "28800"
+        default-time-zone: +00:00
+        table_definition_cache: "2000"
+        auto_increment_increment: "3"
+        sync_binlog: "1"
+        transaction_isolation: read-uncommitted
+        innodb_redo_log_capacity: "104857600"
+        net_read_timeout: "30"
+        innodb_log_file_size: "432013312"
         innodb_thread_concurrency: "0"
-        autovacuum_analyze_scale_factor: "0.0001"
-        idle_in_transaction_session_timeout: "0"
-        query_cache_size: "0"
-        innodb_read_io_threads: "4"
-        max_connections: "1"
+        innodb_flush_log_at_trx_commit: "1"
+        innodb_strict_mode: "ON"
         innodb_write_io_threads: "4"
+        binlog_group_commit_sync_delay: "1"
+        innodb_numa_interleave: "OFF"
+        join_buffer_size: "4194304"
+        binlog_row_image: full
+        query_cache_type: "2"
+        pxc_strict_mode: ENFORCING
+        innodb_io_capacity: "1500"
+        innodb_adaptive_hash_index: "ON"
+        net_write_timeout: "1"
+        tmp_table_size: "16777216"
+        innodb_lock_wait_timeout: "50"
+        innodb_purge_threads: "4"
+        binlog_cache_size: "32768"
+        auto_increment_offset: "3"
+        long_query_time: "10"
+        slow_query_log: "ON"
+        skip_name_resolve: "OFF"
+        sort_buffer_size: "2097152"
+        query_cache_size: "1"
+        interactive_timeout: "28800"
+        max_connections: "200"
+        innodb_read_io_threads: "4"
         max_allowed_packet: "16777216"
-        join_buffer_size: "262144"
-        bgwriter_delay: "200"
-        idle_session_timeout: "0"
+        innodb_buffer_pool_size: "864026624"
+        binlog_rows_query_log_events: "OFF"
+        thread_cache_size: "8"
         max_heap_table_size: "16777216"
-        deadlock_timeout: "100"
-        sql_mode: STRICT_TRANS_TABLES
-        gin_pending_list_limit: "4194304"
-        query_cache_type: "0"
-        wal_buffers: "16"
-        work_mem: "4"
+        character_set_server: utf8
+        explicit_defaults_for_timestamp: "ON"
+        sql_mode: ""
+        table_open_cache: "4970"
+        regexp_time_limit: "32"
+        log_bin_trust_function_creators: "ON"
+        table_open_cache_instances: "16"
+        innodb_flush_method: O_DSYNC
+        group_concat_max_len: "1024"
       properties:
+        join_buffer_size:
+          description: "Размер буфера, используемого при соединениях таблиц без ин\
+            дексов (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "4194304"
+          type: string
+        max_connections:
+          description: Максимальное количество одновременных подключений к серверу
+            (`mysql5` | `mysql` | `mysql8_4` | `postgres` | `postgres14` | `postgres15`
+            | `postgres16` | `postgres17` | `postgres18`).
+          example: "200"
+          type: string
+        sort_buffer_size:
+          description: Размер буфера сортировки для операций ORDER BY и GROUP BY (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "2097152"
+          type: string
+        thread_cache_size:
+          description: "Количество потоков, которые сервер сохраняет для повторног\
+            о использования (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "8"
+          type: string
+        innodb_buffer_pool_size:
+          description: Размер буферного пула InnoDB для хранения данных и индексов
+            в памяти (`mysql5` | `mysql` | `mysql8_4`).
+          example: "864026624"
+          type: string
         auto_increment_increment:
           description: Интервал между значениями столбцов с атрибутом `AUTO_INCREMENT`
-            (`mysql5` | `mysql`).
-          example: "1"
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "3"
           type: string
         auto_increment_offset:
           description: Начальное значение для столбцов с атрибутом `AUTO_INCREMENT`
-            (`mysql5` | `mysql`).
-          example: "1"
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "3"
           type: string
         innodb_io_capacity:
-          description: Количество операций ввода-вывода в секунду `IOPS` (`mysql5`
-            | `mysql`).
-          example: "200"
+          description: "Количество операций ввода-вывода в секунду `IOPS`, использ\
+            уемых InnoDB (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "1500"
           type: string
         innodb_purge_threads:
-          description: "Количество потоков ввода-вывода, используемых для операций\
-            \ очистки (`mysql5` | `mysql`)."
+          description: "Количество потоков, используемых для фоновой очистки undo-з\
+            аписей InnoDB (`mysql5` | `mysql` | `mysql8_4`)."
           example: "4"
           type: string
         innodb_read_io_threads:
-          description: "Количество потоков ввода-вывода, используемых для операций\
-            \ чтения (`mysql5` | `mysql`)."
+          description: Количество потоков ввода-вывода для операций чтения InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
           example: "4"
           type: string
         innodb_thread_concurrency:
-          description: "Максимальное число потоков, которые могут исполняться (`mysql5`\
-            \ | `mysql`)."
+          description: Ограничение количества одновременно выполняющихся потоков InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
           example: "0"
           type: string
         innodb_write_io_threads:
-          description: "Количество потоков ввода-вывода, используемых для операций\
-            \ записи (`mysql5` | `mysql`)."
+          description: Количество потоков ввода-вывода для операций записи InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
           example: "4"
           type: string
-        join_buffer_size:
-          description: Минимальный размер буфера (`mysql5` | `mysql`).
-          example: "262144"
+        innodb_log_file_size:
+          description: Размер файла журнала транзакций InnoDB redo log (`mysql5` |
+            `mysql` | `mysql8_4`).
+          example: "432013312"
           type: string
         max_allowed_packet:
-          description: "Максимальный размер одного пакета, строки или параметра, о\
-            тправляемого функцией `mysql_stmt_send_long_data()` (`mysql5` | `mysql`)."
+          description: "Максимальный размер пакета данных, который может передават\
+            ься между клиентом и сервером (`mysql5` | `mysql` | `mysql8_4`)."
           example: "16777216"
           type: string
         max_heap_table_size:
-          description: Максимальный размер пользовательских MEMORY-таблиц (`mysql5`
-            | `mysql`).
+          description: Максимальный размер таблиц типа MEMORY (`mysql5` | `mysql`
+            | `mysql8_4`).
           example: "16777216"
           type: string
+        sql_mode:
+          description: "Режим работы SQL сервера, определяющий поведение обработки\
+            \ запросов (`mysql5` | `mysql` | `mysql8_4`)."
+          example: ""
+          type: string
+        query_cache_type:
+          description: Тип кэша запросов (`mysql5` | `mysql` | `mysql8_4`).
+          example: "2"
+          type: string
+        query_cache_size:
+          description: "Объем памяти, выделяемый для кэширования результатов запро\
+            сов (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "1"
+          type: string
+        innodb_flush_log_at_trx_commit:
+          description: Режим записи журнала InnoDB при фиксации транзакций (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        transaction_isolation:
+          description: Уровень изоляции транзакций по умолчанию (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: read-uncommitted
+          type: string
+        long_query_time:
+          description: "Время выполнения запроса, после которого он считается долг\
+            им и может попасть в slow query log (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "10"
+          type: string
+        tmp_table_size:
+          description: Максимальный размер временных таблиц в памяти (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: "16777216"
+          type: string
+        table_open_cache:
+          description: "Количество открытых таблиц, которые сервер может хранить в\
+            \ кэше (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "4970"
+          type: string
+        table_open_cache_instances:
+          description: Количество экземпляров кэша открытых таблиц для снижения конкуренции
+            между потоками (`mysql5` | `mysql` | `mysql8_4`).
+          example: "16"
+          type: string
+        innodb_flush_method:
+          description: Метод выполнения операций записи и синхронизации файлов InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: O_DSYNC
+          type: string
+        innodb_strict_mode:
+          description: Включение строгой проверки операций InnoDB (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: "ON"
+          type: string
+        slow_query_log:
+          description: Включение журнала медленных запросов (`mysql5` | `mysql` |
+            `mysql8_4`).
+          example: "ON"
+          type: string
+        binlog_cache_size:
+          description: Размер кэша бинарного журнала для транзакций (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: "32768"
+          type: string
+        binlog_group_commit_sync_delay:
+          description: Задержка синхронизации групповой фиксации бинарного журнала
+            в микросекундах (`mysql5` | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        binlog_row_image:
+          description: "Количество информации, записываемой в бинарный журнал при\
+            \ row-based репликации (`mysql5` | `mysql` | `mysql8_4`)."
+          example: full
+          type: string
+        binlog_rows_query_log_events:
+          description: Включение записи SQL-запросов в бинарный журнал при row-based
+            репликации (`mysql5` | `mysql` | `mysql8_4`).
+          example: "OFF"
+          type: string
+        character_set_server:
+          description: Кодировка по умолчанию для сервера MySQL (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: utf8
+          type: string
+        explicit_defaults_for_timestamp:
+          description: Определяет автоматическое поведение TIMESTAMP без явных значений
+            по умолчанию (`mysql5` | `mysql` | `mysql8_4`).
+          example: "ON"
+          type: string
+        group_concat_max_len:
+          description: Максимальная длина результата функции GROUP_CONCAT (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "1024"
+          type: string
+        innodb_adaptive_hash_index:
+          description: Включение или отключение адаптивного хэш-индекса InnoDB для
+            ускорения поиска по индексам (`mysql5` | `mysql` | `mysql8_4`).
+          example: "ON"
+          type: string
+        innodb_lock_wait_timeout:
+          description: Время ожидания блокировки InnoDB перед завершением транзакции
+            с ошибкой (`mysql5` | `mysql` | `mysql8_4`).
+          example: "50"
+          type: string
+        innodb_numa_interleave:
+          description: Включение распределения памяти InnoDB между NUMA-узлами (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "OFF"
+          type: string
+        net_read_timeout:
+          description: Время ожидания данных от клиента при чтении сетевого соединения
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "30"
+          type: string
+        net_write_timeout:
+          description: Время ожидания записи данных клиенту через сетевое соединение
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        regexp_time_limit:
+          description: Максимальное время выполнения регулярных выражений (`mysql`
+            | `mysql8_4`).
+          example: "32"
+          type: string
+        sync_binlog:
+          description: Количество операций записи бинарного журнала перед принудительной
+            синхронизацией на диск (`mysql5` | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        table_definition_cache:
+          description: "Количество определений таблиц, хранящихся в кэше (`mysql5`\
+            \ | `mysql` | `mysql8_4`)."
+          example: "2000"
+          type: string
+        log_bin_trust_function_creators:
+          description: Разрешение создания хранимых функций без проверки бинарной
+            регистрации (`mysql5` | `mysql` | `mysql8_4`).
+          example: "ON"
+          type: string
+        skip_name_resolve:
+          description: Отключение DNS-разрешения имен клиентов при подключении к серверу
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "OFF"
+          type: string
+        innodb_redo_log_capacity:
+          description: Общий размер redo log InnoDB для хранения журнала восстановления
+            (`mysql8_4`).
+          example: "104857600"
+          type: string
+        wait_timeout:
+          description: Время ожидания неактивного клиентского соединения перед закрытием
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "28800"
+          type: string
+        interactive_timeout:
+          description: Время ожидания неактивного интерактивного соединения перед
+            закрытием (`mysql5` | `mysql` | `mysql8_4`).
+          example: "28800"
+          type: string
+        default-time-zone:
+          description: Часовой пояс сервера MySQL по умолчанию (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: +00:00
+          type: string
+        pxc_strict_mode:
+          description: Режим строгой проверки операций в Percona XtraDB Cluster (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: ENFORCING
+          type: string
+      type: object
+    postgres:
+      description: Параметры PostgreSQL (`postgres` | `postgres14` | `postgres15`
+        | `postgres16` | `postgres17` | `postgres18`)
+      properties:
+        max_connections:
+          description: Максимальное количество одновременных подключений к серверу
+            (`mysql5` | `mysql` | `mysql8_4` | `postgres` | `postgres14` | `postgres15`
+            | `postgres16` | `postgres17` | `postgres18`).
+          example: "200"
+          type: string
         autovacuum_analyze_scale_factor:
-          description: "Доля измененных или удаленных записей в таблице, при котор\
-            ой процесс автоочистки выполнит команду `ANALYZE` (`postgres` | `postgres14`|\
-            \ `postgres15`)."
-          example: "0.0001"
+          description: Доля изменения строк таблицы перед запуском автоматического
+            анализа (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "0.1"
+          type: string
+        autovacuum_max_workers:
+          description: "Максимальное количество процессов autovacuum, которые могу\
+            т работать одновременно (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "3"
+          type: string
+        autovacuum_naptime:
+          description: Интервал между запусками процессов autovacuum (`postgres` |
+            `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "120"
+          type: string
+        autovacuum_vacuum_insert_scale_factor:
+          description: Доля вставленных строк перед запуском vacuum для таблиц с большим
+            количеством вставок (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "0.2"
+          type: string
+        autovacuum_vacuum_scale_factor:
+          description: Доля измененных или удаленных строк перед запуском autovacuum
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "0.2"
+          type: string
+        autovacuum_work_mem:
+          description: "Объем памяти, используемый одним процессом autovacuum (`postgres`\
+            \ | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
+          example: "-1"
           type: string
         bgwriter_delay:
-          description: Задержка между запусками процесса фоновой записи (`postgres`
-            | `postgres14`| `postgres15`).
+          description: Интервал между циклами фонового процесса записи страниц (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
           example: "200"
           type: string
         bgwriter_lru_maxpages:
-          description: Максимальное число элементов буферного кеша (`postgres` | `postgres14`|
-            `postgres15`).
+          description: "Максимальное количество страниц, записываемых background writer\
+            \ за один цикл (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
           example: "100"
           type: string
         deadlock_timeout:
-          description: "Время ожидания, по истечении которого будет выполняться пр\
-            оверка состояния перекрестной блокировки (`postgres` | `postgres14`| `postgres15`)."
-          example: "100"
+          description: Время ожидания блокировки перед проверкой взаимной блокировки
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "1000"
           type: string
         gin_pending_list_limit:
-          description: Максимальный размер очереди записей индекса `GIN` (`postgres`
-            | `postgres14`| `postgres15`).
-          example: "4194304"
+          description: Максимальный размер списка ожидающих вставок индекса GIN (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "4096"
           type: string
         idle_in_transaction_session_timeout:
-          description: "Время простоя открытой транзакции, при превышении которого\
-            \ будет завершена сессия с этой транзакцией (`postgres` | `postgres14`|\
-            \ `postgres15`)."
-          example: "0"
-          type: string
-        idle_session_timeout:
-          description: "Время простоя не открытой транзакции, при превышении котор\
-            ого будет завершена сессия с этой транзакцией (`postgres` | `postgres14`|\
-            \ `postgres15`)."
+          description: Время ожидания неактивной транзакционной сессии перед завершением
+            соединения (`postgres` | `postgres14` | `postgres15` | `postgres16` |
+            `postgres17` | `postgres18`).
           example: "0"
           type: string
         join_collapse_limit:
-          description: "Значение количества элементов в списке `FROM` при превышен\
-            ии которого, планировщик будет переносить в список явные инструкции `JOIN`\
-            \ (`postgres` | `postgres14`| `postgres15`)."
+          description: "Максимальное количество таблиц в JOIN, которые планировщик\
+            \ может переупорядочить (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
           example: "8"
           type: string
         lock_timeout:
-          description: Время ожидания освобождения блокировки (`postgres` | `postgres14`|
-            `postgres15`).
+          description: Максимальное время ожидания блокировки перед отменой запроса
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
           example: "0"
           type: string
         max_prepared_transactions:
-          description: "Максимальное число транзакций, которые могут одновременно\
-            \ находиться в подготовленном состоянии (`postgres` | `postgres14`| `postgres15`)."
+          description: "Максимальное количество подготовленных транзакций, которые\
+            \ могут существовать одновременно (`postgres` | `postgres14` | `postgres15`\
+            \ | `postgres16` | `postgres17` | `postgres18`)."
           example: "0"
-          type: string
-        max_connections:
-          description: Допустимое количество соединений (`postgres` | `postgres14`|
-            `postgres15` | `mysql`).
-          example: "1"
           type: string
         shared_buffers:
-          description: "Устанавливает количество буферов общей памяти, используемы\
-            х сервером (`postgres` | `postgres14`| `postgres15`)."
-          example: "128"
+          description: "Размер общей памяти, используемой PostgreSQL для буферного\
+            \ кэша (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`\
+            \ | `postgres18`)."
+          example: "65536"
+          type: string
+        log_min_duration_statement:
+          description: "Минимальное время выполнения запроса, после которого он за\
+            писывается в журнал (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "-1"
           type: string
         wal_buffers:
-          description: Устанавливает количество буферов дисковых страниц в общей памяти
-            для WAL (`postgres` | `postgres14`| `postgres15`).
-          example: "16"
+          description: "Размер памяти, используемой для буферизации WAL-записей (`postgres`\
+            \ | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
+          example: "2048"
           type: string
         temp_buffers:
-          description: "Устанавливает максимальное количество временных буферов, и\
-            спользуемых каждой сессией (`postgres` | `postgres14`| `postgres15`)."
-          example: "8"
+          description: Максимальный объем памяти для временных таблиц каждой сессии
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "1024"
           type: string
         work_mem:
-          description: "Устанавливает максимальное количество памяти, используемое\
-            \ для рабочих пространств запросов (`postgres` | `postgres14`| `postgres15`)."
+          description: "Объем памяти, используемый одной операцией сортировки или\
+            \ хеширования (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "4096"
+          type: string
+        default_transaction_isolation:
+          description: Уровень изоляции транзакций по умолчанию (`postgres` | `postgres14`
+            | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: read committed
+          type: string
+        effective_cache_size:
+          description: "Оценка объема дискового кэша, доступного планировщику запр\
+            осов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`\
+            \ | `postgres18`)."
+          example: "131072"
+          type: string
+        max_wal_size:
+          description: Максимальный размер WAL перед запуском контрольной точки (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "1024"
+          type: string
+        min_wal_size:
+          description: "Минимальный размер WAL, который сохраняется между контроль\
+            ными точками (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "80"
+          type: string
+        wal_level:
+          description: Уровень детализации записи WAL для восстановления и репликации
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: replica
+          type: string
+        max_replication_slots:
+          description: "Максимальное количество слотов репликации, которые могут б\
+            ыть созданы (`postgres` | `postgres14` | `postgres15` | `postgres16` |\
+            \ `postgres17` | `postgres18`)."
+          example: "10"
+          type: string
+        max_wal_senders:
+          description: Максимальное количество процессов отправки WAL для репликации
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "10"
+          type: string
+        max_worker_processes:
+          description: Максимальное количество фоновых процессов PostgreSQL (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "8"
+          type: string
+        max_logical_replication_workers:
+          description: Максимальное количество процессов логической репликации (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
           example: "4"
           type: string
-        sql_mode:
-          description: "Устанавливает режим SQL. Можно задать несколько режимов, р\
-            азделяя их запятой. (`mysql`)."
-          example: STRICT_TRANS_TABLES
+        max_parallel_maintenance_workers:
+          description: Максимальное количество параллельных процессов для операций
+            обслуживания (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "2"
           type: string
-        query_cache_type:
-          description: Параметр включает или отключает работу MySQL Query Cache (`mysql`).
+        max_parallel_workers:
+          description: Максимальное количество параллельных рабочих процессов для
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "8"
+          type: string
+        max_parallel_workers_per_gather:
+          description: Максимальное количество параллельных рабочих процессов на один
+            Gather-узел (`postgres` | `postgres14` | `postgres15` | `postgres16` |
+            `postgres17` | `postgres18`).
+          example: "2"
+          type: string
+        array_nulls:
+          description: Разрешение использования NULL в массивах PostgreSQL (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        backend_flush_after:
+          description: "Количество страниц, после записи которых выполняется прину\
+            дительная очистка данных на диск серверным процессом (`postgres` | `postgres14`\
+            \ | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
           example: "0"
           type: string
-        query_cache_size:
-          description: "Размер в байтах, доступный для кэша запросов (`mysql`)."
+        backslash_quote:
+          description: Управление использованием обратного слеша в строковых литералах
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: safe_encoding
+          type: string
+        bgwriter_flush_after:
+          description: "Количество страниц, после которого background writer выпол\
+            няет очистку данных на диск (`postgres` | `postgres14` | `postgres15`\
+            \ | `postgres16` | `postgres17` | `postgres18`)."
+          example: "64"
+          type: string
+        bgwriter_lru_multiplier:
+          description: "Множитель количества страниц, которые background writer пы\
+            тается очистить (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "2"
+          type: string
+        default_transaction_read_only:
+          description: Определяет режим транзакций только для чтения по умолчанию
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        enable_hashagg:
+          description: Разрешение использования Hash Aggregate планировщиком запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_hashjoin:
+          description: Разрешение использования Hash Join планировщиком запросов (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_incremental_sort:
+          description: Разрешение использования инкрементальной сортировки планировщиком
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_indexscan:
+          description: Разрешение использования обычного индексного сканирования (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_indexonlyscan:
+          description: Разрешение использования index-only scan (`postgres` | `postgres14`
+            | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_material:
+          description: Разрешение использования материализации промежуточных результатов
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_memoize:
+          description: Разрешение использования Memoize узлов планировщиком запросов
+            (`postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_mergejoin:
+          description: Разрешение использования Merge Join планировщиком запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_parallel_append:
+          description: Разрешение использования параллельного Append для запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_parallel_hash:
+          description: Разрешение использования параллельных Hash операций (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_partition_pruning:
+          description: Разрешение удаления ненужных разделов таблицы при планировании
+            запроса (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_partitionwise_join:
+          description: Разрешение выполнения соединений между секционированными таблицами
+            с учетом секций (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        enable_partitionwise_aggregate:
+          description: Разрешение выполнения агрегатных операций отдельно для секций
+            таблиц (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        enable_seqscan:
+          description: Разрешение использования последовательного сканирования таблиц
+            планировщиком запросов (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_sort:
+          description: Разрешение использования операций сортировки планировщиком
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_tidscan:
+          description: Разрешение использования TID Scan для поиска строк по физическим
+            идентификаторам (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        exit_on_error:
+          description: Завершение сессии при возникновении ошибки SQL (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        from_collapse_limit:
+          description: "Максимальное количество элементов FROM, которые планировщи\
+            к может объединять при оптимизации запросов (`postgres` | `postgres14`\
+            \ | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
+          example: "8"
+          type: string
+        jit:
+          description: Включение JIT-компиляции для ускорения выполнения запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        plan_cache_mode:
+          description: Режим использования кэша планов подготовленных запросов (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: auto
+          type: string
+        quote_all_identifiers:
+          description: Всегда заключать идентификаторы в кавычки при генерации SQL
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        standard_conforming_strings:
+          description: Использование стандартного поведения строковых литералов SQL
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        statement_timeout:
+          description: Максимальное время выполнения SQL-запроса перед автоматической
+            отменой (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
           example: "0"
           type: string
+        timezone:
+          description: Часовой пояс сервера PostgreSQL по умолчанию (`postgres` |
+            `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: +00:00
+          type: string
+        transform_null_equals:
+          description: Преобразование выражений вида `NULL = NULL` в проверку IS NULL
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        max_locks_per_transaction:
+          description: "Количество объектов, которые может блокировать одна транза\
+            кция (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`\
+            \ | `postgres18`)."
+          example: "64"
+          type: string
+        autovacuum_vacuum_cost_limit:
+          description: Лимит стоимости операций autovacuum перед приостановкой работы
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "200"
+          type: string
+        checkpoint_timeout:
+          description: Максимальный интервал времени между автоматическими контрольными
+            точками (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "300"
+          type: string
+        checkpoint_completion_target:
+          description: "Доля интервала checkpoint, за которую PostgreSQL распредел\
+            яет запись данных (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "0.5"
+          type: string
+        wal_compression:
+          description: Включение сжатия WAL-записей для уменьшения объема журнала
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "off"
+          type: string
+        random_page_cost:
+          description: Оценочная стоимость случайного чтения страницы для планировщика
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "4"
+          type: string
+        effective_io_concurrency:
+          description: "Количество параллельных операций ввода-вывода, которые пла\
+            нировщик может учитывать (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "1"
+          type: string
+        log_lock_waits:
+          description: Включение записи в журнал информации об ожидании блокировок
+            дольше deadlock_timeout (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        log_temp_files:
+          description: "Минимальный размер временных файлов, при котором они запис\
+            ываются в журнал (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "-1"
+          type: string
+        track_io_timing:
+          description: Включение сбора статистики времени операций ввода-вывода (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        maintenance_work_mem:
+          description: "Максимальный объем памяти для операций обслуживания, таких\
+            \ как VACUUM и CREATE INDEX (`postgres` | `postgres14` | `postgres15`\
+            \ | `postgres16` | `postgres17` | `postgres18`)."
+          example: "262144"
+          type: string
+        idle_session_timeout:
+          description: Время ожидания неактивной сессии перед автоматическим завершением
+            соединения (`postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "900000"
+          type: string
+        io_method:
+          description: Метод выполнения операций ввода-вывода PostgreSQL (`postgres18`).
+          example: worker
+          type: string
+        io_workers:
+          description: Количество фоновых процессов для выполнения операций ввода-вывода
+            (`postgres18`).
+          example: "3"
+          type: string
+      type: object
     database-cluster:
       description: Кластер базы данных
       example:
         config_parameters:
-          innodb_io_capacity: "200"
-          shared_buffers: "128"
-          join_collapse_limit: "8"
-          auto_increment_increment: "1"
-          bgwriter_lru_maxpages: "100"
-          max_prepared_transactions: "0"
-          innodb_purge_threads: "4"
-          lock_timeout: "0"
-          auto_increment_offset: "1"
-          temp_buffers: "8"
+          wait_timeout: "28800"
+          default-time-zone: +00:00
+          table_definition_cache: "2000"
+          auto_increment_increment: "3"
+          sync_binlog: "1"
+          transaction_isolation: read-uncommitted
+          innodb_redo_log_capacity: "104857600"
+          net_read_timeout: "30"
+          innodb_log_file_size: "432013312"
           innodb_thread_concurrency: "0"
-          autovacuum_analyze_scale_factor: "0.0001"
-          idle_in_transaction_session_timeout: "0"
-          query_cache_size: "0"
-          innodb_read_io_threads: "4"
-          max_connections: "1"
+          innodb_flush_log_at_trx_commit: "1"
+          innodb_strict_mode: "ON"
           innodb_write_io_threads: "4"
+          binlog_group_commit_sync_delay: "1"
+          innodb_numa_interleave: "OFF"
+          join_buffer_size: "4194304"
+          binlog_row_image: full
+          query_cache_type: "2"
+          pxc_strict_mode: ENFORCING
+          innodb_io_capacity: "1500"
+          innodb_adaptive_hash_index: "ON"
+          net_write_timeout: "1"
+          tmp_table_size: "16777216"
+          innodb_lock_wait_timeout: "50"
+          innodb_purge_threads: "4"
+          binlog_cache_size: "32768"
+          auto_increment_offset: "3"
+          long_query_time: "10"
+          slow_query_log: "ON"
+          skip_name_resolve: "OFF"
+          sort_buffer_size: "2097152"
+          query_cache_size: "1"
+          interactive_timeout: "28800"
+          max_connections: "200"
+          innodb_read_io_threads: "4"
           max_allowed_packet: "16777216"
-          join_buffer_size: "262144"
-          bgwriter_delay: "200"
-          idle_session_timeout: "0"
+          innodb_buffer_pool_size: "864026624"
+          binlog_rows_query_log_events: "OFF"
+          thread_cache_size: "8"
           max_heap_table_size: "16777216"
-          deadlock_timeout: "100"
-          sql_mode: STRICT_TRANS_TABLES
-          gin_pending_list_limit: "4194304"
-          query_cache_type: "0"
-          wal_buffers: "16"
-          work_mem: "4"
+          character_set_server: utf8
+          explicit_defaults_for_timestamp: "ON"
+          sql_mode: ""
+          table_open_cache: "4970"
+          regexp_time_limit: "32"
+          log_bin_trust_function_creators: "ON"
+          table_open_cache_instances: "16"
+          innodb_flush_method: O_DSYNC
+          group_concat_max_len: "1024"
         created_at: 2021-02-25T11:04:15Z
         avatar_link: https://urltoimage.com/avatars/image.png
         networks:
@@ -53764,7 +54352,7 @@ components:
         disk:
           $ref: '#/components/schemas/database_cluster_disk'
         config_parameters:
-          $ref: '#/components/schemas/config-parameters'
+          $ref: '#/components/schemas/mysql'
         is_enabled_public_network:
           description: Доступность публичного IP-адреса
           example: false
@@ -53858,7 +54446,7 @@ components:
           example: 5
           type: integer
         config_parameters:
-          $ref: '#/components/schemas/config-parameters'
+          $ref: '#/components/schemas/mysql'
         replication:
           $ref: '#/components/schemas/db-replication'
         network:
@@ -53890,6 +54478,8 @@ components:
           description: ID тарифа.
           example: 5
           type: integer
+        config_parameters:
+          $ref: '#/components/schemas/mysql'
         description:
           description: Описание кластера базы данных
           example: description
@@ -54251,6 +54841,142 @@ components:
       - type
       - version
       type: object
+    config-parameters:
+      description: Параметры базы данных
+      example:
+        mysql:
+          wait_timeout: "28800"
+          default-time-zone: +00:00
+          table_definition_cache: "2000"
+          auto_increment_increment: "3"
+          sync_binlog: "1"
+          transaction_isolation: read-uncommitted
+          innodb_redo_log_capacity: "104857600"
+          net_read_timeout: "30"
+          innodb_log_file_size: "432013312"
+          innodb_thread_concurrency: "0"
+          innodb_flush_log_at_trx_commit: "1"
+          innodb_strict_mode: "ON"
+          innodb_write_io_threads: "4"
+          binlog_group_commit_sync_delay: "1"
+          innodb_numa_interleave: "OFF"
+          join_buffer_size: "4194304"
+          binlog_row_image: full
+          query_cache_type: "2"
+          pxc_strict_mode: ENFORCING
+          innodb_io_capacity: "1500"
+          innodb_adaptive_hash_index: "ON"
+          net_write_timeout: "1"
+          tmp_table_size: "16777216"
+          innodb_lock_wait_timeout: "50"
+          innodb_purge_threads: "4"
+          binlog_cache_size: "32768"
+          auto_increment_offset: "3"
+          long_query_time: "10"
+          slow_query_log: "ON"
+          skip_name_resolve: "OFF"
+          sort_buffer_size: "2097152"
+          query_cache_size: "1"
+          interactive_timeout: "28800"
+          max_connections: "200"
+          innodb_read_io_threads: "4"
+          max_allowed_packet: "16777216"
+          innodb_buffer_pool_size: "864026624"
+          binlog_rows_query_log_events: "OFF"
+          thread_cache_size: "8"
+          max_heap_table_size: "16777216"
+          character_set_server: utf8
+          explicit_defaults_for_timestamp: "ON"
+          sql_mode: ""
+          table_open_cache: "4970"
+          regexp_time_limit: "32"
+          log_bin_trust_function_creators: "ON"
+          table_open_cache_instances: "16"
+          innodb_flush_method: O_DSYNC
+          group_concat_max_len: "1024"
+        postgres:
+          enable_partitionwise_aggregate: "OFF"
+          min_wal_size: "80"
+          max_logical_replication_workers: "4"
+          max_parallel_workers: "8"
+          enable_partition_pruning: "ON"
+          effective_io_concurrency: "1"
+          shared_buffers: "65536"
+          default_transaction_read_only: "OFF"
+          enable_sort: "ON"
+          jit: "ON"
+          max_parallel_maintenance_workers: "2"
+          lock_timeout: "0"
+          quote_all_identifiers: "OFF"
+          autovacuum_naptime: "120"
+          wal_compression: "off"
+          max_worker_processes: "8"
+          idle_in_transaction_session_timeout: "0"
+          enable_parallel_append: "ON"
+          log_temp_files: "-1"
+          autovacuum_work_mem: "-1"
+          backslash_quote: safe_encoding
+          bgwriter_delay: "200"
+          bgwriter_flush_after: "64"
+          deadlock_timeout: "1000"
+          transform_null_equals: "OFF"
+          autovacuum_vacuum_scale_factor: "0.2"
+          plan_cache_mode: auto
+          gin_pending_list_limit: "4096"
+          enable_tidscan: "ON"
+          array_nulls: "ON"
+          log_min_duration_statement: "-1"
+          max_replication_slots: "10"
+          work_mem: "4096"
+          enable_hashagg: "ON"
+          bgwriter_lru_multiplier: "2"
+          timezone: +00:00
+          max_wal_senders: "10"
+          enable_seqscan: "ON"
+          exit_on_error: "OFF"
+          autovacuum_vacuum_insert_scale_factor: "0.2"
+          enable_hashjoin: "ON"
+          enable_indexonlyscan: "ON"
+          join_collapse_limit: "8"
+          enable_indexscan: "ON"
+          default_transaction_isolation: read committed
+          bgwriter_lru_maxpages: "100"
+          enable_mergejoin: "ON"
+          max_prepared_transactions: "0"
+          enable_material: "ON"
+          autovacuum_vacuum_cost_limit: "200"
+          from_collapse_limit: "8"
+          autovacuum_max_workers: "3"
+          enable_memoize: "ON"
+          checkpoint_timeout: "300"
+          enable_partitionwise_join: "OFF"
+          checkpoint_completion_target: "0.5"
+          temp_buffers: "1024"
+          io_workers: "3"
+          autovacuum_analyze_scale_factor: "0.1"
+          max_connections: "200"
+          backend_flush_after: "0"
+          random_page_cost: "4"
+          log_lock_waits: "OFF"
+          enable_incremental_sort: "ON"
+          max_locks_per_transaction: "64"
+          wal_level: replica
+          idle_session_timeout: "900000"
+          maintenance_work_mem: "262144"
+          max_parallel_workers_per_gather: "2"
+          io_method: worker
+          effective_cache_size: "131072"
+          standard_conforming_strings: "ON"
+          enable_parallel_hash: "ON"
+          max_wal_size: "1024"
+          statement_timeout: "0"
+          wal_buffers: "2048"
+          track_io_timing: "OFF"
+      properties:
+        mysql:
+          $ref: '#/components/schemas/config_parameters_mysql'
+        postgres:
+          $ref: '#/components/schemas/config_parameters_postgres'
     auto-backup:
       example:
         is_enabled: true
@@ -58560,34 +59286,55 @@ components:
       example:
         availability_zone: spb-1
         config_parameters:
-          innodb_io_capacity: "200"
-          shared_buffers: "128"
-          join_collapse_limit: "8"
-          auto_increment_increment: "1"
-          bgwriter_lru_maxpages: "100"
-          max_prepared_transactions: "0"
-          innodb_purge_threads: "4"
-          lock_timeout: "0"
-          auto_increment_offset: "1"
-          temp_buffers: "8"
+          wait_timeout: "28800"
+          default-time-zone: +00:00
+          table_definition_cache: "2000"
+          auto_increment_increment: "3"
+          sync_binlog: "1"
+          transaction_isolation: read-uncommitted
+          innodb_redo_log_capacity: "104857600"
+          net_read_timeout: "30"
+          innodb_log_file_size: "432013312"
           innodb_thread_concurrency: "0"
-          autovacuum_analyze_scale_factor: "0.0001"
-          idle_in_transaction_session_timeout: "0"
-          query_cache_size: "0"
-          innodb_read_io_threads: "4"
-          max_connections: "1"
+          innodb_flush_log_at_trx_commit: "1"
+          innodb_strict_mode: "ON"
           innodb_write_io_threads: "4"
+          binlog_group_commit_sync_delay: "1"
+          innodb_numa_interleave: "OFF"
+          join_buffer_size: "4194304"
+          binlog_row_image: full
+          query_cache_type: "2"
+          pxc_strict_mode: ENFORCING
+          innodb_io_capacity: "1500"
+          innodb_adaptive_hash_index: "ON"
+          net_write_timeout: "1"
+          tmp_table_size: "16777216"
+          innodb_lock_wait_timeout: "50"
+          innodb_purge_threads: "4"
+          binlog_cache_size: "32768"
+          auto_increment_offset: "3"
+          long_query_time: "10"
+          slow_query_log: "ON"
+          skip_name_resolve: "OFF"
+          sort_buffer_size: "2097152"
+          query_cache_size: "1"
+          interactive_timeout: "28800"
+          max_connections: "200"
+          innodb_read_io_threads: "4"
           max_allowed_packet: "16777216"
-          join_buffer_size: "262144"
-          bgwriter_delay: "200"
-          idle_session_timeout: "0"
+          innodb_buffer_pool_size: "864026624"
+          binlog_rows_query_log_events: "OFF"
+          thread_cache_size: "8"
           max_heap_table_size: "16777216"
-          deadlock_timeout: "100"
-          sql_mode: STRICT_TRANS_TABLES
-          gin_pending_list_limit: "4194304"
-          query_cache_type: "0"
-          wal_buffers: "16"
-          work_mem: "4"
+          character_set_server: utf8
+          explicit_defaults_for_timestamp: "ON"
+          sql_mode: ""
+          table_open_cache: "4970"
+          regexp_time_limit: "32"
+          log_bin_trust_function_creators: "ON"
+          table_open_cache_instances: "16"
+          innodb_flush_method: O_DSYNC
+          group_concat_max_len: "1024"
         ip: 127.0.0.1
         created_at: 2021-02-25T11:04:15Z
         login: test_user
@@ -58692,7 +59439,7 @@ components:
         disk_stats:
           $ref: '#/components/schemas/db_disk_stats'
         config_parameters:
-          $ref: '#/components/schemas/config-parameters'
+          $ref: '#/components/schemas/mysql'
         is_only_local_ip_access:
           description: "Это логическое значение, которое показывает, доступна ли б\
             аза данных только по локальному IP адресу."
@@ -63547,34 +64294,55 @@ components:
       example:
         dbs:
         - config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
+            wait_timeout: "28800"
+            default-time-zone: +00:00
+            table_definition_cache: "2000"
+            auto_increment_increment: "3"
+            sync_binlog: "1"
+            transaction_isolation: read-uncommitted
+            innodb_redo_log_capacity: "104857600"
+            net_read_timeout: "30"
+            innodb_log_file_size: "432013312"
             innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
+            innodb_flush_log_at_trx_commit: "1"
+            innodb_strict_mode: "ON"
             innodb_write_io_threads: "4"
+            binlog_group_commit_sync_delay: "1"
+            innodb_numa_interleave: "OFF"
+            join_buffer_size: "4194304"
+            binlog_row_image: full
+            query_cache_type: "2"
+            pxc_strict_mode: ENFORCING
+            innodb_io_capacity: "1500"
+            innodb_adaptive_hash_index: "ON"
+            net_write_timeout: "1"
+            tmp_table_size: "16777216"
+            innodb_lock_wait_timeout: "50"
+            innodb_purge_threads: "4"
+            binlog_cache_size: "32768"
+            auto_increment_offset: "3"
+            long_query_time: "10"
+            slow_query_log: "ON"
+            skip_name_resolve: "OFF"
+            sort_buffer_size: "2097152"
+            query_cache_size: "1"
+            interactive_timeout: "28800"
+            max_connections: "200"
+            innodb_read_io_threads: "4"
             max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
+            innodb_buffer_pool_size: "864026624"
+            binlog_rows_query_log_events: "OFF"
+            thread_cache_size: "8"
             max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
+            character_set_server: utf8
+            explicit_defaults_for_timestamp: "ON"
+            sql_mode: ""
+            table_open_cache: "4970"
+            regexp_time_limit: "32"
+            log_bin_trust_function_creators: "ON"
+            table_open_cache_instances: "16"
+            innodb_flush_method: O_DSYNC
+            group_concat_max_len: "1024"
           created_at: 2021-02-25T11:04:15Z
           avatar_link: https://urltoimage.com/avatars/image.png
           networks:
@@ -63604,34 +64372,55 @@ components:
           hash_type: caching_sha2
           status: started
         - config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
+            wait_timeout: "28800"
+            default-time-zone: +00:00
+            table_definition_cache: "2000"
+            auto_increment_increment: "3"
+            sync_binlog: "1"
+            transaction_isolation: read-uncommitted
+            innodb_redo_log_capacity: "104857600"
+            net_read_timeout: "30"
+            innodb_log_file_size: "432013312"
             innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
+            innodb_flush_log_at_trx_commit: "1"
+            innodb_strict_mode: "ON"
             innodb_write_io_threads: "4"
+            binlog_group_commit_sync_delay: "1"
+            innodb_numa_interleave: "OFF"
+            join_buffer_size: "4194304"
+            binlog_row_image: full
+            query_cache_type: "2"
+            pxc_strict_mode: ENFORCING
+            innodb_io_capacity: "1500"
+            innodb_adaptive_hash_index: "ON"
+            net_write_timeout: "1"
+            tmp_table_size: "16777216"
+            innodb_lock_wait_timeout: "50"
+            innodb_purge_threads: "4"
+            binlog_cache_size: "32768"
+            auto_increment_offset: "3"
+            long_query_time: "10"
+            slow_query_log: "ON"
+            skip_name_resolve: "OFF"
+            sort_buffer_size: "2097152"
+            query_cache_size: "1"
+            interactive_timeout: "28800"
+            max_connections: "200"
+            innodb_read_io_threads: "4"
             max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
+            innodb_buffer_pool_size: "864026624"
+            binlog_rows_query_log_events: "OFF"
+            thread_cache_size: "8"
             max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
+            character_set_server: utf8
+            explicit_defaults_for_timestamp: "ON"
+            sql_mode: ""
+            table_open_cache: "4970"
+            regexp_time_limit: "32"
+            log_bin_trust_function_creators: "ON"
+            table_open_cache_instances: "16"
+            innodb_flush_method: O_DSYNC
+            group_concat_max_len: "1024"
           created_at: 2021-02-25T11:04:15Z
           avatar_link: https://urltoimage.com/avatars/image.png
           networks:
@@ -63677,34 +64466,55 @@ components:
       example:
         db:
           config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
+            wait_timeout: "28800"
+            default-time-zone: +00:00
+            table_definition_cache: "2000"
+            auto_increment_increment: "3"
+            sync_binlog: "1"
+            transaction_isolation: read-uncommitted
+            innodb_redo_log_capacity: "104857600"
+            net_read_timeout: "30"
+            innodb_log_file_size: "432013312"
             innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
+            innodb_flush_log_at_trx_commit: "1"
+            innodb_strict_mode: "ON"
             innodb_write_io_threads: "4"
+            binlog_group_commit_sync_delay: "1"
+            innodb_numa_interleave: "OFF"
+            join_buffer_size: "4194304"
+            binlog_row_image: full
+            query_cache_type: "2"
+            pxc_strict_mode: ENFORCING
+            innodb_io_capacity: "1500"
+            innodb_adaptive_hash_index: "ON"
+            net_write_timeout: "1"
+            tmp_table_size: "16777216"
+            innodb_lock_wait_timeout: "50"
+            innodb_purge_threads: "4"
+            binlog_cache_size: "32768"
+            auto_increment_offset: "3"
+            long_query_time: "10"
+            slow_query_log: "ON"
+            skip_name_resolve: "OFF"
+            sort_buffer_size: "2097152"
+            query_cache_size: "1"
+            interactive_timeout: "28800"
+            max_connections: "200"
+            innodb_read_io_threads: "4"
             max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
+            innodb_buffer_pool_size: "864026624"
+            binlog_rows_query_log_events: "OFF"
+            thread_cache_size: "8"
             max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
+            character_set_server: utf8
+            explicit_defaults_for_timestamp: "ON"
+            sql_mode: ""
+            table_open_cache: "4970"
+            regexp_time_limit: "32"
+            log_bin_trust_function_creators: "ON"
+            table_open_cache_instances: "16"
+            innodb_flush_method: O_DSYNC
+            group_concat_max_len: "1024"
           created_at: 2021-02-25T11:04:15Z
           avatar_link: https://urltoimage.com/avatars/image.png
           networks:
@@ -65851,34 +66661,55 @@ components:
         databases:
         - availability_zone: spb-1
           config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
+            wait_timeout: "28800"
+            default-time-zone: +00:00
+            table_definition_cache: "2000"
+            auto_increment_increment: "3"
+            sync_binlog: "1"
+            transaction_isolation: read-uncommitted
+            innodb_redo_log_capacity: "104857600"
+            net_read_timeout: "30"
+            innodb_log_file_size: "432013312"
             innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
+            innodb_flush_log_at_trx_commit: "1"
+            innodb_strict_mode: "ON"
             innodb_write_io_threads: "4"
+            binlog_group_commit_sync_delay: "1"
+            innodb_numa_interleave: "OFF"
+            join_buffer_size: "4194304"
+            binlog_row_image: full
+            query_cache_type: "2"
+            pxc_strict_mode: ENFORCING
+            innodb_io_capacity: "1500"
+            innodb_adaptive_hash_index: "ON"
+            net_write_timeout: "1"
+            tmp_table_size: "16777216"
+            innodb_lock_wait_timeout: "50"
+            innodb_purge_threads: "4"
+            binlog_cache_size: "32768"
+            auto_increment_offset: "3"
+            long_query_time: "10"
+            slow_query_log: "ON"
+            skip_name_resolve: "OFF"
+            sort_buffer_size: "2097152"
+            query_cache_size: "1"
+            interactive_timeout: "28800"
+            max_connections: "200"
+            innodb_read_io_threads: "4"
             max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
+            innodb_buffer_pool_size: "864026624"
+            binlog_rows_query_log_events: "OFF"
+            thread_cache_size: "8"
             max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
+            character_set_server: utf8
+            explicit_defaults_for_timestamp: "ON"
+            sql_mode: ""
+            table_open_cache: "4970"
+            regexp_time_limit: "32"
+            log_bin_trust_function_creators: "ON"
+            table_open_cache_instances: "16"
+            innodb_flush_method: O_DSYNC
+            group_concat_max_len: "1024"
           ip: 127.0.0.1
           created_at: 2021-02-25T11:04:15Z
           login: test_user
@@ -65900,34 +66731,55 @@ components:
           status: started
         - availability_zone: spb-1
           config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
+            wait_timeout: "28800"
+            default-time-zone: +00:00
+            table_definition_cache: "2000"
+            auto_increment_increment: "3"
+            sync_binlog: "1"
+            transaction_isolation: read-uncommitted
+            innodb_redo_log_capacity: "104857600"
+            net_read_timeout: "30"
+            innodb_log_file_size: "432013312"
             innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
+            innodb_flush_log_at_trx_commit: "1"
+            innodb_strict_mode: "ON"
             innodb_write_io_threads: "4"
+            binlog_group_commit_sync_delay: "1"
+            innodb_numa_interleave: "OFF"
+            join_buffer_size: "4194304"
+            binlog_row_image: full
+            query_cache_type: "2"
+            pxc_strict_mode: ENFORCING
+            innodb_io_capacity: "1500"
+            innodb_adaptive_hash_index: "ON"
+            net_write_timeout: "1"
+            tmp_table_size: "16777216"
+            innodb_lock_wait_timeout: "50"
+            innodb_purge_threads: "4"
+            binlog_cache_size: "32768"
+            auto_increment_offset: "3"
+            long_query_time: "10"
+            slow_query_log: "ON"
+            skip_name_resolve: "OFF"
+            sort_buffer_size: "2097152"
+            query_cache_size: "1"
+            interactive_timeout: "28800"
+            max_connections: "200"
+            innodb_read_io_threads: "4"
             max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
+            innodb_buffer_pool_size: "864026624"
+            binlog_rows_query_log_events: "OFF"
+            thread_cache_size: "8"
             max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
+            character_set_server: utf8
+            explicit_defaults_for_timestamp: "ON"
+            sql_mode: ""
+            table_open_cache: "4970"
+            regexp_time_limit: "32"
+            log_bin_trust_function_creators: "ON"
+            table_open_cache_instances: "16"
+            innodb_flush_method: O_DSYNC
+            group_concat_max_len: "1024"
           ip: 127.0.0.1
           created_at: 2021-02-25T11:04:15Z
           login: test_user
@@ -66065,34 +66917,55 @@ components:
         databases:
         - availability_zone: spb-1
           config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
+            wait_timeout: "28800"
+            default-time-zone: +00:00
+            table_definition_cache: "2000"
+            auto_increment_increment: "3"
+            sync_binlog: "1"
+            transaction_isolation: read-uncommitted
+            innodb_redo_log_capacity: "104857600"
+            net_read_timeout: "30"
+            innodb_log_file_size: "432013312"
             innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
+            innodb_flush_log_at_trx_commit: "1"
+            innodb_strict_mode: "ON"
             innodb_write_io_threads: "4"
+            binlog_group_commit_sync_delay: "1"
+            innodb_numa_interleave: "OFF"
+            join_buffer_size: "4194304"
+            binlog_row_image: full
+            query_cache_type: "2"
+            pxc_strict_mode: ENFORCING
+            innodb_io_capacity: "1500"
+            innodb_adaptive_hash_index: "ON"
+            net_write_timeout: "1"
+            tmp_table_size: "16777216"
+            innodb_lock_wait_timeout: "50"
+            innodb_purge_threads: "4"
+            binlog_cache_size: "32768"
+            auto_increment_offset: "3"
+            long_query_time: "10"
+            slow_query_log: "ON"
+            skip_name_resolve: "OFF"
+            sort_buffer_size: "2097152"
+            query_cache_size: "1"
+            interactive_timeout: "28800"
+            max_connections: "200"
+            innodb_read_io_threads: "4"
             max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
+            innodb_buffer_pool_size: "864026624"
+            binlog_rows_query_log_events: "OFF"
+            thread_cache_size: "8"
             max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
+            character_set_server: utf8
+            explicit_defaults_for_timestamp: "ON"
+            sql_mode: ""
+            table_open_cache: "4970"
+            regexp_time_limit: "32"
+            log_bin_trust_function_creators: "ON"
+            table_open_cache_instances: "16"
+            innodb_flush_method: O_DSYNC
+            group_concat_max_len: "1024"
           ip: 127.0.0.1
           created_at: 2021-02-25T11:04:15Z
           login: test_user
@@ -66114,34 +66987,55 @@ components:
           status: started
         - availability_zone: spb-1
           config_parameters:
-            innodb_io_capacity: "200"
-            shared_buffers: "128"
-            join_collapse_limit: "8"
-            auto_increment_increment: "1"
-            bgwriter_lru_maxpages: "100"
-            max_prepared_transactions: "0"
-            innodb_purge_threads: "4"
-            lock_timeout: "0"
-            auto_increment_offset: "1"
-            temp_buffers: "8"
+            wait_timeout: "28800"
+            default-time-zone: +00:00
+            table_definition_cache: "2000"
+            auto_increment_increment: "3"
+            sync_binlog: "1"
+            transaction_isolation: read-uncommitted
+            innodb_redo_log_capacity: "104857600"
+            net_read_timeout: "30"
+            innodb_log_file_size: "432013312"
             innodb_thread_concurrency: "0"
-            autovacuum_analyze_scale_factor: "0.0001"
-            idle_in_transaction_session_timeout: "0"
-            query_cache_size: "0"
-            innodb_read_io_threads: "4"
-            max_connections: "1"
+            innodb_flush_log_at_trx_commit: "1"
+            innodb_strict_mode: "ON"
             innodb_write_io_threads: "4"
+            binlog_group_commit_sync_delay: "1"
+            innodb_numa_interleave: "OFF"
+            join_buffer_size: "4194304"
+            binlog_row_image: full
+            query_cache_type: "2"
+            pxc_strict_mode: ENFORCING
+            innodb_io_capacity: "1500"
+            innodb_adaptive_hash_index: "ON"
+            net_write_timeout: "1"
+            tmp_table_size: "16777216"
+            innodb_lock_wait_timeout: "50"
+            innodb_purge_threads: "4"
+            binlog_cache_size: "32768"
+            auto_increment_offset: "3"
+            long_query_time: "10"
+            slow_query_log: "ON"
+            skip_name_resolve: "OFF"
+            sort_buffer_size: "2097152"
+            query_cache_size: "1"
+            interactive_timeout: "28800"
+            max_connections: "200"
+            innodb_read_io_threads: "4"
             max_allowed_packet: "16777216"
-            join_buffer_size: "262144"
-            bgwriter_delay: "200"
-            idle_session_timeout: "0"
+            innodb_buffer_pool_size: "864026624"
+            binlog_rows_query_log_events: "OFF"
+            thread_cache_size: "8"
             max_heap_table_size: "16777216"
-            deadlock_timeout: "100"
-            sql_mode: STRICT_TRANS_TABLES
-            gin_pending_list_limit: "4194304"
-            query_cache_type: "0"
-            wal_buffers: "16"
-            work_mem: "4"
+            character_set_server: utf8
+            explicit_defaults_for_timestamp: "ON"
+            sql_mode: ""
+            table_open_cache: "4970"
+            regexp_time_limit: "32"
+            log_bin_trust_function_creators: "ON"
+            table_open_cache_instances: "16"
+            innodb_flush_method: O_DSYNC
+            group_concat_max_len: "1024"
           ip: 127.0.0.1
           created_at: 2021-02-25T11:04:15Z
           login: test_user
@@ -70074,6 +70968,828 @@ components:
           description: Минимальный объем дискового пространства.
           example: 1024
           type: number
+      type: object
+    config_parameters_mysql:
+      description: Параметры MySQL (`mysql5` | `mysql` | `mysql8_4`)
+      example:
+        wait_timeout: "28800"
+        default-time-zone: +00:00
+        table_definition_cache: "2000"
+        auto_increment_increment: "3"
+        sync_binlog: "1"
+        transaction_isolation: read-uncommitted
+        innodb_redo_log_capacity: "104857600"
+        net_read_timeout: "30"
+        innodb_log_file_size: "432013312"
+        innodb_thread_concurrency: "0"
+        innodb_flush_log_at_trx_commit: "1"
+        innodb_strict_mode: "ON"
+        innodb_write_io_threads: "4"
+        binlog_group_commit_sync_delay: "1"
+        innodb_numa_interleave: "OFF"
+        join_buffer_size: "4194304"
+        binlog_row_image: full
+        query_cache_type: "2"
+        pxc_strict_mode: ENFORCING
+        innodb_io_capacity: "1500"
+        innodb_adaptive_hash_index: "ON"
+        net_write_timeout: "1"
+        tmp_table_size: "16777216"
+        innodb_lock_wait_timeout: "50"
+        innodb_purge_threads: "4"
+        binlog_cache_size: "32768"
+        auto_increment_offset: "3"
+        long_query_time: "10"
+        slow_query_log: "ON"
+        skip_name_resolve: "OFF"
+        sort_buffer_size: "2097152"
+        query_cache_size: "1"
+        interactive_timeout: "28800"
+        max_connections: "200"
+        innodb_read_io_threads: "4"
+        max_allowed_packet: "16777216"
+        innodb_buffer_pool_size: "864026624"
+        binlog_rows_query_log_events: "OFF"
+        thread_cache_size: "8"
+        max_heap_table_size: "16777216"
+        character_set_server: utf8
+        explicit_defaults_for_timestamp: "ON"
+        sql_mode: ""
+        table_open_cache: "4970"
+        regexp_time_limit: "32"
+        log_bin_trust_function_creators: "ON"
+        table_open_cache_instances: "16"
+        innodb_flush_method: O_DSYNC
+        group_concat_max_len: "1024"
+      properties:
+        join_buffer_size:
+          description: "Размер буфера, используемого при соединениях таблиц без ин\
+            дексов (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "4194304"
+          type: string
+        max_connections:
+          description: Максимальное количество одновременных подключений к серверу
+            (`mysql5` | `mysql` | `mysql8_4` | `postgres` | `postgres14` | `postgres15`
+            | `postgres16` | `postgres17` | `postgres18`).
+          example: "200"
+          type: string
+        sort_buffer_size:
+          description: Размер буфера сортировки для операций ORDER BY и GROUP BY (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "2097152"
+          type: string
+        thread_cache_size:
+          description: "Количество потоков, которые сервер сохраняет для повторног\
+            о использования (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "8"
+          type: string
+        innodb_buffer_pool_size:
+          description: Размер буферного пула InnoDB для хранения данных и индексов
+            в памяти (`mysql5` | `mysql` | `mysql8_4`).
+          example: "864026624"
+          type: string
+        auto_increment_increment:
+          description: Интервал между значениями столбцов с атрибутом `AUTO_INCREMENT`
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "3"
+          type: string
+        auto_increment_offset:
+          description: Начальное значение для столбцов с атрибутом `AUTO_INCREMENT`
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "3"
+          type: string
+        innodb_io_capacity:
+          description: "Количество операций ввода-вывода в секунду `IOPS`, использ\
+            уемых InnoDB (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "1500"
+          type: string
+        innodb_purge_threads:
+          description: "Количество потоков, используемых для фоновой очистки undo-з\
+            аписей InnoDB (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "4"
+          type: string
+        innodb_read_io_threads:
+          description: Количество потоков ввода-вывода для операций чтения InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "4"
+          type: string
+        innodb_thread_concurrency:
+          description: Ограничение количества одновременно выполняющихся потоков InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "0"
+          type: string
+        innodb_write_io_threads:
+          description: Количество потоков ввода-вывода для операций записи InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "4"
+          type: string
+        innodb_log_file_size:
+          description: Размер файла журнала транзакций InnoDB redo log (`mysql5` |
+            `mysql` | `mysql8_4`).
+          example: "432013312"
+          type: string
+        max_allowed_packet:
+          description: "Максимальный размер пакета данных, который может передават\
+            ься между клиентом и сервером (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "16777216"
+          type: string
+        max_heap_table_size:
+          description: Максимальный размер таблиц типа MEMORY (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: "16777216"
+          type: string
+        sql_mode:
+          description: "Режим работы SQL сервера, определяющий поведение обработки\
+            \ запросов (`mysql5` | `mysql` | `mysql8_4`)."
+          example: ""
+          type: string
+        query_cache_type:
+          description: Тип кэша запросов (`mysql5` | `mysql` | `mysql8_4`).
+          example: "2"
+          type: string
+        query_cache_size:
+          description: "Объем памяти, выделяемый для кэширования результатов запро\
+            сов (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "1"
+          type: string
+        innodb_flush_log_at_trx_commit:
+          description: Режим записи журнала InnoDB при фиксации транзакций (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        transaction_isolation:
+          description: Уровень изоляции транзакций по умолчанию (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: read-uncommitted
+          type: string
+        long_query_time:
+          description: "Время выполнения запроса, после которого он считается долг\
+            им и может попасть в slow query log (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "10"
+          type: string
+        tmp_table_size:
+          description: Максимальный размер временных таблиц в памяти (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: "16777216"
+          type: string
+        table_open_cache:
+          description: "Количество открытых таблиц, которые сервер может хранить в\
+            \ кэше (`mysql5` | `mysql` | `mysql8_4`)."
+          example: "4970"
+          type: string
+        table_open_cache_instances:
+          description: Количество экземпляров кэша открытых таблиц для снижения конкуренции
+            между потоками (`mysql5` | `mysql` | `mysql8_4`).
+          example: "16"
+          type: string
+        innodb_flush_method:
+          description: Метод выполнения операций записи и синхронизации файлов InnoDB
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: O_DSYNC
+          type: string
+        innodb_strict_mode:
+          description: Включение строгой проверки операций InnoDB (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: "ON"
+          type: string
+        slow_query_log:
+          description: Включение журнала медленных запросов (`mysql5` | `mysql` |
+            `mysql8_4`).
+          example: "ON"
+          type: string
+        binlog_cache_size:
+          description: Размер кэша бинарного журнала для транзакций (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: "32768"
+          type: string
+        binlog_group_commit_sync_delay:
+          description: Задержка синхронизации групповой фиксации бинарного журнала
+            в микросекундах (`mysql5` | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        binlog_row_image:
+          description: "Количество информации, записываемой в бинарный журнал при\
+            \ row-based репликации (`mysql5` | `mysql` | `mysql8_4`)."
+          example: full
+          type: string
+        binlog_rows_query_log_events:
+          description: Включение записи SQL-запросов в бинарный журнал при row-based
+            репликации (`mysql5` | `mysql` | `mysql8_4`).
+          example: "OFF"
+          type: string
+        character_set_server:
+          description: Кодировка по умолчанию для сервера MySQL (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: utf8
+          type: string
+        explicit_defaults_for_timestamp:
+          description: Определяет автоматическое поведение TIMESTAMP без явных значений
+            по умолчанию (`mysql5` | `mysql` | `mysql8_4`).
+          example: "ON"
+          type: string
+        group_concat_max_len:
+          description: Максимальная длина результата функции GROUP_CONCAT (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "1024"
+          type: string
+        innodb_adaptive_hash_index:
+          description: Включение или отключение адаптивного хэш-индекса InnoDB для
+            ускорения поиска по индексам (`mysql5` | `mysql` | `mysql8_4`).
+          example: "ON"
+          type: string
+        innodb_lock_wait_timeout:
+          description: Время ожидания блокировки InnoDB перед завершением транзакции
+            с ошибкой (`mysql5` | `mysql` | `mysql8_4`).
+          example: "50"
+          type: string
+        innodb_numa_interleave:
+          description: Включение распределения памяти InnoDB между NUMA-узлами (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: "OFF"
+          type: string
+        net_read_timeout:
+          description: Время ожидания данных от клиента при чтении сетевого соединения
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "30"
+          type: string
+        net_write_timeout:
+          description: Время ожидания записи данных клиенту через сетевое соединение
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        regexp_time_limit:
+          description: Максимальное время выполнения регулярных выражений (`mysql`
+            | `mysql8_4`).
+          example: "32"
+          type: string
+        sync_binlog:
+          description: Количество операций записи бинарного журнала перед принудительной
+            синхронизацией на диск (`mysql5` | `mysql` | `mysql8_4`).
+          example: "1"
+          type: string
+        table_definition_cache:
+          description: "Количество определений таблиц, хранящихся в кэше (`mysql5`\
+            \ | `mysql` | `mysql8_4`)."
+          example: "2000"
+          type: string
+        log_bin_trust_function_creators:
+          description: Разрешение создания хранимых функций без проверки бинарной
+            регистрации (`mysql5` | `mysql` | `mysql8_4`).
+          example: "ON"
+          type: string
+        skip_name_resolve:
+          description: Отключение DNS-разрешения имен клиентов при подключении к серверу
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "OFF"
+          type: string
+        innodb_redo_log_capacity:
+          description: Общий размер redo log InnoDB для хранения журнала восстановления
+            (`mysql8_4`).
+          example: "104857600"
+          type: string
+        wait_timeout:
+          description: Время ожидания неактивного клиентского соединения перед закрытием
+            (`mysql5` | `mysql` | `mysql8_4`).
+          example: "28800"
+          type: string
+        interactive_timeout:
+          description: Время ожидания неактивного интерактивного соединения перед
+            закрытием (`mysql5` | `mysql` | `mysql8_4`).
+          example: "28800"
+          type: string
+        default-time-zone:
+          description: Часовой пояс сервера MySQL по умолчанию (`mysql5` | `mysql`
+            | `mysql8_4`).
+          example: +00:00
+          type: string
+        pxc_strict_mode:
+          description: Режим строгой проверки операций в Percona XtraDB Cluster (`mysql5`
+            | `mysql` | `mysql8_4`).
+          example: ENFORCING
+          type: string
+      type: object
+    config_parameters_postgres:
+      description: Параметры PostgreSQL (`postgres` | `postgres14` | `postgres15`
+        | `postgres16` | `postgres17` | `postgres18`)
+      example:
+        enable_partitionwise_aggregate: "OFF"
+        min_wal_size: "80"
+        max_logical_replication_workers: "4"
+        max_parallel_workers: "8"
+        enable_partition_pruning: "ON"
+        effective_io_concurrency: "1"
+        shared_buffers: "65536"
+        default_transaction_read_only: "OFF"
+        enable_sort: "ON"
+        jit: "ON"
+        max_parallel_maintenance_workers: "2"
+        lock_timeout: "0"
+        quote_all_identifiers: "OFF"
+        autovacuum_naptime: "120"
+        wal_compression: "off"
+        max_worker_processes: "8"
+        idle_in_transaction_session_timeout: "0"
+        enable_parallel_append: "ON"
+        log_temp_files: "-1"
+        autovacuum_work_mem: "-1"
+        backslash_quote: safe_encoding
+        bgwriter_delay: "200"
+        bgwriter_flush_after: "64"
+        deadlock_timeout: "1000"
+        transform_null_equals: "OFF"
+        autovacuum_vacuum_scale_factor: "0.2"
+        plan_cache_mode: auto
+        gin_pending_list_limit: "4096"
+        enable_tidscan: "ON"
+        array_nulls: "ON"
+        log_min_duration_statement: "-1"
+        max_replication_slots: "10"
+        work_mem: "4096"
+        enable_hashagg: "ON"
+        bgwriter_lru_multiplier: "2"
+        timezone: +00:00
+        max_wal_senders: "10"
+        enable_seqscan: "ON"
+        exit_on_error: "OFF"
+        autovacuum_vacuum_insert_scale_factor: "0.2"
+        enable_hashjoin: "ON"
+        enable_indexonlyscan: "ON"
+        join_collapse_limit: "8"
+        enable_indexscan: "ON"
+        default_transaction_isolation: read committed
+        bgwriter_lru_maxpages: "100"
+        enable_mergejoin: "ON"
+        max_prepared_transactions: "0"
+        enable_material: "ON"
+        autovacuum_vacuum_cost_limit: "200"
+        from_collapse_limit: "8"
+        autovacuum_max_workers: "3"
+        enable_memoize: "ON"
+        checkpoint_timeout: "300"
+        enable_partitionwise_join: "OFF"
+        checkpoint_completion_target: "0.5"
+        temp_buffers: "1024"
+        io_workers: "3"
+        autovacuum_analyze_scale_factor: "0.1"
+        max_connections: "200"
+        backend_flush_after: "0"
+        random_page_cost: "4"
+        log_lock_waits: "OFF"
+        enable_incremental_sort: "ON"
+        max_locks_per_transaction: "64"
+        wal_level: replica
+        idle_session_timeout: "900000"
+        maintenance_work_mem: "262144"
+        max_parallel_workers_per_gather: "2"
+        io_method: worker
+        effective_cache_size: "131072"
+        standard_conforming_strings: "ON"
+        enable_parallel_hash: "ON"
+        max_wal_size: "1024"
+        statement_timeout: "0"
+        wal_buffers: "2048"
+        track_io_timing: "OFF"
+      properties:
+        max_connections:
+          description: Максимальное количество одновременных подключений к серверу
+            (`mysql5` | `mysql` | `mysql8_4` | `postgres` | `postgres14` | `postgres15`
+            | `postgres16` | `postgres17` | `postgres18`).
+          example: "200"
+          type: string
+        autovacuum_analyze_scale_factor:
+          description: Доля изменения строк таблицы перед запуском автоматического
+            анализа (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "0.1"
+          type: string
+        autovacuum_max_workers:
+          description: "Максимальное количество процессов autovacuum, которые могу\
+            т работать одновременно (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "3"
+          type: string
+        autovacuum_naptime:
+          description: Интервал между запусками процессов autovacuum (`postgres` |
+            `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "120"
+          type: string
+        autovacuum_vacuum_insert_scale_factor:
+          description: Доля вставленных строк перед запуском vacuum для таблиц с большим
+            количеством вставок (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "0.2"
+          type: string
+        autovacuum_vacuum_scale_factor:
+          description: Доля измененных или удаленных строк перед запуском autovacuum
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "0.2"
+          type: string
+        autovacuum_work_mem:
+          description: "Объем памяти, используемый одним процессом autovacuum (`postgres`\
+            \ | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
+          example: "-1"
+          type: string
+        bgwriter_delay:
+          description: Интервал между циклами фонового процесса записи страниц (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "200"
+          type: string
+        bgwriter_lru_maxpages:
+          description: "Максимальное количество страниц, записываемых background writer\
+            \ за один цикл (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "100"
+          type: string
+        deadlock_timeout:
+          description: Время ожидания блокировки перед проверкой взаимной блокировки
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "1000"
+          type: string
+        gin_pending_list_limit:
+          description: Максимальный размер списка ожидающих вставок индекса GIN (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "4096"
+          type: string
+        idle_in_transaction_session_timeout:
+          description: Время ожидания неактивной транзакционной сессии перед завершением
+            соединения (`postgres` | `postgres14` | `postgres15` | `postgres16` |
+            `postgres17` | `postgres18`).
+          example: "0"
+          type: string
+        join_collapse_limit:
+          description: "Максимальное количество таблиц в JOIN, которые планировщик\
+            \ может переупорядочить (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "8"
+          type: string
+        lock_timeout:
+          description: Максимальное время ожидания блокировки перед отменой запроса
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "0"
+          type: string
+        max_prepared_transactions:
+          description: "Максимальное количество подготовленных транзакций, которые\
+            \ могут существовать одновременно (`postgres` | `postgres14` | `postgres15`\
+            \ | `postgres16` | `postgres17` | `postgres18`)."
+          example: "0"
+          type: string
+        shared_buffers:
+          description: "Размер общей памяти, используемой PostgreSQL для буферного\
+            \ кэша (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`\
+            \ | `postgres18`)."
+          example: "65536"
+          type: string
+        log_min_duration_statement:
+          description: "Минимальное время выполнения запроса, после которого он за\
+            писывается в журнал (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "-1"
+          type: string
+        wal_buffers:
+          description: "Размер памяти, используемой для буферизации WAL-записей (`postgres`\
+            \ | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
+          example: "2048"
+          type: string
+        temp_buffers:
+          description: Максимальный объем памяти для временных таблиц каждой сессии
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "1024"
+          type: string
+        work_mem:
+          description: "Объем памяти, используемый одной операцией сортировки или\
+            \ хеширования (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "4096"
+          type: string
+        default_transaction_isolation:
+          description: Уровень изоляции транзакций по умолчанию (`postgres` | `postgres14`
+            | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: read committed
+          type: string
+        effective_cache_size:
+          description: "Оценка объема дискового кэша, доступного планировщику запр\
+            осов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`\
+            \ | `postgres18`)."
+          example: "131072"
+          type: string
+        max_wal_size:
+          description: Максимальный размер WAL перед запуском контрольной точки (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "1024"
+          type: string
+        min_wal_size:
+          description: "Минимальный размер WAL, который сохраняется между контроль\
+            ными точками (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "80"
+          type: string
+        wal_level:
+          description: Уровень детализации записи WAL для восстановления и репликации
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: replica
+          type: string
+        max_replication_slots:
+          description: "Максимальное количество слотов репликации, которые могут б\
+            ыть созданы (`postgres` | `postgres14` | `postgres15` | `postgres16` |\
+            \ `postgres17` | `postgres18`)."
+          example: "10"
+          type: string
+        max_wal_senders:
+          description: Максимальное количество процессов отправки WAL для репликации
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "10"
+          type: string
+        max_worker_processes:
+          description: Максимальное количество фоновых процессов PostgreSQL (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "8"
+          type: string
+        max_logical_replication_workers:
+          description: Максимальное количество процессов логической репликации (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "4"
+          type: string
+        max_parallel_maintenance_workers:
+          description: Максимальное количество параллельных процессов для операций
+            обслуживания (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "2"
+          type: string
+        max_parallel_workers:
+          description: Максимальное количество параллельных рабочих процессов для
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "8"
+          type: string
+        max_parallel_workers_per_gather:
+          description: Максимальное количество параллельных рабочих процессов на один
+            Gather-узел (`postgres` | `postgres14` | `postgres15` | `postgres16` |
+            `postgres17` | `postgres18`).
+          example: "2"
+          type: string
+        array_nulls:
+          description: Разрешение использования NULL в массивах PostgreSQL (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        backend_flush_after:
+          description: "Количество страниц, после записи которых выполняется прину\
+            дительная очистка данных на диск серверным процессом (`postgres` | `postgres14`\
+            \ | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
+          example: "0"
+          type: string
+        backslash_quote:
+          description: Управление использованием обратного слеша в строковых литералах
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: safe_encoding
+          type: string
+        bgwriter_flush_after:
+          description: "Количество страниц, после которого background writer выпол\
+            няет очистку данных на диск (`postgres` | `postgres14` | `postgres15`\
+            \ | `postgres16` | `postgres17` | `postgres18`)."
+          example: "64"
+          type: string
+        bgwriter_lru_multiplier:
+          description: "Множитель количества страниц, которые background writer пы\
+            тается очистить (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "2"
+          type: string
+        default_transaction_read_only:
+          description: Определяет режим транзакций только для чтения по умолчанию
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        enable_hashagg:
+          description: Разрешение использования Hash Aggregate планировщиком запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_hashjoin:
+          description: Разрешение использования Hash Join планировщиком запросов (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_incremental_sort:
+          description: Разрешение использования инкрементальной сортировки планировщиком
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_indexscan:
+          description: Разрешение использования обычного индексного сканирования (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_indexonlyscan:
+          description: Разрешение использования index-only scan (`postgres` | `postgres14`
+            | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_material:
+          description: Разрешение использования материализации промежуточных результатов
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_memoize:
+          description: Разрешение использования Memoize узлов планировщиком запросов
+            (`postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_mergejoin:
+          description: Разрешение использования Merge Join планировщиком запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_parallel_append:
+          description: Разрешение использования параллельного Append для запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_parallel_hash:
+          description: Разрешение использования параллельных Hash операций (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_partition_pruning:
+          description: Разрешение удаления ненужных разделов таблицы при планировании
+            запроса (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_partitionwise_join:
+          description: Разрешение выполнения соединений между секционированными таблицами
+            с учетом секций (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        enable_partitionwise_aggregate:
+          description: Разрешение выполнения агрегатных операций отдельно для секций
+            таблиц (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        enable_seqscan:
+          description: Разрешение использования последовательного сканирования таблиц
+            планировщиком запросов (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        enable_sort:
+          description: Разрешение использования операций сортировки планировщиком
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        enable_tidscan:
+          description: Разрешение использования TID Scan для поиска строк по физическим
+            идентификаторам (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "ON"
+          type: string
+        exit_on_error:
+          description: Завершение сессии при возникновении ошибки SQL (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        from_collapse_limit:
+          description: "Максимальное количество элементов FROM, которые планировщи\
+            к может объединять при оптимизации запросов (`postgres` | `postgres14`\
+            \ | `postgres15` | `postgres16` | `postgres17` | `postgres18`)."
+          example: "8"
+          type: string
+        jit:
+          description: Включение JIT-компиляции для ускорения выполнения запросов
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        plan_cache_mode:
+          description: Режим использования кэша планов подготовленных запросов (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: auto
+          type: string
+        quote_all_identifiers:
+          description: Всегда заключать идентификаторы в кавычки при генерации SQL
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        standard_conforming_strings:
+          description: Использование стандартного поведения строковых литералов SQL
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "ON"
+          type: string
+        statement_timeout:
+          description: Максимальное время выполнения SQL-запроса перед автоматической
+            отменой (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "0"
+          type: string
+        timezone:
+          description: Часовой пояс сервера PostgreSQL по умолчанию (`postgres` |
+            `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: +00:00
+          type: string
+        transform_null_equals:
+          description: Преобразование выражений вида `NULL = NULL` в проверку IS NULL
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "OFF"
+          type: string
+        max_locks_per_transaction:
+          description: "Количество объектов, которые может блокировать одна транза\
+            кция (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`\
+            \ | `postgres18`)."
+          example: "64"
+          type: string
+        autovacuum_vacuum_cost_limit:
+          description: Лимит стоимости операций autovacuum перед приостановкой работы
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "200"
+          type: string
+        checkpoint_timeout:
+          description: Максимальный интервал времени между автоматическими контрольными
+            точками (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "300"
+          type: string
+        checkpoint_completion_target:
+          description: "Доля интервала checkpoint, за которую PostgreSQL распредел\
+            яет запись данных (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "0.5"
+          type: string
+        wal_compression:
+          description: Включение сжатия WAL-записей для уменьшения объема журнала
+            (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "off"
+          type: string
+        random_page_cost:
+          description: Оценочная стоимость случайного чтения страницы для планировщика
+            запросов (`postgres` | `postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "4"
+          type: string
+        effective_io_concurrency:
+          description: "Количество параллельных операций ввода-вывода, которые пла\
+            нировщик может учитывать (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "1"
+          type: string
+        log_lock_waits:
+          description: Включение записи в журнал информации об ожидании блокировок
+            дольше deadlock_timeout (`postgres` | `postgres14` | `postgres15` | `postgres16`
+            | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        log_temp_files:
+          description: "Минимальный размер временных файлов, при котором они запис\
+            ываются в журнал (`postgres` | `postgres14` | `postgres15` | `postgres16`\
+            \ | `postgres17` | `postgres18`)."
+          example: "-1"
+          type: string
+        track_io_timing:
+          description: Включение сбора статистики времени операций ввода-вывода (`postgres`
+            | `postgres14` | `postgres15` | `postgres16` | `postgres17` | `postgres18`).
+          example: "OFF"
+          type: string
+        maintenance_work_mem:
+          description: "Максимальный объем памяти для операций обслуживания, таких\
+            \ как VACUUM и CREATE INDEX (`postgres` | `postgres14` | `postgres15`\
+            \ | `postgres16` | `postgres17` | `postgres18`)."
+          example: "262144"
+          type: string
+        idle_session_timeout:
+          description: Время ожидания неактивной сессии перед автоматическим завершением
+            соединения (`postgres14` | `postgres15` | `postgres16` | `postgres17`
+            | `postgres18`).
+          example: "900000"
+          type: string
+        io_method:
+          description: Метод выполнения операций ввода-вывода PostgreSQL (`postgres18`).
+          example: worker
+          type: string
+        io_workers:
+          description: Количество фоновых процессов для выполнения операций ввода-вывода
+            (`postgres18`).
+          example: "3"
+          type: string
       type: object
     dedicated_server_preset_cpu:
       description: "Объект, содержащий информацию о процессоре выделенного сервера\

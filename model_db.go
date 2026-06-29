@@ -50,7 +50,7 @@ type Db struct {
 	// ID тарифа.
 	PresetId int32 `json:"preset_id"`
 	DiskStats NullableDbDiskStats `json:"disk_stats"`
-	ConfigParameters ConfigParameters `json:"config_parameters"`
+	ConfigParameters Mysql `json:"config_parameters"`
 	// Это логическое значение, которое показывает, доступна ли база данных только по локальному IP адресу.
 	IsOnlyLocalIpAccess bool `json:"is_only_local_ip_access"`
 	AvailabilityZone AvailabilityZone `json:"availability_zone"`
@@ -60,7 +60,7 @@ type Db struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ DbType, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters ConfigParameters, isOnlyLocalIpAccess bool, availabilityZone AvailabilityZone) *Db {
+func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ DbType, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters Mysql, isOnlyLocalIpAccess bool, availabilityZone AvailabilityZone) *Db {
 	this := Db{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -494,9 +494,9 @@ func (o *Db) SetDiskStats(v DbDiskStats) {
 }
 
 // GetConfigParameters returns the ConfigParameters field value
-func (o *Db) GetConfigParameters() ConfigParameters {
+func (o *Db) GetConfigParameters() Mysql {
 	if o == nil {
-		var ret ConfigParameters
+		var ret Mysql
 		return ret
 	}
 
@@ -505,7 +505,7 @@ func (o *Db) GetConfigParameters() ConfigParameters {
 
 // GetConfigParametersOk returns a tuple with the ConfigParameters field value
 // and a boolean to check if the value has been set.
-func (o *Db) GetConfigParametersOk() (*ConfigParameters, bool) {
+func (o *Db) GetConfigParametersOk() (*Mysql, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -513,7 +513,7 @@ func (o *Db) GetConfigParametersOk() (*ConfigParameters, bool) {
 }
 
 // SetConfigParameters sets field value
-func (o *Db) SetConfigParameters(v ConfigParameters) {
+func (o *Db) SetConfigParameters(v Mysql) {
 	o.ConfigParameters = v
 }
 

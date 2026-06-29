@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **Status** | **string** | Текущий статус базы данных. | 
 **PresetId** | **int32** | ID тарифа. | 
 **DiskStats** | [**NullableDbDiskStats**](DbDiskStats.md) |  | 
-**ConfigParameters** | [**ConfigParameters**](ConfigParameters.md) |  | 
+**ConfigParameters** | [**Mysql**](Mysql.md) |  | 
 **IsOnlyLocalIpAccess** | **bool** | Это логическое значение, которое показывает, доступна ли база данных только по локальному IP адресу. | 
 **AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewDb
 
-`func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ DbType, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters ConfigParameters, isOnlyLocalIpAccess bool, availabilityZone AvailabilityZone, ) *Db`
+`func NewDb(id float32, createdAt string, accountId string, login string, password string, name string, host NullableString, type_ DbType, hashType NullableString, port int32, ip NullableString, localIp NullableString, status string, presetId int32, diskStats NullableDbDiskStats, configParameters Mysql, isOnlyLocalIpAccess bool, availabilityZone AvailabilityZone, ) *Db`
 
 NewDb instantiates a new Db object
 This constructor will assign default values to properties that have it defined,
@@ -420,20 +420,20 @@ SetDiskStats sets DiskStats field to given value.
 UnsetDiskStats ensures that no value is present for DiskStats, not even an explicit nil
 ### GetConfigParameters
 
-`func (o *Db) GetConfigParameters() ConfigParameters`
+`func (o *Db) GetConfigParameters() Mysql`
 
 GetConfigParameters returns the ConfigParameters field if non-nil, zero value otherwise.
 
 ### GetConfigParametersOk
 
-`func (o *Db) GetConfigParametersOk() (*ConfigParameters, bool)`
+`func (o *Db) GetConfigParametersOk() (*Mysql, bool)`
 
 GetConfigParametersOk returns a tuple with the ConfigParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfigParameters
 
-`func (o *Db) SetConfigParameters(v ConfigParameters)`
+`func (o *Db) SetConfigParameters(v Mysql)`
 
 SetConfigParameters sets ConfigParameters field to given value.
 

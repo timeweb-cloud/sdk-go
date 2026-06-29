@@ -24,6 +24,7 @@ type UpdateCluster struct {
 	Name *string `json:"name,omitempty"`
 	// ID тарифа.
 	PresetId *int32 `json:"preset_id,omitempty"`
+	ConfigParameters *Mysql `json:"config_parameters,omitempty"`
 	// Описание кластера базы данных
 	Description *string `json:"description,omitempty"`
 	// Доступность публичного IP-адреса
@@ -111,6 +112,38 @@ func (o *UpdateCluster) HasPresetId() bool {
 // SetPresetId gets a reference to the given int32 and assigns it to the PresetId field.
 func (o *UpdateCluster) SetPresetId(v int32) {
 	o.PresetId = &v
+}
+
+// GetConfigParameters returns the ConfigParameters field value if set, zero value otherwise.
+func (o *UpdateCluster) GetConfigParameters() Mysql {
+	if o == nil || IsNil(o.ConfigParameters) {
+		var ret Mysql
+		return ret
+	}
+	return *o.ConfigParameters
+}
+
+// GetConfigParametersOk returns a tuple with the ConfigParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCluster) GetConfigParametersOk() (*Mysql, bool) {
+	if o == nil || IsNil(o.ConfigParameters) {
+		return nil, false
+	}
+	return o.ConfigParameters, true
+}
+
+// HasConfigParameters returns a boolean if a field has been set.
+func (o *UpdateCluster) HasConfigParameters() bool {
+	if o != nil && !IsNil(o.ConfigParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigParameters gets a reference to the given Mysql and assigns it to the ConfigParameters field.
+func (o *UpdateCluster) SetConfigParameters(v Mysql) {
+	o.ConfigParameters = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -224,6 +257,9 @@ func (o UpdateCluster) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PresetId) {
 		toSerialize["preset_id"] = o.PresetId
+	}
+	if !IsNil(o.ConfigParameters) {
+		toSerialize["config_parameters"] = o.ConfigParameters
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description

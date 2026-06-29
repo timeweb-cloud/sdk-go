@@ -2816,7 +2816,7 @@ type ApiGetDatabaseParametersRequest struct {
 	ApiService *DatabasesAPIService
 }
 
-func (r ApiGetDatabaseParametersRequest) Execute() (*map[string][]string, *http.Response, error) {
+func (r ApiGetDatabaseParametersRequest) Execute() (*ConfigParameters, *http.Response, error) {
 	return r.ApiService.GetDatabaseParametersExecute(r)
 }
 
@@ -2836,13 +2836,13 @@ func (a *DatabasesAPIService) GetDatabaseParameters(ctx context.Context) ApiGetD
 }
 
 // Execute executes the request
-//  @return map[string][]string
-func (a *DatabasesAPIService) GetDatabaseParametersExecute(r ApiGetDatabaseParametersRequest) (*map[string][]string, *http.Response, error) {
+//  @return ConfigParameters
+func (a *DatabasesAPIService) GetDatabaseParametersExecute(r ApiGetDatabaseParametersRequest) (*ConfigParameters, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *map[string][]string
+		localVarReturnValue  *ConfigParameters
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DatabasesAPIService.GetDatabaseParameters")
