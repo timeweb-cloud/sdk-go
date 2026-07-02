@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Password** | Pointer to **string** | Пароль пользователя базы данных | [optional] 
-**Privileges** | Pointer to **[]string** | Список привилегий пользователя базы данных | [optional] 
+**Privileges** | Pointer to [**[]PropertiesMysql**](PropertiesMysql.md) | Список привилегий пользователя базы данных | [optional] 
 **Description** | Pointer to **string** | Описание пользователя базы данных | [optional] 
 **InstanceId** | Pointer to **float32** | ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам | [optional] 
 
@@ -55,20 +55,20 @@ HasPassword returns a boolean if a field has been set.
 
 ### GetPrivileges
 
-`func (o *UpdateAdmin) GetPrivileges() []string`
+`func (o *UpdateAdmin) GetPrivileges() []PropertiesMysql`
 
 GetPrivileges returns the Privileges field if non-nil, zero value otherwise.
 
 ### GetPrivilegesOk
 
-`func (o *UpdateAdmin) GetPrivilegesOk() (*[]string, bool)`
+`func (o *UpdateAdmin) GetPrivilegesOk() (*[]PropertiesMysql, bool)`
 
 GetPrivilegesOk returns a tuple with the Privileges field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivileges
 
-`func (o *UpdateAdmin) SetPrivileges(v []string)`
+`func (o *UpdateAdmin) SetPrivileges(v []PropertiesMysql)`
 
 SetPrivileges sets Privileges field to given value.
 

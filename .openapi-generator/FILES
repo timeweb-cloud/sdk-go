@@ -104,6 +104,7 @@ docs/BucketUser.md
 docs/BucketWebsiteConfig.md
 docs/BucketWebsiteConfigErrorPagesInner.md
 docs/CheckDomain200Response.md
+docs/Clickhouse.md
 docs/ClusterEdit.md
 docs/ClusterEditOidcProvider.md
 docs/ClusterIn.md
@@ -123,6 +124,7 @@ docs/ComponentsSchemasMeta.md
 docs/ConfigParameters.md
 docs/ConfigParametersMysql.md
 docs/ConfigParametersPostgres.md
+docs/ConfigParametersValkey.md
 docs/ContainerRegistryAPI.md
 docs/ContainerRegistryPresetsInner.md
 docs/ContainerRegistryRepositoriesInner.md
@@ -388,6 +390,7 @@ docs/IncreaseNodes.md
 docs/InfoServicePrice.md
 docs/Invoice.md
 docs/K8SVersionsResponse.md
+docs/Kafka.md
 docs/KnowledgeBasesAPI.md
 docs/Knowledgebase.md
 docs/KnowledgebaseV2.md
@@ -412,6 +415,7 @@ docs/ModelParamsInfo.md
 docs/ModelParamsInfoMaxTokens.md
 docs/ModelParamsInfoReasoningEffort.md
 docs/ModelParamsInfoTemperature.md
+docs/Mongodb.md
 docs/MountNetworkDrive.md
 docs/Mysql.md
 docs/NatIn.md
@@ -441,6 +445,7 @@ docs/NotificationSettingChannel.md
 docs/NotificationSettingChannels.md
 docs/NotificationSettingType.md
 docs/OS.md
+docs/Opensearch.md
 docs/OutgoingIsDisabled.md
 docs/OutgoingIsEnabled.md
 docs/PaymentsAPI.md
@@ -448,6 +453,7 @@ docs/PerformActionOnBackupRequest.md
 docs/PerformActionOnServerRequest.md
 docs/Policy.md
 docs/Postgres.md
+docs/Postgresql.md
 docs/PresetsBalancer.md
 docs/PresetsDbs.md
 docs/PresetsResponse.md
@@ -455,8 +461,11 @@ docs/PresetsStorage.md
 docs/Project.md
 docs/ProjectResource.md
 docs/ProjectsAPI.md
+docs/PropertiesMysql.md
+docs/PropertiesValkey.md
 docs/Provider.md
 docs/Providers.md
+docs/Rabbitmq.md
 docs/ReduceNodes.md
 docs/RegistriesResponse.md
 docs/RegistryEdit.md
@@ -593,6 +602,7 @@ docs/UploadSuccessfulResponse.md
 docs/UrlStatus.md
 docs/Use.md
 docs/VPCAPI.md
+docs/Valkey.md
 docs/Vds.md
 docs/VdsDisksInner.md
 docs/VdsImage.md
@@ -680,6 +690,7 @@ model_bucket_user.go
 model_bucket_website_config.go
 model_bucket_website_config_error_pages_inner.go
 model_check_domain_200_response.go
+model_clickhouse.go
 model_cluster_edit.go
 model_cluster_edit_oidc_provider.go
 model_cluster_in.go
@@ -699,6 +710,7 @@ model_components_schemas_meta.go
 model_config_parameters.go
 model_config_parameters_mysql.go
 model_config_parameters_postgres.go
+model_config_parameters_valkey.go
 model_container_registry_presets_inner.go
 model_container_registry_repositories_inner.go
 model_create_admin.go
@@ -957,6 +969,7 @@ model_increase_nodes.go
 model_info_service_price.go
 model_invoice.go
 model_k8_s_versions_response.go
+model_kafka.go
 model_knowledgebase.go
 model_knowledgebase_v2.go
 model_location.go
@@ -977,6 +990,7 @@ model_model_params_info.go
 model_model_params_info_max_tokens.go
 model_model_params_info_reasoning_effort.go
 model_model_params_info_temperature.go
+model_mongodb.go
 model_mount_network_drive.go
 model_mysql.go
 model_nat_in.go
@@ -1004,6 +1018,7 @@ model_notification_setting.go
 model_notification_setting_channel.go
 model_notification_setting_channels.go
 model_notification_setting_type.go
+model_opensearch.go
 model_os.go
 model_outgoing_is_disabled.go
 model_outgoing_is_enabled.go
@@ -1011,14 +1026,18 @@ model_perform_action_on_backup_request.go
 model_perform_action_on_server_request.go
 model_policy.go
 model_postgres.go
+model_postgresql.go
 model_presets_balancer.go
 model_presets_dbs.go
 model_presets_response.go
 model_presets_storage.go
 model_project.go
 model_project_resource.go
+model_properties_mysql.go
+model_properties_valkey.go
 model_provider.go
 model_providers.go
+model_rabbitmq.go
 model_reduce_nodes.go
 model_registries_response.go
 model_registry_edit.go
@@ -1150,6 +1169,7 @@ model_upload_successful_response.go
 model_url_status.go
 model_url_type.go
 model_use.go
+model_valkey.go
 model_vds.go
 model_vds_disks_inner.go
 model_vds_image.go

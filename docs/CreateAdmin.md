@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **Password** | **string** | Пароль пользователя базы данных | 
 **Host** | Pointer to **string** | Хост пользователя | [optional] 
 **InstanceId** | Pointer to **float32** | ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам | [optional] 
-**Privileges** | **[]string** | Список привилегий пользователя базы данных | 
+**Privileges** | [**[]PropertiesMysql**](PropertiesMysql.md) | Список привилегий пользователя базы данных | 
 **Description** | Pointer to **string** | Описание пользователя базы данных | [optional] 
 
 ## Methods
 
 ### NewCreateAdmin
 
-`func NewCreateAdmin(login string, password string, privileges []string, ) *CreateAdmin`
+`func NewCreateAdmin(login string, password string, privileges []PropertiesMysql, ) *CreateAdmin`
 
 NewCreateAdmin instantiates a new CreateAdmin object
 This constructor will assign default values to properties that have it defined,
@@ -122,20 +122,20 @@ HasInstanceId returns a boolean if a field has been set.
 
 ### GetPrivileges
 
-`func (o *CreateAdmin) GetPrivileges() []string`
+`func (o *CreateAdmin) GetPrivileges() []PropertiesMysql`
 
 GetPrivileges returns the Privileges field if non-nil, zero value otherwise.
 
 ### GetPrivilegesOk
 
-`func (o *CreateAdmin) GetPrivilegesOk() (*[]string, bool)`
+`func (o *CreateAdmin) GetPrivilegesOk() (*[]PropertiesMysql, bool)`
 
 GetPrivilegesOk returns a tuple with the Privileges field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivileges
 
-`func (o *CreateAdmin) SetPrivileges(v []string)`
+`func (o *CreateAdmin) SetPrivileges(v []PropertiesMysql)`
 
 SetPrivileges sets Privileges field to given value.
 

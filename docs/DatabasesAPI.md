@@ -264,7 +264,7 @@ import (
 
 func main() {
     dbClusterId := int32(56) // int32 | ID кластера базы данных
-    createAdmin := *openapiclient.NewCreateAdmin("default_login", "bs.:L2f$Tm:SC~", []string{"Privileges_example"}) // CreateAdmin | 
+    createAdmin := *openapiclient.NewCreateAdmin("default_login", "bs.:L2f$Tm:SC~", []openapiclient.PropertiesMysql{openapiclient.properties-mysql("ALTER")}) // CreateAdmin | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

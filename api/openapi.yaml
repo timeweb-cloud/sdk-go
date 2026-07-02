@@ -54192,6 +54192,69 @@ components:
           example: "3"
           type: string
       type: object
+    valkey:
+      description: Параметры Valkey (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)
+      properties:
+        client-output-buffer-limit normal:
+          description: "Ограничение буфера вывода для обычных клиентских подключен\
+            ий. Формат: `hard-limit soft-limit soft-seconds` (`valkey` | `valkey7`\
+            \ | `valkey8_1` | `valkey9_1`)."
+          example: 0 0 0
+          type: string
+        client-output-buffer-limit pubsub:
+          description: "Ограничение буфера вывода для клиентов pub/sub. Формат: `hard-limit\
+            \ soft-limit soft-seconds` (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)."
+          example: 33554432 8388608 60
+          type: string
+        databases:
+          description: Количество логических баз данных на сервере (`valkey` | `valkey7`
+            | `valkey8_1` | `valkey9_1`).
+          example: "16"
+          type: string
+        timeout:
+          description: Время ожидания в секундах перед закрытием неактивного клиентского
+            соединения. `0` — отключено (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "0"
+          type: string
+        maxmemory-policy:
+          description: Политика вытеснения ключей при достижении лимита памяти (`valkey`
+            | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: allkeys-lru
+          type: string
+        slowlog-log-slower-than:
+          description: Минимальное время выполнения команды в микросекундах для записи
+            в журнал медленных команд (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "10000"
+          type: string
+        slowlog-max-len:
+          description: "Максимальное количество записей, хранящихся в журнале медл\
+            енных команд (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)."
+          example: "128"
+          type: string
+        save:
+          description: "Условие создания снимка RDB на диск. Формат: `seconds changes`\
+            \ — сохранение выполняется, если за указанное время было сделано не ме\
+            нее указанного количества изменений (`valkey` | `valkey7` | `valkey8_1`\
+            \ | `valkey9_1`)."
+          example: 900 1
+          type: string
+        appendonly:
+          description: Включение режима AOF (Append Only File) для персистентного
+            хранения данных (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "yes"
+          type: string
+        appendfsync:
+          description: "Режим синхронизации AOF-файла с диском: `always` — при каж\
+            дой записи, `everysec` — раз в секунду, `no` — управление передаётся О\
+            С (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)."
+          example: everysec
+          type: string
+        tcp-keepalive:
+          description: Интервал проверки активности TCP-соединения в секундах. `0`
+            — отключено (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "300"
+          type: string
+      type: object
     database-cluster:
       description: Кластер базы данных
       example:
@@ -54373,6 +54436,122 @@ components:
       - status
       - type
       type: object
+    properties-mysql:
+      enum:
+      - ALTER
+      - CREATE
+      - CREATE_VIEW
+      - DELETE
+      - DROP
+      - EVENT
+      - INDEX
+      - INSERT
+      - LOCK_TABLES
+      - REFERENCES
+      - SELECT
+      - SHOW_VIEW
+      - TRIGGER
+      - UPDATE
+      - ALTER_ROUTINE
+      - CREATE_ROUTINE
+      - CREATE_TEMPORARY_TABLES
+      - CREATE_USER
+      - PROCESS
+      - SLOW_LOG
+      - CREATE_DB
+      title: mysql
+      type: string
+    postgresql:
+      enum:
+      - SELECT
+      - INSERT
+      - UPDATE
+      - DELETE
+      - TRUNCATE
+      - REFERENCES
+      - TRIGGER
+      - CREATE
+      - TEMPORARY
+      - CREATEDB
+      - CREATEROLE
+      title: postgres
+      type: string
+    properties-valkey:
+      enum:
+      - READ
+      - WRITE
+      - ADMIN
+      - BITMAP
+      - BLOCKING
+      - CONNECTION
+      - DANGEROUS
+      - GEO
+      - HASH
+      - HYPERLOGLOG
+      - FAST
+      - KEYSPACE
+      - LIST
+      - PUBSUB
+      - SCRIPTING
+      - SET
+      - SORTEDSET
+      - SLOW
+      - STREAM
+      - STRING
+      - TRANSACTION
+      title: valkey
+      type: string
+    mongodb:
+      enum:
+      - dbAdmin
+      - readWrite
+      title: mongodb
+      type: string
+    opensearch:
+      enum:
+      - READ
+      - WRITE
+      title: opensearch
+      type: string
+    clickhouse:
+      enum:
+      - ALTER
+      - ALTER_TABLE
+      - ALTER_VIEW
+      - CREATE
+      - CREATE_VIEW
+      - CREATE_DICTIONARY
+      - CREATE_TABLE
+      - DROP
+      - DROP_TABLE
+      - DROP_VIEW
+      - DROP_DICTIONARY
+      - SELECT
+      - INSERT
+      - SHOW
+      - TRUNCATE
+      - OPTIMIZE
+      - CREATE_TEMPORARY_TABLE
+      - dictGet
+      title: clickhouse
+      type: string
+    kafka:
+      description: Привилегии Kafka (`kafka`)
+      enum:
+      - DESCRIBE
+      - READ
+      - WRITE
+      title: kafka
+      type: string
+    rabbitmq:
+      enum:
+      - CONFIGURE
+      - READ
+      - WRITE
+      - READ_DASHBOARD
+      - WRITE_DASHBOARD
+      title: rabbitmq
+      type: string
     db-replication:
       description: Репликация
       properties:
@@ -54499,12 +54678,12 @@ components:
         password: bs.:L2f$Tm:SC~
         instances:
         - privileges:
-          - ALTER
-          - ALTER
+          - null
+          - null
           instance_id: 0.8008281904610115
         - privileges:
-          - ALTER
-          - ALTER
+          - null
+          - null
           instance_id: 0.8008281904610115
         host: '%'
         created_at: 2021-02-25T11:04:15Z
@@ -54575,75 +54754,7 @@ components:
         privileges:
           description: Список привилегий пользователя базы данных
           items:
-            enum:
-            - ALTER
-            - ALTER_TABLE
-            - ALTER_VIEW
-            - CREATE_VIEW
-            - CREATE_DICTIONARY
-            - CREATE_FUNCTION
-            - CREATE_TABLE
-            - CREATE
-            - DELETE
-            - DROP
-            - DROP_TABLE
-            - DROP_VIEW
-            - DROP_DICTIONARY
-            - EVENT
-            - INDEX
-            - INSERT
-            - LOCK_TABLES
-            - REFERENCES
-            - SELECT
-            - SHOW
-            - SHOW_VIEW
-            - TRUNCATE
-            - TRIGGER
-            - UPDATE
-            - READ
-            - WRITE
-            - READ_WRITE
-            - DB_ADMIN
-            - ALTER_ROUTINE
-            - CREATE_ROUTINE
-            - CREATE_TEMPORARY_TABLES
-            - TEMPORARY
-            - CONFIGURE
-            - READ_DASHBOARD
-            - WRITE_DASHBOARD
-            - DESCRIBE
-            - OPTIMIZE
-            - EXECUTE
-            - CREATEDB
-            - CREATEROLE
-            - CREATE_DB
-            - CREATE_USER
-            - PROCESS
-            - SLOW_LOG
-            - CREATE_TEMPORARY_TABLE
-            - ADMIN
-            - BITMAP
-            - BLOCKING
-            - CONNECTION
-            - DANGEROUS
-            - GEO
-            - HASH
-            - HYPERLOGLOG
-            - FAST
-            - KEYSPACE
-            - LIST
-            - PUBSUB
-            - SCRIPTING
-            - SET
-            - SORTEDSET
-            - SLOW
-            - STREAM
-            - STRING
-            - TRANSACTION
-            - dictGet
-            - dbAdmin
-            - readWrite
-            type: string
+            $ref: '#/components/schemas/properties-mysql'
           type: array
         description:
           description: Описание пользователя базы данных
@@ -54663,75 +54774,7 @@ components:
         privileges:
           description: Список привилегий пользователя базы данных
           items:
-            enum:
-            - ALTER
-            - ALTER_TABLE
-            - ALTER_VIEW
-            - CREATE_VIEW
-            - CREATE_DICTIONARY
-            - CREATE_FUNCTION
-            - CREATE_TABLE
-            - CREATE
-            - DELETE
-            - DROP
-            - DROP_TABLE
-            - DROP_VIEW
-            - DROP_DICTIONARY
-            - EVENT
-            - INDEX
-            - INSERT
-            - LOCK_TABLES
-            - REFERENCES
-            - SELECT
-            - SHOW
-            - SHOW_VIEW
-            - TRUNCATE
-            - TRIGGER
-            - UPDATE
-            - READ
-            - WRITE
-            - READ_WRITE
-            - DB_ADMIN
-            - ALTER_ROUTINE
-            - CREATE_ROUTINE
-            - CREATE_TEMPORARY_TABLES
-            - TEMPORARY
-            - CONFIGURE
-            - READ_DASHBOARD
-            - WRITE_DASHBOARD
-            - DESCRIBE
-            - OPTIMIZE
-            - EXECUTE
-            - CREATEDB
-            - CREATEROLE
-            - CREATE_DB
-            - CREATE_USER
-            - PROCESS
-            - SLOW_LOG
-            - CREATE_TEMPORARY_TABLE
-            - ADMIN
-            - BITMAP
-            - BLOCKING
-            - CONNECTION
-            - DANGEROUS
-            - GEO
-            - HASH
-            - HYPERLOGLOG
-            - FAST
-            - KEYSPACE
-            - LIST
-            - PUBSUB
-            - SCRIPTING
-            - SET
-            - SORTEDSET
-            - SLOW
-            - STREAM
-            - STRING
-            - TRANSACTION
-            - dictGet
-            - dbAdmin
-            - readWrite
-            type: string
+            $ref: '#/components/schemas/properties-mysql'
           type: array
         description:
           description: Описание пользователя базы данных
@@ -54894,6 +54937,18 @@ components:
           table_open_cache_instances: "16"
           innodb_flush_method: O_DSYNC
           group_concat_max_len: "1024"
+        valkey:
+          client-output-buffer-limit normal: 0 0 0
+          databases: "16"
+          maxmemory-policy: allkeys-lru
+          appendonly: "yes"
+          appendfsync: everysec
+          slowlog-log-slower-than: "10000"
+          slowlog-max-len: "128"
+          save: 900 1
+          tcp-keepalive: "300"
+          client-output-buffer-limit pubsub: 33554432 8388608 60
+          timeout: "0"
         postgres:
           enable_partitionwise_aggregate: "OFF"
           min_wal_size: "80"
@@ -54977,6 +55032,8 @@ components:
           $ref: '#/components/schemas/config_parameters_mysql'
         postgres:
           $ref: '#/components/schemas/config_parameters_postgres'
+        valkey:
+          $ref: '#/components/schemas/config_parameters_valkey'
     auto-backup:
       example:
         is_enabled: true
@@ -64569,12 +64626,12 @@ components:
         - password: bs.:L2f$Tm:SC~
           instances:
           - privileges:
-            - ALTER
-            - ALTER
+            - null
+            - null
             instance_id: 0.8008281904610115
           - privileges:
-            - ALTER
-            - ALTER
+            - null
+            - null
             instance_id: 0.8008281904610115
           host: '%'
           created_at: 2021-02-25T11:04:15Z
@@ -64584,12 +64641,12 @@ components:
         - password: bs.:L2f$Tm:SC~
           instances:
           - privileges:
-            - ALTER
-            - ALTER
+            - null
+            - null
             instance_id: 0.8008281904610115
           - privileges:
-            - ALTER
-            - ALTER
+            - null
+            - null
             instance_id: 0.8008281904610115
           host: '%'
           created_at: 2021-02-25T11:04:15Z
@@ -64613,12 +64670,12 @@ components:
           password: bs.:L2f$Tm:SC~
           instances:
           - privileges:
-            - ALTER
-            - ALTER
+            - null
+            - null
             instance_id: 0.8008281904610115
           - privileges:
-            - ALTER
-            - ALTER
+            - null
+            - null
             instance_id: 0.8008281904610115
           host: '%'
           created_at: 2021-02-25T11:04:15Z
@@ -70776,75 +70833,7 @@ components:
         privileges:
           description: Список привилегий пользователя базы данных
           items:
-            enum:
-            - ALTER
-            - ALTER_TABLE
-            - ALTER_VIEW
-            - CREATE_VIEW
-            - CREATE_DICTIONARY
-            - CREATE_FUNCTION
-            - CREATE_TABLE
-            - CREATE
-            - DELETE
-            - DROP
-            - DROP_TABLE
-            - DROP_VIEW
-            - DROP_DICTIONARY
-            - EVENT
-            - INDEX
-            - INSERT
-            - LOCK_TABLES
-            - REFERENCES
-            - SELECT
-            - SHOW
-            - SHOW_VIEW
-            - TRUNCATE
-            - TRIGGER
-            - UPDATE
-            - READ
-            - WRITE
-            - READ_WRITE
-            - DB_ADMIN
-            - ALTER_ROUTINE
-            - CREATE_ROUTINE
-            - CREATE_TEMPORARY_TABLES
-            - TEMPORARY
-            - CONFIGURE
-            - READ_DASHBOARD
-            - WRITE_DASHBOARD
-            - DESCRIBE
-            - OPTIMIZE
-            - EXECUTE
-            - CREATEDB
-            - CREATEROLE
-            - CREATE_DB
-            - CREATE_USER
-            - PROCESS
-            - SLOW_LOG
-            - CREATE_TEMPORARY_TABLE
-            - ADMIN
-            - BITMAP
-            - BLOCKING
-            - CONNECTION
-            - DANGEROUS
-            - GEO
-            - HASH
-            - HYPERLOGLOG
-            - FAST
-            - KEYSPACE
-            - LIST
-            - PUBSUB
-            - SCRIPTING
-            - SET
-            - SORTEDSET
-            - SLOW
-            - STREAM
-            - STRING
-            - TRANSACTION
-            - dictGet
-            - dbAdmin
-            - readWrite
-            type: string
+            $ref: '#/components/schemas/properties-mysql'
           type: array
         description:
           description: Описание пользователя базы данных
@@ -70865,8 +70854,8 @@ components:
     database_admin_instances_inner:
       example:
         privileges:
-        - ALTER
-        - ALTER
+        - null
+        - null
         instance_id: 0.8008281904610115
       properties:
         instance_id:
@@ -70875,75 +70864,7 @@ components:
         privileges:
           description: Список привилегий пользователя базы данных
           items:
-            enum:
-            - ALTER
-            - ALTER_TABLE
-            - ALTER_VIEW
-            - CREATE_VIEW
-            - CREATE_DICTIONARY
-            - CREATE_FUNCTION
-            - CREATE_TABLE
-            - CREATE
-            - DELETE
-            - DROP
-            - DROP_TABLE
-            - DROP_VIEW
-            - DROP_DICTIONARY
-            - EVENT
-            - INDEX
-            - INSERT
-            - LOCK_TABLES
-            - REFERENCES
-            - SELECT
-            - SHOW
-            - SHOW_VIEW
-            - TRUNCATE
-            - TRIGGER
-            - UPDATE
-            - READ
-            - WRITE
-            - READ_WRITE
-            - DB_ADMIN
-            - ALTER_ROUTINE
-            - CREATE_ROUTINE
-            - CREATE_TEMPORARY_TABLES
-            - TEMPORARY
-            - CONFIGURE
-            - READ_DASHBOARD
-            - WRITE_DASHBOARD
-            - DESCRIBE
-            - OPTIMIZE
-            - EXECUTE
-            - CREATEDB
-            - CREATEROLE
-            - CREATE_DB
-            - CREATE_USER
-            - PROCESS
-            - SLOW_LOG
-            - CREATE_TEMPORARY_TABLE
-            - ADMIN
-            - BITMAP
-            - BLOCKING
-            - CONNECTION
-            - DANGEROUS
-            - GEO
-            - HASH
-            - HYPERLOGLOG
-            - FAST
-            - KEYSPACE
-            - LIST
-            - PUBSUB
-            - SCRIPTING
-            - SET
-            - SORTEDSET
-            - SLOW
-            - STREAM
-            - STRING
-            - TRANSACTION
-            - dictGet
-            - dbAdmin
-            - readWrite
-            type: string
+            $ref: '#/components/schemas/properties-mysql'
           type: array
       required:
       - instance_id
@@ -71789,6 +71710,81 @@ components:
           description: Количество фоновых процессов для выполнения операций ввода-вывода
             (`postgres18`).
           example: "3"
+          type: string
+      type: object
+    config_parameters_valkey:
+      description: Параметры Valkey (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)
+      example:
+        client-output-buffer-limit normal: 0 0 0
+        databases: "16"
+        maxmemory-policy: allkeys-lru
+        appendonly: "yes"
+        appendfsync: everysec
+        slowlog-log-slower-than: "10000"
+        slowlog-max-len: "128"
+        save: 900 1
+        tcp-keepalive: "300"
+        client-output-buffer-limit pubsub: 33554432 8388608 60
+        timeout: "0"
+      properties:
+        client-output-buffer-limit normal:
+          description: "Ограничение буфера вывода для обычных клиентских подключен\
+            ий. Формат: `hard-limit soft-limit soft-seconds` (`valkey` | `valkey7`\
+            \ | `valkey8_1` | `valkey9_1`)."
+          example: 0 0 0
+          type: string
+        client-output-buffer-limit pubsub:
+          description: "Ограничение буфера вывода для клиентов pub/sub. Формат: `hard-limit\
+            \ soft-limit soft-seconds` (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)."
+          example: 33554432 8388608 60
+          type: string
+        databases:
+          description: Количество логических баз данных на сервере (`valkey` | `valkey7`
+            | `valkey8_1` | `valkey9_1`).
+          example: "16"
+          type: string
+        timeout:
+          description: Время ожидания в секундах перед закрытием неактивного клиентского
+            соединения. `0` — отключено (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "0"
+          type: string
+        maxmemory-policy:
+          description: Политика вытеснения ключей при достижении лимита памяти (`valkey`
+            | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: allkeys-lru
+          type: string
+        slowlog-log-slower-than:
+          description: Минимальное время выполнения команды в микросекундах для записи
+            в журнал медленных команд (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "10000"
+          type: string
+        slowlog-max-len:
+          description: "Максимальное количество записей, хранящихся в журнале медл\
+            енных команд (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)."
+          example: "128"
+          type: string
+        save:
+          description: "Условие создания снимка RDB на диск. Формат: `seconds changes`\
+            \ — сохранение выполняется, если за указанное время было сделано не ме\
+            нее указанного количества изменений (`valkey` | `valkey7` | `valkey8_1`\
+            \ | `valkey9_1`)."
+          example: 900 1
+          type: string
+        appendonly:
+          description: Включение режима AOF (Append Only File) для персистентного
+            хранения данных (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "yes"
+          type: string
+        appendfsync:
+          description: "Режим синхронизации AOF-файла с диском: `always` — при каж\
+            дой записи, `everysec` — раз в секунду, `no` — управление передаётся О\
+            С (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)."
+          example: everysec
+          type: string
+        tcp-keepalive:
+          description: Интервал проверки активности TCP-соединения в секундах. `0`
+            — отключено (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+          example: "300"
           type: string
       type: object
     dedicated_server_preset_cpu:

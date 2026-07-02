@@ -22,6 +22,7 @@ var _ MappedNullable = &ConfigParameters{}
 type ConfigParameters struct {
 	Mysql *ConfigParametersMysql `json:"mysql,omitempty"`
 	Postgres *ConfigParametersPostgres `json:"postgres,omitempty"`
+	Valkey *ConfigParametersValkey `json:"valkey,omitempty"`
 }
 
 // NewConfigParameters instantiates a new ConfigParameters object
@@ -105,6 +106,38 @@ func (o *ConfigParameters) SetPostgres(v ConfigParametersPostgres) {
 	o.Postgres = &v
 }
 
+// GetValkey returns the Valkey field value if set, zero value otherwise.
+func (o *ConfigParameters) GetValkey() ConfigParametersValkey {
+	if o == nil || IsNil(o.Valkey) {
+		var ret ConfigParametersValkey
+		return ret
+	}
+	return *o.Valkey
+}
+
+// GetValkeyOk returns a tuple with the Valkey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParameters) GetValkeyOk() (*ConfigParametersValkey, bool) {
+	if o == nil || IsNil(o.Valkey) {
+		return nil, false
+	}
+	return o.Valkey, true
+}
+
+// HasValkey returns a boolean if a field has been set.
+func (o *ConfigParameters) HasValkey() bool {
+	if o != nil && !IsNil(o.Valkey) {
+		return true
+	}
+
+	return false
+}
+
+// SetValkey gets a reference to the given ConfigParametersValkey and assigns it to the Valkey field.
+func (o *ConfigParameters) SetValkey(v ConfigParametersValkey) {
+	o.Valkey = &v
+}
+
 func (o ConfigParameters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -120,6 +153,9 @@ func (o ConfigParameters) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Postgres) {
 		toSerialize["postgres"] = o.Postgres
+	}
+	if !IsNil(o.Valkey) {
+		toSerialize["valkey"] = o.Valkey
 	}
 	return toSerialize, nil
 }

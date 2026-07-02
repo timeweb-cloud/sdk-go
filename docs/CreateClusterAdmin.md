@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Login** | Pointer to **string** | Имя пользователя базы данных | [optional] 
 **Password** | Pointer to **string** | Пароль пользователя базы данных | [optional] 
 **Host** | Pointer to **string** | Хост пользователя | [optional] 
-**Privileges** | Pointer to **[]string** | Список привилегий пользователя базы данных | [optional] 
+**Privileges** | Pointer to [**[]PropertiesMysql**](PropertiesMysql.md) | Список привилегий пользователя базы данных | [optional] 
 **Description** | Pointer to **string** | Описание пользователя базы данных | [optional] 
 
 ## Methods
@@ -106,20 +106,20 @@ HasHost returns a boolean if a field has been set.
 
 ### GetPrivileges
 
-`func (o *CreateClusterAdmin) GetPrivileges() []string`
+`func (o *CreateClusterAdmin) GetPrivileges() []PropertiesMysql`
 
 GetPrivileges returns the Privileges field if non-nil, zero value otherwise.
 
 ### GetPrivilegesOk
 
-`func (o *CreateClusterAdmin) GetPrivilegesOk() (*[]string, bool)`
+`func (o *CreateClusterAdmin) GetPrivilegesOk() (*[]PropertiesMysql, bool)`
 
 GetPrivilegesOk returns a tuple with the Privileges field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivileges
 
-`func (o *CreateClusterAdmin) SetPrivileges(v []string)`
+`func (o *CreateClusterAdmin) SetPrivileges(v []PropertiesMysql)`
 
 SetPrivileges sets Privileges field to given value.
 

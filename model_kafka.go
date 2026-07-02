@@ -13,227 +13,102 @@ package openapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// checks if the UpdateAdmin type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateAdmin{}
+// Kafka Привилегии Kafka (`kafka`)
+type Kafka string
 
-// UpdateAdmin struct for UpdateAdmin
-type UpdateAdmin struct {
-	// Пароль пользователя базы данных
-	Password *string `json:"password,omitempty"`
-	// Список привилегий пользователя базы данных
-	Privileges []PropertiesMysql `json:"privileges,omitempty"`
-	// Описание пользователя базы данных
-	Description *string `json:"description,omitempty"`
-	// ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам
-	InstanceId *float32 `json:"instance_id,omitempty"`
+// List of kafka
+const (
+	DESCRIBE Kafka = "DESCRIBE"
+	READ Kafka = "READ"
+	WRITE Kafka = "WRITE"
+)
+
+// All allowed values of Kafka enum
+var AllowedKafkaEnumValues = []Kafka{
+	"DESCRIBE",
+	"READ",
+	"WRITE",
 }
 
-// NewUpdateAdmin instantiates a new UpdateAdmin object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewUpdateAdmin() *UpdateAdmin {
-	this := UpdateAdmin{}
-	return &this
-}
-
-// NewUpdateAdminWithDefaults instantiates a new UpdateAdmin object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewUpdateAdminWithDefaults() *UpdateAdmin {
-	this := UpdateAdmin{}
-	return &this
-}
-
-// GetPassword returns the Password field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetPassword() string {
-	if o == nil || IsNil(o.Password) {
-		var ret string
-		return ret
-	}
-	return *o.Password
-}
-
-// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetPasswordOk() (*string, bool) {
-	if o == nil || IsNil(o.Password) {
-		return nil, false
-	}
-	return o.Password, true
-}
-
-// HasPassword returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasPassword() bool {
-	if o != nil && !IsNil(o.Password) {
-		return true
-	}
-
-	return false
-}
-
-// SetPassword gets a reference to the given string and assigns it to the Password field.
-func (o *UpdateAdmin) SetPassword(v string) {
-	o.Password = &v
-}
-
-// GetPrivileges returns the Privileges field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetPrivileges() []PropertiesMysql {
-	if o == nil || IsNil(o.Privileges) {
-		var ret []PropertiesMysql
-		return ret
-	}
-	return o.Privileges
-}
-
-// GetPrivilegesOk returns a tuple with the Privileges field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetPrivilegesOk() ([]PropertiesMysql, bool) {
-	if o == nil || IsNil(o.Privileges) {
-		return nil, false
-	}
-	return o.Privileges, true
-}
-
-// HasPrivileges returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasPrivileges() bool {
-	if o != nil && !IsNil(o.Privileges) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivileges gets a reference to the given []PropertiesMysql and assigns it to the Privileges field.
-func (o *UpdateAdmin) SetPrivileges(v []PropertiesMysql) {
-	o.Privileges = v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *UpdateAdmin) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetInstanceId returns the InstanceId field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetInstanceId() float32 {
-	if o == nil || IsNil(o.InstanceId) {
-		var ret float32
-		return ret
-	}
-	return *o.InstanceId
-}
-
-// GetInstanceIdOk returns a tuple with the InstanceId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetInstanceIdOk() (*float32, bool) {
-	if o == nil || IsNil(o.InstanceId) {
-		return nil, false
-	}
-	return o.InstanceId, true
-}
-
-// HasInstanceId returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasInstanceId() bool {
-	if o != nil && !IsNil(o.InstanceId) {
-		return true
-	}
-
-	return false
-}
-
-// SetInstanceId gets a reference to the given float32 and assigns it to the InstanceId field.
-func (o *UpdateAdmin) SetInstanceId(v float32) {
-	o.InstanceId = &v
-}
-
-func (o UpdateAdmin) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+func (v *Kafka) UnmarshalJSON(src []byte) error {
+	var value string
+	err := json.Unmarshal(src, &value)
 	if err != nil {
-		return []byte{}, err
+		return err
 	}
-	return json.Marshal(toSerialize)
+	enumTypeValue := Kafka(value)
+	for _, existing := range AllowedKafkaEnumValues {
+		if existing == enumTypeValue {
+			*v = enumTypeValue
+			return nil
+		}
+	}
+
+	return fmt.Errorf("%+v is not a valid Kafka", value)
 }
 
-func (o UpdateAdmin) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Password) {
-		toSerialize["password"] = o.Password
+// NewKafkaFromValue returns a pointer to a valid Kafka
+// for the value passed as argument, or an error if the value passed is not allowed by the enum
+func NewKafkaFromValue(v string) (*Kafka, error) {
+	ev := Kafka(v)
+	if ev.IsValid() {
+		return &ev, nil
+	} else {
+		return nil, fmt.Errorf("invalid value '%v' for Kafka: valid values are %v", v, AllowedKafkaEnumValues)
 	}
-	if !IsNil(o.Privileges) {
-		toSerialize["privileges"] = o.Privileges
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.InstanceId) {
-		toSerialize["instance_id"] = o.InstanceId
-	}
-	return toSerialize, nil
 }
 
-type NullableUpdateAdmin struct {
-	value *UpdateAdmin
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v Kafka) IsValid() bool {
+	for _, existing := range AllowedKafkaEnumValues {
+		if existing == v {
+			return true
+		}
+	}
+	return false
+}
+
+// Ptr returns reference to kafka value
+func (v Kafka) Ptr() *Kafka {
+	return &v
+}
+
+type NullableKafka struct {
+	value *Kafka
 	isSet bool
 }
 
-func (v NullableUpdateAdmin) Get() *UpdateAdmin {
+func (v NullableKafka) Get() *Kafka {
 	return v.value
 }
 
-func (v *NullableUpdateAdmin) Set(val *UpdateAdmin) {
+func (v *NullableKafka) Set(val *Kafka) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateAdmin) IsSet() bool {
+func (v NullableKafka) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateAdmin) Unset() {
+func (v *NullableKafka) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateAdmin(val *UpdateAdmin) *NullableUpdateAdmin {
-	return &NullableUpdateAdmin{value: val, isSet: true}
+func NewNullableKafka(val *Kafka) *NullableKafka {
+	return &NullableKafka{value: val, isSet: true}
 }
 
-func (v NullableUpdateAdmin) MarshalJSON() ([]byte, error) {
+func (v NullableKafka) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateAdmin) UnmarshalJSON(src []byte) error {
+func (v *NullableKafka) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

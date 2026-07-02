@@ -29,7 +29,7 @@ type CreateAdmin struct {
 	// ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам
 	InstanceId *float32 `json:"instance_id,omitempty"`
 	// Список привилегий пользователя базы данных
-	Privileges []string `json:"privileges"`
+	Privileges []PropertiesMysql `json:"privileges"`
 	// Описание пользователя базы данных
 	Description *string `json:"description,omitempty"`
 }
@@ -38,7 +38,7 @@ type CreateAdmin struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAdmin(login string, password string, privileges []string) *CreateAdmin {
+func NewCreateAdmin(login string, password string, privileges []PropertiesMysql) *CreateAdmin {
 	this := CreateAdmin{}
 	this.Login = login
 	this.Password = password
@@ -167,9 +167,9 @@ func (o *CreateAdmin) SetInstanceId(v float32) {
 }
 
 // GetPrivileges returns the Privileges field value
-func (o *CreateAdmin) GetPrivileges() []string {
+func (o *CreateAdmin) GetPrivileges() []PropertiesMysql {
 	if o == nil {
-		var ret []string
+		var ret []PropertiesMysql
 		return ret
 	}
 
@@ -178,7 +178,7 @@ func (o *CreateAdmin) GetPrivileges() []string {
 
 // GetPrivilegesOk returns a tuple with the Privileges field value
 // and a boolean to check if the value has been set.
-func (o *CreateAdmin) GetPrivilegesOk() ([]string, bool) {
+func (o *CreateAdmin) GetPrivilegesOk() ([]PropertiesMysql, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -186,7 +186,7 @@ func (o *CreateAdmin) GetPrivilegesOk() ([]string, bool) {
 }
 
 // SetPrivileges sets field value
-func (o *CreateAdmin) SetPrivileges(v []string) {
+func (o *CreateAdmin) SetPrivileges(v []PropertiesMysql) {
 	o.Privileges = v
 }
 

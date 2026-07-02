@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Mysql** | Pointer to [**ConfigParametersMysql**](ConfigParametersMysql.md) |  | [optional] 
 **Postgres** | Pointer to [**ConfigParametersPostgres**](ConfigParametersPostgres.md) |  | [optional] 
+**Valkey** | Pointer to [**ConfigParametersValkey**](ConfigParametersValkey.md) |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetPostgres sets Postgres field to given value.
 `func (o *ConfigParameters) HasPostgres() bool`
 
 HasPostgres returns a boolean if a field has been set.
+
+### GetValkey
+
+`func (o *ConfigParameters) GetValkey() ConfigParametersValkey`
+
+GetValkey returns the Valkey field if non-nil, zero value otherwise.
+
+### GetValkeyOk
+
+`func (o *ConfigParameters) GetValkeyOk() (*ConfigParametersValkey, bool)`
+
+GetValkeyOk returns a tuple with the Valkey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValkey
+
+`func (o *ConfigParameters) SetValkey(v ConfigParametersValkey)`
+
+SetValkey sets Valkey field to given value.
+
+### HasValkey
+
+`func (o *ConfigParameters) HasValkey() bool`
+
+HasValkey returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

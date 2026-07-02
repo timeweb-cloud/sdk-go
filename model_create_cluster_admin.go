@@ -27,7 +27,7 @@ type CreateClusterAdmin struct {
 	// Хост пользователя
 	Host *string `json:"host,omitempty"`
 	// Список привилегий пользователя базы данных
-	Privileges []string `json:"privileges,omitempty"`
+	Privileges []PropertiesMysql `json:"privileges,omitempty"`
 	// Описание пользователя базы данных
 	Description *string `json:"description,omitempty"`
 }
@@ -146,9 +146,9 @@ func (o *CreateClusterAdmin) SetHost(v string) {
 }
 
 // GetPrivileges returns the Privileges field value if set, zero value otherwise.
-func (o *CreateClusterAdmin) GetPrivileges() []string {
+func (o *CreateClusterAdmin) GetPrivileges() []PropertiesMysql {
 	if o == nil || IsNil(o.Privileges) {
-		var ret []string
+		var ret []PropertiesMysql
 		return ret
 	}
 	return o.Privileges
@@ -156,7 +156,7 @@ func (o *CreateClusterAdmin) GetPrivileges() []string {
 
 // GetPrivilegesOk returns a tuple with the Privileges field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateClusterAdmin) GetPrivilegesOk() ([]string, bool) {
+func (o *CreateClusterAdmin) GetPrivilegesOk() ([]PropertiesMysql, bool) {
 	if o == nil || IsNil(o.Privileges) {
 		return nil, false
 	}
@@ -172,8 +172,8 @@ func (o *CreateClusterAdmin) HasPrivileges() bool {
 	return false
 }
 
-// SetPrivileges gets a reference to the given []string and assigns it to the Privileges field.
-func (o *CreateClusterAdmin) SetPrivileges(v []string) {
+// SetPrivileges gets a reference to the given []PropertiesMysql and assigns it to the Privileges field.
+func (o *CreateClusterAdmin) SetPrivileges(v []PropertiesMysql) {
 	o.Privileges = v
 }
 

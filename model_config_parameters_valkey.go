@@ -15,167 +15,405 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateAdmin type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateAdmin{}
+// checks if the ConfigParametersValkey type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConfigParametersValkey{}
 
-// UpdateAdmin struct for UpdateAdmin
-type UpdateAdmin struct {
-	// Пароль пользователя базы данных
-	Password *string `json:"password,omitempty"`
-	// Список привилегий пользователя базы данных
-	Privileges []PropertiesMysql `json:"privileges,omitempty"`
-	// Описание пользователя базы данных
-	Description *string `json:"description,omitempty"`
-	// ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам
-	InstanceId *float32 `json:"instance_id,omitempty"`
+// ConfigParametersValkey Параметры Valkey (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`)
+type ConfigParametersValkey struct {
+	// Ограничение буфера вывода для обычных клиентских подключений. Формат: `hard-limit soft-limit soft-seconds` (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	ClientOutputBufferLimitNormal *string `json:"client-output-buffer-limit normal,omitempty"`
+	// Ограничение буфера вывода для клиентов pub/sub. Формат: `hard-limit soft-limit soft-seconds` (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	ClientOutputBufferLimitPubsub *string `json:"client-output-buffer-limit pubsub,omitempty"`
+	// Количество логических баз данных на сервере (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	Databases *string `json:"databases,omitempty"`
+	// Время ожидания в секундах перед закрытием неактивного клиентского соединения. `0` — отключено (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	Timeout *string `json:"timeout,omitempty"`
+	// Политика вытеснения ключей при достижении лимита памяти (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	MaxmemoryPolicy *string `json:"maxmemory-policy,omitempty"`
+	// Минимальное время выполнения команды в микросекундах для записи в журнал медленных команд (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	SlowlogLogSlowerThan *string `json:"slowlog-log-slower-than,omitempty"`
+	// Максимальное количество записей, хранящихся в журнале медленных команд (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	SlowlogMaxLen *string `json:"slowlog-max-len,omitempty"`
+	// Условие создания снимка RDB на диск. Формат: `seconds changes` — сохранение выполняется, если за указанное время было сделано не менее указанного количества изменений (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	Save *string `json:"save,omitempty"`
+	// Включение режима AOF (Append Only File) для персистентного хранения данных (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	Appendonly *string `json:"appendonly,omitempty"`
+	// Режим синхронизации AOF-файла с диском: `always` — при каждой записи, `everysec` — раз в секунду, `no` — управление передаётся ОС (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	Appendfsync *string `json:"appendfsync,omitempty"`
+	// Интервал проверки активности TCP-соединения в секундах. `0` — отключено (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	TcpKeepalive *string `json:"tcp-keepalive,omitempty"`
 }
 
-// NewUpdateAdmin instantiates a new UpdateAdmin object
+// NewConfigParametersValkey instantiates a new ConfigParametersValkey object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAdmin() *UpdateAdmin {
-	this := UpdateAdmin{}
+func NewConfigParametersValkey() *ConfigParametersValkey {
+	this := ConfigParametersValkey{}
 	return &this
 }
 
-// NewUpdateAdminWithDefaults instantiates a new UpdateAdmin object
+// NewConfigParametersValkeyWithDefaults instantiates a new ConfigParametersValkey object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateAdminWithDefaults() *UpdateAdmin {
-	this := UpdateAdmin{}
+func NewConfigParametersValkeyWithDefaults() *ConfigParametersValkey {
+	this := ConfigParametersValkey{}
 	return &this
 }
 
-// GetPassword returns the Password field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetPassword() string {
-	if o == nil || IsNil(o.Password) {
+// GetClientOutputBufferLimitNormal returns the ClientOutputBufferLimitNormal field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetClientOutputBufferLimitNormal() string {
+	if o == nil || IsNil(o.ClientOutputBufferLimitNormal) {
 		var ret string
 		return ret
 	}
-	return *o.Password
+	return *o.ClientOutputBufferLimitNormal
 }
 
-// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
+// GetClientOutputBufferLimitNormalOk returns a tuple with the ClientOutputBufferLimitNormal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetPasswordOk() (*string, bool) {
-	if o == nil || IsNil(o.Password) {
+func (o *ConfigParametersValkey) GetClientOutputBufferLimitNormalOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientOutputBufferLimitNormal) {
 		return nil, false
 	}
-	return o.Password, true
+	return o.ClientOutputBufferLimitNormal, true
 }
 
-// HasPassword returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasPassword() bool {
-	if o != nil && !IsNil(o.Password) {
+// HasClientOutputBufferLimitNormal returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasClientOutputBufferLimitNormal() bool {
+	if o != nil && !IsNil(o.ClientOutputBufferLimitNormal) {
 		return true
 	}
 
 	return false
 }
 
-// SetPassword gets a reference to the given string and assigns it to the Password field.
-func (o *UpdateAdmin) SetPassword(v string) {
-	o.Password = &v
+// SetClientOutputBufferLimitNormal gets a reference to the given string and assigns it to the ClientOutputBufferLimitNormal field.
+func (o *ConfigParametersValkey) SetClientOutputBufferLimitNormal(v string) {
+	o.ClientOutputBufferLimitNormal = &v
 }
 
-// GetPrivileges returns the Privileges field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetPrivileges() []PropertiesMysql {
-	if o == nil || IsNil(o.Privileges) {
-		var ret []PropertiesMysql
-		return ret
-	}
-	return o.Privileges
-}
-
-// GetPrivilegesOk returns a tuple with the Privileges field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetPrivilegesOk() ([]PropertiesMysql, bool) {
-	if o == nil || IsNil(o.Privileges) {
-		return nil, false
-	}
-	return o.Privileges, true
-}
-
-// HasPrivileges returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasPrivileges() bool {
-	if o != nil && !IsNil(o.Privileges) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivileges gets a reference to the given []PropertiesMysql and assigns it to the Privileges field.
-func (o *UpdateAdmin) SetPrivileges(v []PropertiesMysql) {
-	o.Privileges = v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+// GetClientOutputBufferLimitPubsub returns the ClientOutputBufferLimitPubsub field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetClientOutputBufferLimitPubsub() string {
+	if o == nil || IsNil(o.ClientOutputBufferLimitPubsub) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.ClientOutputBufferLimitPubsub
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetClientOutputBufferLimitPubsubOk returns a tuple with the ClientOutputBufferLimitPubsub field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+func (o *ConfigParametersValkey) GetClientOutputBufferLimitPubsubOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientOutputBufferLimitPubsub) {
 		return nil, false
 	}
-	return o.Description, true
+	return o.ClientOutputBufferLimitPubsub, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+// HasClientOutputBufferLimitPubsub returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasClientOutputBufferLimitPubsub() bool {
+	if o != nil && !IsNil(o.ClientOutputBufferLimitPubsub) {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *UpdateAdmin) SetDescription(v string) {
-	o.Description = &v
+// SetClientOutputBufferLimitPubsub gets a reference to the given string and assigns it to the ClientOutputBufferLimitPubsub field.
+func (o *ConfigParametersValkey) SetClientOutputBufferLimitPubsub(v string) {
+	o.ClientOutputBufferLimitPubsub = &v
 }
 
-// GetInstanceId returns the InstanceId field value if set, zero value otherwise.
-func (o *UpdateAdmin) GetInstanceId() float32 {
-	if o == nil || IsNil(o.InstanceId) {
-		var ret float32
+// GetDatabases returns the Databases field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetDatabases() string {
+	if o == nil || IsNil(o.Databases) {
+		var ret string
 		return ret
 	}
-	return *o.InstanceId
+	return *o.Databases
 }
 
-// GetInstanceIdOk returns a tuple with the InstanceId field value if set, nil otherwise
+// GetDatabasesOk returns a tuple with the Databases field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAdmin) GetInstanceIdOk() (*float32, bool) {
-	if o == nil || IsNil(o.InstanceId) {
+func (o *ConfigParametersValkey) GetDatabasesOk() (*string, bool) {
+	if o == nil || IsNil(o.Databases) {
 		return nil, false
 	}
-	return o.InstanceId, true
+	return o.Databases, true
 }
 
-// HasInstanceId returns a boolean if a field has been set.
-func (o *UpdateAdmin) HasInstanceId() bool {
-	if o != nil && !IsNil(o.InstanceId) {
+// HasDatabases returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasDatabases() bool {
+	if o != nil && !IsNil(o.Databases) {
 		return true
 	}
 
 	return false
 }
 
-// SetInstanceId gets a reference to the given float32 and assigns it to the InstanceId field.
-func (o *UpdateAdmin) SetInstanceId(v float32) {
-	o.InstanceId = &v
+// SetDatabases gets a reference to the given string and assigns it to the Databases field.
+func (o *ConfigParametersValkey) SetDatabases(v string) {
+	o.Databases = &v
 }
 
-func (o UpdateAdmin) MarshalJSON() ([]byte, error) {
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetTimeout() string {
+	if o == nil || IsNil(o.Timeout) {
+		var ret string
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetTimeoutOk() (*string, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given string and assigns it to the Timeout field.
+func (o *ConfigParametersValkey) SetTimeout(v string) {
+	o.Timeout = &v
+}
+
+// GetMaxmemoryPolicy returns the MaxmemoryPolicy field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetMaxmemoryPolicy() string {
+	if o == nil || IsNil(o.MaxmemoryPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.MaxmemoryPolicy
+}
+
+// GetMaxmemoryPolicyOk returns a tuple with the MaxmemoryPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetMaxmemoryPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.MaxmemoryPolicy) {
+		return nil, false
+	}
+	return o.MaxmemoryPolicy, true
+}
+
+// HasMaxmemoryPolicy returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasMaxmemoryPolicy() bool {
+	if o != nil && !IsNil(o.MaxmemoryPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxmemoryPolicy gets a reference to the given string and assigns it to the MaxmemoryPolicy field.
+func (o *ConfigParametersValkey) SetMaxmemoryPolicy(v string) {
+	o.MaxmemoryPolicy = &v
+}
+
+// GetSlowlogLogSlowerThan returns the SlowlogLogSlowerThan field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetSlowlogLogSlowerThan() string {
+	if o == nil || IsNil(o.SlowlogLogSlowerThan) {
+		var ret string
+		return ret
+	}
+	return *o.SlowlogLogSlowerThan
+}
+
+// GetSlowlogLogSlowerThanOk returns a tuple with the SlowlogLogSlowerThan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetSlowlogLogSlowerThanOk() (*string, bool) {
+	if o == nil || IsNil(o.SlowlogLogSlowerThan) {
+		return nil, false
+	}
+	return o.SlowlogLogSlowerThan, true
+}
+
+// HasSlowlogLogSlowerThan returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasSlowlogLogSlowerThan() bool {
+	if o != nil && !IsNil(o.SlowlogLogSlowerThan) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlowlogLogSlowerThan gets a reference to the given string and assigns it to the SlowlogLogSlowerThan field.
+func (o *ConfigParametersValkey) SetSlowlogLogSlowerThan(v string) {
+	o.SlowlogLogSlowerThan = &v
+}
+
+// GetSlowlogMaxLen returns the SlowlogMaxLen field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetSlowlogMaxLen() string {
+	if o == nil || IsNil(o.SlowlogMaxLen) {
+		var ret string
+		return ret
+	}
+	return *o.SlowlogMaxLen
+}
+
+// GetSlowlogMaxLenOk returns a tuple with the SlowlogMaxLen field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetSlowlogMaxLenOk() (*string, bool) {
+	if o == nil || IsNil(o.SlowlogMaxLen) {
+		return nil, false
+	}
+	return o.SlowlogMaxLen, true
+}
+
+// HasSlowlogMaxLen returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasSlowlogMaxLen() bool {
+	if o != nil && !IsNil(o.SlowlogMaxLen) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlowlogMaxLen gets a reference to the given string and assigns it to the SlowlogMaxLen field.
+func (o *ConfigParametersValkey) SetSlowlogMaxLen(v string) {
+	o.SlowlogMaxLen = &v
+}
+
+// GetSave returns the Save field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetSave() string {
+	if o == nil || IsNil(o.Save) {
+		var ret string
+		return ret
+	}
+	return *o.Save
+}
+
+// GetSaveOk returns a tuple with the Save field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetSaveOk() (*string, bool) {
+	if o == nil || IsNil(o.Save) {
+		return nil, false
+	}
+	return o.Save, true
+}
+
+// HasSave returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasSave() bool {
+	if o != nil && !IsNil(o.Save) {
+		return true
+	}
+
+	return false
+}
+
+// SetSave gets a reference to the given string and assigns it to the Save field.
+func (o *ConfigParametersValkey) SetSave(v string) {
+	o.Save = &v
+}
+
+// GetAppendonly returns the Appendonly field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetAppendonly() string {
+	if o == nil || IsNil(o.Appendonly) {
+		var ret string
+		return ret
+	}
+	return *o.Appendonly
+}
+
+// GetAppendonlyOk returns a tuple with the Appendonly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetAppendonlyOk() (*string, bool) {
+	if o == nil || IsNil(o.Appendonly) {
+		return nil, false
+	}
+	return o.Appendonly, true
+}
+
+// HasAppendonly returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasAppendonly() bool {
+	if o != nil && !IsNil(o.Appendonly) {
+		return true
+	}
+
+	return false
+}
+
+// SetAppendonly gets a reference to the given string and assigns it to the Appendonly field.
+func (o *ConfigParametersValkey) SetAppendonly(v string) {
+	o.Appendonly = &v
+}
+
+// GetAppendfsync returns the Appendfsync field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetAppendfsync() string {
+	if o == nil || IsNil(o.Appendfsync) {
+		var ret string
+		return ret
+	}
+	return *o.Appendfsync
+}
+
+// GetAppendfsyncOk returns a tuple with the Appendfsync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetAppendfsyncOk() (*string, bool) {
+	if o == nil || IsNil(o.Appendfsync) {
+		return nil, false
+	}
+	return o.Appendfsync, true
+}
+
+// HasAppendfsync returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasAppendfsync() bool {
+	if o != nil && !IsNil(o.Appendfsync) {
+		return true
+	}
+
+	return false
+}
+
+// SetAppendfsync gets a reference to the given string and assigns it to the Appendfsync field.
+func (o *ConfigParametersValkey) SetAppendfsync(v string) {
+	o.Appendfsync = &v
+}
+
+// GetTcpKeepalive returns the TcpKeepalive field value if set, zero value otherwise.
+func (o *ConfigParametersValkey) GetTcpKeepalive() string {
+	if o == nil || IsNil(o.TcpKeepalive) {
+		var ret string
+		return ret
+	}
+	return *o.TcpKeepalive
+}
+
+// GetTcpKeepaliveOk returns a tuple with the TcpKeepalive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigParametersValkey) GetTcpKeepaliveOk() (*string, bool) {
+	if o == nil || IsNil(o.TcpKeepalive) {
+		return nil, false
+	}
+	return o.TcpKeepalive, true
+}
+
+// HasTcpKeepalive returns a boolean if a field has been set.
+func (o *ConfigParametersValkey) HasTcpKeepalive() bool {
+	if o != nil && !IsNil(o.TcpKeepalive) {
+		return true
+	}
+
+	return false
+}
+
+// SetTcpKeepalive gets a reference to the given string and assigns it to the TcpKeepalive field.
+func (o *ConfigParametersValkey) SetTcpKeepalive(v string) {
+	o.TcpKeepalive = &v
+}
+
+func (o ConfigParametersValkey) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -183,55 +421,76 @@ func (o UpdateAdmin) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateAdmin) ToMap() (map[string]interface{}, error) {
+func (o ConfigParametersValkey) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Password) {
-		toSerialize["password"] = o.Password
+	if !IsNil(o.ClientOutputBufferLimitNormal) {
+		toSerialize["client-output-buffer-limit normal"] = o.ClientOutputBufferLimitNormal
 	}
-	if !IsNil(o.Privileges) {
-		toSerialize["privileges"] = o.Privileges
+	if !IsNil(o.ClientOutputBufferLimitPubsub) {
+		toSerialize["client-output-buffer-limit pubsub"] = o.ClientOutputBufferLimitPubsub
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if !IsNil(o.Databases) {
+		toSerialize["databases"] = o.Databases
 	}
-	if !IsNil(o.InstanceId) {
-		toSerialize["instance_id"] = o.InstanceId
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
+	}
+	if !IsNil(o.MaxmemoryPolicy) {
+		toSerialize["maxmemory-policy"] = o.MaxmemoryPolicy
+	}
+	if !IsNil(o.SlowlogLogSlowerThan) {
+		toSerialize["slowlog-log-slower-than"] = o.SlowlogLogSlowerThan
+	}
+	if !IsNil(o.SlowlogMaxLen) {
+		toSerialize["slowlog-max-len"] = o.SlowlogMaxLen
+	}
+	if !IsNil(o.Save) {
+		toSerialize["save"] = o.Save
+	}
+	if !IsNil(o.Appendonly) {
+		toSerialize["appendonly"] = o.Appendonly
+	}
+	if !IsNil(o.Appendfsync) {
+		toSerialize["appendfsync"] = o.Appendfsync
+	}
+	if !IsNil(o.TcpKeepalive) {
+		toSerialize["tcp-keepalive"] = o.TcpKeepalive
 	}
 	return toSerialize, nil
 }
 
-type NullableUpdateAdmin struct {
-	value *UpdateAdmin
+type NullableConfigParametersValkey struct {
+	value *ConfigParametersValkey
 	isSet bool
 }
 
-func (v NullableUpdateAdmin) Get() *UpdateAdmin {
+func (v NullableConfigParametersValkey) Get() *ConfigParametersValkey {
 	return v.value
 }
 
-func (v *NullableUpdateAdmin) Set(val *UpdateAdmin) {
+func (v *NullableConfigParametersValkey) Set(val *ConfigParametersValkey) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateAdmin) IsSet() bool {
+func (v NullableConfigParametersValkey) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateAdmin) Unset() {
+func (v *NullableConfigParametersValkey) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateAdmin(val *UpdateAdmin) *NullableUpdateAdmin {
-	return &NullableUpdateAdmin{value: val, isSet: true}
+func NewNullableConfigParametersValkey(val *ConfigParametersValkey) *NullableConfigParametersValkey {
+	return &NullableConfigParametersValkey{value: val, isSet: true}
 }
 
-func (v NullableUpdateAdmin) MarshalJSON() ([]byte, error) {
+func (v NullableConfigParametersValkey) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateAdmin) UnmarshalJSON(src []byte) error {
+func (v *NullableConfigParametersValkey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

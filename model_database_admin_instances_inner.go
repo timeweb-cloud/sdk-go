@@ -23,14 +23,14 @@ type DatabaseAdminInstancesInner struct {
 	// ID базы данных
 	InstanceId float32 `json:"instance_id"`
 	// Список привилегий пользователя базы данных
-	Privileges []string `json:"privileges"`
+	Privileges []PropertiesMysql `json:"privileges"`
 }
 
 // NewDatabaseAdminInstancesInner instantiates a new DatabaseAdminInstancesInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseAdminInstancesInner(instanceId float32, privileges []string) *DatabaseAdminInstancesInner {
+func NewDatabaseAdminInstancesInner(instanceId float32, privileges []PropertiesMysql) *DatabaseAdminInstancesInner {
 	this := DatabaseAdminInstancesInner{}
 	this.InstanceId = instanceId
 	this.Privileges = privileges
@@ -70,9 +70,9 @@ func (o *DatabaseAdminInstancesInner) SetInstanceId(v float32) {
 }
 
 // GetPrivileges returns the Privileges field value
-func (o *DatabaseAdminInstancesInner) GetPrivileges() []string {
+func (o *DatabaseAdminInstancesInner) GetPrivileges() []PropertiesMysql {
 	if o == nil {
-		var ret []string
+		var ret []PropertiesMysql
 		return ret
 	}
 
@@ -81,7 +81,7 @@ func (o *DatabaseAdminInstancesInner) GetPrivileges() []string {
 
 // GetPrivilegesOk returns a tuple with the Privileges field value
 // and a boolean to check if the value has been set.
-func (o *DatabaseAdminInstancesInner) GetPrivilegesOk() ([]string, bool) {
+func (o *DatabaseAdminInstancesInner) GetPrivilegesOk() ([]PropertiesMysql, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -89,7 +89,7 @@ func (o *DatabaseAdminInstancesInner) GetPrivilegesOk() ([]string, bool) {
 }
 
 // SetPrivileges sets field value
-func (o *DatabaseAdminInstancesInner) SetPrivileges(v []string) {
+func (o *DatabaseAdminInstancesInner) SetPrivileges(v []PropertiesMysql) {
 	o.Privileges = v
 }
 

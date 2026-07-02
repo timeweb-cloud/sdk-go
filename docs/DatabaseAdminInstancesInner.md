@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InstanceId** | **float32** | ID базы данных | 
-**Privileges** | **[]string** | Список привилегий пользователя базы данных | 
+**Privileges** | [**[]PropertiesMysql**](PropertiesMysql.md) | Список привилегий пользователя базы данных | 
 
 ## Methods
 
 ### NewDatabaseAdminInstancesInner
 
-`func NewDatabaseAdminInstancesInner(instanceId float32, privileges []string, ) *DatabaseAdminInstancesInner`
+`func NewDatabaseAdminInstancesInner(instanceId float32, privileges []PropertiesMysql, ) *DatabaseAdminInstancesInner`
 
 NewDatabaseAdminInstancesInner instantiates a new DatabaseAdminInstancesInner object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetInstanceId sets InstanceId field to given value.
 
 ### GetPrivileges
 
-`func (o *DatabaseAdminInstancesInner) GetPrivileges() []string`
+`func (o *DatabaseAdminInstancesInner) GetPrivileges() []PropertiesMysql`
 
 GetPrivileges returns the Privileges field if non-nil, zero value otherwise.
 
 ### GetPrivilegesOk
 
-`func (o *DatabaseAdminInstancesInner) GetPrivilegesOk() (*[]string, bool)`
+`func (o *DatabaseAdminInstancesInner) GetPrivilegesOk() (*[]PropertiesMysql, bool)`
 
 GetPrivilegesOk returns a tuple with the Privileges field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivileges
 
-`func (o *DatabaseAdminInstancesInner) SetPrivileges(v []string)`
+`func (o *DatabaseAdminInstancesInner) SetPrivileges(v []PropertiesMysql)`
 
 SetPrivileges sets Privileges field to given value.
 
