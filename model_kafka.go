@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// Kafka Привилегии Kafka (`kafka`)
+// Kafka the model 'Kafka'
 type Kafka string
 
 // List of kafka

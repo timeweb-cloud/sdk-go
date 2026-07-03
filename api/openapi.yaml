@@ -54536,7 +54536,6 @@ components:
       title: clickhouse
       type: string
     kafka:
-      description: Привилегии Kafka (`kafka`)
       enum:
       - DESCRIBE
       - READ
