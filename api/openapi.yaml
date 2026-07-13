@@ -36362,10 +36362,10 @@ paths:
         DNS-запись будет добавлена с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о добавленной DNS-записи.
       operationId: createDomainDNSRecordV2
       parameters:
-      - description: "Полное имя домена или поддомена. Для создания записи на осно\
-          вном домене передайте имя домена (например, `somedomain.ru`). Для создан\
-          ия записи на поддомене передайте полное доменное имя включая поддомен (н\
-          апример, `sub.somedomain.ru`)."
+      - description: |-
+          Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+
+          Поддомен должен быть создан заранее методом добавления поддомена (`POST /api/v1/domains/{fqdn}/subdomains/{subdomain}`).
         explode: false
         in: path
         name: fqdn
@@ -36612,10 +36612,10 @@ paths:
         , отправьте запрос DELETE на `/api/v2/domains/{fqdn}/dns-records/{record_id}`."
       operationId: deleteDomainDNSRecordV2
       parameters:
-      - description: "Полное имя домена или поддомена. Для создания записи на осно\
-          вном домене передайте имя домена (например, `somedomain.ru`). Для создан\
-          ия записи на поддомене передайте полное доменное имя включая поддомен (н\
-          апример, `sub.somedomain.ru`)."
+      - description: |-
+          Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+
+          Поддомен должен быть создан заранее методом добавления поддомена (`POST /api/v1/domains/{fqdn}/subdomains/{subdomain}`).
         explode: false
         in: path
         name: fqdn
@@ -36753,10 +36753,10 @@ paths:
         DNS-запись будет обновлена с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией об обновленной DNS-записи.
       operationId: updateDomainDNSRecordV2
       parameters:
-      - description: "Полное имя домена или поддомена. Для создания записи на осно\
-          вном домене передайте имя домена (например, `somedomain.ru`). Для создан\
-          ия записи на поддомене передайте полное доменное имя включая поддомен (н\
-          апример, `sub.somedomain.ru`)."
+      - description: |-
+          Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+
+          Поддомен должен быть создан заранее методом добавления поддомена (`POST /api/v1/domains/{fqdn}/subdomains/{subdomain}`).
         explode: false
         in: path
         name: fqdn
@@ -37796,9 +37796,9 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn}:
+  /api/v1/domains/{fqdn}/subdomains/{subdomain}:
     delete:
-      description: "Чтобы удалить поддомен, отправьте запрос DELETE на `/api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn}`."
+      description: "Чтобы удалить поддомен, отправьте запрос DELETE на `/api/v1/domains/{fqdn}/subdomains/{subdomain}`."
       operationId: deleteSubdomain
       parameters:
       - description: Полное имя домена.
@@ -37810,13 +37810,14 @@ paths:
           example: somedomain.ru
           type: string
         style: simple
-      - description: Полное имя поддомена.
+      - description: "Имя поддомена без имени домена. Например, для поддомена `sub.somedomain.ru`\
+          \ нужно передать `sub`."
         explode: false
         in: path
-        name: subdomain_fqdn
+        name: subdomain
         required: true
         schema:
-          example: sub.somedomain.ru
+          example: sub
           type: string
         style: simple
       responses:
@@ -37868,10 +37869,10 @@ paths:
           curl -X DELETE \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru"
+            "https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub"
       - lang: JavaScript
         source: |
-          fetch('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru', {
+          fetch('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub', {
               method: 'DELETE',
               headers: {
                   'Content-Type': 'application/json',
@@ -37882,7 +37883,7 @@ paths:
         source: |
           const axios = require('axios');
 
-          const response = await axios.delete('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru', {
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub', {
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
@@ -37898,15 +37899,12 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          response = requests.delete(
-              'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru',
-              headers=headers,
-          )
+          response = requests.delete('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub', headers=headers)
       - lang: PHP
         source: |
           <?php
           $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru');
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub');
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
           curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -37920,7 +37918,7 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru\"\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub\"\
           , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -37931,7 +37929,7 @@ paths:
         source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
           \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
           import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru\"\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
           Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
@@ -37943,7 +37941,7 @@ paths:
           \t}\n}\n"
     post:
       description: |-
-        Чтобы добавить поддомен, отправьте запрос POST на `/api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn}`, задав необходимые атрибуты.
+        Чтобы добавить поддомен, отправьте запрос POST на `/api/v1/domains/{fqdn}/subdomains/{subdomain}`, задав необходимые атрибуты.
 
         Поддомен будет добавлен с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о добавленном поддомене.
       operationId: addSubdomain
@@ -37957,13 +37955,14 @@ paths:
           example: somedomain.ru
           type: string
         style: simple
-      - description: Полное имя поддомена.
+      - description: "Имя поддомена без имени домена. Например, для поддомена `sub.somedomain.ru`\
+          \ нужно передать `sub`."
         explode: false
         in: path
-        name: subdomain_fqdn
+        name: subdomain
         required: true
         schema:
-          example: sub.somedomain.ru
+          example: sub
           type: string
         style: simple
       responses:
@@ -38013,10 +38012,10 @@ paths:
           curl -X POST \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru"
+            "https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub"
       - lang: JavaScript
         source: |
-          fetch('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru', {
+          fetch('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -38028,7 +38027,7 @@ paths:
           const axios = require('axios');
 
           const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru',
+              'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub',
               '',
               {
                   headers: {
@@ -38047,15 +38046,12 @@ paths:
               'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
           }
 
-          response = requests.post(
-              'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru',
-              headers=headers,
-          )
+          response = requests.post('https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub', headers=headers)
       - lang: PHP
         source: |
           <?php
           $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru');
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub');
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
           curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -38069,7 +38065,7 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
           \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru\"\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub\"\
           , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
           Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
           , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
@@ -38080,7 +38076,7 @@ paths:
         source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
           \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
           import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub.somedomain.ru\"\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/domains/somedomain.ru/subdomains/sub\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
           Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
@@ -51357,10 +51353,10 @@ components:
         type: string
       style: simple
     domain-subdomain-fqdn-create-dns:
-      description: "Полное имя домена или поддомена. Для создания записи на основн\
-        ом домене передайте имя домена (например, `somedomain.ru`). Для создания з\
-        аписи на поддомене передайте полное доменное имя включая поддомен (наприме\
-        р, `sub.somedomain.ru`)."
+      description: |-
+        Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+
+        Поддомен должен быть создан заранее методом добавления поддомена (`POST /api/v1/domains/{fqdn}/subdomains/{subdomain}`).
       explode: false
       in: path
       name: fqdn
@@ -51389,14 +51385,15 @@ components:
         example: somedomain.ru
         type: string
       style: simple
-    subdomain-fqdn:
-      description: Полное имя поддомена.
+    subdomain:
+      description: "Имя поддомена без имени домена. Например, для поддомена `sub.somedomain.ru`\
+        \ нужно передать `sub`."
       explode: false
       in: path
-      name: subdomain_fqdn
+      name: subdomain
       required: true
       schema:
-        example: sub.somedomain.ru
+        example: sub
         type: string
       style: simple
     person-id:

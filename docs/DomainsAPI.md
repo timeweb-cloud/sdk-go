@@ -5,7 +5,7 @@ All URIs are relative to *https://api.timeweb.cloud*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddDomain**](DomainsAPI.md#AddDomain) | **Post** /api/v1/add-domain/{fqdn} | Добавление домена на аккаунт
-[**AddSubdomain**](DomainsAPI.md#AddSubdomain) | **Post** /api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn} | Добавление поддомена
+[**AddSubdomain**](DomainsAPI.md#AddSubdomain) | **Post** /api/v1/domains/{fqdn}/subdomains/{subdomain} | Добавление поддомена
 [**CheckDomain**](DomainsAPI.md#CheckDomain) | **Get** /api/v1/check-domain/{fqdn} | Проверить, доступен ли домен для регистрации
 [**CreateDomainDNSRecord**](DomainsAPI.md#CreateDomainDNSRecord) | **Post** /api/v1/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
 [**CreateDomainDNSRecordV2**](DomainsAPI.md#CreateDomainDNSRecordV2) | **Post** /api/v2/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**DeleteDomain**](DomainsAPI.md#DeleteDomain) | **Delete** /api/v1/domains/{fqdn} | Удаление домена
 [**DeleteDomainDNSRecord**](DomainsAPI.md#DeleteDomainDNSRecord) | **Delete** /api/v1/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
 [**DeleteDomainDNSRecordV2**](DomainsAPI.md#DeleteDomainDNSRecordV2) | **Delete** /api/v2/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
-[**DeleteSubdomain**](DomainsAPI.md#DeleteSubdomain) | **Delete** /api/v1/domains/{fqdn}/subdomains/{subdomain_fqdn} | Удаление поддомена
+[**DeleteSubdomain**](DomainsAPI.md#DeleteSubdomain) | **Delete** /api/v1/domains/{fqdn}/subdomains/{subdomain} | Удаление поддомена
 [**GetDomain**](DomainsAPI.md#GetDomain) | **Get** /api/v1/domains/{fqdn} | Получение информации о домене
 [**GetDomainDNSRecords**](DomainsAPI.md#GetDomainDNSRecords) | **Get** /api/v1/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
 [**GetDomainDefaultDNSRecords**](DomainsAPI.md#GetDomainDefaultDNSRecords) | **Get** /api/v1/domains/{fqdn}/default-dns-records | Получить информацию обо всех DNS-записях по умолчанию домена или поддомена
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 ## AddSubdomain
 
-> AddSubdomain201Response AddSubdomain(ctx, fqdn, subdomainFqdn).Execute()
+> AddSubdomain201Response AddSubdomain(ctx, fqdn, subdomain).Execute()
 
 Добавление поддомена
 
@@ -121,11 +121,11 @@ import (
 
 func main() {
     fqdn := "somedomain.ru" // string | Полное имя домена.
-    subdomainFqdn := "sub.somedomain.ru" // string | Полное имя поддомена.
+    subdomain := "sub" // string | Имя поддомена без имени домена. Например, для поддомена `sub.somedomain.ru` нужно передать `sub`.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DomainsAPI.AddSubdomain(context.Background(), fqdn, subdomainFqdn).Execute()
+    resp, r, err := apiClient.DomainsAPI.AddSubdomain(context.Background(), fqdn, subdomain).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.AddSubdomain``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **fqdn** | **string** | Полное имя домена. | 
-**subdomainFqdn** | **string** | Полное имя поддомена. | 
+**subdomain** | **string** | Имя поддомена без имени домена. Например, для поддомена &#x60;sub.somedomain.ru&#x60; нужно передать &#x60;sub&#x60;. | 
 
 ### Other Parameters
 
@@ -335,7 +335,7 @@ import (
 )
 
 func main() {
-    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).  Поддомен должен быть создан заранее методом добавления поддомена (`POST /api/v1/domains/{fqdn}/subdomains/{subdomain}`).
     createDnsV2 := *openapiclient.NewCreateDnsV2("Type_example", "192.168.1.0") // CreateDnsV2 | 
 
     configuration := openapiclient.NewConfiguration()
@@ -356,7 +356,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;). | 
+**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;).  Поддомен должен быть создан заранее методом добавления поддомена (&#x60;POST /api/v1/domains/{fqdn}/subdomains/{subdomain}&#x60;). | 
 
 ### Other Parameters
 
@@ -612,7 +612,7 @@ import (
 )
 
 func main() {
-    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).  Поддомен должен быть создан заранее методом добавления поддомена (`POST /api/v1/domains/{fqdn}/subdomains/{subdomain}`).
     recordId := int32(123) // int32 | ID DNS-записи домена или поддомена.
 
     configuration := openapiclient.NewConfiguration()
@@ -631,7 +631,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;). | 
+**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;).  Поддомен должен быть создан заранее методом добавления поддомена (&#x60;POST /api/v1/domains/{fqdn}/subdomains/{subdomain}&#x60;). | 
 **recordId** | **int32** | ID DNS-записи домена или поддомена. | 
 
 ### Other Parameters
@@ -664,7 +664,7 @@ Name | Type | Description  | Notes
 
 ## DeleteSubdomain
 
-> DeleteSubdomain(ctx, fqdn, subdomainFqdn).Execute()
+> DeleteSubdomain(ctx, fqdn, subdomain).Execute()
 
 Удаление поддомена
 
@@ -684,11 +684,11 @@ import (
 
 func main() {
     fqdn := "somedomain.ru" // string | Полное имя домена.
-    subdomainFqdn := "sub.somedomain.ru" // string | Полное имя поддомена.
+    subdomain := "sub" // string | Имя поддомена без имени домена. Например, для поддомена `sub.somedomain.ru` нужно передать `sub`.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.DomainsAPI.DeleteSubdomain(context.Background(), fqdn, subdomainFqdn).Execute()
+    r, err := apiClient.DomainsAPI.DeleteSubdomain(context.Background(), fqdn, subdomain).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DeleteSubdomain``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -703,7 +703,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **fqdn** | **string** | Полное имя домена. | 
-**subdomainFqdn** | **string** | Полное имя поддомена. | 
+**subdomain** | **string** | Имя поддомена без имени домена. Например, для поддомена &#x60;sub.somedomain.ru&#x60; нужно передать &#x60;sub&#x60;. | 
 
 ### Other Parameters
 
@@ -1539,7 +1539,7 @@ import (
 )
 
 func main() {
-    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
+    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).  Поддомен должен быть создан заранее методом добавления поддомена (`POST /api/v1/domains/{fqdn}/subdomains/{subdomain}`).
     recordId := int32(123) // int32 | ID DNS-записи домена или поддомена.
     createDnsV2 := *openapiclient.NewCreateDnsV2("Type_example", "192.168.1.0") // CreateDnsV2 | 
 
@@ -1561,7 +1561,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;). | 
+**fqdn** | **string** | Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, &#x60;somedomain.ru&#x60;). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, &#x60;sub.somedomain.ru&#x60;).  Поддомен должен быть создан заранее методом добавления поддомена (&#x60;POST /api/v1/domains/{fqdn}/subdomains/{subdomain}&#x60;). | 
 **recordId** | **int32** | ID DNS-записи домена или поддомена. | 
 
 ### Other Parameters
