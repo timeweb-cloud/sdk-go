@@ -94,6 +94,8 @@ type APIClient struct {
 
 	ServersAPI *ServersAPIService
 
+	SnapshotsAPI *SnapshotsAPIService
+
 	VPCAPI *VPCAPIService
 }
 
@@ -135,6 +137,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.S3API = (*S3APIService)(&c.common)
 	c.SSHAPI = (*SSHAPIService)(&c.common)
 	c.ServersAPI = (*ServersAPIService)(&c.common)
+	c.SnapshotsAPI = (*SnapshotsAPIService)(&c.common)
 	c.VPCAPI = (*VPCAPIService)(&c.common)
 
 	return c

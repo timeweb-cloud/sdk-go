@@ -24,6 +24,7 @@ api_projects.go
 api_routers.go
 api_s3.go
 api_servers.go
+api_snapshots.go
 api_ssh.go
 api_vpc.go
 client.go
@@ -348,6 +349,8 @@ docs/GetProjectStorages200Response.md
 docs/GetProjects200Response.md
 docs/GetProviders200Response.md
 docs/GetRepositories200Response.md
+docs/GetRestorePoint200Response.md
+docs/GetRestorePoints200Response.md
 docs/GetServerDiskAutoBackupSettings200Response.md
 docs/GetServerDiskBackup200Response.md
 docs/GetServerDiskBackups200Response.md
@@ -483,6 +486,7 @@ docs/ResourceTransfer.md
 docs/ResourceType.md
 docs/Resources.md
 docs/ResourcesResponse.md
+docs/RestorePoint.md
 docs/RouterEdit.md
 docs/RouterIn.md
 docs/RouterInIpsInner.md
@@ -535,6 +539,7 @@ docs/ServiceServicePrice.md
 docs/ServiceServicePriceNodeGroupsInner.md
 docs/SetLabels.md
 docs/SettingCondition.md
+docs/SnapshotsAPI.md
 docs/SpamFilterIsDisabled.md
 docs/SpamFilterIsEnabled.md
 docs/SpamProtectionIsDisabled.md
@@ -928,6 +933,8 @@ model_get_project_storages_200_response.go
 model_get_projects_200_response.go
 model_get_providers_200_response.go
 model_get_repositories_200_response.go
+model_get_restore_point_200_response.go
+model_get_restore_points_200_response.go
 model_get_server_disk_auto_backup_settings_200_response.go
 model_get_server_disk_backup_200_response.go
 model_get_server_disk_backups_200_response.go
@@ -1055,6 +1062,7 @@ model_resource_transfer.go
 model_resource_type.go
 model_resources.go
 model_resources_response.go
+model_restore_point.go
 model_router_edit.go
 model_router_in.go
 model_router_in_ips_inner.go
@@ -1204,6 +1212,7 @@ test/api_projects_test.go
 test/api_routers_test.go
 test/api_s3_test.go
 test/api_servers_test.go
+test/api_snapshots_test.go
 test/api_ssh_test.go
 test/api_vpc_test.go
 utils.go
