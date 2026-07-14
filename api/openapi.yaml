@@ -52194,7 +52194,7 @@ components:
         example: 87fa289f-1513-4c4d-8d49-5707f411f14b
         type: string
       style: simple
-    agent-id:
+    id:
       description: ID агента
       explode: false
       in: path
@@ -52216,7 +52216,7 @@ components:
         minimum: 1
         type: integer
       style: simple
-    agent-id-2:
+    agent-id:
       description: ID агента
       explode: false
       in: path
