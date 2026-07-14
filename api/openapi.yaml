@@ -239,11 +239,6 @@ tags:
     \ к серверу по сети. Вы можете использовать их как дополнительные диски для об\
     лачных серверов."
   name: Network drives
-- description: "Снапшот — это снимок состояния облачного сервера (VDS), к которому\
-    \ можно вернуться. Снапшот можно создать, зафиксировать (`commit`) или откатит\
-    ь к нему сервер (`rollback`). Каждому снапшоту соответствует один облачный сер\
-    вер."
-  name: Snapshots
 paths:
   /api/v1/account/finances:
     get:
@@ -20304,692 +20299,6 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/restore-points:
-    get:
-      description: |-
-        Чтобы получить список снапшотов аккаунта, отправьте GET-запрос на `/api/v1/restore-points`.
-
-        Тело ответа будет представлять собой объект JSON с ключом `restore_points`.
-
-        Снапшот — это снимок состояния облачного сервера (VDS), к которому можно вернуться. Каждому снапшоту соответствует один сервер.
-      operationId: getRestorePoints
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getRestorePoints_200_response'
-          description: Объект JSON c ключом `restore_points`
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Получение списка снапшотов
-      tags:
-      - Snapshots
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X GET \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/restore-points"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/restore-points', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.get('https://api.timeweb.cloud/api/v1/restore-points', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.get('https://api.timeweb.cloud/api/v1/restore-points', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/restore-points\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/restore-points/{vds_id}:
-    get:
-      description: |-
-        Чтобы получить снапшот облачного сервера (VDS), отправьте GET-запрос на `/api/v1/restore-points/{vds_id}`.
-
-        Тело ответа будет представлять собой объект JSON с ключом `restore_point`.
-      operationId: getRestorePoint
-      parameters:
-      - description: ID облачного сервера (VDS).
-        explode: false
-        in: path
-        name: vds_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getRestorePoint_200_response'
-          description: Объект JSON c ключом `restore_point`
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Получение снапшота сервера
-      tags:
-      - Snapshots
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X GET \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/restore-points/1051"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.get('https://api.timeweb.cloud/api/v1/restore-points/1051', {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-              }
-          });
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.get('https://api.timeweb.cloud/api/v1/restore-points/1051', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/restore-points/1051\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/restore-points/{vds_id}/create:
-    post:
-      description: |-
-        Чтобы создать снапшот облачного сервера (VDS), отправьте POST-запрос на `/api/v1/restore-points/{vds_id}/create`.
-
-        Тело ответа будет содержать объект JSON с ключом `restore_point` и информацией о созданном снапшоте. Сразу после создания снапшот может находиться в статусе `creating`.
-
-        Для создания снапшота сервер должен быть включён, иначе вернётся ошибка `403`.
-      operationId: createRestorePoint
-      parameters:
-      - description: ID облачного сервера (VDS).
-        explode: false
-        in: path
-        name: vds_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getRestorePoint_200_response'
-          description: Объект JSON c ключом `restore_point`
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Создание снапшота
-      tags:
-      - Snapshots
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/restore-points/1051/create"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051/create', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/restore-points/1051/create',
-              '',
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.post('https://api.timeweb.cloud/api/v1/restore-points/1051/create', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051/create');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/restore-points/1051/create\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051/create\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/restore-points/{vds_id}/commit:
-    post:
-      description: |-
-        Чтобы зафиксировать (применить) снапшот облачного сервера (VDS), отправьте POST-запрос на `/api/v1/restore-points/{vds_id}/commit`.
-
-        Фиксация подтверждает текущее состояние сервера. Действие выполняется асинхронно, ответ не содержит тела.
-
-        Для выполнения действия сервер должен быть включён, иначе вернётся ошибка `403`.
-      operationId: commitRestorePoint
-      parameters:
-      - description: ID облачного сервера (VDS).
-        explode: false
-        in: path
-        name: vds_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      responses:
-        "204":
-          description: Действие над снапшотом запущено
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Фиксация снапшота
-      tags:
-      - Snapshots
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/restore-points/1051/commit"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051/commit', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/restore-points/1051/commit',
-              '',
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.post('https://api.timeweb.cloud/api/v1/restore-points/1051/commit', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051/commit');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/restore-points/1051/commit\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051/commit\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
-  /api/v1/restore-points/{vds_id}/rollback:
-    post:
-      description: |-
-        Чтобы откатить облачный сервер (VDS) к снапшоту, отправьте POST-запрос на `/api/v1/restore-points/{vds_id}/rollback`.
-
-        Откат возвращает сервер к состоянию, сохранённому в снапшоте. Действие выполняется асинхронно, ответ не содержит тела.
-
-        Для выполнения действия сервер должен быть включён, иначе вернётся ошибка `403`.
-      operationId: rollbackRestorePoint
-      parameters:
-      - description: ID облачного сервера (VDS).
-        explode: false
-        in: path
-        name: vds_id
-        required: true
-        schema:
-          example: 1051
-          minimum: 1
-          type: integer
-        style: simple
-      responses:
-        "204":
-          description: Действие над снапшотом запущено
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_400_response'
-          description: Некорректный запрос
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_401_response'
-          description: Не авторизован
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAccountStatus_403_response'
-          description: Запрещено
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getImage_404_response'
-          description: Не найдено
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_429_response'
-          description: Слишком много запросов
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getFinances_500_response'
-          description: Внутренняя ошибка сервера
-      summary: Откат к снапшоту
-      tags:
-      - Snapshots
-      x-codeSamples:
-      - lang: cURL
-        label: cURL
-        source: |-
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
-            "https://api.timeweb.cloud/api/v1/restore-points/1051/rollback"
-      - lang: JavaScript
-        source: |
-          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051/rollback', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
-              }
-          });
-      - lang: Node
-        source: |
-          const axios = require('axios');
-
-          const response = await axios.post(
-              'https://api.timeweb.cloud/api/v1/restore-points/1051/rollback',
-              '',
-              {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
-                  }
-              }
-          );
-      - lang: Python
-        source: |
-          import os
-          import requests
-
-          headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
-          }
-
-          response = requests.post('https://api.timeweb.cloud/api/v1/restore-points/1051/rollback', headers=headers)
-      - lang: PHP
-        source: |
-          <?php
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051/rollback');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-          curl_setopt($ch, CURLOPT_HTTPHEADER, [
-              'Content-Type: application/json',
-              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
-          ]);
-
-          $response = curl_exec($ch);
-
-          curl_close($ch);
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
-          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
-          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/restore-points/1051/rollback\"\
-          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
-          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
-          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
-          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
-          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
-          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
-      - lang: Java
-        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
-          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
-          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
-          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051/rollback\"\
-          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
-          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
-          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
-          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
-          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
-          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
-          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
-          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
-          \t}\n}\n"
   /api/v1/servers:
     get:
       description: |-
@@ -27309,6 +26618,692 @@ paths:
           \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
           import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
           \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/servers/123456/image-unmount\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/restore-points:
+    get:
+      description: |-
+        Чтобы получить список снапшотов аккаунта, отправьте GET-запрос на `/api/v1/restore-points`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `restore_points`.
+
+        Снапшот — это снимок состояния облачного сервера (VDS), к которому можно вернуться. Каждому снапшоту соответствует один сервер.
+      operationId: getRestorePoints
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRestorePoints_200_response'
+          description: Объект JSON c ключом `restore_points`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка снапшотов
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/restore-points"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/restore-points', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/restore-points', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/restore-points', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/restore-points\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/restore-points/{vds_id}:
+    get:
+      description: |-
+        Чтобы получить снапшот облачного сервера (VDS), отправьте GET-запрос на `/api/v1/restore-points/{vds_id}`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `restore_point`.
+      operationId: getRestorePoint
+      parameters:
+      - description: ID облачного сервера (VDS).
+        explode: false
+        in: path
+        name: vds_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRestorePoint_200_response'
+          description: Объект JSON c ключом `restore_point`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение снапшота сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/restore-points/1051"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/restore-points/1051', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/restore-points/1051', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/restore-points/1051\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/restore-points/{vds_id}/create:
+    post:
+      description: |-
+        Чтобы создать снапшот облачного сервера (VDS), отправьте POST-запрос на `/api/v1/restore-points/{vds_id}/create`.
+
+        Тело ответа будет содержать объект JSON с ключом `restore_point` и информацией о созданном снапшоте. Сразу после создания снапшот может находиться в статусе `creating`.
+
+        Для создания снапшота сервер должен быть включён, иначе вернётся ошибка `403`.
+      operationId: createRestorePoint
+      parameters:
+      - description: ID облачного сервера (VDS).
+        explode: false
+        in: path
+        name: vds_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRestorePoint_200_response'
+          description: Объект JSON c ключом `restore_point`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание снапшота
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/restore-points/1051/create"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051/create', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/restore-points/1051/create',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/restore-points/1051/create', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051/create');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/restore-points/1051/create\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051/create\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/restore-points/{vds_id}/commit:
+    post:
+      description: |-
+        Чтобы зафиксировать (применить) снапшот облачного сервера (VDS), отправьте POST-запрос на `/api/v1/restore-points/{vds_id}/commit`.
+
+        Фиксация подтверждает текущее состояние сервера. Действие выполняется асинхронно, ответ не содержит тела.
+
+        Для выполнения действия сервер должен быть включён, иначе вернётся ошибка `403`.
+      operationId: commitRestorePoint
+      parameters:
+      - description: ID облачного сервера (VDS).
+        explode: false
+        in: path
+        name: vds_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Действие над снапшотом запущено
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Фиксация снапшота
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/restore-points/1051/commit"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051/commit', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/restore-points/1051/commit',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/restore-points/1051/commit', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051/commit');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/restore-points/1051/commit\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051/commit\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/restore-points/{vds_id}/rollback:
+    post:
+      description: |-
+        Чтобы откатить облачный сервер (VDS) к снапшоту, отправьте POST-запрос на `/api/v1/restore-points/{vds_id}/rollback`.
+
+        Откат возвращает сервер к состоянию, сохранённому в снапшоте. Действие выполняется асинхронно, ответ не содержит тела.
+
+        Для выполнения действия сервер должен быть включён, иначе вернётся ошибка `403`.
+      operationId: rollbackRestorePoint
+      parameters:
+      - description: ID облачного сервера (VDS).
+        explode: false
+        in: path
+        name: vds_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Действие над снапшотом запущено
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Откат к снапшоту
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/restore-points/1051/rollback"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/restore-points/1051/rollback', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/restore-points/1051/rollback',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/restore-points/1051/rollback', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/restore-points/1051/rollback');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/restore-points/1051/rollback\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/restore-points/1051/rollback\"\
           );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
           \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
           Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
@@ -51893,17 +51888,6 @@ components:
         minimum: 1
         type: integer
       style: simple
-    vds-id:
-      description: ID облачного сервера (VDS).
-      explode: false
-      in: path
-      name: vds_id
-      required: true
-      schema:
-        example: 1051
-        minimum: 1
-        type: integer
-      style: simple
     server-id:
       description: ID облачного сервера.
       explode: false
@@ -51931,6 +51915,17 @@ components:
       explode: false
       in: path
       name: backup_id
+      required: true
+      schema:
+        example: 1051
+        minimum: 1
+        type: integer
+      style: simple
+    vds-id:
+      description: ID облачного сервера (VDS).
+      explode: false
+      in: path
+      name: vds_id
       required: true
       schema:
         example: 1051
@@ -58824,65 +58819,6 @@ components:
       - router_presets
       title: RouterPresetsResponse
       type: object
-    restore-point:
-      example:
-        account_id: aaaa1234
-        vds_id: 1051
-        created_at: 2023-05-16T09:00:00Z
-        id: 4321
-        expired_at: 2023-05-23T09:00:00Z
-        status: created
-      properties:
-        id:
-          description: ID снапшота.
-          example: 4321
-          type: number
-        created_at:
-          description: Дата и время создания снапшота в формате ISO 8601.
-          example: 2023-05-16T09:00:00Z
-          format: date-time
-          type: string
-        expired_at:
-          description: Дата и время истечения снапшота в формате ISO 8601.
-          example: 2023-05-23T09:00:00Z
-          format: date-time
-          nullable: true
-          type: string
-        status:
-          description: |-
-            Статус снапшота.
-
-            - `creating` — создаётся;
-            - `created` — создан;
-            - `committed` — зафиксирован;
-            - `rolled_back` — откачен;
-            - `error` — ошибка;
-            - `deleted` — удалён.
-          enum:
-          - creating
-          - created
-          - committed
-          - rolled_back
-          - error
-          - deleted
-          example: created
-          type: string
-        vds_id:
-          description: "ID облачного сервера (VDS), к которому относится снапшот."
-          example: 1051
-          type: number
-        account_id:
-          description: ID аккаунта-владельца снапшота.
-          example: aaaa1234
-          type: string
-      required:
-      - account_id
-      - created_at
-      - expired_at
-      - id
-      - status
-      - vds_id
-      type: object
     vds:
       description: Сервер
       example:
@@ -59717,6 +59653,65 @@ components:
       - size
       - status
       - type
+      type: object
+    restore-point:
+      example:
+        account_id: aaaa1234
+        vds_id: 1051
+        created_at: 2023-05-16T09:00:00Z
+        id: 4321
+        expired_at: 2023-05-23T09:00:00Z
+        status: created
+      properties:
+        id:
+          description: ID снапшота.
+          example: 4321
+          type: number
+        created_at:
+          description: Дата и время создания снапшота в формате ISO 8601.
+          example: 2023-05-16T09:00:00Z
+          format: date-time
+          type: string
+        expired_at:
+          description: Дата и время истечения снапшота в формате ISO 8601.
+          example: 2023-05-23T09:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          description: |-
+            Статус снапшота.
+
+            - `creating` — создаётся;
+            - `created` — создан;
+            - `committed` — зафиксирован;
+            - `rolled_back` — откачен;
+            - `error` — ошибка;
+            - `deleted` — удалён.
+          enum:
+          - creating
+          - created
+          - committed
+          - rolled_back
+          - error
+          - deleted
+          example: created
+          type: string
+        vds_id:
+          description: "ID облачного сервера (VDS), к которому относится снапшот."
+          example: 1051
+          type: number
+        account_id:
+          description: ID аккаунта-владельца снапшота.
+          example: aaaa1234
+          type: string
+      required:
+      - account_id
+      - created_at
+      - expired_at
+      - id
+      - status
+      - vds_id
       type: object
     project:
       description: Проект
@@ -65944,49 +65939,6 @@ components:
       - yaml_config
       title: ClusterIn
       type: object
-    getRestorePoints_200_response:
-      example:
-        meta:
-          total: 10
-        restore_points:
-        - account_id: aaaa1234
-          vds_id: 1051
-          created_at: 2023-05-16T09:00:00Z
-          id: 4321
-          expired_at: 2023-05-23T09:00:00Z
-          status: created
-        - account_id: aaaa1234
-          vds_id: 1051
-          created_at: 2023-05-16T09:00:00Z
-          id: 4321
-          expired_at: 2023-05-23T09:00:00Z
-          status: created
-      properties:
-        restore_points:
-          items:
-            $ref: '#/components/schemas/restore-point'
-          type: array
-        meta:
-          $ref: '#/components/schemas/meta'
-      required:
-      - meta
-      - restore_points
-      type: object
-    getRestorePoint_200_response:
-      example:
-        restore_point:
-          account_id: aaaa1234
-          vds_id: 1051
-          created_at: 2023-05-16T09:00:00Z
-          id: 4321
-          expired_at: 2023-05-23T09:00:00Z
-          status: created
-      properties:
-        restore_point:
-          $ref: '#/components/schemas/restore-point'
-      required:
-      - restore_point
-      type: object
     getServers_200_response:
       example:
         servers:
@@ -66969,6 +66921,49 @@ components:
           type: string
       required:
       - action
+      type: object
+    getRestorePoints_200_response:
+      example:
+        meta:
+          total: 10
+        restore_points:
+        - account_id: aaaa1234
+          vds_id: 1051
+          created_at: 2023-05-16T09:00:00Z
+          id: 4321
+          expired_at: 2023-05-23T09:00:00Z
+          status: created
+        - account_id: aaaa1234
+          vds_id: 1051
+          created_at: 2023-05-16T09:00:00Z
+          id: 4321
+          expired_at: 2023-05-23T09:00:00Z
+          status: created
+      properties:
+        restore_points:
+          items:
+            $ref: '#/components/schemas/restore-point'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - meta
+      - restore_points
+      type: object
+    getRestorePoint_200_response:
+      example:
+        restore_point:
+          account_id: aaaa1234
+          vds_id: 1051
+          created_at: 2023-05-16T09:00:00Z
+          id: 4321
+          expired_at: 2023-05-23T09:00:00Z
+          status: created
+      properties:
+        restore_point:
+          $ref: '#/components/schemas/restore-point'
+      required:
+      - restore_point
       type: object
     getProjects_200_response:
       example:

@@ -50,6 +50,33 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ServersAPIService CommitRestorePoint", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var vdsId int32
+
+		httpRes, err := apiClient.ServersAPI.CommitRestorePoint(context.Background(), vdsId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService CreateRestorePoint", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var vdsId int32
+
+		resp, httpRes, err := apiClient.ServersAPI.CreateRestorePoint(context.Background(), vdsId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ServersAPIService CreateServer", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -164,6 +191,32 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.ServersAPI.GetOsList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService GetRestorePoint", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var vdsId int32
+
+		resp, httpRes, err := apiClient.ServersAPI.GetRestorePoint(context.Background(), vdsId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService GetRestorePoints", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ServersAPI.GetRestorePoints(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -442,6 +495,19 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 		var serverId int32
 
 		httpRes, err := apiClient.ServersAPI.ResetServerPassword(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServersAPIService RollbackRestorePoint", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var vdsId int32
+
+		httpRes, err := apiClient.ServersAPI.RollbackRestorePoint(context.Background(), vdsId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

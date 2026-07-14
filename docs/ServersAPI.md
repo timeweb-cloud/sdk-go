@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddServerIP**](ServersAPI.md#AddServerIP) | **Post** /api/v1/servers/{server_id}/ips | Добавление IP-адреса сервера
 [**CloneServer**](ServersAPI.md#CloneServer) | **Post** /api/v1/servers/{server_id}/clone | Клонирование сервера
+[**CommitRestorePoint**](ServersAPI.md#CommitRestorePoint) | **Post** /api/v1/restore-points/{vds_id}/commit | Фиксация снапшота
+[**CreateRestorePoint**](ServersAPI.md#CreateRestorePoint) | **Post** /api/v1/restore-points/{vds_id}/create | Создание снапшота
 [**CreateServer**](ServersAPI.md#CreateServer) | **Post** /api/v1/servers | Создание сервера
 [**CreateServerDisk**](ServersAPI.md#CreateServerDisk) | **Post** /api/v1/servers/{server_id}/disks | Создание диска сервера
 [**CreateServerDiskBackup**](ServersAPI.md#CreateServerDiskBackup) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups | Создание бэкапа диска сервера
@@ -15,6 +17,8 @@ Method | HTTP request | Description
 [**DeleteServerIP**](ServersAPI.md#DeleteServerIP) | **Delete** /api/v1/servers/{server_id}/ips | Удаление IP-адреса сервера
 [**GetConfigurators**](ServersAPI.md#GetConfigurators) | **Get** /api/v1/configurator/servers | Получение списка конфигураторов серверов
 [**GetOsList**](ServersAPI.md#GetOsList) | **Get** /api/v1/os/servers | Получение списка операционных систем
+[**GetRestorePoint**](ServersAPI.md#GetRestorePoint) | **Get** /api/v1/restore-points/{vds_id} | Получение снапшота сервера
+[**GetRestorePoints**](ServersAPI.md#GetRestorePoints) | **Get** /api/v1/restore-points | Получение списка снапшотов
 [**GetServer**](ServersAPI.md#GetServer) | **Get** /api/v1/servers/{server_id} | Получение сервера
 [**GetServerDisk**](ServersAPI.md#GetServerDisk) | **Get** /api/v1/servers/{server_id}/disks/{disk_id} | Получение диска сервера
 [**GetServerDiskAutoBackupSettings**](ServersAPI.md#GetServerDiskAutoBackupSettings) | **Get** /api/v1/servers/{server_id}/disks/{disk_id}/auto-backups | Получить настройки автобэкапов диска сервера
@@ -35,6 +39,7 @@ Method | HTTP request | Description
 [**RebootServer**](ServersAPI.md#RebootServer) | **Post** /api/v1/servers/{server_id}/reboot | Перезагрузка сервера
 [**RebootServerHard**](ServersAPI.md#RebootServerHard) | **Post** /api/v1/servers/{server_id}/hard-reboot | Принудительная перезагрузка сервера
 [**ResetServerPassword**](ServersAPI.md#ResetServerPassword) | **Post** /api/v1/servers/{server_id}/reset-password | Сброс пароля сервера
+[**RollbackRestorePoint**](ServersAPI.md#RollbackRestorePoint) | **Post** /api/v1/restore-points/{vds_id}/rollback | Откат к снапшоту
 [**ShutdownServer**](ServersAPI.md#ShutdownServer) | **Post** /api/v1/servers/{server_id}/shutdown | Выключение сервера
 [**StartServer**](ServersAPI.md#StartServer) | **Post** /api/v1/servers/{server_id}/start | Запуск сервера
 [**UpdateServer**](ServersAPI.md#UpdateServer) | **Patch** /api/v1/servers/{server_id} | Изменение сервера
@@ -174,6 +179,144 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateServer201Response**](CreateServer201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CommitRestorePoint
+
+> CommitRestorePoint(ctx, vdsId).Execute()
+
+Фиксация снапшота
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    vdsId := int32(1051) // int32 | ID облачного сервера (VDS).
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ServersAPI.CommitRestorePoint(context.Background(), vdsId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.CommitRestorePoint``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**vdsId** | **int32** | ID облачного сервера (VDS). | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCommitRestorePointRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateRestorePoint
+
+> GetRestorePoint200Response CreateRestorePoint(ctx, vdsId).Execute()
+
+Создание снапшота
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    vdsId := int32(1051) // int32 | ID облачного сервера (VDS).
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ServersAPI.CreateRestorePoint(context.Background(), vdsId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.CreateRestorePoint``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateRestorePoint`: GetRestorePoint200Response
+    fmt.Fprintf(os.Stdout, "Response from `ServersAPI.CreateRestorePoint`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**vdsId** | **int32** | ID облачного сервера (VDS). | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRestorePointRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetRestorePoint200Response**](GetRestorePoint200Response.md)
 
 ### Authorization
 
@@ -798,6 +941,137 @@ Other parameters are passed through a pointer to a apiGetOsListRequest struct vi
 ### Return type
 
 [**GetOsList200Response**](GetOsList200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRestorePoint
+
+> GetRestorePoint200Response GetRestorePoint(ctx, vdsId).Execute()
+
+Получение снапшота сервера
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    vdsId := int32(1051) // int32 | ID облачного сервера (VDS).
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ServersAPI.GetRestorePoint(context.Background(), vdsId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.GetRestorePoint``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetRestorePoint`: GetRestorePoint200Response
+    fmt.Fprintf(os.Stdout, "Response from `ServersAPI.GetRestorePoint`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**vdsId** | **int32** | ID облачного сервера (VDS). | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRestorePointRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetRestorePoint200Response**](GetRestorePoint200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRestorePoints
+
+> GetRestorePoints200Response GetRestorePoints(ctx).Execute()
+
+Получение списка снапшотов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ServersAPI.GetRestorePoints(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.GetRestorePoints``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetRestorePoints`: GetRestorePoints200Response
+    fmt.Fprintf(os.Stdout, "Response from `ServersAPI.GetRestorePoints`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRestorePointsRequest struct via the builder pattern
+
+
+### Return type
+
+[**GetRestorePoints200Response**](GetRestorePoints200Response.md)
 
 ### Authorization
 
@@ -2199,6 +2473,74 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiResetServerPasswordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RollbackRestorePoint
+
+> RollbackRestorePoint(ctx, vdsId).Execute()
+
+Откат к снапшоту
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    vdsId := int32(1051) // int32 | ID облачного сервера (VDS).
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ServersAPI.RollbackRestorePoint(context.Background(), vdsId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.RollbackRestorePoint``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**vdsId** | **int32** | ID облачного сервера (VDS). | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRollbackRestorePointRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

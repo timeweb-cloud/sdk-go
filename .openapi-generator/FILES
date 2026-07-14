@@ -24,7 +24,6 @@ api_projects.go
 api_routers.go
 api_s3.go
 api_servers.go
-api_snapshots.go
 api_ssh.go
 api_vpc.go
 client.go
@@ -539,7 +538,6 @@ docs/ServiceServicePrice.md
 docs/ServiceServicePriceNodeGroupsInner.md
 docs/SetLabels.md
 docs/SettingCondition.md
-docs/SnapshotsAPI.md
 docs/SpamFilterIsDisabled.md
 docs/SpamFilterIsEnabled.md
 docs/SpamProtectionIsDisabled.md
@@ -1212,7 +1210,6 @@ test/api_projects_test.go
 test/api_routers_test.go
 test/api_s3_test.go
 test/api_servers_test.go
-test/api_snapshots_test.go
 test/api_ssh_test.go
 test/api_vpc_test.go
 utils.go
