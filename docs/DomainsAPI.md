@@ -10,9 +10,11 @@ Method | HTTP request | Description
 [**CreateDomainDNSRecord**](DomainsAPI.md#CreateDomainDNSRecord) | **Post** /api/v1/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
 [**CreateDomainDNSRecordV2**](DomainsAPI.md#CreateDomainDNSRecordV2) | **Post** /api/v2/domains/{fqdn}/dns-records | Добавить информацию о DNS-записи для домена или поддомена
 [**CreateDomainRequest**](DomainsAPI.md#CreateDomainRequest) | **Post** /api/v1/domains-requests | Создание заявки на регистрацию/продление/трансфер домена
+[**CreatePerson**](DomainsAPI.md#CreatePerson) | **Post** /api/v1/persons | Создание администратора доменов
 [**DeleteDomain**](DomainsAPI.md#DeleteDomain) | **Delete** /api/v1/domains/{fqdn} | Удаление домена
 [**DeleteDomainDNSRecord**](DomainsAPI.md#DeleteDomainDNSRecord) | **Delete** /api/v1/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
 [**DeleteDomainDNSRecordV2**](DomainsAPI.md#DeleteDomainDNSRecordV2) | **Delete** /api/v2/domains/{fqdn}/dns-records/{record_id} | Удалить информацию о DNS-записи для домена или поддомена
+[**DeletePerson**](DomainsAPI.md#DeletePerson) | **Delete** /api/v1/persons/{person_id} | Удаление администратора доменов
 [**DeleteSubdomain**](DomainsAPI.md#DeleteSubdomain) | **Delete** /api/v1/domains/{fqdn}/subdomains/{subdomain} | Удаление поддомена
 [**GetDomain**](DomainsAPI.md#GetDomain) | **Get** /api/v1/domains/{fqdn} | Получение информации о домене
 [**GetDomainDNSRecords**](DomainsAPI.md#GetDomainDNSRecords) | **Get** /api/v1/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
@@ -21,6 +23,8 @@ Method | HTTP request | Description
 [**GetDomainRequest**](DomainsAPI.md#GetDomainRequest) | **Get** /api/v1/domains-requests/{request_id} | Получение заявки на регистрацию/продление/трансфер домена
 [**GetDomainRequests**](DomainsAPI.md#GetDomainRequests) | **Get** /api/v1/domains-requests | Получение списка заявок на регистрацию/продление/трансфер домена
 [**GetDomains**](DomainsAPI.md#GetDomains) | **Get** /api/v1/domains | Получение списка всех доменов
+[**GetPerson**](DomainsAPI.md#GetPerson) | **Get** /api/v1/persons/{person_id} | Получение администратора доменов
+[**GetPersons**](DomainsAPI.md#GetPersons) | **Get** /api/v1/persons | Получение списка администраторов доменов
 [**GetTLD**](DomainsAPI.md#GetTLD) | **Get** /api/v1/tlds/{tld_id} | Получить информацию о доменной зоне по ID
 [**GetTLDs**](DomainsAPI.md#GetTLDs) | **Get** /api/v1/tlds | Получить информацию о доменных зонах
 [**UpdateDomainAutoProlongation**](DomainsAPI.md#UpdateDomainAutoProlongation) | **Patch** /api/v1/domains/{fqdn} | Включение/выключение автопродления домена
@@ -28,6 +32,7 @@ Method | HTTP request | Description
 [**UpdateDomainDNSRecordV2**](DomainsAPI.md#UpdateDomainDNSRecordV2) | **Patch** /api/v2/domains/{fqdn}/dns-records/{record_id} | Обновить информацию о DNS-записи домена или поддомена
 [**UpdateDomainNameServers**](DomainsAPI.md#UpdateDomainNameServers) | **Put** /api/v1/domains/{fqdn}/name-servers | Изменение name-серверов домена
 [**UpdateDomainRequest**](DomainsAPI.md#UpdateDomainRequest) | **Patch** /api/v1/domains-requests/{request_id} | Оплата/обновление заявки на регистрацию/продление/трансфер домена
+[**UpdatePerson**](DomainsAPI.md#UpdatePerson) | **Put** /api/v1/persons/{person_id} | Обновление контактных данных администратора доменов
 
 
 
@@ -452,6 +457,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreatePerson
+
+> CreatePerson201Response CreatePerson(ctx).Person2(person2).Execute()
+
+Создание администратора доменов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    person2 := *openapiclient.NewPerson2("person", "Иванов Иван Иванович", true, "1990-01-01", "2010-01-01", "123456", "ОУФМС России", "1234", "190000", "г. Санкт-Петербург, ул. Примерная, д. 1", "+79000000000", "ivanov@example.com") // Person2 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DomainsAPI.CreatePerson(context.Background()).Person2(person2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.CreatePerson``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreatePerson`: CreatePerson201Response
+    fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.CreatePerson`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreatePersonRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **person2** | [**Person2**](Person2.md) |  | 
+
+### Return type
+
+[**CreatePerson201Response**](CreatePerson201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteDomain
 
 > DeleteDomain(ctx, fqdn).Execute()
@@ -642,6 +713,74 @@ Other parameters are passed through a pointer to a apiDeleteDomainDNSRecordV2Req
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeletePerson
+
+> DeletePerson(ctx, personId).Execute()
+
+Удаление администратора доменов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    personId := int32(123) // int32 | ID администратора домена.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.DomainsAPI.DeletePerson(context.Background(), personId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DeletePerson``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**personId** | **int32** | ID администратора домена. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeletePersonRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -1233,6 +1372,146 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetPerson
+
+> CreatePerson201Response GetPerson(ctx, personId).Execute()
+
+Получение администратора доменов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    personId := int32(123) // int32 | ID администратора домена.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DomainsAPI.GetPerson(context.Background(), personId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.GetPerson``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPerson`: CreatePerson201Response
+    fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.GetPerson`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**personId** | **int32** | ID администратора домена. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPersonRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CreatePerson201Response**](CreatePerson201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPersons
+
+> GetPersons200Response GetPersons(ctx).Limit(limit).Offset(offset).IsClosed(isClosed).Execute()
+
+Получение списка администраторов доменов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    limit := int32(56) // int32 | Обозначает количество записей, которое необходимо вернуть. (optional) (default to 100)
+    offset := int32(56) // int32 | Указывает на смещение относительно начала списка. (optional) (default to 0)
+    isClosed := false // bool | Фильтр по закрытым администраторам: `true` — вернуть только закрытых, `false` — только активных. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DomainsAPI.GetPersons(context.Background()).Limit(limit).Offset(offset).IsClosed(isClosed).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.GetPersons``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPersons`: GetPersons200Response
+    fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.GetPersons`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPersonsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** | Обозначает количество записей, которое необходимо вернуть. | [default to 100]
+ **offset** | **int32** | Указывает на смещение относительно начала списка. | [default to 0]
+ **isClosed** | **bool** | Фильтр по закрытым администраторам: &#x60;true&#x60; — вернуть только закрытых, &#x60;false&#x60; — только активных. | 
+
+### Return type
+
+[**GetPersons200Response**](GetPersons200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetTLD
 
 > GetTLD200Response GetTLD(ctx, tldId).Execute()
@@ -1722,6 +2001,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateDomainRequest201Response**](CreateDomainRequest201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdatePerson
+
+> CreatePerson201Response UpdatePerson(ctx, personId).UpdatePerson(updatePerson).Execute()
+
+Обновление контактных данных администратора доменов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    personId := int32(123) // int32 | ID администратора домена.
+    updatePerson := *openapiclient.NewUpdatePerson("г. Санкт-Петербург, ул. Примерная, д. 1", "ivanov@example.com", "+79000000000", "190000") // UpdatePerson | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DomainsAPI.UpdatePerson(context.Background(), personId).UpdatePerson(updatePerson).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.UpdatePerson``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdatePerson`: CreatePerson201Response
+    fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.UpdatePerson`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**personId** | **int32** | ID администратора домена. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdatePersonRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updatePerson** | [**UpdatePerson**](UpdatePerson.md) |  | 
+
+### Return type
+
+[**CreatePerson201Response**](CreatePerson201Response.md)
 
 ### Authorization
 

@@ -173,6 +173,7 @@ docs/CreateMultipleDomainMailboxesV2201Response.md
 docs/CreateMultipleDomainMailboxesV2RequestInner.md
 docs/CreateNetworkDrive.md
 docs/CreateNetworkDrive201Response.md
+docs/CreatePerson201Response.md
 docs/CreateProject.md
 docs/CreateProject201Response.md
 docs/CreateRule.md
@@ -339,6 +340,7 @@ docs/GetNetworkDrivesAvailableResources200Response.md
 docs/GetNetworkDrivesPresets200Response.md
 docs/GetNotificationSettings200Response.md
 docs/GetOsList200Response.md
+docs/GetPersons200Response.md
 docs/GetProjectBalancers200Response.md
 docs/GetProjectClusters200Response.md
 docs/GetProjectDatabases200Response.md
@@ -391,6 +393,7 @@ docs/ImagesOutResponse.md
 docs/IncreaseNodes.md
 docs/InfoServicePrice.md
 docs/Invoice.md
+docs/Ip.md
 docs/K8SVersionsResponse.md
 docs/Kafka.md
 docs/KnowledgeBasesAPI.md
@@ -448,11 +451,14 @@ docs/NotificationSettingChannels.md
 docs/NotificationSettingType.md
 docs/OS.md
 docs/Opensearch.md
+docs/Org.md
 docs/OutgoingIsDisabled.md
 docs/OutgoingIsEnabled.md
 docs/PaymentsAPI.md
 docs/PerformActionOnBackupRequest.md
 docs/PerformActionOnServerRequest.md
+docs/Person.md
+docs/Person2.md
 docs/Policy.md
 docs/Postgres.md
 docs/Postgresql.md
@@ -584,6 +590,7 @@ docs/UpdateNetworkDrive.md
 docs/UpdateNotificationSettingsRequest.md
 docs/UpdateNotificationSettingsRequestSettingsInner.md
 docs/UpdateNotificationSettingsRequestSettingsInnerChannels.md
+docs/UpdatePerson.md
 docs/UpdateProject.md
 docs/UpdateRule.md
 docs/UpdateServer.md
@@ -761,6 +768,7 @@ model_create_multiple_domain_mailboxes_v2_201_response.go
 model_create_multiple_domain_mailboxes_v2_request_inner.go
 model_create_network_drive.go
 model_create_network_drive_201_response.go
+model_create_person_201_response.go
 model_create_project.go
 model_create_project_201_response.go
 model_create_rule.go
@@ -922,6 +930,7 @@ model_get_network_drives_available_resources_200_response.go
 model_get_network_drives_presets_200_response.go
 model_get_notification_settings_200_response.go
 model_get_os_list_200_response.go
+model_get_persons_200_response.go
 model_get_project_balancers_200_response.go
 model_get_project_clusters_200_response.go
 model_get_project_databases_200_response.go
@@ -973,6 +982,7 @@ model_images_out_response.go
 model_increase_nodes.go
 model_info_service_price.go
 model_invoice.go
+model_ip.go
 model_k8_s_versions_response.go
 model_kafka.go
 model_knowledgebase.go
@@ -1024,11 +1034,14 @@ model_notification_setting_channel.go
 model_notification_setting_channels.go
 model_notification_setting_type.go
 model_opensearch.go
+model_org.go
 model_os.go
 model_outgoing_is_disabled.go
 model_outgoing_is_enabled.go
 model_perform_action_on_backup_request.go
 model_perform_action_on_server_request.go
+model_person.go
+model_person_2.go
 model_policy.go
 model_postgres.go
 model_postgresql.go
@@ -1154,6 +1167,7 @@ model_update_network_drive.go
 model_update_notification_settings_request.go
 model_update_notification_settings_request_settings_inner.go
 model_update_notification_settings_request_settings_inner_channels.go
+model_update_person.go
 model_update_project.go
 model_update_rule.go
 model_update_server.go

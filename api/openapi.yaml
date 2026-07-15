@@ -40206,6 +40206,778 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/persons:
+    get:
+      description: |-
+        Чтобы получить список администраторов доменов на вашем аккаунте, отправьте GET-запрос на `/api/v1/persons`.
+
+         Тело ответа будет представлять собой объект JSON с ключом `persons`.
+      operationId: getPersons
+      parameters:
+      - description: "Обозначает количество записей, которое необходимо вернуть."
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      - description: Указывает на смещение относительно начала списка.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          type: integer
+        style: form
+      - description: "Фильтр по закрытым администраторам: `true` — вернуть только\
+          \ закрытых, `false` — только активных."
+        explode: true
+        in: query
+        name: is_closed
+        required: false
+        schema:
+          example: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPersons_200_response'
+          description: Ответ будет представлять собой объект JSON c ключом `persons`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка администраторов доменов
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/persons"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/persons', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/persons', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/persons', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/persons');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/persons\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/persons\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: |-
+        Чтобы создать администратора доменов, отправьте POST-запрос на `/api/v1/persons`, задав необходимые атрибуты. Набор полей зависит от типа администратора: физическое лицо (`person`), организация (`org`) или индивидуальный предприниматель (`ip`).
+
+         Тело ответа будет представлять собой объект JSON с ключом `person`.
+      operationId: createPerson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/person-2'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createPerson_201_response'
+          description: Ответ будет представлять собой объект JSON c ключом `person`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание администратора доменов
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"type":"person","name":"Иванов Иван Иванович","is_resident":true,"birthdate":"1990-01-01","passport_date":"2010-01-01","passport_number":"123456","passport_place":"ОУФМС России","passport_series":"1234","postcode":"190000","mailing_address":"г. Санкт-Петербург, ул. Примерная, д. 1","phone":"+79000000000","email":"ivanov@example.com"}' \
+            "https://api.timeweb.cloud/api/v1/persons"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/persons', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'type': 'person',
+                  'name': '\u0418\u0432\u0430\u043D\u043E\u0432 \u0418\u0432\u0430\u043D \u0418\u0432\u0430\u043D\u043E\u0432\u0438\u0447',
+                  'is_resident': true,
+                  'birthdate': '1990-01-01',
+                  'passport_date': '2010-01-01',
+                  'passport_number': '123456',
+                  'passport_place': '\u041E\u0423\u0424\u041C\u0421 \u0420\u043E\u0441\u0441\u0438\u0438',
+                  'passport_series': '1234',
+                  'postcode': '190000',
+                  'mailing_address': '\u0433. \u0421\u0430\u043D\u043A\u0442-\u041F\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433, \u0443\u043B. \u041F\u0440\u0438\u043C\u0435\u0440\u043D\u0430\u044F, \u0434. 1',
+                  'phone': '+79000000000',
+                  'email': 'ivanov@example.com'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/persons',
+              {
+                  'type': 'person',
+                  'name': '\u0418\u0432\u0430\u043D\u043E\u0432 \u0418\u0432\u0430\u043D \u0418\u0432\u0430\u043D\u043E\u0432\u0438\u0447',
+                  'is_resident': true,
+                  'birthdate': '1990-01-01',
+                  'passport_date': '2010-01-01',
+                  'passport_number': '123456',
+                  'passport_place': '\u041E\u0423\u0424\u041C\u0421 \u0420\u043E\u0441\u0441\u0438\u0438',
+                  'passport_series': '1234',
+                  'postcode': '190000',
+                  'mailing_address': '\u0433. \u0421\u0430\u043D\u043A\u0442-\u041F\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433, \u0443\u043B. \u041F\u0440\u0438\u043C\u0435\u0440\u043D\u0430\u044F, \u0434. 1',
+                  'phone': '+79000000000',
+                  'email': 'ivanov@example.com'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'type': 'person',
+              'name': 'Иванов Иван Иванович',
+              'is_resident': True,
+              'birthdate': '1990-01-01',
+              'passport_date': '2010-01-01',
+              'passport_number': '123456',
+              'passport_place': 'ОУФМС России',
+              'passport_series': '1234',
+              'postcode': '190000',
+              'mailing_address': 'г. Санкт-Петербург, ул. Примерная, д. 1',
+              'phone': '+79000000000',
+              'email': 'ivanov@example.com',
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/persons', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"type":"person","name":"Иванов Иван Иванович","is_resident":true,"birthdate":"1990-01-01","passport_date":"2010-01-01","passport_number":"123456","passport_place":"ОУФМС России","passport_series":"1234","postcode":"190000","mailing_address":"г. Санкт-Петербург, ул. Примерная, д. 1","phone":"+79000000000","email":"ivanov@example.com"}'.encode()
+          #response = requests.post('https://api.timeweb.cloud/api/v1/persons', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/persons');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"type\":\"person\",\"name\":\"Иванов Иван Иванович\",\"is_resident\":true,\"birthdate\":\"1990-01-01\",\"passport_date\":\"2010-01-01\",\"passport_number\":\"123456\",\"passport_place\":\"ОУФМС России\",\"passport_series\":\"1234\",\"postcode\":\"190000\",\"mailing_address\":\"г. Санкт-Петербург, ул. Примерная, д. 1\",\"phone\":\"+79000000000\",\"email\":\"ivanov@example.com\"}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"type\":\"person\",\"name\":\"Иванов И\
+          ван Иванович\",\"is_resident\":true,\"birthdate\":\"1990-01-01\",\"passport_date\"\
+          :\"2010-01-01\",\"passport_number\":\"123456\",\"passport_place\":\"ОУФМ\
+          С России\",\"passport_series\":\"1234\",\"postcode\":\"190000\",\"mailing_address\"\
+          :\"г. Санкт-Петербург, ул. Примерная, д. 1\",\"phone\":\"+79000000000\"\
+          ,\"email\":\"ivanov@example.com\"}`)\n\treq, err := http.NewRequest(\"POST\"\
+          , \"https://api.timeweb.cloud/api/v1/persons\", data)\n\tif err != nil {\n\
+          \t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\", \"application/json\"\
+          )\n\treq.Header.Set(\"Authorization\", \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"\
+          ))\n\tresp, err := client.Do(req)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tdefer resp.Body.Close()\n\tbodyText, err := io.ReadAll(resp.Body)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n\
+          }\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/persons\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\\"type\\\":\\\"person\\\",\\\"name\\\":\\\"Иванов Иван Иванович\\\",\\\
+          \"is_resident\\\":true,\\\"birthdate\\\":\\\"1990-01-01\\\",\\\"passport_date\\\
+          \":\\\"2010-01-01\\\",\\\"passport_number\\\":\\\"123456\\\",\\\"passport_place\\\
+          \":\\\"ОУФМС России\\\",\\\"passport_series\\\":\\\"1234\\\",\\\"postcode\\\
+          \":\\\"190000\\\",\\\"mailing_address\\\":\\\"г. Санкт-Петербург, ул. Пр\
+          имерная, д. 1\\\",\\\"phone\\\":\\\"+79000000000\\\",\\\"email\\\":\\\"\
+          ivanov@example.com\\\"}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\
+          \thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/persons/{person_id}:
+    delete:
+      description: "Чтобы удалить администратора доменов, отправьте DELETE-запрос\
+        \ на `/api/v1/persons/{person_id}`."
+      operationId: deletePerson
+      parameters:
+      - description: ID администратора домена.
+        explode: false
+        in: path
+        name: person_id
+        required: true
+        schema:
+          example: 123
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Администратор доменов успешно удален.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление администратора доменов
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/persons/123"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/persons/123', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/persons/123', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/persons/123', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/persons/123');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/persons/123\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/persons/123\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: |-
+        Чтобы получить администратора доменов, отправьте GET-запрос на `/api/v1/persons/{person_id}`.
+
+         Тело ответа будет представлять собой объект JSON с ключом `person`.
+      operationId: getPerson
+      parameters:
+      - description: ID администратора домена.
+        explode: false
+        in: path
+        name: person_id
+        required: true
+        schema:
+          example: 123
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createPerson_201_response'
+          description: Ответ будет представлять собой объект JSON c ключом `person`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение администратора доменов
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/persons/123"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/persons/123', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/persons/123', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/persons/123', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/persons/123');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/persons/123\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/persons/123\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    put:
+      description: |-
+        Чтобы обновить контактные данные администратора доменов, отправьте PUT-запрос на `/api/v1/persons/{person_id}`.
+
+         Тело ответа будет представлять собой объект JSON с ключом `person`.
+      operationId: updatePerson
+      parameters:
+      - description: ID администратора домена.
+        explode: false
+        in: path
+        name: person_id
+        required: true
+        schema:
+          example: 123
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update-person'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createPerson_201_response'
+          description: Ответ будет представлять собой объект JSON c ключом `person`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Обновление контактных данных администратора доменов
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PUT \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"address":"г. Санкт-Петербург, ул. Примерная, д. 1","email":"ivanov@example.com","phone":"+79000000000","postcode":"190000"}' \
+            "https://api.timeweb.cloud/api/v1/persons/123"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/persons/123', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'address': '\u0433. \u0421\u0430\u043D\u043A\u0442-\u041F\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433, \u0443\u043B. \u041F\u0440\u0438\u043C\u0435\u0440\u043D\u0430\u044F, \u0434. 1',
+                  'email': 'ivanov@example.com',
+                  'phone': '+79000000000',
+                  'postcode': '190000'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.put(
+              'https://api.timeweb.cloud/api/v1/persons/123',
+              {
+                  'address': '\u0433. \u0421\u0430\u043D\u043A\u0442-\u041F\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433, \u0443\u043B. \u041F\u0440\u0438\u043C\u0435\u0440\u043D\u0430\u044F, \u0434. 1',
+                  'email': 'ivanov@example.com',
+                  'phone': '+79000000000',
+                  'postcode': '190000'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'address': 'г. Санкт-Петербург, ул. Примерная, д. 1',
+              'email': 'ivanov@example.com',
+              'phone': '+79000000000',
+              'postcode': '190000',
+          }
+
+          response = requests.put('https://api.timeweb.cloud/api/v1/persons/123', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"address":"г. Санкт-Петербург, ул. Примерная, д. 1","email":"ivanov@example.com","phone":"+79000000000","postcode":"190000"}'.encode()
+          #response = requests.put('https://api.timeweb.cloud/api/v1/persons/123', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/persons/123');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"address\":\"г. Санкт-Петербург, ул. Примерная, д. 1\",\"email\":\"ivanov@example.com\",\"phone\":\"+79000000000\",\"postcode\":\"190000\"}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"address\":\"г. Санкт-Петербург, ул. П\
+          римерная, д. 1\",\"email\":\"ivanov@example.com\",\"phone\":\"+79000000000\"\
+          ,\"postcode\":\"190000\"}`)\n\treq, err := http.NewRequest(\"PUT\", \"https://api.timeweb.cloud/api/v1/persons/123\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/persons/123\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          PUT\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\\"address\\\":\\\"г. Санкт-Петербург, ул. Примерная, д. 1\\\",\\\"email\\\
+          \":\\\"ivanov@example.com\\\",\\\"phone\\\":\\\"+79000000000\\\",\\\"postcode\\\
+          \":\\\"190000\\\"}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v2/vpcs:
     get:
       description: "Чтобы получить список VPCs, отправьте GET-запрос на `/api/v2/vpcs`."
@@ -52145,6 +52917,27 @@ components:
         example: 123
         type: integer
       style: simple
+    is-closed:
+      description: "Фильтр по закрытым администраторам: `true` — вернуть только за\
+        крытых, `false` — только активных."
+      explode: true
+      in: query
+      name: is_closed
+      required: false
+      schema:
+        example: false
+        type: boolean
+      style: form
+    person-id-2:
+      description: ID администратора домена.
+      explode: false
+      in: path
+      name: person_id
+      required: true
+      schema:
+        example: 123
+        type: integer
+      style: simple
     vpc-id:
       description: ID сети
       explode: false
@@ -62263,6 +63056,385 @@ components:
       - transfer
       - whois_privacy_price
       type: object
+    person:
+      example:
+        contact_name: Иванов Иван Иванович
+        birthdate: 1990-01-01
+        is_blank: false
+        postcode: "190000"
+        inn: "7700000000"
+        passport_date: 2010-01-01
+        kpp: "770000000"
+        type: person
+        passport_place: ОУФМС России
+        passport_series: "1234"
+        mailing_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+        country_code: RU
+        name_eng: Ivanov Ivan
+        legal_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+        phone: +79000000000
+        passport_number: "123456"
+        name: Иванов Иван Иванович
+        is_resident: true
+        id: 123
+        email: ivanov@example.com
+        is_closed: false
+      properties:
+        id:
+          description: Уникальный идентификатор администратора домена.
+          example: 123
+          type: integer
+        type:
+          description: "Тип администратора: `person` — физическое лицо, `org` — ор\
+            ганизация, `ip` — индивидуальный предприниматель."
+          enum:
+          - person
+          - org
+          - ip
+          example: person
+          type: string
+        name:
+          description: Имя администратора (ФИО или название организации).
+          example: Иванов Иван Иванович
+          type: string
+        name_eng:
+          description: Имя администратора в латинской транслитерации.
+          example: Ivanov Ivan
+          type: string
+        email:
+          description: Адрес электронной почты администратора.
+          example: ivanov@example.com
+          type: string
+        phone:
+          description: Контактный телефон администратора.
+          example: +79000000000
+          type: string
+        postcode:
+          description: Почтовый индекс.
+          example: "190000"
+          type: string
+        mailing_address:
+          description: Почтовый адрес.
+          example: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          type: string
+        country_code:
+          description: Код страны администратора.
+          example: RU
+          nullable: true
+          type: string
+        is_resident:
+          description: "Это логическое значение, которое показывает, является ли а\
+            дминистратор резидентом РФ."
+          example: true
+          type: boolean
+        is_blank:
+          description: "Это логическое значение, которое показывает, заполнены ли\
+            \ данные администратора не полностью."
+          example: false
+          type: boolean
+        is_closed:
+          description: "Это логическое значение, которое показывает, закрыт ли адм\
+            инистратор."
+          example: false
+          type: boolean
+        birthdate:
+          description: Дата рождения. Только для типов `person` и `ip`.
+          example: 1990-01-01
+          type: string
+        passport_date:
+          description: Дата выдачи паспорта. Только для типов `person` и `ip`.
+          example: 2010-01-01
+          type: string
+        passport_number:
+          description: Номер паспорта. Только для типов `person` и `ip`.
+          example: "123456"
+          type: string
+        passport_place:
+          description: Кем выдан паспорт. Только для типов `person` и `ip`.
+          example: ОУФМС России
+          type: string
+        passport_series:
+          description: Серия паспорта. Только для типов `person` и `ip`.
+          example: "1234"
+          type: string
+        inn:
+          description: ИНН. Только для типов `org` и `ip`.
+          example: "7700000000"
+          type: string
+        kpp:
+          description: КПП организации. Только для типа `org`.
+          example: "770000000"
+          type: string
+        legal_address:
+          description: Юридический адрес организации. Только для типа `org`.
+          example: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          type: string
+        contact_name:
+          description: Контактное лицо организации. Только для типа `org`.
+          example: Иванов Иван Иванович
+          type: string
+      required:
+      - country_code
+      - email
+      - id
+      - is_blank
+      - is_closed
+      - is_resident
+      - mailing_address
+      - name
+      - name_eng
+      - phone
+      - postcode
+      - type
+      type: object
+    person-2:
+      description: Администратор домена — физическое лицо
+      properties:
+        type:
+          description: Тип администратора.
+          enum:
+          - person
+          example: person
+          type: string
+        name:
+          description: ФИО администратора.
+          example: Иванов Иван Иванович
+          type: string
+        is_resident:
+          description: "Это логическое значение, которое показывает, является ли а\
+            дминистратор резидентом РФ."
+          example: true
+          type: boolean
+        birthdate:
+          description: Дата рождения.
+          example: 1990-01-01
+          type: string
+        passport_date:
+          description: Дата выдачи паспорта.
+          example: 2010-01-01
+          type: string
+        passport_number:
+          description: Номер паспорта.
+          example: "123456"
+          type: string
+        passport_place:
+          description: Кем выдан паспорт.
+          example: ОУФМС России
+          type: string
+        passport_series:
+          description: Серия паспорта.
+          example: "1234"
+          type: string
+        postcode:
+          description: Почтовый индекс.
+          example: "190000"
+          type: string
+        mailing_address:
+          description: Почтовый адрес.
+          example: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          type: string
+        phone:
+          description: Контактный телефон.
+          example: +79000000000
+          type: string
+        email:
+          description: Адрес электронной почты.
+          example: ivanov@example.com
+          type: string
+        country_code:
+          description: "Код страны. Только для нерезидентов РФ (`is_resident: false`);\
+            \ для резидентов поле передавать не нужно."
+          example: KZ
+          nullable: true
+          type: string
+      required:
+      - birthdate
+      - email
+      - is_resident
+      - mailing_address
+      - name
+      - passport_date
+      - passport_number
+      - passport_place
+      - passport_series
+      - phone
+      - postcode
+      - type
+      title: Физическое лицо
+      type: object
+    org:
+      description: Администратор домена — организация
+      properties:
+        type:
+          description: Тип администратора.
+          enum:
+          - org
+          example: org
+          type: string
+        name:
+          description: Название организации.
+          example: ООО «Пример»
+          type: string
+        is_resident:
+          description: "Это логическое значение, которое показывает, является ли а\
+            дминистратор резидентом РФ."
+          example: true
+          type: boolean
+        contact_name:
+          description: Контактное лицо организации.
+          example: Иванов Иван Иванович
+          type: string
+        inn:
+          description: ИНН организации.
+          example: "7700000000"
+          type: string
+        kpp:
+          description: КПП организации.
+          example: "770000000"
+          type: string
+        legal_address:
+          description: Юридический адрес организации.
+          example: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          type: string
+        postcode:
+          description: Почтовый индекс.
+          example: "190000"
+          type: string
+        mailing_address:
+          description: Почтовый адрес.
+          example: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          type: string
+        phone:
+          description: Контактный телефон.
+          example: +79000000000
+          type: string
+        email:
+          description: Адрес электронной почты.
+          example: org@example.com
+          type: string
+        country_code:
+          description: "Код страны. Только для нерезидентов РФ (`is_resident: false`);\
+            \ для резидентов поле передавать не нужно."
+          example: KZ
+          nullable: true
+          type: string
+      required:
+      - contact_name
+      - email
+      - inn
+      - is_resident
+      - legal_address
+      - mailing_address
+      - name
+      - phone
+      - postcode
+      - type
+      title: Организация
+      type: object
+    ip:
+      description: Администратор домена — индивидуальный предприниматель
+      properties:
+        type:
+          description: Тип администратора.
+          enum:
+          - ip
+          example: ip
+          type: string
+        name:
+          description: ФИО индивидуального предпринимателя.
+          example: ИП Иванов Иван Иванович
+          type: string
+        is_resident:
+          description: "Это логическое значение, которое показывает, является ли а\
+            дминистратор резидентом РФ."
+          example: true
+          type: boolean
+        birthdate:
+          description: Дата рождения.
+          example: 1990-01-01
+          type: string
+        passport_date:
+          description: Дата выдачи паспорта.
+          example: 2010-01-01
+          type: string
+        passport_number:
+          description: Номер паспорта.
+          example: "123456"
+          type: string
+        passport_place:
+          description: Кем выдан паспорт.
+          example: ОУФМС России
+          type: string
+        passport_series:
+          description: Серия паспорта.
+          example: "1234"
+          type: string
+        inn:
+          description: ИНН индивидуального предпринимателя.
+          example: "770000000000"
+          type: string
+        postcode:
+          description: Почтовый индекс.
+          example: "190000"
+          type: string
+        mailing_address:
+          description: Почтовый адрес.
+          example: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          type: string
+        phone:
+          description: Контактный телефон.
+          example: +79000000000
+          type: string
+        email:
+          description: Адрес электронной почты.
+          example: ip@example.com
+          type: string
+        country_code:
+          description: "Код страны. Только для нерезидентов РФ (`is_resident: false`);\
+            \ для резидентов поле передавать не нужно."
+          example: KZ
+          nullable: true
+          type: string
+      required:
+      - birthdate
+      - email
+      - inn
+      - is_resident
+      - mailing_address
+      - name
+      - passport_date
+      - passport_number
+      - passport_place
+      - passport_series
+      - phone
+      - postcode
+      - type
+      title: Индивидуальный предприниматель
+      type: object
+    update-person:
+      properties:
+        address:
+          description: Почтовый адрес администратора.
+          example: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          type: string
+        email:
+          description: Адрес электронной почты администратора.
+          example: ivanov@example.com
+          type: string
+        phone:
+          description: Контактный телефон администратора.
+          example: +79000000000
+          type: string
+        postcode:
+          description: Почтовый индекс.
+          example: "190000"
+          type: string
+      required:
+      - address
+      - email
+      - phone
+      - postcode
+      type: object
     vpc:
       example:
         availability_zone: spb-1
@@ -69858,6 +71030,94 @@ components:
           type: boolean
       required:
       - is_domain_available
+      type: object
+    getPersons_200_response:
+      example:
+        persons:
+        - contact_name: Иванов Иван Иванович
+          birthdate: 1990-01-01
+          is_blank: false
+          postcode: "190000"
+          inn: "7700000000"
+          passport_date: 2010-01-01
+          kpp: "770000000"
+          type: person
+          passport_place: ОУФМС России
+          passport_series: "1234"
+          mailing_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          country_code: RU
+          name_eng: Ivanov Ivan
+          legal_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          phone: +79000000000
+          passport_number: "123456"
+          name: Иванов Иван Иванович
+          is_resident: true
+          id: 123
+          email: ivanov@example.com
+          is_closed: false
+        - contact_name: Иванов Иван Иванович
+          birthdate: 1990-01-01
+          is_blank: false
+          postcode: "190000"
+          inn: "7700000000"
+          passport_date: 2010-01-01
+          kpp: "770000000"
+          type: person
+          passport_place: ОУФМС России
+          passport_series: "1234"
+          mailing_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          country_code: RU
+          name_eng: Ivanov Ivan
+          legal_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          phone: +79000000000
+          passport_number: "123456"
+          name: Иванов Иван Иванович
+          is_resident: true
+          id: 123
+          email: ivanov@example.com
+          is_closed: false
+        meta:
+          total: 10
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        persons:
+          items:
+            $ref: '#/components/schemas/person'
+          type: array
+      required:
+      - meta
+      - persons
+      type: object
+    createPerson_201_response:
+      example:
+        person:
+          contact_name: Иванов Иван Иванович
+          birthdate: 1990-01-01
+          is_blank: false
+          postcode: "190000"
+          inn: "7700000000"
+          passport_date: 2010-01-01
+          kpp: "770000000"
+          type: person
+          passport_place: ОУФМС России
+          passport_series: "1234"
+          mailing_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          country_code: RU
+          name_eng: Ivanov Ivan
+          legal_address: "г. Санкт-Петербург, ул. Примерная, д. 1"
+          phone: +79000000000
+          passport_number: "123456"
+          name: Иванов Иван Иванович
+          is_resident: true
+          id: 123
+          email: ivanov@example.com
+          is_closed: false
+      properties:
+        person:
+          $ref: '#/components/schemas/person'
+      required:
+      - person
       type: object
     getVPCs_200_response:
       example:

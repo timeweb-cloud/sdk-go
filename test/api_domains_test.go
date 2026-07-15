@@ -104,6 +104,18 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DomainsAPIService CreatePerson", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DomainsAPI.CreatePerson(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DomainsAPIService DeleteDomain", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -139,6 +151,19 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 		var recordId int32
 
 		httpRes, err := apiClient.DomainsAPI.DeleteDomainDNSRecordV2(context.Background(), fqdn, recordId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService DeletePerson", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var personId int32
+
+		httpRes, err := apiClient.DomainsAPI.DeletePerson(context.Background(), personId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -253,6 +278,32 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DomainsAPIService GetPerson", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var personId int32
+
+		resp, httpRes, err := apiClient.DomainsAPI.GetPerson(context.Background(), personId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService GetPersons", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DomainsAPI.GetPersons(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DomainsAPIService GetTLD", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -344,6 +395,20 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 		var requestId int32
 
 		resp, httpRes, err := apiClient.DomainsAPI.UpdateDomainRequest(context.Background(), requestId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService UpdatePerson", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var personId int32
+
+		resp, httpRes, err := apiClient.DomainsAPI.UpdatePerson(context.Background(), personId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
