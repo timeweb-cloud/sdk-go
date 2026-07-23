@@ -48835,6 +48835,7 @@ paths:
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
     post:
+      deprecated: true
       description: |-
         Чтобы создать AI агента, отправьте POST-запрос на `/api/v1/cloud-ai/agents`, задав необходимые атрибуты.
 
@@ -49002,6 +49003,196 @@ paths:
           \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v2/cloud-ai/agents:
+    post:
+      description: |-
+        Чтобы создать AI агента, отправьте POST-запрос на `/api/v2/cloud-ai/agents`, задав необходимые атрибуты.
+
+        Агент будет создан с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о созданном агенте.
+      operationId: createAgentV2
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-agent-v2'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createAgent_201_response'
+          description: Объект JSON c ключом `agent`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание AI агента
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{"name":"Мой агент","access_type":"private","model_id":1,"token_limit":0,"settings":{"model":{"temperature":0.7},"system_prompt":"Ты — полезный ассистент","refine_query":false}}' \
+            "https://api.timeweb.cloud/api/v2/cloud-ai/agents"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/cloud-ai/agents', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              body: JSON.stringify({
+                  'name': '\u041C\u043E\u0439 \u0430\u0433\u0435\u043D\u0442',
+                  'access_type': 'private',
+                  'model_id': 1,
+                  'token_limit': 0,
+                  'settings': {
+                      'model': {
+                          'temperature': 0.7
+                      },
+                      'system_prompt': '\u0422\u044B \u2014 \u043F\u043E\u043B\u0435\u0437\u043D\u044B\u0439 \u0430\u0441\u0441\u0438\u0441\u0442\u0435\u043D\u0442',
+                      'refine_query': false
+                  }
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v2/cloud-ai/agents',
+              {
+                  'name': '\u041C\u043E\u0439 \u0430\u0433\u0435\u043D\u0442',
+                  'access_type': 'private',
+                  'model_id': 1,
+                  'token_limit': 0,
+                  'settings': {
+                      'model': {
+                          'temperature': 0.7
+                      },
+                      'system_prompt': '\u0422\u044B \u2014 \u043F\u043E\u043B\u0435\u0437\u043D\u044B\u0439 \u0430\u0441\u0441\u0438\u0441\u0442\u0435\u043D\u0442',
+                      'refine_query': false
+                  }
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'Мой агент',
+              'access_type': 'private',
+              'model_id': 1,
+              'token_limit': 0,
+              'settings': {
+                  'model': {
+                      'temperature': 0.7,
+                  },
+                  'system_prompt': 'Ты — полезный ассистент',
+                  'refine_query': False,
+              },
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v2/cloud-ai/agents', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{"name":"Мой агент","access_type":"private","model_id":1,"token_limit":0,"settings":{"model":{"temperature":0.7},"system_prompt":"Ты — полезный ассистент","refine_query":false}}'.encode()
+          #response = requests.post('https://api.timeweb.cloud/api/v2/cloud-ai/agents', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/cloud-ai/agents');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"name\":\"Мой агент\",\"access_type\":\"private\",\"model_id\":1,\"token_limit\":0,\"settings\":{\"model\":{\"temperature\":0.7},\"system_prompt\":\"Ты — полезный ассистент\",\"refine_query\":false}}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\"name\":\"Мой агент\",\"access_type\"\
+          :\"private\",\"model_id\":1,\"token_limit\":0,\"settings\":{\"model\":{\"\
+          temperature\":0.7},\"system_prompt\":\"Ты — полезный ассистент\",\"refine_query\"\
+          :false}}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v2/cloud-ai/agents\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v2/cloud-ai/agents\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\\"name\\\":\\\"Мой агент\\\",\\\"access_type\\\":\\\"private\\\",\\\"\
+          model_id\\\":1,\\\"token_limit\\\":0,\\\"settings\\\":{\\\"model\\\":{\\\
+          \"temperature\\\":0.7},\\\"system_prompt\\\":\\\"Ты — полезный ассистент\
+          \\\",\\\"refine_query\\\":false}}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
   /api/v1/cloud-ai/agents/{id}:
     delete:
@@ -64972,6 +65163,57 @@ components:
       - settings
       - token_package_id
       type: object
+    create-agent-v2:
+      description: Данные для создания AI агента через API v2
+      properties:
+        name:
+          description: Название агента
+          example: Мой AI помощник
+          type: string
+        description:
+          description: Описание агента
+          example: Помощник для ответов на вопросы
+          type: string
+        access_type:
+          description: Тип доступа к агенту
+          enum:
+          - public
+          - private
+          example: private
+          type: string
+        model_id:
+          description: ID основной модели
+          example: 1
+          type: number
+        token_limit:
+          description: Дневной лимит токенов для агента (0 — без лимита)
+          example: 100000
+          minimum: 0
+          type: number
+        settings:
+          $ref: '#/components/schemas/agent_settings'
+        project_id:
+          description: ID проекта
+          example: 1
+          type: number
+        additional_model_ids:
+          description: Список ID дополнительных моделей агента
+          example:
+          - 2
+          - 3
+          items:
+            type: number
+          type: array
+        is_web_search_enabled:
+          description: Признак использования веб-поиска агентом
+          example: false
+          type: boolean
+      required:
+      - access_type
+      - model_id
+      - name
+      - settings
+      type: object
     update-agent:
       description: Данные для обновления AI агента
       properties:
@@ -65440,6 +65682,8 @@ components:
     model:
       description: Модель AI
       example:
+        deprecation_date: 2026-12-31T00:00:00Z
+        is_stopped: false
         is_deprecated: false
         name: gpt-4o
         provider_id: 1
@@ -65490,6 +65734,16 @@ components:
           description: "Признак, что модель устарела"
           example: false
           type: boolean
+        is_stopped:
+          description: "Признак, что поддержка модели остановлена в системе"
+          example: false
+          type: boolean
+        deprecation_date:
+          description: Дата депрекейта модели у провайдера
+          example: 2026-12-31T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
         is_reasoning:
           description: Признак поддержки режима рассуждения
           example: false
@@ -65504,6 +65758,7 @@ components:
       - id
       - is_deprecated
       - is_reasoning
+      - is_stopped
       - name
       - provider_id
       - public_name
@@ -72542,7 +72797,9 @@ components:
     getModels_200_response:
       example:
         models:
-        - is_deprecated: false
+        - deprecation_date: 2026-12-31T00:00:00Z
+          is_stopped: false
+          is_deprecated: false
           name: gpt-4o
           provider_id: 1
           params_info:
@@ -72563,7 +72820,9 @@ components:
           type: llm
           public_name: GPT 4o
           version: 2024-08-06
-        - is_deprecated: false
+        - deprecation_date: 2026-12-31T00:00:00Z
+          is_stopped: false
+          is_deprecated: false
           name: gpt-4o
           provider_id: 1
           params_info:

@@ -225,6 +225,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AIAgentsAPI* | [**AddAdditionalTokenPackage**](docs/AIAgentsAPI.md#addadditionaltokenpackage) | **Post** /api/v1/cloud-ai/agents/{id}/add-additional-token-package | Добавление дополнительного пакета токенов
 *AIAgentsAPI* | [**CreateAgent**](docs/AIAgentsAPI.md#createagent) | **Post** /api/v1/cloud-ai/agents | Создание AI агента
+*AIAgentsAPI* | [**CreateAgentV2**](docs/AIAgentsAPI.md#createagentv2) | **Post** /api/v2/cloud-ai/agents | Создание AI агента
 *AIAgentsAPI* | [**DeleteAgent**](docs/AIAgentsAPI.md#deleteagent) | **Delete** /api/v1/cloud-ai/agents/{id} | Удаление AI агента
 *AIAgentsAPI* | [**GetAgent**](docs/AIAgentsAPI.md#getagent) | **Get** /api/v1/cloud-ai/agents/{id} | Получение AI агента
 *AIAgentsAPI* | [**GetAgentStatistics**](docs/AIAgentsAPI.md#getagentstatistics) | **Get** /api/v1/cloud-ai/agents/{id}/statistic | Получение статистики использования токенов агента
@@ -666,6 +667,7 @@ Class | Method | HTTP request | Description
  - [CreateAdmin](docs/CreateAdmin.md)
  - [CreateAgent](docs/CreateAgent.md)
  - [CreateAgent201Response](docs/CreateAgent201Response.md)
+ - [CreateAgentV2](docs/CreateAgentV2.md)
  - [CreateApp](docs/CreateApp.md)
  - [CreateApp201Response](docs/CreateApp201Response.md)
  - [CreateBalancer](docs/CreateBalancer.md)

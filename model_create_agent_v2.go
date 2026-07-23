@@ -13,113 +13,55 @@ package openapi
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the Model type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Model{}
+// checks if the CreateAgentV2 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAgentV2{}
 
-// Model Модель AI
-type Model struct {
-	// Уникальный идентификатор модели
-	Id float32 `json:"id"`
-	// ID провайдера, который предоставляет модель
-	ProviderId float32 `json:"provider_id"`
-	// Название модели
+// CreateAgentV2 Данные для создания AI агента через API v2
+type CreateAgentV2 struct {
+	// Название агента
 	Name string `json:"name"`
-	// Публичное имя модели
-	PublicName string `json:"public_name"`
-	// Тип модели (llm - языковая модель, embedding - модель для эмбеддингов)
-	Type string `json:"type"`
-	// Признак, что модель устарела
-	IsDeprecated bool `json:"is_deprecated"`
-	// Признак, что поддержка модели остановлена в системе
-	IsStopped bool `json:"is_stopped"`
-	// Дата депрекейта модели у провайдера
-	DeprecationDate NullableTime `json:"deprecation_date,omitempty"`
-	// Признак поддержки режима рассуждения
-	IsReasoning bool `json:"is_reasoning"`
-	// Версия модели
-	Version string `json:"version"`
-	ParamsInfo NullableModelParamsInfo `json:"params_info,omitempty"`
+	// Описание агента
+	Description *string `json:"description,omitempty"`
+	// Тип доступа к агенту
+	AccessType string `json:"access_type"`
+	// ID основной модели
+	ModelId float32 `json:"model_id"`
+	// Дневной лимит токенов для агента (0 — без лимита)
+	TokenLimit *float32 `json:"token_limit,omitempty"`
+	Settings AgentSettings `json:"settings"`
+	// ID проекта
+	ProjectId *float32 `json:"project_id,omitempty"`
+	// Список ID дополнительных моделей агента
+	AdditionalModelIds []float32 `json:"additional_model_ids,omitempty"`
+	// Признак использования веб-поиска агентом
+	IsWebSearchEnabled *bool `json:"is_web_search_enabled,omitempty"`
 }
 
-// NewModel instantiates a new Model object
+// NewCreateAgentV2 instantiates a new CreateAgentV2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModel(id float32, providerId float32, name string, publicName string, type_ string, isDeprecated bool, isStopped bool, isReasoning bool, version string) *Model {
-	this := Model{}
-	this.Id = id
-	this.ProviderId = providerId
+func NewCreateAgentV2(name string, accessType string, modelId float32, settings AgentSettings) *CreateAgentV2 {
+	this := CreateAgentV2{}
 	this.Name = name
-	this.PublicName = publicName
-	this.Type = type_
-	this.IsDeprecated = isDeprecated
-	this.IsStopped = isStopped
-	this.IsReasoning = isReasoning
-	this.Version = version
+	this.AccessType = accessType
+	this.ModelId = modelId
+	this.Settings = settings
 	return &this
 }
 
-// NewModelWithDefaults instantiates a new Model object
+// NewCreateAgentV2WithDefaults instantiates a new CreateAgentV2 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewModelWithDefaults() *Model {
-	this := Model{}
+func NewCreateAgentV2WithDefaults() *CreateAgentV2 {
+	this := CreateAgentV2{}
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *Model) GetId() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *Model) GetIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *Model) SetId(v float32) {
-	o.Id = v
-}
-
-// GetProviderId returns the ProviderId field value
-func (o *Model) GetProviderId() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.ProviderId
-}
-
-// GetProviderIdOk returns a tuple with the ProviderId field value
-// and a boolean to check if the value has been set.
-func (o *Model) GetProviderIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ProviderId, true
-}
-
-// SetProviderId sets field value
-func (o *Model) SetProviderId(v float32) {
-	o.ProviderId = v
 }
 
 // GetName returns the Name field value
-func (o *Model) GetName() string {
+func (o *CreateAgentV2) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -130,7 +72,7 @@ func (o *Model) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *Model) GetNameOk() (*string, bool) {
+func (o *CreateAgentV2) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -138,239 +80,243 @@ func (o *Model) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *Model) SetName(v string) {
+func (o *CreateAgentV2) SetName(v string) {
 	o.Name = v
 }
 
-// GetPublicName returns the PublicName field value
-func (o *Model) GetPublicName() string {
-	if o == nil {
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
-
-	return o.PublicName
+	return *o.Description
 }
 
-// GetPublicNameOk returns a tuple with the PublicName field value
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model) GetPublicNameOk() (*string, bool) {
-	if o == nil {
+func (o *CreateAgentV2) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return &o.PublicName, true
+	return o.Description, true
 }
 
-// SetPublicName sets field value
-func (o *Model) SetPublicName(v string) {
-	o.PublicName = v
-}
-
-// GetType returns the Type field value
-func (o *Model) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *Model) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *Model) SetType(v string) {
-	o.Type = v
-}
-
-// GetIsDeprecated returns the IsDeprecated field value
-func (o *Model) GetIsDeprecated() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsDeprecated
-}
-
-// GetIsDeprecatedOk returns a tuple with the IsDeprecated field value
-// and a boolean to check if the value has been set.
-func (o *Model) GetIsDeprecatedOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsDeprecated, true
-}
-
-// SetIsDeprecated sets field value
-func (o *Model) SetIsDeprecated(v bool) {
-	o.IsDeprecated = v
-}
-
-// GetIsStopped returns the IsStopped field value
-func (o *Model) GetIsStopped() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsStopped
-}
-
-// GetIsStoppedOk returns a tuple with the IsStopped field value
-// and a boolean to check if the value has been set.
-func (o *Model) GetIsStoppedOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsStopped, true
-}
-
-// SetIsStopped sets field value
-func (o *Model) SetIsStopped(v bool) {
-	o.IsStopped = v
-}
-
-// GetDeprecationDate returns the DeprecationDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Model) GetDeprecationDate() time.Time {
-	if o == nil || IsNil(o.DeprecationDate.Get()) {
-		var ret time.Time
-		return ret
-	}
-	return *o.DeprecationDate.Get()
-}
-
-// GetDeprecationDateOk returns a tuple with the DeprecationDate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Model) GetDeprecationDateOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.DeprecationDate.Get(), o.DeprecationDate.IsSet()
-}
-
-// HasDeprecationDate returns a boolean if a field has been set.
-func (o *Model) HasDeprecationDate() bool {
-	if o != nil && o.DeprecationDate.IsSet() {
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
 	return false
 }
 
-// SetDeprecationDate gets a reference to the given NullableTime and assigns it to the DeprecationDate field.
-func (o *Model) SetDeprecationDate(v time.Time) {
-	o.DeprecationDate.Set(&v)
-}
-// SetDeprecationDateNil sets the value for DeprecationDate to be an explicit nil
-func (o *Model) SetDeprecationDateNil() {
-	o.DeprecationDate.Set(nil)
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateAgentV2) SetDescription(v string) {
+	o.Description = &v
 }
 
-// UnsetDeprecationDate ensures that no value is present for DeprecationDate, not even an explicit nil
-func (o *Model) UnsetDeprecationDate() {
-	o.DeprecationDate.Unset()
-}
-
-// GetIsReasoning returns the IsReasoning field value
-func (o *Model) GetIsReasoning() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsReasoning
-}
-
-// GetIsReasoningOk returns a tuple with the IsReasoning field value
-// and a boolean to check if the value has been set.
-func (o *Model) GetIsReasoningOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsReasoning, true
-}
-
-// SetIsReasoning sets field value
-func (o *Model) SetIsReasoning(v bool) {
-	o.IsReasoning = v
-}
-
-// GetVersion returns the Version field value
-func (o *Model) GetVersion() string {
+// GetAccessType returns the AccessType field value
+func (o *CreateAgentV2) GetAccessType() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Version
+	return o.AccessType
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetAccessTypeOk returns a tuple with the AccessType field value
 // and a boolean to check if the value has been set.
-func (o *Model) GetVersionOk() (*string, bool) {
+func (o *CreateAgentV2) GetAccessTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Version, true
+	return &o.AccessType, true
 }
 
-// SetVersion sets field value
-func (o *Model) SetVersion(v string) {
-	o.Version = v
+// SetAccessType sets field value
+func (o *CreateAgentV2) SetAccessType(v string) {
+	o.AccessType = v
 }
 
-// GetParamsInfo returns the ParamsInfo field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Model) GetParamsInfo() ModelParamsInfo {
-	if o == nil || IsNil(o.ParamsInfo.Get()) {
-		var ret ModelParamsInfo
+// GetModelId returns the ModelId field value
+func (o *CreateAgentV2) GetModelId() float32 {
+	if o == nil {
+		var ret float32
 		return ret
 	}
-	return *o.ParamsInfo.Get()
+
+	return o.ModelId
 }
 
-// GetParamsInfoOk returns a tuple with the ParamsInfo field value if set, nil otherwise
+// GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Model) GetParamsInfoOk() (*ModelParamsInfo, bool) {
+func (o *CreateAgentV2) GetModelIdOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ParamsInfo.Get(), o.ParamsInfo.IsSet()
+	return &o.ModelId, true
 }
 
-// HasParamsInfo returns a boolean if a field has been set.
-func (o *Model) HasParamsInfo() bool {
-	if o != nil && o.ParamsInfo.IsSet() {
+// SetModelId sets field value
+func (o *CreateAgentV2) SetModelId(v float32) {
+	o.ModelId = v
+}
+
+// GetTokenLimit returns the TokenLimit field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetTokenLimit() float32 {
+	if o == nil || IsNil(o.TokenLimit) {
+		var ret float32
+		return ret
+	}
+	return *o.TokenLimit
+}
+
+// GetTokenLimitOk returns a tuple with the TokenLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetTokenLimitOk() (*float32, bool) {
+	if o == nil || IsNil(o.TokenLimit) {
+		return nil, false
+	}
+	return o.TokenLimit, true
+}
+
+// HasTokenLimit returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasTokenLimit() bool {
+	if o != nil && !IsNil(o.TokenLimit) {
 		return true
 	}
 
 	return false
 }
 
-// SetParamsInfo gets a reference to the given NullableModelParamsInfo and assigns it to the ParamsInfo field.
-func (o *Model) SetParamsInfo(v ModelParamsInfo) {
-	o.ParamsInfo.Set(&v)
-}
-// SetParamsInfoNil sets the value for ParamsInfo to be an explicit nil
-func (o *Model) SetParamsInfoNil() {
-	o.ParamsInfo.Set(nil)
+// SetTokenLimit gets a reference to the given float32 and assigns it to the TokenLimit field.
+func (o *CreateAgentV2) SetTokenLimit(v float32) {
+	o.TokenLimit = &v
 }
 
-// UnsetParamsInfo ensures that no value is present for ParamsInfo, not even an explicit nil
-func (o *Model) UnsetParamsInfo() {
-	o.ParamsInfo.Unset()
+// GetSettings returns the Settings field value
+func (o *CreateAgentV2) GetSettings() AgentSettings {
+	if o == nil {
+		var ret AgentSettings
+		return ret
+	}
+
+	return o.Settings
 }
 
-func (o Model) MarshalJSON() ([]byte, error) {
+// GetSettingsOk returns a tuple with the Settings field value
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetSettingsOk() (*AgentSettings, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Settings, true
+}
+
+// SetSettings sets field value
+func (o *CreateAgentV2) SetSettings(v AgentSettings) {
+	o.Settings = v
+}
+
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetProjectId() float32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret float32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetProjectIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
+func (o *CreateAgentV2) SetProjectId(v float32) {
+	o.ProjectId = &v
+}
+
+// GetAdditionalModelIds returns the AdditionalModelIds field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetAdditionalModelIds() []float32 {
+	if o == nil || IsNil(o.AdditionalModelIds) {
+		var ret []float32
+		return ret
+	}
+	return o.AdditionalModelIds
+}
+
+// GetAdditionalModelIdsOk returns a tuple with the AdditionalModelIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetAdditionalModelIdsOk() ([]float32, bool) {
+	if o == nil || IsNil(o.AdditionalModelIds) {
+		return nil, false
+	}
+	return o.AdditionalModelIds, true
+}
+
+// HasAdditionalModelIds returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasAdditionalModelIds() bool {
+	if o != nil && !IsNil(o.AdditionalModelIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalModelIds gets a reference to the given []float32 and assigns it to the AdditionalModelIds field.
+func (o *CreateAgentV2) SetAdditionalModelIds(v []float32) {
+	o.AdditionalModelIds = v
+}
+
+// GetIsWebSearchEnabled returns the IsWebSearchEnabled field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetIsWebSearchEnabled() bool {
+	if o == nil || IsNil(o.IsWebSearchEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsWebSearchEnabled
+}
+
+// GetIsWebSearchEnabledOk returns a tuple with the IsWebSearchEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetIsWebSearchEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsWebSearchEnabled) {
+		return nil, false
+	}
+	return o.IsWebSearchEnabled, true
+}
+
+// HasIsWebSearchEnabled returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasIsWebSearchEnabled() bool {
+	if o != nil && !IsNil(o.IsWebSearchEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsWebSearchEnabled gets a reference to the given bool and assigns it to the IsWebSearchEnabled field.
+func (o *CreateAgentV2) SetIsWebSearchEnabled(v bool) {
+	o.IsWebSearchEnabled = &v
+}
+
+func (o CreateAgentV2) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -378,58 +324,62 @@ func (o Model) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Model) ToMap() (map[string]interface{}, error) {
+func (o CreateAgentV2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["provider_id"] = o.ProviderId
 	toSerialize["name"] = o.Name
-	toSerialize["public_name"] = o.PublicName
-	toSerialize["type"] = o.Type
-	toSerialize["is_deprecated"] = o.IsDeprecated
-	toSerialize["is_stopped"] = o.IsStopped
-	if o.DeprecationDate.IsSet() {
-		toSerialize["deprecation_date"] = o.DeprecationDate.Get()
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
-	toSerialize["is_reasoning"] = o.IsReasoning
-	toSerialize["version"] = o.Version
-	if o.ParamsInfo.IsSet() {
-		toSerialize["params_info"] = o.ParamsInfo.Get()
+	toSerialize["access_type"] = o.AccessType
+	toSerialize["model_id"] = o.ModelId
+	if !IsNil(o.TokenLimit) {
+		toSerialize["token_limit"] = o.TokenLimit
+	}
+	toSerialize["settings"] = o.Settings
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
+	}
+	if !IsNil(o.AdditionalModelIds) {
+		toSerialize["additional_model_ids"] = o.AdditionalModelIds
+	}
+	if !IsNil(o.IsWebSearchEnabled) {
+		toSerialize["is_web_search_enabled"] = o.IsWebSearchEnabled
 	}
 	return toSerialize, nil
 }
 
-type NullableModel struct {
-	value *Model
+type NullableCreateAgentV2 struct {
+	value *CreateAgentV2
 	isSet bool
 }
 
-func (v NullableModel) Get() *Model {
+func (v NullableCreateAgentV2) Get() *CreateAgentV2 {
 	return v.value
 }
 
-func (v *NullableModel) Set(val *Model) {
+func (v *NullableCreateAgentV2) Set(val *CreateAgentV2) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableModel) IsSet() bool {
+func (v NullableCreateAgentV2) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableModel) Unset() {
+func (v *NullableCreateAgentV2) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableModel(val *Model) *NullableModel {
-	return &NullableModel{value: val, isSet: true}
+func NewNullableCreateAgentV2(val *CreateAgentV2) *NullableCreateAgentV2 {
+	return &NullableCreateAgentV2{value: val, isSet: true}
 }
 
-func (v NullableModel) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAgentV2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableModel) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAgentV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

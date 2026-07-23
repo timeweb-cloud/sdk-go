@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **PublicName** | **string** | Публичное имя модели | 
 **Type** | **string** | Тип модели (llm - языковая модель, embedding - модель для эмбеддингов) | 
 **IsDeprecated** | **bool** | Признак, что модель устарела | 
+**IsStopped** | **bool** | Признак, что поддержка модели остановлена в системе | 
+**DeprecationDate** | Pointer to **NullableTime** | Дата депрекейта модели у провайдера | [optional] 
 **IsReasoning** | **bool** | Признак поддержки режима рассуждения | 
 **Version** | **string** | Версия модели | 
 **ParamsInfo** | Pointer to [**NullableModelParamsInfo**](ModelParamsInfo.md) |  | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewModel
 
-`func NewModel(id float32, providerId float32, name string, publicName string, type_ string, isDeprecated bool, isReasoning bool, version string, ) *Model`
+`func NewModel(id float32, providerId float32, name string, publicName string, type_ string, isDeprecated bool, isStopped bool, isReasoning bool, version string, ) *Model`
 
 NewModel instantiates a new Model object
 This constructor will assign default values to properties that have it defined,
@@ -153,6 +155,61 @@ and a boolean to check if the value has been set.
 SetIsDeprecated sets IsDeprecated field to given value.
 
 
+### GetIsStopped
+
+`func (o *Model) GetIsStopped() bool`
+
+GetIsStopped returns the IsStopped field if non-nil, zero value otherwise.
+
+### GetIsStoppedOk
+
+`func (o *Model) GetIsStoppedOk() (*bool, bool)`
+
+GetIsStoppedOk returns a tuple with the IsStopped field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsStopped
+
+`func (o *Model) SetIsStopped(v bool)`
+
+SetIsStopped sets IsStopped field to given value.
+
+
+### GetDeprecationDate
+
+`func (o *Model) GetDeprecationDate() time.Time`
+
+GetDeprecationDate returns the DeprecationDate field if non-nil, zero value otherwise.
+
+### GetDeprecationDateOk
+
+`func (o *Model) GetDeprecationDateOk() (*time.Time, bool)`
+
+GetDeprecationDateOk returns a tuple with the DeprecationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeprecationDate
+
+`func (o *Model) SetDeprecationDate(v time.Time)`
+
+SetDeprecationDate sets DeprecationDate field to given value.
+
+### HasDeprecationDate
+
+`func (o *Model) HasDeprecationDate() bool`
+
+HasDeprecationDate returns a boolean if a field has been set.
+
+### SetDeprecationDateNil
+
+`func (o *Model) SetDeprecationDateNil(b bool)`
+
+ SetDeprecationDateNil sets the value for DeprecationDate to be an explicit nil
+
+### UnsetDeprecationDate
+`func (o *Model) UnsetDeprecationDate()`
+
+UnsetDeprecationDate ensures that no value is present for DeprecationDate, not even an explicit nil
 ### GetIsReasoning
 
 `func (o *Model) GetIsReasoning() bool`

@@ -131,6 +131,7 @@ docs/ContainerRegistryRepositoriesInner.md
 docs/CreateAdmin.md
 docs/CreateAgent.md
 docs/CreateAgent201Response.md
+docs/CreateAgentV2.md
 docs/CreateApp.md
 docs/CreateApp201Response.md
 docs/CreateBalancer.md
@@ -726,6 +727,7 @@ model_container_registry_repositories_inner.go
 model_create_admin.go
 model_create_agent.go
 model_create_agent_201_response.go
+model_create_agent_v2.go
 model_create_app.go
 model_create_app_201_response.go
 model_create_balancer.go

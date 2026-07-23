@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddAdditionalTokenPackage**](AIAgentsAPI.md#AddAdditionalTokenPackage) | **Post** /api/v1/cloud-ai/agents/{id}/add-additional-token-package | Добавление дополнительного пакета токенов
 [**CreateAgent**](AIAgentsAPI.md#CreateAgent) | **Post** /api/v1/cloud-ai/agents | Создание AI агента
+[**CreateAgentV2**](AIAgentsAPI.md#CreateAgentV2) | **Post** /api/v2/cloud-ai/agents | Создание AI агента
 [**DeleteAgent**](AIAgentsAPI.md#DeleteAgent) | **Delete** /api/v1/cloud-ai/agents/{id} | Удаление AI агента
 [**GetAgent**](AIAgentsAPI.md#GetAgent) | **Get** /api/v1/cloud-ai/agents/{id} | Получение AI агента
 [**GetAgentStatistics**](AIAgentsAPI.md#GetAgentStatistics) | **Get** /api/v1/cloud-ai/agents/{id}/statistic | Получение статистики использования токенов агента
@@ -134,6 +135,72 @@ Other parameters are passed through a pointer to a apiCreateAgentRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createAgent** | [**CreateAgent**](CreateAgent.md) |  | 
+
+### Return type
+
+[**CreateAgent201Response**](CreateAgent201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateAgentV2
+
+> CreateAgent201Response CreateAgentV2(ctx).CreateAgentV2(createAgentV2).Execute()
+
+Создание AI агента
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    createAgentV2 := *openapiclient.NewCreateAgentV2("Мой AI помощник", "private", float32(1), *openapiclient.NewAgentSettings(*openapiclient.NewAgentModelSettings(), "SystemPrompt_example", false)) // CreateAgentV2 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AIAgentsAPI.CreateAgentV2(context.Background()).CreateAgentV2(createAgentV2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.CreateAgentV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateAgentV2`: CreateAgent201Response
+    fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.CreateAgentV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateAgentV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createAgentV2** | [**CreateAgentV2**](CreateAgentV2.md) |  | 
 
 ### Return type
 
