@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**GetAgentsTokenPackages**](AIAgentsAPI.md#GetAgentsTokenPackages) | **Get** /api/v1/cloud-ai/token-packages/agents | Получение списка пакетов токенов для агентов
 [**GetKnowledgebasesTokenPackages**](AIAgentsAPI.md#GetKnowledgebasesTokenPackages) | **Get** /api/v1/cloud-ai/token-packages/knowledge-bases | Получение списка пакетов токенов для баз знаний
 [**GetModels**](AIAgentsAPI.md#GetModels) | **Get** /api/v1/cloud-ai/models | Получение списка моделей
+[**GetModelsV3**](AIAgentsAPI.md#GetModelsV3) | **Get** /api/v3/cloud-ai/models | Получение списка моделей
 [**UpdateAgent**](AIAgentsAPI.md#UpdateAgent) | **Patch** /api/v1/cloud-ai/agents/{id} | Обновление AI агента
 
 
@@ -664,6 +665,67 @@ Other parameters are passed through a pointer to a apiGetModelsRequest struct vi
 ### Return type
 
 [**GetModels200Response**](GetModels200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetModelsV3
+
+> GetModelsV3200Response GetModelsV3(ctx).Execute()
+
+Получение списка моделей
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AIAgentsAPI.GetModelsV3(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.GetModelsV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetModelsV3`: GetModelsV3200Response
+    fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.GetModelsV3`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetModelsV3Request struct via the builder pattern
+
+
+### Return type
+
+[**GetModelsV3200Response**](GetModelsV3200Response.md)
 
 ### Authorization
 

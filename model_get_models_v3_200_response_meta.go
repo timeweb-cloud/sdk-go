@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetModels200ResponseMeta type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetModels200ResponseMeta{}
+// checks if the GetModelsV3200ResponseMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetModelsV3200ResponseMeta{}
 
-// GetModels200ResponseMeta struct for GetModels200ResponseMeta
-type GetModels200ResponseMeta struct {
+// GetModelsV3200ResponseMeta struct for GetModelsV3200ResponseMeta
+type GetModelsV3200ResponseMeta struct {
 	// Общее количество моделей
 	Total float32 `json:"total"`
 }
 
-// NewGetModels200ResponseMeta instantiates a new GetModels200ResponseMeta object
+// NewGetModelsV3200ResponseMeta instantiates a new GetModelsV3200ResponseMeta object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetModels200ResponseMeta(total float32) *GetModels200ResponseMeta {
-	this := GetModels200ResponseMeta{}
+func NewGetModelsV3200ResponseMeta(total float32) *GetModelsV3200ResponseMeta {
+	this := GetModelsV3200ResponseMeta{}
 	this.Total = total
 	return &this
 }
 
-// NewGetModels200ResponseMetaWithDefaults instantiates a new GetModels200ResponseMeta object
+// NewGetModelsV3200ResponseMetaWithDefaults instantiates a new GetModelsV3200ResponseMeta object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetModels200ResponseMetaWithDefaults() *GetModels200ResponseMeta {
-	this := GetModels200ResponseMeta{}
+func NewGetModelsV3200ResponseMetaWithDefaults() *GetModelsV3200ResponseMeta {
+	this := GetModelsV3200ResponseMeta{}
 	return &this
 }
 
 // GetTotal returns the Total field value
-func (o *GetModels200ResponseMeta) GetTotal() float32 {
+func (o *GetModelsV3200ResponseMeta) GetTotal() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -54,7 +54,7 @@ func (o *GetModels200ResponseMeta) GetTotal() float32 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *GetModels200ResponseMeta) GetTotalOk() (*float32, bool) {
+func (o *GetModelsV3200ResponseMeta) GetTotalOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,11 +62,11 @@ func (o *GetModels200ResponseMeta) GetTotalOk() (*float32, bool) {
 }
 
 // SetTotal sets field value
-func (o *GetModels200ResponseMeta) SetTotal(v float32) {
+func (o *GetModelsV3200ResponseMeta) SetTotal(v float32) {
 	o.Total = v
 }
 
-func (o GetModels200ResponseMeta) MarshalJSON() ([]byte, error) {
+func (o GetModelsV3200ResponseMeta) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -74,44 +74,44 @@ func (o GetModels200ResponseMeta) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetModels200ResponseMeta) ToMap() (map[string]interface{}, error) {
+func (o GetModelsV3200ResponseMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["total"] = o.Total
 	return toSerialize, nil
 }
 
-type NullableGetModels200ResponseMeta struct {
-	value *GetModels200ResponseMeta
+type NullableGetModelsV3200ResponseMeta struct {
+	value *GetModelsV3200ResponseMeta
 	isSet bool
 }
 
-func (v NullableGetModels200ResponseMeta) Get() *GetModels200ResponseMeta {
+func (v NullableGetModelsV3200ResponseMeta) Get() *GetModelsV3200ResponseMeta {
 	return v.value
 }
 
-func (v *NullableGetModels200ResponseMeta) Set(val *GetModels200ResponseMeta) {
+func (v *NullableGetModelsV3200ResponseMeta) Set(val *GetModelsV3200ResponseMeta) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetModels200ResponseMeta) IsSet() bool {
+func (v NullableGetModelsV3200ResponseMeta) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetModels200ResponseMeta) Unset() {
+func (v *NullableGetModelsV3200ResponseMeta) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetModels200ResponseMeta(val *GetModels200ResponseMeta) *NullableGetModels200ResponseMeta {
-	return &NullableGetModels200ResponseMeta{value: val, isSet: true}
+func NewNullableGetModelsV3200ResponseMeta(val *GetModelsV3200ResponseMeta) *NullableGetModelsV3200ResponseMeta {
+	return &NullableGetModelsV3200ResponseMeta{value: val, isSet: true}
 }
 
-func (v NullableGetModels200ResponseMeta) MarshalJSON() ([]byte, error) {
+func (v NullableGetModelsV3200ResponseMeta) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetModels200ResponseMeta) UnmarshalJSON(src []byte) error {
+func (v *NullableGetModelsV3200ResponseMeta) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -233,6 +233,7 @@ Class | Method | HTTP request | Description
 *AIAgentsAPI* | [**GetAgentsTokenPackages**](docs/AIAgentsAPI.md#getagentstokenpackages) | **Get** /api/v1/cloud-ai/token-packages/agents | Получение списка пакетов токенов для агентов
 *AIAgentsAPI* | [**GetKnowledgebasesTokenPackages**](docs/AIAgentsAPI.md#getknowledgebasestokenpackages) | **Get** /api/v1/cloud-ai/token-packages/knowledge-bases | Получение списка пакетов токенов для баз знаний
 *AIAgentsAPI* | [**GetModels**](docs/AIAgentsAPI.md#getmodels) | **Get** /api/v1/cloud-ai/models | Получение списка моделей
+*AIAgentsAPI* | [**GetModelsV3**](docs/AIAgentsAPI.md#getmodelsv3) | **Get** /api/v3/cloud-ai/models | Получение списка моделей
 *AIAgentsAPI* | [**UpdateAgent**](docs/AIAgentsAPI.md#updateagent) | **Patch** /api/v1/cloud-ai/agents/{id} | Обновление AI агента
 *AccountAPI* | [**AddCountriesToAllowedList**](docs/AccountAPI.md#addcountriestoallowedlist) | **Post** /api/v1/auth/access/countries | Добавление стран в список разрешенных
 *AccountAPI* | [**AddIPsToAllowedList**](docs/AccountAPI.md#addipstoallowedlist) | **Post** /api/v1/auth/access/ips | Добавление IP-адресов в список разрешенных
@@ -866,7 +867,8 @@ Class | Method | HTTP request | Description
  - [GetLocations200Response](docs/GetLocations200Response.md)
  - [GetMailboxes200Response](docs/GetMailboxes200Response.md)
  - [GetModels200Response](docs/GetModels200Response.md)
- - [GetModels200ResponseMeta](docs/GetModels200ResponseMeta.md)
+ - [GetModelsV3200Response](docs/GetModelsV3200Response.md)
+ - [GetModelsV3200ResponseMeta](docs/GetModelsV3200ResponseMeta.md)
  - [GetNetworkDrives200Response](docs/GetNetworkDrives200Response.md)
  - [GetNetworkDrivesAvailableResources200Response](docs/GetNetworkDrivesAvailableResources200Response.md)
  - [GetNetworkDrivesPresets200Response](docs/GetNetworkDrivesPresets200Response.md)
@@ -947,6 +949,7 @@ Class | Method | HTTP request | Description
  - [ModelParamsInfoMaxTokens](docs/ModelParamsInfoMaxTokens.md)
  - [ModelParamsInfoReasoningEffort](docs/ModelParamsInfoReasoningEffort.md)
  - [ModelParamsInfoTemperature](docs/ModelParamsInfoTemperature.md)
+ - [ModelV3](docs/ModelV3.md)
  - [Mongodb](docs/Mongodb.md)
  - [MountNetworkDrive](docs/MountNetworkDrive.md)
  - [Mysql](docs/Mysql.md)

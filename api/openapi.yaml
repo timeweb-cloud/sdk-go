@@ -52330,9 +52330,144 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
-  /api/v1/cloud-ai/models:
+  /api/v3/cloud-ai/models:
     get:
       description: |-
+        Чтобы получить список доступных AI моделей с их характеристиками, отправьте GET-запрос на `/api/v3/cloud-ai/models`.
+
+        Тело ответа будет представлять собой объект JSON с ключом `models`.
+
+        Характеристики модели (цены, лимиты, возможности) возвращаются в словаре `parameter_values`. Актуальные цены за токены — в ключах `parameter_values.cost_in` и `parameter_values.cost_out` (в рублях за 1 токен).
+      operationId: getModelsV3
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getModelsV3_200_response'
+          description: Объект JSON c ключами `models` и `meta`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка моделей
+      tags:
+      - AI Agents
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v3/cloud-ai/models"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v3/cloud-ai/models', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v3/cloud-ai/models', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v3/cloud-ai/models', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v3/cloud-ai/models');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v3/cloud-ai/models\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v3/cloud-ai/models\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cloud-ai/models:
+    get:
+      deprecated: true
+      description: |-
+        Метод устарел — используйте `GET /api/v3/cloud-ai/models`.
+
         Чтобы получить список доступных AI моделей, отправьте GET-запрос на `/api/v1/cloud-ai/models`.
 
         Тело ответа будет представлять собой объект JSON с ключом `models`.
@@ -52462,7 +52597,10 @@ paths:
           \t}\n}\n"
   /api/v1/cloud-ai/token-packages/agents:
     get:
+      deprecated: true
       description: |-
+        Метод устарел.
+
         Чтобы получить список доступных пакетов токенов для AI агентов, отправьте GET-запрос на `/api/v1/cloud-ai/token-packages/agents`.
 
         Тело ответа будет представлять собой объект JSON с ключом `token_packages`.
@@ -64992,7 +65130,7 @@ components:
       example:
         settings:
           widget:
-            icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+            icon_url: https://s3.twcstorage.ru/tw-cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
             signature: AI Ассистент
             name: Помощник поддержки
             whitelist_domains:
@@ -65678,6 +65816,204 @@ components:
           description: Описание базы знаний
           example: База знаний с документацией
           type: string
+      type: object
+    model-v3:
+      description: "Модель AI (v3). Идентификация и управляющие поля находятся на\
+        \ верхнем уровне, все сравнимые характеристики (цены, лимиты, возможности\
+        ) — в словаре `parameter_values`"
+      example:
+        deprecation_date: 2000-01-23T04:56:07.000+00:00
+        is_stopped: false
+        parameter_values:
+          cost_in: 1.62E-4
+          cost_out: 0.00135
+          context_window: 272000
+          max_output_tokens: 128000
+          is_reasoning: true
+          supports_function_calling: true
+          supported_input_modalities:
+          - text
+          - image
+          supported_output_modalities:
+          - text
+          avg_speed: 124.8
+          aa_intelligence_index: 48
+          aa_coding_index: 45
+          aa_agentic_index: 51
+          release_date: 2025-11-13
+        created_at: 2025-11-17T10:35:46Z
+        type: llm
+        version: "5.1"
+        model_name: openai/gpt-5.1
+        updated_at: 2026-07-17T09:37:23Z
+        is_deprecated: false
+        name: gpt
+        provider_id: 1
+        params_info:
+          temperature:
+            type: number
+            min: 0
+            max: 2
+            default: 1
+            description: Контролирует случайность вывода модели
+          max_tokens:
+            type: number
+            min: 1
+            max: 128000
+            default: 4096
+            description: Максимальное количество токенов в выводе
+          reasoning_effort:
+            type: enum
+            enum:
+            - none
+            - low
+            - medium
+            - high
+            default: none
+            description: Уровень усилий рассуждения
+        id: 66
+        public_name: GPT 5.1
+      properties:
+        id:
+          description: Уникальный идентификатор модели
+          example: 66
+          type: number
+        provider_id:
+          description: "ID провайдера, который предоставляет модель"
+          example: 1
+          type: number
+        name:
+          description: Название модели
+          example: gpt
+          type: string
+        public_name:
+          description: Публичное имя модели
+          example: GPT 5.1
+          type: string
+        model_name:
+          description: "Идентификатор модели, который передаётся в поле `model` те\
+            ла запроса"
+          example: openai/gpt-5.1
+          type: string
+        type:
+          description: "Тип модели (llm — языковая модель, hosted-llm — self-hosted\
+            \ языковая модель, embedding — модель для эмбеддингов, image — генерац\
+            ия изображений, audio — работа с аудио, moderation — модерация контент\
+            а)"
+          enum:
+          - llm
+          - hosted-llm
+          - embedding
+          - image
+          - audio
+          - moderation
+          example: llm
+          type: string
+        version:
+          description: Версия модели
+          example: "5.1"
+          type: string
+        is_deprecated:
+          description: "Признак, что модель устарела"
+          example: false
+          type: boolean
+        is_stopped:
+          description: "Признак, что поддержка модели остановлена"
+          example: false
+          type: boolean
+        deprecation_date:
+          description: "Дата отключения модели у провайдера. `null`, если отключен\
+            ие не запланировано"
+          format: date-time
+          nullable: true
+          type: string
+          example: null
+        created_at:
+          description: Дата и время добавления модели
+          example: 2025-11-17T10:35:46Z
+          format: date-time
+          type: string
+        updated_at:
+          description: Дата и время последнего обновления модели
+          example: 2026-07-17T09:37:23Z
+          format: date-time
+          type: string
+        params_info:
+          description: "Информация о доступных параметрах модели с их ограничениям\
+            и. Ключ — название параметра, значение — его тип, ограничения и значен\
+            ие по умолчанию"
+          example:
+            temperature:
+              type: number
+              min: 0
+              max: 2
+              default: 1
+              description: Контролирует случайность вывода модели
+            max_tokens:
+              type: number
+              min: 1
+              max: 128000
+              default: 4096
+              description: Максимальное количество токенов в выводе
+            reasoning_effort:
+              type: enum
+              enum:
+              - none
+              - low
+              - medium
+              - high
+              default: none
+              description: Уровень усилий рассуждения
+          nullable: true
+          type: object
+        parameter_values:
+          additionalProperties: true
+          description: |-
+            Характеристики модели. Ключ — код характеристики, значение — число, строка, булево значение или массив строк.
+
+            Основные коды:
+            - `cost_in` — цена за 1 входной токен в рублях
+            - `cost_out` — цена за 1 выходной токен в рублях
+            - `context_window` — размер контекстного окна в токенах
+            - `max_output_tokens` — максимальное количество токенов в ответе
+            - `is_reasoning` — поддержка режима рассуждений
+            - `supports_function_calling` — поддержка function calling
+            - `supported_input_modalities` — поддерживаемые входные модальности (например, `text`, `image`)
+            - `supported_output_modalities` — поддерживаемые выходные модальности
+            - `avg_speed` — средняя скорость генерации в токенах в секунду
+            - `aa_intelligence_index`, `aa_coding_index`, `aa_agentic_index` — индексы качества Artificial Analysis
+            - `release_date` — дата релиза модели
+          example:
+            cost_in: 1.62E-4
+            cost_out: 0.00135
+            context_window: 272000
+            max_output_tokens: 128000
+            is_reasoning: true
+            supports_function_calling: true
+            supported_input_modalities:
+            - text
+            - image
+            supported_output_modalities:
+            - text
+            avg_speed: 124.8
+            aa_intelligence_index: 48
+            aa_coding_index: 45
+            aa_agentic_index: 51
+            release_date: 2025-11-13
+          type: object
+      required:
+      - created_at
+      - id
+      - is_deprecated
+      - is_stopped
+      - model_name
+      - name
+      - parameter_values
+      - provider_id
+      - public_name
+      - type
+      - updated_at
+      - version
       type: object
     model:
       description: Модель AI
@@ -72272,7 +72608,7 @@ components:
         agents:
         - settings:
             widget:
-              icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+              icon_url: https://s3.twcstorage.ru/tw-cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
               signature: AI Ассистент
               name: Помощник поддержки
               whitelist_domains:
@@ -72310,7 +72646,7 @@ components:
           status: active
         - settings:
             widget:
-              icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+              icon_url: https://s3.twcstorage.ru/tw-cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
               signature: AI Ассистент
               name: Помощник поддержки
               whitelist_domains:
@@ -72362,7 +72698,7 @@ components:
         agent:
           settings:
             widget:
-              icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+              icon_url: https://s3.twcstorage.ru/tw-cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
               signature: AI Ассистент
               name: Помощник поддержки
               whitelist_domains:
@@ -72783,7 +73119,7 @@ components:
       - knowledgebase_statistics
       - meta
       type: object
-    getModels_200_response_meta:
+    getModelsV3_200_response_meta:
       example:
         total: 10
       properties:
@@ -72793,6 +73129,124 @@ components:
           type: number
       required:
       - total
+      type: object
+    getModelsV3_200_response:
+      example:
+        models:
+        - deprecation_date: 2000-01-23T04:56:07.000+00:00
+          is_stopped: false
+          parameter_values:
+            cost_in: 1.62E-4
+            cost_out: 0.00135
+            context_window: 272000
+            max_output_tokens: 128000
+            is_reasoning: true
+            supports_function_calling: true
+            supported_input_modalities:
+            - text
+            - image
+            supported_output_modalities:
+            - text
+            avg_speed: 124.8
+            aa_intelligence_index: 48
+            aa_coding_index: 45
+            aa_agentic_index: 51
+            release_date: 2025-11-13
+          created_at: 2025-11-17T10:35:46Z
+          type: llm
+          version: "5.1"
+          model_name: openai/gpt-5.1
+          updated_at: 2026-07-17T09:37:23Z
+          is_deprecated: false
+          name: gpt
+          provider_id: 1
+          params_info:
+            temperature:
+              type: number
+              min: 0
+              max: 2
+              default: 1
+              description: Контролирует случайность вывода модели
+            max_tokens:
+              type: number
+              min: 1
+              max: 128000
+              default: 4096
+              description: Максимальное количество токенов в выводе
+            reasoning_effort:
+              type: enum
+              enum:
+              - none
+              - low
+              - medium
+              - high
+              default: none
+              description: Уровень усилий рассуждения
+          id: 66
+          public_name: GPT 5.1
+        - deprecation_date: 2000-01-23T04:56:07.000+00:00
+          is_stopped: false
+          parameter_values:
+            cost_in: 1.62E-4
+            cost_out: 0.00135
+            context_window: 272000
+            max_output_tokens: 128000
+            is_reasoning: true
+            supports_function_calling: true
+            supported_input_modalities:
+            - text
+            - image
+            supported_output_modalities:
+            - text
+            avg_speed: 124.8
+            aa_intelligence_index: 48
+            aa_coding_index: 45
+            aa_agentic_index: 51
+            release_date: 2025-11-13
+          created_at: 2025-11-17T10:35:46Z
+          type: llm
+          version: "5.1"
+          model_name: openai/gpt-5.1
+          updated_at: 2026-07-17T09:37:23Z
+          is_deprecated: false
+          name: gpt
+          provider_id: 1
+          params_info:
+            temperature:
+              type: number
+              min: 0
+              max: 2
+              default: 1
+              description: Контролирует случайность вывода модели
+            max_tokens:
+              type: number
+              min: 1
+              max: 128000
+              default: 4096
+              description: Максимальное количество токенов в выводе
+            reasoning_effort:
+              type: enum
+              enum:
+              - none
+              - low
+              - medium
+              - high
+              default: none
+              description: Уровень усилий рассуждения
+          id: 66
+          public_name: GPT 5.1
+        meta:
+          total: 10
+      properties:
+        models:
+          items:
+            $ref: '#/components/schemas/model-v3'
+          type: array
+        meta:
+          $ref: '#/components/schemas/getModelsV3_200_response_meta'
+      required:
+      - meta
+      - models
       type: object
     getModels_200_response:
       example:
@@ -72851,7 +73305,7 @@ components:
             $ref: '#/components/schemas/model'
           type: array
         meta:
-          $ref: '#/components/schemas/getModels_200_response_meta'
+          $ref: '#/components/schemas/getModelsV3_200_response_meta'
       required:
       - meta
       - models
@@ -75859,7 +76313,7 @@ components:
     agent_settings_widget:
       description: Настройки виджета
       example:
-        icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+        icon_url: https://s3.twcstorage.ru/tw-cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
         signature: AI Ассистент
         name: Помощник поддержки
         whitelist_domains:
@@ -75902,7 +76356,7 @@ components:
           type: string
         icon_url:
           description: URL иконки виджета
-          example: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+          example: https://s3.twcstorage.ru/tw-cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
           type: string
         chat_position:
           description: Позиция виджета чата на странице
@@ -75925,7 +76379,7 @@ components:
       description: Настройки агента
       example:
         widget:
-          icon_url: https://st.timeweb.com/cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
+          icon_url: https://s3.twcstorage.ru/tw-cloud-static/cloud-ai/agent-widget/agent_icons/1.svg
           signature: AI Ассистент
           name: Помощник поддержки
           whitelist_domains:

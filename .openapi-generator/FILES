@@ -335,7 +335,8 @@ docs/GetKnowledgebasesV2200ResponseMeta.md
 docs/GetLocations200Response.md
 docs/GetMailboxes200Response.md
 docs/GetModels200Response.md
-docs/GetModels200ResponseMeta.md
+docs/GetModelsV3200Response.md
+docs/GetModelsV3200ResponseMeta.md
 docs/GetNetworkDrives200Response.md
 docs/GetNetworkDrivesAvailableResources200Response.md
 docs/GetNetworkDrivesPresets200Response.md
@@ -421,6 +422,7 @@ docs/ModelParamsInfo.md
 docs/ModelParamsInfoMaxTokens.md
 docs/ModelParamsInfoReasoningEffort.md
 docs/ModelParamsInfoTemperature.md
+docs/ModelV3.md
 docs/Mongodb.md
 docs/MountNetworkDrive.md
 docs/Mysql.md
@@ -926,7 +928,8 @@ model_get_knowledgebases_v2_200_response_meta.go
 model_get_locations_200_response.go
 model_get_mailboxes_200_response.go
 model_get_models_200_response.go
-model_get_models_200_response_meta.go
+model_get_models_v3_200_response.go
+model_get_models_v3_200_response_meta.go
 model_get_network_drives_200_response.go
 model_get_network_drives_available_resources_200_response.go
 model_get_network_drives_presets_200_response.go
@@ -1007,6 +1010,7 @@ model_model_params_info.go
 model_model_params_info_max_tokens.go
 model_model_params_info_reasoning_effort.go
 model_model_params_info_temperature.go
+model_model_v3.go
 model_mongodb.go
 model_mount_network_drive.go
 model_mysql.go

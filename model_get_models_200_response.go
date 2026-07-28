@@ -21,14 +21,14 @@ var _ MappedNullable = &GetModels200Response{}
 // GetModels200Response struct for GetModels200Response
 type GetModels200Response struct {
 	Models []Model `json:"models"`
-	Meta GetModels200ResponseMeta `json:"meta"`
+	Meta GetModelsV3200ResponseMeta `json:"meta"`
 }
 
 // NewGetModels200Response instantiates a new GetModels200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetModels200Response(models []Model, meta GetModels200ResponseMeta) *GetModels200Response {
+func NewGetModels200Response(models []Model, meta GetModelsV3200ResponseMeta) *GetModels200Response {
 	this := GetModels200Response{}
 	this.Models = models
 	this.Meta = meta
@@ -68,9 +68,9 @@ func (o *GetModels200Response) SetModels(v []Model) {
 }
 
 // GetMeta returns the Meta field value
-func (o *GetModels200Response) GetMeta() GetModels200ResponseMeta {
+func (o *GetModels200Response) GetMeta() GetModelsV3200ResponseMeta {
 	if o == nil {
-		var ret GetModels200ResponseMeta
+		var ret GetModelsV3200ResponseMeta
 		return ret
 	}
 
@@ -79,7 +79,7 @@ func (o *GetModels200Response) GetMeta() GetModels200ResponseMeta {
 
 // GetMetaOk returns a tuple with the Meta field value
 // and a boolean to check if the value has been set.
-func (o *GetModels200Response) GetMetaOk() (*GetModels200ResponseMeta, bool) {
+func (o *GetModels200Response) GetMetaOk() (*GetModelsV3200ResponseMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,7 +87,7 @@ func (o *GetModels200Response) GetMetaOk() (*GetModels200ResponseMeta, bool) {
 }
 
 // SetMeta sets field value
-func (o *GetModels200Response) SetMeta(v GetModels200ResponseMeta) {
+func (o *GetModels200Response) SetMeta(v GetModelsV3200ResponseMeta) {
 	o.Meta = v
 }
 
