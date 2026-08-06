@@ -3,21 +3,15 @@
 ## Enum
 
 
-* `ALTER` (value: `"ALTER"`)
-
 * `ALTER_TABLE` (value: `"ALTER_TABLE"`)
 
 * `ALTER_VIEW` (value: `"ALTER_VIEW"`)
-
-* `CREATE` (value: `"CREATE"`)
 
 * `CREATE_VIEW` (value: `"CREATE_VIEW"`)
 
 * `CREATE_DICTIONARY` (value: `"CREATE_DICTIONARY"`)
 
 * `CREATE_TABLE` (value: `"CREATE_TABLE"`)
-
-* `DROP` (value: `"DROP"`)
 
 * `DROP_TABLE` (value: `"DROP_TABLE"`)
 

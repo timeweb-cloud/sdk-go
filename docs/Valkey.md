@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClientOutputBufferLimitNormal** | Pointer to **string** | Ограничение буфера вывода для обычных клиентских подключений. Формат: &#x60;hard-limit soft-limit soft-seconds&#x60; (&#x60;valkey&#x60; | &#x60;valkey7&#x60; | &#x60;valkey8_1&#x60; | &#x60;valkey9_1&#x60;). | [optional] 
+**NotifyKeyspaceEvents** | Pointer to **string** | Настройка уведомлений о событиях пространства ключей (&#x60;valkey&#x60; | &#x60;valkey7&#x60; | &#x60;valkey8_1&#x60; | &#x60;valkey9_1&#x60;). | [optional] 
 **ClientOutputBufferLimitPubsub** | Pointer to **string** | Ограничение буфера вывода для клиентов pub/sub. Формат: &#x60;hard-limit soft-limit soft-seconds&#x60; (&#x60;valkey&#x60; | &#x60;valkey7&#x60; | &#x60;valkey8_1&#x60; | &#x60;valkey9_1&#x60;). | [optional] 
 **Databases** | Pointer to **string** | Количество логических баз данных на сервере (&#x60;valkey&#x60; | &#x60;valkey7&#x60; | &#x60;valkey8_1&#x60; | &#x60;valkey9_1&#x60;). | [optional] 
 **Timeout** | Pointer to **string** | Время ожидания в секундах перед закрытием неактивного клиентского соединения. &#x60;0&#x60; — отключено (&#x60;valkey&#x60; | &#x60;valkey7&#x60; | &#x60;valkey8_1&#x60; | &#x60;valkey9_1&#x60;). | [optional] 
@@ -59,6 +60,31 @@ SetClientOutputBufferLimitNormal sets ClientOutputBufferLimitNormal field to giv
 `func (o *Valkey) HasClientOutputBufferLimitNormal() bool`
 
 HasClientOutputBufferLimitNormal returns a boolean if a field has been set.
+
+### GetNotifyKeyspaceEvents
+
+`func (o *Valkey) GetNotifyKeyspaceEvents() string`
+
+GetNotifyKeyspaceEvents returns the NotifyKeyspaceEvents field if non-nil, zero value otherwise.
+
+### GetNotifyKeyspaceEventsOk
+
+`func (o *Valkey) GetNotifyKeyspaceEventsOk() (*string, bool)`
+
+GetNotifyKeyspaceEventsOk returns a tuple with the NotifyKeyspaceEvents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotifyKeyspaceEvents
+
+`func (o *Valkey) SetNotifyKeyspaceEvents(v string)`
+
+SetNotifyKeyspaceEvents sets NotifyKeyspaceEvents field to given value.
+
+### HasNotifyKeyspaceEvents
+
+`func (o *Valkey) HasNotifyKeyspaceEvents() bool`
+
+HasNotifyKeyspaceEvents returns a boolean if a field has been set.
 
 ### GetClientOutputBufferLimitPubsub
 

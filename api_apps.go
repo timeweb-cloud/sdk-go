@@ -153,7 +153,7 @@ func (a *AppsAPIService) AddProviderExecute(r ApiAddProviderRequest) (*AddProvid
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -328,7 +328,7 @@ func (a *AppsAPIService) CreateAppExecute(r ApiCreateAppRequest) (*CreateApp201R
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -507,7 +507,7 @@ func (a *AppsAPIService) CreateDeployExecute(r ApiCreateDeployRequest) (*CreateD
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -993,7 +993,7 @@ func (a *AppsAPIService) DeployActionExecute(r ApiDeployActionRequest) (*CreateD
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1718,7 +1718,7 @@ func (a *AppsAPIService) GetAppStatisticsExecute(r ApiGetAppStatisticsRequest) (
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -8,14 +8,15 @@ Name | Type | Description | Notes
 **Password** | **string** | Пароль пользователя базы данных | 
 **Host** | Pointer to **string** | Хост пользователя | [optional] 
 **InstanceId** | Pointer to **float32** | ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам | [optional] 
-**Privileges** | [**[]PropertiesMysql**](PropertiesMysql.md) | Список привилегий пользователя базы данных | 
+**ForAll** | Pointer to **bool** | Выдать привилегии на все инстансы базы данных | [optional] 
+**Privileges** | Pointer to [**[]PropertiesMysql**](PropertiesMysql.md) | Список привилегий пользователя базы данных | [optional] 
 **Description** | Pointer to **string** | Описание пользователя базы данных | [optional] 
 
 ## Methods
 
 ### NewCreateAdmin
 
-`func NewCreateAdmin(login string, password string, privileges []PropertiesMysql, ) *CreateAdmin`
+`func NewCreateAdmin(login string, password string, ) *CreateAdmin`
 
 NewCreateAdmin instantiates a new CreateAdmin object
 This constructor will assign default values to properties that have it defined,
@@ -120,6 +121,31 @@ SetInstanceId sets InstanceId field to given value.
 
 HasInstanceId returns a boolean if a field has been set.
 
+### GetForAll
+
+`func (o *CreateAdmin) GetForAll() bool`
+
+GetForAll returns the ForAll field if non-nil, zero value otherwise.
+
+### GetForAllOk
+
+`func (o *CreateAdmin) GetForAllOk() (*bool, bool)`
+
+GetForAllOk returns a tuple with the ForAll field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForAll
+
+`func (o *CreateAdmin) SetForAll(v bool)`
+
+SetForAll sets ForAll field to given value.
+
+### HasForAll
+
+`func (o *CreateAdmin) HasForAll() bool`
+
+HasForAll returns a boolean if a field has been set.
+
 ### GetPrivileges
 
 `func (o *CreateAdmin) GetPrivileges() []PropertiesMysql`
@@ -139,6 +165,11 @@ and a boolean to check if the value has been set.
 
 SetPrivileges sets Privileges field to given value.
 
+### HasPrivileges
+
+`func (o *CreateAdmin) HasPrivileges() bool`
+
+HasPrivileges returns a boolean if a field has been set.
 
 ### GetDescription
 

@@ -20,17 +20,16 @@ var _ MappedNullable = &DeleteDatabaseCluster200Response{}
 
 // DeleteDatabaseCluster200Response struct for DeleteDatabaseCluster200Response
 type DeleteDatabaseCluster200Response struct {
-	// Хеш, который совместно с кодом авторизации надо будет отправить для удаления
-	Hash string `json:"hash"`
+	DatabaseDelete DeleteDatabaseCluster200ResponseDatabaseDelete `json:"database_delete"`
 }
 
 // NewDeleteDatabaseCluster200Response instantiates a new DeleteDatabaseCluster200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteDatabaseCluster200Response(hash string) *DeleteDatabaseCluster200Response {
+func NewDeleteDatabaseCluster200Response(databaseDelete DeleteDatabaseCluster200ResponseDatabaseDelete) *DeleteDatabaseCluster200Response {
 	this := DeleteDatabaseCluster200Response{}
-	this.Hash = hash
+	this.DatabaseDelete = databaseDelete
 	return &this
 }
 
@@ -42,28 +41,28 @@ func NewDeleteDatabaseCluster200ResponseWithDefaults() *DeleteDatabaseCluster200
 	return &this
 }
 
-// GetHash returns the Hash field value
-func (o *DeleteDatabaseCluster200Response) GetHash() string {
+// GetDatabaseDelete returns the DatabaseDelete field value
+func (o *DeleteDatabaseCluster200Response) GetDatabaseDelete() DeleteDatabaseCluster200ResponseDatabaseDelete {
 	if o == nil {
-		var ret string
+		var ret DeleteDatabaseCluster200ResponseDatabaseDelete
 		return ret
 	}
 
-	return o.Hash
+	return o.DatabaseDelete
 }
 
-// GetHashOk returns a tuple with the Hash field value
+// GetDatabaseDeleteOk returns a tuple with the DatabaseDelete field value
 // and a boolean to check if the value has been set.
-func (o *DeleteDatabaseCluster200Response) GetHashOk() (*string, bool) {
+func (o *DeleteDatabaseCluster200Response) GetDatabaseDeleteOk() (*DeleteDatabaseCluster200ResponseDatabaseDelete, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Hash, true
+	return &o.DatabaseDelete, true
 }
 
-// SetHash sets field value
-func (o *DeleteDatabaseCluster200Response) SetHash(v string) {
-	o.Hash = v
+// SetDatabaseDelete sets field value
+func (o *DeleteDatabaseCluster200Response) SetDatabaseDelete(v DeleteDatabaseCluster200ResponseDatabaseDelete) {
+	o.DatabaseDelete = v
 }
 
 func (o DeleteDatabaseCluster200Response) MarshalJSON() ([]byte, error) {
@@ -76,7 +75,7 @@ func (o DeleteDatabaseCluster200Response) MarshalJSON() ([]byte, error) {
 
 func (o DeleteDatabaseCluster200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["hash"] = o.Hash
+	toSerialize["database_delete"] = o.DatabaseDelete
 	return toSerialize, nil
 }
 

@@ -4,10 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Login** | Pointer to **string** | Новое имя пользователя базы данных. Переименование доступно только в кластерах PostgreSQL | [optional] 
 **Password** | Pointer to **string** | Пароль пользователя базы данных | [optional] 
 **Privileges** | Pointer to [**[]PropertiesMysql**](PropertiesMysql.md) | Список привилегий пользователя базы данных | [optional] 
 **Description** | Pointer to **string** | Описание пользователя базы данных | [optional] 
 **InstanceId** | Pointer to **float32** | ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам | [optional] 
+**ForAll** | Pointer to **bool** | Выдать привилегии на все инстансы базы данных | [optional] 
 
 ## Methods
 
@@ -27,6 +29,31 @@ will change when the set of required properties is changed
 NewUpdateAdminWithDefaults instantiates a new UpdateAdmin object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetLogin
+
+`func (o *UpdateAdmin) GetLogin() string`
+
+GetLogin returns the Login field if non-nil, zero value otherwise.
+
+### GetLoginOk
+
+`func (o *UpdateAdmin) GetLoginOk() (*string, bool)`
+
+GetLoginOk returns a tuple with the Login field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogin
+
+`func (o *UpdateAdmin) SetLogin(v string)`
+
+SetLogin sets Login field to given value.
+
+### HasLogin
+
+`func (o *UpdateAdmin) HasLogin() bool`
+
+HasLogin returns a boolean if a field has been set.
 
 ### GetPassword
 
@@ -127,6 +154,31 @@ SetInstanceId sets InstanceId field to given value.
 `func (o *UpdateAdmin) HasInstanceId() bool`
 
 HasInstanceId returns a boolean if a field has been set.
+
+### GetForAll
+
+`func (o *UpdateAdmin) GetForAll() bool`
+
+GetForAll returns the ForAll field if non-nil, zero value otherwise.
+
+### GetForAllOk
+
+`func (o *UpdateAdmin) GetForAllOk() (*bool, bool)`
+
+GetForAllOk returns a tuple with the ForAll field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForAll
+
+`func (o *UpdateAdmin) SetForAll(v bool)`
+
+SetForAll sets ForAll field to given value.
+
+### HasForAll
+
+`func (o *UpdateAdmin) HasForAll() bool`
+
+HasForAll returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

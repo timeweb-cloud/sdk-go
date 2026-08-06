@@ -7,12 +7,14 @@ Name | Type | Description | Notes
 **Id** | Pointer to **float32** | ID для каждого экземпляра тарифа базы данных. | [optional] 
 **Description** | Pointer to **string** | Описание тарифа. | [optional] 
 **DescriptionShort** | Pointer to **string** | Краткое описание тарифа. | [optional] 
-**Cpu** | Pointer to **float32** | Описание процессора тарифа. | [optional] 
-**Ram** | Pointer to **float32** | Описание ОЗУ тарифа. | [optional] 
-**Disk** | Pointer to **float32** | Описание диска тарифа. | [optional] 
-**Type** | Pointer to [**DbType**](DbType.md) |  | [optional] 
+**Cpu** | Pointer to **float32** | Количество ядер процессора тарифа. | [optional] 
+**CpuFrequency** | Pointer to **string** | Частота процессора (в ГГц). | [optional] 
+**Ram** | Pointer to **float32** | Объём оперативной памяти тарифа (в Мб). | [optional] 
+**Disk** | Pointer to **float32** | Размер диска тарифа (в Мб). | [optional] 
+**Type** | Pointer to **string** | Семейство СУБД тарифа. Значение не совпадает с типом кластера, который передаётся в поле &#x60;type&#x60; при создании кластера (&#x60;POST /api/v1/databases&#x60;): там используется версионированный тип, например &#x60;postgres17&#x60;. Тарифы для Valkey возвращаются со значением &#x60;redis&#x60; — отдельного значения &#x60;valkey&#x60; в этом поле не бывает. | [optional] 
 **Price** | Pointer to **float32** | Стоимость тарифа базы данных | [optional] 
 **Location** | Pointer to **string** | Географическое расположение тарифа. | [optional] 
+**Tags** | Pointer to **[]string** | Теги тарифа, в том числе тег группы тарифов, в пределах которой доступна смена тарифа. | [optional] 
 
 ## Methods
 
@@ -133,6 +135,31 @@ SetCpu sets Cpu field to given value.
 
 HasCpu returns a boolean if a field has been set.
 
+### GetCpuFrequency
+
+`func (o *PresetsDbs) GetCpuFrequency() string`
+
+GetCpuFrequency returns the CpuFrequency field if non-nil, zero value otherwise.
+
+### GetCpuFrequencyOk
+
+`func (o *PresetsDbs) GetCpuFrequencyOk() (*string, bool)`
+
+GetCpuFrequencyOk returns a tuple with the CpuFrequency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuFrequency
+
+`func (o *PresetsDbs) SetCpuFrequency(v string)`
+
+SetCpuFrequency sets CpuFrequency field to given value.
+
+### HasCpuFrequency
+
+`func (o *PresetsDbs) HasCpuFrequency() bool`
+
+HasCpuFrequency returns a boolean if a field has been set.
+
 ### GetRam
 
 `func (o *PresetsDbs) GetRam() float32`
@@ -185,20 +212,20 @@ HasDisk returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *PresetsDbs) GetType() DbType`
+`func (o *PresetsDbs) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *PresetsDbs) GetTypeOk() (*DbType, bool)`
+`func (o *PresetsDbs) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *PresetsDbs) SetType(v DbType)`
+`func (o *PresetsDbs) SetType(v string)`
 
 SetType sets Type field to given value.
 
@@ -257,6 +284,31 @@ SetLocation sets Location field to given value.
 `func (o *PresetsDbs) HasLocation() bool`
 
 HasLocation returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *PresetsDbs) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *PresetsDbs) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *PresetsDbs) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *PresetsDbs) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

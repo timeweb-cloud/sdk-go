@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | Тип IP-адреса сети | 
-**Ip** | **string** | IP-адрес сети | 
+**Type** | **string** | Тип IP-адреса сети. | 
+**Ip** | **NullableString** | IP-адрес сети. | 
 
 ## Methods
 
 ### NewDatabaseClusterNetworksInnerIpsInner
 
-`func NewDatabaseClusterNetworksInnerIpsInner(type_ string, ip string, ) *DatabaseClusterNetworksInnerIpsInner`
+`func NewDatabaseClusterNetworksInnerIpsInner(type_ string, ip NullableString, ) *DatabaseClusterNetworksInnerIpsInner`
 
 NewDatabaseClusterNetworksInnerIpsInner instantiates a new DatabaseClusterNetworksInnerIpsInner object
 This constructor will assign default values to properties that have it defined,
@@ -66,6 +66,16 @@ and a boolean to check if the value has been set.
 SetIp sets Ip field to given value.
 
 
+### SetIpNil
+
+`func (o *DatabaseClusterNetworksInnerIpsInner) SetIpNil(b bool)`
+
+ SetIpNil sets the value for Ip to be an explicit nil
+
+### UnsetIp
+`func (o *DatabaseClusterNetworksInnerIpsInner) UnsetIp()`
+
+UnsetIp ensures that no value is present for Ip, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -5,36 +5,51 @@ All URIs are relative to *https://api.timeweb.cloud*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateDatabaseBackup**](DatabasesAPI.md#CreateDatabaseBackup) | **Post** /api/v1/dbs/{db_id}/backups | Создание бэкапа базы данных
+[**CreateDatabaseBackupDownloadUrl**](DatabasesAPI.md#CreateDatabaseBackupDownloadUrl) | **Post** /api/v1/dbs/{db_id}/backups/{backup_id}/download-url | Получение ссылки для скачивания бэкапа базы данных
 [**CreateDatabaseCluster**](DatabasesAPI.md#CreateDatabaseCluster) | **Post** /api/v1/databases | Создание кластера базы данных
 [**CreateDatabaseInstance**](DatabasesAPI.md#CreateDatabaseInstance) | **Post** /api/v1/databases/{db_cluster_id}/instances | Создание инстанса базы данных
+[**CreateDatabaseS3Backup**](DatabasesAPI.md#CreateDatabaseS3Backup) | **Post** /api/v2/databases/{db_id}/backups | Создание S3-бэкапа базы данных
 [**CreateDatabaseUser**](DatabasesAPI.md#CreateDatabaseUser) | **Post** /api/v1/databases/{db_cluster_id}/admins | Создание пользователя базы данных
 [**DeleteDatabaseBackup**](DatabasesAPI.md#DeleteDatabaseBackup) | **Delete** /api/v1/dbs/{db_id}/backups/{backup_id} | Удаление бэкапа базы данных
 [**DeleteDatabaseCluster**](DatabasesAPI.md#DeleteDatabaseCluster) | **Delete** /api/v1/databases/{db_cluster_id} | Удаление кластера базы данных
 [**DeleteDatabaseInstance**](DatabasesAPI.md#DeleteDatabaseInstance) | **Delete** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Удаление инстанса базы данных
+[**DeleteDatabaseS3Backup**](DatabasesAPI.md#DeleteDatabaseS3Backup) | **Delete** /api/v2/databases/{db_id}/backups/{backup_id} | Удаление S3-бэкапа базы данных
 [**DeleteDatabaseUser**](DatabasesAPI.md#DeleteDatabaseUser) | **Delete** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Удаление пользователя базы данных
 [**GetDatabaseAutoBackupsSettings**](DatabasesAPI.md#GetDatabaseAutoBackupsSettings) | **Get** /api/v1/dbs/{db_id}/auto-backups | Получение настроек автобэкапов базы данных
 [**GetDatabaseBackup**](DatabasesAPI.md#GetDatabaseBackup) | **Get** /api/v1/dbs/{db_id}/backups/{backup_id} | Получение бэкапа базы данных
 [**GetDatabaseBackups**](DatabasesAPI.md#GetDatabaseBackups) | **Get** /api/v1/dbs/{db_id}/backups | Список бэкапов базы данных
 [**GetDatabaseCluster**](DatabasesAPI.md#GetDatabaseCluster) | **Get** /api/v1/databases/{db_cluster_id} | Получение кластера базы данных
+[**GetDatabaseClusterReplicas**](DatabasesAPI.md#GetDatabaseClusterReplicas) | **Get** /api/v1/databases/{db_cluster_id}/replicas | Получение списка реплик кластера базы данных
 [**GetDatabaseClusterTypes**](DatabasesAPI.md#GetDatabaseClusterTypes) | **Get** /api/v1/database-types | Получение списка типов кластеров баз данных
 [**GetDatabaseClusters**](DatabasesAPI.md#GetDatabaseClusters) | **Get** /api/v1/databases | Получение списка кластеров баз данных
+[**GetDatabaseConfigurators**](DatabasesAPI.md#GetDatabaseConfigurators) | **Get** /api/v1/configurator/databases | Получение списка конфигураторов баз данных
+[**GetDatabaseDefaultParameters**](DatabasesAPI.md#GetDatabaseDefaultParameters) | **Get** /api/v1/dbs/default-parameters | Получение рекомендуемых значений параметров баз данных
 [**GetDatabaseInstance**](DatabasesAPI.md#GetDatabaseInstance) | **Get** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Получение инстанса базы данных
 [**GetDatabaseInstances**](DatabasesAPI.md#GetDatabaseInstances) | **Get** /api/v1/databases/{db_cluster_id}/instances | Получение списка инстансов баз данных
 [**GetDatabaseParameters**](DatabasesAPI.md#GetDatabaseParameters) | **Get** /api/v1/dbs/parameters | Получение списка параметров баз данных
+[**GetDatabasePreset**](DatabasesAPI.md#GetDatabasePreset) | **Get** /api/v2/dbs/presets/{preset_id} | Получение тарифа для базы данных
+[**GetDatabasePrivileges**](DatabasesAPI.md#GetDatabasePrivileges) | **Get** /api/v1/databases/{db_cluster_id}/privileges | Получение привилегий кластера базы данных
+[**GetDatabaseS3Backup**](DatabasesAPI.md#GetDatabaseS3Backup) | **Get** /api/v2/databases/{db_id}/backups/{backup_id} | Получение S3-бэкапа базы данных
+[**GetDatabaseS3Backups**](DatabasesAPI.md#GetDatabaseS3Backups) | **Get** /api/v2/databases/{db_id}/backups | Список S3-бэкапов базы данных
 [**GetDatabaseUser**](DatabasesAPI.md#GetDatabaseUser) | **Get** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Получение пользователя базы данных
 [**GetDatabaseUsers**](DatabasesAPI.md#GetDatabaseUsers) | **Get** /api/v1/databases/{db_cluster_id}/admins | Получение списка пользователей базы данных
 [**GetDatabasesPresets**](DatabasesAPI.md#GetDatabasesPresets) | **Get** /api/v2/presets/dbs | Получение списка тарифов для баз данных
+[**PerformDatabaseClusterAction**](DatabasesAPI.md#PerformDatabaseClusterAction) | **Post** /api/v1/databases/{db_cluster_id}/action | Выполнение действия над кластером базы данных
 [**RestoreDatabaseFromBackup**](DatabasesAPI.md#RestoreDatabaseFromBackup) | **Put** /api/v1/dbs/{db_id}/backups/{backup_id} | Восстановление базы данных из бэкапа
+[**RestoreDatabaseFromS3Backup**](DatabasesAPI.md#RestoreDatabaseFromS3Backup) | **Post** /api/v2/databases/{db_id}/backups/{backup_id}/restore | Восстановление базы данных из S3-бэкапа
 [**UpdateDatabaseAutoBackupsSettings**](DatabasesAPI.md#UpdateDatabaseAutoBackupsSettings) | **Patch** /api/v1/dbs/{db_id}/auto-backups | Изменение настроек автобэкапов базы данных
+[**UpdateDatabaseBackup**](DatabasesAPI.md#UpdateDatabaseBackup) | **Patch** /api/v1/dbs/{db_id}/backups/{backup_id} | Изменение комментария к бэкапу базы данных
 [**UpdateDatabaseCluster**](DatabasesAPI.md#UpdateDatabaseCluster) | **Patch** /api/v1/databases/{db_cluster_id} | Изменение кластера базы данных
+[**UpdateDatabaseClusterV2**](DatabasesAPI.md#UpdateDatabaseClusterV2) | **Patch** /api/v2/databases/{db_cluster_id} | Изменение кластера базы данных (v2)
 [**UpdateDatabaseInstance**](DatabasesAPI.md#UpdateDatabaseInstance) | **Patch** /api/v1/databases/{db_cluster_id}/instances/{instance_id} | Изменение инстанса базы данных
+[**UpdateDatabaseS3Backup**](DatabasesAPI.md#UpdateDatabaseS3Backup) | **Patch** /api/v2/databases/{db_id}/backups/{backup_id} | Изменение комментария S3-бэкапа базы данных
 [**UpdateDatabaseUser**](DatabasesAPI.md#UpdateDatabaseUser) | **Patch** /api/v1/databases/{db_cluster_id}/admins/{admin_id} | Изменение пользователя базы данных
 
 
 
 ## CreateDatabaseBackup
 
-> CreateDatabaseBackup201Response CreateDatabaseBackup(ctx, dbId).Comment(comment).Execute()
+> CreateDatabaseBackup201Response CreateDatabaseBackup(ctx, dbId).DbsCreateBackup(dbsCreateBackup).Execute()
 
 Создание бэкапа базы данных
 
@@ -54,11 +69,11 @@ import (
 
 func main() {
     dbId := int32(56) // int32 | ID базы данных
-    comment := "comment_example" // string | Описание бэкапа (optional)
+    dbsCreateBackup := *openapiclient.NewDbsCreateBackup() // DbsCreateBackup |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DatabasesAPI.CreateDatabaseBackup(context.Background(), dbId).Comment(comment).Execute()
+    resp, r, err := apiClient.DatabasesAPI.CreateDatabaseBackup(context.Background(), dbId).DbsCreateBackup(dbsCreateBackup).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.CreateDatabaseBackup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -84,7 +99,7 @@ Other parameters are passed through a pointer to a apiCreateDatabaseBackupReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **comment** | **string** | Описание бэкапа | 
+ **dbsCreateBackup** | [**DbsCreateBackup**](DbsCreateBackup.md) |  | 
 
 ### Return type
 
@@ -96,7 +111,82 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateDatabaseBackupDownloadUrl
+
+> CreateDatabaseBackupDownloadUrl201Response CreateDatabaseBackupDownloadUrl(ctx, dbId, backupId).BackupDownloadUrlRequest(backupDownloadUrlRequest).Execute()
+
+Получение ссылки для скачивания бэкапа базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := int32(56) // int32 | ID резервной копии
+    backupDownloadUrlRequest := *openapiclient.NewBackupDownloadUrlRequest("backup-2024-02-02") // BackupDownloadUrlRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.CreateDatabaseBackupDownloadUrl(context.Background(), dbId, backupId).BackupDownloadUrlRequest(backupDownloadUrlRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.CreateDatabaseBackupDownloadUrl``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateDatabaseBackupDownloadUrl`: CreateDatabaseBackupDownloadUrl201Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.CreateDatabaseBackupDownloadUrl`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **int32** | ID резервной копии | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateDatabaseBackupDownloadUrlRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **backupDownloadUrlRequest** | [**BackupDownloadUrlRequest**](BackupDownloadUrlRequest.md) |  | 
+
+### Return type
+
+[**CreateDatabaseBackupDownloadUrl201Response**](CreateDatabaseBackupDownloadUrl201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -242,6 +332,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateDatabaseS3Backup
+
+> CreateDatabaseS3Backup201Response CreateDatabaseS3Backup(ctx, dbId).CreateS3Backup(createS3Backup).Execute()
+
+Создание S3-бэкапа базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+    createS3Backup := *openapiclient.NewCreateS3Backup() // CreateS3Backup |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.CreateDatabaseS3Backup(context.Background(), dbId).CreateS3Backup(createS3Backup).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.CreateDatabaseS3Backup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateDatabaseS3Backup`: CreateDatabaseS3Backup201Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.CreateDatabaseS3Backup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateDatabaseS3BackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createS3Backup** | [**CreateS3Backup**](CreateS3Backup.md) |  | 
+
+### Return type
+
+[**CreateDatabaseS3Backup201Response**](CreateDatabaseS3Backup201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateDatabaseUser
 
 > CreateDatabaseUser201Response CreateDatabaseUser(ctx, dbClusterId).CreateAdmin(createAdmin).Execute()
@@ -264,7 +426,7 @@ import (
 
 func main() {
     dbClusterId := int32(56) // int32 | ID кластера базы данных
-    createAdmin := *openapiclient.NewCreateAdmin("default_login", "bs.:L2f$Tm:SC~", []openapiclient.PropertiesMysql{openapiclient.properties-mysql("ALTER")}) // CreateAdmin | 
+    createAdmin := *openapiclient.NewCreateAdmin("default_login", "bs.:L2f$Tm:SC~") // CreateAdmin | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -387,7 +549,7 @@ Name | Type | Description  | Notes
 
 ## DeleteDatabaseCluster
 
-> DeleteDatabaseCluster200Response DeleteDatabaseCluster(ctx, dbClusterId).Hash(hash).Code(code).Execute()
+> DeleteDatabaseCluster200Response DeleteDatabaseCluster(ctx, dbClusterId).Execute()
 
 Удаление кластера базы данных
 
@@ -407,12 +569,10 @@ import (
 
 func main() {
     dbClusterId := int32(56) // int32 | ID кластера базы данных
-    hash := "15095f25-aac3-4d60-a788-96cb5136f186" // string | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. (optional)
-    code := "0000" // string | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена `is_able_to_delete` установлен в значение `true` (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DatabasesAPI.DeleteDatabaseCluster(context.Background(), dbClusterId).Hash(hash).Code(code).Execute()
+    resp, r, err := apiClient.DatabasesAPI.DeleteDatabaseCluster(context.Background(), dbClusterId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.DeleteDatabaseCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -438,8 +598,6 @@ Other parameters are passed through a pointer to a apiDeleteDatabaseClusterReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **hash** | **string** | Хеш, который совместно с кодом авторизации надо отправить для удаления, если включено подтверждение удаления сервисов через Телеграм. | 
- **code** | **string** | Код подтверждения, который придет к вам в Телеграм, после запроса удаления, если включено подтверждение удаления сервисов.  При помощи API токена сервисы можно удалять без подтверждения, если параметр токена &#x60;is_able_to_delete&#x60; установлен в значение &#x60;true&#x60; | 
 
 ### Return type
 
@@ -505,6 +663,77 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteDatabaseInstanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDatabaseS3Backup
+
+> DeleteDatabaseS3Backup(ctx, dbId, backupId).Execute()
+
+Удаление S3-бэкапа базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID резервной копии в формате UUID
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.DatabasesAPI.DeleteDatabaseS3Backup(context.Background(), dbId, backupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.DeleteDatabaseS3Backup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **string** | ID резервной копии в формате UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDatabaseS3BackupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -673,7 +902,7 @@ Name | Type | Description  | Notes
 
 ## GetDatabaseBackup
 
-> CreateDatabaseBackup201Response GetDatabaseBackup(ctx, dbId, backupId).Execute()
+> GetDatabaseBackup200Response GetDatabaseBackup(ctx, dbId, backupId).Execute()
 
 Получение бэкапа базы данных
 
@@ -702,7 +931,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseBackup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetDatabaseBackup`: CreateDatabaseBackup201Response
+    // response from `GetDatabaseBackup`: GetDatabaseBackup200Response
     fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseBackup`: %v\n", resp)
 }
 ```
@@ -728,7 +957,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateDatabaseBackup201Response**](CreateDatabaseBackup201Response.md)
+[**GetDatabaseBackup200Response**](GetDatabaseBackup200Response.md)
 
 ### Authorization
 
@@ -888,6 +1117,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetDatabaseClusterReplicas
+
+> GetDatabaseClusterReplicas200Response GetDatabaseClusterReplicas(ctx, dbClusterId).Execute()
+
+Получение списка реплик кластера базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabaseClusterReplicas(context.Background(), dbClusterId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseClusterReplicas``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabaseClusterReplicas`: GetDatabaseClusterReplicas200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseClusterReplicas`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbClusterId** | **int32** | ID кластера базы данных | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabaseClusterReplicasRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetDatabaseClusterReplicas200Response**](GetDatabaseClusterReplicas200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetDatabaseClusterTypes
 
 > GetDatabaseClusterTypes200Response GetDatabaseClusterTypes(ctx).Execute()
@@ -1002,6 +1301,144 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDatabaseClusters200Response**](GetDatabaseClusters200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabaseConfigurators
+
+> GetDatabaseConfigurators200Response GetDatabaseConfigurators(ctx).ClusterId(clusterId).WithUnavailable(withUnavailable).Execute()
+
+Получение списка конфигураторов баз данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    clusterId := int32(56) // int32 | ID кластера базы данных. Возвращает конфигураторы группы, в пределах которой доступна смена конфигурации этого кластера (сценарий изменения кластера). (optional)
+    withUnavailable := true // bool | Включить в ответ конфигураторы, недоступные к заказу из-за нехватки свободных ресурсов. Учитывается только при запросе без `cluster_id`. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabaseConfigurators(context.Background()).ClusterId(clusterId).WithUnavailable(withUnavailable).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseConfigurators``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabaseConfigurators`: GetDatabaseConfigurators200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseConfigurators`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabaseConfiguratorsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clusterId** | **int32** | ID кластера базы данных. Возвращает конфигураторы группы, в пределах которой доступна смена конфигурации этого кластера (сценарий изменения кластера). | 
+ **withUnavailable** | **bool** | Включить в ответ конфигураторы, недоступные к заказу из-за нехватки свободных ресурсов. Учитывается только при запросе без &#x60;cluster_id&#x60;. | 
+
+### Return type
+
+[**GetDatabaseConfigurators200Response**](GetDatabaseConfigurators200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabaseDefaultParameters
+
+> GetDatabaseDefaultParameters200Response GetDatabaseDefaultParameters(ctx).Type_(type_).Ram(ram).ReplicaCount(replicaCount).Execute()
+
+Получение рекомендуемых значений параметров баз данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    type_ := "postgres17" // string | Тип кластера базы данных.
+    ram := int32(2048) // int32 | Объём оперативной памяти кластера (в Мб).
+    replicaCount := int32(1) // int32 | Количество нод (реплик) кластера. (optional) (default to 1)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabaseDefaultParameters(context.Background()).Type_(type_).Ram(ram).ReplicaCount(replicaCount).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseDefaultParameters``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabaseDefaultParameters`: GetDatabaseDefaultParameters200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseDefaultParameters`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabaseDefaultParametersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **type_** | **string** | Тип кластера базы данных. | 
+ **ram** | **int32** | Объём оперативной памяти кластера (в Мб). | 
+ **replicaCount** | **int32** | Количество нод (реплик) кластера. | [default to 1]
+
+### Return type
+
+[**GetDatabaseDefaultParameters200Response**](GetDatabaseDefaultParameters200Response.md)
 
 ### Authorization
 
@@ -1162,7 +1599,7 @@ Name | Type | Description  | Notes
 
 ## GetDatabaseParameters
 
-> ConfigParameters GetDatabaseParameters(ctx).Execute()
+> DbParametersByType GetDatabaseParameters(ctx).Execute()
 
 Получение списка параметров баз данных
 
@@ -1189,7 +1626,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseParameters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetDatabaseParameters`: ConfigParameters
+    // response from `GetDatabaseParameters`: DbParametersByType
     fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseParameters`: %v\n", resp)
 }
 ```
@@ -1205,7 +1642,290 @@ Other parameters are passed through a pointer to a apiGetDatabaseParametersReque
 
 ### Return type
 
-[**ConfigParameters**](ConfigParameters.md)
+[**DbParametersByType**](DbParametersByType.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabasePreset
+
+> GetDatabasePreset200Response GetDatabasePreset(ctx, presetId).Execute()
+
+Получение тарифа для базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    presetId := int32(56) // int32 | ID тарифа
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabasePreset(context.Background(), presetId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabasePreset``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabasePreset`: GetDatabasePreset200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabasePreset`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**presetId** | **int32** | ID тарифа | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabasePresetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetDatabasePreset200Response**](GetDatabasePreset200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabasePrivileges
+
+> GetDatabasePrivileges200Response GetDatabasePrivileges(ctx, dbClusterId).Execute()
+
+Получение привилегий кластера базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabasePrivileges(context.Background(), dbClusterId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabasePrivileges``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabasePrivileges`: GetDatabasePrivileges200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabasePrivileges`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbClusterId** | **int32** | ID кластера базы данных | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabasePrivilegesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetDatabasePrivileges200Response**](GetDatabasePrivileges200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabaseS3Backup
+
+> CreateDatabaseS3Backup201Response GetDatabaseS3Backup(ctx, dbId, backupId).Execute()
+
+Получение S3-бэкапа базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID резервной копии в формате UUID
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabaseS3Backup(context.Background(), dbId, backupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseS3Backup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabaseS3Backup`: CreateDatabaseS3Backup201Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseS3Backup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **string** | ID резервной копии в формате UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabaseS3BackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**CreateDatabaseS3Backup201Response**](CreateDatabaseS3Backup201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatabaseS3Backups
+
+> GetDatabaseS3Backups200Response GetDatabaseS3Backups(ctx, dbId).Execute()
+
+Список S3-бэкапов базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.GetDatabaseS3Backups(context.Background(), dbId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabaseS3Backups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDatabaseS3Backups`: GetDatabaseS3Backups200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.GetDatabaseS3Backups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatabaseS3BackupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetDatabaseS3Backups200Response**](GetDatabaseS3Backups200Response.md)
 
 ### Authorization
 
@@ -1366,7 +2086,7 @@ Name | Type | Description  | Notes
 
 ## GetDatabasesPresets
 
-> GetDatabasesPresets200Response GetDatabasesPresets(ctx).DbId(dbId).Execute()
+> GetDatabasesPresets200Response GetDatabasesPresets(ctx).ClusterId(clusterId).WithUnavailable(withUnavailable).Execute()
 
 Получение списка тарифов для баз данных
 
@@ -1385,11 +2105,12 @@ import (
 )
 
 func main() {
-    dbId := int32(56) // int32 | ID базы данных (optional)
+    clusterId := int32(56) // int32 | ID кластера базы данных. Возвращает тарифы группы, в пределах которой доступна смена тарифа этого кластера (сценарий изменения кластера). (optional)
+    withUnavailable := true // bool | Включить в ответ тарифы, недоступные к заказу из-за нехватки свободных ресурсов. Учитывается только при запросе без `cluster_id`: вместе с `cluster_id` фильтр по свободным ресурсам и так не применяется. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DatabasesAPI.GetDatabasesPresets(context.Background()).DbId(dbId).Execute()
+    resp, r, err := apiClient.DatabasesAPI.GetDatabasesPresets(context.Background()).ClusterId(clusterId).WithUnavailable(withUnavailable).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.GetDatabasesPresets``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1410,7 +2131,8 @@ Other parameters are passed through a pointer to a apiGetDatabasesPresetsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dbId** | **int32** | ID базы данных | 
+ **clusterId** | **int32** | ID кластера базы данных. Возвращает тарифы группы, в пределах которой доступна смена тарифа этого кластера (сценарий изменения кластера). | 
+ **withUnavailable** | **bool** | Включить в ответ тарифы, недоступные к заказу из-за нехватки свободных ресурсов. Учитывается только при запросе без &#x60;cluster_id&#x60;: вместе с &#x60;cluster_id&#x60; фильтр по свободным ресурсам и так не применяется. | 
 
 ### Return type
 
@@ -1423,6 +2145,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PerformDatabaseClusterAction
+
+> PerformDatabaseClusterAction(ctx, dbClusterId).ClusterAction(clusterAction).Execute()
+
+Выполнение действия над кластером базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+    clusterAction := *openapiclient.NewClusterAction("reboot") // ClusterAction | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.DatabasesAPI.PerformDatabaseClusterAction(context.Background(), dbClusterId).ClusterAction(clusterAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.PerformDatabaseClusterAction``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbClusterId** | **int32** | ID кластера базы данных | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPerformDatabaseClusterActionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **clusterAction** | [**ClusterAction**](ClusterAction.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1501,9 +2293,80 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RestoreDatabaseFromS3Backup
+
+> RestoreDatabaseFromS3Backup(ctx, dbId, backupId).Execute()
+
+Восстановление базы данных из S3-бэкапа
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID резервной копии в формате UUID
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.DatabasesAPI.RestoreDatabaseFromS3Backup(context.Background(), dbId, backupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.RestoreDatabaseFromS3Backup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **string** | ID резервной копии в формате UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreDatabaseFromS3BackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateDatabaseAutoBackupsSettings
 
-> GetDatabaseAutoBackupsSettings200Response UpdateDatabaseAutoBackupsSettings(ctx, dbId).AutoBackup(autoBackup).Execute()
+> GetDatabaseAutoBackupsSettings200Response UpdateDatabaseAutoBackupsSettings(ctx, dbId).UpdateAutoBackup(updateAutoBackup).Execute()
 
 Изменение настроек автобэкапов базы данных
 
@@ -1523,11 +2386,11 @@ import (
 
 func main() {
     dbId := int32(56) // int32 | ID базы данных
-    autoBackup := *openapiclient.NewAutoBackup(true) // AutoBackup | При значении `is_enabled`: `true`, поля `copy_count`, `creation_start_at`, `interval` являются обязательными (optional)
+    updateAutoBackup := *openapiclient.NewUpdateAutoBackup(true) // UpdateAutoBackup | При значении `is_enabled`: `true`, поля `copy_count`, `creation_start_at`, `interval` являются обязательными
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DatabasesAPI.UpdateDatabaseAutoBackupsSettings(context.Background(), dbId).AutoBackup(autoBackup).Execute()
+    resp, r, err := apiClient.DatabasesAPI.UpdateDatabaseAutoBackupsSettings(context.Background(), dbId).UpdateAutoBackup(updateAutoBackup).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.UpdateDatabaseAutoBackupsSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1553,7 +2416,7 @@ Other parameters are passed through a pointer to a apiUpdateDatabaseAutoBackupsS
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **autoBackup** | [**AutoBackup**](AutoBackup.md) | При значении &#x60;is_enabled&#x60;: &#x60;true&#x60;, поля &#x60;copy_count&#x60;, &#x60;creation_start_at&#x60;, &#x60;interval&#x60; являются обязательными | 
+ **updateAutoBackup** | [**UpdateAutoBackup**](UpdateAutoBackup.md) | При значении &#x60;is_enabled&#x60;: &#x60;true&#x60;, поля &#x60;copy_count&#x60;, &#x60;creation_start_at&#x60;, &#x60;interval&#x60; являются обязательными | 
 
 ### Return type
 
@@ -1573,9 +2436,84 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateDatabaseBackup
+
+> GetDatabaseBackup200Response UpdateDatabaseBackup(ctx, dbId, backupId).DbsUpdateBackup(dbsUpdateBackup).Execute()
+
+Изменение комментария к бэкапу базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := int32(56) // int32 | ID резервной копии
+    dbsUpdateBackup := *openapiclient.NewDbsUpdateBackup("Бэкап перед обновлением") // DbsUpdateBackup | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.UpdateDatabaseBackup(context.Background(), dbId, backupId).DbsUpdateBackup(dbsUpdateBackup).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.UpdateDatabaseBackup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateDatabaseBackup`: GetDatabaseBackup200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.UpdateDatabaseBackup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **int32** | ID резервной копии | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateDatabaseBackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **dbsUpdateBackup** | [**DbsUpdateBackup**](DbsUpdateBackup.md) |  | 
+
+### Return type
+
+[**GetDatabaseBackup200Response**](GetDatabaseBackup200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateDatabaseCluster
 
-> CreateDatabaseCluster201Response UpdateDatabaseCluster(ctx, dbClusterId).UpdateCluster(updateCluster).Execute()
+> UpdateDatabaseCluster200Response UpdateDatabaseCluster(ctx, dbClusterId).UpdateCluster(updateCluster).Execute()
 
 Изменение кластера базы данных
 
@@ -1604,7 +2542,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.UpdateDatabaseCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateDatabaseCluster`: CreateDatabaseCluster201Response
+    // response from `UpdateDatabaseCluster`: UpdateDatabaseCluster200Response
     fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.UpdateDatabaseCluster`: %v\n", resp)
 }
 ```
@@ -1629,7 +2567,79 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateDatabaseCluster201Response**](CreateDatabaseCluster201Response.md)
+[**UpdateDatabaseCluster200Response**](UpdateDatabaseCluster200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateDatabaseClusterV2
+
+> UpdateDatabaseCluster200Response UpdateDatabaseClusterV2(ctx, dbClusterId).UpdateClusterV2(updateClusterV2).Execute()
+
+Изменение кластера базы данных (v2)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbClusterId := int32(56) // int32 | ID кластера базы данных
+    updateClusterV2 := *openapiclient.NewUpdateClusterV2() // UpdateClusterV2 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.UpdateDatabaseClusterV2(context.Background(), dbClusterId).UpdateClusterV2(updateClusterV2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.UpdateDatabaseClusterV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateDatabaseClusterV2`: UpdateDatabaseCluster200Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.UpdateDatabaseClusterV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbClusterId** | **int32** | ID кластера базы данных | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateDatabaseClusterV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateClusterV2** | [**UpdateClusterV2**](UpdateClusterV2.md) |  | 
+
+### Return type
+
+[**UpdateDatabaseCluster200Response**](UpdateDatabaseCluster200Response.md)
 
 ### Authorization
 
@@ -1647,7 +2657,7 @@ Name | Type | Description  | Notes
 
 ## UpdateDatabaseInstance
 
-> CreateDatabaseInstance201Response UpdateDatabaseInstance(ctx, dbClusterId).UpdateInstance(updateInstance).Execute()
+> CreateDatabaseInstance201Response UpdateDatabaseInstance(ctx, dbClusterId, instanceId).UpdateInstance(updateInstance).Execute()
 
 Изменение инстанса базы данных
 
@@ -1667,11 +2677,12 @@ import (
 
 func main() {
     dbClusterId := int32(56) // int32 | ID кластера базы данных
+    instanceId := int32(56) // int32 | ID инстанса базы данных
     updateInstance := *openapiclient.NewUpdateInstance() // UpdateInstance | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DatabasesAPI.UpdateDatabaseInstance(context.Background(), dbClusterId).UpdateInstance(updateInstance).Execute()
+    resp, r, err := apiClient.DatabasesAPI.UpdateDatabaseInstance(context.Background(), dbClusterId, instanceId).UpdateInstance(updateInstance).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.UpdateDatabaseInstance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1688,6 +2699,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **dbClusterId** | **int32** | ID кластера базы данных | 
+**instanceId** | **int32** | ID инстанса базы данных | 
 
 ### Other Parameters
 
@@ -1697,11 +2709,87 @@ Other parameters are passed through a pointer to a apiUpdateDatabaseInstanceRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+
  **updateInstance** | [**UpdateInstance**](UpdateInstance.md) |  | 
 
 ### Return type
 
 [**CreateDatabaseInstance201Response**](CreateDatabaseInstance201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateDatabaseS3Backup
+
+> CreateDatabaseS3Backup201Response UpdateDatabaseS3Backup(ctx, dbId, backupId).UpdateS3Backup(updateS3Backup).Execute()
+
+Изменение комментария S3-бэкапа базы данных
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    dbId := int32(56) // int32 | ID базы данных
+    backupId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID резервной копии в формате UUID
+    updateS3Backup := *openapiclient.NewUpdateS3Backup() // UpdateS3Backup |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DatabasesAPI.UpdateDatabaseS3Backup(context.Background(), dbId, backupId).UpdateS3Backup(updateS3Backup).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DatabasesAPI.UpdateDatabaseS3Backup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateDatabaseS3Backup`: CreateDatabaseS3Backup201Response
+    fmt.Fprintf(os.Stdout, "Response from `DatabasesAPI.UpdateDatabaseS3Backup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dbId** | **int32** | ID базы данных | 
+**backupId** | **string** | ID резервной копии в формате UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateDatabaseS3BackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateS3Backup** | [**UpdateS3Backup**](UpdateS3Backup.md) |  | 
+
+### Return type
+
+[**CreateDatabaseS3Backup201Response**](CreateDatabaseS3Backup201Response.md)
 
 ### Authorization
 

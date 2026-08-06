@@ -1232,7 +1232,7 @@ Name | Type | Description  | Notes
 
 ## GetServerDiskAutoBackupSettings
 
-> GetServerDiskAutoBackupSettings200Response GetServerDiskAutoBackupSettings(ctx, serverId, diskId).Execute()
+> GetDatabaseAutoBackupsSettings200Response GetServerDiskAutoBackupSettings(ctx, serverId, diskId).Execute()
 
 Получить настройки автобэкапов диска сервера
 
@@ -1261,7 +1261,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.GetServerDiskAutoBackupSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetServerDiskAutoBackupSettings`: GetServerDiskAutoBackupSettings200Response
+    // response from `GetServerDiskAutoBackupSettings`: GetDatabaseAutoBackupsSettings200Response
     fmt.Fprintf(os.Stdout, "Response from `ServersAPI.GetServerDiskAutoBackupSettings`: %v\n", resp)
 }
 ```
@@ -1287,7 +1287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetServerDiskAutoBackupSettings200Response**](GetServerDiskAutoBackupSettings200Response.md)
+[**GetDatabaseAutoBackupsSettings200Response**](GetDatabaseAutoBackupsSettings200Response.md)
 
 ### Authorization
 
@@ -2850,7 +2850,7 @@ Name | Type | Description  | Notes
 
 ## UpdateServerDiskAutoBackupSettings
 
-> GetServerDiskAutoBackupSettings200Response UpdateServerDiskAutoBackupSettings(ctx, serverId, diskId).AutoBackup(autoBackup).Execute()
+> GetDatabaseAutoBackupsSettings200Response UpdateServerDiskAutoBackupSettings(ctx, serverId, diskId).AutoBackup(autoBackup).Execute()
 
 Изменение настроек автобэкапов диска сервера
 
@@ -2880,7 +2880,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.UpdateServerDiskAutoBackupSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateServerDiskAutoBackupSettings`: GetServerDiskAutoBackupSettings200Response
+    // response from `UpdateServerDiskAutoBackupSettings`: GetDatabaseAutoBackupsSettings200Response
     fmt.Fprintf(os.Stdout, "Response from `ServersAPI.UpdateServerDiskAutoBackupSettings`: %v\n", resp)
 }
 ```
@@ -2907,7 +2907,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetServerDiskAutoBackupSettings200Response**](GetServerDiskAutoBackupSettings200Response.md)
+[**GetDatabaseAutoBackupsSettings200Response**](GetDatabaseAutoBackupsSettings200Response.md)
 
 ### Authorization
 

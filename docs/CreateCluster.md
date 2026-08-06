@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **Admin** | Pointer to [**CreateClusterAdmin**](CreateClusterAdmin.md) |  | [optional] 
 **Instance** | Pointer to [**CreateClusterInstance**](CreateClusterInstance.md) |  | [optional] 
 **HashType** | Pointer to **string** | Тип хеширования базы данных (mysql | postgres). | [optional] 
-**PresetId** | Pointer to **int32** | ID тарифа. Нельзя передавать вместе с &#x60;configurator_id&#x60; | [optional] 
-**ConfiguratorId** | Pointer to **int32** | ID конфигуратора. Нельзя передавать вместе с &#x60;preset_id&#x60; | [optional] 
+**PresetId** | Pointer to **int32** | ID тарифа. Нельзя передавать вместе с &#x60;configuration&#x60; | [optional] 
+**Configuration** | Pointer to [**CreateClusterConfiguration**](CreateClusterConfiguration.md) |  | [optional] 
 **ProjectId** | Pointer to **int32** | ID проекта. | [optional] 
 **ConfigParameters** | Pointer to [**Mysql**](Mysql.md) |  | [optional] 
 **Replication** | Pointer to [**DbReplication**](DbReplication.md) |  | [optional] 
@@ -19,6 +19,9 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Описание кластера базы данных | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 **AutoBackups** | Pointer to [**CreateDbAutoBackups**](CreateDbAutoBackups.md) |  | [optional] 
+**BackupSchedule** | Pointer to [**CreateClusterBackupSchedule**](CreateClusterBackupSchedule.md) |  | [optional] 
+**MaintenanceSlot** | Pointer to [**CreateClusterMaintenanceSlot**](CreateClusterMaintenanceSlot.md) |  | [optional] 
+**DiskAutoscaling** | Pointer to [**CreateClusterDiskAutoscaling**](CreateClusterDiskAutoscaling.md) |  | [optional] 
 
 ## Methods
 
@@ -179,30 +182,30 @@ SetPresetId sets PresetId field to given value.
 
 HasPresetId returns a boolean if a field has been set.
 
-### GetConfiguratorId
+### GetConfiguration
 
-`func (o *CreateCluster) GetConfiguratorId() int32`
+`func (o *CreateCluster) GetConfiguration() CreateClusterConfiguration`
 
-GetConfiguratorId returns the ConfiguratorId field if non-nil, zero value otherwise.
+GetConfiguration returns the Configuration field if non-nil, zero value otherwise.
 
-### GetConfiguratorIdOk
+### GetConfigurationOk
 
-`func (o *CreateCluster) GetConfiguratorIdOk() (*int32, bool)`
+`func (o *CreateCluster) GetConfigurationOk() (*CreateClusterConfiguration, bool)`
 
-GetConfiguratorIdOk returns a tuple with the ConfiguratorId field if it's non-nil, zero value otherwise
+GetConfigurationOk returns a tuple with the Configuration field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConfiguratorId
+### SetConfiguration
 
-`func (o *CreateCluster) SetConfiguratorId(v int32)`
+`func (o *CreateCluster) SetConfiguration(v CreateClusterConfiguration)`
 
-SetConfiguratorId sets ConfiguratorId field to given value.
+SetConfiguration sets Configuration field to given value.
 
-### HasConfiguratorId
+### HasConfiguration
 
-`func (o *CreateCluster) HasConfiguratorId() bool`
+`func (o *CreateCluster) HasConfiguration() bool`
 
-HasConfiguratorId returns a boolean if a field has been set.
+HasConfiguration returns a boolean if a field has been set.
 
 ### GetProjectId
 
@@ -403,6 +406,81 @@ SetAutoBackups sets AutoBackups field to given value.
 `func (o *CreateCluster) HasAutoBackups() bool`
 
 HasAutoBackups returns a boolean if a field has been set.
+
+### GetBackupSchedule
+
+`func (o *CreateCluster) GetBackupSchedule() CreateClusterBackupSchedule`
+
+GetBackupSchedule returns the BackupSchedule field if non-nil, zero value otherwise.
+
+### GetBackupScheduleOk
+
+`func (o *CreateCluster) GetBackupScheduleOk() (*CreateClusterBackupSchedule, bool)`
+
+GetBackupScheduleOk returns a tuple with the BackupSchedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupSchedule
+
+`func (o *CreateCluster) SetBackupSchedule(v CreateClusterBackupSchedule)`
+
+SetBackupSchedule sets BackupSchedule field to given value.
+
+### HasBackupSchedule
+
+`func (o *CreateCluster) HasBackupSchedule() bool`
+
+HasBackupSchedule returns a boolean if a field has been set.
+
+### GetMaintenanceSlot
+
+`func (o *CreateCluster) GetMaintenanceSlot() CreateClusterMaintenanceSlot`
+
+GetMaintenanceSlot returns the MaintenanceSlot field if non-nil, zero value otherwise.
+
+### GetMaintenanceSlotOk
+
+`func (o *CreateCluster) GetMaintenanceSlotOk() (*CreateClusterMaintenanceSlot, bool)`
+
+GetMaintenanceSlotOk returns a tuple with the MaintenanceSlot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaintenanceSlot
+
+`func (o *CreateCluster) SetMaintenanceSlot(v CreateClusterMaintenanceSlot)`
+
+SetMaintenanceSlot sets MaintenanceSlot field to given value.
+
+### HasMaintenanceSlot
+
+`func (o *CreateCluster) HasMaintenanceSlot() bool`
+
+HasMaintenanceSlot returns a boolean if a field has been set.
+
+### GetDiskAutoscaling
+
+`func (o *CreateCluster) GetDiskAutoscaling() CreateClusterDiskAutoscaling`
+
+GetDiskAutoscaling returns the DiskAutoscaling field if non-nil, zero value otherwise.
+
+### GetDiskAutoscalingOk
+
+`func (o *CreateCluster) GetDiskAutoscalingOk() (*CreateClusterDiskAutoscaling, bool)`
+
+GetDiskAutoscalingOk returns a tuple with the DiskAutoscaling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiskAutoscaling
+
+`func (o *CreateCluster) SetDiskAutoscaling(v CreateClusterDiskAutoscaling)`
+
+SetDiskAutoscaling sets DiskAutoscaling field to given value.
+
+### HasDiskAutoscaling
+
+`func (o *CreateCluster) HasDiskAutoscaling() bool`
+
+HasDiskAutoscaling returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

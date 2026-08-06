@@ -22,6 +22,8 @@ var _ MappedNullable = &Valkey{}
 type Valkey struct {
 	// Ограничение буфера вывода для обычных клиентских подключений. Формат: `hard-limit soft-limit soft-seconds` (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
 	ClientOutputBufferLimitNormal *string `json:"client-output-buffer-limit normal,omitempty"`
+	// Настройка уведомлений о событиях пространства ключей (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
+	NotifyKeyspaceEvents *string `json:"notify-keyspace-events,omitempty"`
 	// Ограничение буфера вывода для клиентов pub/sub. Формат: `hard-limit soft-limit soft-seconds` (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
 	ClientOutputBufferLimitPubsub *string `json:"client-output-buffer-limit pubsub,omitempty"`
 	// Количество логических баз данных на сервере (`valkey` | `valkey7` | `valkey8_1` | `valkey9_1`).
@@ -91,6 +93,38 @@ func (o *Valkey) HasClientOutputBufferLimitNormal() bool {
 // SetClientOutputBufferLimitNormal gets a reference to the given string and assigns it to the ClientOutputBufferLimitNormal field.
 func (o *Valkey) SetClientOutputBufferLimitNormal(v string) {
 	o.ClientOutputBufferLimitNormal = &v
+}
+
+// GetNotifyKeyspaceEvents returns the NotifyKeyspaceEvents field value if set, zero value otherwise.
+func (o *Valkey) GetNotifyKeyspaceEvents() string {
+	if o == nil || IsNil(o.NotifyKeyspaceEvents) {
+		var ret string
+		return ret
+	}
+	return *o.NotifyKeyspaceEvents
+}
+
+// GetNotifyKeyspaceEventsOk returns a tuple with the NotifyKeyspaceEvents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Valkey) GetNotifyKeyspaceEventsOk() (*string, bool) {
+	if o == nil || IsNil(o.NotifyKeyspaceEvents) {
+		return nil, false
+	}
+	return o.NotifyKeyspaceEvents, true
+}
+
+// HasNotifyKeyspaceEvents returns a boolean if a field has been set.
+func (o *Valkey) HasNotifyKeyspaceEvents() bool {
+	if o != nil && !IsNil(o.NotifyKeyspaceEvents) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifyKeyspaceEvents gets a reference to the given string and assigns it to the NotifyKeyspaceEvents field.
+func (o *Valkey) SetNotifyKeyspaceEvents(v string) {
+	o.NotifyKeyspaceEvents = &v
 }
 
 // GetClientOutputBufferLimitPubsub returns the ClientOutputBufferLimitPubsub field value if set, zero value otherwise.
@@ -425,6 +459,9 @@ func (o Valkey) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ClientOutputBufferLimitNormal) {
 		toSerialize["client-output-buffer-limit normal"] = o.ClientOutputBufferLimitNormal
+	}
+	if !IsNil(o.NotifyKeyspaceEvents) {
+		toSerialize["notify-keyspace-events"] = o.NotifyKeyspaceEvents
 	}
 	if !IsNil(o.ClientOutputBufferLimitPubsub) {
 		toSerialize["client-output-buffer-limit pubsub"] = o.ClientOutputBufferLimitPubsub

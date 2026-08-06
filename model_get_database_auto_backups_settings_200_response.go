@@ -20,17 +20,15 @@ var _ MappedNullable = &GetDatabaseAutoBackupsSettings200Response{}
 
 // GetDatabaseAutoBackupsSettings200Response struct for GetDatabaseAutoBackupsSettings200Response
 type GetDatabaseAutoBackupsSettings200Response struct {
-	Meta Meta `json:"meta"`
-	AutoBackupsSettings []AutoBackup `json:"auto_backups_settings"`
+	AutoBackupsSettings AutoBackup `json:"auto_backups_settings"`
 }
 
 // NewGetDatabaseAutoBackupsSettings200Response instantiates a new GetDatabaseAutoBackupsSettings200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDatabaseAutoBackupsSettings200Response(meta Meta, autoBackupsSettings []AutoBackup) *GetDatabaseAutoBackupsSettings200Response {
+func NewGetDatabaseAutoBackupsSettings200Response(autoBackupsSettings AutoBackup) *GetDatabaseAutoBackupsSettings200Response {
 	this := GetDatabaseAutoBackupsSettings200Response{}
-	this.Meta = meta
 	this.AutoBackupsSettings = autoBackupsSettings
 	return &this
 }
@@ -43,34 +41,10 @@ func NewGetDatabaseAutoBackupsSettings200ResponseWithDefaults() *GetDatabaseAuto
 	return &this
 }
 
-// GetMeta returns the Meta field value
-func (o *GetDatabaseAutoBackupsSettings200Response) GetMeta() Meta {
-	if o == nil {
-		var ret Meta
-		return ret
-	}
-
-	return o.Meta
-}
-
-// GetMetaOk returns a tuple with the Meta field value
-// and a boolean to check if the value has been set.
-func (o *GetDatabaseAutoBackupsSettings200Response) GetMetaOk() (*Meta, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Meta, true
-}
-
-// SetMeta sets field value
-func (o *GetDatabaseAutoBackupsSettings200Response) SetMeta(v Meta) {
-	o.Meta = v
-}
-
 // GetAutoBackupsSettings returns the AutoBackupsSettings field value
-func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettings() []AutoBackup {
+func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettings() AutoBackup {
 	if o == nil {
-		var ret []AutoBackup
+		var ret AutoBackup
 		return ret
 	}
 
@@ -79,15 +53,15 @@ func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettings() []A
 
 // GetAutoBackupsSettingsOk returns a tuple with the AutoBackupsSettings field value
 // and a boolean to check if the value has been set.
-func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettingsOk() ([]AutoBackup, bool) {
+func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettingsOk() (*AutoBackup, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.AutoBackupsSettings, true
+	return &o.AutoBackupsSettings, true
 }
 
 // SetAutoBackupsSettings sets field value
-func (o *GetDatabaseAutoBackupsSettings200Response) SetAutoBackupsSettings(v []AutoBackup) {
+func (o *GetDatabaseAutoBackupsSettings200Response) SetAutoBackupsSettings(v AutoBackup) {
 	o.AutoBackupsSettings = v
 }
 
@@ -101,7 +75,6 @@ func (o GetDatabaseAutoBackupsSettings200Response) MarshalJSON() ([]byte, error)
 
 func (o GetDatabaseAutoBackupsSettings200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["meta"] = o.Meta
 	toSerialize["auto_backups_settings"] = o.AutoBackupsSettings
 	return toSerialize, nil
 }

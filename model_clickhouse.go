@@ -21,14 +21,11 @@ type Clickhouse string
 
 // List of clickhouse
 const (
-	ALTER Clickhouse = "ALTER"
 	ALTER_TABLE Clickhouse = "ALTER_TABLE"
 	ALTER_VIEW Clickhouse = "ALTER_VIEW"
-	CREATE Clickhouse = "CREATE"
 	CREATE_VIEW Clickhouse = "CREATE_VIEW"
 	CREATE_DICTIONARY Clickhouse = "CREATE_DICTIONARY"
 	CREATE_TABLE Clickhouse = "CREATE_TABLE"
-	DROP Clickhouse = "DROP"
 	DROP_TABLE Clickhouse = "DROP_TABLE"
 	DROP_VIEW Clickhouse = "DROP_VIEW"
 	DROP_DICTIONARY Clickhouse = "DROP_DICTIONARY"
@@ -43,14 +40,11 @@ const (
 
 // All allowed values of Clickhouse enum
 var AllowedClickhouseEnumValues = []Clickhouse{
-	"ALTER",
 	"ALTER_TABLE",
 	"ALTER_VIEW",
-	"CREATE",
 	"CREATE_VIEW",
 	"CREATE_DICTIONARY",
 	"CREATE_TABLE",
-	"DROP",
 	"DROP_TABLE",
 	"DROP_VIEW",
 	"DROP_DICTIONARY",

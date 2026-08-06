@@ -20,17 +20,17 @@ var _ MappedNullable = &DatabaseClusterNetworksInnerIpsInner{}
 
 // DatabaseClusterNetworksInnerIpsInner struct for DatabaseClusterNetworksInnerIpsInner
 type DatabaseClusterNetworksInnerIpsInner struct {
-	// Тип IP-адреса сети
+	// Тип IP-адреса сети.
 	Type string `json:"type"`
-	// IP-адрес сети
-	Ip string `json:"ip"`
+	// IP-адрес сети.
+	Ip NullableString `json:"ip"`
 }
 
 // NewDatabaseClusterNetworksInnerIpsInner instantiates a new DatabaseClusterNetworksInnerIpsInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseClusterNetworksInnerIpsInner(type_ string, ip string) *DatabaseClusterNetworksInnerIpsInner {
+func NewDatabaseClusterNetworksInnerIpsInner(type_ string, ip NullableString) *DatabaseClusterNetworksInnerIpsInner {
 	this := DatabaseClusterNetworksInnerIpsInner{}
 	this.Type = type_
 	this.Ip = ip
@@ -70,27 +70,29 @@ func (o *DatabaseClusterNetworksInnerIpsInner) SetType(v string) {
 }
 
 // GetIp returns the Ip field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DatabaseClusterNetworksInnerIpsInner) GetIp() string {
-	if o == nil {
+	if o == nil || o.Ip.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Ip
+	return *o.Ip.Get()
 }
 
 // GetIpOk returns a tuple with the Ip field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DatabaseClusterNetworksInnerIpsInner) GetIpOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ip, true
+	return o.Ip.Get(), o.Ip.IsSet()
 }
 
 // SetIp sets field value
 func (o *DatabaseClusterNetworksInnerIpsInner) SetIp(v string) {
-	o.Ip = v
+	o.Ip.Set(&v)
 }
 
 func (o DatabaseClusterNetworksInnerIpsInner) MarshalJSON() ([]byte, error) {
@@ -104,7 +106,7 @@ func (o DatabaseClusterNetworksInnerIpsInner) MarshalJSON() ([]byte, error) {
 func (o DatabaseClusterNetworksInnerIpsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
-	toSerialize["ip"] = o.Ip
+	toSerialize["ip"] = o.Ip.Get()
 	return toSerialize, nil
 }
 

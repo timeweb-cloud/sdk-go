@@ -133,7 +133,7 @@ func (a *DomainsAPIService) AddDomainExecute(r ApiAddDomainRequest) (*http.Respo
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -787,7 +787,7 @@ func (a *DomainsAPIService) CreateDomainDNSRecordV2Execute(r ApiCreateDomainDNSR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -953,7 +953,7 @@ func (a *DomainsAPIService) CreateDomainRequestExecute(r ApiCreateDomainRequestR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1274,7 +1274,7 @@ func (a *DomainsAPIService) DeleteDomainExecute(r ApiDeleteDomainRequest) (*http
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1884,7 +1884,7 @@ func (a *DomainsAPIService) DeleteSubdomainExecute(r ApiDeleteSubdomainRequest) 
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3887,7 +3887,7 @@ func (a *DomainsAPIService) UpdateDomainAutoProlongationExecute(r ApiUpdateDomai
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4249,7 +4249,7 @@ func (a *DomainsAPIService) UpdateDomainDNSRecordV2Execute(r ApiUpdateDomainDNSR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4600,7 +4600,7 @@ func (a *DomainsAPIService) UpdateDomainRequestExecute(r ApiUpdateDomainRequestR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -8,12 +8,15 @@ Name | Type | Description | Notes
 **CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана база данных. | 
 **Name** | **string** | Название базы данных. | 
 **Description** | **string** | Описание базы данных | 
+**Extensions** | [**DatabaseExtensions**](DatabaseExtensions.md) |  | 
+**OwnerId** | **NullableFloat32** | ID администратора базы данных, который является владельцем этой базы данных. &#x60;null&#x60;, если владелец не задан. | 
+**ConfigParameters** | [**KafkaConfigParameters**](KafkaConfigParameters.md) |  | 
 
 ## Methods
 
 ### NewDatabaseInstance
 
-`func NewDatabaseInstance(id float32, createdAt string, name string, description string, ) *DatabaseInstance`
+`func NewDatabaseInstance(id float32, createdAt string, name string, description string, extensions DatabaseExtensions, ownerId NullableFloat32, configParameters KafkaConfigParameters, ) *DatabaseInstance`
 
 NewDatabaseInstance instantiates a new DatabaseInstance object
 This constructor will assign default values to properties that have it defined,
@@ -106,6 +109,76 @@ and a boolean to check if the value has been set.
 `func (o *DatabaseInstance) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
+
+
+### GetExtensions
+
+`func (o *DatabaseInstance) GetExtensions() DatabaseExtensions`
+
+GetExtensions returns the Extensions field if non-nil, zero value otherwise.
+
+### GetExtensionsOk
+
+`func (o *DatabaseInstance) GetExtensionsOk() (*DatabaseExtensions, bool)`
+
+GetExtensionsOk returns a tuple with the Extensions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtensions
+
+`func (o *DatabaseInstance) SetExtensions(v DatabaseExtensions)`
+
+SetExtensions sets Extensions field to given value.
+
+
+### GetOwnerId
+
+`func (o *DatabaseInstance) GetOwnerId() float32`
+
+GetOwnerId returns the OwnerId field if non-nil, zero value otherwise.
+
+### GetOwnerIdOk
+
+`func (o *DatabaseInstance) GetOwnerIdOk() (*float32, bool)`
+
+GetOwnerIdOk returns a tuple with the OwnerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwnerId
+
+`func (o *DatabaseInstance) SetOwnerId(v float32)`
+
+SetOwnerId sets OwnerId field to given value.
+
+
+### SetOwnerIdNil
+
+`func (o *DatabaseInstance) SetOwnerIdNil(b bool)`
+
+ SetOwnerIdNil sets the value for OwnerId to be an explicit nil
+
+### UnsetOwnerId
+`func (o *DatabaseInstance) UnsetOwnerId()`
+
+UnsetOwnerId ensures that no value is present for OwnerId, not even an explicit nil
+### GetConfigParameters
+
+`func (o *DatabaseInstance) GetConfigParameters() KafkaConfigParameters`
+
+GetConfigParameters returns the ConfigParameters field if non-nil, zero value otherwise.
+
+### GetConfigParametersOk
+
+`func (o *DatabaseInstance) GetConfigParametersOk() (*KafkaConfigParameters, bool)`
+
+GetConfigParametersOk returns a tuple with the ConfigParameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigParameters
+
+`func (o *DatabaseInstance) SetConfigParameters(v KafkaConfigParameters)`
+
+SetConfigParameters sets ConfigParameters field to given value.
 
 
 

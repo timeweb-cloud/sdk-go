@@ -20,6 +20,8 @@ var _ MappedNullable = &UpdateAdmin{}
 
 // UpdateAdmin struct for UpdateAdmin
 type UpdateAdmin struct {
+	// Новое имя пользователя базы данных. Переименование доступно только в кластерах PostgreSQL
+	Login *string `json:"login,omitempty"`
 	// Пароль пользователя базы данных
 	Password *string `json:"password,omitempty"`
 	// Список привилегий пользователя базы данных
@@ -28,6 +30,8 @@ type UpdateAdmin struct {
 	Description *string `json:"description,omitempty"`
 	// ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам
 	InstanceId *float32 `json:"instance_id,omitempty"`
+	// Выдать привилегии на все инстансы базы данных
+	ForAll *bool `json:"for_all,omitempty"`
 }
 
 // NewUpdateAdmin instantiates a new UpdateAdmin object
@@ -45,6 +49,38 @@ func NewUpdateAdmin() *UpdateAdmin {
 func NewUpdateAdminWithDefaults() *UpdateAdmin {
 	this := UpdateAdmin{}
 	return &this
+}
+
+// GetLogin returns the Login field value if set, zero value otherwise.
+func (o *UpdateAdmin) GetLogin() string {
+	if o == nil || IsNil(o.Login) {
+		var ret string
+		return ret
+	}
+	return *o.Login
+}
+
+// GetLoginOk returns a tuple with the Login field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAdmin) GetLoginOk() (*string, bool) {
+	if o == nil || IsNil(o.Login) {
+		return nil, false
+	}
+	return o.Login, true
+}
+
+// HasLogin returns a boolean if a field has been set.
+func (o *UpdateAdmin) HasLogin() bool {
+	if o != nil && !IsNil(o.Login) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogin gets a reference to the given string and assigns it to the Login field.
+func (o *UpdateAdmin) SetLogin(v string) {
+	o.Login = &v
 }
 
 // GetPassword returns the Password field value if set, zero value otherwise.
@@ -175,6 +211,38 @@ func (o *UpdateAdmin) SetInstanceId(v float32) {
 	o.InstanceId = &v
 }
 
+// GetForAll returns the ForAll field value if set, zero value otherwise.
+func (o *UpdateAdmin) GetForAll() bool {
+	if o == nil || IsNil(o.ForAll) {
+		var ret bool
+		return ret
+	}
+	return *o.ForAll
+}
+
+// GetForAllOk returns a tuple with the ForAll field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAdmin) GetForAllOk() (*bool, bool) {
+	if o == nil || IsNil(o.ForAll) {
+		return nil, false
+	}
+	return o.ForAll, true
+}
+
+// HasForAll returns a boolean if a field has been set.
+func (o *UpdateAdmin) HasForAll() bool {
+	if o != nil && !IsNil(o.ForAll) {
+		return true
+	}
+
+	return false
+}
+
+// SetForAll gets a reference to the given bool and assigns it to the ForAll field.
+func (o *UpdateAdmin) SetForAll(v bool) {
+	o.ForAll = &v
+}
+
 func (o UpdateAdmin) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -185,6 +253,9 @@ func (o UpdateAdmin) MarshalJSON() ([]byte, error) {
 
 func (o UpdateAdmin) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Login) {
+		toSerialize["login"] = o.Login
+	}
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password
 	}
@@ -196,6 +267,9 @@ func (o UpdateAdmin) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.InstanceId) {
 		toSerialize["instance_id"] = o.InstanceId
+	}
+	if !IsNil(o.ForAll) {
+		toSerialize["for_all"] = o.ForAll
 	}
 	return toSerialize, nil
 }

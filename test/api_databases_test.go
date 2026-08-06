@@ -36,6 +36,21 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DatabasesAPIService CreateDatabaseBackupDownloadUrl", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+		var backupId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.CreateDatabaseBackupDownloadUrl(context.Background(), dbId, backupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DatabasesAPIService CreateDatabaseCluster", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -55,6 +70,20 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 		var dbClusterId int32
 
 		resp, httpRes, err := apiClient.DatabasesAPI.CreateDatabaseInstance(context.Background(), dbClusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService CreateDatabaseS3Backup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.CreateDatabaseS3Backup(context.Background(), dbId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -112,6 +141,20 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 		var instanceId int32
 
 		httpRes, err := apiClient.DatabasesAPI.DeleteDatabaseInstance(context.Background(), dbClusterId, instanceId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService DeleteDatabaseS3Backup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+		var backupId string
+
+		httpRes, err := apiClient.DatabasesAPI.DeleteDatabaseS3Backup(context.Background(), dbId, backupId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -189,6 +232,20 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DatabasesAPIService GetDatabaseClusterReplicas", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbClusterId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseClusterReplicas(context.Background(), dbClusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DatabasesAPIService GetDatabaseClusterTypes", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -206,6 +263,30 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseClusters(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService GetDatabaseConfigurators", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseConfigurators(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService GetDatabaseDefaultParameters", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseDefaultParameters(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -254,6 +335,63 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DatabasesAPIService GetDatabasePreset", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var presetId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabasePreset(context.Background(), presetId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService GetDatabasePrivileges", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbClusterId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabasePrivileges(context.Background(), dbClusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService GetDatabaseS3Backup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+		var backupId string
+
+		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseS3Backup(context.Background(), dbId, backupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService GetDatabaseS3Backups", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.GetDatabaseS3Backups(context.Background(), dbId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DatabasesAPIService GetDatabaseUser", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -295,6 +433,19 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DatabasesAPIService PerformDatabaseClusterAction", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbClusterId int32
+
+		httpRes, err := apiClient.DatabasesAPI.PerformDatabaseClusterAction(context.Background(), dbClusterId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DatabasesAPIService RestoreDatabaseFromBackup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -309,6 +460,20 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DatabasesAPIService RestoreDatabaseFromS3Backup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+		var backupId string
+
+		httpRes, err := apiClient.DatabasesAPI.RestoreDatabaseFromS3Backup(context.Background(), dbId, backupId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DatabasesAPIService UpdateDatabaseAutoBackupsSettings", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -316,6 +481,21 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 		var dbId int32
 
 		resp, httpRes, err := apiClient.DatabasesAPI.UpdateDatabaseAutoBackupsSettings(context.Background(), dbId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService UpdateDatabaseBackup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+		var backupId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.UpdateDatabaseBackup(context.Background(), dbId, backupId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -337,13 +517,43 @@ func Test_openapi_DatabasesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DatabasesAPIService UpdateDatabaseInstance", func(t *testing.T) {
+	t.Run("Test DatabasesAPIService UpdateDatabaseClusterV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var dbClusterId int32
 
-		resp, httpRes, err := apiClient.DatabasesAPI.UpdateDatabaseInstance(context.Background(), dbClusterId).Execute()
+		resp, httpRes, err := apiClient.DatabasesAPI.UpdateDatabaseClusterV2(context.Background(), dbClusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService UpdateDatabaseInstance", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbClusterId int32
+		var instanceId int32
+
+		resp, httpRes, err := apiClient.DatabasesAPI.UpdateDatabaseInstance(context.Background(), dbClusterId, instanceId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DatabasesAPIService UpdateDatabaseS3Backup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var dbId int32
+		var backupId string
+
+		resp, httpRes, err := apiClient.DatabasesAPI.UpdateDatabaseS3Backup(context.Background(), dbId, backupId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

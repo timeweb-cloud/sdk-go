@@ -22,7 +22,7 @@ var _ MappedNullable = &DatabaseAdmin{}
 type DatabaseAdmin struct {
 	// ID для каждого экземпляра пользователя базы данных. Автоматически генерируется при создании.
 	Id float32 `json:"id"`
-	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана база данных.
+	// Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан пользователь базы данных.
 	CreatedAt string `json:"created_at"`
 	// Имя пользователя базы данных
 	Login string `json:"login"`
@@ -32,6 +32,10 @@ type DatabaseAdmin struct {
 	Description string `json:"description"`
 	// Хост пользователя
 	Host NullableString `json:"host"`
+	// Флаг, выданы ли пользователю привилегии на все инстансы базы данных
+	ForAll bool `json:"for_all"`
+	// Флаг, был ли сброшен пароль пользователя
+	IsResetPassword bool `json:"is_reset_password"`
 	Instances []DatabaseAdminInstancesInner `json:"instances"`
 }
 
@@ -39,7 +43,7 @@ type DatabaseAdmin struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseAdmin(id float32, createdAt string, login string, password string, description string, host NullableString, instances []DatabaseAdminInstancesInner) *DatabaseAdmin {
+func NewDatabaseAdmin(id float32, createdAt string, login string, password string, description string, host NullableString, forAll bool, isResetPassword bool, instances []DatabaseAdminInstancesInner) *DatabaseAdmin {
 	this := DatabaseAdmin{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -47,6 +51,8 @@ func NewDatabaseAdmin(id float32, createdAt string, login string, password strin
 	this.Password = password
 	this.Description = description
 	this.Host = host
+	this.ForAll = forAll
+	this.IsResetPassword = isResetPassword
 	this.Instances = instances
 	return &this
 }
@@ -205,6 +211,54 @@ func (o *DatabaseAdmin) SetHost(v string) {
 	o.Host.Set(&v)
 }
 
+// GetForAll returns the ForAll field value
+func (o *DatabaseAdmin) GetForAll() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ForAll
+}
+
+// GetForAllOk returns a tuple with the ForAll field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseAdmin) GetForAllOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ForAll, true
+}
+
+// SetForAll sets field value
+func (o *DatabaseAdmin) SetForAll(v bool) {
+	o.ForAll = v
+}
+
+// GetIsResetPassword returns the IsResetPassword field value
+func (o *DatabaseAdmin) GetIsResetPassword() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsResetPassword
+}
+
+// GetIsResetPasswordOk returns a tuple with the IsResetPassword field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseAdmin) GetIsResetPasswordOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsResetPassword, true
+}
+
+// SetIsResetPassword sets field value
+func (o *DatabaseAdmin) SetIsResetPassword(v bool) {
+	o.IsResetPassword = v
+}
+
 // GetInstances returns the Instances field value
 func (o *DatabaseAdmin) GetInstances() []DatabaseAdminInstancesInner {
 	if o == nil {
@@ -245,6 +299,8 @@ func (o DatabaseAdmin) ToMap() (map[string]interface{}, error) {
 	toSerialize["password"] = o.Password
 	toSerialize["description"] = o.Description
 	toSerialize["host"] = o.Host.Get()
+	toSerialize["for_all"] = o.ForAll
+	toSerialize["is_reset_password"] = o.IsResetPassword
 	toSerialize["instances"] = o.Instances
 	return toSerialize, nil
 }

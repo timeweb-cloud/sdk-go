@@ -22,15 +22,22 @@ var _ MappedNullable = &UpdateCluster{}
 type UpdateCluster struct {
 	// Название кластера базы данных.
 	Name *string `json:"name,omitempty"`
-	// ID тарифа.
+	// ID тарифа. Нельзя передавать вместе с `configuration`
 	PresetId *int32 `json:"preset_id,omitempty"`
+	Configuration *UpdateClusterConfiguration `json:"configuration,omitempty"`
 	ConfigParameters *Mysql `json:"config_parameters,omitempty"`
+	// Тип хеширования базы данных (mysql | postgres).
+	HashType *string `json:"hash_type,omitempty"`
 	// Описание кластера базы данных
 	Description *string `json:"description,omitempty"`
 	// Доступность публичного IP-адреса
 	IsEnabledPublicNetwork *bool `json:"is_enabled_public_network,omitempty"`
-	// Использование IPv6 адреса.
-	IsPublicIpv6 *bool `json:"is_public_ipv6,omitempty"`
+	// Использование публичного IPv6-адреса.
+	IsEnabledPublicIpv6 *bool `json:"is_enabled_public_ipv6,omitempty"`
+	// Включить защищенное подключение к кластеру базы данных
+	IsSecureConnectionEnable *bool `json:"is_secure_connection_enable,omitempty"`
+	MaintenanceSlot *CreateClusterMaintenanceSlot `json:"maintenance_slot,omitempty"`
+	DiskAutoscaling *CreateClusterDiskAutoscaling `json:"disk_autoscaling,omitempty"`
 }
 
 // NewUpdateCluster instantiates a new UpdateCluster object
@@ -114,6 +121,38 @@ func (o *UpdateCluster) SetPresetId(v int32) {
 	o.PresetId = &v
 }
 
+// GetConfiguration returns the Configuration field value if set, zero value otherwise.
+func (o *UpdateCluster) GetConfiguration() UpdateClusterConfiguration {
+	if o == nil || IsNil(o.Configuration) {
+		var ret UpdateClusterConfiguration
+		return ret
+	}
+	return *o.Configuration
+}
+
+// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCluster) GetConfigurationOk() (*UpdateClusterConfiguration, bool) {
+	if o == nil || IsNil(o.Configuration) {
+		return nil, false
+	}
+	return o.Configuration, true
+}
+
+// HasConfiguration returns a boolean if a field has been set.
+func (o *UpdateCluster) HasConfiguration() bool {
+	if o != nil && !IsNil(o.Configuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguration gets a reference to the given UpdateClusterConfiguration and assigns it to the Configuration field.
+func (o *UpdateCluster) SetConfiguration(v UpdateClusterConfiguration) {
+	o.Configuration = &v
+}
+
 // GetConfigParameters returns the ConfigParameters field value if set, zero value otherwise.
 func (o *UpdateCluster) GetConfigParameters() Mysql {
 	if o == nil || IsNil(o.ConfigParameters) {
@@ -144,6 +183,38 @@ func (o *UpdateCluster) HasConfigParameters() bool {
 // SetConfigParameters gets a reference to the given Mysql and assigns it to the ConfigParameters field.
 func (o *UpdateCluster) SetConfigParameters(v Mysql) {
 	o.ConfigParameters = &v
+}
+
+// GetHashType returns the HashType field value if set, zero value otherwise.
+func (o *UpdateCluster) GetHashType() string {
+	if o == nil || IsNil(o.HashType) {
+		var ret string
+		return ret
+	}
+	return *o.HashType
+}
+
+// GetHashTypeOk returns a tuple with the HashType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCluster) GetHashTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.HashType) {
+		return nil, false
+	}
+	return o.HashType, true
+}
+
+// HasHashType returns a boolean if a field has been set.
+func (o *UpdateCluster) HasHashType() bool {
+	if o != nil && !IsNil(o.HashType) {
+		return true
+	}
+
+	return false
+}
+
+// SetHashType gets a reference to the given string and assigns it to the HashType field.
+func (o *UpdateCluster) SetHashType(v string) {
+	o.HashType = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -210,36 +281,132 @@ func (o *UpdateCluster) SetIsEnabledPublicNetwork(v bool) {
 	o.IsEnabledPublicNetwork = &v
 }
 
-// GetIsPublicIpv6 returns the IsPublicIpv6 field value if set, zero value otherwise.
-func (o *UpdateCluster) GetIsPublicIpv6() bool {
-	if o == nil || IsNil(o.IsPublicIpv6) {
+// GetIsEnabledPublicIpv6 returns the IsEnabledPublicIpv6 field value if set, zero value otherwise.
+func (o *UpdateCluster) GetIsEnabledPublicIpv6() bool {
+	if o == nil || IsNil(o.IsEnabledPublicIpv6) {
 		var ret bool
 		return ret
 	}
-	return *o.IsPublicIpv6
+	return *o.IsEnabledPublicIpv6
 }
 
-// GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field value if set, nil otherwise
+// GetIsEnabledPublicIpv6Ok returns a tuple with the IsEnabledPublicIpv6 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateCluster) GetIsPublicIpv6Ok() (*bool, bool) {
-	if o == nil || IsNil(o.IsPublicIpv6) {
+func (o *UpdateCluster) GetIsEnabledPublicIpv6Ok() (*bool, bool) {
+	if o == nil || IsNil(o.IsEnabledPublicIpv6) {
 		return nil, false
 	}
-	return o.IsPublicIpv6, true
+	return o.IsEnabledPublicIpv6, true
 }
 
-// HasIsPublicIpv6 returns a boolean if a field has been set.
-func (o *UpdateCluster) HasIsPublicIpv6() bool {
-	if o != nil && !IsNil(o.IsPublicIpv6) {
+// HasIsEnabledPublicIpv6 returns a boolean if a field has been set.
+func (o *UpdateCluster) HasIsEnabledPublicIpv6() bool {
+	if o != nil && !IsNil(o.IsEnabledPublicIpv6) {
 		return true
 	}
 
 	return false
 }
 
-// SetIsPublicIpv6 gets a reference to the given bool and assigns it to the IsPublicIpv6 field.
-func (o *UpdateCluster) SetIsPublicIpv6(v bool) {
-	o.IsPublicIpv6 = &v
+// SetIsEnabledPublicIpv6 gets a reference to the given bool and assigns it to the IsEnabledPublicIpv6 field.
+func (o *UpdateCluster) SetIsEnabledPublicIpv6(v bool) {
+	o.IsEnabledPublicIpv6 = &v
+}
+
+// GetIsSecureConnectionEnable returns the IsSecureConnectionEnable field value if set, zero value otherwise.
+func (o *UpdateCluster) GetIsSecureConnectionEnable() bool {
+	if o == nil || IsNil(o.IsSecureConnectionEnable) {
+		var ret bool
+		return ret
+	}
+	return *o.IsSecureConnectionEnable
+}
+
+// GetIsSecureConnectionEnableOk returns a tuple with the IsSecureConnectionEnable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCluster) GetIsSecureConnectionEnableOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsSecureConnectionEnable) {
+		return nil, false
+	}
+	return o.IsSecureConnectionEnable, true
+}
+
+// HasIsSecureConnectionEnable returns a boolean if a field has been set.
+func (o *UpdateCluster) HasIsSecureConnectionEnable() bool {
+	if o != nil && !IsNil(o.IsSecureConnectionEnable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSecureConnectionEnable gets a reference to the given bool and assigns it to the IsSecureConnectionEnable field.
+func (o *UpdateCluster) SetIsSecureConnectionEnable(v bool) {
+	o.IsSecureConnectionEnable = &v
+}
+
+// GetMaintenanceSlot returns the MaintenanceSlot field value if set, zero value otherwise.
+func (o *UpdateCluster) GetMaintenanceSlot() CreateClusterMaintenanceSlot {
+	if o == nil || IsNil(o.MaintenanceSlot) {
+		var ret CreateClusterMaintenanceSlot
+		return ret
+	}
+	return *o.MaintenanceSlot
+}
+
+// GetMaintenanceSlotOk returns a tuple with the MaintenanceSlot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCluster) GetMaintenanceSlotOk() (*CreateClusterMaintenanceSlot, bool) {
+	if o == nil || IsNil(o.MaintenanceSlot) {
+		return nil, false
+	}
+	return o.MaintenanceSlot, true
+}
+
+// HasMaintenanceSlot returns a boolean if a field has been set.
+func (o *UpdateCluster) HasMaintenanceSlot() bool {
+	if o != nil && !IsNil(o.MaintenanceSlot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaintenanceSlot gets a reference to the given CreateClusterMaintenanceSlot and assigns it to the MaintenanceSlot field.
+func (o *UpdateCluster) SetMaintenanceSlot(v CreateClusterMaintenanceSlot) {
+	o.MaintenanceSlot = &v
+}
+
+// GetDiskAutoscaling returns the DiskAutoscaling field value if set, zero value otherwise.
+func (o *UpdateCluster) GetDiskAutoscaling() CreateClusterDiskAutoscaling {
+	if o == nil || IsNil(o.DiskAutoscaling) {
+		var ret CreateClusterDiskAutoscaling
+		return ret
+	}
+	return *o.DiskAutoscaling
+}
+
+// GetDiskAutoscalingOk returns a tuple with the DiskAutoscaling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCluster) GetDiskAutoscalingOk() (*CreateClusterDiskAutoscaling, bool) {
+	if o == nil || IsNil(o.DiskAutoscaling) {
+		return nil, false
+	}
+	return o.DiskAutoscaling, true
+}
+
+// HasDiskAutoscaling returns a boolean if a field has been set.
+func (o *UpdateCluster) HasDiskAutoscaling() bool {
+	if o != nil && !IsNil(o.DiskAutoscaling) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskAutoscaling gets a reference to the given CreateClusterDiskAutoscaling and assigns it to the DiskAutoscaling field.
+func (o *UpdateCluster) SetDiskAutoscaling(v CreateClusterDiskAutoscaling) {
+	o.DiskAutoscaling = &v
 }
 
 func (o UpdateCluster) MarshalJSON() ([]byte, error) {
@@ -258,8 +425,14 @@ func (o UpdateCluster) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PresetId) {
 		toSerialize["preset_id"] = o.PresetId
 	}
+	if !IsNil(o.Configuration) {
+		toSerialize["configuration"] = o.Configuration
+	}
 	if !IsNil(o.ConfigParameters) {
 		toSerialize["config_parameters"] = o.ConfigParameters
+	}
+	if !IsNil(o.HashType) {
+		toSerialize["hash_type"] = o.HashType
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
@@ -267,8 +440,17 @@ func (o UpdateCluster) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsEnabledPublicNetwork) {
 		toSerialize["is_enabled_public_network"] = o.IsEnabledPublicNetwork
 	}
-	if !IsNil(o.IsPublicIpv6) {
-		toSerialize["is_public_ipv6"] = o.IsPublicIpv6
+	if !IsNil(o.IsEnabledPublicIpv6) {
+		toSerialize["is_enabled_public_ipv6"] = o.IsEnabledPublicIpv6
+	}
+	if !IsNil(o.IsSecureConnectionEnable) {
+		toSerialize["is_secure_connection_enable"] = o.IsSecureConnectionEnable
+	}
+	if !IsNil(o.MaintenanceSlot) {
+		toSerialize["maintenance_slot"] = o.MaintenanceSlot
+	}
+	if !IsNil(o.DiskAutoscaling) {
+		toSerialize["disk_autoscaling"] = o.DiskAutoscaling
 	}
 	return toSerialize, nil
 }

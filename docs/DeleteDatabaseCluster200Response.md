@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Hash** | **string** | Хеш, который совместно с кодом авторизации надо будет отправить для удаления | 
+**DatabaseDelete** | [**DeleteDatabaseCluster200ResponseDatabaseDelete**](DeleteDatabaseCluster200ResponseDatabaseDelete.md) |  | 
 
 ## Methods
 
 ### NewDeleteDatabaseCluster200Response
 
-`func NewDeleteDatabaseCluster200Response(hash string, ) *DeleteDatabaseCluster200Response`
+`func NewDeleteDatabaseCluster200Response(databaseDelete DeleteDatabaseCluster200ResponseDatabaseDelete, ) *DeleteDatabaseCluster200Response`
 
 NewDeleteDatabaseCluster200Response instantiates a new DeleteDatabaseCluster200Response object
 This constructor will assign default values to properties that have it defined,
@@ -25,24 +25,24 @@ NewDeleteDatabaseCluster200ResponseWithDefaults instantiates a new DeleteDatabas
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetHash
+### GetDatabaseDelete
 
-`func (o *DeleteDatabaseCluster200Response) GetHash() string`
+`func (o *DeleteDatabaseCluster200Response) GetDatabaseDelete() DeleteDatabaseCluster200ResponseDatabaseDelete`
 
-GetHash returns the Hash field if non-nil, zero value otherwise.
+GetDatabaseDelete returns the DatabaseDelete field if non-nil, zero value otherwise.
 
-### GetHashOk
+### GetDatabaseDeleteOk
 
-`func (o *DeleteDatabaseCluster200Response) GetHashOk() (*string, bool)`
+`func (o *DeleteDatabaseCluster200Response) GetDatabaseDeleteOk() (*DeleteDatabaseCluster200ResponseDatabaseDelete, bool)`
 
-GetHashOk returns a tuple with the Hash field if it's non-nil, zero value otherwise
+GetDatabaseDeleteOk returns a tuple with the DatabaseDelete field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHash
+### SetDatabaseDelete
 
-`func (o *DeleteDatabaseCluster200Response) SetHash(v string)`
+`func (o *DeleteDatabaseCluster200Response) SetDatabaseDelete(v DeleteDatabaseCluster200ResponseDatabaseDelete)`
 
-SetHash sets Hash field to given value.
+SetDatabaseDelete sets DatabaseDelete field to given value.
 
 
 

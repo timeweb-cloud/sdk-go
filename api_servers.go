@@ -172,7 +172,7 @@ func (a *ServersAPIService) AddServerIPExecute(r ApiAddServerIPRequest) (*AddSer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -343,7 +343,7 @@ func (a *ServersAPIService) CloneServerExecute(r ApiCloneServerRequest) (*Create
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -859,7 +859,7 @@ func (a *ServersAPIService) CreateServerExecute(r ApiCreateServerRequest) (*Crea
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1049,7 +1049,7 @@ func (a *ServersAPIService) CreateServerDiskExecute(r ApiCreateServerDiskRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1440,7 +1440,7 @@ func (a *ServersAPIService) DeleteServerExecute(r ApiDeleteServerRequest) (*Dele
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1627,7 +1627,7 @@ func (a *ServersAPIService) DeleteServerDiskExecute(r ApiDeleteServerDiskRequest
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1812,7 +1812,7 @@ func (a *ServersAPIService) DeleteServerDiskBackupExecute(r ApiDeleteServerDiskB
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1994,7 +1994,7 @@ func (a *ServersAPIService) DeleteServerIPExecute(r ApiDeleteServerIPRequest) (*
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2796,7 +2796,7 @@ func (a *ServersAPIService) GetServerExecute(r ApiGetServerRequest) (*CreateServ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2985,7 +2985,7 @@ func (a *ServersAPIService) GetServerDiskExecute(r ApiGetServerDiskRequest) (*Cr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3038,7 +3038,7 @@ type ApiGetServerDiskAutoBackupSettingsRequest struct {
 	diskId int32
 }
 
-func (r ApiGetServerDiskAutoBackupSettingsRequest) Execute() (*GetServerDiskAutoBackupSettings200Response, *http.Response, error) {
+func (r ApiGetServerDiskAutoBackupSettingsRequest) Execute() (*GetDatabaseAutoBackupsSettings200Response, *http.Response, error) {
 	return r.ApiService.GetServerDiskAutoBackupSettingsExecute(r)
 }
 
@@ -3062,13 +3062,13 @@ func (a *ServersAPIService) GetServerDiskAutoBackupSettings(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return GetServerDiskAutoBackupSettings200Response
-func (a *ServersAPIService) GetServerDiskAutoBackupSettingsExecute(r ApiGetServerDiskAutoBackupSettingsRequest) (*GetServerDiskAutoBackupSettings200Response, *http.Response, error) {
+//  @return GetDatabaseAutoBackupsSettings200Response
+func (a *ServersAPIService) GetServerDiskAutoBackupSettingsExecute(r ApiGetServerDiskAutoBackupSettingsRequest) (*GetDatabaseAutoBackupsSettings200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetServerDiskAutoBackupSettings200Response
+		localVarReturnValue  *GetDatabaseAutoBackupsSettings200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServersAPIService.GetServerDiskAutoBackupSettings")
@@ -3712,7 +3712,7 @@ func (a *ServersAPIService) GetServerDisksExecute(r ApiGetServerDisksRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3895,7 +3895,7 @@ func (a *ServersAPIService) GetServerIPsExecute(r ApiGetServerIPsRequest) (*GetS
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4107,7 +4107,7 @@ func (a *ServersAPIService) GetServerLogsExecute(r ApiGetServerLogsRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4314,7 +4314,7 @@ func (a *ServersAPIService) GetServerStatisticsExecute(r ApiGetServerStatisticsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4508,7 +4508,7 @@ func (a *ServersAPIService) GetServerStatisticsNewExecute(r ApiGetServerStatisti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5184,7 +5184,7 @@ func (a *ServersAPIService) HardShutdownServerExecute(r ApiHardShutdownServerReq
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5526,7 +5526,7 @@ func (a *ServersAPIService) PerformActionOnBackupExecute(r ApiPerformActionOnBac
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5708,7 +5708,7 @@ func (a *ServersAPIService) PerformActionOnServerExecute(r ApiPerformActionOnSer
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5868,7 +5868,7 @@ func (a *ServersAPIService) RebootServerExecute(r ApiRebootServerRequest) (*http
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6028,7 +6028,7 @@ func (a *ServersAPIService) RebootServerHardExecute(r ApiRebootServerHardRequest
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6177,7 +6177,7 @@ func (a *ServersAPIService) ResetServerPasswordExecute(r ApiResetServerPasswordR
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6501,7 +6501,7 @@ func (a *ServersAPIService) ShutdownServerExecute(r ApiShutdownServerRequest) (*
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6650,7 +6650,7 @@ func (a *ServersAPIService) StartServerExecute(r ApiStartServerRequest) (*http.R
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6834,7 +6834,7 @@ func (a *ServersAPIService) UpdateServerExecute(r ApiUpdateServerRequest) (*Crea
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7031,7 +7031,7 @@ func (a *ServersAPIService) UpdateServerDiskExecute(r ApiUpdateServerDiskRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7091,7 +7091,7 @@ func (r ApiUpdateServerDiskAutoBackupSettingsRequest) AutoBackup(autoBackup Auto
 	return r
 }
 
-func (r ApiUpdateServerDiskAutoBackupSettingsRequest) Execute() (*GetServerDiskAutoBackupSettings200Response, *http.Response, error) {
+func (r ApiUpdateServerDiskAutoBackupSettingsRequest) Execute() (*GetDatabaseAutoBackupsSettings200Response, *http.Response, error) {
 	return r.ApiService.UpdateServerDiskAutoBackupSettingsExecute(r)
 }
 
@@ -7115,13 +7115,13 @@ func (a *ServersAPIService) UpdateServerDiskAutoBackupSettings(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return GetServerDiskAutoBackupSettings200Response
-func (a *ServersAPIService) UpdateServerDiskAutoBackupSettingsExecute(r ApiUpdateServerDiskAutoBackupSettingsRequest) (*GetServerDiskAutoBackupSettings200Response, *http.Response, error) {
+//  @return GetDatabaseAutoBackupsSettings200Response
+func (a *ServersAPIService) UpdateServerDiskAutoBackupSettingsExecute(r ApiUpdateServerDiskAutoBackupSettingsRequest) (*GetDatabaseAutoBackupsSettings200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetServerDiskAutoBackupSettings200Response
+		localVarReturnValue  *GetDatabaseAutoBackupsSettings200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServersAPIService.UpdateServerDiskAutoBackupSettings")
@@ -7604,7 +7604,7 @@ func (a *ServersAPIService) UpdateServerIPExecute(r ApiUpdateServerIPRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7792,7 +7792,7 @@ func (a *ServersAPIService) UpdateServerNATExecute(r ApiUpdateServerNATRequest) 
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7972,7 +7972,7 @@ func (a *ServersAPIService) UpdateServerOSBootModeExecute(r ApiUpdateServerOSBoo
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

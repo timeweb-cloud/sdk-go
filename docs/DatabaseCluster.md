@@ -8,23 +8,41 @@ Name | Type | Description | Notes
 **CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана база данных. | 
 **Location** | **NullableString** | Локация сервера. | 
 **Name** | **string** | Название кластера базы данных. | 
+**Description** | **string** | Описание кластера базы данных. | 
 **Networks** | [**[]DatabaseClusterNetworksInner**](DatabaseClusterNetworksInner.md) | Список сетей кластера базы данных. | 
-**IsPublicIpv6** | Pointer to **bool** | Использование IPv6 адреса. | [optional] 
-**Type** | [**DbType**](DbType.md) |  | 
+**IsEnabledPublicIpv6** | **bool** | Использование публичного IPv6-адреса. | 
+**Type** | **NullableString** | Тип базы данных. Список возможных значений шире, чем список типов, доступных при создании нового кластера. | 
 **HashType** | **NullableString** | Тип хеширования кластера базы данных (mysql5 | mysql | postgres). | 
 **AvatarLink** | **NullableString** | Ссылка на аватар для базы данных. | 
 **Port** | **NullableInt32** | Порт | 
-**Status** | **string** | Текущий статус кластера базы данных. | 
-**PresetId** | **int32** | ID тарифа. | 
-**Disk** | Pointer to [**NullableDatabaseClusterDisk**](DatabaseClusterDisk.md) |  | [optional] 
+**Status** | **string** | Текущий статус кластера базы данных. Значение &#x60;read_only&#x60; означает, что запись в кластер заблокирована из-за переполнения диска — чтобы снять блокировку, освободите место или увеличьте размер диска. | 
+**PresetId** | **NullableInt32** | ID тарифа. Равен &#x60;null&#x60; у кластеров, созданных через конфигуратор — в этом случае заполнен &#x60;configurator_id&#x60;. | 
+**ConfiguratorId** | **NullableInt32** | ID конфигуратора. Равен &#x60;null&#x60; у кластеров, созданных по тарифу. | 
+**Cpu** | **NullableInt32** | Количество ядер процессора. | 
+**CpuFrequency** | **NullableString** | Частота процессора. | 
+**IsDedicatedCpu** | **bool** | Используются ли выделенные ядра процессора. | 
+**Ram** | **NullableInt32** | Объем оперативной памяти (в Мб). | 
+**Disk** | [**NullableDatabaseClusterDisk**](DatabaseClusterDisk.md) |  | 
+**HasAdditionalDisk** | **bool** | Подключен ли к кластеру дополнительный диск. | 
+**DiskAutoscaling** | [**NullableDatabaseClusterDiskAutoscaling**](DatabaseClusterDiskAutoscaling.md) |  | 
 **ConfigParameters** | [**Mysql**](Mysql.md) |  | 
 **IsEnabledPublicNetwork** | **bool** | Доступность публичного IP-адреса | 
+**IsSecureConnectionEnabled** | **bool** | Включено ли защищенное подключение к кластеру базы данных. | 
+**IsAutobackupsEnabled** | **bool** | Включены ли автоматические резервные копии кластера базы данных. | 
+**IsBackupScheduleEnabled** | **bool** | Включено ли расписание резервного копирования кластера базы данных. | 
+**AvailabilityZone** | [**AvailabilityZone**](AvailabilityZone.md) |  | 
+**ProjectId** | Pointer to **int32** | ID проекта, в котором находится кластер базы данных. | [optional] 
+**ReplicaList** | [**[]DatabaseClusterReplicaListInner**](DatabaseClusterReplicaListInner.md) | Список реплик кластера базы данных. | 
+**Domains** | [**[]DatabaseClusterDomainsInner**](DatabaseClusterDomainsInner.md) | Список доменов кластера базы данных. Если публичная сеть отключена (&#x60;is_enabled_public_network: false&#x60;), список всегда пустой. | 
+**ChildServices** | [**[]DatabaseClusterChildServicesInner**](DatabaseClusterChildServicesInner.md) | Список дочерних сервисов кластера базы данных. | 
+**ParentServices** | [**[]DatabaseClusterParentServicesInner**](DatabaseClusterParentServicesInner.md) | Список родительских сервисов кластера базы данных. | 
+**MaintenanceSlot** | [**DatabaseClusterMaintenanceSlot**](DatabaseClusterMaintenanceSlot.md) |  | 
 
 ## Methods
 
 ### NewDatabaseCluster
 
-`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters Mysql, isEnabledPublicNetwork bool, ) *DatabaseCluster`
+`func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, description string, networks []DatabaseClusterNetworksInner, isEnabledPublicIpv6 bool, type_ NullableString, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId NullableInt32, configuratorId NullableInt32, cpu NullableInt32, cpuFrequency NullableString, isDedicatedCpu bool, ram NullableInt32, disk NullableDatabaseClusterDisk, hasAdditionalDisk bool, diskAutoscaling NullableDatabaseClusterDiskAutoscaling, configParameters Mysql, isEnabledPublicNetwork bool, isSecureConnectionEnabled bool, isAutobackupsEnabled bool, isBackupScheduleEnabled bool, availabilityZone AvailabilityZone, replicaList []DatabaseClusterReplicaListInner, domains []DatabaseClusterDomainsInner, childServices []DatabaseClusterChildServicesInner, parentServices []DatabaseClusterParentServicesInner, maintenanceSlot DatabaseClusterMaintenanceSlot, ) *DatabaseCluster`
 
 NewDatabaseCluster instantiates a new DatabaseCluster object
 This constructor will assign default values to properties that have it defined,
@@ -129,6 +147,26 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
+### GetDescription
+
+`func (o *DatabaseCluster) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *DatabaseCluster) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *DatabaseCluster) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+
 ### GetNetworks
 
 `func (o *DatabaseCluster) GetNetworks() []DatabaseClusterNetworksInner`
@@ -149,51 +187,56 @@ and a boolean to check if the value has been set.
 SetNetworks sets Networks field to given value.
 
 
-### GetIsPublicIpv6
+### GetIsEnabledPublicIpv6
 
-`func (o *DatabaseCluster) GetIsPublicIpv6() bool`
+`func (o *DatabaseCluster) GetIsEnabledPublicIpv6() bool`
 
-GetIsPublicIpv6 returns the IsPublicIpv6 field if non-nil, zero value otherwise.
+GetIsEnabledPublicIpv6 returns the IsEnabledPublicIpv6 field if non-nil, zero value otherwise.
 
-### GetIsPublicIpv6Ok
+### GetIsEnabledPublicIpv6Ok
 
-`func (o *DatabaseCluster) GetIsPublicIpv6Ok() (*bool, bool)`
+`func (o *DatabaseCluster) GetIsEnabledPublicIpv6Ok() (*bool, bool)`
 
-GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field if it's non-nil, zero value otherwise
+GetIsEnabledPublicIpv6Ok returns a tuple with the IsEnabledPublicIpv6 field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsPublicIpv6
+### SetIsEnabledPublicIpv6
 
-`func (o *DatabaseCluster) SetIsPublicIpv6(v bool)`
+`func (o *DatabaseCluster) SetIsEnabledPublicIpv6(v bool)`
 
-SetIsPublicIpv6 sets IsPublicIpv6 field to given value.
+SetIsEnabledPublicIpv6 sets IsEnabledPublicIpv6 field to given value.
 
-### HasIsPublicIpv6
-
-`func (o *DatabaseCluster) HasIsPublicIpv6() bool`
-
-HasIsPublicIpv6 returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *DatabaseCluster) GetType() DbType`
+`func (o *DatabaseCluster) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *DatabaseCluster) GetTypeOk() (*DbType, bool)`
+`func (o *DatabaseCluster) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *DatabaseCluster) SetType(v DbType)`
+`func (o *DatabaseCluster) SetType(v string)`
 
 SetType sets Type field to given value.
 
 
+### SetTypeNil
+
+`func (o *DatabaseCluster) SetTypeNil(b bool)`
+
+ SetTypeNil sets the value for Type to be an explicit nil
+
+### UnsetType
+`func (o *DatabaseCluster) UnsetType()`
+
+UnsetType ensures that no value is present for Type, not even an explicit nil
 ### GetHashType
 
 `func (o *DatabaseCluster) GetHashType() string`
@@ -324,6 +367,156 @@ and a boolean to check if the value has been set.
 SetPresetId sets PresetId field to given value.
 
 
+### SetPresetIdNil
+
+`func (o *DatabaseCluster) SetPresetIdNil(b bool)`
+
+ SetPresetIdNil sets the value for PresetId to be an explicit nil
+
+### UnsetPresetId
+`func (o *DatabaseCluster) UnsetPresetId()`
+
+UnsetPresetId ensures that no value is present for PresetId, not even an explicit nil
+### GetConfiguratorId
+
+`func (o *DatabaseCluster) GetConfiguratorId() int32`
+
+GetConfiguratorId returns the ConfiguratorId field if non-nil, zero value otherwise.
+
+### GetConfiguratorIdOk
+
+`func (o *DatabaseCluster) GetConfiguratorIdOk() (*int32, bool)`
+
+GetConfiguratorIdOk returns a tuple with the ConfiguratorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguratorId
+
+`func (o *DatabaseCluster) SetConfiguratorId(v int32)`
+
+SetConfiguratorId sets ConfiguratorId field to given value.
+
+
+### SetConfiguratorIdNil
+
+`func (o *DatabaseCluster) SetConfiguratorIdNil(b bool)`
+
+ SetConfiguratorIdNil sets the value for ConfiguratorId to be an explicit nil
+
+### UnsetConfiguratorId
+`func (o *DatabaseCluster) UnsetConfiguratorId()`
+
+UnsetConfiguratorId ensures that no value is present for ConfiguratorId, not even an explicit nil
+### GetCpu
+
+`func (o *DatabaseCluster) GetCpu() int32`
+
+GetCpu returns the Cpu field if non-nil, zero value otherwise.
+
+### GetCpuOk
+
+`func (o *DatabaseCluster) GetCpuOk() (*int32, bool)`
+
+GetCpuOk returns a tuple with the Cpu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpu
+
+`func (o *DatabaseCluster) SetCpu(v int32)`
+
+SetCpu sets Cpu field to given value.
+
+
+### SetCpuNil
+
+`func (o *DatabaseCluster) SetCpuNil(b bool)`
+
+ SetCpuNil sets the value for Cpu to be an explicit nil
+
+### UnsetCpu
+`func (o *DatabaseCluster) UnsetCpu()`
+
+UnsetCpu ensures that no value is present for Cpu, not even an explicit nil
+### GetCpuFrequency
+
+`func (o *DatabaseCluster) GetCpuFrequency() string`
+
+GetCpuFrequency returns the CpuFrequency field if non-nil, zero value otherwise.
+
+### GetCpuFrequencyOk
+
+`func (o *DatabaseCluster) GetCpuFrequencyOk() (*string, bool)`
+
+GetCpuFrequencyOk returns a tuple with the CpuFrequency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuFrequency
+
+`func (o *DatabaseCluster) SetCpuFrequency(v string)`
+
+SetCpuFrequency sets CpuFrequency field to given value.
+
+
+### SetCpuFrequencyNil
+
+`func (o *DatabaseCluster) SetCpuFrequencyNil(b bool)`
+
+ SetCpuFrequencyNil sets the value for CpuFrequency to be an explicit nil
+
+### UnsetCpuFrequency
+`func (o *DatabaseCluster) UnsetCpuFrequency()`
+
+UnsetCpuFrequency ensures that no value is present for CpuFrequency, not even an explicit nil
+### GetIsDedicatedCpu
+
+`func (o *DatabaseCluster) GetIsDedicatedCpu() bool`
+
+GetIsDedicatedCpu returns the IsDedicatedCpu field if non-nil, zero value otherwise.
+
+### GetIsDedicatedCpuOk
+
+`func (o *DatabaseCluster) GetIsDedicatedCpuOk() (*bool, bool)`
+
+GetIsDedicatedCpuOk returns a tuple with the IsDedicatedCpu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDedicatedCpu
+
+`func (o *DatabaseCluster) SetIsDedicatedCpu(v bool)`
+
+SetIsDedicatedCpu sets IsDedicatedCpu field to given value.
+
+
+### GetRam
+
+`func (o *DatabaseCluster) GetRam() int32`
+
+GetRam returns the Ram field if non-nil, zero value otherwise.
+
+### GetRamOk
+
+`func (o *DatabaseCluster) GetRamOk() (*int32, bool)`
+
+GetRamOk returns a tuple with the Ram field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRam
+
+`func (o *DatabaseCluster) SetRam(v int32)`
+
+SetRam sets Ram field to given value.
+
+
+### SetRamNil
+
+`func (o *DatabaseCluster) SetRamNil(b bool)`
+
+ SetRamNil sets the value for Ram to be an explicit nil
+
+### UnsetRam
+`func (o *DatabaseCluster) UnsetRam()`
+
+UnsetRam ensures that no value is present for Ram, not even an explicit nil
 ### GetDisk
 
 `func (o *DatabaseCluster) GetDisk() DatabaseClusterDisk`
@@ -343,11 +536,6 @@ and a boolean to check if the value has been set.
 
 SetDisk sets Disk field to given value.
 
-### HasDisk
-
-`func (o *DatabaseCluster) HasDisk() bool`
-
-HasDisk returns a boolean if a field has been set.
 
 ### SetDiskNil
 
@@ -359,6 +547,56 @@ HasDisk returns a boolean if a field has been set.
 `func (o *DatabaseCluster) UnsetDisk()`
 
 UnsetDisk ensures that no value is present for Disk, not even an explicit nil
+### GetHasAdditionalDisk
+
+`func (o *DatabaseCluster) GetHasAdditionalDisk() bool`
+
+GetHasAdditionalDisk returns the HasAdditionalDisk field if non-nil, zero value otherwise.
+
+### GetHasAdditionalDiskOk
+
+`func (o *DatabaseCluster) GetHasAdditionalDiskOk() (*bool, bool)`
+
+GetHasAdditionalDiskOk returns a tuple with the HasAdditionalDisk field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAdditionalDisk
+
+`func (o *DatabaseCluster) SetHasAdditionalDisk(v bool)`
+
+SetHasAdditionalDisk sets HasAdditionalDisk field to given value.
+
+
+### GetDiskAutoscaling
+
+`func (o *DatabaseCluster) GetDiskAutoscaling() DatabaseClusterDiskAutoscaling`
+
+GetDiskAutoscaling returns the DiskAutoscaling field if non-nil, zero value otherwise.
+
+### GetDiskAutoscalingOk
+
+`func (o *DatabaseCluster) GetDiskAutoscalingOk() (*DatabaseClusterDiskAutoscaling, bool)`
+
+GetDiskAutoscalingOk returns a tuple with the DiskAutoscaling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiskAutoscaling
+
+`func (o *DatabaseCluster) SetDiskAutoscaling(v DatabaseClusterDiskAutoscaling)`
+
+SetDiskAutoscaling sets DiskAutoscaling field to given value.
+
+
+### SetDiskAutoscalingNil
+
+`func (o *DatabaseCluster) SetDiskAutoscalingNil(b bool)`
+
+ SetDiskAutoscalingNil sets the value for DiskAutoscaling to be an explicit nil
+
+### UnsetDiskAutoscaling
+`func (o *DatabaseCluster) UnsetDiskAutoscaling()`
+
+UnsetDiskAutoscaling ensures that no value is present for DiskAutoscaling, not even an explicit nil
 ### GetConfigParameters
 
 `func (o *DatabaseCluster) GetConfigParameters() Mysql`
@@ -397,6 +635,211 @@ and a boolean to check if the value has been set.
 `func (o *DatabaseCluster) SetIsEnabledPublicNetwork(v bool)`
 
 SetIsEnabledPublicNetwork sets IsEnabledPublicNetwork field to given value.
+
+
+### GetIsSecureConnectionEnabled
+
+`func (o *DatabaseCluster) GetIsSecureConnectionEnabled() bool`
+
+GetIsSecureConnectionEnabled returns the IsSecureConnectionEnabled field if non-nil, zero value otherwise.
+
+### GetIsSecureConnectionEnabledOk
+
+`func (o *DatabaseCluster) GetIsSecureConnectionEnabledOk() (*bool, bool)`
+
+GetIsSecureConnectionEnabledOk returns a tuple with the IsSecureConnectionEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecureConnectionEnabled
+
+`func (o *DatabaseCluster) SetIsSecureConnectionEnabled(v bool)`
+
+SetIsSecureConnectionEnabled sets IsSecureConnectionEnabled field to given value.
+
+
+### GetIsAutobackupsEnabled
+
+`func (o *DatabaseCluster) GetIsAutobackupsEnabled() bool`
+
+GetIsAutobackupsEnabled returns the IsAutobackupsEnabled field if non-nil, zero value otherwise.
+
+### GetIsAutobackupsEnabledOk
+
+`func (o *DatabaseCluster) GetIsAutobackupsEnabledOk() (*bool, bool)`
+
+GetIsAutobackupsEnabledOk returns a tuple with the IsAutobackupsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAutobackupsEnabled
+
+`func (o *DatabaseCluster) SetIsAutobackupsEnabled(v bool)`
+
+SetIsAutobackupsEnabled sets IsAutobackupsEnabled field to given value.
+
+
+### GetIsBackupScheduleEnabled
+
+`func (o *DatabaseCluster) GetIsBackupScheduleEnabled() bool`
+
+GetIsBackupScheduleEnabled returns the IsBackupScheduleEnabled field if non-nil, zero value otherwise.
+
+### GetIsBackupScheduleEnabledOk
+
+`func (o *DatabaseCluster) GetIsBackupScheduleEnabledOk() (*bool, bool)`
+
+GetIsBackupScheduleEnabledOk returns a tuple with the IsBackupScheduleEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsBackupScheduleEnabled
+
+`func (o *DatabaseCluster) SetIsBackupScheduleEnabled(v bool)`
+
+SetIsBackupScheduleEnabled sets IsBackupScheduleEnabled field to given value.
+
+
+### GetAvailabilityZone
+
+`func (o *DatabaseCluster) GetAvailabilityZone() AvailabilityZone`
+
+GetAvailabilityZone returns the AvailabilityZone field if non-nil, zero value otherwise.
+
+### GetAvailabilityZoneOk
+
+`func (o *DatabaseCluster) GetAvailabilityZoneOk() (*AvailabilityZone, bool)`
+
+GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZone
+
+`func (o *DatabaseCluster) SetAvailabilityZone(v AvailabilityZone)`
+
+SetAvailabilityZone sets AvailabilityZone field to given value.
+
+
+### GetProjectId
+
+`func (o *DatabaseCluster) GetProjectId() int32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *DatabaseCluster) GetProjectIdOk() (*int32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *DatabaseCluster) SetProjectId(v int32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *DatabaseCluster) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
+
+### GetReplicaList
+
+`func (o *DatabaseCluster) GetReplicaList() []DatabaseClusterReplicaListInner`
+
+GetReplicaList returns the ReplicaList field if non-nil, zero value otherwise.
+
+### GetReplicaListOk
+
+`func (o *DatabaseCluster) GetReplicaListOk() (*[]DatabaseClusterReplicaListInner, bool)`
+
+GetReplicaListOk returns a tuple with the ReplicaList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplicaList
+
+`func (o *DatabaseCluster) SetReplicaList(v []DatabaseClusterReplicaListInner)`
+
+SetReplicaList sets ReplicaList field to given value.
+
+
+### GetDomains
+
+`func (o *DatabaseCluster) GetDomains() []DatabaseClusterDomainsInner`
+
+GetDomains returns the Domains field if non-nil, zero value otherwise.
+
+### GetDomainsOk
+
+`func (o *DatabaseCluster) GetDomainsOk() (*[]DatabaseClusterDomainsInner, bool)`
+
+GetDomainsOk returns a tuple with the Domains field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDomains
+
+`func (o *DatabaseCluster) SetDomains(v []DatabaseClusterDomainsInner)`
+
+SetDomains sets Domains field to given value.
+
+
+### GetChildServices
+
+`func (o *DatabaseCluster) GetChildServices() []DatabaseClusterChildServicesInner`
+
+GetChildServices returns the ChildServices field if non-nil, zero value otherwise.
+
+### GetChildServicesOk
+
+`func (o *DatabaseCluster) GetChildServicesOk() (*[]DatabaseClusterChildServicesInner, bool)`
+
+GetChildServicesOk returns a tuple with the ChildServices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChildServices
+
+`func (o *DatabaseCluster) SetChildServices(v []DatabaseClusterChildServicesInner)`
+
+SetChildServices sets ChildServices field to given value.
+
+
+### GetParentServices
+
+`func (o *DatabaseCluster) GetParentServices() []DatabaseClusterParentServicesInner`
+
+GetParentServices returns the ParentServices field if non-nil, zero value otherwise.
+
+### GetParentServicesOk
+
+`func (o *DatabaseCluster) GetParentServicesOk() (*[]DatabaseClusterParentServicesInner, bool)`
+
+GetParentServicesOk returns a tuple with the ParentServices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentServices
+
+`func (o *DatabaseCluster) SetParentServices(v []DatabaseClusterParentServicesInner)`
+
+SetParentServices sets ParentServices field to given value.
+
+
+### GetMaintenanceSlot
+
+`func (o *DatabaseCluster) GetMaintenanceSlot() DatabaseClusterMaintenanceSlot`
+
+GetMaintenanceSlot returns the MaintenanceSlot field if non-nil, zero value otherwise.
+
+### GetMaintenanceSlotOk
+
+`func (o *DatabaseCluster) GetMaintenanceSlotOk() (*DatabaseClusterMaintenanceSlot, bool)`
+
+GetMaintenanceSlotOk returns a tuple with the MaintenanceSlot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaintenanceSlot
+
+`func (o *DatabaseCluster) SetMaintenanceSlot(v DatabaseClusterMaintenanceSlot)`
+
+SetMaintenanceSlot sets MaintenanceSlot field to given value.
 
 
 

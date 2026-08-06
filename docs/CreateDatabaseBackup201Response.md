@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Backup** | [**Backup**](Backup.md) |  | 
+**Backup** | [**NullableBackup**](Backup.md) |  | 
 
 ## Methods
 
 ### NewCreateDatabaseBackup201Response
 
-`func NewCreateDatabaseBackup201Response(backup Backup, ) *CreateDatabaseBackup201Response`
+`func NewCreateDatabaseBackup201Response(backup NullableBackup, ) *CreateDatabaseBackup201Response`
 
 NewCreateDatabaseBackup201Response instantiates a new CreateDatabaseBackup201Response object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,16 @@ and a boolean to check if the value has been set.
 SetBackup sets Backup field to given value.
 
 
+### SetBackupNil
+
+`func (o *CreateDatabaseBackup201Response) SetBackupNil(b bool)`
+
+ SetBackupNil sets the value for Backup to be an explicit nil
+
+### UnsetBackup
+`func (o *CreateDatabaseBackup201Response) UnsetBackup()`
+
+UnsetBackup ensures that no value is present for Backup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

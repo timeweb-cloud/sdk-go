@@ -20,14 +20,14 @@ var _ MappedNullable = &CreateDatabaseBackup201Response{}
 
 // CreateDatabaseBackup201Response struct for CreateDatabaseBackup201Response
 type CreateDatabaseBackup201Response struct {
-	Backup Backup `json:"backup"`
+	Backup NullableBackup `json:"backup"`
 }
 
 // NewCreateDatabaseBackup201Response instantiates a new CreateDatabaseBackup201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDatabaseBackup201Response(backup Backup) *CreateDatabaseBackup201Response {
+func NewCreateDatabaseBackup201Response(backup NullableBackup) *CreateDatabaseBackup201Response {
 	this := CreateDatabaseBackup201Response{}
 	this.Backup = backup
 	return &this
@@ -42,27 +42,29 @@ func NewCreateDatabaseBackup201ResponseWithDefaults() *CreateDatabaseBackup201Re
 }
 
 // GetBackup returns the Backup field value
+// If the value is explicit nil, the zero value for Backup will be returned
 func (o *CreateDatabaseBackup201Response) GetBackup() Backup {
-	if o == nil {
+	if o == nil || o.Backup.Get() == nil {
 		var ret Backup
 		return ret
 	}
 
-	return o.Backup
+	return *o.Backup.Get()
 }
 
 // GetBackupOk returns a tuple with the Backup field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateDatabaseBackup201Response) GetBackupOk() (*Backup, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Backup, true
+	return o.Backup.Get(), o.Backup.IsSet()
 }
 
 // SetBackup sets field value
 func (o *CreateDatabaseBackup201Response) SetBackup(v Backup) {
-	o.Backup = v
+	o.Backup.Set(&v)
 }
 
 func (o CreateDatabaseBackup201Response) MarshalJSON() ([]byte, error) {
@@ -75,7 +77,7 @@ func (o CreateDatabaseBackup201Response) MarshalJSON() ([]byte, error) {
 
 func (o CreateDatabaseBackup201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["backup"] = o.Backup
+	toSerialize["backup"] = o.Backup.Get()
 	return toSerialize, nil
 }
 

@@ -27,10 +27,9 @@ type CreateCluster struct {
 	Instance *CreateClusterInstance `json:"instance,omitempty"`
 	// Тип хеширования базы данных (mysql | postgres).
 	HashType *string `json:"hash_type,omitempty"`
-	// ID тарифа. Нельзя передавать вместе с `configurator_id`
+	// ID тарифа. Нельзя передавать вместе с `configuration`
 	PresetId *int32 `json:"preset_id,omitempty"`
-	// ID конфигуратора. Нельзя передавать вместе с `preset_id`
-	ConfiguratorId *int32 `json:"configurator_id,omitempty"`
+	Configuration *CreateClusterConfiguration `json:"configuration,omitempty"`
 	// ID проекта.
 	ProjectId *int32 `json:"project_id,omitempty"`
 	ConfigParameters *Mysql `json:"config_parameters,omitempty"`
@@ -42,6 +41,9 @@ type CreateCluster struct {
 	Description *string `json:"description,omitempty"`
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 	AutoBackups *CreateDbAutoBackups `json:"auto_backups,omitempty"`
+	BackupSchedule *CreateClusterBackupSchedule `json:"backup_schedule,omitempty"`
+	MaintenanceSlot *CreateClusterMaintenanceSlot `json:"maintenance_slot,omitempty"`
+	DiskAutoscaling *CreateClusterDiskAutoscaling `json:"disk_autoscaling,omitempty"`
 }
 
 // NewCreateCluster instantiates a new CreateCluster object
@@ -239,36 +241,36 @@ func (o *CreateCluster) SetPresetId(v int32) {
 	o.PresetId = &v
 }
 
-// GetConfiguratorId returns the ConfiguratorId field value if set, zero value otherwise.
-func (o *CreateCluster) GetConfiguratorId() int32 {
-	if o == nil || IsNil(o.ConfiguratorId) {
-		var ret int32
+// GetConfiguration returns the Configuration field value if set, zero value otherwise.
+func (o *CreateCluster) GetConfiguration() CreateClusterConfiguration {
+	if o == nil || IsNil(o.Configuration) {
+		var ret CreateClusterConfiguration
 		return ret
 	}
-	return *o.ConfiguratorId
+	return *o.Configuration
 }
 
-// GetConfiguratorIdOk returns a tuple with the ConfiguratorId field value if set, nil otherwise
+// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCluster) GetConfiguratorIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.ConfiguratorId) {
+func (o *CreateCluster) GetConfigurationOk() (*CreateClusterConfiguration, bool) {
+	if o == nil || IsNil(o.Configuration) {
 		return nil, false
 	}
-	return o.ConfiguratorId, true
+	return o.Configuration, true
 }
 
-// HasConfiguratorId returns a boolean if a field has been set.
-func (o *CreateCluster) HasConfiguratorId() bool {
-	if o != nil && !IsNil(o.ConfiguratorId) {
+// HasConfiguration returns a boolean if a field has been set.
+func (o *CreateCluster) HasConfiguration() bool {
+	if o != nil && !IsNil(o.Configuration) {
 		return true
 	}
 
 	return false
 }
 
-// SetConfiguratorId gets a reference to the given int32 and assigns it to the ConfiguratorId field.
-func (o *CreateCluster) SetConfiguratorId(v int32) {
-	o.ConfiguratorId = &v
+// SetConfiguration gets a reference to the given CreateClusterConfiguration and assigns it to the Configuration field.
+func (o *CreateCluster) SetConfiguration(v CreateClusterConfiguration) {
+	o.Configuration = &v
 }
 
 // GetProjectId returns the ProjectId field value if set, zero value otherwise.
@@ -527,6 +529,102 @@ func (o *CreateCluster) SetAutoBackups(v CreateDbAutoBackups) {
 	o.AutoBackups = &v
 }
 
+// GetBackupSchedule returns the BackupSchedule field value if set, zero value otherwise.
+func (o *CreateCluster) GetBackupSchedule() CreateClusterBackupSchedule {
+	if o == nil || IsNil(o.BackupSchedule) {
+		var ret CreateClusterBackupSchedule
+		return ret
+	}
+	return *o.BackupSchedule
+}
+
+// GetBackupScheduleOk returns a tuple with the BackupSchedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetBackupScheduleOk() (*CreateClusterBackupSchedule, bool) {
+	if o == nil || IsNil(o.BackupSchedule) {
+		return nil, false
+	}
+	return o.BackupSchedule, true
+}
+
+// HasBackupSchedule returns a boolean if a field has been set.
+func (o *CreateCluster) HasBackupSchedule() bool {
+	if o != nil && !IsNil(o.BackupSchedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupSchedule gets a reference to the given CreateClusterBackupSchedule and assigns it to the BackupSchedule field.
+func (o *CreateCluster) SetBackupSchedule(v CreateClusterBackupSchedule) {
+	o.BackupSchedule = &v
+}
+
+// GetMaintenanceSlot returns the MaintenanceSlot field value if set, zero value otherwise.
+func (o *CreateCluster) GetMaintenanceSlot() CreateClusterMaintenanceSlot {
+	if o == nil || IsNil(o.MaintenanceSlot) {
+		var ret CreateClusterMaintenanceSlot
+		return ret
+	}
+	return *o.MaintenanceSlot
+}
+
+// GetMaintenanceSlotOk returns a tuple with the MaintenanceSlot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetMaintenanceSlotOk() (*CreateClusterMaintenanceSlot, bool) {
+	if o == nil || IsNil(o.MaintenanceSlot) {
+		return nil, false
+	}
+	return o.MaintenanceSlot, true
+}
+
+// HasMaintenanceSlot returns a boolean if a field has been set.
+func (o *CreateCluster) HasMaintenanceSlot() bool {
+	if o != nil && !IsNil(o.MaintenanceSlot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaintenanceSlot gets a reference to the given CreateClusterMaintenanceSlot and assigns it to the MaintenanceSlot field.
+func (o *CreateCluster) SetMaintenanceSlot(v CreateClusterMaintenanceSlot) {
+	o.MaintenanceSlot = &v
+}
+
+// GetDiskAutoscaling returns the DiskAutoscaling field value if set, zero value otherwise.
+func (o *CreateCluster) GetDiskAutoscaling() CreateClusterDiskAutoscaling {
+	if o == nil || IsNil(o.DiskAutoscaling) {
+		var ret CreateClusterDiskAutoscaling
+		return ret
+	}
+	return *o.DiskAutoscaling
+}
+
+// GetDiskAutoscalingOk returns a tuple with the DiskAutoscaling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCluster) GetDiskAutoscalingOk() (*CreateClusterDiskAutoscaling, bool) {
+	if o == nil || IsNil(o.DiskAutoscaling) {
+		return nil, false
+	}
+	return o.DiskAutoscaling, true
+}
+
+// HasDiskAutoscaling returns a boolean if a field has been set.
+func (o *CreateCluster) HasDiskAutoscaling() bool {
+	if o != nil && !IsNil(o.DiskAutoscaling) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskAutoscaling gets a reference to the given CreateClusterDiskAutoscaling and assigns it to the DiskAutoscaling field.
+func (o *CreateCluster) SetDiskAutoscaling(v CreateClusterDiskAutoscaling) {
+	o.DiskAutoscaling = &v
+}
+
 func (o CreateCluster) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -551,8 +649,8 @@ func (o CreateCluster) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PresetId) {
 		toSerialize["preset_id"] = o.PresetId
 	}
-	if !IsNil(o.ConfiguratorId) {
-		toSerialize["configurator_id"] = o.ConfiguratorId
+	if !IsNil(o.Configuration) {
+		toSerialize["configuration"] = o.Configuration
 	}
 	if !IsNil(o.ProjectId) {
 		toSerialize["project_id"] = o.ProjectId
@@ -577,6 +675,15 @@ func (o CreateCluster) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AutoBackups) {
 		toSerialize["auto_backups"] = o.AutoBackups
+	}
+	if !IsNil(o.BackupSchedule) {
+		toSerialize["backup_schedule"] = o.BackupSchedule
+	}
+	if !IsNil(o.MaintenanceSlot) {
+		toSerialize["maintenance_slot"] = o.MaintenanceSlot
+	}
+	if !IsNil(o.DiskAutoscaling) {
+		toSerialize["disk_autoscaling"] = o.DiskAutoscaling
 	}
 	return toSerialize, nil
 }

@@ -18,7 +18,7 @@ import (
 // checks if the DatabaseClusterNetworksInner type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DatabaseClusterNetworksInner{}
 
-// DatabaseClusterNetworksInner struct for DatabaseClusterNetworksInner
+// DatabaseClusterNetworksInner Публичная сеть кластера базы данных.
 type DatabaseClusterNetworksInner struct {
 	// Тип сети.
 	Type string `json:"type"`

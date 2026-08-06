@@ -24,6 +24,10 @@ type UpdateInstance struct {
 	Name *string `json:"name,omitempty"`
 	// Описание инстанса базы данных
 	Description *string `json:"description,omitempty"`
+	// ID пользователя базы данных, который станет владельцем инстанса. Доступно только в кластерах PostgreSQL
+	OwnerId *float32 `json:"owner_id,omitempty"`
+	Extensions *DatabaseExtensions `json:"extensions,omitempty"`
+	ConfigParameters *UpdateKafkaConfigParameters `json:"config_parameters,omitempty"`
 }
 
 // NewUpdateInstance instantiates a new UpdateInstance object
@@ -107,6 +111,102 @@ func (o *UpdateInstance) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetOwnerId returns the OwnerId field value if set, zero value otherwise.
+func (o *UpdateInstance) GetOwnerId() float32 {
+	if o == nil || IsNil(o.OwnerId) {
+		var ret float32
+		return ret
+	}
+	return *o.OwnerId
+}
+
+// GetOwnerIdOk returns a tuple with the OwnerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateInstance) GetOwnerIdOk() (*float32, bool) {
+	if o == nil || IsNil(o.OwnerId) {
+		return nil, false
+	}
+	return o.OwnerId, true
+}
+
+// HasOwnerId returns a boolean if a field has been set.
+func (o *UpdateInstance) HasOwnerId() bool {
+	if o != nil && !IsNil(o.OwnerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnerId gets a reference to the given float32 and assigns it to the OwnerId field.
+func (o *UpdateInstance) SetOwnerId(v float32) {
+	o.OwnerId = &v
+}
+
+// GetExtensions returns the Extensions field value if set, zero value otherwise.
+func (o *UpdateInstance) GetExtensions() DatabaseExtensions {
+	if o == nil || IsNil(o.Extensions) {
+		var ret DatabaseExtensions
+		return ret
+	}
+	return *o.Extensions
+}
+
+// GetExtensionsOk returns a tuple with the Extensions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateInstance) GetExtensionsOk() (*DatabaseExtensions, bool) {
+	if o == nil || IsNil(o.Extensions) {
+		return nil, false
+	}
+	return o.Extensions, true
+}
+
+// HasExtensions returns a boolean if a field has been set.
+func (o *UpdateInstance) HasExtensions() bool {
+	if o != nil && !IsNil(o.Extensions) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtensions gets a reference to the given DatabaseExtensions and assigns it to the Extensions field.
+func (o *UpdateInstance) SetExtensions(v DatabaseExtensions) {
+	o.Extensions = &v
+}
+
+// GetConfigParameters returns the ConfigParameters field value if set, zero value otherwise.
+func (o *UpdateInstance) GetConfigParameters() UpdateKafkaConfigParameters {
+	if o == nil || IsNil(o.ConfigParameters) {
+		var ret UpdateKafkaConfigParameters
+		return ret
+	}
+	return *o.ConfigParameters
+}
+
+// GetConfigParametersOk returns a tuple with the ConfigParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateInstance) GetConfigParametersOk() (*UpdateKafkaConfigParameters, bool) {
+	if o == nil || IsNil(o.ConfigParameters) {
+		return nil, false
+	}
+	return o.ConfigParameters, true
+}
+
+// HasConfigParameters returns a boolean if a field has been set.
+func (o *UpdateInstance) HasConfigParameters() bool {
+	if o != nil && !IsNil(o.ConfigParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigParameters gets a reference to the given UpdateKafkaConfigParameters and assigns it to the ConfigParameters field.
+func (o *UpdateInstance) SetConfigParameters(v UpdateKafkaConfigParameters) {
+	o.ConfigParameters = &v
+}
+
 func (o UpdateInstance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -122,6 +222,15 @@ func (o UpdateInstance) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.OwnerId) {
+		toSerialize["owner_id"] = o.OwnerId
+	}
+	if !IsNil(o.Extensions) {
+		toSerialize["extensions"] = o.Extensions
+	}
+	if !IsNil(o.ConfigParameters) {
+		toSerialize["config_parameters"] = o.ConfigParameters
 	}
 	return toSerialize, nil
 }

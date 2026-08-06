@@ -28,8 +28,10 @@ type CreateAdmin struct {
 	Host *string `json:"host,omitempty"`
 	// ID инстанса базы данных для применения привилегий. Если поле не передано, то привилегии будут применены ко всем инстансам
 	InstanceId *float32 `json:"instance_id,omitempty"`
+	// Выдать привилегии на все инстансы базы данных
+	ForAll *bool `json:"for_all,omitempty"`
 	// Список привилегий пользователя базы данных
-	Privileges []PropertiesMysql `json:"privileges"`
+	Privileges []PropertiesMysql `json:"privileges,omitempty"`
 	// Описание пользователя базы данных
 	Description *string `json:"description,omitempty"`
 }
@@ -38,11 +40,10 @@ type CreateAdmin struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAdmin(login string, password string, privileges []PropertiesMysql) *CreateAdmin {
+func NewCreateAdmin(login string, password string) *CreateAdmin {
 	this := CreateAdmin{}
 	this.Login = login
 	this.Password = password
-	this.Privileges = privileges
 	return &this
 }
 
@@ -166,26 +167,66 @@ func (o *CreateAdmin) SetInstanceId(v float32) {
 	o.InstanceId = &v
 }
 
-// GetPrivileges returns the Privileges field value
+// GetForAll returns the ForAll field value if set, zero value otherwise.
+func (o *CreateAdmin) GetForAll() bool {
+	if o == nil || IsNil(o.ForAll) {
+		var ret bool
+		return ret
+	}
+	return *o.ForAll
+}
+
+// GetForAllOk returns a tuple with the ForAll field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAdmin) GetForAllOk() (*bool, bool) {
+	if o == nil || IsNil(o.ForAll) {
+		return nil, false
+	}
+	return o.ForAll, true
+}
+
+// HasForAll returns a boolean if a field has been set.
+func (o *CreateAdmin) HasForAll() bool {
+	if o != nil && !IsNil(o.ForAll) {
+		return true
+	}
+
+	return false
+}
+
+// SetForAll gets a reference to the given bool and assigns it to the ForAll field.
+func (o *CreateAdmin) SetForAll(v bool) {
+	o.ForAll = &v
+}
+
+// GetPrivileges returns the Privileges field value if set, zero value otherwise.
 func (o *CreateAdmin) GetPrivileges() []PropertiesMysql {
-	if o == nil {
+	if o == nil || IsNil(o.Privileges) {
 		var ret []PropertiesMysql
 		return ret
 	}
-
 	return o.Privileges
 }
 
-// GetPrivilegesOk returns a tuple with the Privileges field value
+// GetPrivilegesOk returns a tuple with the Privileges field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateAdmin) GetPrivilegesOk() ([]PropertiesMysql, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Privileges) {
 		return nil, false
 	}
 	return o.Privileges, true
 }
 
-// SetPrivileges sets field value
+// HasPrivileges returns a boolean if a field has been set.
+func (o *CreateAdmin) HasPrivileges() bool {
+	if o != nil && !IsNil(o.Privileges) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivileges gets a reference to the given []PropertiesMysql and assigns it to the Privileges field.
 func (o *CreateAdmin) SetPrivileges(v []PropertiesMysql) {
 	o.Privileges = v
 }
@@ -240,7 +281,12 @@ func (o CreateAdmin) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InstanceId) {
 		toSerialize["instance_id"] = o.InstanceId
 	}
-	toSerialize["privileges"] = o.Privileges
+	if !IsNil(o.ForAll) {
+		toSerialize["for_all"] = o.ForAll
+	}
+	if !IsNil(o.Privileges) {
+		toSerialize["privileges"] = o.Privileges
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}

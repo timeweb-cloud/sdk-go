@@ -350,7 +350,7 @@ func (a *MailAPIService) CreateDomainMailboxV2Execute(r ApiCreateDomainMailboxV2
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2508,7 +2508,7 @@ func (a *MailAPIService) UpdateMailboxV2Execute(r ApiUpdateMailboxV2Request) (*U
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v CreateDatabaseBackup409Response
+			var v UpdateDatabaseInstance409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

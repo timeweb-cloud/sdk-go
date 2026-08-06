@@ -28,46 +28,99 @@ type DatabaseCluster struct {
 	Location NullableString `json:"location"`
 	// Название кластера базы данных.
 	Name string `json:"name"`
+	// Описание кластера базы данных.
+	Description string `json:"description"`
 	// Список сетей кластера базы данных.
 	Networks []DatabaseClusterNetworksInner `json:"networks"`
-	// Использование IPv6 адреса.
-	IsPublicIpv6 *bool `json:"is_public_ipv6,omitempty"`
-	Type DbType `json:"type"`
+	// Использование публичного IPv6-адреса.
+	IsEnabledPublicIpv6 bool `json:"is_enabled_public_ipv6"`
+	// Тип базы данных. Список возможных значений шире, чем список типов, доступных при создании нового кластера.
+	Type NullableString `json:"type"`
 	// Тип хеширования кластера базы данных (mysql5 | mysql | postgres).
 	HashType NullableString `json:"hash_type"`
 	// Ссылка на аватар для базы данных.
 	AvatarLink NullableString `json:"avatar_link"`
 	// Порт
 	Port NullableInt32 `json:"port"`
-	// Текущий статус кластера базы данных.
+	// Текущий статус кластера базы данных. Значение `read_only` означает, что запись в кластер заблокирована из-за переполнения диска — чтобы снять блокировку, освободите место или увеличьте размер диска.
 	Status string `json:"status"`
-	// ID тарифа.
-	PresetId int32 `json:"preset_id"`
-	Disk NullableDatabaseClusterDisk `json:"disk,omitempty"`
+	// ID тарифа. Равен `null` у кластеров, созданных через конфигуратор — в этом случае заполнен `configurator_id`.
+	PresetId NullableInt32 `json:"preset_id"`
+	// ID конфигуратора. Равен `null` у кластеров, созданных по тарифу.
+	ConfiguratorId NullableInt32 `json:"configurator_id"`
+	// Количество ядер процессора.
+	Cpu NullableInt32 `json:"cpu"`
+	// Частота процессора.
+	CpuFrequency NullableString `json:"cpu_frequency"`
+	// Используются ли выделенные ядра процессора.
+	IsDedicatedCpu bool `json:"is_dedicated_cpu"`
+	// Объем оперативной памяти (в Мб).
+	Ram NullableInt32 `json:"ram"`
+	Disk NullableDatabaseClusterDisk `json:"disk"`
+	// Подключен ли к кластеру дополнительный диск.
+	HasAdditionalDisk bool `json:"has_additional_disk"`
+	DiskAutoscaling NullableDatabaseClusterDiskAutoscaling `json:"disk_autoscaling"`
 	ConfigParameters Mysql `json:"config_parameters"`
 	// Доступность публичного IP-адреса
 	IsEnabledPublicNetwork bool `json:"is_enabled_public_network"`
+	// Включено ли защищенное подключение к кластеру базы данных.
+	IsSecureConnectionEnabled bool `json:"is_secure_connection_enabled"`
+	// Включены ли автоматические резервные копии кластера базы данных.
+	IsAutobackupsEnabled bool `json:"is_autobackups_enabled"`
+	// Включено ли расписание резервного копирования кластера базы данных.
+	IsBackupScheduleEnabled bool `json:"is_backup_schedule_enabled"`
+	AvailabilityZone AvailabilityZone `json:"availability_zone"`
+	// ID проекта, в котором находится кластер базы данных.
+	ProjectId *int32 `json:"project_id,omitempty"`
+	// Список реплик кластера базы данных.
+	ReplicaList []DatabaseClusterReplicaListInner `json:"replica_list"`
+	// Список доменов кластера базы данных. Если публичная сеть отключена (`is_enabled_public_network: false`), список всегда пустой.
+	Domains []DatabaseClusterDomainsInner `json:"domains"`
+	// Список дочерних сервисов кластера базы данных.
+	ChildServices []DatabaseClusterChildServicesInner `json:"child_services"`
+	// Список родительских сервисов кластера базы данных.
+	ParentServices []DatabaseClusterParentServicesInner `json:"parent_services"`
+	MaintenanceSlot DatabaseClusterMaintenanceSlot `json:"maintenance_slot"`
 }
 
 // NewDatabaseCluster instantiates a new DatabaseCluster object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, networks []DatabaseClusterNetworksInner, type_ DbType, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId int32, configParameters Mysql, isEnabledPublicNetwork bool) *DatabaseCluster {
+func NewDatabaseCluster(id float32, createdAt string, location NullableString, name string, description string, networks []DatabaseClusterNetworksInner, isEnabledPublicIpv6 bool, type_ NullableString, hashType NullableString, avatarLink NullableString, port NullableInt32, status string, presetId NullableInt32, configuratorId NullableInt32, cpu NullableInt32, cpuFrequency NullableString, isDedicatedCpu bool, ram NullableInt32, disk NullableDatabaseClusterDisk, hasAdditionalDisk bool, diskAutoscaling NullableDatabaseClusterDiskAutoscaling, configParameters Mysql, isEnabledPublicNetwork bool, isSecureConnectionEnabled bool, isAutobackupsEnabled bool, isBackupScheduleEnabled bool, availabilityZone AvailabilityZone, replicaList []DatabaseClusterReplicaListInner, domains []DatabaseClusterDomainsInner, childServices []DatabaseClusterChildServicesInner, parentServices []DatabaseClusterParentServicesInner, maintenanceSlot DatabaseClusterMaintenanceSlot) *DatabaseCluster {
 	this := DatabaseCluster{}
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.Location = location
 	this.Name = name
+	this.Description = description
 	this.Networks = networks
+	this.IsEnabledPublicIpv6 = isEnabledPublicIpv6
 	this.Type = type_
 	this.HashType = hashType
 	this.AvatarLink = avatarLink
 	this.Port = port
 	this.Status = status
 	this.PresetId = presetId
+	this.ConfiguratorId = configuratorId
+	this.Cpu = cpu
+	this.CpuFrequency = cpuFrequency
+	this.IsDedicatedCpu = isDedicatedCpu
+	this.Ram = ram
+	this.Disk = disk
+	this.HasAdditionalDisk = hasAdditionalDisk
+	this.DiskAutoscaling = diskAutoscaling
 	this.ConfigParameters = configParameters
 	this.IsEnabledPublicNetwork = isEnabledPublicNetwork
+	this.IsSecureConnectionEnabled = isSecureConnectionEnabled
+	this.IsAutobackupsEnabled = isAutobackupsEnabled
+	this.IsBackupScheduleEnabled = isBackupScheduleEnabled
+	this.AvailabilityZone = availabilityZone
+	this.ReplicaList = replicaList
+	this.Domains = domains
+	this.ChildServices = childServices
+	this.ParentServices = parentServices
+	this.MaintenanceSlot = maintenanceSlot
 	return &this
 }
 
@@ -177,6 +230,30 @@ func (o *DatabaseCluster) SetName(v string) {
 	o.Name = v
 }
 
+// GetDescription returns the Description field value
+func (o *DatabaseCluster) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *DatabaseCluster) SetDescription(v string) {
+	o.Description = v
+}
+
 // GetNetworks returns the Networks field value
 func (o *DatabaseCluster) GetNetworks() []DatabaseClusterNetworksInner {
 	if o == nil {
@@ -201,60 +278,54 @@ func (o *DatabaseCluster) SetNetworks(v []DatabaseClusterNetworksInner) {
 	o.Networks = v
 }
 
-// GetIsPublicIpv6 returns the IsPublicIpv6 field value if set, zero value otherwise.
-func (o *DatabaseCluster) GetIsPublicIpv6() bool {
-	if o == nil || IsNil(o.IsPublicIpv6) {
+// GetIsEnabledPublicIpv6 returns the IsEnabledPublicIpv6 field value
+func (o *DatabaseCluster) GetIsEnabledPublicIpv6() bool {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsPublicIpv6
+
+	return o.IsEnabledPublicIpv6
 }
 
-// GetIsPublicIpv6Ok returns a tuple with the IsPublicIpv6 field value if set, nil otherwise
+// GetIsEnabledPublicIpv6Ok returns a tuple with the IsEnabledPublicIpv6 field value
 // and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetIsPublicIpv6Ok() (*bool, bool) {
-	if o == nil || IsNil(o.IsPublicIpv6) {
+func (o *DatabaseCluster) GetIsEnabledPublicIpv6Ok() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsPublicIpv6, true
+	return &o.IsEnabledPublicIpv6, true
 }
 
-// HasIsPublicIpv6 returns a boolean if a field has been set.
-func (o *DatabaseCluster) HasIsPublicIpv6() bool {
-	if o != nil && !IsNil(o.IsPublicIpv6) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsPublicIpv6 gets a reference to the given bool and assigns it to the IsPublicIpv6 field.
-func (o *DatabaseCluster) SetIsPublicIpv6(v bool) {
-	o.IsPublicIpv6 = &v
+// SetIsEnabledPublicIpv6 sets field value
+func (o *DatabaseCluster) SetIsEnabledPublicIpv6(v bool) {
+	o.IsEnabledPublicIpv6 = v
 }
 
 // GetType returns the Type field value
-func (o *DatabaseCluster) GetType() DbType {
-	if o == nil {
-		var ret DbType
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DatabaseCluster) GetType() string {
+	if o == nil || o.Type.Get() == nil {
+		var ret string
 		return ret
 	}
 
-	return o.Type
+	return *o.Type.Get()
 }
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *DatabaseCluster) GetTypeOk() (*DbType, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseCluster) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type.Get(), o.Type.IsSet()
 }
 
 // SetType sets field value
-func (o *DatabaseCluster) SetType(v DbType) {
-	o.Type = v
+func (o *DatabaseCluster) SetType(v string) {
+	o.Type.Set(&v)
 }
 
 // GetHashType returns the HashType field value
@@ -360,39 +431,171 @@ func (o *DatabaseCluster) SetStatus(v string) {
 }
 
 // GetPresetId returns the PresetId field value
+// If the value is explicit nil, the zero value for int32 will be returned
 func (o *DatabaseCluster) GetPresetId() int32 {
-	if o == nil {
+	if o == nil || o.PresetId.Get() == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.PresetId
+	return *o.PresetId.Get()
 }
 
 // GetPresetIdOk returns a tuple with the PresetId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DatabaseCluster) GetPresetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PresetId, true
+	return o.PresetId.Get(), o.PresetId.IsSet()
 }
 
 // SetPresetId sets field value
 func (o *DatabaseCluster) SetPresetId(v int32) {
-	o.PresetId = v
+	o.PresetId.Set(&v)
 }
 
-// GetDisk returns the Disk field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetConfiguratorId returns the ConfiguratorId field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *DatabaseCluster) GetConfiguratorId() int32 {
+	if o == nil || o.ConfiguratorId.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.ConfiguratorId.Get()
+}
+
+// GetConfiguratorIdOk returns a tuple with the ConfiguratorId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseCluster) GetConfiguratorIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ConfiguratorId.Get(), o.ConfiguratorId.IsSet()
+}
+
+// SetConfiguratorId sets field value
+func (o *DatabaseCluster) SetConfiguratorId(v int32) {
+	o.ConfiguratorId.Set(&v)
+}
+
+// GetCpu returns the Cpu field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *DatabaseCluster) GetCpu() int32 {
+	if o == nil || o.Cpu.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.Cpu.Get()
+}
+
+// GetCpuOk returns a tuple with the Cpu field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseCluster) GetCpuOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cpu.Get(), o.Cpu.IsSet()
+}
+
+// SetCpu sets field value
+func (o *DatabaseCluster) SetCpu(v int32) {
+	o.Cpu.Set(&v)
+}
+
+// GetCpuFrequency returns the CpuFrequency field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DatabaseCluster) GetCpuFrequency() string {
+	if o == nil || o.CpuFrequency.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.CpuFrequency.Get()
+}
+
+// GetCpuFrequencyOk returns a tuple with the CpuFrequency field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseCluster) GetCpuFrequencyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CpuFrequency.Get(), o.CpuFrequency.IsSet()
+}
+
+// SetCpuFrequency sets field value
+func (o *DatabaseCluster) SetCpuFrequency(v string) {
+	o.CpuFrequency.Set(&v)
+}
+
+// GetIsDedicatedCpu returns the IsDedicatedCpu field value
+func (o *DatabaseCluster) GetIsDedicatedCpu() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsDedicatedCpu
+}
+
+// GetIsDedicatedCpuOk returns a tuple with the IsDedicatedCpu field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetIsDedicatedCpuOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsDedicatedCpu, true
+}
+
+// SetIsDedicatedCpu sets field value
+func (o *DatabaseCluster) SetIsDedicatedCpu(v bool) {
+	o.IsDedicatedCpu = v
+}
+
+// GetRam returns the Ram field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *DatabaseCluster) GetRam() int32 {
+	if o == nil || o.Ram.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.Ram.Get()
+}
+
+// GetRamOk returns a tuple with the Ram field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseCluster) GetRamOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ram.Get(), o.Ram.IsSet()
+}
+
+// SetRam sets field value
+func (o *DatabaseCluster) SetRam(v int32) {
+	o.Ram.Set(&v)
+}
+
+// GetDisk returns the Disk field value
+// If the value is explicit nil, the zero value for DatabaseClusterDisk will be returned
 func (o *DatabaseCluster) GetDisk() DatabaseClusterDisk {
-	if o == nil || IsNil(o.Disk.Get()) {
+	if o == nil || o.Disk.Get() == nil {
 		var ret DatabaseClusterDisk
 		return ret
 	}
+
 	return *o.Disk.Get()
 }
 
-// GetDiskOk returns a tuple with the Disk field value if set, nil otherwise
+// GetDiskOk returns a tuple with the Disk field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DatabaseCluster) GetDiskOk() (*DatabaseClusterDisk, bool) {
@@ -402,27 +605,59 @@ func (o *DatabaseCluster) GetDiskOk() (*DatabaseClusterDisk, bool) {
 	return o.Disk.Get(), o.Disk.IsSet()
 }
 
-// HasDisk returns a boolean if a field has been set.
-func (o *DatabaseCluster) HasDisk() bool {
-	if o != nil && o.Disk.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDisk gets a reference to the given NullableDatabaseClusterDisk and assigns it to the Disk field.
+// SetDisk sets field value
 func (o *DatabaseCluster) SetDisk(v DatabaseClusterDisk) {
 	o.Disk.Set(&v)
 }
-// SetDiskNil sets the value for Disk to be an explicit nil
-func (o *DatabaseCluster) SetDiskNil() {
-	o.Disk.Set(nil)
+
+// GetHasAdditionalDisk returns the HasAdditionalDisk field value
+func (o *DatabaseCluster) GetHasAdditionalDisk() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.HasAdditionalDisk
 }
 
-// UnsetDisk ensures that no value is present for Disk, not even an explicit nil
-func (o *DatabaseCluster) UnsetDisk() {
-	o.Disk.Unset()
+// GetHasAdditionalDiskOk returns a tuple with the HasAdditionalDisk field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetHasAdditionalDiskOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.HasAdditionalDisk, true
+}
+
+// SetHasAdditionalDisk sets field value
+func (o *DatabaseCluster) SetHasAdditionalDisk(v bool) {
+	o.HasAdditionalDisk = v
+}
+
+// GetDiskAutoscaling returns the DiskAutoscaling field value
+// If the value is explicit nil, the zero value for DatabaseClusterDiskAutoscaling will be returned
+func (o *DatabaseCluster) GetDiskAutoscaling() DatabaseClusterDiskAutoscaling {
+	if o == nil || o.DiskAutoscaling.Get() == nil {
+		var ret DatabaseClusterDiskAutoscaling
+		return ret
+	}
+
+	return *o.DiskAutoscaling.Get()
+}
+
+// GetDiskAutoscalingOk returns a tuple with the DiskAutoscaling field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseCluster) GetDiskAutoscalingOk() (*DatabaseClusterDiskAutoscaling, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DiskAutoscaling.Get(), o.DiskAutoscaling.IsSet()
+}
+
+// SetDiskAutoscaling sets field value
+func (o *DatabaseCluster) SetDiskAutoscaling(v DatabaseClusterDiskAutoscaling) {
+	o.DiskAutoscaling.Set(&v)
 }
 
 // GetConfigParameters returns the ConfigParameters field value
@@ -473,6 +708,254 @@ func (o *DatabaseCluster) SetIsEnabledPublicNetwork(v bool) {
 	o.IsEnabledPublicNetwork = v
 }
 
+// GetIsSecureConnectionEnabled returns the IsSecureConnectionEnabled field value
+func (o *DatabaseCluster) GetIsSecureConnectionEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsSecureConnectionEnabled
+}
+
+// GetIsSecureConnectionEnabledOk returns a tuple with the IsSecureConnectionEnabled field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetIsSecureConnectionEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsSecureConnectionEnabled, true
+}
+
+// SetIsSecureConnectionEnabled sets field value
+func (o *DatabaseCluster) SetIsSecureConnectionEnabled(v bool) {
+	o.IsSecureConnectionEnabled = v
+}
+
+// GetIsAutobackupsEnabled returns the IsAutobackupsEnabled field value
+func (o *DatabaseCluster) GetIsAutobackupsEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsAutobackupsEnabled
+}
+
+// GetIsAutobackupsEnabledOk returns a tuple with the IsAutobackupsEnabled field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetIsAutobackupsEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsAutobackupsEnabled, true
+}
+
+// SetIsAutobackupsEnabled sets field value
+func (o *DatabaseCluster) SetIsAutobackupsEnabled(v bool) {
+	o.IsAutobackupsEnabled = v
+}
+
+// GetIsBackupScheduleEnabled returns the IsBackupScheduleEnabled field value
+func (o *DatabaseCluster) GetIsBackupScheduleEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsBackupScheduleEnabled
+}
+
+// GetIsBackupScheduleEnabledOk returns a tuple with the IsBackupScheduleEnabled field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetIsBackupScheduleEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsBackupScheduleEnabled, true
+}
+
+// SetIsBackupScheduleEnabled sets field value
+func (o *DatabaseCluster) SetIsBackupScheduleEnabled(v bool) {
+	o.IsBackupScheduleEnabled = v
+}
+
+// GetAvailabilityZone returns the AvailabilityZone field value
+func (o *DatabaseCluster) GetAvailabilityZone() AvailabilityZone {
+	if o == nil {
+		var ret AvailabilityZone
+		return ret
+	}
+
+	return o.AvailabilityZone
+}
+
+// GetAvailabilityZoneOk returns a tuple with the AvailabilityZone field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetAvailabilityZoneOk() (*AvailabilityZone, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AvailabilityZone, true
+}
+
+// SetAvailabilityZone sets field value
+func (o *DatabaseCluster) SetAvailabilityZone(v AvailabilityZone) {
+	o.AvailabilityZone = v
+}
+
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *DatabaseCluster) GetProjectId() int32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret int32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetProjectIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *DatabaseCluster) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *DatabaseCluster) SetProjectId(v int32) {
+	o.ProjectId = &v
+}
+
+// GetReplicaList returns the ReplicaList field value
+func (o *DatabaseCluster) GetReplicaList() []DatabaseClusterReplicaListInner {
+	if o == nil {
+		var ret []DatabaseClusterReplicaListInner
+		return ret
+	}
+
+	return o.ReplicaList
+}
+
+// GetReplicaListOk returns a tuple with the ReplicaList field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetReplicaListOk() ([]DatabaseClusterReplicaListInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReplicaList, true
+}
+
+// SetReplicaList sets field value
+func (o *DatabaseCluster) SetReplicaList(v []DatabaseClusterReplicaListInner) {
+	o.ReplicaList = v
+}
+
+// GetDomains returns the Domains field value
+func (o *DatabaseCluster) GetDomains() []DatabaseClusterDomainsInner {
+	if o == nil {
+		var ret []DatabaseClusterDomainsInner
+		return ret
+	}
+
+	return o.Domains
+}
+
+// GetDomainsOk returns a tuple with the Domains field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetDomainsOk() ([]DatabaseClusterDomainsInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Domains, true
+}
+
+// SetDomains sets field value
+func (o *DatabaseCluster) SetDomains(v []DatabaseClusterDomainsInner) {
+	o.Domains = v
+}
+
+// GetChildServices returns the ChildServices field value
+func (o *DatabaseCluster) GetChildServices() []DatabaseClusterChildServicesInner {
+	if o == nil {
+		var ret []DatabaseClusterChildServicesInner
+		return ret
+	}
+
+	return o.ChildServices
+}
+
+// GetChildServicesOk returns a tuple with the ChildServices field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetChildServicesOk() ([]DatabaseClusterChildServicesInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChildServices, true
+}
+
+// SetChildServices sets field value
+func (o *DatabaseCluster) SetChildServices(v []DatabaseClusterChildServicesInner) {
+	o.ChildServices = v
+}
+
+// GetParentServices returns the ParentServices field value
+func (o *DatabaseCluster) GetParentServices() []DatabaseClusterParentServicesInner {
+	if o == nil {
+		var ret []DatabaseClusterParentServicesInner
+		return ret
+	}
+
+	return o.ParentServices
+}
+
+// GetParentServicesOk returns a tuple with the ParentServices field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetParentServicesOk() ([]DatabaseClusterParentServicesInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ParentServices, true
+}
+
+// SetParentServices sets field value
+func (o *DatabaseCluster) SetParentServices(v []DatabaseClusterParentServicesInner) {
+	o.ParentServices = v
+}
+
+// GetMaintenanceSlot returns the MaintenanceSlot field value
+func (o *DatabaseCluster) GetMaintenanceSlot() DatabaseClusterMaintenanceSlot {
+	if o == nil {
+		var ret DatabaseClusterMaintenanceSlot
+		return ret
+	}
+
+	return o.MaintenanceSlot
+}
+
+// GetMaintenanceSlotOk returns a tuple with the MaintenanceSlot field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseCluster) GetMaintenanceSlotOk() (*DatabaseClusterMaintenanceSlot, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MaintenanceSlot, true
+}
+
+// SetMaintenanceSlot sets field value
+func (o *DatabaseCluster) SetMaintenanceSlot(v DatabaseClusterMaintenanceSlot) {
+	o.MaintenanceSlot = v
+}
+
 func (o DatabaseCluster) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -487,21 +970,37 @@ func (o DatabaseCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["location"] = o.Location.Get()
 	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
 	toSerialize["networks"] = o.Networks
-	if !IsNil(o.IsPublicIpv6) {
-		toSerialize["is_public_ipv6"] = o.IsPublicIpv6
-	}
-	toSerialize["type"] = o.Type
+	toSerialize["is_enabled_public_ipv6"] = o.IsEnabledPublicIpv6
+	toSerialize["type"] = o.Type.Get()
 	toSerialize["hash_type"] = o.HashType.Get()
 	toSerialize["avatar_link"] = o.AvatarLink.Get()
 	toSerialize["port"] = o.Port.Get()
 	toSerialize["status"] = o.Status
-	toSerialize["preset_id"] = o.PresetId
-	if o.Disk.IsSet() {
-		toSerialize["disk"] = o.Disk.Get()
-	}
+	toSerialize["preset_id"] = o.PresetId.Get()
+	toSerialize["configurator_id"] = o.ConfiguratorId.Get()
+	toSerialize["cpu"] = o.Cpu.Get()
+	toSerialize["cpu_frequency"] = o.CpuFrequency.Get()
+	toSerialize["is_dedicated_cpu"] = o.IsDedicatedCpu
+	toSerialize["ram"] = o.Ram.Get()
+	toSerialize["disk"] = o.Disk.Get()
+	toSerialize["has_additional_disk"] = o.HasAdditionalDisk
+	toSerialize["disk_autoscaling"] = o.DiskAutoscaling.Get()
 	toSerialize["config_parameters"] = o.ConfigParameters
 	toSerialize["is_enabled_public_network"] = o.IsEnabledPublicNetwork
+	toSerialize["is_secure_connection_enabled"] = o.IsSecureConnectionEnabled
+	toSerialize["is_autobackups_enabled"] = o.IsAutobackupsEnabled
+	toSerialize["is_backup_schedule_enabled"] = o.IsBackupScheduleEnabled
+	toSerialize["availability_zone"] = o.AvailabilityZone
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
+	}
+	toSerialize["replica_list"] = o.ReplicaList
+	toSerialize["domains"] = o.Domains
+	toSerialize["child_services"] = o.ChildServices
+	toSerialize["parent_services"] = o.ParentServices
+	toSerialize["maintenance_slot"] = o.MaintenanceSlot
 	return toSerialize, nil
 }
 

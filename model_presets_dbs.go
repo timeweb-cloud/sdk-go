@@ -26,17 +26,22 @@ type PresetsDbs struct {
 	Description *string `json:"description,omitempty"`
 	// Краткое описание тарифа.
 	DescriptionShort *string `json:"description_short,omitempty"`
-	// Описание процессора тарифа.
+	// Количество ядер процессора тарифа.
 	Cpu *float32 `json:"cpu,omitempty"`
-	// Описание ОЗУ тарифа.
+	// Частота процессора (в ГГц).
+	CpuFrequency *string `json:"cpu_frequency,omitempty"`
+	// Объём оперативной памяти тарифа (в Мб).
 	Ram *float32 `json:"ram,omitempty"`
-	// Описание диска тарифа.
+	// Размер диска тарифа (в Мб).
 	Disk *float32 `json:"disk,omitempty"`
-	Type *DbType `json:"type,omitempty"`
+	// Семейство СУБД тарифа. Значение не совпадает с типом кластера, который передаётся в поле `type` при создании кластера (`POST /api/v1/databases`): там используется версионированный тип, например `postgres17`. Тарифы для Valkey возвращаются со значением `redis` — отдельного значения `valkey` в этом поле не бывает.
+	Type *string `json:"type,omitempty"`
 	// Стоимость тарифа базы данных
 	Price *float32 `json:"price,omitempty"`
 	// Географическое расположение тарифа.
 	Location *string `json:"location,omitempty"`
+	// Теги тарифа, в том числе тег группы тарифов, в пределах которой доступна смена тарифа.
+	Tags []string `json:"tags,omitempty"`
 }
 
 // NewPresetsDbs instantiates a new PresetsDbs object
@@ -184,6 +189,38 @@ func (o *PresetsDbs) SetCpu(v float32) {
 	o.Cpu = &v
 }
 
+// GetCpuFrequency returns the CpuFrequency field value if set, zero value otherwise.
+func (o *PresetsDbs) GetCpuFrequency() string {
+	if o == nil || IsNil(o.CpuFrequency) {
+		var ret string
+		return ret
+	}
+	return *o.CpuFrequency
+}
+
+// GetCpuFrequencyOk returns a tuple with the CpuFrequency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PresetsDbs) GetCpuFrequencyOk() (*string, bool) {
+	if o == nil || IsNil(o.CpuFrequency) {
+		return nil, false
+	}
+	return o.CpuFrequency, true
+}
+
+// HasCpuFrequency returns a boolean if a field has been set.
+func (o *PresetsDbs) HasCpuFrequency() bool {
+	if o != nil && !IsNil(o.CpuFrequency) {
+		return true
+	}
+
+	return false
+}
+
+// SetCpuFrequency gets a reference to the given string and assigns it to the CpuFrequency field.
+func (o *PresetsDbs) SetCpuFrequency(v string) {
+	o.CpuFrequency = &v
+}
+
 // GetRam returns the Ram field value if set, zero value otherwise.
 func (o *PresetsDbs) GetRam() float32 {
 	if o == nil || IsNil(o.Ram) {
@@ -249,9 +286,9 @@ func (o *PresetsDbs) SetDisk(v float32) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *PresetsDbs) GetType() DbType {
+func (o *PresetsDbs) GetType() string {
 	if o == nil || IsNil(o.Type) {
-		var ret DbType
+		var ret string
 		return ret
 	}
 	return *o.Type
@@ -259,7 +296,7 @@ func (o *PresetsDbs) GetType() DbType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PresetsDbs) GetTypeOk() (*DbType, bool) {
+func (o *PresetsDbs) GetTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -275,8 +312,8 @@ func (o *PresetsDbs) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given DbType and assigns it to the Type field.
-func (o *PresetsDbs) SetType(v DbType) {
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *PresetsDbs) SetType(v string) {
 	o.Type = &v
 }
 
@@ -344,6 +381,38 @@ func (o *PresetsDbs) SetLocation(v string) {
 	o.Location = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *PresetsDbs) GetTags() []string {
+	if o == nil || IsNil(o.Tags) {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PresetsDbs) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *PresetsDbs) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *PresetsDbs) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o PresetsDbs) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -366,6 +435,9 @@ func (o PresetsDbs) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cpu) {
 		toSerialize["cpu"] = o.Cpu
 	}
+	if !IsNil(o.CpuFrequency) {
+		toSerialize["cpu_frequency"] = o.CpuFrequency
+	}
 	if !IsNil(o.Ram) {
 		toSerialize["ram"] = o.Ram
 	}
@@ -380,6 +452,9 @@ func (o PresetsDbs) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 	return toSerialize, nil
 }

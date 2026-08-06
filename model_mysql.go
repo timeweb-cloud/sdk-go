@@ -52,10 +52,12 @@ type Mysql struct {
 	MaxHeapTableSize *string `json:"max_heap_table_size,omitempty"`
 	// Режим работы SQL сервера, определяющий поведение обработки запросов (`mysql5` | `mysql` | `mysql8_4`).
 	SqlMode *string `json:"sql_mode,omitempty"`
-	// Тип кэша запросов (`mysql5` | `mysql` | `mysql8_4`).
+	// Тип кэша запросов (`mysql5`).
 	QueryCacheType *string `json:"query_cache_type,omitempty"`
-	// Объем памяти, выделяемый для кэширования результатов запросов (`mysql5` | `mysql` | `mysql8_4`).
+	// Объем памяти, выделяемый для кэширования результатов запросов (`mysql5`).
 	QueryCacheSize *string `json:"query_cache_size,omitempty"`
+	// Максимальный размер результата запроса, который может быть закэширован (`mysql5`).
+	QueryCacheLimit *string `json:"query_cache_limit,omitempty"`
 	// Режим записи журнала InnoDB при фиксации транзакций (`mysql5` | `mysql` | `mysql8_4`).
 	InnodbFlushLogAtTrxCommit *string `json:"innodb_flush_log_at_trx_commit,omitempty"`
 	// Уровень изоляции транзакций по умолчанию (`mysql5` | `mysql` | `mysql8_4`).
@@ -711,6 +713,38 @@ func (o *Mysql) HasQueryCacheSize() bool {
 // SetQueryCacheSize gets a reference to the given string and assigns it to the QueryCacheSize field.
 func (o *Mysql) SetQueryCacheSize(v string) {
 	o.QueryCacheSize = &v
+}
+
+// GetQueryCacheLimit returns the QueryCacheLimit field value if set, zero value otherwise.
+func (o *Mysql) GetQueryCacheLimit() string {
+	if o == nil || IsNil(o.QueryCacheLimit) {
+		var ret string
+		return ret
+	}
+	return *o.QueryCacheLimit
+}
+
+// GetQueryCacheLimitOk returns a tuple with the QueryCacheLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Mysql) GetQueryCacheLimitOk() (*string, bool) {
+	if o == nil || IsNil(o.QueryCacheLimit) {
+		return nil, false
+	}
+	return o.QueryCacheLimit, true
+}
+
+// HasQueryCacheLimit returns a boolean if a field has been set.
+func (o *Mysql) HasQueryCacheLimit() bool {
+	if o != nil && !IsNil(o.QueryCacheLimit) {
+		return true
+	}
+
+	return false
+}
+
+// SetQueryCacheLimit gets a reference to the given string and assigns it to the QueryCacheLimit field.
+func (o *Mysql) SetQueryCacheLimit(v string) {
+	o.QueryCacheLimit = &v
 }
 
 // GetInnodbFlushLogAtTrxCommit returns the InnodbFlushLogAtTrxCommit field value if set, zero value otherwise.
@@ -1768,6 +1802,9 @@ func (o Mysql) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.QueryCacheSize) {
 		toSerialize["query_cache_size"] = o.QueryCacheSize
+	}
+	if !IsNil(o.QueryCacheLimit) {
+		toSerialize["query_cache_limit"] = o.QueryCacheLimit
 	}
 	if !IsNil(o.InnodbFlushLogAtTrxCommit) {
 		toSerialize["innodb_flush_log_at_trx_commit"] = o.InnodbFlushLogAtTrxCommit

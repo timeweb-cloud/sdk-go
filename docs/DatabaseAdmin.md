@@ -5,18 +5,20 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **float32** | ID для каждого экземпляра пользователя базы данных. Автоматически генерируется при создании. | 
-**CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда была создана база данных. | 
+**CreatedAt** | **string** | Значение времени, указанное в комбинированном формате даты и времени ISO8601, которое представляет, когда был создан пользователь базы данных. | 
 **Login** | **string** | Имя пользователя базы данных | 
 **Password** | **string** | Пароль пользователя базы данных | 
 **Description** | **string** | Описание пользователя базы данных | 
 **Host** | **NullableString** | Хост пользователя | 
+**ForAll** | **bool** | Флаг, выданы ли пользователю привилегии на все инстансы базы данных | 
+**IsResetPassword** | **bool** | Флаг, был ли сброшен пароль пользователя | 
 **Instances** | [**[]DatabaseAdminInstancesInner**](DatabaseAdminInstancesInner.md) |  | 
 
 ## Methods
 
 ### NewDatabaseAdmin
 
-`func NewDatabaseAdmin(id float32, createdAt string, login string, password string, description string, host NullableString, instances []DatabaseAdminInstancesInner, ) *DatabaseAdmin`
+`func NewDatabaseAdmin(id float32, createdAt string, login string, password string, description string, host NullableString, forAll bool, isResetPassword bool, instances []DatabaseAdminInstancesInner, ) *DatabaseAdmin`
 
 NewDatabaseAdmin instantiates a new DatabaseAdmin object
 This constructor will assign default values to properties that have it defined,
@@ -161,6 +163,46 @@ SetHost sets Host field to given value.
 `func (o *DatabaseAdmin) UnsetHost()`
 
 UnsetHost ensures that no value is present for Host, not even an explicit nil
+### GetForAll
+
+`func (o *DatabaseAdmin) GetForAll() bool`
+
+GetForAll returns the ForAll field if non-nil, zero value otherwise.
+
+### GetForAllOk
+
+`func (o *DatabaseAdmin) GetForAllOk() (*bool, bool)`
+
+GetForAllOk returns a tuple with the ForAll field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForAll
+
+`func (o *DatabaseAdmin) SetForAll(v bool)`
+
+SetForAll sets ForAll field to given value.
+
+
+### GetIsResetPassword
+
+`func (o *DatabaseAdmin) GetIsResetPassword() bool`
+
+GetIsResetPassword returns the IsResetPassword field if non-nil, zero value otherwise.
+
+### GetIsResetPasswordOk
+
+`func (o *DatabaseAdmin) GetIsResetPasswordOk() (*bool, bool)`
+
+GetIsResetPasswordOk returns a tuple with the IsResetPassword field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsResetPassword
+
+`func (o *DatabaseAdmin) SetIsResetPassword(v bool)`
+
+SetIsResetPassword sets IsResetPassword field to given value.
+
+
 ### GetInstances
 
 `func (o *DatabaseAdmin) GetInstances() []DatabaseAdminInstancesInner`

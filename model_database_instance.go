@@ -28,18 +28,25 @@ type DatabaseInstance struct {
 	Name string `json:"name"`
 	// Описание базы данных
 	Description string `json:"description"`
+	Extensions DatabaseExtensions `json:"extensions"`
+	// ID администратора базы данных, который является владельцем этой базы данных. `null`, если владелец не задан.
+	OwnerId NullableFloat32 `json:"owner_id"`
+	ConfigParameters KafkaConfigParameters `json:"config_parameters"`
 }
 
 // NewDatabaseInstance instantiates a new DatabaseInstance object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseInstance(id float32, createdAt string, name string, description string) *DatabaseInstance {
+func NewDatabaseInstance(id float32, createdAt string, name string, description string, extensions DatabaseExtensions, ownerId NullableFloat32, configParameters KafkaConfigParameters) *DatabaseInstance {
 	this := DatabaseInstance{}
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.Name = name
 	this.Description = description
+	this.Extensions = extensions
+	this.OwnerId = ownerId
+	this.ConfigParameters = configParameters
 	return &this
 }
 
@@ -147,6 +154,80 @@ func (o *DatabaseInstance) SetDescription(v string) {
 	o.Description = v
 }
 
+// GetExtensions returns the Extensions field value
+func (o *DatabaseInstance) GetExtensions() DatabaseExtensions {
+	if o == nil {
+		var ret DatabaseExtensions
+		return ret
+	}
+
+	return o.Extensions
+}
+
+// GetExtensionsOk returns a tuple with the Extensions field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseInstance) GetExtensionsOk() (*DatabaseExtensions, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Extensions, true
+}
+
+// SetExtensions sets field value
+func (o *DatabaseInstance) SetExtensions(v DatabaseExtensions) {
+	o.Extensions = v
+}
+
+// GetOwnerId returns the OwnerId field value
+// If the value is explicit nil, the zero value for float32 will be returned
+func (o *DatabaseInstance) GetOwnerId() float32 {
+	if o == nil || o.OwnerId.Get() == nil {
+		var ret float32
+		return ret
+	}
+
+	return *o.OwnerId.Get()
+}
+
+// GetOwnerIdOk returns a tuple with the OwnerId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DatabaseInstance) GetOwnerIdOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OwnerId.Get(), o.OwnerId.IsSet()
+}
+
+// SetOwnerId sets field value
+func (o *DatabaseInstance) SetOwnerId(v float32) {
+	o.OwnerId.Set(&v)
+}
+
+// GetConfigParameters returns the ConfigParameters field value
+func (o *DatabaseInstance) GetConfigParameters() KafkaConfigParameters {
+	if o == nil {
+		var ret KafkaConfigParameters
+		return ret
+	}
+
+	return o.ConfigParameters
+}
+
+// GetConfigParametersOk returns a tuple with the ConfigParameters field value
+// and a boolean to check if the value has been set.
+func (o *DatabaseInstance) GetConfigParametersOk() (*KafkaConfigParameters, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ConfigParameters, true
+}
+
+// SetConfigParameters sets field value
+func (o *DatabaseInstance) SetConfigParameters(v KafkaConfigParameters) {
+	o.ConfigParameters = v
+}
+
 func (o DatabaseInstance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -161,6 +242,9 @@ func (o DatabaseInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
+	toSerialize["extensions"] = o.Extensions
+	toSerialize["owner_id"] = o.OwnerId.Get()
+	toSerialize["config_parameters"] = o.ConfigParameters
 	return toSerialize, nil
 }
 

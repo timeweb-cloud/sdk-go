@@ -4,14 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Meta** | [**Meta**](Meta.md) |  | 
-**AutoBackupsSettings** | [**[]AutoBackup**](AutoBackup.md) |  | 
+**AutoBackupsSettings** | [**AutoBackup**](AutoBackup.md) |  | 
 
 ## Methods
 
 ### NewGetDatabaseAutoBackupsSettings200Response
 
-`func NewGetDatabaseAutoBackupsSettings200Response(meta Meta, autoBackupsSettings []AutoBackup, ) *GetDatabaseAutoBackupsSettings200Response`
+`func NewGetDatabaseAutoBackupsSettings200Response(autoBackupsSettings AutoBackup, ) *GetDatabaseAutoBackupsSettings200Response`
 
 NewGetDatabaseAutoBackupsSettings200Response instantiates a new GetDatabaseAutoBackupsSettings200Response object
 This constructor will assign default values to properties that have it defined,
@@ -26,42 +25,22 @@ NewGetDatabaseAutoBackupsSettings200ResponseWithDefaults instantiates a new GetD
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetMeta
-
-`func (o *GetDatabaseAutoBackupsSettings200Response) GetMeta() Meta`
-
-GetMeta returns the Meta field if non-nil, zero value otherwise.
-
-### GetMetaOk
-
-`func (o *GetDatabaseAutoBackupsSettings200Response) GetMetaOk() (*Meta, bool)`
-
-GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMeta
-
-`func (o *GetDatabaseAutoBackupsSettings200Response) SetMeta(v Meta)`
-
-SetMeta sets Meta field to given value.
-
-
 ### GetAutoBackupsSettings
 
-`func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettings() []AutoBackup`
+`func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettings() AutoBackup`
 
 GetAutoBackupsSettings returns the AutoBackupsSettings field if non-nil, zero value otherwise.
 
 ### GetAutoBackupsSettingsOk
 
-`func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettingsOk() (*[]AutoBackup, bool)`
+`func (o *GetDatabaseAutoBackupsSettings200Response) GetAutoBackupsSettingsOk() (*AutoBackup, bool)`
 
 GetAutoBackupsSettingsOk returns a tuple with the AutoBackupsSettings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAutoBackupsSettings
 
-`func (o *GetDatabaseAutoBackupsSettings200Response) SetAutoBackupsSettings(v []AutoBackup)`
+`func (o *GetDatabaseAutoBackupsSettings200Response) SetAutoBackupsSettings(v AutoBackup)`
 
 SetAutoBackupsSettings sets AutoBackupsSettings field to given value.
 

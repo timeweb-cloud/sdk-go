@@ -20,8 +20,9 @@ Name | Type | Description | Notes
 **MaxAllowedPacket** | Pointer to **string** | Максимальный размер пакета данных, который может передаваться между клиентом и сервером (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
 **MaxHeapTableSize** | Pointer to **string** | Максимальный размер таблиц типа MEMORY (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
 **SqlMode** | Pointer to **string** | Режим работы SQL сервера, определяющий поведение обработки запросов (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
-**QueryCacheType** | Pointer to **string** | Тип кэша запросов (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
-**QueryCacheSize** | Pointer to **string** | Объем памяти, выделяемый для кэширования результатов запросов (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
+**QueryCacheType** | Pointer to **string** | Тип кэша запросов (&#x60;mysql5&#x60;). | [optional] 
+**QueryCacheSize** | Pointer to **string** | Объем памяти, выделяемый для кэширования результатов запросов (&#x60;mysql5&#x60;). | [optional] 
+**QueryCacheLimit** | Pointer to **string** | Максимальный размер результата запроса, который может быть закэширован (&#x60;mysql5&#x60;). | [optional] 
 **InnodbFlushLogAtTrxCommit** | Pointer to **string** | Режим записи журнала InnoDB при фиксации транзакций (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
 **TransactionIsolation** | Pointer to **string** | Уровень изоляции транзакций по умолчанию (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
 **LongQueryTime** | Pointer to **string** | Время выполнения запроса, после которого он считается долгим и может попасть в slow query log (&#x60;mysql5&#x60; | &#x60;mysql&#x60; | &#x60;mysql8_4&#x60;). | [optional] 
@@ -522,6 +523,31 @@ SetQueryCacheSize sets QueryCacheSize field to given value.
 `func (o *Mysql) HasQueryCacheSize() bool`
 
 HasQueryCacheSize returns a boolean if a field has been set.
+
+### GetQueryCacheLimit
+
+`func (o *Mysql) GetQueryCacheLimit() string`
+
+GetQueryCacheLimit returns the QueryCacheLimit field if non-nil, zero value otherwise.
+
+### GetQueryCacheLimitOk
+
+`func (o *Mysql) GetQueryCacheLimitOk() (*string, bool)`
+
+GetQueryCacheLimitOk returns a tuple with the QueryCacheLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueryCacheLimit
+
+`func (o *Mysql) SetQueryCacheLimit(v string)`
+
+SetQueryCacheLimit sets QueryCacheLimit field to given value.
+
+### HasQueryCacheLimit
+
+`func (o *Mysql) HasQueryCacheLimit() bool`
+
+HasQueryCacheLimit returns a boolean if a field has been set.
 
 ### GetInnodbFlushLogAtTrxCommit
 
