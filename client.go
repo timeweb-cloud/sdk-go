@@ -58,6 +58,8 @@ type APIClient struct {
 
 	BalancersAPI *BalancersAPIService
 
+	CDNAPI *CDNAPIService
+
 	ContainerRegistryAPI *ContainerRegistryAPIService
 
 	DatabasesAPI *DatabasesAPIService
@@ -117,6 +119,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountAPI = (*AccountAPIService)(&c.common)
 	c.AppsAPI = (*AppsAPIService)(&c.common)
 	c.BalancersAPI = (*BalancersAPIService)(&c.common)
+	c.CDNAPI = (*CDNAPIService)(&c.common)
 	c.ContainerRegistryAPI = (*ContainerRegistryAPIService)(&c.common)
 	c.DatabasesAPI = (*DatabasesAPIService)(&c.common)
 	c.DedicatedServersAPI = (*DedicatedServersAPIService)(&c.common)

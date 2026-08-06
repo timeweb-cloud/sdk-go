@@ -205,6 +205,13 @@ tags:
     \ </br></br> Подробнее об Apps – в нашей <a href='https://timeweb.cloud/docs/apps'\
     \ target='_blank'>базе знаний</a>."
   name: Apps
+- description: "CDN (Content Delivery Network) — сеть серверов, распределенных по\
+    \ разным регионам, которая кэширует контент вашего сайта и отдает его пользова\
+    телям с ближайшего к ним узла. Это ускоряет загрузку и снижает нагрузку на ист\
+    очник контента — S3-хранилище или ваш собственный сервер.</br></br> Подробнее\
+    \ о CDN – в нашей <a href='https://timeweb.cloud/docs/cdn' target='_blank'>баз\
+    е знаний</a>."
+  name: CDN
 - description: Firewall позволяет фильтровать трафик по заранее установленным правилам.
     Вы можете создать несколько групп правил и подключить их на один или несколько
     облачных серверов.
@@ -52858,6 +52865,3160 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/cdn/http-resources:
+    get:
+      description: "Чтобы получить список CDN-ресурсов, отправьте GET-запрос на `/api/v1/cdn/http-resources`."
+      operationId: getCdnResources
+      parameters:
+      - description: "Оставить в выдаче только ресурсы, источником контента которы\
+          х является указанное S3-хранилище."
+        explode: true
+        in: query
+        name: bucket_id
+        required: false
+        schema:
+          example: 4210
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnResources_200_response'
+          description: Объект JSON c ключом `http_resources`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка CDN-ресурсов
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/http-resources"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/http-resources', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/http-resources', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: |-
+        Чтобы создать CDN-ресурс, отправьте POST-запрос на `/api/v1/cdn/http-resources`.
+
+        Источник контента задается ровно одним из полей: `storage_id` для S3-хранилища или `server` для произвольного origin-сервера. Если ни одно из них не передано, вернется ошибка `400`.
+
+        Сразу после создания ресурсу выдается технический домен `cdn_domain`, а сам ресурс какое-то время находится в статусе `processing`, пока конфигурация применяется на узлах CDN.
+      operationId: createCdnResource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create-http-resource'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCdnResource_201_response'
+          description: Объект JSON c ключом `http_resource`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "name": "Статика интернет-магазина",
+            "preset_id": 4001,
+            "server": {
+              "host": "origin.example.com",
+              "port": 443
+            },
+            "use_https": true
+          }' "https://api.timeweb.cloud/api/v1/cdn/http-resources"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "name": "Статика интернет-магазина",\n  "preset_id": 4001,\n  "server": {\n    "host": "origin.example.com",\n    "port": 443\n  },\n  "use_https": true\n}',
+              body: JSON.stringify({
+                  'name': '\u0421\u0442\u0430\u0442\u0438\u043A\u0430 \u0438\u043D\u0442\u0435\u0440\u043D\u0435\u0442-\u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430',
+                  'preset_id': 4001,
+                  'server': {
+                      'host': 'origin.example.com',
+                      'port': 443
+                  },
+                  'use_https': true
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources',
+              // '{\n  "name": "Статика интернет-магазина",\n  "preset_id": 4001,\n  "server": {\n    "host": "origin.example.com",\n    "port": 443\n  },\n  "use_https": true\n}',
+              {
+                  'name': '\u0421\u0442\u0430\u0442\u0438\u043A\u0430 \u0438\u043D\u0442\u0435\u0440\u043D\u0435\u0442-\u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430',
+                  'preset_id': 4001,
+                  'server': {
+                      'host': 'origin.example.com',
+                      'port': 443
+                  },
+                  'use_https': true
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'Статика интернет-магазина',
+              'preset_id': 4001,
+              'server': {
+                  'host': 'origin.example.com',
+                  'port': 443,
+              },
+              'use_https': True,
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cdn/http-resources', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "name": "Статика интернет-магазина",\n  "preset_id": 4001,\n  "server": {\n    "host": "origin.example.com",\n    "port": 443\n  },\n  "use_https": true\n}'.encode()
+          #response = requests.post('https://api.timeweb.cloud/api/v1/cdn/http-resources', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"name\": \"Статика интернет-магазина\",\n  \"preset_id\": 4001,\n  \"server\": {\n    \"host\": \"origin.example.com\",\n    \"port\": 443\n  },\n  \"use_https\": true\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"name\": \"Статика интернет-магази\
+          на\",\n  \"preset_id\": 4001,\n  \"server\": {\n    \"host\": \"origin.example.com\"\
+          ,\n    \"port\": 443\n  },\n  \"use_https\": true\n}`)\n\treq, err := http.NewRequest(\"\
+          POST\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources\", data)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\"\
+          , \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
+          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n  \\\"name\\\": \\\"Статика интернет-магазина\\\",\\n  \\\"preset_id\\\
+          \": 4001,\\n  \\\"server\\\": {\\n    \\\"host\\\": \\\"origin.example.com\\\
+          \",\\n    \\\"port\\\": 443\\n  },\\n  \\\"use_https\\\": true\\n}\");\n\
+          \t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/http-resources/{resource_id}:
+    delete:
+      description: "Чтобы удалить CDN-ресурс, отправьте DELETE-запрос на `/api/v1/cdn/http-resources/{resource_id}`.\
+        \ Вместе с ресурсом освобождается его технический домен, а привязанный сер\
+        тификат отвязывается."
+      operationId: deleteCdnResource
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: CDN-ресурс успешно удален
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    get:
+      description: "Чтобы получить информацию об отдельном CDN-ресурсе, отправьте\
+        \ GET-запрос на `/api/v1/cdn/http-resources/{resource_id}`."
+      operationId: getCdnResource
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCdnResource_201_response'
+          description: Объект JSON c ключом `http_resource`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    patch:
+      description: |-
+        Чтобы изменить CDN-ресурс, отправьте PATCH-запрос на `/api/v1/cdn/http-resources/{resource_id}`.
+
+        Передавайте только те поля, которые нужно изменить: переданные значения накладываются на текущую конфигурацию, а непереданные остаются без изменений. Чтобы сбросить настройку, передайте в соответствующем поле `null`.
+
+        Поля `storage_id` и `config.origin.servers` нельзя передавать вместе — источник контента может быть только один.
+      operationId: updateCdnResource
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update-http-resource'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCdnResource_201_response'
+          description: Объект JSON c ключом `http_resource`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Изменение CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "name": "Статика интернет-магазина",
+            "config": {
+              "cache": {
+                "cdn": {
+                  "ttl": {
+                    "2xx": 3600
+                  }
+                }
+              }
+            }
+          }' "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "name": "Статика интернет-магазина",\n  "config": {\n    "cache": {\n      "cdn": {\n        "ttl": {\n          "2xx": 3600\n        }\n      }\n    }\n  }\n}',
+              body: JSON.stringify({
+                  'name': '\u0421\u0442\u0430\u0442\u0438\u043A\u0430 \u0438\u043D\u0442\u0435\u0440\u043D\u0435\u0442-\u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430',
+                  'config': {
+                      'cache': {
+                          'cdn': {
+                              'ttl': {
+                                  '2xx': 3600
+                              }
+                          }
+                      }
+                  }
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.patch(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234',
+              // '{\n  "name": "Статика интернет-магазина",\n  "config": {\n    "cache": {\n      "cdn": {\n        "ttl": {\n          "2xx": 3600\n        }\n      }\n    }\n  }\n}',
+              {
+                  'name': '\u0421\u0442\u0430\u0442\u0438\u043A\u0430 \u0438\u043D\u0442\u0435\u0440\u043D\u0435\u0442-\u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430',
+                  'config': {
+                      'cache': {
+                          'cdn': {
+                              'ttl': {
+                                  '2xx': 3600
+                              }
+                          }
+                      }
+                  }
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'name': 'Статика интернет-магазина',
+              'config': {
+                  'cache': {
+                      'cdn': {
+                          'ttl': {
+                              '2xx': 3600,
+                          },
+                      },
+                  },
+              },
+          }
+
+          response = requests.patch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "name": "Статика интернет-магазина",\n  "config": {\n    "cache": {\n      "cdn": {\n        "ttl": {\n          "2xx": 3600\n        }\n      }\n    }\n  }\n}'.encode()
+          #response = requests.patch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"name\": \"Статика интернет-магазина\",\n  \"config\": {\n    \"cache\": {\n      \"cdn\": {\n        \"ttl\": {\n          \"2xx\": 3600\n        }\n      }\n    }\n  }\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"name\": \"Статика интернет-магази\
+          на\",\n  \"config\": {\n    \"cache\": {\n      \"cdn\": {\n        \"ttl\"\
+          : {\n          \"2xx\": 3600\n        }\n      }\n    }\n  }\n}`)\n\treq,\
+          \ err := http.NewRequest(\"PATCH\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234\");\n\t\
+          \tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"PATCH\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\n  \\\"name\\\": \\\"Статика интернет-магазина\\\"\
+          ,\\n  \\\"config\\\": {\\n    \\\"cache\\\": {\\n      \\\"cdn\\\": {\\\
+          n        \\\"ttl\\\": {\\n          \\\"2xx\\\": 3600\\n        }\\n   \
+          \   }\\n    }\\n  }\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\
+          \thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/http-resources/{resource_id}/configuration:
+    get:
+      description: |-
+        Чтобы получить текущую конфигурацию CDN-ресурса, отправьте GET-запрос на `/api/v1/cdn/http-resources/{resource_id}/configuration`.
+
+        Изменить конфигурацию можно в поле `config` PATCH-запроса на `/api/v1/cdn/http-resources/{resource_id}`.
+      operationId: getCdnResourceConfiguration
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnResourceConfiguration_200_response'
+          description: Объект JSON c ключом `http_resource_configuration`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение конфигурации CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/configuration"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/configuration', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/configuration', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/configuration', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/configuration');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/configuration\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/configuration\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/http-resources/{resource_id}/suspend:
+    post:
+      description: |-
+        Чтобы приостановить раздачу контента, отправьте POST-запрос на `/api/v1/cdn/http-resources/{resource_id}/suspend`. Ресурс перейдет в статус `stopped`, его настройки и домены сохранятся.
+
+        Если ресурс заблокирован, вернется ошибка `409`.
+      operationId: suspendCdnResource
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCdnResource_201_response'
+          description: Объект JSON c ключом `http_resource`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Приостановка раздачи CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/suspend"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/suspend', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/suspend',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/suspend', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/suspend');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/suspend\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/suspend\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/http-resources/{resource_id}/resume:
+    post:
+      description: |-
+        Чтобы возобновить раздачу контента после приостановки, отправьте POST-запрос на `/api/v1/cdn/http-resources/{resource_id}/resume`.
+
+        Если ресурс заблокирован, вернется ошибка `409`.
+      operationId: resumeCdnResource
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCdnResource_201_response'
+          description: Объект JSON c ключом `http_resource`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Возобновление раздачи CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/resume"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/resume', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/resume',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/resume', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/resume');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/resume\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/resume\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/http-resources/{resource_id}/clear-cache:
+    post:
+      description: |-
+        Чтобы очистить кэш на узлах CDN, отправьте POST-запрос на `/api/v1/cdn/http-resources/{resource_id}/clear-cache`.
+
+        При `purge_type` = `full` очищается весь кэш ресурса, при `purge_type` = `partial` — только файлы из списка `paths`.
+      operationId: clearCdnResourceCache
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/clear-cache'
+        required: true
+      responses:
+        "204":
+          description: Запрос на очистку кэша принят
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Очистка кэша CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "purge_type": "partial",
+            "paths": ["/img/logo.png"]
+          }' "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "purge_type": "partial",\n  "paths": ["/img/logo.png"]\n}',
+              body: JSON.stringify({
+                  'purge_type': 'partial',
+                  'paths': [
+                      '/img/logo.png'
+                  ]
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache',
+              // '{\n  "purge_type": "partial",\n  "paths": ["/img/logo.png"]\n}',
+              {
+                  'purge_type': 'partial',
+                  'paths': [
+                      '/img/logo.png'
+                  ]
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'purge_type': 'partial',
+              'paths': [
+                  '/img/logo.png',
+              ],
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "purge_type": "partial",\n  "paths": ["/img/logo.png"]\n}'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"purge_type\": \"partial\",\n  \"paths\": [\"/img/logo.png\"]\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"purge_type\": \"partial\",\n  \"\
+          paths\": [\"/img/logo.png\"]\n}`)\n\treq, err := http.NewRequest(\"POST\"\
+          , \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/clear-cache\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\n  \\\"purge_type\\\": \\\"partial\\\",\\n  \\\"paths\\\
+          \": [\\\"/img/logo.png\\\"]\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/http-resources/{resource_id}/preload-cache:
+    post:
+      description: "Чтобы заранее загрузить файлы в кэш узлов CDN, не дожидаясь пе\
+        рвого обращения пользователей, отправьте POST-запрос на `/api/v1/cdn/http-resources/{resource_id}/preload-cache`."
+      operationId: preloadCdnResourceCache
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/preload-cache'
+        required: true
+      responses:
+        "204":
+          description: Запрос на загрузку файлов в кэш принят
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Предварительная загрузка кэша CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "paths": ["/img/logo.png", "/css/main.css"]
+          }' "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "paths": ["/img/logo.png", "/css/main.css"]\n}',
+              body: JSON.stringify({
+                  'paths': [
+                      '/img/logo.png',
+                      '/css/main.css'
+                  ]
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache',
+              // '{\n  "paths": ["/img/logo.png", "/css/main.css"]\n}',
+              {
+                  'paths': [
+                      '/img/logo.png',
+                      '/css/main.css'
+                  ]
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'paths': [
+                  '/img/logo.png',
+                  '/css/main.css',
+              ],
+          }
+
+          response = requests.post(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache',
+              headers=headers,
+              json=json_data,
+          )
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "paths": ["/img/logo.png", "/css/main.css"]\n}'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"paths\": [\"/img/logo.png\", \"/css/main.css\"]\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"paths\": [\"/img/logo.png\", \"/css/main.css\"\
+          ]\n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/preload-cache\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\n  \\\"paths\\\": [\\\"/img/logo.png\\\", \\\"/css/main.css\\\
+          \"]\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/http-resources/{resource_id}/statistics:
+    get:
+      description: |-
+        Чтобы получить статистику трафика и запросов CDN-ресурса, отправьте GET-запрос на `/api/v1/cdn/http-resources/{resource_id}/statistics`.
+
+        Данные возвращаются с разбивкой по часовым интервалам. Если период не указан, вернется статистика за последние 6 часов.
+      operationId: getCdnResourceStatistics
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      - description: Начало периода в формате ISO 8601. По умолчанию — 6 часов назад.
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          example: 2026-04-16T00:00:00Z
+          format: date-time
+          type: string
+        style: form
+      - description: Конец периода в формате ISO 8601. По умолчанию — текущий момент.
+          Должен быть не раньше `from`.
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          example: 2026-04-16T23:59:59Z
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnResourceStatistics_200_response'
+          description: Объект JSON c ключом `statistics`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение статистики CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/statistics?from=2026-04-16T00:00:00Z&to=2026-04-16T23:59:59Z"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/statistics?from=2026-04-16T00:00:00Z&to=2026-04-16T23:59:59Z', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/statistics?from=2026-04-16T00:00:00Z&to=2026-04-16T23:59:59Z', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get(
+              'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/statistics?from=2026-04-16T00:00:00Z&to=2026-04-16T23:59:59Z',
+              headers=headers,
+          )
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/statistics?from=2026-04-16T00:00:00Z&to=2026-04-16T23:59:59Z');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/statistics?from=2026-04-16T00:00:00Z&to=2026-04-16T23:59:59Z\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/http-resources/1234/statistics?from=2026-04-16T00:00:00Z&to=2026-04-16T23:59:59Z\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/presets:
+    get:
+      description: "Чтобы получить список доступных тарифов CDN, отправьте GET-зап\
+        рос на `/api/v1/cdn/presets`. ID тарифа из этого списка указывается в поле\
+        \ `preset_id` при создании и изменении ресурса."
+      operationId: getCdnPresets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnPresets_200_response'
+          description: Объект JSON c ключом `http_resource_presets`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка тарифов CDN
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/presets"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/presets', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/presets', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/presets', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/presets');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/presets\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/presets\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/nodes/origin:
+    get:
+      description: "Чтобы получить список IP-адресов и подсетей, с которых узлы CDN\
+        \ обращаются к источнику контента, отправьте GET-запрос на `/api/v1/cdn/nodes/origin`.\
+        \ Этот список удобно использовать, чтобы разрешить доступ к origin-серверу\
+        \ только для узлов CDN."
+      operationId: getCdnOriginNodes
+      parameters:
+      - description: Добавить в выдачу узлы дополнительных зон раздачи.
+        explode: true
+        in: query
+        name: with_extra_zones
+        required: false
+        schema:
+          default: false
+          example: true
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnOriginNodes_200_response'
+          description: Объект JSON c ключом `origin_nodes`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка подсетей узлов CDN
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/nodes/origin"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/nodes/origin', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/nodes/origin', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/nodes/origin', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/nodes/origin');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/nodes/origin\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/nodes/origin\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/nodes/http-resources/{resource_id}:
+    get:
+      description: "Чтобы получить список узлов, которые раздают контент доменов р\
+        есурса, отправьте GET-запрос на `/api/v1/cdn/nodes/http-resources/{resource_id}`."
+      operationId: getCdnResourceNodes
+      parameters:
+      - description: ID CDN-ресурса
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          description: ID CDN-ресурса
+          example: 1234
+          type: integer
+        style: simple
+      - description: Добавить в выдачу узлы дополнительных зон раздачи.
+        explode: true
+        in: query
+        name: with_extra_zones
+        required: false
+        schema:
+          default: false
+          example: true
+          type: boolean
+        style: form
+      - description: Оставить в выдаче только основные зоны раздачи в указанных странах.
+          Коды стран в формате ISO 3166-1 alpha-2.
+        explode: true
+        in: query
+        name: country
+        required: false
+        schema:
+          example:
+          - RU
+          - KZ
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnResourceNodes_200_response'
+          description: Объект JSON c ключом `user_nodes`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка раздающих узлов CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/nodes/http-resources/1234?country=RU"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/nodes/http-resources/1234?country=RU', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/nodes/http-resources/1234', {
+              params: {
+                  'country': 'RU'
+              },
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          params = {
+              'country': 'RU',
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/nodes/http-resources/1234', params=params, headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/nodes/http-resources/1234?country=RU');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/nodes/http-resources/1234?country=RU\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/nodes/http-resources/1234?country=RU\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/certificates:
+    get:
+      description: "Чтобы получить список SSL-сертификатов, доступных для доменов\
+        \ CDN-ресурсов, отправьте GET-запрос на `/api/v1/cdn/certificates`."
+      operationId: getCdnCertificates
+      parameters:
+      - description: "Оставить в выдаче только сертификаты, подходящие для доменов\
+          \ указанного CDN-ресурса."
+        explode: true
+        in: query
+        name: resource_id
+        required: false
+        schema:
+          example: 1234
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnCertificates_200_response'
+          description: Объект JSON c ключом `certificates`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка сертификатов CDN
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/certificates"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/certificates', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/certificates', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/certificates', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/certificates');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/certificates\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/certificates\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+    post:
+      description: |-
+        Чтобы загрузить собственный SSL-сертификат, отправьте POST-запрос на `/api/v1/cdn/certificates`.
+
+        После загрузки сертификат появится в списке `/api/v1/cdn/certificates` — привязать его к ресурсу можно, передав его ID в поле `config.security.certificate_id` PATCH-запроса на `/api/v1/cdn/http-resources/{resource_id}`.
+
+        Если сертификат или приватный ключ не проходят проверку — например, истек срок действия или ключ не соответствует сертификату — вернется ошибка `422`.
+      operationId: addCdnCertificate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/add-certificate'
+        required: true
+      responses:
+        "204":
+          description: Сертификат успешно добавлен
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addCdnCertificate_422_response'
+          description: Не удалось обработать сертификат
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Загрузка собственного сертификата CDN
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+            "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+            "comment": "Сертификат для cdn.example.com"
+          }' "https://api.timeweb.cloud/api/v1/cdn/certificates"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/certificates', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "private_key": "-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----",\n  "certificate": "-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----",\n  "comment": "Сертификат для cdn.example.com"\n}',
+              body: JSON.stringify({
+                  'private_key': '-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+                  'certificate': '-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----',
+                  'comment': '\u0421\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442 \u0434\u043B\u044F cdn.example.com'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/certificates',
+              // '{\n  "private_key": "-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----",\n  "certificate": "-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----",\n  "comment": "Сертификат для cdn.example.com"\n}',
+              {
+                  'private_key': '-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+                  'certificate': '-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----',
+                  'comment': '\u0421\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442 \u0434\u043B\u044F cdn.example.com'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'private_key': '-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+              'certificate': '-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----',
+              'comment': 'Сертификат для cdn.example.com',
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cdn/certificates', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "private_key": "-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----",\n  "certificate": "-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----",\n  "comment": "Сертификат для cdn.example.com"\n}'.encode()
+          #response = requests.post('https://api.timeweb.cloud/api/v1/cdn/certificates', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/certificates');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\",\n  \"certificate\": \"-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----\",\n  \"comment\": \"Сертификат для cdn.example.com\"\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"private_key\": \"-----BEGIN PRIVATE\
+          \ KEY-----\\n...\\n-----END PRIVATE KEY-----\",\n  \"certificate\": \"-----BEGIN\
+          \ CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----\",\n  \"comment\":\
+          \ \"Сертификат для cdn.example.com\"\n}`)\n\treq, err := http.NewRequest(\"\
+          POST\", \"https://api.timeweb.cloud/api/v1/cdn/certificates\", data)\n\t\
+          if err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"Content-Type\"\
+          , \"application/json\")\n\treq.Header.Set(\"Authorization\", \"Bearer \"\
+          \ + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cdn/certificates\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n  \\\"private_key\\\": \\\"-----BEGIN PRIVATE KEY-----\\\\n...\\\\n-----END\
+          \ PRIVATE KEY-----\\\",\\n  \\\"certificate\\\": \\\"-----BEGIN CERTIFICATE-----\\\
+          \\n...\\\\n-----END CERTIFICATE-----\\\",\\n  \\\"comment\\\": \\\"Серти\
+          фикат для cdn.example.com\\\"\\n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\
+          \t\thttpConn.getOutputStream().close();\n\n\t\tInputStream responseStream\
+          \ = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/certificates/issue:
+    post:
+      description: |-
+        Чтобы выпустить бесплатный сертификат Let's Encrypt для доменов CDN-ресурса, отправьте POST-запрос на `/api/v1/cdn/certificates/issue`.
+
+        Выпуск выполняется асинхронно: в ответ возвращается код `202`, а следить за ходом выпуска можно по списку задач `/api/v1/cdn/certificates/tasks`. Готовый сертификат привязывается к ресурсу автоматически.
+
+        Перед выпуском убедитесь, что домены ресурса указывают на его технический домен `cdn_domain` — иначе вернется ошибка `422`.
+      operationId: issueCdnCertificate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/issue-certificate'
+        required: true
+      responses:
+        "202":
+          description: Запрос на выпуск сертификата принят
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addCdnCertificate_422_response'
+          description: Не удалось обработать сертификат
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Выпуск сертификата Let's Encrypt для CDN-ресурса
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "resource_id": 1234
+          }' "https://api.timeweb.cloud/api/v1/cdn/certificates/issue"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/certificates/issue', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "resource_id": 1234\n}',
+              body: JSON.stringify({
+                  'resource_id': 1234
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/certificates/issue',
+              // '{\n  "resource_id": 1234\n}',
+              {
+                  'resource_id': 1234
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'resource_id': 1234,
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cdn/certificates/issue', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "resource_id": 1234\n}'
+          #response = requests.post('https://api.timeweb.cloud/api/v1/cdn/certificates/issue', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/certificates/issue');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"resource_id\": 1234\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"resource_id\": 1234\n}`)\n\treq,\
+          \ err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cdn/certificates/issue\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/cdn/certificates/issue\");\n\t\t\
+          HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\n  \\\"resource_id\\\": 1234\\n}\");\n\t\twriter.flush();\n\
+          \t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\n\t\tInputStream\
+          \ responseStream = httpConn.getResponseCode() / 100 == 2\n\t\t\t\t? httpConn.getInputStream()\n\
+          \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
+          \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/certificates/tasks:
+    get:
+      description: "Чтобы получить список задач на выпуск сертификатов Let's Encrypt,\
+        \ отправьте GET-запрос на `/api/v1/cdn/certificates/tasks`."
+      operationId: getCdnCertificateTasks
+      parameters:
+      - description: Оставить в выдаче только задачи указанного CDN-ресурса.
+        explode: true
+        in: query
+        name: resource_id
+        required: false
+        schema:
+          example: 1234
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCdnCertificateTasks_200_response'
+          description: Объект JSON c ключом `certificate_tasks`
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение списка задач на выпуск сертификатов
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/certificates/tasks"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/certificates/tasks', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v1/cdn/certificates/tasks', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v1/cdn/certificates/tasks', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/certificates/tasks');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v1/cdn/certificates/tasks\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/certificates/tasks\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/certificates/tasks/{task_id}/archive:
+    post:
+      description: "Чтобы убрать из списка задачу на выпуск сертификата, отправьте\
+        \ POST-запрос на `/api/v1/cdn/certificates/tasks/{task_id}/archive`."
+      operationId: archiveCdnCertificateTask
+      parameters:
+      - description: ID задачи на выпуск сертификата
+        explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: ID задачи на выпуск сертификата
+          example: 42
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Задача на выпуск сертификата успешно архивирована
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Архивация задачи на выпуск сертификата
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/certificates/tasks/42/archive"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/certificates/tasks/42/archive', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/cdn/certificates/tasks/42/archive',
+              '',
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v1/cdn/certificates/tasks/42/archive', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/certificates/tasks/42/archive');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/cdn/certificates/tasks/42/archive\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/certificates/tasks/42/archive\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
+  /api/v1/cdn/certificates/{certificate_id}:
+    delete:
+      description: |-
+        Чтобы удалить SSL-сертификат, отправьте DELETE-запрос на `/api/v1/cdn/certificates/{certificate_id}`.
+
+        Если сертификат привязан к CDN-ресурсу, вернется ошибка `409` — сначала отвяжите его, передав `config.security.certificate_id` = `null` в PATCH-запросе на `/api/v1/cdn/http-resources/{resource_id}`.
+      operationId: deleteCdnCertificate
+      parameters:
+      - description: ID сертификата
+        explode: false
+        in: path
+        name: certificate_id
+        required: true
+        schema:
+          description: ID сертификата
+          example: 5678
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Сертификат успешно удален
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createDatabaseBackup_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Удаление сертификата CDN
+      tags:
+      - CDN
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X DELETE \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v1/cdn/certificates/5678"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/cdn/certificates/5678', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.delete('https://api.timeweb.cloud/api/v1/cdn/certificates/5678', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.delete('https://api.timeweb.cloud/api/v1/cdn/certificates/5678', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/cdn/certificates/5678');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"DELETE\", \"https://api.timeweb.cloud/api/v1/cdn/certificates/5678\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v1/cdn/certificates/5678\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"DELETE\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
 components:
   parameters:
     limit:
@@ -53355,6 +56516,39 @@ components:
         minimum: 1
         type: integer
       style: simple
+    resource-id:
+      description: ID CDN-ресурса
+      explode: false
+      in: path
+      name: resource_id
+      required: true
+      schema:
+        description: ID CDN-ресурса
+        example: 1234
+        type: integer
+      style: simple
+    task-id:
+      description: ID задачи на выпуск сертификата
+      explode: false
+      in: path
+      name: task_id
+      required: true
+      schema:
+        description: ID задачи на выпуск сертификата
+        example: 42
+        type: integer
+      style: simple
+    certificate-id:
+      description: ID сертификата
+      explode: false
+      in: path
+      name: certificate_id
+      required: true
+      schema:
+        description: ID сертификата
+        example: 5678
+        type: integer
+      style: simple
   responses:
     "400":
       $ref: '#/components/responses/bad-request'
@@ -53412,6 +56606,12 @@ components:
           schema:
             $ref: '#/components/schemas/getAccountStatus_403_response'
       description: Запрещено
+    unprocessable-entity:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/addCdnCertificate_422_response'
+      description: Не удалось обработать сертификат
   schemas:
     response_id:
       description: "ID запроса, который можно указывать при обращении в службу тех\
@@ -66170,6 +69370,835 @@ components:
       - token_amount
       - type
       type: object
+    traffic-usage:
+      description: Потребление ресурса с начала текущего расчетного месяца. Счетчики
+        обнуляются в начале каждого расчетного периода.
+      example:
+        outgoing_traffic: 10737418240
+        cache_ratio: 92.5
+        requests: 154302
+      properties:
+        requests:
+          description: Количество запросов к ресурсу с начала расчетного месяца.
+          example: 154302
+          type: number
+        outgoing_traffic:
+          description: "Исходящий трафик ресурса с начала расчетного месяца, в бай\
+            тах."
+          example: 10737418240
+          type: number
+        cache_ratio:
+          description: "Доля запросов, отданных из кэша, в процентах."
+          example: 92.5
+          type: number
+      required:
+      - cache_ratio
+      - outgoing_traffic
+      - requests
+      type: object
+    http-resource:
+      description: CDN-ресурс
+      example:
+        cdn_domain: 3f9c1b7a.cdn.twcstorage.ru
+        preset_id: 4001
+        project_id: 987
+        storage_id: 4210
+        name: Статика интернет-магазина
+        description: Раздача картинок и css
+        avatar_link: https://timeweb.cloud/avatars/cdn/3f9c1b7a.png
+        id: 1234
+        source: 5bd2b0c9-mybucket
+        traffic_limit_bytes: 107374182400
+        traffic_usage:
+          outgoing_traffic: 10737418240
+          cache_ratio: 92.5
+          requests: 154302
+        status: created
+      properties:
+        id:
+          description: ID CDN-ресурса. Генерируется автоматически при создании.
+          example: 1234
+          type: integer
+        name:
+          description: Название CDN-ресурса.
+          example: Статика интернет-магазина
+          maxLength: 255
+          type: string
+        description:
+          description: Описание CDN-ресурса.
+          example: Раздача картинок и css
+          maxLength: 255
+          type: string
+        source:
+          description: "Источник контента: имя S3-бакета, если ресурс создан повер\
+            х хранилища, либо хост origin-сервера."
+          example: 5bd2b0c9-mybucket
+          type: string
+        traffic_usage:
+          $ref: '#/components/schemas/traffic-usage'
+        status:
+          description: |-
+            Статус CDN-ресурса.
+            - `created` — ресурс создан и раздает контент;
+            - `processing` — конфигурация применяется на стороне CDN;
+            - `stopped` — раздача приостановлена;
+            - `failed` — настройка ресурса завершилась с ошибкой;
+            - `no_paid` — ресурс не оплачен;
+            - `blocked` — ресурс заблокирован;
+            - `traffic_limit_exceeded` — раздача остановлена автоматически из-за достижения лимита трафика `traffic_limit_bytes`.
+          enum:
+          - created
+          - processing
+          - stopped
+          - failed
+          - no_paid
+          - blocked
+          - traffic_limit_exceeded
+          example: created
+          type: string
+        cdn_domain:
+          description: "Технический домен, выданный ресурсу. Доступен сразу после\
+            \ создания и всегда остается в списке доменов ресурса."
+          example: 3f9c1b7a.cdn.twcstorage.ru
+          type: string
+        preset_id:
+          description: ID тарифа CDN. Список доступных тарифов можно получить в `/api/v1/cdn/presets`.
+          example: 4001
+          type: integer
+        project_id:
+          description: "ID проекта, к которому привязан ресурс."
+          example: 987
+          type: integer
+        avatar_link:
+          description: Ссылка на аватар ресурса.
+          example: https://timeweb.cloud/avatars/cdn/3f9c1b7a.png
+          nullable: true
+          type: string
+        storage_id:
+          description: "ID S3-хранилища, которое используется в качестве источника\
+            \ контента. `null`, если источником является origin-сервер."
+          example: 4210
+          nullable: true
+          type: integer
+        traffic_limit_bytes:
+          description: "Лимит исходящего трафика на расчетный месяц, в байтах. При\
+            \ достижении лимита раздача останавливается, а ресурс переходит в стат\
+            ус `traffic_limit_exceeded`. `null` — лимит не задан."
+          example: 107374182400
+          nullable: true
+          type: integer
+      required:
+      - cdn_domain
+      - id
+      - name
+      - preset_id
+      - source
+      - status
+      - traffic_usage
+      type: object
+    origin-server:
+      description: "Origin-сервер, с которого CDN забирает контент"
+      example:
+        port: 443
+        host: origin.example.com
+      properties:
+        host:
+          description: Домен или IPv4-адрес origin-сервера.
+          example: origin.example.com
+          type: string
+        port:
+          description: Порт origin-сервера.
+          example: 443
+          maximum: 65535
+          minimum: 1
+          type: integer
+      required:
+      - host
+      - port
+      type: object
+    create-http-resource:
+      description: "Параметры создания CDN-ресурса. Источник контента задается ров\
+        но одним из полей: `storage_id` или `server`."
+      properties:
+        name:
+          description: Название CDN-ресурса.
+          example: Статика интернет-магазина
+          maxLength: 255
+          type: string
+        preset_id:
+          description: ID тарифа CDN. Список доступных тарифов можно получить в `/api/v1/cdn/presets`.
+          example: 4001
+          type: integer
+        description:
+          description: Описание CDN-ресурса.
+          example: Раздача картинок и css
+          maxLength: 255
+          type: string
+        storage_id:
+          description: "ID S3-хранилища, которое будет источником контента. Нельзя\
+            \ передавать вместе с `server`."
+          example: 4210
+          type: integer
+        server:
+          $ref: '#/components/schemas/origin-server'
+        use_https:
+          description: Обращаться к источнику контента по HTTPS.
+          example: true
+          type: boolean
+        delivery_domain:
+          description: "Собственный домен, с которого будет раздаваться контент. Д\
+            омен добавляется к техническому домену ресурса, для его работы нужно н\
+            аправить CNAME-запись на `cdn_domain`."
+          example: cdn.example.com
+          type: string
+        project_id:
+          description: "ID проекта, в который нужно поместить ресурс. Если не указ\
+            ан, ресурс попадет в проект по умолчанию."
+          example: 987
+          type: integer
+        traffic_limit_bytes:
+          description: "Лимит исходящего трафика на расчетный месяц, в байтах. При\
+            \ достижении лимита раздача останавливается автоматически."
+          example: 107374182400
+          minimum: 0
+          nullable: true
+          type: integer
+      required:
+      - name
+      - preset_id
+      type: object
+    config-delivery:
+      description: Настройки раздачи контента
+      example:
+        large_files: false
+        slice_size: 10
+        gzip: true
+        packaging:
+          mp4:
+            output_protocols:
+            - HLS
+        http3: true
+        image_optimization: false
+      properties:
+        http3:
+          description: Раздавать контент по HTTP/3 (QUIC).
+          example: true
+          type: boolean
+        gzip:
+          description: Сжимать ответы алгоритмом gzip.
+          example: true
+          type: boolean
+        large_files:
+          description: Режим раздачи больших файлов.
+          example: false
+          type: boolean
+        slice_size:
+          description: Размер слайса в мегабайтах — файл забирается с источника и
+            кэшируется частями такого размера. `null` — не использовать слайсинг.
+          example: 10
+          maximum: 1024
+          minimum: 1
+          nullable: true
+          type: integer
+        image_optimization:
+          description: Оптимизировать изображения на лету.
+          example: false
+          type: boolean
+        packaging:
+          $ref: '#/components/schemas/config_delivery_packaging'
+      type: object
+    config-cache:
+      description: Настройки кэширования
+      example:
+        query_args:
+          mode: whitelist
+          list:
+          - version
+          - lang
+        browser:
+          ttl: 600
+        always_online:
+          stale_conditions:
+          - error
+          - timeout
+        cdn:
+          ttl:
+            "2xx": 3600
+      properties:
+        cdn:
+          $ref: '#/components/schemas/config_cache_cdn'
+        browser:
+          $ref: '#/components/schemas/config_cache_browser'
+        always_online:
+          $ref: '#/components/schemas/config_cache_always_online'
+        query_args:
+          $ref: '#/components/schemas/config_cache_query_args'
+      type: object
+    config-origin:
+      description: Настройки источника контента
+      example:
+        servers:
+        - port: 443
+          host: origin.example.com
+        use_https: true
+        aws:
+          secret_key: 3vhtLpVjEyGxNQOOxJPCLb2Fexample
+          access_key: 6VQ2SN0OKXFYZ0IHLEXAMPLE
+      properties:
+        servers:
+          description: "Origin-серверы, с которых CDN забирает контент. Передача э\
+            того поля переключает ресурс с S3-хранилища на origin-сервер."
+          items:
+            $ref: '#/components/schemas/origin-server'
+          maxItems: 1
+          nullable: true
+          type: array
+        use_https:
+          description: Обращаться к источнику контента по HTTPS.
+          example: true
+          type: boolean
+        aws:
+          $ref: '#/components/schemas/config_origin_aws'
+      type: object
+    config-security:
+      description: Настройки безопасности
+      example:
+        redirect: true
+        certificate_id: 5678
+        secure_token:
+          secret_key: s3cr3tKey0
+          restrict_by_ip: false
+      properties:
+        redirect:
+          description: Перенаправлять запросы с HTTP на HTTPS.
+          example: true
+          type: boolean
+        certificate_id:
+          description: "ID SSL-сертификата, который используется для доменов ресур\
+            са. `null` — отвязать сертификат."
+          example: 5678
+          nullable: true
+          type: integer
+        secure_token:
+          $ref: '#/components/schemas/config_security_secure_token'
+      type: object
+    config-http-headers:
+      description: Настройки HTTP-заголовков
+      example:
+        request:
+          X-Custom-Header: value
+        cors:
+          always: false
+          domains:
+          - https://example.com
+      properties:
+        request:
+          additionalProperties:
+            type: string
+          description: "Статические заголовки, которые CDN добавляет к запросам на\
+            \ источник контента. Имена заголовков могут содержать символы `A-Za-z0-9-_.*()=/;`,\
+            \ значения — печатные ASCII-символы. `null` — удалить все заголовки."
+          example:
+            X-Custom-Header: value
+          nullable: true
+          type: object
+        cors:
+          $ref: '#/components/schemas/config_http_headers_cors'
+      type: object
+    config-access:
+      description: Настройки доступа к ресурсу. Секция доступна только для чтения
+        — изменить ее через API нельзя.
+      example:
+        allowed_methods:
+        - POST
+        - PUT
+      properties:
+        allowed_methods:
+          description: "Дополнительные HTTP-методы, разрешенные при обращении к ре\
+            сурсу. `null` — используется набор методов по умолчанию."
+          example:
+          - POST
+          - PUT
+          items:
+            enum:
+            - POST
+            - PUT
+            - PATCH
+            - DELETE
+            - MKCOL
+            - COPY
+            - MOVE
+            - PROPFIND
+            - PROPPATCH
+            - LOCK
+            - UNLOCK
+            type: string
+          nullable: true
+          readOnly: true
+          type: array
+      type: object
+    config-domains:
+      description: "Домены, с которых раздается контент ресурса"
+      example:
+        aliases:
+        - 3f9c1b7a.cdn.twcstorage.ru
+        - cdn.example.com
+      properties:
+        aliases:
+          description: "Список доменов ресурса. Первым в списке всегда идет технич\
+            еский домен `cdn_domain`, вторым может быть ваш собственный домен. Что\
+            бы собственный домен заработал, направьте на `cdn_domain` CNAME-запись\
+            . `null` — оставить только технический домен."
+          example:
+          - 3f9c1b7a.cdn.twcstorage.ru
+          - cdn.example.com
+          items:
+            type: string
+          maxItems: 2
+          nullable: true
+          type: array
+      type: object
+    config-robots:
+      description: Настройки robots.txt для доменов ресурса
+      example:
+        type: deny
+        content: |-
+          User-agent: *
+          Disallow: /private
+      properties:
+        type:
+          description: |-
+            Режим отдачи `robots.txt`.
+            - `deny` — CDN отдает `robots.txt`, запрещающий индексацию;
+            - `cached` — `robots.txt` берется с источника контента;
+            - `custom` — CDN отдает содержимое из поля `content`.
+          enum:
+          - deny
+          - cached
+          - custom
+          example: deny
+          type: string
+        content:
+          description: Содержимое `robots.txt`. Обязательно и учитывается только при
+            `type` = `custom`.
+          example: |-
+            User-agent: *
+            Disallow: /private
+          type: string
+      required:
+      - type
+      type: object
+    http-resource-config:
+      description: "Конфигурация CDN-ресурса. Все секции необязательны: при измене\
+        нии конфигурации переданные поля накладываются на текущие значения, а непе\
+        реданные остаются без изменений."
+      example:
+        delivery:
+          large_files: false
+          slice_size: 10
+          gzip: true
+          packaging:
+            mp4:
+              output_protocols:
+              - HLS
+          http3: true
+          image_optimization: false
+        cache:
+          query_args:
+            mode: whitelist
+            list:
+            - version
+            - lang
+          browser:
+            ttl: 600
+          always_online:
+            stale_conditions:
+            - error
+            - timeout
+          cdn:
+            ttl:
+              "2xx": 3600
+        security:
+          redirect: true
+          certificate_id: 5678
+          secure_token:
+            secret_key: s3cr3tKey0
+            restrict_by_ip: false
+        access:
+          allowed_methods:
+          - POST
+          - PUT
+        http_headers:
+          request:
+            X-Custom-Header: value
+          cors:
+            always: false
+            domains:
+            - https://example.com
+        origin:
+          servers:
+          - port: 443
+            host: origin.example.com
+          use_https: true
+          aws:
+            secret_key: 3vhtLpVjEyGxNQOOxJPCLb2Fexample
+            access_key: 6VQ2SN0OKXFYZ0IHLEXAMPLE
+        domains:
+          aliases:
+          - 3f9c1b7a.cdn.twcstorage.ru
+          - cdn.example.com
+        robots:
+          type: deny
+          content: |-
+            User-agent: *
+            Disallow: /private
+      properties:
+        delivery:
+          $ref: '#/components/schemas/config-delivery'
+        cache:
+          $ref: '#/components/schemas/config-cache'
+        origin:
+          $ref: '#/components/schemas/config-origin'
+        security:
+          $ref: '#/components/schemas/config-security'
+        http_headers:
+          $ref: '#/components/schemas/config-http-headers'
+        access:
+          $ref: '#/components/schemas/config-access'
+        domains:
+          $ref: '#/components/schemas/config-domains'
+        robots:
+          $ref: '#/components/schemas/config-robots'
+      type: object
+    update-http-resource:
+      description: "Параметры изменения CDN-ресурса. Передавайте только те поля, к\
+        оторые нужно изменить."
+      properties:
+        name:
+          description: Название CDN-ресурса.
+          example: Статика интернет-магазина
+          maxLength: 255
+          type: string
+        description:
+          description: Описание CDN-ресурса.
+          example: Раздача картинок и css
+          maxLength: 255
+          type: string
+        preset_id:
+          description: ID тарифа CDN. Список доступных тарифов можно получить в `/api/v1/cdn/presets`.
+          example: 4001
+          type: integer
+        storage_id:
+          description: "ID S3-хранилища, которое будет источником контента. Нельзя\
+            \ передавать вместе с `config.origin.servers`."
+          example: 4210
+          type: integer
+        traffic_limit_bytes:
+          description: "Лимит исходящего трафика на расчетный месяц, в байтах. `null`\
+            \ — снять лимит. Если ресурс был остановлен по лимиту, при снятии или\
+            \ увеличении лимита раздача возобновится."
+          example: 107374182400
+          minimum: 0
+          nullable: true
+          type: integer
+        config:
+          $ref: '#/components/schemas/http-resource-config'
+      type: object
+    clear-cache:
+      description: Параметры очистки кэша
+      properties:
+        purge_type:
+          description: |-
+            Тип очистки.
+            - `full` — очистить весь кэш ресурса;
+            - `partial` — очистить кэш только по путям из `paths`.
+          enum:
+          - full
+          - partial
+          example: partial
+          type: string
+        paths:
+          description: "Список путей к файлам, кэш которых нужно очистить. Обязате\
+            лен при `purge_type` = `partial`."
+          example:
+          - /img/logo.png
+          - /css/main.css
+          items:
+            type: string
+          type: array
+      required:
+      - purge_type
+      type: object
+    preload-cache:
+      description: Параметры предварительной загрузки кэша
+      properties:
+        paths:
+          description: "Список путей к файлам, которые нужно заранее загрузить в к\
+            эш узлов CDN."
+          example:
+          - /img/logo.png
+          - /css/main.css
+          items:
+            type: string
+          type: array
+      required:
+      - paths
+      type: object
+    statistics:
+      description: "Статистика CDN-ресурса за период, с разбивкой по часам"
+      example:
+        requests:
+        - logged_at: 2026-04-16T13:00:00Z
+          status_5xx: 0
+          status_2xx: 1024
+          status_3xx: 12
+          status_4xx: 3
+        - logged_at: 2026-04-16T13:00:00Z
+          status_5xx: 0
+          status_2xx: 1024
+          status_3xx: 12
+          status_4xx: 3
+        traffic:
+        - logged_at: 2026-04-16T13:00:00Z
+          outgoing_bytes: 12345678
+        - logged_at: 2026-04-16T13:00:00Z
+          outgoing_bytes: 12345678
+      properties:
+        traffic:
+          description: Исходящий трафик по часовым интервалам.
+          items:
+            $ref: '#/components/schemas/statistics_traffic_inner'
+          type: array
+        requests:
+          description: Количество запросов по часовым интервалам с разбивкой по классам
+            HTTP-статуса ответа.
+          items:
+            $ref: '#/components/schemas/statistics_requests_inner'
+          type: array
+      required:
+      - requests
+      - traffic
+      type: object
+    preset:
+      description: Тариф CDN
+      example:
+        description_short: CDN
+        cost: 0
+        service_name: CDN
+        request_rate_cost: 0.3
+        description: CDN с оплатой за трафик и запросы
+        traffic_rate_cost: 1.5
+        id: 4001
+      properties:
+        id:
+          description: ID тарифа. Указывается в поле `preset_id` при создании и изменении
+            ресурса.
+          example: 4001
+          type: integer
+        service_name:
+          description: Название тарифа.
+          example: CDN
+          type: string
+        description:
+          description: Описание тарифа.
+          example: CDN с оплатой за трафик и запросы
+          type: string
+        description_short:
+          description: Краткое описание тарифа.
+          example: CDN
+          type: string
+        cost:
+          description: Абонентская плата за тариф в рублях.
+          example: 0
+          type: number
+        traffic_rate_cost:
+          description: "Стоимость единицы исходящего трафика по тарифу аккаунта, в\
+            \ рублях."
+          example: 1.5
+          type: number
+        request_rate_cost:
+          description: "Стоимость единицы запросов по тарифу аккаунта, в рублях."
+          example: 0.3
+          type: number
+      required:
+      - cost
+      - description
+      - description_short
+      - id
+      - request_rate_cost
+      - service_name
+      - traffic_rate_cost
+      type: object
+    origin-node:
+      description: "Подсеть узлов CDN, которые обращаются к источнику контента"
+      example:
+        ipv6_subnet: 240e:958:31:204::/112
+        ipv4_subnet: 1.2.3.4/32
+      properties:
+        ipv4_subnet:
+          description: "IPv4-адрес или подсеть узлов. `null`, если у записи нет IPv4-п\
+            одсети."
+          example: 1.2.3.4/32
+          nullable: true
+          type: string
+        ipv6_subnet:
+          description: "IPv6-адрес или подсеть узлов. `null`, если у записи нет IPv6-п\
+            одсети."
+          example: 240e:958:31:204::/112
+          nullable: true
+          type: string
+      required:
+      - ipv4_subnet
+      - ipv6_subnet
+      type: object
+    user-node:
+      description: "Узел CDN, который раздает контент ресурса пользователям"
+      example:
+        ipv4_address: 1.2.3.4
+      properties:
+        ipv4_address:
+          description: IPv4-адрес раздающего узла.
+          example: 1.2.3.4
+          type: string
+      required:
+      - ipv4_address
+      type: object
+    certificate:
+      description: SSL-сертификат CDN
+      example:
+        expires_at: 2026-04-15T10:20:30Z
+        domains:
+        - cdn.example.com
+        - static.example.com
+        id: 5678
+        cn: cdn.example.com
+        type: lets_encrypt
+        issued_at: 2026-01-15T10:20:30Z
+      properties:
+        id:
+          description: ID сертификата. Указывается в поле `config.security.certificate_id`
+            при привязке сертификата к ресурсу.
+          example: 5678
+          type: integer
+        type:
+          description: |-
+            Тип сертификата.
+            - `lets_encrypt` — сертификат, выпущенный через Let's Encrypt;
+            - `uploaded` — сертификат, загруженный вами.
+          enum:
+          - lets_encrypt
+          - uploaded
+          example: lets_encrypt
+          type: string
+        cn:
+          description: Основное доменное имя сертификата.
+          example: cdn.example.com
+          type: string
+        domains:
+          description: "Все доменные имена сертификата, включая указанные в SAN."
+          example:
+          - cdn.example.com
+          - static.example.com
+          items:
+            type: string
+          type: array
+        issued_at:
+          description: Дата выпуска сертификата.
+          example: 2026-01-15T10:20:30Z
+          format: date-time
+          type: string
+        expires_at:
+          description: Дата окончания действия сертификата.
+          example: 2026-04-15T10:20:30Z
+          format: date-time
+          type: string
+      required:
+      - cn
+      - domains
+      - expires_at
+      - id
+      - issued_at
+      - type
+      type: object
+    add-certificate:
+      description: Параметры загрузки собственного сертификата
+      properties:
+        private_key:
+          description: Приватный ключ сертификата в формате PEM.
+          example: |-
+            -----BEGIN PRIVATE KEY-----
+            MIIEvQIBADANBgkqhkiG9w0BAQ...
+            -----END PRIVATE KEY-----
+          type: string
+        certificate:
+          description: Сертификат вместе с цепочкой в формате PEM.
+          example: |-
+            -----BEGIN CERTIFICATE-----
+            MIIFazCCA1OgAwIBAgIRAI...
+            -----END CERTIFICATE-----
+          type: string
+        comment:
+          default: SSL Certificate
+          description: Комментарий к сертификату.
+          example: Сертификат для cdn.example.com
+          type: string
+      required:
+      - certificate
+      - private_key
+      type: object
+    issue-certificate:
+      description: Параметры выпуска сертификата Let's Encrypt
+      properties:
+        resource_id:
+          description: "ID CDN-ресурса, для доменов которого нужно выпустить серти\
+            фикат."
+          example: 1234
+          type: integer
+      required:
+      - resource_id
+      type: object
+    certificate-task:
+      description: Задача на выпуск сертификата Let's Encrypt
+      example:
+        domains:
+        - cdn.example.com
+        resource_id: 1234
+        id: 42
+        status: in_progress
+      properties:
+        id:
+          description: ID задачи на выпуск сертификата.
+          example: 42
+          type: integer
+        status:
+          description: |-
+            Статус выпуска сертификата.
+            - `in_progress` — сертификат выпускается;
+            - `success` — сертификат выпущен и привязан к ресурсу;
+            - `failed` — выпустить сертификат не удалось.
+          enum:
+          - in_progress
+          - success
+          - failed
+          example: in_progress
+          type: string
+        domains:
+          description: "Доменные имена, для которых выпускается сертификат."
+          example:
+          - cdn.example.com
+          items:
+            type: string
+          type: array
+        resource_id:
+          description: "ID CDN-ресурса, для которого выпускается сертификат."
+          example: 1234
+          type: integer
+      required:
+      - domains
+      - id
+      - resource_id
+      - status
+      type: object
     getFinances_200_response:
       example:
         finances:
@@ -73355,6 +77384,323 @@ components:
       - meta
       - token_packages
       type: object
+    getCdnResources_200_response:
+      example:
+        meta:
+          total: 10
+        http_resources:
+        - cdn_domain: 3f9c1b7a.cdn.twcstorage.ru
+          preset_id: 4001
+          project_id: 987
+          storage_id: 4210
+          name: Статика интернет-магазина
+          description: Раздача картинок и css
+          avatar_link: https://timeweb.cloud/avatars/cdn/3f9c1b7a.png
+          id: 1234
+          source: 5bd2b0c9-mybucket
+          traffic_limit_bytes: 107374182400
+          traffic_usage:
+            outgoing_traffic: 10737418240
+            cache_ratio: 92.5
+            requests: 154302
+          status: created
+        - cdn_domain: 3f9c1b7a.cdn.twcstorage.ru
+          preset_id: 4001
+          project_id: 987
+          storage_id: 4210
+          name: Статика интернет-магазина
+          description: Раздача картинок и css
+          avatar_link: https://timeweb.cloud/avatars/cdn/3f9c1b7a.png
+          id: 1234
+          source: 5bd2b0c9-mybucket
+          traffic_limit_bytes: 107374182400
+          traffic_usage:
+            outgoing_traffic: 10737418240
+            cache_ratio: 92.5
+            requests: 154302
+          status: created
+      properties:
+        http_resources:
+          items:
+            $ref: '#/components/schemas/http-resource'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - http_resources
+      - meta
+      type: object
+    createCdnResource_201_response:
+      example:
+        http_resource:
+          cdn_domain: 3f9c1b7a.cdn.twcstorage.ru
+          preset_id: 4001
+          project_id: 987
+          storage_id: 4210
+          name: Статика интернет-магазина
+          description: Раздача картинок и css
+          avatar_link: https://timeweb.cloud/avatars/cdn/3f9c1b7a.png
+          id: 1234
+          source: 5bd2b0c9-mybucket
+          traffic_limit_bytes: 107374182400
+          traffic_usage:
+            outgoing_traffic: 10737418240
+            cache_ratio: 92.5
+            requests: 154302
+          status: created
+      properties:
+        http_resource:
+          $ref: '#/components/schemas/http-resource'
+      required:
+      - http_resource
+      type: object
+    getCdnResourceConfiguration_200_response:
+      example:
+        http_resource_configuration:
+          delivery:
+            large_files: false
+            slice_size: 10
+            gzip: true
+            packaging:
+              mp4:
+                output_protocols:
+                - HLS
+            http3: true
+            image_optimization: false
+          cache:
+            query_args:
+              mode: whitelist
+              list:
+              - version
+              - lang
+            browser:
+              ttl: 600
+            always_online:
+              stale_conditions:
+              - error
+              - timeout
+            cdn:
+              ttl:
+                "2xx": 3600
+          security:
+            redirect: true
+            certificate_id: 5678
+            secure_token:
+              secret_key: s3cr3tKey0
+              restrict_by_ip: false
+          access:
+            allowed_methods:
+            - POST
+            - PUT
+          http_headers:
+            request:
+              X-Custom-Header: value
+            cors:
+              always: false
+              domains:
+              - https://example.com
+          origin:
+            servers:
+            - port: 443
+              host: origin.example.com
+            use_https: true
+            aws:
+              secret_key: 3vhtLpVjEyGxNQOOxJPCLb2Fexample
+              access_key: 6VQ2SN0OKXFYZ0IHLEXAMPLE
+          domains:
+            aliases:
+            - 3f9c1b7a.cdn.twcstorage.ru
+            - cdn.example.com
+          robots:
+            type: deny
+            content: |-
+              User-agent: *
+              Disallow: /private
+      properties:
+        http_resource_configuration:
+          $ref: '#/components/schemas/http-resource-config'
+      required:
+      - http_resource_configuration
+      type: object
+    getCdnResourceStatistics_200_response:
+      example:
+        statistics:
+          requests:
+          - logged_at: 2026-04-16T13:00:00Z
+            status_5xx: 0
+            status_2xx: 1024
+            status_3xx: 12
+            status_4xx: 3
+          - logged_at: 2026-04-16T13:00:00Z
+            status_5xx: 0
+            status_2xx: 1024
+            status_3xx: 12
+            status_4xx: 3
+          traffic:
+          - logged_at: 2026-04-16T13:00:00Z
+            outgoing_bytes: 12345678
+          - logged_at: 2026-04-16T13:00:00Z
+            outgoing_bytes: 12345678
+      properties:
+        statistics:
+          $ref: '#/components/schemas/statistics'
+      required:
+      - statistics
+      type: object
+    getCdnPresets_200_response:
+      example:
+        meta:
+          total: 10
+        http_resource_presets:
+        - description_short: CDN
+          cost: 0
+          service_name: CDN
+          request_rate_cost: 0.3
+          description: CDN с оплатой за трафик и запросы
+          traffic_rate_cost: 1.5
+          id: 4001
+        - description_short: CDN
+          cost: 0
+          service_name: CDN
+          request_rate_cost: 0.3
+          description: CDN с оплатой за трафик и запросы
+          traffic_rate_cost: 1.5
+          id: 4001
+      properties:
+        http_resource_presets:
+          items:
+            $ref: '#/components/schemas/preset'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - http_resource_presets
+      - meta
+      type: object
+    getCdnOriginNodes_200_response:
+      example:
+        origin_nodes:
+        - ipv6_subnet: 240e:958:31:204::/112
+          ipv4_subnet: 1.2.3.4/32
+        - ipv6_subnet: 240e:958:31:204::/112
+          ipv4_subnet: 1.2.3.4/32
+        meta:
+          total: 10
+      properties:
+        origin_nodes:
+          items:
+            $ref: '#/components/schemas/origin-node'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - meta
+      - origin_nodes
+      type: object
+    getCdnResourceNodes_200_response:
+      example:
+        meta:
+          total: 10
+        user_nodes:
+        - ipv4_address: 1.2.3.4
+        - ipv4_address: 1.2.3.4
+      properties:
+        user_nodes:
+          items:
+            $ref: '#/components/schemas/user-node'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - meta
+      - user_nodes
+      type: object
+    getCdnCertificates_200_response:
+      example:
+        certificates:
+        - expires_at: 2026-04-15T10:20:30Z
+          domains:
+          - cdn.example.com
+          - static.example.com
+          id: 5678
+          cn: cdn.example.com
+          type: lets_encrypt
+          issued_at: 2026-01-15T10:20:30Z
+        - expires_at: 2026-04-15T10:20:30Z
+          domains:
+          - cdn.example.com
+          - static.example.com
+          id: 5678
+          cn: cdn.example.com
+          type: lets_encrypt
+          issued_at: 2026-01-15T10:20:30Z
+        meta:
+          total: 10
+      properties:
+        certificates:
+          items:
+            $ref: '#/components/schemas/certificate'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - certificates
+      - meta
+      type: object
+    addCdnCertificate_422_response:
+      properties:
+        status_code:
+          description: "Короткий идентификатор, соответствующий возвращаемому коду\
+            \ состояния HTTP."
+          example: 422
+          type: number
+        message:
+          description: "Сообщение, предоставляющее дополнительную информацию об ош\
+            ибке, в том числе сведения, помогающие устранить ее, когда это возможн\
+            о."
+          example: Certificate is expired
+          type: string
+        error_code:
+          description: Краткое описание ошибки HTTP на основе статуса.
+          example: cert_add_expired
+          type: string
+        response_id:
+          description: "ID запроса, который можно указывать при обращении в службу\
+            \ технической поддержки, чтобы помочь определить проблему."
+          example: 15095f25-aac3-4d60-a788-96cb5136f186
+          format: uuid
+          type: string
+      required:
+      - error_code
+      - response_id
+      - status_code
+      type: object
+    getCdnCertificateTasks_200_response:
+      example:
+        certificate_tasks:
+        - domains:
+          - cdn.example.com
+          resource_id: 1234
+          id: 42
+          status: in_progress
+        - domains:
+          - cdn.example.com
+          resource_id: 1234
+          id: 42
+          status: in_progress
+        meta:
+          total: 10
+      properties:
+        certificate_tasks:
+          items:
+            $ref: '#/components/schemas/certificate-task'
+          type: array
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+      - certificate_tasks
+      - meta
+      type: object
     service_service_price_node_groups_inner:
       example:
         cost: 500
@@ -76533,6 +80879,258 @@ components:
           $ref: '#/components/schemas/model_params_info_max_tokens'
         reasoning_effort:
           $ref: '#/components/schemas/model_params_info_reasoning_effort'
+      type: object
+    config_delivery_packaging_mp4:
+      description: Упаковка MP4-файлов. `null` — отключить упаковку MP4.
+      example:
+        output_protocols:
+        - HLS
+      nullable: true
+      properties:
+        output_protocols:
+          description: "Протоколы, в которые упаковывается исходный MP4."
+          example:
+          - HLS
+          items:
+            enum:
+            - HLS
+            - MPEG-DASH
+            type: string
+          type: array
+      required:
+      - output_protocols
+      type: object
+    config_delivery_packaging:
+      description: Упаковка видео в потоковые форматы. `null` — отключить упаковку.
+      example:
+        mp4:
+          output_protocols:
+          - HLS
+      nullable: true
+      properties:
+        mp4:
+          $ref: '#/components/schemas/config_delivery_packaging_mp4'
+      type: object
+    config_cache_cdn_ttl:
+      description: "Время жизни кэша по классам HTTP-статуса ответа источника, в с\
+        екундах."
+      example:
+        "2xx": 3600
+      properties:
+        "2xx":
+          description: "Время жизни кэша для ответов со статусом 2xx, в секундах."
+          example: 3600
+          minimum: 0
+          type: integer
+      type: object
+    config_cache_cdn:
+      description: Кэш на узлах CDN. `null` — отключить кэширование на узлах CDN.
+      example:
+        ttl:
+          "2xx": 3600
+      nullable: true
+      properties:
+        ttl:
+          $ref: '#/components/schemas/config_cache_cdn_ttl'
+      required:
+      - ttl
+      type: object
+    config_cache_browser:
+      description: Кэш в браузере пользователя. `null` — отключить браузерное кэширование.
+      example:
+        ttl: 600
+      nullable: true
+      properties:
+        ttl:
+          description: "Время жизни кэша в браузере, в секундах."
+          example: 600
+          minimum: 0
+          type: integer
+      required:
+      - ttl
+      type: object
+    config_cache_always_online:
+      description: "Отдавать устаревший контент из кэша, если источник недоступен\
+        . `null` — отключить."
+      example:
+        stale_conditions:
+        - error
+        - timeout
+      nullable: true
+      properties:
+        stale_conditions:
+          description: "Условия, при которых из кэша отдается устаревший контент."
+          example:
+          - error
+          - timeout
+          items:
+            enum:
+            - error
+            - timeout
+            - invalid_header
+            - updating
+            - http_403
+            - http_404
+            - http_429
+            - http_500
+            - http_502
+            - http_503
+            - http_504
+            type: string
+          type: array
+      required:
+      - stale_conditions
+      type: object
+    config_cache_query_args:
+      description: Правила учета query-параметров в ключе кэша. `null` — не учитывать
+        query-параметры.
+      example:
+        mode: whitelist
+        list:
+        - version
+        - lang
+      nullable: true
+      properties:
+        mode:
+          description: |-
+            Режим учета query-параметров.
+            - `all` — учитывать все параметры;
+            - `whitelist` — учитывать только параметры из `list`;
+            - `blacklist` — учитывать все параметры, кроме перечисленных в `list`.
+          enum:
+          - all
+          - whitelist
+          - blacklist
+          example: whitelist
+          type: string
+        list:
+          description: Список query-параметров для режимов `whitelist` и `blacklist`.
+          example:
+          - version
+          - lang
+          items:
+            type: string
+          type: array
+      required:
+      - mode
+      type: object
+    config_origin_aws:
+      description: "Ключи для доступа к источнику, совместимому с Amazon S3 API. `null`\
+        \ — не использовать авторизацию AWS."
+      example:
+        secret_key: 3vhtLpVjEyGxNQOOxJPCLb2Fexample
+        access_key: 6VQ2SN0OKXFYZ0IHLEXAMPLE
+      nullable: true
+      properties:
+        access_key:
+          description: Access key.
+          example: 6VQ2SN0OKXFYZ0IHLEXAMPLE
+          type: string
+        secret_key:
+          description: Secret key.
+          example: 3vhtLpVjEyGxNQOOxJPCLb2Fexample
+          type: string
+      required:
+      - access_key
+      - secret_key
+      type: object
+    config_security_secure_token:
+      description: Защита ссылок подписанным токеном. `null` — отключить защиту ссылок.
+      example:
+        secret_key: s3cr3tKey0
+        restrict_by_ip: false
+      nullable: true
+      properties:
+        secret_key:
+          description: "Секретный ключ, которым подписывается ссылка."
+          example: s3cr3tKey0
+          type: string
+        restrict_by_ip:
+          description: Привязывать подписанную ссылку к IP-адресу пользователя.
+          example: false
+          type: boolean
+      required:
+      - restrict_by_ip
+      - secret_key
+      type: object
+    config_http_headers_cors:
+      description: Настройки CORS. `null` — отключить CORS.
+      example:
+        always: false
+        domains:
+        - https://example.com
+      nullable: true
+      properties:
+        domains:
+          description: "Домены, которым разрешены кросс-доменные запросы. Укажите\
+            \ `*`, чтобы разрешить все домены."
+          example:
+          - https://example.com
+          items:
+            type: string
+          type: array
+        always:
+          description: "Отдавать CORS-заголовки во всех ответах, а не только при н\
+            аличии заголовка `Origin` в запросе."
+          example: false
+          type: boolean
+      required:
+      - always
+      - domains
+      type: object
+    statistics_traffic_inner:
+      example:
+        logged_at: 2026-04-16T13:00:00Z
+        outgoing_bytes: 12345678
+      properties:
+        logged_at:
+          description: Начало часового интервала в UTC.
+          example: 2026-04-16T13:00:00Z
+          format: date-time
+          type: string
+        outgoing_bytes:
+          description: "Исходящий трафик за интервал, в байтах."
+          example: 12345678
+          type: number
+      required:
+      - logged_at
+      - outgoing_bytes
+      type: object
+    statistics_requests_inner:
+      example:
+        logged_at: 2026-04-16T13:00:00Z
+        status_5xx: 0
+        status_2xx: 1024
+        status_3xx: 12
+        status_4xx: 3
+      properties:
+        logged_at:
+          description: Начало часового интервала в UTC.
+          example: 2026-04-16T13:00:00Z
+          format: date-time
+          type: string
+        status_2xx:
+          description: Количество ответов со статусом 2xx.
+          example: 1024
+          type: number
+        status_3xx:
+          description: Количество ответов со статусом 3xx.
+          example: 12
+          type: number
+        status_4xx:
+          description: Количество ответов со статусом 4xx.
+          example: 3
+          type: number
+        status_5xx:
+          description: Количество ответов со статусом 5xx.
+          example: 0
+          type: number
+      required:
+      - logged_at
+      - status_2xx
+      - status_3xx
+      - status_4xx
+      - status_5xx
       type: object
   securitySchemes:
     Bearer:
