@@ -59592,6 +59592,18 @@ components:
       - failed
       - deleted
       type: string
+    Location:
+      description: Локация образа.
+      enum:
+      - ru-1
+      - ru-2
+      - ru-3
+      - pl-1
+      - kz-1
+      - nl-1
+      - de-1
+      example: ru-1
+      type: string
     OS:
       description: An enumeration.
       enum:
@@ -59653,15 +59665,7 @@ components:
           description: ID связанного с образом диска.
           type: integer
         location:
-          description: Локация образа.
-          enum:
-          - ru-1
-          - ru-2
-          - pl-1
-          - kz-1
-          - nl-1
-          example: ru-1
-          type: string
+          $ref: '#/components/schemas/Location'
         os:
           $ref: '#/components/schemas/OS'
         progress:
@@ -59758,14 +59762,6 @@ components:
       - message
       - status_code
       type: object
-    Location:
-      description: An enumeration.
-      enum:
-      - ru-1
-      - ru-2
-      - pl-1
-      - kz-1
-      type: string
     ImageInAPI:
       example:
         os: other
@@ -71296,9 +71292,13 @@ components:
       - ru-1
       - ru-2
       - ru-3
+      - ru-4
+      - ru-5
       - pl-1
       - kz-1
       - nl-1
+      - de-1
+      - us-4
       example: ru-1
       type: string
     location-dto:

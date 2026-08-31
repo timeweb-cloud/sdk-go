@@ -9,11 +9,19 @@
 
 * `RU_3` (value: `"ru-3"`)
 
+* `RU_4` (value: `"ru-4"`)
+
+* `RU_5` (value: `"ru-5"`)
+
 * `PL_1` (value: `"pl-1"`)
 
 * `KZ_1` (value: `"kz-1"`)
 
 * `NL_1` (value: `"nl-1"`)
+
+* `DE_1` (value: `"de-1"`)
+
+* `US_4` (value: `"us-4"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -37,8 +37,7 @@ type Image struct {
 	Description string `json:"description"`
 	// ID связанного с образом диска.
 	DiskId int32 `json:"disk_id"`
-	// Локация образа.
-	Location string `json:"location"`
+	Location Location `json:"location"`
 	Os OS `json:"os"`
 	// Процент создания образа.
 	Progress int32 `json:"progress"`
@@ -52,7 +51,7 @@ type Image struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImage(id string, status ImageStatus, createdAt string, deletedAt string, size int32, virtualSize int32, name string, description string, diskId int32, location string, os OS, progress int32, isCustom bool, type_ string) *Image {
+func NewImage(id string, status ImageStatus, createdAt string, deletedAt string, size int32, virtualSize int32, name string, description string, diskId int32, location Location, os OS, progress int32, isCustom bool, type_ string) *Image {
 	this := Image{}
 	this.Id = id
 	this.Status = status
@@ -296,9 +295,9 @@ func (o *Image) SetDiskId(v int32) {
 }
 
 // GetLocation returns the Location field value
-func (o *Image) GetLocation() string {
+func (o *Image) GetLocation() Location {
 	if o == nil {
-		var ret string
+		var ret Location
 		return ret
 	}
 
@@ -307,7 +306,7 @@ func (o *Image) GetLocation() string {
 
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetLocationOk() (*string, bool) {
+func (o *Image) GetLocationOk() (*Location, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -315,7 +314,7 @@ func (o *Image) GetLocationOk() (*string, bool) {
 }
 
 // SetLocation sets field value
-func (o *Image) SetLocation(v string) {
+func (o *Image) SetLocation(v Location) {
 	o.Location = v
 }
 

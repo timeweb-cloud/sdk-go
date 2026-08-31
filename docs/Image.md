@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Имя образа. | 
 **Description** | **string** | Описание образа. | 
 **DiskId** | **int32** | ID связанного с образом диска. | 
-**Location** | **string** | Локация образа. | 
+**Location** | [**Location**](Location.md) |  | 
 **Os** | [**OS**](OS.md) |  | 
 **Progress** | **int32** | Процент создания образа. | 
 **IsCustom** | **bool** | Логическое значение, которое показывает, является ли образ кастомным. | 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewImage
 
-`func NewImage(id string, status ImageStatus, createdAt string, deletedAt string, size int32, virtualSize int32, name string, description string, diskId int32, location string, os OS, progress int32, isCustom bool, type_ string, ) *Image`
+`func NewImage(id string, status ImageStatus, createdAt string, deletedAt string, size int32, virtualSize int32, name string, description string, diskId int32, location Location, os OS, progress int32, isCustom bool, type_ string, ) *Image`
 
 NewImage instantiates a new Image object
 This constructor will assign default values to properties that have it defined,
@@ -220,20 +220,20 @@ SetDiskId sets DiskId field to given value.
 
 ### GetLocation
 
-`func (o *Image) GetLocation() string`
+`func (o *Image) GetLocation() Location`
 
 GetLocation returns the Location field if non-nil, zero value otherwise.
 
 ### GetLocationOk
 
-`func (o *Image) GetLocationOk() (*string, bool)`
+`func (o *Image) GetLocationOk() (*Location, bool)`
 
 GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocation
 
-`func (o *Image) SetLocation(v string)`
+`func (o *Image) SetLocation(v Location)`
 
 SetLocation sets Location field to given value.
 

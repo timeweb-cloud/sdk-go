@@ -24,9 +24,13 @@ const (
 	RU_1 Location = "ru-1"
 	RU_2 Location = "ru-2"
 	RU_3 Location = "ru-3"
+	RU_4 Location = "ru-4"
+	RU_5 Location = "ru-5"
 	PL_1 Location = "pl-1"
 	KZ_1 Location = "kz-1"
 	NL_1 Location = "nl-1"
+	DE_1 Location = "de-1"
+	US_4 Location = "us-4"
 )
 
 // All allowed values of Location enum
@@ -34,9 +38,13 @@ var AllowedLocationEnumValues = []Location{
 	"ru-1",
 	"ru-2",
 	"ru-3",
+	"ru-4",
+	"ru-5",
 	"pl-1",
 	"kz-1",
 	"nl-1",
+	"de-1",
+	"us-4",
 }
 
 func (v *Location) UnmarshalJSON(src []byte) error {
