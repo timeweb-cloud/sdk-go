@@ -47,6 +47,20 @@ func Test_openapi_KnowledgeBasesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KnowledgeBasesAPIService CreateKnowledgebaseDocument", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.KnowledgeBasesAPI.CreateKnowledgebaseDocument(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KnowledgeBasesAPIService DeleteDocument", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -117,13 +131,13 @@ func Test_openapi_KnowledgeBasesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test KnowledgeBasesAPIService GetKnowledgebaseStatistics", func(t *testing.T) {
+	t.Run("Test KnowledgeBasesAPIService GetKnowledgebaseV3", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id int32
 
-		resp, httpRes, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseStatistics(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseV3(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -148,6 +162,18 @@ func Test_openapi_KnowledgeBasesAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.KnowledgeBasesAPI.GetKnowledgebasesV2(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KnowledgeBasesAPIService GetKnowledgebasesV3", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.KnowledgeBasesAPI.GetKnowledgebasesV3(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -204,6 +230,35 @@ func Test_openapi_KnowledgeBasesAPIService(t *testing.T) {
 		var id int32
 
 		resp, httpRes, err := apiClient.KnowledgeBasesAPI.UpdateKnowledgebase(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KnowledgeBasesAPIService UpdateKnowledgebaseAgentLink", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+		var agentId int32
+
+		httpRes, err := apiClient.KnowledgeBasesAPI.UpdateKnowledgebaseAgentLink(context.Background(), id, agentId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KnowledgeBasesAPIService UpdateKnowledgebaseDocument", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+		var documentId int32
+
+		resp, httpRes, err := apiClient.KnowledgeBasesAPI.UpdateKnowledgebaseDocument(context.Background(), id, documentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

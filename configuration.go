@@ -99,6 +99,168 @@ func NewConfiguration() *Configuration {
 			},
 		},
 		OperationServers: map[string]ServerConfigurations{
+			"AIGatewayInferenceAPIService.CancelAiGatewayBatch": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CancelAiGatewayResponse": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayBatch": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayChatCompletion": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayCompletion": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayEmbedding": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayImage": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayImageEdit": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayResponse": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewaySpeech": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.CreateAiGatewayTranscription": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.DeleteAiGatewayFile": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.DeleteAiGatewayResponse": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.DownloadAiGatewayFileContent": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.GetAiGatewayBatch": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.GetAiGatewayBatches": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.GetAiGatewayFile": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.GetAiGatewayModels": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.GetAiGatewayResponse": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AIGatewayInferenceAPIService.UploadAiGatewayFile": {
+				{
+					URL: "https://api.timeweb.ai",
+					Description: "No description provided",
+				},
+			},
+			"AISolutionsAPIService.StreamAiSolutionChat": {
+				{
+					URL: "https://agent.timeweb.cloud",
+					Description: "No description provided",
+				},
+			},
+			"MCPAPIService.DeleteMcpSearchSession": {
+				{
+					URL: "https://api.timeweb.cloud",
+					Description: "No description provided",
+				},
+			},
+			"MCPAPIService.DeleteMcpSession": {
+				{
+					URL: "https://api.timeweb.cloud",
+					Description: "No description provided",
+				},
+			},
+			"MCPAPIService.OpenMcpSearchStream": {
+				{
+					URL: "https://api.timeweb.cloud",
+					Description: "No description provided",
+				},
+			},
+			"MCPAPIService.OpenMcpStream": {
+				{
+					URL: "https://api.timeweb.cloud",
+					Description: "No description provided",
+				},
+			},
+			"MCPAPIService.SendMcpMessage": {
+				{
+					URL: "https://api.timeweb.cloud",
+					Description: "No description provided",
+				},
+			},
+			"MCPAPIService.SendMcpSearchMessage": {
+				{
+					URL: "https://api.timeweb.cloud",
+					Description: "No description provided",
+				},
+			},
 		},
 	}
 	return cfg

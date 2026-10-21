@@ -4,21 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Уникальный идентификатор пакета | 
-**ModelId** | **float32** | ID модели, к которой применяется пакет токенов | 
-**Name** | **string** | Название пакета токенов | 
-**PackageType** | **string** | Тип пакета (base - базовый, additional - дополнительный, promo - промо) | 
-**Type** | **string** | Тип сущности, к которой относится пакет (agent - агент, knowledgebase - база знаний) | 
-**TokenAmount** | **float32** | Количество токенов в пакете | 
-**Price** | **float32** | Цена пакета в целых единицах | 
-**DurationDays** | Pointer to **NullableFloat32** | Продолжительность пакета в днях (null для дополнительных пакетов) | [optional] 
-**IsAvailable** | **bool** | Флаг, указывающий доступность пакета | 
+**Id** | **int32** | ID пакета | 
+**ModelId** | **int32** | ID модели, к которой относится пакет | 
+**ServiceTypeId** | **int32** | ID тарифа пакета в биллинге | 
+**Name** | **string** | Название пакета | 
+**PackageType** | **string** | Тип пакета: &#x60;base&#x60; — пакет подписки, &#x60;additional&#x60; — дополнительный пакет, &#x60;promo&#x60; — промо-пакет | 
+**Type** | **string** | Для чего пакет: &#x60;agent&#x60; — AI агент, &#x60;knowledgebase&#x60; — база знаний | 
+**TokenAmount** | **int32** | Количество токенов в пакете | 
+**Price** | **float32** | Цена пакета в рублях | 
+**DurationDays** | **NullableInt32** | Период подписки в днях. &#x60;null&#x60; для дополнительных пакетов | 
+**IsAvailable** | **bool** | Пакет доступен для покупки | 
 
 ## Methods
 
 ### NewTokenPackage
 
-`func NewTokenPackage(id float32, modelId float32, name string, packageType string, type_ string, tokenAmount float32, price float32, isAvailable bool, ) *TokenPackage`
+`func NewTokenPackage(id int32, modelId int32, serviceTypeId int32, name string, packageType string, type_ string, tokenAmount int32, price float32, durationDays NullableInt32, isAvailable bool, ) *TokenPackage`
 
 NewTokenPackage instantiates a new TokenPackage object
 This constructor will assign default values to properties that have it defined,
@@ -35,42 +36,62 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *TokenPackage) GetId() float32`
+`func (o *TokenPackage) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *TokenPackage) GetIdOk() (*float32, bool)`
+`func (o *TokenPackage) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *TokenPackage) SetId(v float32)`
+`func (o *TokenPackage) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetModelId
 
-`func (o *TokenPackage) GetModelId() float32`
+`func (o *TokenPackage) GetModelId() int32`
 
 GetModelId returns the ModelId field if non-nil, zero value otherwise.
 
 ### GetModelIdOk
 
-`func (o *TokenPackage) GetModelIdOk() (*float32, bool)`
+`func (o *TokenPackage) GetModelIdOk() (*int32, bool)`
 
 GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetModelId
 
-`func (o *TokenPackage) SetModelId(v float32)`
+`func (o *TokenPackage) SetModelId(v int32)`
 
 SetModelId sets ModelId field to given value.
+
+
+### GetServiceTypeId
+
+`func (o *TokenPackage) GetServiceTypeId() int32`
+
+GetServiceTypeId returns the ServiceTypeId field if non-nil, zero value otherwise.
+
+### GetServiceTypeIdOk
+
+`func (o *TokenPackage) GetServiceTypeIdOk() (*int32, bool)`
+
+GetServiceTypeIdOk returns a tuple with the ServiceTypeId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceTypeId
+
+`func (o *TokenPackage) SetServiceTypeId(v int32)`
+
+SetServiceTypeId sets ServiceTypeId field to given value.
 
 
 ### GetName
@@ -135,20 +156,20 @@ SetType sets Type field to given value.
 
 ### GetTokenAmount
 
-`func (o *TokenPackage) GetTokenAmount() float32`
+`func (o *TokenPackage) GetTokenAmount() int32`
 
 GetTokenAmount returns the TokenAmount field if non-nil, zero value otherwise.
 
 ### GetTokenAmountOk
 
-`func (o *TokenPackage) GetTokenAmountOk() (*float32, bool)`
+`func (o *TokenPackage) GetTokenAmountOk() (*int32, bool)`
 
 GetTokenAmountOk returns a tuple with the TokenAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTokenAmount
 
-`func (o *TokenPackage) SetTokenAmount(v float32)`
+`func (o *TokenPackage) SetTokenAmount(v int32)`
 
 SetTokenAmount sets TokenAmount field to given value.
 
@@ -175,28 +196,23 @@ SetPrice sets Price field to given value.
 
 ### GetDurationDays
 
-`func (o *TokenPackage) GetDurationDays() float32`
+`func (o *TokenPackage) GetDurationDays() int32`
 
 GetDurationDays returns the DurationDays field if non-nil, zero value otherwise.
 
 ### GetDurationDaysOk
 
-`func (o *TokenPackage) GetDurationDaysOk() (*float32, bool)`
+`func (o *TokenPackage) GetDurationDaysOk() (*int32, bool)`
 
 GetDurationDaysOk returns a tuple with the DurationDays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDurationDays
 
-`func (o *TokenPackage) SetDurationDays(v float32)`
+`func (o *TokenPackage) SetDurationDays(v int32)`
 
 SetDurationDays sets DurationDays field to given value.
 
-### HasDurationDays
-
-`func (o *TokenPackage) HasDurationDays() bool`
-
-HasDurationDays returns a boolean if a field has been set.
 
 ### SetDurationDaysNil
 

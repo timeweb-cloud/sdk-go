@@ -20,7 +20,7 @@ var _ MappedNullable = &GetModelsV3200ResponseMeta{}
 
 // GetModelsV3200ResponseMeta struct for GetModelsV3200ResponseMeta
 type GetModelsV3200ResponseMeta struct {
-	// Общее количество моделей
+	// Количество моделей
 	Total float32 `json:"total"`
 }
 

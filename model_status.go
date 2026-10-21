@@ -20,6 +20,8 @@ var _ MappedNullable = &Status{}
 
 // Status Статус аккаунта
 type Status struct {
+	// Логин аккаунта.
+	Login string `json:"login"`
 	// Это логическое значение, которое показывает, заблокирован ли аккаунт.
 	IsBlocked bool `json:"is_blocked"`
 	// Это логическое значение, которое показывает, заблокирован ли аккаунт навсегда.
@@ -37,8 +39,9 @@ type Status struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStatus(isBlocked bool, isPermanentBlocked bool, isSendBillLetters bool, companyInfo StatusCompanyInfo, lastPasswordChangedAt string, ymClientId NullableString) *Status {
+func NewStatus(login string, isBlocked bool, isPermanentBlocked bool, isSendBillLetters bool, companyInfo StatusCompanyInfo, lastPasswordChangedAt string, ymClientId NullableString) *Status {
 	this := Status{}
+	this.Login = login
 	this.IsBlocked = isBlocked
 	this.IsPermanentBlocked = isPermanentBlocked
 	this.IsSendBillLetters = isSendBillLetters
@@ -54,6 +57,30 @@ func NewStatus(isBlocked bool, isPermanentBlocked bool, isSendBillLetters bool, 
 func NewStatusWithDefaults() *Status {
 	this := Status{}
 	return &this
+}
+
+// GetLogin returns the Login field value
+func (o *Status) GetLogin() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Login
+}
+
+// GetLoginOk returns a tuple with the Login field value
+// and a boolean to check if the value has been set.
+func (o *Status) GetLoginOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Login, true
+}
+
+// SetLogin sets field value
+func (o *Status) SetLogin(v string) {
+	o.Login = v
 }
 
 // GetIsBlocked returns the IsBlocked field value
@@ -212,6 +239,7 @@ func (o Status) MarshalJSON() ([]byte, error) {
 
 func (o Status) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["login"] = o.Login
 	toSerialize["is_blocked"] = o.IsBlocked
 	toSerialize["is_permanent_blocked"] = o.IsPermanentBlocked
 	toSerialize["is_send_bill_letters"] = o.IsSendBillLetters

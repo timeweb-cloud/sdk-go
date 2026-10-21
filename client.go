@@ -50,7 +50,21 @@ type APIClient struct {
 
 	// API Services
 
+	AIAgentIntegrationsAPI *AIAgentIntegrationsAPIService
+
+	AIAgentSkillsAPI *AIAgentSkillsAPIService
+
+	AIAgentToolsAPI *AIAgentToolsAPIService
+
 	AIAgentsAPI *AIAgentsAPIService
+
+	AIGatewayAPI *AIGatewayAPIService
+
+	AIGatewayInferenceAPI *AIGatewayInferenceAPIService
+
+	AIModelsAPI *AIModelsAPIService
+
+	AISolutionsAPI *AISolutionsAPIService
 
 	AccountAPI *AccountAPIService
 
@@ -79,6 +93,8 @@ type APIClient struct {
 	KubernetesAPI *KubernetesAPIService
 
 	LocationsAPI *LocationsAPIService
+
+	MCPAPI *MCPAPIService
 
 	MailAPI *MailAPIService
 
@@ -115,7 +131,14 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AIAgentIntegrationsAPI = (*AIAgentIntegrationsAPIService)(&c.common)
+	c.AIAgentSkillsAPI = (*AIAgentSkillsAPIService)(&c.common)
+	c.AIAgentToolsAPI = (*AIAgentToolsAPIService)(&c.common)
 	c.AIAgentsAPI = (*AIAgentsAPIService)(&c.common)
+	c.AIGatewayAPI = (*AIGatewayAPIService)(&c.common)
+	c.AIGatewayInferenceAPI = (*AIGatewayInferenceAPIService)(&c.common)
+	c.AIModelsAPI = (*AIModelsAPIService)(&c.common)
+	c.AISolutionsAPI = (*AISolutionsAPIService)(&c.common)
 	c.AccountAPI = (*AccountAPIService)(&c.common)
 	c.AppsAPI = (*AppsAPIService)(&c.common)
 	c.BalancersAPI = (*BalancersAPIService)(&c.common)
@@ -130,6 +153,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.KnowledgeBasesAPI = (*KnowledgeBasesAPIService)(&c.common)
 	c.KubernetesAPI = (*KubernetesAPIService)(&c.common)
 	c.LocationsAPI = (*LocationsAPIService)(&c.common)
+	c.MCPAPI = (*MCPAPIService)(&c.common)
 	c.MailAPI = (*MailAPIService)(&c.common)
 	c.NetworkDrivesAPI = (*NetworkDrivesAPIService)(&c.common)
 	c.PaymentsAPI = (*PaymentsAPIService)(&c.common)

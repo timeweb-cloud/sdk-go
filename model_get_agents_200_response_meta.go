@@ -20,15 +20,15 @@ var _ MappedNullable = &GetAgents200ResponseMeta{}
 
 // GetAgents200ResponseMeta struct for GetAgents200ResponseMeta
 type GetAgents200ResponseMeta struct {
-	// Общее количество агентов
-	Total float32 `json:"total"`
+	// Количество агентов
+	Total int32 `json:"total"`
 }
 
 // NewGetAgents200ResponseMeta instantiates a new GetAgents200ResponseMeta object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAgents200ResponseMeta(total float32) *GetAgents200ResponseMeta {
+func NewGetAgents200ResponseMeta(total int32) *GetAgents200ResponseMeta {
 	this := GetAgents200ResponseMeta{}
 	this.Total = total
 	return &this
@@ -43,9 +43,9 @@ func NewGetAgents200ResponseMetaWithDefaults() *GetAgents200ResponseMeta {
 }
 
 // GetTotal returns the Total field value
-func (o *GetAgents200ResponseMeta) GetTotal() float32 {
+func (o *GetAgents200ResponseMeta) GetTotal() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -54,7 +54,7 @@ func (o *GetAgents200ResponseMeta) GetTotal() float32 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *GetAgents200ResponseMeta) GetTotalOk() (*float32, bool) {
+func (o *GetAgents200ResponseMeta) GetTotalOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *GetAgents200ResponseMeta) GetTotalOk() (*float32, bool) {
 }
 
 // SetTotal sets field value
-func (o *GetAgents200ResponseMeta) SetTotal(v float32) {
+func (o *GetAgents200ResponseMeta) SetTotal(v int32) {
 	o.Total = v
 }
 

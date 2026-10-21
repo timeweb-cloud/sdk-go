@@ -18,34 +18,38 @@ import (
 // checks if the CreateAgent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateAgent{}
 
-// CreateAgent Данные для создания AI агента
+// CreateAgent Данные для создания AI агента (устаревший метод API v1)
 type CreateAgent struct {
 	// Название агента
 	Name string `json:"name"`
 	// Описание агента
 	Description *string `json:"description,omitempty"`
-	// Тип доступа к агенту
+	// Тип доступа: `public` — агент отвечает анонимным посетителям сайта через виджет; `private` — только по токену аккаунта.
 	AccessType string `json:"access_type"`
-	// ID модели
-	ModelId float32 `json:"model_id"`
-	// ID пакета токенов
-	TokenPackageId float32 `json:"token_package_id"`
+	// ID основной модели агента
+	ModelId int32 `json:"model_id"`
 	Settings AgentSettings `json:"settings"`
-	// ID проекта
-	ProjectId *float32 `json:"project_id,omitempty"`
+	// ID проекта, в который нужно добавить агента. По умолчанию — проект по умолчанию.
+	ProjectId *int32 `json:"project_id,omitempty"`
+	// Включить веб-поиск
+	IsWebSearchEnabled *bool `json:"is_web_search_enabled,omitempty"`
+	// ID пакета токенов. Обязателен для совместимости, но не учитывается: агент всегда создаётся с поресурсной оплатой.
+	TokenPackageId int32 `json:"token_package_id"`
 }
 
 // NewCreateAgent instantiates a new CreateAgent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAgent(name string, accessType string, modelId float32, tokenPackageId float32, settings AgentSettings) *CreateAgent {
+func NewCreateAgent(name string, accessType string, modelId int32, settings AgentSettings, tokenPackageId int32) *CreateAgent {
 	this := CreateAgent{}
 	this.Name = name
 	this.AccessType = accessType
 	this.ModelId = modelId
-	this.TokenPackageId = tokenPackageId
 	this.Settings = settings
+	var isWebSearchEnabled bool = false
+	this.IsWebSearchEnabled = &isWebSearchEnabled
+	this.TokenPackageId = tokenPackageId
 	return &this
 }
 
@@ -54,6 +58,8 @@ func NewCreateAgent(name string, accessType string, modelId float32, tokenPackag
 // but it doesn't guarantee that properties required by API are set
 func NewCreateAgentWithDefaults() *CreateAgent {
 	this := CreateAgent{}
+	var isWebSearchEnabled bool = false
+	this.IsWebSearchEnabled = &isWebSearchEnabled
 	return &this
 }
 
@@ -138,9 +144,9 @@ func (o *CreateAgent) SetAccessType(v string) {
 }
 
 // GetModelId returns the ModelId field value
-func (o *CreateAgent) GetModelId() float32 {
+func (o *CreateAgent) GetModelId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -149,7 +155,7 @@ func (o *CreateAgent) GetModelId() float32 {
 
 // GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAgent) GetModelIdOk() (*float32, bool) {
+func (o *CreateAgent) GetModelIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,32 +163,8 @@ func (o *CreateAgent) GetModelIdOk() (*float32, bool) {
 }
 
 // SetModelId sets field value
-func (o *CreateAgent) SetModelId(v float32) {
+func (o *CreateAgent) SetModelId(v int32) {
 	o.ModelId = v
-}
-
-// GetTokenPackageId returns the TokenPackageId field value
-func (o *CreateAgent) GetTokenPackageId() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.TokenPackageId
-}
-
-// GetTokenPackageIdOk returns a tuple with the TokenPackageId field value
-// and a boolean to check if the value has been set.
-func (o *CreateAgent) GetTokenPackageIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TokenPackageId, true
-}
-
-// SetTokenPackageId sets field value
-func (o *CreateAgent) SetTokenPackageId(v float32) {
-	o.TokenPackageId = v
 }
 
 // GetSettings returns the Settings field value
@@ -210,9 +192,9 @@ func (o *CreateAgent) SetSettings(v AgentSettings) {
 }
 
 // GetProjectId returns the ProjectId field value if set, zero value otherwise.
-func (o *CreateAgent) GetProjectId() float32 {
+func (o *CreateAgent) GetProjectId() int32 {
 	if o == nil || IsNil(o.ProjectId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.ProjectId
@@ -220,7 +202,7 @@ func (o *CreateAgent) GetProjectId() float32 {
 
 // GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAgent) GetProjectIdOk() (*float32, bool) {
+func (o *CreateAgent) GetProjectIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.ProjectId) {
 		return nil, false
 	}
@@ -236,9 +218,65 @@ func (o *CreateAgent) HasProjectId() bool {
 	return false
 }
 
-// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
-func (o *CreateAgent) SetProjectId(v float32) {
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *CreateAgent) SetProjectId(v int32) {
 	o.ProjectId = &v
+}
+
+// GetIsWebSearchEnabled returns the IsWebSearchEnabled field value if set, zero value otherwise.
+func (o *CreateAgent) GetIsWebSearchEnabled() bool {
+	if o == nil || IsNil(o.IsWebSearchEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsWebSearchEnabled
+}
+
+// GetIsWebSearchEnabledOk returns a tuple with the IsWebSearchEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgent) GetIsWebSearchEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsWebSearchEnabled) {
+		return nil, false
+	}
+	return o.IsWebSearchEnabled, true
+}
+
+// HasIsWebSearchEnabled returns a boolean if a field has been set.
+func (o *CreateAgent) HasIsWebSearchEnabled() bool {
+	if o != nil && !IsNil(o.IsWebSearchEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsWebSearchEnabled gets a reference to the given bool and assigns it to the IsWebSearchEnabled field.
+func (o *CreateAgent) SetIsWebSearchEnabled(v bool) {
+	o.IsWebSearchEnabled = &v
+}
+
+// GetTokenPackageId returns the TokenPackageId field value
+func (o *CreateAgent) GetTokenPackageId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TokenPackageId
+}
+
+// GetTokenPackageIdOk returns a tuple with the TokenPackageId field value
+// and a boolean to check if the value has been set.
+func (o *CreateAgent) GetTokenPackageIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TokenPackageId, true
+}
+
+// SetTokenPackageId sets field value
+func (o *CreateAgent) SetTokenPackageId(v int32) {
+	o.TokenPackageId = v
 }
 
 func (o CreateAgent) MarshalJSON() ([]byte, error) {
@@ -257,11 +295,14 @@ func (o CreateAgent) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["access_type"] = o.AccessType
 	toSerialize["model_id"] = o.ModelId
-	toSerialize["token_package_id"] = o.TokenPackageId
 	toSerialize["settings"] = o.Settings
 	if !IsNil(o.ProjectId) {
 		toSerialize["project_id"] = o.ProjectId
 	}
+	if !IsNil(o.IsWebSearchEnabled) {
+		toSerialize["is_web_search_enabled"] = o.IsWebSearchEnabled
+	}
+	toSerialize["token_package_id"] = o.TokenPackageId
 	return toSerialize, nil
 }
 

@@ -20,17 +20,17 @@ var _ MappedNullable = &GetKnowledgebases200Response{}
 
 // GetKnowledgebases200Response struct for GetKnowledgebases200Response
 type GetKnowledgebases200Response struct {
-	Knowledgebases []Knowledgebase `json:"knowledgebases"`
-	Meta GetKnowledgebasesV2200ResponseMeta `json:"meta"`
+	KnowledgeBases []Knowledgebase `json:"knowledge_bases"`
+	Meta GetKnowledgebasesV3200ResponseMeta `json:"meta"`
 }
 
 // NewGetKnowledgebases200Response instantiates a new GetKnowledgebases200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetKnowledgebases200Response(knowledgebases []Knowledgebase, meta GetKnowledgebasesV2200ResponseMeta) *GetKnowledgebases200Response {
+func NewGetKnowledgebases200Response(knowledgeBases []Knowledgebase, meta GetKnowledgebasesV3200ResponseMeta) *GetKnowledgebases200Response {
 	this := GetKnowledgebases200Response{}
-	this.Knowledgebases = knowledgebases
+	this.KnowledgeBases = knowledgeBases
 	this.Meta = meta
 	return &this
 }
@@ -43,34 +43,34 @@ func NewGetKnowledgebases200ResponseWithDefaults() *GetKnowledgebases200Response
 	return &this
 }
 
-// GetKnowledgebases returns the Knowledgebases field value
-func (o *GetKnowledgebases200Response) GetKnowledgebases() []Knowledgebase {
+// GetKnowledgeBases returns the KnowledgeBases field value
+func (o *GetKnowledgebases200Response) GetKnowledgeBases() []Knowledgebase {
 	if o == nil {
 		var ret []Knowledgebase
 		return ret
 	}
 
-	return o.Knowledgebases
+	return o.KnowledgeBases
 }
 
-// GetKnowledgebasesOk returns a tuple with the Knowledgebases field value
+// GetKnowledgeBasesOk returns a tuple with the KnowledgeBases field value
 // and a boolean to check if the value has been set.
-func (o *GetKnowledgebases200Response) GetKnowledgebasesOk() ([]Knowledgebase, bool) {
+func (o *GetKnowledgebases200Response) GetKnowledgeBasesOk() ([]Knowledgebase, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Knowledgebases, true
+	return o.KnowledgeBases, true
 }
 
-// SetKnowledgebases sets field value
-func (o *GetKnowledgebases200Response) SetKnowledgebases(v []Knowledgebase) {
-	o.Knowledgebases = v
+// SetKnowledgeBases sets field value
+func (o *GetKnowledgebases200Response) SetKnowledgeBases(v []Knowledgebase) {
+	o.KnowledgeBases = v
 }
 
 // GetMeta returns the Meta field value
-func (o *GetKnowledgebases200Response) GetMeta() GetKnowledgebasesV2200ResponseMeta {
+func (o *GetKnowledgebases200Response) GetMeta() GetKnowledgebasesV3200ResponseMeta {
 	if o == nil {
-		var ret GetKnowledgebasesV2200ResponseMeta
+		var ret GetKnowledgebasesV3200ResponseMeta
 		return ret
 	}
 
@@ -79,7 +79,7 @@ func (o *GetKnowledgebases200Response) GetMeta() GetKnowledgebasesV2200ResponseM
 
 // GetMetaOk returns a tuple with the Meta field value
 // and a boolean to check if the value has been set.
-func (o *GetKnowledgebases200Response) GetMetaOk() (*GetKnowledgebasesV2200ResponseMeta, bool) {
+func (o *GetKnowledgebases200Response) GetMetaOk() (*GetKnowledgebasesV3200ResponseMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,7 +87,7 @@ func (o *GetKnowledgebases200Response) GetMetaOk() (*GetKnowledgebasesV2200Respo
 }
 
 // SetMeta sets field value
-func (o *GetKnowledgebases200Response) SetMeta(v GetKnowledgebasesV2200ResponseMeta) {
+func (o *GetKnowledgebases200Response) SetMeta(v GetKnowledgebasesV3200ResponseMeta) {
 	o.Meta = v
 }
 
@@ -101,7 +101,7 @@ func (o GetKnowledgebases200Response) MarshalJSON() ([]byte, error) {
 
 func (o GetKnowledgebases200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["knowledgebases"] = o.Knowledgebases
+	toSerialize["knowledge_bases"] = o.KnowledgeBases
 	toSerialize["meta"] = o.Meta
 	return toSerialize, nil
 }

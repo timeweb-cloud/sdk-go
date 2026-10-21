@@ -19,46 +19,63 @@ import (
 // checks if the Agent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Agent{}
 
-// Agent AI Agent
+// Agent AI агент
 type Agent struct {
-	// Уникальный идентификатор агента
-	Id float32 `json:"id"`
+	// ID агента
+	Id int32 `json:"id"`
 	// Название агента
 	Name string `json:"name"`
 	// Описание агента
-	Description string `json:"description"`
-	// ID модели
-	ModelId float32 `json:"model_id"`
-	// ID провайдера
-	ProviderId float32 `json:"provider_id"`
+	Description NullableString `json:"description"`
+	// ID проекта, в котором находится агент
+	ProjectId *int32 `json:"project_id,omitempty"`
+	// ID основной модели агента
+	ModelId int32 `json:"model_id"`
+	// ID провайдера модели
+	ProviderId int32 `json:"provider_id"`
 	Settings AgentSettings `json:"settings"`
-	// Статус агента
+	// Статус агента: - `active` — работает; - `suspended` — приостановлен владельцем; - `blocked` — заблокирован (для агентов с пакетом токенов — закончились токены или подписка); - `deleted` — удалён.
 	Status string `json:"status"`
-	// Тип доступа к агенту
+	// Тип доступа: `public` — агент отвечает анонимным посетителям сайта через виджет; `private` — только по токену аккаунта.
 	AccessType string `json:"access_type"`
-	// Всего токенов выделено агенту
-	TotalTokens float32 `json:"total_tokens"`
-	// Использовано токенов
-	UsedTokens float32 `json:"used_tokens"`
-	// Осталось токенов
-	RemainingTokens float32 `json:"remaining_tokens"`
-	// ID пакета токенов
-	TokenPackageId float32 `json:"token_package_id"`
-	// Дата обновления подписки
-	SubscriptionRenewalDate time.Time `json:"subscription_renewal_date"`
-	// ID баз знаний, связанных с агентом
-	KnowledgeBasesIds []float32 `json:"knowledge_bases_ids"`
-	// ID доступа
-	AccessId float32 `json:"access_id"`
+	// Идентификатор доступа агента. Используется для вызова агента из своих приложений через OpenAI-совместимое API (см. https://agent.timeweb.cloud/docs) и для встраивания виджета.
+	AccessId string `json:"access_id"`
+	// Устарело. Дневной лимит агента в токенах без привязки к модели, если он задан; `0` — такого лимита нет. Лимиты в деньгах, по моделям и за другие периоды здесь не отражаются — используйте лимиты агента (`/api/v1/cloud-ai/agents/{id}/entity-limits`).
+	// Deprecated
+	TokenLimit int32 `json:"token_limit"`
+	// Всего токенов в пакете. Только для агентов с пакетом токенов (устаревшая схема оплаты).
+	TotalTokens *int32 `json:"total_tokens,omitempty"`
+	// Использовано токенов пакета. Для агентов с поресурсной оплатой — `null`.
+	UsedTokens NullableInt32 `json:"used_tokens"`
+	// Осталось токенов в пакете. Только для агентов с пакетом токенов.
+	RemainingTokens *int32 `json:"remaining_tokens,omitempty"`
+	// ID пакета токенов. Только для агентов с пакетом токенов; у агентов с поресурсной оплатой поле отсутствует.
+	TokenPackageId *int32 `json:"token_package_id,omitempty"`
+	// Дата продления подписки на пакет токенов. Только для агентов с пакетом токенов.
+	SubscriptionRenewalDate *time.Time `json:"subscription_renewal_date,omitempty"`
+	// Включена ли автоматическая докупка пакетов токенов
+	AutoBuyAdditionalTokens bool `json:"auto_buy_additional_tokens"`
+	// Инструменты, подключённые к агенту
+	Tools []AgentToolsInner `json:"tools"`
+	// ID дополнительных моделей агента
+	AdditionalModelIds []int32 `json:"additional_model_ids"`
+	// Дополнительные модели агента с настройками
+	AdditionalModels []AgentAdditionalModel `json:"additional_models"`
+	// Включён ли веб-поиск
+	IsWebSearchEnabled bool `json:"is_web_search_enabled"`
+	// ID ключа AI Gateway, к которому привязан агент. `null` — агента можно привязать к ключу (см. обновление агента); поле отсутствует — привязка недоступна.
+	AiGatewayKeyId NullableString `json:"ai_gateway_key_id,omitempty"`
 	// Дата создания агента
 	CreatedAt time.Time `json:"created_at"`
+	// ID баз знаний, подключённых к агенту
+	KnowledgeBasesIds []int32 `json:"knowledge_bases_ids"`
 }
 
 // NewAgent instantiates a new Agent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAgent(id float32, name string, description string, modelId float32, providerId float32, settings AgentSettings, status string, accessType string, totalTokens float32, usedTokens float32, remainingTokens float32, tokenPackageId float32, subscriptionRenewalDate time.Time, knowledgeBasesIds []float32, accessId float32, createdAt time.Time) *Agent {
+func NewAgent(id int32, name string, description NullableString, modelId int32, providerId int32, settings AgentSettings, status string, accessType string, accessId string, tokenLimit int32, usedTokens NullableInt32, autoBuyAdditionalTokens bool, tools []AgentToolsInner, additionalModelIds []int32, additionalModels []AgentAdditionalModel, isWebSearchEnabled bool, createdAt time.Time, knowledgeBasesIds []int32) *Agent {
 	this := Agent{}
 	this.Id = id
 	this.Name = name
@@ -68,14 +85,16 @@ func NewAgent(id float32, name string, description string, modelId float32, prov
 	this.Settings = settings
 	this.Status = status
 	this.AccessType = accessType
-	this.TotalTokens = totalTokens
-	this.UsedTokens = usedTokens
-	this.RemainingTokens = remainingTokens
-	this.TokenPackageId = tokenPackageId
-	this.SubscriptionRenewalDate = subscriptionRenewalDate
-	this.KnowledgeBasesIds = knowledgeBasesIds
 	this.AccessId = accessId
+	this.TokenLimit = tokenLimit
+	this.UsedTokens = usedTokens
+	this.AutoBuyAdditionalTokens = autoBuyAdditionalTokens
+	this.Tools = tools
+	this.AdditionalModelIds = additionalModelIds
+	this.AdditionalModels = additionalModels
+	this.IsWebSearchEnabled = isWebSearchEnabled
 	this.CreatedAt = createdAt
+	this.KnowledgeBasesIds = knowledgeBasesIds
 	return &this
 }
 
@@ -88,9 +107,9 @@ func NewAgentWithDefaults() *Agent {
 }
 
 // GetId returns the Id field value
-func (o *Agent) GetId() float32 {
+func (o *Agent) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -99,7 +118,7 @@ func (o *Agent) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *Agent) GetIdOk() (*float32, bool) {
+func (o *Agent) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,7 +126,7 @@ func (o *Agent) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *Agent) SetId(v float32) {
+func (o *Agent) SetId(v int32) {
 	o.Id = v
 }
 
@@ -136,33 +155,67 @@ func (o *Agent) SetName(v string) {
 }
 
 // GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *Agent) GetDescription() string {
-	if o == nil {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Agent) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // SetDescription sets field value
 func (o *Agent) SetDescription(v string) {
-	o.Description = v
+	o.Description.Set(&v)
+}
+
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *Agent) GetProjectId() int32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret int32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetProjectIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *Agent) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *Agent) SetProjectId(v int32) {
+	o.ProjectId = &v
 }
 
 // GetModelId returns the ModelId field value
-func (o *Agent) GetModelId() float32 {
+func (o *Agent) GetModelId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -171,7 +224,7 @@ func (o *Agent) GetModelId() float32 {
 
 // GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-func (o *Agent) GetModelIdOk() (*float32, bool) {
+func (o *Agent) GetModelIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -179,14 +232,14 @@ func (o *Agent) GetModelIdOk() (*float32, bool) {
 }
 
 // SetModelId sets field value
-func (o *Agent) SetModelId(v float32) {
+func (o *Agent) SetModelId(v int32) {
 	o.ModelId = v
 }
 
 // GetProviderId returns the ProviderId field value
-func (o *Agent) GetProviderId() float32 {
+func (o *Agent) GetProviderId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -195,7 +248,7 @@ func (o *Agent) GetProviderId() float32 {
 
 // GetProviderIdOk returns a tuple with the ProviderId field value
 // and a boolean to check if the value has been set.
-func (o *Agent) GetProviderIdOk() (*float32, bool) {
+func (o *Agent) GetProviderIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -203,7 +256,7 @@ func (o *Agent) GetProviderIdOk() (*float32, bool) {
 }
 
 // SetProviderId sets field value
-func (o *Agent) SetProviderId(v float32) {
+func (o *Agent) SetProviderId(v int32) {
 	o.ProviderId = v
 }
 
@@ -279,154 +332,10 @@ func (o *Agent) SetAccessType(v string) {
 	o.AccessType = v
 }
 
-// GetTotalTokens returns the TotalTokens field value
-func (o *Agent) GetTotalTokens() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.TotalTokens
-}
-
-// GetTotalTokensOk returns a tuple with the TotalTokens field value
-// and a boolean to check if the value has been set.
-func (o *Agent) GetTotalTokensOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TotalTokens, true
-}
-
-// SetTotalTokens sets field value
-func (o *Agent) SetTotalTokens(v float32) {
-	o.TotalTokens = v
-}
-
-// GetUsedTokens returns the UsedTokens field value
-func (o *Agent) GetUsedTokens() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.UsedTokens
-}
-
-// GetUsedTokensOk returns a tuple with the UsedTokens field value
-// and a boolean to check if the value has been set.
-func (o *Agent) GetUsedTokensOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UsedTokens, true
-}
-
-// SetUsedTokens sets field value
-func (o *Agent) SetUsedTokens(v float32) {
-	o.UsedTokens = v
-}
-
-// GetRemainingTokens returns the RemainingTokens field value
-func (o *Agent) GetRemainingTokens() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.RemainingTokens
-}
-
-// GetRemainingTokensOk returns a tuple with the RemainingTokens field value
-// and a boolean to check if the value has been set.
-func (o *Agent) GetRemainingTokensOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RemainingTokens, true
-}
-
-// SetRemainingTokens sets field value
-func (o *Agent) SetRemainingTokens(v float32) {
-	o.RemainingTokens = v
-}
-
-// GetTokenPackageId returns the TokenPackageId field value
-func (o *Agent) GetTokenPackageId() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.TokenPackageId
-}
-
-// GetTokenPackageIdOk returns a tuple with the TokenPackageId field value
-// and a boolean to check if the value has been set.
-func (o *Agent) GetTokenPackageIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TokenPackageId, true
-}
-
-// SetTokenPackageId sets field value
-func (o *Agent) SetTokenPackageId(v float32) {
-	o.TokenPackageId = v
-}
-
-// GetSubscriptionRenewalDate returns the SubscriptionRenewalDate field value
-func (o *Agent) GetSubscriptionRenewalDate() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.SubscriptionRenewalDate
-}
-
-// GetSubscriptionRenewalDateOk returns a tuple with the SubscriptionRenewalDate field value
-// and a boolean to check if the value has been set.
-func (o *Agent) GetSubscriptionRenewalDateOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SubscriptionRenewalDate, true
-}
-
-// SetSubscriptionRenewalDate sets field value
-func (o *Agent) SetSubscriptionRenewalDate(v time.Time) {
-	o.SubscriptionRenewalDate = v
-}
-
-// GetKnowledgeBasesIds returns the KnowledgeBasesIds field value
-func (o *Agent) GetKnowledgeBasesIds() []float32 {
-	if o == nil {
-		var ret []float32
-		return ret
-	}
-
-	return o.KnowledgeBasesIds
-}
-
-// GetKnowledgeBasesIdsOk returns a tuple with the KnowledgeBasesIds field value
-// and a boolean to check if the value has been set.
-func (o *Agent) GetKnowledgeBasesIdsOk() ([]float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.KnowledgeBasesIds, true
-}
-
-// SetKnowledgeBasesIds sets field value
-func (o *Agent) SetKnowledgeBasesIds(v []float32) {
-	o.KnowledgeBasesIds = v
-}
-
 // GetAccessId returns the AccessId field value
-func (o *Agent) GetAccessId() float32 {
+func (o *Agent) GetAccessId() string {
 	if o == nil {
-		var ret float32
+		var ret string
 		return ret
 	}
 
@@ -435,7 +344,7 @@ func (o *Agent) GetAccessId() float32 {
 
 // GetAccessIdOk returns a tuple with the AccessId field value
 // and a boolean to check if the value has been set.
-func (o *Agent) GetAccessIdOk() (*float32, bool) {
+func (o *Agent) GetAccessIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -443,8 +352,351 @@ func (o *Agent) GetAccessIdOk() (*float32, bool) {
 }
 
 // SetAccessId sets field value
-func (o *Agent) SetAccessId(v float32) {
+func (o *Agent) SetAccessId(v string) {
 	o.AccessId = v
+}
+
+// GetTokenLimit returns the TokenLimit field value
+// Deprecated
+func (o *Agent) GetTokenLimit() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TokenLimit
+}
+
+// GetTokenLimitOk returns a tuple with the TokenLimit field value
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *Agent) GetTokenLimitOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TokenLimit, true
+}
+
+// SetTokenLimit sets field value
+// Deprecated
+func (o *Agent) SetTokenLimit(v int32) {
+	o.TokenLimit = v
+}
+
+// GetTotalTokens returns the TotalTokens field value if set, zero value otherwise.
+func (o *Agent) GetTotalTokens() int32 {
+	if o == nil || IsNil(o.TotalTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.TotalTokens
+}
+
+// GetTotalTokensOk returns a tuple with the TotalTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetTotalTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.TotalTokens) {
+		return nil, false
+	}
+	return o.TotalTokens, true
+}
+
+// HasTotalTokens returns a boolean if a field has been set.
+func (o *Agent) HasTotalTokens() bool {
+	if o != nil && !IsNil(o.TotalTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalTokens gets a reference to the given int32 and assigns it to the TotalTokens field.
+func (o *Agent) SetTotalTokens(v int32) {
+	o.TotalTokens = &v
+}
+
+// GetUsedTokens returns the UsedTokens field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *Agent) GetUsedTokens() int32 {
+	if o == nil || o.UsedTokens.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.UsedTokens.Get()
+}
+
+// GetUsedTokensOk returns a tuple with the UsedTokens field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Agent) GetUsedTokensOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.UsedTokens.Get(), o.UsedTokens.IsSet()
+}
+
+// SetUsedTokens sets field value
+func (o *Agent) SetUsedTokens(v int32) {
+	o.UsedTokens.Set(&v)
+}
+
+// GetRemainingTokens returns the RemainingTokens field value if set, zero value otherwise.
+func (o *Agent) GetRemainingTokens() int32 {
+	if o == nil || IsNil(o.RemainingTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.RemainingTokens
+}
+
+// GetRemainingTokensOk returns a tuple with the RemainingTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetRemainingTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.RemainingTokens) {
+		return nil, false
+	}
+	return o.RemainingTokens, true
+}
+
+// HasRemainingTokens returns a boolean if a field has been set.
+func (o *Agent) HasRemainingTokens() bool {
+	if o != nil && !IsNil(o.RemainingTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemainingTokens gets a reference to the given int32 and assigns it to the RemainingTokens field.
+func (o *Agent) SetRemainingTokens(v int32) {
+	o.RemainingTokens = &v
+}
+
+// GetTokenPackageId returns the TokenPackageId field value if set, zero value otherwise.
+func (o *Agent) GetTokenPackageId() int32 {
+	if o == nil || IsNil(o.TokenPackageId) {
+		var ret int32
+		return ret
+	}
+	return *o.TokenPackageId
+}
+
+// GetTokenPackageIdOk returns a tuple with the TokenPackageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetTokenPackageIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.TokenPackageId) {
+		return nil, false
+	}
+	return o.TokenPackageId, true
+}
+
+// HasTokenPackageId returns a boolean if a field has been set.
+func (o *Agent) HasTokenPackageId() bool {
+	if o != nil && !IsNil(o.TokenPackageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenPackageId gets a reference to the given int32 and assigns it to the TokenPackageId field.
+func (o *Agent) SetTokenPackageId(v int32) {
+	o.TokenPackageId = &v
+}
+
+// GetSubscriptionRenewalDate returns the SubscriptionRenewalDate field value if set, zero value otherwise.
+func (o *Agent) GetSubscriptionRenewalDate() time.Time {
+	if o == nil || IsNil(o.SubscriptionRenewalDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.SubscriptionRenewalDate
+}
+
+// GetSubscriptionRenewalDateOk returns a tuple with the SubscriptionRenewalDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetSubscriptionRenewalDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.SubscriptionRenewalDate) {
+		return nil, false
+	}
+	return o.SubscriptionRenewalDate, true
+}
+
+// HasSubscriptionRenewalDate returns a boolean if a field has been set.
+func (o *Agent) HasSubscriptionRenewalDate() bool {
+	if o != nil && !IsNil(o.SubscriptionRenewalDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubscriptionRenewalDate gets a reference to the given time.Time and assigns it to the SubscriptionRenewalDate field.
+func (o *Agent) SetSubscriptionRenewalDate(v time.Time) {
+	o.SubscriptionRenewalDate = &v
+}
+
+// GetAutoBuyAdditionalTokens returns the AutoBuyAdditionalTokens field value
+func (o *Agent) GetAutoBuyAdditionalTokens() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.AutoBuyAdditionalTokens
+}
+
+// GetAutoBuyAdditionalTokensOk returns a tuple with the AutoBuyAdditionalTokens field value
+// and a boolean to check if the value has been set.
+func (o *Agent) GetAutoBuyAdditionalTokensOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AutoBuyAdditionalTokens, true
+}
+
+// SetAutoBuyAdditionalTokens sets field value
+func (o *Agent) SetAutoBuyAdditionalTokens(v bool) {
+	o.AutoBuyAdditionalTokens = v
+}
+
+// GetTools returns the Tools field value
+func (o *Agent) GetTools() []AgentToolsInner {
+	if o == nil {
+		var ret []AgentToolsInner
+		return ret
+	}
+
+	return o.Tools
+}
+
+// GetToolsOk returns a tuple with the Tools field value
+// and a boolean to check if the value has been set.
+func (o *Agent) GetToolsOk() ([]AgentToolsInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Tools, true
+}
+
+// SetTools sets field value
+func (o *Agent) SetTools(v []AgentToolsInner) {
+	o.Tools = v
+}
+
+// GetAdditionalModelIds returns the AdditionalModelIds field value
+func (o *Agent) GetAdditionalModelIds() []int32 {
+	if o == nil {
+		var ret []int32
+		return ret
+	}
+
+	return o.AdditionalModelIds
+}
+
+// GetAdditionalModelIdsOk returns a tuple with the AdditionalModelIds field value
+// and a boolean to check if the value has been set.
+func (o *Agent) GetAdditionalModelIdsOk() ([]int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AdditionalModelIds, true
+}
+
+// SetAdditionalModelIds sets field value
+func (o *Agent) SetAdditionalModelIds(v []int32) {
+	o.AdditionalModelIds = v
+}
+
+// GetAdditionalModels returns the AdditionalModels field value
+func (o *Agent) GetAdditionalModels() []AgentAdditionalModel {
+	if o == nil {
+		var ret []AgentAdditionalModel
+		return ret
+	}
+
+	return o.AdditionalModels
+}
+
+// GetAdditionalModelsOk returns a tuple with the AdditionalModels field value
+// and a boolean to check if the value has been set.
+func (o *Agent) GetAdditionalModelsOk() ([]AgentAdditionalModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AdditionalModels, true
+}
+
+// SetAdditionalModels sets field value
+func (o *Agent) SetAdditionalModels(v []AgentAdditionalModel) {
+	o.AdditionalModels = v
+}
+
+// GetIsWebSearchEnabled returns the IsWebSearchEnabled field value
+func (o *Agent) GetIsWebSearchEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsWebSearchEnabled
+}
+
+// GetIsWebSearchEnabledOk returns a tuple with the IsWebSearchEnabled field value
+// and a boolean to check if the value has been set.
+func (o *Agent) GetIsWebSearchEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsWebSearchEnabled, true
+}
+
+// SetIsWebSearchEnabled sets field value
+func (o *Agent) SetIsWebSearchEnabled(v bool) {
+	o.IsWebSearchEnabled = v
+}
+
+// GetAiGatewayKeyId returns the AiGatewayKeyId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Agent) GetAiGatewayKeyId() string {
+	if o == nil || IsNil(o.AiGatewayKeyId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AiGatewayKeyId.Get()
+}
+
+// GetAiGatewayKeyIdOk returns a tuple with the AiGatewayKeyId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Agent) GetAiGatewayKeyIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AiGatewayKeyId.Get(), o.AiGatewayKeyId.IsSet()
+}
+
+// HasAiGatewayKeyId returns a boolean if a field has been set.
+func (o *Agent) HasAiGatewayKeyId() bool {
+	if o != nil && o.AiGatewayKeyId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAiGatewayKeyId gets a reference to the given NullableString and assigns it to the AiGatewayKeyId field.
+func (o *Agent) SetAiGatewayKeyId(v string) {
+	o.AiGatewayKeyId.Set(&v)
+}
+// SetAiGatewayKeyIdNil sets the value for AiGatewayKeyId to be an explicit nil
+func (o *Agent) SetAiGatewayKeyIdNil() {
+	o.AiGatewayKeyId.Set(nil)
+}
+
+// UnsetAiGatewayKeyId ensures that no value is present for AiGatewayKeyId, not even an explicit nil
+func (o *Agent) UnsetAiGatewayKeyId() {
+	o.AiGatewayKeyId.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -471,6 +723,30 @@ func (o *Agent) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetKnowledgeBasesIds returns the KnowledgeBasesIds field value
+func (o *Agent) GetKnowledgeBasesIds() []int32 {
+	if o == nil {
+		var ret []int32
+		return ret
+	}
+
+	return o.KnowledgeBasesIds
+}
+
+// GetKnowledgeBasesIdsOk returns a tuple with the KnowledgeBasesIds field value
+// and a boolean to check if the value has been set.
+func (o *Agent) GetKnowledgeBasesIdsOk() ([]int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.KnowledgeBasesIds, true
+}
+
+// SetKnowledgeBasesIds sets field value
+func (o *Agent) SetKnowledgeBasesIds(v []int32) {
+	o.KnowledgeBasesIds = v
+}
+
 func (o Agent) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -483,20 +759,40 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["description"] = o.Description
+	toSerialize["description"] = o.Description.Get()
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
+	}
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["provider_id"] = o.ProviderId
 	toSerialize["settings"] = o.Settings
 	toSerialize["status"] = o.Status
 	toSerialize["access_type"] = o.AccessType
-	toSerialize["total_tokens"] = o.TotalTokens
-	toSerialize["used_tokens"] = o.UsedTokens
-	toSerialize["remaining_tokens"] = o.RemainingTokens
-	toSerialize["token_package_id"] = o.TokenPackageId
-	toSerialize["subscription_renewal_date"] = o.SubscriptionRenewalDate
-	toSerialize["knowledge_bases_ids"] = o.KnowledgeBasesIds
 	toSerialize["access_id"] = o.AccessId
+	toSerialize["token_limit"] = o.TokenLimit
+	if !IsNil(o.TotalTokens) {
+		toSerialize["total_tokens"] = o.TotalTokens
+	}
+	toSerialize["used_tokens"] = o.UsedTokens.Get()
+	if !IsNil(o.RemainingTokens) {
+		toSerialize["remaining_tokens"] = o.RemainingTokens
+	}
+	if !IsNil(o.TokenPackageId) {
+		toSerialize["token_package_id"] = o.TokenPackageId
+	}
+	if !IsNil(o.SubscriptionRenewalDate) {
+		toSerialize["subscription_renewal_date"] = o.SubscriptionRenewalDate
+	}
+	toSerialize["auto_buy_additional_tokens"] = o.AutoBuyAdditionalTokens
+	toSerialize["tools"] = o.Tools
+	toSerialize["additional_model_ids"] = o.AdditionalModelIds
+	toSerialize["additional_models"] = o.AdditionalModels
+	toSerialize["is_web_search_enabled"] = o.IsWebSearchEnabled
+	if o.AiGatewayKeyId.IsSet() {
+		toSerialize["ai_gateway_key_id"] = o.AiGatewayKeyId.Get()
+	}
 	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["knowledge_bases_ids"] = o.KnowledgeBasesIds
 	return toSerialize, nil
 }
 

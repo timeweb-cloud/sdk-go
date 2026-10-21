@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Knowledgebases** | [**[]Knowledgebase**](Knowledgebase.md) |  | 
-**Meta** | [**GetKnowledgebasesV2200ResponseMeta**](GetKnowledgebasesV2200ResponseMeta.md) |  | 
+**KnowledgeBases** | [**[]Knowledgebase**](Knowledgebase.md) |  | 
+**Meta** | [**GetKnowledgebasesV3200ResponseMeta**](GetKnowledgebasesV3200ResponseMeta.md) |  | 
 
 ## Methods
 
 ### NewGetKnowledgebases200Response
 
-`func NewGetKnowledgebases200Response(knowledgebases []Knowledgebase, meta GetKnowledgebasesV2200ResponseMeta, ) *GetKnowledgebases200Response`
+`func NewGetKnowledgebases200Response(knowledgeBases []Knowledgebase, meta GetKnowledgebasesV3200ResponseMeta, ) *GetKnowledgebases200Response`
 
 NewGetKnowledgebases200Response instantiates a new GetKnowledgebases200Response object
 This constructor will assign default values to properties that have it defined,
@@ -26,42 +26,42 @@ NewGetKnowledgebases200ResponseWithDefaults instantiates a new GetKnowledgebases
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetKnowledgebases
+### GetKnowledgeBases
 
-`func (o *GetKnowledgebases200Response) GetKnowledgebases() []Knowledgebase`
+`func (o *GetKnowledgebases200Response) GetKnowledgeBases() []Knowledgebase`
 
-GetKnowledgebases returns the Knowledgebases field if non-nil, zero value otherwise.
+GetKnowledgeBases returns the KnowledgeBases field if non-nil, zero value otherwise.
 
-### GetKnowledgebasesOk
+### GetKnowledgeBasesOk
 
-`func (o *GetKnowledgebases200Response) GetKnowledgebasesOk() (*[]Knowledgebase, bool)`
+`func (o *GetKnowledgebases200Response) GetKnowledgeBasesOk() (*[]Knowledgebase, bool)`
 
-GetKnowledgebasesOk returns a tuple with the Knowledgebases field if it's non-nil, zero value otherwise
+GetKnowledgeBasesOk returns a tuple with the KnowledgeBases field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetKnowledgebases
+### SetKnowledgeBases
 
-`func (o *GetKnowledgebases200Response) SetKnowledgebases(v []Knowledgebase)`
+`func (o *GetKnowledgebases200Response) SetKnowledgeBases(v []Knowledgebase)`
 
-SetKnowledgebases sets Knowledgebases field to given value.
+SetKnowledgeBases sets KnowledgeBases field to given value.
 
 
 ### GetMeta
 
-`func (o *GetKnowledgebases200Response) GetMeta() GetKnowledgebasesV2200ResponseMeta`
+`func (o *GetKnowledgebases200Response) GetMeta() GetKnowledgebasesV3200ResponseMeta`
 
 GetMeta returns the Meta field if non-nil, zero value otherwise.
 
 ### GetMetaOk
 
-`func (o *GetKnowledgebases200Response) GetMetaOk() (*GetKnowledgebasesV2200ResponseMeta, bool)`
+`func (o *GetKnowledgebases200Response) GetMetaOk() (*GetKnowledgebasesV3200ResponseMeta, bool)`
 
 GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMeta
 
-`func (o *GetKnowledgebases200Response) SetMeta(v GetKnowledgebasesV2200ResponseMeta)`
+`func (o *GetKnowledgebases200Response) SetMeta(v GetKnowledgebasesV3200ResponseMeta)`
 
 SetMeta sets Meta field to given value.
 

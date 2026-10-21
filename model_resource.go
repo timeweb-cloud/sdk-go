@@ -18,32 +18,26 @@ import (
 // checks if the Resource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Resource{}
 
-// Resource struct for Resource
+// Resource Ресурс MCP
 type Resource struct {
-	// Запрошенное количество ресурса
-	Requested *float32 `json:"requested,omitempty"`
-	// Доступное количество
-	Allocatable *float32 `json:"allocatable,omitempty"`
-	// Общее количество
-	Capacity *float32 `json:"capacity,omitempty"`
-	// Используемое количество
-	Used *float32 `json:"used,omitempty"`
+	// URI ресурса
+	Uri string `json:"uri"`
+	// Имя ресурса
+	Name string `json:"name"`
+	// Описание ресурса
+	Description *string `json:"description,omitempty"`
+	// Тип содержимого
+	MimeType *string `json:"mimeType,omitempty"`
 }
 
 // NewResource instantiates a new Resource object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResource() *Resource {
+func NewResource(uri string, name string) *Resource {
 	this := Resource{}
-	var requested float32 = 0
-	this.Requested = &requested
-	var allocatable float32 = 0
-	this.Allocatable = &allocatable
-	var capacity float32 = 0
-	this.Capacity = &capacity
-	var used float32 = 0
-	this.Used = &used
+	this.Uri = uri
+	this.Name = name
 	return &this
 }
 
@@ -52,143 +46,119 @@ func NewResource() *Resource {
 // but it doesn't guarantee that properties required by API are set
 func NewResourceWithDefaults() *Resource {
 	this := Resource{}
-	var requested float32 = 0
-	this.Requested = &requested
-	var allocatable float32 = 0
-	this.Allocatable = &allocatable
-	var capacity float32 = 0
-	this.Capacity = &capacity
-	var used float32 = 0
-	this.Used = &used
 	return &this
 }
 
-// GetRequested returns the Requested field value if set, zero value otherwise.
-func (o *Resource) GetRequested() float32 {
-	if o == nil || IsNil(o.Requested) {
-		var ret float32
+// GetUri returns the Uri field value
+func (o *Resource) GetUri() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.Requested
+
+	return o.Uri
 }
 
-// GetRequestedOk returns a tuple with the Requested field value if set, nil otherwise
+// GetUriOk returns a tuple with the Uri field value
 // and a boolean to check if the value has been set.
-func (o *Resource) GetRequestedOk() (*float32, bool) {
-	if o == nil || IsNil(o.Requested) {
+func (o *Resource) GetUriOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Requested, true
+	return &o.Uri, true
 }
 
-// HasRequested returns a boolean if a field has been set.
-func (o *Resource) HasRequested() bool {
-	if o != nil && !IsNil(o.Requested) {
+// SetUri sets field value
+func (o *Resource) SetUri(v string) {
+	o.Uri = v
+}
+
+// GetName returns the Name field value
+func (o *Resource) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Resource) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Resource) SetName(v string) {
+	o.Name = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *Resource) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *Resource) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
 	return false
 }
 
-// SetRequested gets a reference to the given float32 and assigns it to the Requested field.
-func (o *Resource) SetRequested(v float32) {
-	o.Requested = &v
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *Resource) SetDescription(v string) {
+	o.Description = &v
 }
 
-// GetAllocatable returns the Allocatable field value if set, zero value otherwise.
-func (o *Resource) GetAllocatable() float32 {
-	if o == nil || IsNil(o.Allocatable) {
-		var ret float32
+// GetMimeType returns the MimeType field value if set, zero value otherwise.
+func (o *Resource) GetMimeType() string {
+	if o == nil || IsNil(o.MimeType) {
+		var ret string
 		return ret
 	}
-	return *o.Allocatable
+	return *o.MimeType
 }
 
-// GetAllocatableOk returns a tuple with the Allocatable field value if set, nil otherwise
+// GetMimeTypeOk returns a tuple with the MimeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Resource) GetAllocatableOk() (*float32, bool) {
-	if o == nil || IsNil(o.Allocatable) {
+func (o *Resource) GetMimeTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.MimeType) {
 		return nil, false
 	}
-	return o.Allocatable, true
+	return o.MimeType, true
 }
 
-// HasAllocatable returns a boolean if a field has been set.
-func (o *Resource) HasAllocatable() bool {
-	if o != nil && !IsNil(o.Allocatable) {
+// HasMimeType returns a boolean if a field has been set.
+func (o *Resource) HasMimeType() bool {
+	if o != nil && !IsNil(o.MimeType) {
 		return true
 	}
 
 	return false
 }
 
-// SetAllocatable gets a reference to the given float32 and assigns it to the Allocatable field.
-func (o *Resource) SetAllocatable(v float32) {
-	o.Allocatable = &v
-}
-
-// GetCapacity returns the Capacity field value if set, zero value otherwise.
-func (o *Resource) GetCapacity() float32 {
-	if o == nil || IsNil(o.Capacity) {
-		var ret float32
-		return ret
-	}
-	return *o.Capacity
-}
-
-// GetCapacityOk returns a tuple with the Capacity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Resource) GetCapacityOk() (*float32, bool) {
-	if o == nil || IsNil(o.Capacity) {
-		return nil, false
-	}
-	return o.Capacity, true
-}
-
-// HasCapacity returns a boolean if a field has been set.
-func (o *Resource) HasCapacity() bool {
-	if o != nil && !IsNil(o.Capacity) {
-		return true
-	}
-
-	return false
-}
-
-// SetCapacity gets a reference to the given float32 and assigns it to the Capacity field.
-func (o *Resource) SetCapacity(v float32) {
-	o.Capacity = &v
-}
-
-// GetUsed returns the Used field value if set, zero value otherwise.
-func (o *Resource) GetUsed() float32 {
-	if o == nil || IsNil(o.Used) {
-		var ret float32
-		return ret
-	}
-	return *o.Used
-}
-
-// GetUsedOk returns a tuple with the Used field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Resource) GetUsedOk() (*float32, bool) {
-	if o == nil || IsNil(o.Used) {
-		return nil, false
-	}
-	return o.Used, true
-}
-
-// HasUsed returns a boolean if a field has been set.
-func (o *Resource) HasUsed() bool {
-	if o != nil && !IsNil(o.Used) {
-		return true
-	}
-
-	return false
-}
-
-// SetUsed gets a reference to the given float32 and assigns it to the Used field.
-func (o *Resource) SetUsed(v float32) {
-	o.Used = &v
+// SetMimeType gets a reference to the given string and assigns it to the MimeType field.
+func (o *Resource) SetMimeType(v string) {
+	o.MimeType = &v
 }
 
 func (o Resource) MarshalJSON() ([]byte, error) {
@@ -201,17 +171,13 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 
 func (o Resource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Requested) {
-		toSerialize["requested"] = o.Requested
+	toSerialize["uri"] = o.Uri
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Allocatable) {
-		toSerialize["allocatable"] = o.Allocatable
-	}
-	if !IsNil(o.Capacity) {
-		toSerialize["capacity"] = o.Capacity
-	}
-	if !IsNil(o.Used) {
-		toSerialize["used"] = o.Used
+	if !IsNil(o.MimeType) {
+		toSerialize["mimeType"] = o.MimeType
 	}
 	return toSerialize, nil
 }

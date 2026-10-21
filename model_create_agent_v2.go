@@ -18,37 +18,49 @@ import (
 // checks if the CreateAgentV2 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateAgentV2{}
 
-// CreateAgentV2 Данные для создания AI агента через API v2
+// CreateAgentV2 Данные для создания AI агента
 type CreateAgentV2 struct {
 	// Название агента
 	Name string `json:"name"`
 	// Описание агента
 	Description *string `json:"description,omitempty"`
-	// Тип доступа к агенту
+	// Тип доступа: `public` — агент отвечает анонимным посетителям сайта через виджет; `private` — только по токену аккаунта.
 	AccessType string `json:"access_type"`
-	// ID основной модели
-	ModelId float32 `json:"model_id"`
-	// Дневной лимит токенов для агента (0 — без лимита)
-	TokenLimit *float32 `json:"token_limit,omitempty"`
+	// ID основной модели агента
+	ModelId int32 `json:"model_id"`
 	Settings AgentSettings `json:"settings"`
-	// ID проекта
-	ProjectId *float32 `json:"project_id,omitempty"`
-	// Список ID дополнительных моделей агента
-	AdditionalModelIds []float32 `json:"additional_model_ids,omitempty"`
-	// Признак использования веб-поиска агентом
+	// ID проекта, в который нужно добавить агента. По умолчанию — проект по умолчанию.
+	ProjectId *int32 `json:"project_id,omitempty"`
+	// Включить веб-поиск
 	IsWebSearchEnabled *bool `json:"is_web_search_enabled,omitempty"`
+	// Дневной лимит расходов агента в валюте аккаунта. `0` или не передан — без лимита. Создаётся как лимит агента с периодом `day`; изменить его можно через лимиты агента.
+	MoneyLimit *float32 `json:"money_limit,omitempty"`
+	// Устарело: дневной лимит агента в токенах. `0` или не передан — без лимита. Не учитывается, если передан `money_limit`.
+	// Deprecated
+	TokenLimit *int32 `json:"token_limit,omitempty"`
+	// Устарело и не учитывается: агент всегда создаётся с поресурсной оплатой.
+	// Deprecated
+	TokenPackageId *int32 `json:"token_package_id,omitempty"`
+	// ID дополнительных моделей агента (например, для генерации изображений). Список заменяет текущий целиком.
+	AdditionalModelIds []int32 `json:"additional_model_ids,omitempty"`
+	// Дополнительные модели вместе с настройками (для моделей генерации изображений — `width`/`height`). Если переданы и `additional_models`, и `additional_model_ids`, используется `additional_models`.
+	AdditionalModels []AgentAdditionalModel `json:"additional_models,omitempty"`
+	// ID навыков, которые нужно подключить к агенту сразу после создания (текущие версии навыков). Неизвестные ID пропускаются; ошибка подключения навыков не отменяет создание агента.
+	SkillIds []int32 `json:"skill_ids,omitempty"`
 }
 
 // NewCreateAgentV2 instantiates a new CreateAgentV2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAgentV2(name string, accessType string, modelId float32, settings AgentSettings) *CreateAgentV2 {
+func NewCreateAgentV2(name string, accessType string, modelId int32, settings AgentSettings) *CreateAgentV2 {
 	this := CreateAgentV2{}
 	this.Name = name
 	this.AccessType = accessType
 	this.ModelId = modelId
 	this.Settings = settings
+	var isWebSearchEnabled bool = false
+	this.IsWebSearchEnabled = &isWebSearchEnabled
 	return &this
 }
 
@@ -57,6 +69,8 @@ func NewCreateAgentV2(name string, accessType string, modelId float32, settings 
 // but it doesn't guarantee that properties required by API are set
 func NewCreateAgentV2WithDefaults() *CreateAgentV2 {
 	this := CreateAgentV2{}
+	var isWebSearchEnabled bool = false
+	this.IsWebSearchEnabled = &isWebSearchEnabled
 	return &this
 }
 
@@ -141,9 +155,9 @@ func (o *CreateAgentV2) SetAccessType(v string) {
 }
 
 // GetModelId returns the ModelId field value
-func (o *CreateAgentV2) GetModelId() float32 {
+func (o *CreateAgentV2) GetModelId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -152,7 +166,7 @@ func (o *CreateAgentV2) GetModelId() float32 {
 
 // GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAgentV2) GetModelIdOk() (*float32, bool) {
+func (o *CreateAgentV2) GetModelIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -160,40 +174,8 @@ func (o *CreateAgentV2) GetModelIdOk() (*float32, bool) {
 }
 
 // SetModelId sets field value
-func (o *CreateAgentV2) SetModelId(v float32) {
+func (o *CreateAgentV2) SetModelId(v int32) {
 	o.ModelId = v
-}
-
-// GetTokenLimit returns the TokenLimit field value if set, zero value otherwise.
-func (o *CreateAgentV2) GetTokenLimit() float32 {
-	if o == nil || IsNil(o.TokenLimit) {
-		var ret float32
-		return ret
-	}
-	return *o.TokenLimit
-}
-
-// GetTokenLimitOk returns a tuple with the TokenLimit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAgentV2) GetTokenLimitOk() (*float32, bool) {
-	if o == nil || IsNil(o.TokenLimit) {
-		return nil, false
-	}
-	return o.TokenLimit, true
-}
-
-// HasTokenLimit returns a boolean if a field has been set.
-func (o *CreateAgentV2) HasTokenLimit() bool {
-	if o != nil && !IsNil(o.TokenLimit) {
-		return true
-	}
-
-	return false
-}
-
-// SetTokenLimit gets a reference to the given float32 and assigns it to the TokenLimit field.
-func (o *CreateAgentV2) SetTokenLimit(v float32) {
-	o.TokenLimit = &v
 }
 
 // GetSettings returns the Settings field value
@@ -221,9 +203,9 @@ func (o *CreateAgentV2) SetSettings(v AgentSettings) {
 }
 
 // GetProjectId returns the ProjectId field value if set, zero value otherwise.
-func (o *CreateAgentV2) GetProjectId() float32 {
+func (o *CreateAgentV2) GetProjectId() int32 {
 	if o == nil || IsNil(o.ProjectId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.ProjectId
@@ -231,7 +213,7 @@ func (o *CreateAgentV2) GetProjectId() float32 {
 
 // GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAgentV2) GetProjectIdOk() (*float32, bool) {
+func (o *CreateAgentV2) GetProjectIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.ProjectId) {
 		return nil, false
 	}
@@ -247,41 +229,9 @@ func (o *CreateAgentV2) HasProjectId() bool {
 	return false
 }
 
-// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
-func (o *CreateAgentV2) SetProjectId(v float32) {
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *CreateAgentV2) SetProjectId(v int32) {
 	o.ProjectId = &v
-}
-
-// GetAdditionalModelIds returns the AdditionalModelIds field value if set, zero value otherwise.
-func (o *CreateAgentV2) GetAdditionalModelIds() []float32 {
-	if o == nil || IsNil(o.AdditionalModelIds) {
-		var ret []float32
-		return ret
-	}
-	return o.AdditionalModelIds
-}
-
-// GetAdditionalModelIdsOk returns a tuple with the AdditionalModelIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAgentV2) GetAdditionalModelIdsOk() ([]float32, bool) {
-	if o == nil || IsNil(o.AdditionalModelIds) {
-		return nil, false
-	}
-	return o.AdditionalModelIds, true
-}
-
-// HasAdditionalModelIds returns a boolean if a field has been set.
-func (o *CreateAgentV2) HasAdditionalModelIds() bool {
-	if o != nil && !IsNil(o.AdditionalModelIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdditionalModelIds gets a reference to the given []float32 and assigns it to the AdditionalModelIds field.
-func (o *CreateAgentV2) SetAdditionalModelIds(v []float32) {
-	o.AdditionalModelIds = v
 }
 
 // GetIsWebSearchEnabled returns the IsWebSearchEnabled field value if set, zero value otherwise.
@@ -316,6 +266,204 @@ func (o *CreateAgentV2) SetIsWebSearchEnabled(v bool) {
 	o.IsWebSearchEnabled = &v
 }
 
+// GetMoneyLimit returns the MoneyLimit field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetMoneyLimit() float32 {
+	if o == nil || IsNil(o.MoneyLimit) {
+		var ret float32
+		return ret
+	}
+	return *o.MoneyLimit
+}
+
+// GetMoneyLimitOk returns a tuple with the MoneyLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetMoneyLimitOk() (*float32, bool) {
+	if o == nil || IsNil(o.MoneyLimit) {
+		return nil, false
+	}
+	return o.MoneyLimit, true
+}
+
+// HasMoneyLimit returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasMoneyLimit() bool {
+	if o != nil && !IsNil(o.MoneyLimit) {
+		return true
+	}
+
+	return false
+}
+
+// SetMoneyLimit gets a reference to the given float32 and assigns it to the MoneyLimit field.
+func (o *CreateAgentV2) SetMoneyLimit(v float32) {
+	o.MoneyLimit = &v
+}
+
+// GetTokenLimit returns the TokenLimit field value if set, zero value otherwise.
+// Deprecated
+func (o *CreateAgentV2) GetTokenLimit() int32 {
+	if o == nil || IsNil(o.TokenLimit) {
+		var ret int32
+		return ret
+	}
+	return *o.TokenLimit
+}
+
+// GetTokenLimitOk returns a tuple with the TokenLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *CreateAgentV2) GetTokenLimitOk() (*int32, bool) {
+	if o == nil || IsNil(o.TokenLimit) {
+		return nil, false
+	}
+	return o.TokenLimit, true
+}
+
+// HasTokenLimit returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasTokenLimit() bool {
+	if o != nil && !IsNil(o.TokenLimit) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenLimit gets a reference to the given int32 and assigns it to the TokenLimit field.
+// Deprecated
+func (o *CreateAgentV2) SetTokenLimit(v int32) {
+	o.TokenLimit = &v
+}
+
+// GetTokenPackageId returns the TokenPackageId field value if set, zero value otherwise.
+// Deprecated
+func (o *CreateAgentV2) GetTokenPackageId() int32 {
+	if o == nil || IsNil(o.TokenPackageId) {
+		var ret int32
+		return ret
+	}
+	return *o.TokenPackageId
+}
+
+// GetTokenPackageIdOk returns a tuple with the TokenPackageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *CreateAgentV2) GetTokenPackageIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.TokenPackageId) {
+		return nil, false
+	}
+	return o.TokenPackageId, true
+}
+
+// HasTokenPackageId returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasTokenPackageId() bool {
+	if o != nil && !IsNil(o.TokenPackageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenPackageId gets a reference to the given int32 and assigns it to the TokenPackageId field.
+// Deprecated
+func (o *CreateAgentV2) SetTokenPackageId(v int32) {
+	o.TokenPackageId = &v
+}
+
+// GetAdditionalModelIds returns the AdditionalModelIds field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetAdditionalModelIds() []int32 {
+	if o == nil || IsNil(o.AdditionalModelIds) {
+		var ret []int32
+		return ret
+	}
+	return o.AdditionalModelIds
+}
+
+// GetAdditionalModelIdsOk returns a tuple with the AdditionalModelIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetAdditionalModelIdsOk() ([]int32, bool) {
+	if o == nil || IsNil(o.AdditionalModelIds) {
+		return nil, false
+	}
+	return o.AdditionalModelIds, true
+}
+
+// HasAdditionalModelIds returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasAdditionalModelIds() bool {
+	if o != nil && !IsNil(o.AdditionalModelIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalModelIds gets a reference to the given []int32 and assigns it to the AdditionalModelIds field.
+func (o *CreateAgentV2) SetAdditionalModelIds(v []int32) {
+	o.AdditionalModelIds = v
+}
+
+// GetAdditionalModels returns the AdditionalModels field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetAdditionalModels() []AgentAdditionalModel {
+	if o == nil || IsNil(o.AdditionalModels) {
+		var ret []AgentAdditionalModel
+		return ret
+	}
+	return o.AdditionalModels
+}
+
+// GetAdditionalModelsOk returns a tuple with the AdditionalModels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetAdditionalModelsOk() ([]AgentAdditionalModel, bool) {
+	if o == nil || IsNil(o.AdditionalModels) {
+		return nil, false
+	}
+	return o.AdditionalModels, true
+}
+
+// HasAdditionalModels returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasAdditionalModels() bool {
+	if o != nil && !IsNil(o.AdditionalModels) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalModels gets a reference to the given []AgentAdditionalModel and assigns it to the AdditionalModels field.
+func (o *CreateAgentV2) SetAdditionalModels(v []AgentAdditionalModel) {
+	o.AdditionalModels = v
+}
+
+// GetSkillIds returns the SkillIds field value if set, zero value otherwise.
+func (o *CreateAgentV2) GetSkillIds() []int32 {
+	if o == nil || IsNil(o.SkillIds) {
+		var ret []int32
+		return ret
+	}
+	return o.SkillIds
+}
+
+// GetSkillIdsOk returns a tuple with the SkillIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAgentV2) GetSkillIdsOk() ([]int32, bool) {
+	if o == nil || IsNil(o.SkillIds) {
+		return nil, false
+	}
+	return o.SkillIds, true
+}
+
+// HasSkillIds returns a boolean if a field has been set.
+func (o *CreateAgentV2) HasSkillIds() bool {
+	if o != nil && !IsNil(o.SkillIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetSkillIds gets a reference to the given []int32 and assigns it to the SkillIds field.
+func (o *CreateAgentV2) SetSkillIds(v []int32) {
+	o.SkillIds = v
+}
+
 func (o CreateAgentV2) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -332,18 +480,30 @@ func (o CreateAgentV2) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["access_type"] = o.AccessType
 	toSerialize["model_id"] = o.ModelId
-	if !IsNil(o.TokenLimit) {
-		toSerialize["token_limit"] = o.TokenLimit
-	}
 	toSerialize["settings"] = o.Settings
 	if !IsNil(o.ProjectId) {
 		toSerialize["project_id"] = o.ProjectId
 	}
+	if !IsNil(o.IsWebSearchEnabled) {
+		toSerialize["is_web_search_enabled"] = o.IsWebSearchEnabled
+	}
+	if !IsNil(o.MoneyLimit) {
+		toSerialize["money_limit"] = o.MoneyLimit
+	}
+	if !IsNil(o.TokenLimit) {
+		toSerialize["token_limit"] = o.TokenLimit
+	}
+	if !IsNil(o.TokenPackageId) {
+		toSerialize["token_package_id"] = o.TokenPackageId
+	}
 	if !IsNil(o.AdditionalModelIds) {
 		toSerialize["additional_model_ids"] = o.AdditionalModelIds
 	}
-	if !IsNil(o.IsWebSearchEnabled) {
-		toSerialize["is_web_search_enabled"] = o.IsWebSearchEnabled
+	if !IsNil(o.AdditionalModels) {
+		toSerialize["additional_models"] = o.AdditionalModels
+	}
+	if !IsNil(o.SkillIds) {
+		toSerialize["skill_ids"] = o.SkillIds
 	}
 	return toSerialize, nil
 }

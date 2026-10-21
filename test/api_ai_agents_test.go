@@ -35,11 +35,39 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIAgentsAPIService ChangeAgentModel", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.ChangeAgentModel(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AIAgentsAPIService CreateAgent", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.AIAgentsAPI.CreateAgent(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService CreateAgentEntityLimit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.CreateAgentEntityLimit(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -72,6 +100,34 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIAgentsAPIService DeleteAgentEntityLimit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+		var limitId string
+
+		httpRes, err := apiClient.AIAgentsAPI.DeleteAgentEntityLimit(context.Background(), id, limitId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService ExportAgentChatsCsv", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.ExportAgentChatsCsv(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AIAgentsAPIService GetAgent", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -79,6 +135,64 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 		var id int32
 
 		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgent(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService GetAgentChatList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentChatList(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService GetAgentChatMessages", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+		var chatId string
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentChatMessages(context.Background(), id, chatId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService GetAgentEntityLimit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+		var limitId string
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentEntityLimit(context.Background(), id, limitId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService GetAgentEntityLimits", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentEntityLimits(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -100,6 +214,20 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIAgentsAPIService GetAgentV3", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentV3(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AIAgentsAPIService GetAgents", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -112,11 +240,11 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AIAgentsAPIService GetAgentsTokenPackages", func(t *testing.T) {
+	t.Run("Test AIAgentsAPIService GetAgentsV3", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentsTokenPackages(context.Background()).Execute()
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentsV3(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -124,35 +252,13 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AIAgentsAPIService GetKnowledgebasesTokenPackages", func(t *testing.T) {
+	t.Run("Test AIAgentsAPIService SyncAgentEntityLimits", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.AIAgentsAPI.GetKnowledgebasesTokenPackages(context.Background()).Execute()
+		var id int32
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AIAgentsAPIService GetModels", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.AIAgentsAPI.GetModels(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AIAgentsAPIService GetModelsV3", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.AIAgentsAPI.GetModelsV3(context.Background()).Execute()
+		resp, httpRes, err := apiClient.AIAgentsAPI.SyncAgentEntityLimits(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -167,6 +273,21 @@ func Test_openapi_AIAgentsAPIService(t *testing.T) {
 		var id int32
 
 		resp, httpRes, err := apiClient.AIAgentsAPI.UpdateAgent(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService UpdateAgentEntityLimit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+		var limitId string
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.UpdateAgentEntityLimit(context.Background(), id, limitId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

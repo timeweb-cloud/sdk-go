@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Total** | **float32** | Общее количество агентов | 
+**Total** | **int32** | Количество агентов | 
 
 ## Methods
 
 ### NewGetAgents200ResponseMeta
 
-`func NewGetAgents200ResponseMeta(total float32, ) *GetAgents200ResponseMeta`
+`func NewGetAgents200ResponseMeta(total int32, ) *GetAgents200ResponseMeta`
 
 NewGetAgents200ResponseMeta instantiates a new GetAgents200ResponseMeta object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetTotal
 
-`func (o *GetAgents200ResponseMeta) GetTotal() float32`
+`func (o *GetAgents200ResponseMeta) GetTotal() int32`
 
 GetTotal returns the Total field if non-nil, zero value otherwise.
 
 ### GetTotalOk
 
-`func (o *GetAgents200ResponseMeta) GetTotalOk() (*float32, bool)`
+`func (o *GetAgents200ResponseMeta) GetTotalOk() (*int32, bool)`
 
 GetTotalOk returns a tuple with the Total field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotal
 
-`func (o *GetAgents200ResponseMeta) SetTotal(v float32)`
+`func (o *GetAgents200ResponseMeta) SetTotal(v int32)`
 
 SetTotal sets Total field to given value.
 

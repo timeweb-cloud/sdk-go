@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | Тип статуса документа | 
-**Timestamp** | **time.Time** | Время записи информации (ISO string) | 
-**ErrorCode** | Pointer to **string** | Код ошибки (только для type: &#39;error&#39;) | [optional] 
+**Type** | **string** | Тип состояния, совпадает со статусом документа | 
+**Timestamp** | **time.Time** | Время, когда записано состояние | 
+**ErrorCode** | Pointer to **string** | Код ошибки, только для &#x60;type: error&#x60;: - &#x60;INSUFFICIENT_TOKENS&#x60; — недостаточно токенов для индексации - &#x60;CRITICAL_BALANCE&#x60; — критически низкий остаток токенов - &#x60;NEGATIVE_BALANCE&#x60; — отрицательный остаток токенов - &#x60;INDEXING_ERROR&#x60; — не удалось обработать документ | [optional] 
+**Stage** | Pointer to **string** | Этап индексации, на котором произошла ошибка | [optional] 
+**TraceId** | Pointer to **string** | Идентификатор операции индексации — укажите его при обращении в поддержку | [optional] 
 **Details** | Pointer to [**DocumentStatusInfoDetails**](DocumentStatusInfoDetails.md) |  | [optional] 
 
 ## Methods
@@ -92,6 +94,56 @@ SetErrorCode sets ErrorCode field to given value.
 `func (o *DocumentStatusInfo) HasErrorCode() bool`
 
 HasErrorCode returns a boolean if a field has been set.
+
+### GetStage
+
+`func (o *DocumentStatusInfo) GetStage() string`
+
+GetStage returns the Stage field if non-nil, zero value otherwise.
+
+### GetStageOk
+
+`func (o *DocumentStatusInfo) GetStageOk() (*string, bool)`
+
+GetStageOk returns a tuple with the Stage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStage
+
+`func (o *DocumentStatusInfo) SetStage(v string)`
+
+SetStage sets Stage field to given value.
+
+### HasStage
+
+`func (o *DocumentStatusInfo) HasStage() bool`
+
+HasStage returns a boolean if a field has been set.
+
+### GetTraceId
+
+`func (o *DocumentStatusInfo) GetTraceId() string`
+
+GetTraceId returns the TraceId field if non-nil, zero value otherwise.
+
+### GetTraceIdOk
+
+`func (o *DocumentStatusInfo) GetTraceIdOk() (*string, bool)`
+
+GetTraceIdOk returns a tuple with the TraceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTraceId
+
+`func (o *DocumentStatusInfo) SetTraceId(v string)`
+
+SetTraceId sets TraceId field to given value.
+
+### HasTraceId
+
+`func (o *DocumentStatusInfo) HasTraceId() bool`
+
+HasTraceId returns a boolean if a field has been set.
 
 ### GetDetails
 

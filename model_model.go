@@ -19,46 +19,52 @@ import (
 // checks if the Model type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Model{}
 
-// Model Модель AI
+// Model AI модель
 type Model struct {
-	// Уникальный идентификатор модели
-	Id float32 `json:"id"`
-	// ID провайдера, который предоставляет модель
-	ProviderId float32 `json:"provider_id"`
-	// Название модели
+	// ID модели
+	Id int32 `json:"id"`
+	// ID провайдера модели
+	ProviderId int32 `json:"provider_id"`
+	// Семейство модели
 	Name string `json:"name"`
-	// Публичное имя модели
+	// Отображаемое название модели
 	PublicName string `json:"public_name"`
-	// Тип модели (llm - языковая модель, embedding - модель для эмбеддингов)
+	// Идентификатор модели с префиксом провайдера — передаётся в поле `model` запросов к AI Gateway
+	ModelName string `json:"model_name"`
+	// Тип модели: - `llm` — языковая модель - `hosted-llm` — языковая модель, размещённая в Timeweb Cloud - `embedding` — модель эмбеддингов - `image` — генерация изображений - `audio` — работа с аудио - `video` — генерация видео - `moderation` — модерация контента - `system-one` — служебная модель с собственным API
 	Type string `json:"type"`
-	// Признак, что модель устарела
-	IsDeprecated bool `json:"is_deprecated"`
-	// Признак, что поддержка модели остановлена в системе
-	IsStopped bool `json:"is_stopped"`
-	// Дата депрекейта модели у провайдера
-	DeprecationDate NullableTime `json:"deprecation_date,omitempty"`
-	// Признак поддержки режима рассуждения
-	IsReasoning bool `json:"is_reasoning"`
 	// Версия модели
 	Version string `json:"version"`
-	ParamsInfo NullableModelParamsInfo `json:"params_info,omitempty"`
+	// Модель устарела и недоступна для выбора в новых агентах
+	IsDeprecated bool `json:"is_deprecated"`
+	// Поддержка модели остановлена: запросы к ней не выполняются
+	IsStopped bool `json:"is_stopped"`
+	// Дата отключения модели у провайдера. `null`, если отключение не запланировано
+	DeprecationDate NullableTime `json:"deprecation_date"`
+	// Модель поддерживает режим рассуждений
+	IsReasoning bool `json:"is_reasoning"`
+	// Параметры генерации, которые можно настроить у агента с этой моделью. Ключ — имя параметра (`temperature`, `top_p`, `max_tokens`, `reasoning_effort` и т.д.). `null`, если параметры не заданы
+	ParamsInfo map[string]ModelParamInfo `json:"params_info"`
 }
 
 // NewModel instantiates a new Model object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModel(id float32, providerId float32, name string, publicName string, type_ string, isDeprecated bool, isStopped bool, isReasoning bool, version string) *Model {
+func NewModel(id int32, providerId int32, name string, publicName string, modelName string, type_ string, version string, isDeprecated bool, isStopped bool, deprecationDate NullableTime, isReasoning bool, paramsInfo map[string]ModelParamInfo) *Model {
 	this := Model{}
 	this.Id = id
 	this.ProviderId = providerId
 	this.Name = name
 	this.PublicName = publicName
+	this.ModelName = modelName
 	this.Type = type_
+	this.Version = version
 	this.IsDeprecated = isDeprecated
 	this.IsStopped = isStopped
+	this.DeprecationDate = deprecationDate
 	this.IsReasoning = isReasoning
-	this.Version = version
+	this.ParamsInfo = paramsInfo
 	return &this
 }
 
@@ -71,9 +77,9 @@ func NewModelWithDefaults() *Model {
 }
 
 // GetId returns the Id field value
-func (o *Model) GetId() float32 {
+func (o *Model) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -82,7 +88,7 @@ func (o *Model) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *Model) GetIdOk() (*float32, bool) {
+func (o *Model) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,14 +96,14 @@ func (o *Model) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *Model) SetId(v float32) {
+func (o *Model) SetId(v int32) {
 	o.Id = v
 }
 
 // GetProviderId returns the ProviderId field value
-func (o *Model) GetProviderId() float32 {
+func (o *Model) GetProviderId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -106,7 +112,7 @@ func (o *Model) GetProviderId() float32 {
 
 // GetProviderIdOk returns a tuple with the ProviderId field value
 // and a boolean to check if the value has been set.
-func (o *Model) GetProviderIdOk() (*float32, bool) {
+func (o *Model) GetProviderIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -114,7 +120,7 @@ func (o *Model) GetProviderIdOk() (*float32, bool) {
 }
 
 // SetProviderId sets field value
-func (o *Model) SetProviderId(v float32) {
+func (o *Model) SetProviderId(v int32) {
 	o.ProviderId = v
 }
 
@@ -166,6 +172,30 @@ func (o *Model) SetPublicName(v string) {
 	o.PublicName = v
 }
 
+// GetModelName returns the ModelName field value
+func (o *Model) GetModelName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ModelName
+}
+
+// GetModelNameOk returns a tuple with the ModelName field value
+// and a boolean to check if the value has been set.
+func (o *Model) GetModelNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ModelName, true
+}
+
+// SetModelName sets field value
+func (o *Model) SetModelName(v string) {
+	o.ModelName = v
+}
+
 // GetType returns the Type field value
 func (o *Model) GetType() string {
 	if o == nil {
@@ -188,6 +218,30 @@ func (o *Model) GetTypeOk() (*string, bool) {
 // SetType sets field value
 func (o *Model) SetType(v string) {
 	o.Type = v
+}
+
+// GetVersion returns the Version field value
+func (o *Model) GetVersion() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value
+// and a boolean to check if the value has been set.
+func (o *Model) GetVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Version, true
+}
+
+// SetVersion sets field value
+func (o *Model) SetVersion(v string) {
+	o.Version = v
 }
 
 // GetIsDeprecated returns the IsDeprecated field value
@@ -238,16 +292,18 @@ func (o *Model) SetIsStopped(v bool) {
 	o.IsStopped = v
 }
 
-// GetDeprecationDate returns the DeprecationDate field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDeprecationDate returns the DeprecationDate field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *Model) GetDeprecationDate() time.Time {
-	if o == nil || IsNil(o.DeprecationDate.Get()) {
+	if o == nil || o.DeprecationDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.DeprecationDate.Get()
 }
 
-// GetDeprecationDateOk returns a tuple with the DeprecationDate field value if set, nil otherwise
+// GetDeprecationDateOk returns a tuple with the DeprecationDate field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Model) GetDeprecationDateOk() (*time.Time, bool) {
@@ -257,27 +313,9 @@ func (o *Model) GetDeprecationDateOk() (*time.Time, bool) {
 	return o.DeprecationDate.Get(), o.DeprecationDate.IsSet()
 }
 
-// HasDeprecationDate returns a boolean if a field has been set.
-func (o *Model) HasDeprecationDate() bool {
-	if o != nil && o.DeprecationDate.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDeprecationDate gets a reference to the given NullableTime and assigns it to the DeprecationDate field.
+// SetDeprecationDate sets field value
 func (o *Model) SetDeprecationDate(v time.Time) {
 	o.DeprecationDate.Set(&v)
-}
-// SetDeprecationDateNil sets the value for DeprecationDate to be an explicit nil
-func (o *Model) SetDeprecationDateNil() {
-	o.DeprecationDate.Set(nil)
-}
-
-// UnsetDeprecationDate ensures that no value is present for DeprecationDate, not even an explicit nil
-func (o *Model) UnsetDeprecationDate() {
-	o.DeprecationDate.Unset()
 }
 
 // GetIsReasoning returns the IsReasoning field value
@@ -304,70 +342,30 @@ func (o *Model) SetIsReasoning(v bool) {
 	o.IsReasoning = v
 }
 
-// GetVersion returns the Version field value
-func (o *Model) GetVersion() string {
+// GetParamsInfo returns the ParamsInfo field value
+// If the value is explicit nil, the zero value for map[string]ModelParamInfo will be returned
+func (o *Model) GetParamsInfo() map[string]ModelParamInfo {
 	if o == nil {
-		var ret string
+		var ret map[string]ModelParamInfo
 		return ret
 	}
 
-	return o.Version
+	return o.ParamsInfo
 }
 
-// GetVersionOk returns a tuple with the Version field value
-// and a boolean to check if the value has been set.
-func (o *Model) GetVersionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Version, true
-}
-
-// SetVersion sets field value
-func (o *Model) SetVersion(v string) {
-	o.Version = v
-}
-
-// GetParamsInfo returns the ParamsInfo field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Model) GetParamsInfo() ModelParamsInfo {
-	if o == nil || IsNil(o.ParamsInfo.Get()) {
-		var ret ModelParamsInfo
-		return ret
-	}
-	return *o.ParamsInfo.Get()
-}
-
-// GetParamsInfoOk returns a tuple with the ParamsInfo field value if set, nil otherwise
+// GetParamsInfoOk returns a tuple with the ParamsInfo field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Model) GetParamsInfoOk() (*ModelParamsInfo, bool) {
-	if o == nil {
+func (o *Model) GetParamsInfoOk() (*map[string]ModelParamInfo, bool) {
+	if o == nil || IsNil(o.ParamsInfo) {
 		return nil, false
 	}
-	return o.ParamsInfo.Get(), o.ParamsInfo.IsSet()
+	return &o.ParamsInfo, true
 }
 
-// HasParamsInfo returns a boolean if a field has been set.
-func (o *Model) HasParamsInfo() bool {
-	if o != nil && o.ParamsInfo.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetParamsInfo gets a reference to the given NullableModelParamsInfo and assigns it to the ParamsInfo field.
-func (o *Model) SetParamsInfo(v ModelParamsInfo) {
-	o.ParamsInfo.Set(&v)
-}
-// SetParamsInfoNil sets the value for ParamsInfo to be an explicit nil
-func (o *Model) SetParamsInfoNil() {
-	o.ParamsInfo.Set(nil)
-}
-
-// UnsetParamsInfo ensures that no value is present for ParamsInfo, not even an explicit nil
-func (o *Model) UnsetParamsInfo() {
-	o.ParamsInfo.Unset()
+// SetParamsInfo sets field value
+func (o *Model) SetParamsInfo(v map[string]ModelParamInfo) {
+	o.ParamsInfo = v
 }
 
 func (o Model) MarshalJSON() ([]byte, error) {
@@ -384,16 +382,15 @@ func (o Model) ToMap() (map[string]interface{}, error) {
 	toSerialize["provider_id"] = o.ProviderId
 	toSerialize["name"] = o.Name
 	toSerialize["public_name"] = o.PublicName
+	toSerialize["model_name"] = o.ModelName
 	toSerialize["type"] = o.Type
+	toSerialize["version"] = o.Version
 	toSerialize["is_deprecated"] = o.IsDeprecated
 	toSerialize["is_stopped"] = o.IsStopped
-	if o.DeprecationDate.IsSet() {
-		toSerialize["deprecation_date"] = o.DeprecationDate.Get()
-	}
+	toSerialize["deprecation_date"] = o.DeprecationDate.Get()
 	toSerialize["is_reasoning"] = o.IsReasoning
-	toSerialize["version"] = o.Version
-	if o.ParamsInfo.IsSet() {
-		toSerialize["params_info"] = o.ParamsInfo.Get()
+	if o.ParamsInfo != nil {
+		toSerialize["params_info"] = o.ParamsInfo
 	}
 	return toSerialize, nil
 }

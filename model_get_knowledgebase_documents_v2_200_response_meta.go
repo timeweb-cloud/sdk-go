@@ -20,11 +20,11 @@ var _ MappedNullable = &GetKnowledgebaseDocumentsV2200ResponseMeta{}
 
 // GetKnowledgebaseDocumentsV2200ResponseMeta struct for GetKnowledgebaseDocumentsV2200ResponseMeta
 type GetKnowledgebaseDocumentsV2200ResponseMeta struct {
-	// Общее количество документов
+	// Количество документов, подходящих под фильтр
 	Total float32 `json:"total"`
-	// Количество документов на странице
+	// Применённый размер страницы
 	Limit float32 `json:"limit"`
-	// Количество пропущенных документов
+	// Применённое смещение
 	Offset float32 `json:"offset"`
 }
 

@@ -20,7 +20,7 @@ var _ MappedNullable = &GetAgentsTokenPackages200ResponseMeta{}
 
 // GetAgentsTokenPackages200ResponseMeta struct for GetAgentsTokenPackages200ResponseMeta
 type GetAgentsTokenPackages200ResponseMeta struct {
-	// Общее количество пакетов токенов
+	// Количество пакетов токенов
 	Total float32 `json:"total"`
 }
 

@@ -4,26 +4,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Уникальный идентификатор базы знаний | 
+**Id** | **int32** | ID базы знаний | 
 **Name** | **string** | Название базы знаний | 
-**Description** | Pointer to **NullableString** | Описание базы знаний | [optional] 
-**DbaasId** | **float32** | ID базы данных opensearch | 
-**Status** | **string** | Статус базы знаний | 
-**LastSync** | Pointer to **NullableTime** | Дата последней синхронизации | [optional] 
-**TotalTokens** | **float32** | Всего токенов выделено | 
-**UsedTokens** | **float32** | Использовано токенов | 
-**RemainingTokens** | **float32** | Осталось токенов | 
-**TokenPackageId** | **float32** | ID пакета токенов | 
-**SubscriptionRenewalDate** | **time.Time** | Дата обновления подписки | 
-**DocumentsCount** | **float32** | Общее количество документов в базе знаний | 
-**AgentsIds** | **[]float32** | ID агентов, связанных с базой знаний | 
-**CreatedAt** | **time.Time** | Дата создания базы знаний | 
+**Description** | **NullableString** | Описание базы знаний | 
+**ProjectId** | Pointer to **int32** | ID проекта, в котором находится база знаний. Поля нет, если проект не определён | [optional] 
+**DbaasId** | **int32** | ID кластера базы данных OpenSearch, который создан для базы знаний в вашем аккаунте | 
+**Status** | **string** | Статус базы знаний: - &#x60;creating&#x60; — создаётся кластер базы данных, документы будут проиндексированы после перехода в &#x60;active&#x60; - &#x60;active&#x60; — база знаний работает - &#x60;blocked&#x60; — заблокирована: закончились токены или не удалось продлить подписку - &#x60;deleted&#x60; — удалена | 
+**LastSync** | **NullableTime** | Дата и время последней синхронизации. &#x60;null&#x60;, если синхронизации не было | 
+**TotalTokens** | **int32** | Количество токенов, доступных в текущем периоде подписки (пакет подписки и докупленные пакеты) | 
+**UsedTokens** | **int32** | Количество израсходованных токенов | 
+**RemainingTokens** | **int32** | Количество оставшихся токенов | 
+**TokenPackageId** | **int32** | ID пакета токенов подписки базы знаний | 
+**SubscriptionRenewalDate** | **NullableTime** | Дата следующего продления подписки (списания стоимости пакета токенов) | 
+**DocumentsCount** | **int32** | Количество документов в базе знаний | 
+**AgentsIds** | **[]int32** | ID агентов, к которым привязана база знаний | 
+**CreatedAt** | **time.Time** | Дата и время создания базы знаний | 
 
 ## Methods
 
 ### NewKnowledgebaseV2
 
-`func NewKnowledgebaseV2(id float32, name string, dbaasId float32, status string, totalTokens float32, usedTokens float32, remainingTokens float32, tokenPackageId float32, subscriptionRenewalDate time.Time, documentsCount float32, agentsIds []float32, createdAt time.Time, ) *KnowledgebaseV2`
+`func NewKnowledgebaseV2(id int32, name string, description NullableString, dbaasId int32, status string, lastSync NullableTime, totalTokens int32, usedTokens int32, remainingTokens int32, tokenPackageId int32, subscriptionRenewalDate NullableTime, documentsCount int32, agentsIds []int32, createdAt time.Time, ) *KnowledgebaseV2`
 
 NewKnowledgebaseV2 instantiates a new KnowledgebaseV2 object
 This constructor will assign default values to properties that have it defined,
@@ -40,20 +41,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *KnowledgebaseV2) GetId() float32`
+`func (o *KnowledgebaseV2) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *KnowledgebaseV2) GetIdOk() (*float32, bool)`
+`func (o *KnowledgebaseV2) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *KnowledgebaseV2) SetId(v float32)`
+`func (o *KnowledgebaseV2) SetId(v int32)`
 
 SetId sets Id field to given value.
 
@@ -97,11 +98,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *KnowledgebaseV2) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -113,22 +109,47 @@ HasDescription returns a boolean if a field has been set.
 `func (o *KnowledgebaseV2) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetProjectId
+
+`func (o *KnowledgebaseV2) GetProjectId() int32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *KnowledgebaseV2) GetProjectIdOk() (*int32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *KnowledgebaseV2) SetProjectId(v int32)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *KnowledgebaseV2) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
+
 ### GetDbaasId
 
-`func (o *KnowledgebaseV2) GetDbaasId() float32`
+`func (o *KnowledgebaseV2) GetDbaasId() int32`
 
 GetDbaasId returns the DbaasId field if non-nil, zero value otherwise.
 
 ### GetDbaasIdOk
 
-`func (o *KnowledgebaseV2) GetDbaasIdOk() (*float32, bool)`
+`func (o *KnowledgebaseV2) GetDbaasIdOk() (*int32, bool)`
 
 GetDbaasIdOk returns a tuple with the DbaasId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDbaasId
 
-`func (o *KnowledgebaseV2) SetDbaasId(v float32)`
+`func (o *KnowledgebaseV2) SetDbaasId(v int32)`
 
 SetDbaasId sets DbaasId field to given value.
 
@@ -172,11 +193,6 @@ and a boolean to check if the value has been set.
 
 SetLastSync sets LastSync field to given value.
 
-### HasLastSync
-
-`func (o *KnowledgebaseV2) HasLastSync() bool`
-
-HasLastSync returns a boolean if a field has been set.
 
 ### SetLastSyncNil
 
@@ -190,80 +206,80 @@ HasLastSync returns a boolean if a field has been set.
 UnsetLastSync ensures that no value is present for LastSync, not even an explicit nil
 ### GetTotalTokens
 
-`func (o *KnowledgebaseV2) GetTotalTokens() float32`
+`func (o *KnowledgebaseV2) GetTotalTokens() int32`
 
 GetTotalTokens returns the TotalTokens field if non-nil, zero value otherwise.
 
 ### GetTotalTokensOk
 
-`func (o *KnowledgebaseV2) GetTotalTokensOk() (*float32, bool)`
+`func (o *KnowledgebaseV2) GetTotalTokensOk() (*int32, bool)`
 
 GetTotalTokensOk returns a tuple with the TotalTokens field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalTokens
 
-`func (o *KnowledgebaseV2) SetTotalTokens(v float32)`
+`func (o *KnowledgebaseV2) SetTotalTokens(v int32)`
 
 SetTotalTokens sets TotalTokens field to given value.
 
 
 ### GetUsedTokens
 
-`func (o *KnowledgebaseV2) GetUsedTokens() float32`
+`func (o *KnowledgebaseV2) GetUsedTokens() int32`
 
 GetUsedTokens returns the UsedTokens field if non-nil, zero value otherwise.
 
 ### GetUsedTokensOk
 
-`func (o *KnowledgebaseV2) GetUsedTokensOk() (*float32, bool)`
+`func (o *KnowledgebaseV2) GetUsedTokensOk() (*int32, bool)`
 
 GetUsedTokensOk returns a tuple with the UsedTokens field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUsedTokens
 
-`func (o *KnowledgebaseV2) SetUsedTokens(v float32)`
+`func (o *KnowledgebaseV2) SetUsedTokens(v int32)`
 
 SetUsedTokens sets UsedTokens field to given value.
 
 
 ### GetRemainingTokens
 
-`func (o *KnowledgebaseV2) GetRemainingTokens() float32`
+`func (o *KnowledgebaseV2) GetRemainingTokens() int32`
 
 GetRemainingTokens returns the RemainingTokens field if non-nil, zero value otherwise.
 
 ### GetRemainingTokensOk
 
-`func (o *KnowledgebaseV2) GetRemainingTokensOk() (*float32, bool)`
+`func (o *KnowledgebaseV2) GetRemainingTokensOk() (*int32, bool)`
 
 GetRemainingTokensOk returns a tuple with the RemainingTokens field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRemainingTokens
 
-`func (o *KnowledgebaseV2) SetRemainingTokens(v float32)`
+`func (o *KnowledgebaseV2) SetRemainingTokens(v int32)`
 
 SetRemainingTokens sets RemainingTokens field to given value.
 
 
 ### GetTokenPackageId
 
-`func (o *KnowledgebaseV2) GetTokenPackageId() float32`
+`func (o *KnowledgebaseV2) GetTokenPackageId() int32`
 
 GetTokenPackageId returns the TokenPackageId field if non-nil, zero value otherwise.
 
 ### GetTokenPackageIdOk
 
-`func (o *KnowledgebaseV2) GetTokenPackageIdOk() (*float32, bool)`
+`func (o *KnowledgebaseV2) GetTokenPackageIdOk() (*int32, bool)`
 
 GetTokenPackageIdOk returns a tuple with the TokenPackageId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTokenPackageId
 
-`func (o *KnowledgebaseV2) SetTokenPackageId(v float32)`
+`func (o *KnowledgebaseV2) SetTokenPackageId(v int32)`
 
 SetTokenPackageId sets TokenPackageId field to given value.
 
@@ -288,42 +304,52 @@ and a boolean to check if the value has been set.
 SetSubscriptionRenewalDate sets SubscriptionRenewalDate field to given value.
 
 
+### SetSubscriptionRenewalDateNil
+
+`func (o *KnowledgebaseV2) SetSubscriptionRenewalDateNil(b bool)`
+
+ SetSubscriptionRenewalDateNil sets the value for SubscriptionRenewalDate to be an explicit nil
+
+### UnsetSubscriptionRenewalDate
+`func (o *KnowledgebaseV2) UnsetSubscriptionRenewalDate()`
+
+UnsetSubscriptionRenewalDate ensures that no value is present for SubscriptionRenewalDate, not even an explicit nil
 ### GetDocumentsCount
 
-`func (o *KnowledgebaseV2) GetDocumentsCount() float32`
+`func (o *KnowledgebaseV2) GetDocumentsCount() int32`
 
 GetDocumentsCount returns the DocumentsCount field if non-nil, zero value otherwise.
 
 ### GetDocumentsCountOk
 
-`func (o *KnowledgebaseV2) GetDocumentsCountOk() (*float32, bool)`
+`func (o *KnowledgebaseV2) GetDocumentsCountOk() (*int32, bool)`
 
 GetDocumentsCountOk returns a tuple with the DocumentsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDocumentsCount
 
-`func (o *KnowledgebaseV2) SetDocumentsCount(v float32)`
+`func (o *KnowledgebaseV2) SetDocumentsCount(v int32)`
 
 SetDocumentsCount sets DocumentsCount field to given value.
 
 
 ### GetAgentsIds
 
-`func (o *KnowledgebaseV2) GetAgentsIds() []float32`
+`func (o *KnowledgebaseV2) GetAgentsIds() []int32`
 
 GetAgentsIds returns the AgentsIds field if non-nil, zero value otherwise.
 
 ### GetAgentsIdsOk
 
-`func (o *KnowledgebaseV2) GetAgentsIdsOk() (*[]float32, bool)`
+`func (o *KnowledgebaseV2) GetAgentsIdsOk() (*[]int32, bool)`
 
 GetAgentsIdsOk returns a tuple with the AgentsIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAgentsIds
 
-`func (o *KnowledgebaseV2) SetAgentsIds(v []float32)`
+`func (o *KnowledgebaseV2) SetAgentsIds(v []int32)`
 
 SetAgentsIds sets AgentsIds field to given value.
 

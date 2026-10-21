@@ -21,11 +21,17 @@ var _ MappedNullable = &AgentSettings{}
 // AgentSettings Настройки агента
 type AgentSettings struct {
 	Model AgentModelSettings `json:"model"`
-	// Системный промпт
+	// Системный промпт (инструкция) агента
 	SystemPrompt string `json:"system_prompt"`
-	// Уточнять ли запрос перед обработкой
+	// Уточнять (переформулировать) запрос пользователя перед поиском по базам знаний
 	RefineQuery bool `json:"refine_query"`
-	Widget *AgentSettingsWidget `json:"widget,omitempty"`
+	// Запоминать факты о каждом авторизованном пользователе и учитывать их в ответах. В виджете не работает.
+	MemoryEnabled *bool `json:"memory_enabled,omitempty"`
+	Widget *AgentWidgetSettings `json:"widget,omitempty"`
+	// Домены, которыми ограничивается веб-поиск агента (не более 5). Каждый элемент — домен (`timeweb.ru`) или домен с путём (`timeweb.ru/docs`). Если поле не передано при обновлении, сохранённый список не меняется.
+	WebSearchAllowedSites []string `json:"web_search_allowed_sites,omitempty"`
+	// Настройки дополнительных моделей. Заполняется автоматически из поля `additional_models` запроса создания или обновления агента, передавать здесь не нужно.
+	AdditionalModels []AgentAdditionalModel `json:"additional_models,omitempty"`
 }
 
 // NewAgentSettings instantiates a new AgentSettings object
@@ -37,6 +43,8 @@ func NewAgentSettings(model AgentModelSettings, systemPrompt string, refineQuery
 	this.Model = model
 	this.SystemPrompt = systemPrompt
 	this.RefineQuery = refineQuery
+	var memoryEnabled bool = false
+	this.MemoryEnabled = &memoryEnabled
 	return &this
 }
 
@@ -45,6 +53,8 @@ func NewAgentSettings(model AgentModelSettings, systemPrompt string, refineQuery
 // but it doesn't guarantee that properties required by API are set
 func NewAgentSettingsWithDefaults() *AgentSettings {
 	this := AgentSettings{}
+	var memoryEnabled bool = false
+	this.MemoryEnabled = &memoryEnabled
 	return &this
 }
 
@@ -120,10 +130,42 @@ func (o *AgentSettings) SetRefineQuery(v bool) {
 	o.RefineQuery = v
 }
 
+// GetMemoryEnabled returns the MemoryEnabled field value if set, zero value otherwise.
+func (o *AgentSettings) GetMemoryEnabled() bool {
+	if o == nil || IsNil(o.MemoryEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.MemoryEnabled
+}
+
+// GetMemoryEnabledOk returns a tuple with the MemoryEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentSettings) GetMemoryEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.MemoryEnabled) {
+		return nil, false
+	}
+	return o.MemoryEnabled, true
+}
+
+// HasMemoryEnabled returns a boolean if a field has been set.
+func (o *AgentSettings) HasMemoryEnabled() bool {
+	if o != nil && !IsNil(o.MemoryEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetMemoryEnabled gets a reference to the given bool and assigns it to the MemoryEnabled field.
+func (o *AgentSettings) SetMemoryEnabled(v bool) {
+	o.MemoryEnabled = &v
+}
+
 // GetWidget returns the Widget field value if set, zero value otherwise.
-func (o *AgentSettings) GetWidget() AgentSettingsWidget {
+func (o *AgentSettings) GetWidget() AgentWidgetSettings {
 	if o == nil || IsNil(o.Widget) {
-		var ret AgentSettingsWidget
+		var ret AgentWidgetSettings
 		return ret
 	}
 	return *o.Widget
@@ -131,7 +173,7 @@ func (o *AgentSettings) GetWidget() AgentSettingsWidget {
 
 // GetWidgetOk returns a tuple with the Widget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentSettings) GetWidgetOk() (*AgentSettingsWidget, bool) {
+func (o *AgentSettings) GetWidgetOk() (*AgentWidgetSettings, bool) {
 	if o == nil || IsNil(o.Widget) {
 		return nil, false
 	}
@@ -147,9 +189,73 @@ func (o *AgentSettings) HasWidget() bool {
 	return false
 }
 
-// SetWidget gets a reference to the given AgentSettingsWidget and assigns it to the Widget field.
-func (o *AgentSettings) SetWidget(v AgentSettingsWidget) {
+// SetWidget gets a reference to the given AgentWidgetSettings and assigns it to the Widget field.
+func (o *AgentSettings) SetWidget(v AgentWidgetSettings) {
 	o.Widget = &v
+}
+
+// GetWebSearchAllowedSites returns the WebSearchAllowedSites field value if set, zero value otherwise.
+func (o *AgentSettings) GetWebSearchAllowedSites() []string {
+	if o == nil || IsNil(o.WebSearchAllowedSites) {
+		var ret []string
+		return ret
+	}
+	return o.WebSearchAllowedSites
+}
+
+// GetWebSearchAllowedSitesOk returns a tuple with the WebSearchAllowedSites field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentSettings) GetWebSearchAllowedSitesOk() ([]string, bool) {
+	if o == nil || IsNil(o.WebSearchAllowedSites) {
+		return nil, false
+	}
+	return o.WebSearchAllowedSites, true
+}
+
+// HasWebSearchAllowedSites returns a boolean if a field has been set.
+func (o *AgentSettings) HasWebSearchAllowedSites() bool {
+	if o != nil && !IsNil(o.WebSearchAllowedSites) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebSearchAllowedSites gets a reference to the given []string and assigns it to the WebSearchAllowedSites field.
+func (o *AgentSettings) SetWebSearchAllowedSites(v []string) {
+	o.WebSearchAllowedSites = v
+}
+
+// GetAdditionalModels returns the AdditionalModels field value if set, zero value otherwise.
+func (o *AgentSettings) GetAdditionalModels() []AgentAdditionalModel {
+	if o == nil || IsNil(o.AdditionalModels) {
+		var ret []AgentAdditionalModel
+		return ret
+	}
+	return o.AdditionalModels
+}
+
+// GetAdditionalModelsOk returns a tuple with the AdditionalModels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentSettings) GetAdditionalModelsOk() ([]AgentAdditionalModel, bool) {
+	if o == nil || IsNil(o.AdditionalModels) {
+		return nil, false
+	}
+	return o.AdditionalModels, true
+}
+
+// HasAdditionalModels returns a boolean if a field has been set.
+func (o *AgentSettings) HasAdditionalModels() bool {
+	if o != nil && !IsNil(o.AdditionalModels) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalModels gets a reference to the given []AgentAdditionalModel and assigns it to the AdditionalModels field.
+func (o *AgentSettings) SetAdditionalModels(v []AgentAdditionalModel) {
+	o.AdditionalModels = v
 }
 
 func (o AgentSettings) MarshalJSON() ([]byte, error) {
@@ -165,8 +271,17 @@ func (o AgentSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize["model"] = o.Model
 	toSerialize["system_prompt"] = o.SystemPrompt
 	toSerialize["refine_query"] = o.RefineQuery
+	if !IsNil(o.MemoryEnabled) {
+		toSerialize["memory_enabled"] = o.MemoryEnabled
+	}
 	if !IsNil(o.Widget) {
 		toSerialize["widget"] = o.Widget
+	}
+	if !IsNil(o.WebSearchAllowedSites) {
+		toSerialize["web_search_allowed_sites"] = o.WebSearchAllowedSites
+	}
+	if !IsNil(o.AdditionalModels) {
+		toSerialize["additional_models"] = o.AdditionalModels
 	}
 	return toSerialize, nil
 }

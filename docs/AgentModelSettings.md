@@ -4,11 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Temperature** | Pointer to **float32** | Контролирует случайность вывода модели. | [optional] 
-**TopP** | Pointer to **float32** | Контролирует разнообразие вывода модели. | [optional] 
-**MaxTokens** | Pointer to **float32** | Максимальное количество токенов в выводе. | [optional] 
-**FrequencyPenalty** | Pointer to **float32** | Положительные значения штрафуют новые токены на основе их существующей частоты. | [optional] 
-**PresencePenalty** | Pointer to **float32** | Положительные значения штрафуют новые токены на основе того, встречались ли они в тексте ранее. | [optional] 
+**Temperature** | Pointer to **float32** | Температура: чем выше, тем случайнее ответы модели. | [optional] 
+**TopP** | Pointer to **float32** | Nucleus sampling: доля вероятностной массы, из которой выбираются токены. | [optional] 
+**MaxTokens** | Pointer to **int32** | Максимальное количество токенов в ответе модели. | [optional] 
+**FrequencyPenalty** | Pointer to **float32** | Штраф за частоту: положительные значения снижают повторы уже использованных токенов. | [optional] 
+**PresencePenalty** | Pointer to **float32** | Штраф за присутствие: положительные значения поощряют новые темы. | [optional] 
+**EnableThinking** | Pointer to **bool** | Включает режим рассуждений (thinking) для моделей, которые его поддерживают. | [optional] 
 
 ## Methods
 
@@ -81,20 +82,20 @@ HasTopP returns a boolean if a field has been set.
 
 ### GetMaxTokens
 
-`func (o *AgentModelSettings) GetMaxTokens() float32`
+`func (o *AgentModelSettings) GetMaxTokens() int32`
 
 GetMaxTokens returns the MaxTokens field if non-nil, zero value otherwise.
 
 ### GetMaxTokensOk
 
-`func (o *AgentModelSettings) GetMaxTokensOk() (*float32, bool)`
+`func (o *AgentModelSettings) GetMaxTokensOk() (*int32, bool)`
 
 GetMaxTokensOk returns a tuple with the MaxTokens field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaxTokens
 
-`func (o *AgentModelSettings) SetMaxTokens(v float32)`
+`func (o *AgentModelSettings) SetMaxTokens(v int32)`
 
 SetMaxTokens sets MaxTokens field to given value.
 
@@ -153,6 +154,31 @@ SetPresencePenalty sets PresencePenalty field to given value.
 `func (o *AgentModelSettings) HasPresencePenalty() bool`
 
 HasPresencePenalty returns a boolean if a field has been set.
+
+### GetEnableThinking
+
+`func (o *AgentModelSettings) GetEnableThinking() bool`
+
+GetEnableThinking returns the EnableThinking field if non-nil, zero value otherwise.
+
+### GetEnableThinkingOk
+
+`func (o *AgentModelSettings) GetEnableThinkingOk() (*bool, bool)`
+
+GetEnableThinkingOk returns a tuple with the EnableThinking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableThinking
+
+`func (o *AgentModelSettings) SetEnableThinking(v bool)`
+
+SetEnableThinking sets EnableThinking field to given value.
+
+### HasEnableThinking
+
+`func (o *AgentModelSettings) HasEnableThinking() bool`
+
+HasEnableThinking returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

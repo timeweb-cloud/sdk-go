@@ -20,16 +20,16 @@ var _ MappedNullable = &CreateKnowledgebase201Response{}
 
 // CreateKnowledgebase201Response struct for CreateKnowledgebase201Response
 type CreateKnowledgebase201Response struct {
-	Knowledgebase Knowledgebase `json:"knowledgebase"`
+	KnowledgeBase Knowledgebase `json:"knowledge_base"`
 }
 
 // NewCreateKnowledgebase201Response instantiates a new CreateKnowledgebase201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateKnowledgebase201Response(knowledgebase Knowledgebase) *CreateKnowledgebase201Response {
+func NewCreateKnowledgebase201Response(knowledgeBase Knowledgebase) *CreateKnowledgebase201Response {
 	this := CreateKnowledgebase201Response{}
-	this.Knowledgebase = knowledgebase
+	this.KnowledgeBase = knowledgeBase
 	return &this
 }
 
@@ -41,28 +41,28 @@ func NewCreateKnowledgebase201ResponseWithDefaults() *CreateKnowledgebase201Resp
 	return &this
 }
 
-// GetKnowledgebase returns the Knowledgebase field value
-func (o *CreateKnowledgebase201Response) GetKnowledgebase() Knowledgebase {
+// GetKnowledgeBase returns the KnowledgeBase field value
+func (o *CreateKnowledgebase201Response) GetKnowledgeBase() Knowledgebase {
 	if o == nil {
 		var ret Knowledgebase
 		return ret
 	}
 
-	return o.Knowledgebase
+	return o.KnowledgeBase
 }
 
-// GetKnowledgebaseOk returns a tuple with the Knowledgebase field value
+// GetKnowledgeBaseOk returns a tuple with the KnowledgeBase field value
 // and a boolean to check if the value has been set.
-func (o *CreateKnowledgebase201Response) GetKnowledgebaseOk() (*Knowledgebase, bool) {
+func (o *CreateKnowledgebase201Response) GetKnowledgeBaseOk() (*Knowledgebase, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Knowledgebase, true
+	return &o.KnowledgeBase, true
 }
 
-// SetKnowledgebase sets field value
-func (o *CreateKnowledgebase201Response) SetKnowledgebase(v Knowledgebase) {
-	o.Knowledgebase = v
+// SetKnowledgeBase sets field value
+func (o *CreateKnowledgebase201Response) SetKnowledgeBase(v Knowledgebase) {
+	o.KnowledgeBase = v
 }
 
 func (o CreateKnowledgebase201Response) MarshalJSON() ([]byte, error) {
@@ -75,7 +75,7 @@ func (o CreateKnowledgebase201Response) MarshalJSON() ([]byte, error) {
 
 func (o CreateKnowledgebase201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["knowledgebase"] = o.Knowledgebase
+	toSerialize["knowledge_base"] = o.KnowledgeBase
 	return toSerialize, nil
 }
 

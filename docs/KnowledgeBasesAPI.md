@@ -4,29 +4,33 @@ All URIs are relative to *https://api.timeweb.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddAdditionalTokenPackageToKnowledgebase**](KnowledgeBasesAPI.md#AddAdditionalTokenPackageToKnowledgebase) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/add-additional-token-package | Добавление дополнительного пакета токенов
+[**AddAdditionalTokenPackageToKnowledgebase**](KnowledgeBasesAPI.md#AddAdditionalTokenPackageToKnowledgebase) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/add-additional-token-package | Покупка дополнительных пакетов токенов
 [**CreateKnowledgebase**](KnowledgeBasesAPI.md#CreateKnowledgebase) | **Post** /api/v1/cloud-ai/knowledge-bases | Создание базы знаний
+[**CreateKnowledgebaseDocument**](KnowledgeBasesAPI.md#CreateKnowledgebaseDocument) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/documents | Добавление документа по ссылке
 [**DeleteDocument**](KnowledgeBasesAPI.md#DeleteDocument) | **Delete** /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id} | Удаление документа из базы знаний
 [**DeleteKnowledgebase**](KnowledgeBasesAPI.md#DeleteKnowledgebase) | **Delete** /api/v1/cloud-ai/knowledge-bases/{id} | Удаление базы знаний
-[**DownloadDocument**](KnowledgeBasesAPI.md#DownloadDocument) | **Get** /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/download | Скачивание документа из базы знаний
-[**GetKnowledgebase**](KnowledgeBasesAPI.md#GetKnowledgebase) | **Get** /api/v1/cloud-ai/knowledge-bases/{id} | Получение базы знаний
+[**DownloadDocument**](KnowledgeBasesAPI.md#DownloadDocument) | **Get** /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/download | Скачивание файла документа
+[**GetKnowledgebase**](KnowledgeBasesAPI.md#GetKnowledgebase) | **Get** /api/v1/cloud-ai/knowledge-bases/{id} | Получение базы знаний со списком документов
 [**GetKnowledgebaseDocumentsV2**](KnowledgeBasesAPI.md#GetKnowledgebaseDocumentsV2) | **Get** /api/v2/cloud-ai/knowledge-bases/{id}/documents | Получение списка документов базы знаний
-[**GetKnowledgebaseStatistics**](KnowledgeBasesAPI.md#GetKnowledgebaseStatistics) | **Get** /api/v1/cloud-ai/knowledge-bases/{id}/statistic | Получение статистики использования токенов базы знаний
-[**GetKnowledgebases**](KnowledgeBasesAPI.md#GetKnowledgebases) | **Get** /api/v1/cloud-ai/knowledge-bases | Получение списка баз знаний
+[**GetKnowledgebaseV3**](KnowledgeBasesAPI.md#GetKnowledgebaseV3) | **Get** /api/v3/cloud-ai/knowledge-bases/{id} | Получение базы знаний
+[**GetKnowledgebases**](KnowledgeBasesAPI.md#GetKnowledgebases) | **Get** /api/v1/cloud-ai/knowledge-bases | Получение списка баз знаний (v1)
 [**GetKnowledgebasesV2**](KnowledgeBasesAPI.md#GetKnowledgebasesV2) | **Get** /api/v2/cloud-ai/knowledge-bases | Получение списка баз знаний (v2)
+[**GetKnowledgebasesV3**](KnowledgeBasesAPI.md#GetKnowledgebasesV3) | **Get** /api/v3/cloud-ai/knowledge-bases | Получение списка баз знаний
 [**LinkKnowledgebaseToAgent**](KnowledgeBasesAPI.md#LinkKnowledgebaseToAgent) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id} | Привязка базы знаний к агенту
 [**ReindexDocument**](KnowledgeBasesAPI.md#ReindexDocument) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/reindex | Переиндексация документа
 [**UnlinkKnowledgebaseFromAgent**](KnowledgeBasesAPI.md#UnlinkKnowledgebaseFromAgent) | **Delete** /api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id} | Отвязка базы знаний от агента
-[**UpdateKnowledgebase**](KnowledgeBasesAPI.md#UpdateKnowledgebase) | **Patch** /api/v1/cloud-ai/knowledge-bases/{id} | Обновление базы знаний
+[**UpdateKnowledgebase**](KnowledgeBasesAPI.md#UpdateKnowledgebase) | **Patch** /api/v1/cloud-ai/knowledge-bases/{id} | Изменение базы знаний
+[**UpdateKnowledgebaseAgentLink**](KnowledgeBasesAPI.md#UpdateKnowledgebaseAgentLink) | **Patch** /api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id} | Изменение режима поиска по базе знаний для агента
+[**UpdateKnowledgebaseDocument**](KnowledgeBasesAPI.md#UpdateKnowledgebaseDocument) | **Patch** /api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id} | Изменение документа
 [**UploadFilesToKnowledgebase**](KnowledgeBasesAPI.md#UploadFilesToKnowledgebase) | **Post** /api/v1/cloud-ai/knowledge-bases/{id}/upload | Загрузка файлов в базу знаний
 
 
 
 ## AddAdditionalTokenPackageToKnowledgebase
 
-> AddAdditionalTokenPackageToKnowledgebase(ctx, id).AddTokenPackage(addTokenPackage).Execute()
+> AddAdditionalTokenPackageToKnowledgebase(ctx, id).KnowledgebaseAddTokenPackage(knowledgebaseAddTokenPackage).Execute()
 
-Добавление дополнительного пакета токенов
+Покупка дополнительных пакетов токенов
 
 
 
@@ -44,11 +48,11 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    addTokenPackage := *openapiclient.NewAddTokenPackage() // AddTokenPackage |  (optional)
+    knowledgebaseAddTokenPackage := *openapiclient.NewKnowledgebaseAddTokenPackage() // KnowledgebaseAddTokenPackage |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.KnowledgeBasesAPI.AddAdditionalTokenPackageToKnowledgebase(context.Background(), id).AddTokenPackage(addTokenPackage).Execute()
+    r, err := apiClient.KnowledgeBasesAPI.AddAdditionalTokenPackageToKnowledgebase(context.Background(), id).KnowledgebaseAddTokenPackage(knowledgebaseAddTokenPackage).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.AddAdditionalTokenPackageToKnowledgebase``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -72,7 +76,7 @@ Other parameters are passed through a pointer to a apiAddAdditionalTokenPackageT
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **addTokenPackage** | [**AddTokenPackage**](AddTokenPackage.md) |  | 
+ **knowledgebaseAddTokenPackage** | [**KnowledgebaseAddTokenPackage**](KnowledgebaseAddTokenPackage.md) |  | 
 
 ### Return type
 
@@ -113,7 +117,7 @@ import (
 )
 
 func main() {
-    createKnowledgebase := *openapiclient.NewCreateKnowledgebase("Моя база знаний", float32(1), "net_12345", float32(1)) // CreateKnowledgebase | 
+    createKnowledgebase := *openapiclient.NewCreateKnowledgebase("Документация продукта", int32(2449), "network-1234567890abcdef", int32(111)) // CreateKnowledgebase | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -158,6 +162,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateKnowledgebaseDocument
+
+> CreateKnowledgebaseDocument201Response CreateKnowledgebaseDocument(ctx, id).CreateDocument(createDocument).Execute()
+
+Добавление документа по ссылке
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := int32(1) // int32 | ID базы знаний
+    createDocument := *openapiclient.NewCreateDocument("FAQ", "link", "https://example.com/docs/faq.md") // CreateDocument | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.KnowledgeBasesAPI.CreateKnowledgebaseDocument(context.Background(), id).CreateDocument(createDocument).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.CreateKnowledgebaseDocument``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateKnowledgebaseDocument`: CreateKnowledgebaseDocument201Response
+    fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.CreateKnowledgebaseDocument`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | ID базы знаний | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateKnowledgebaseDocumentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createDocument** | [**CreateDocument**](CreateDocument.md) |  | 
+
+### Return type
+
+[**CreateKnowledgebaseDocument201Response**](CreateKnowledgebaseDocument201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteDocument
 
 > DeleteDocument(ctx, id, documentId).Execute()
@@ -180,7 +256,7 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    documentId := int32(1) // int32 | ID документа
+    documentId := int32(286071) // int32 | ID документа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -301,7 +377,7 @@ Name | Type | Description  | Notes
 
 > *os.File DownloadDocument(ctx, id, documentId).Execute()
 
-Скачивание документа из базы знаний
+Скачивание файла документа
 
 
 
@@ -319,7 +395,7 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    documentId := int32(1) // int32 | ID документа
+    documentId := int32(286071) // int32 | ID документа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -374,7 +450,7 @@ Name | Type | Description  | Notes
 
 > CreateKnowledgebase201Response GetKnowledgebase(ctx, id).Execute()
 
-Получение базы знаний
+Получение базы знаний со списком документов
 
 
 
@@ -442,7 +518,7 @@ Name | Type | Description  | Notes
 
 ## GetKnowledgebaseDocumentsV2
 
-> GetKnowledgebaseDocumentsV2200Response GetKnowledgebaseDocumentsV2(ctx, id).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
+> GetKnowledgebaseDocumentsV2200Response GetKnowledgebaseDocumentsV2(ctx, id).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Search(search).Execute()
 
 Получение списка документов базы знаний
 
@@ -462,14 +538,15 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    limit := int32(20) // int32 | Количество документов на странице (по умолчанию: 10, максимум: 100) (optional) (default to 10)
-    offset := int32(0) // int32 | Количество документов для пропуска (по умолчанию: 0) (optional) (default to 0)
-    sortBy := "indexing_timestamp" // string | Поле для сортировки (по умолчанию: indexing_timestamp - время последней индексации документа) (optional) (default to "indexing_timestamp")
-    sortOrder := "DESC" // string | Порядок сортировки (по умолчанию: DESC) (optional) (default to "DESC")
+    limit := int32(20) // int32 | Количество документов на странице. Значения больше 100 уменьшаются до 100 (optional) (default to 10)
+    offset := int32(0) // int32 | Количество документов, которые нужно пропустить (optional) (default to 0)
+    sortBy := "name" // string | Поле сортировки. `indexing_timestamp` — время последнего изменения документа (optional) (default to "indexing_timestamp")
+    sortOrder := "ASC" // string | Порядок сортировки (optional) (default to "DESC")
+    search := "faq" // string | Фильтр по подстроке в названии документа (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseDocumentsV2(context.Background(), id).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
+    resp, r, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseDocumentsV2(context.Background(), id).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Search(search).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.GetKnowledgebaseDocumentsV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -495,10 +572,11 @@ Other parameters are passed through a pointer to a apiGetKnowledgebaseDocumentsV
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **int32** | Количество документов на странице (по умолчанию: 10, максимум: 100) | [default to 10]
- **offset** | **int32** | Количество документов для пропуска (по умолчанию: 0) | [default to 0]
- **sortBy** | **string** | Поле для сортировки (по умолчанию: indexing_timestamp - время последней индексации документа) | [default to &quot;indexing_timestamp&quot;]
- **sortOrder** | **string** | Порядок сортировки (по умолчанию: DESC) | [default to &quot;DESC&quot;]
+ **limit** | **int32** | Количество документов на странице. Значения больше 100 уменьшаются до 100 | [default to 10]
+ **offset** | **int32** | Количество документов, которые нужно пропустить | [default to 0]
+ **sortBy** | **string** | Поле сортировки. &#x60;indexing_timestamp&#x60; — время последнего изменения документа | [default to &quot;indexing_timestamp&quot;]
+ **sortOrder** | **string** | Порядок сортировки | [default to &quot;DESC&quot;]
+ **search** | **string** | Фильтр по подстроке в названии документа | 
 
 ### Return type
 
@@ -518,11 +596,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetKnowledgebaseStatistics
+## GetKnowledgebaseV3
 
-> GetKnowledgebaseStatistics200Response GetKnowledgebaseStatistics(ctx, id).StartTime(startTime).EndTime(endTime).Interval(interval).Execute()
+> GetKnowledgebaseV3200Response GetKnowledgebaseV3(ctx, id).Execute()
 
-Получение статистики использования токенов базы знаний
+Получение базы знаний
 
 
 
@@ -535,25 +613,21 @@ import (
     "context"
     "fmt"
     "os"
-    "time"
     openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    startTime := time.Now() // time.Time | Начало временного диапазона (ISO 8601) (optional)
-    endTime := time.Now() // time.Time | Конец временного диапазона (ISO 8601) (optional)
-    interval := float32(60) // float32 | Интервал в минутах (по умолчанию 60) (optional) (default to 60)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseStatistics(context.Background(), id).StartTime(startTime).EndTime(endTime).Interval(interval).Execute()
+    resp, r, err := apiClient.KnowledgeBasesAPI.GetKnowledgebaseV3(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.GetKnowledgebaseStatistics``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.GetKnowledgebaseV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKnowledgebaseStatistics`: GetKnowledgebaseStatistics200Response
-    fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.GetKnowledgebaseStatistics`: %v\n", resp)
+    // response from `GetKnowledgebaseV3`: GetKnowledgebaseV3200Response
+    fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.GetKnowledgebaseV3`: %v\n", resp)
 }
 ```
 
@@ -567,19 +641,16 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKnowledgebaseStatisticsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKnowledgebaseV3Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **startTime** | **time.Time** | Начало временного диапазона (ISO 8601) | 
- **endTime** | **time.Time** | Конец временного диапазона (ISO 8601) | 
- **interval** | **float32** | Интервал в минутах (по умолчанию 60) | [default to 60]
 
 ### Return type
 
-[**GetKnowledgebaseStatistics200Response**](GetKnowledgebaseStatistics200Response.md)
+[**GetKnowledgebaseV3200Response**](GetKnowledgebaseV3200Response.md)
 
 ### Authorization
 
@@ -599,7 +670,7 @@ Name | Type | Description  | Notes
 
 > GetKnowledgebases200Response GetKnowledgebases(ctx).Execute()
 
-Получение списка баз знаний
+Получение списка баз знаний (v1)
 
 
 
@@ -717,9 +788,70 @@ Other parameters are passed through a pointer to a apiGetKnowledgebasesV2Request
 [[Back to README]](../README.md)
 
 
+## GetKnowledgebasesV3
+
+> GetKnowledgebasesV3200Response GetKnowledgebasesV3(ctx).Execute()
+
+Получение списка баз знаний
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.KnowledgeBasesAPI.GetKnowledgebasesV3(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.GetKnowledgebasesV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKnowledgebasesV3`: GetKnowledgebasesV3200Response
+    fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.GetKnowledgebasesV3`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKnowledgebasesV3Request struct via the builder pattern
+
+
+### Return type
+
+[**GetKnowledgebasesV3200Response**](GetKnowledgebasesV3200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## LinkKnowledgebaseToAgent
 
-> LinkKnowledgebaseToAgent(ctx, id, agentId).Execute()
+> LinkKnowledgebaseToAgent(ctx, id, agentId).LinkKnowledgebase(linkKnowledgebase).Execute()
 
 Привязка базы знаний к агенту
 
@@ -739,11 +871,12 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    agentId := int32(1) // int32 | ID агента
+    agentId := int32(101) // int32 | ID AI агента
+    linkKnowledgebase := *openapiclient.NewLinkKnowledgebase() // LinkKnowledgebase |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.KnowledgeBasesAPI.LinkKnowledgebaseToAgent(context.Background(), id, agentId).Execute()
+    r, err := apiClient.KnowledgeBasesAPI.LinkKnowledgebaseToAgent(context.Background(), id, agentId).LinkKnowledgebase(linkKnowledgebase).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.LinkKnowledgebaseToAgent``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -758,7 +891,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **id** | **int32** | ID базы знаний | 
-**agentId** | **int32** | ID агента | 
+**agentId** | **int32** | ID AI агента | 
 
 ### Other Parameters
 
@@ -769,6 +902,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **linkKnowledgebase** | [**LinkKnowledgebase**](LinkKnowledgebase.md) |  | 
 
 ### Return type
 
@@ -780,7 +914,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -810,7 +944,7 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    documentId := int32(1) // int32 | ID документа
+    documentId := int32(286071) // int32 | ID документа
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -881,7 +1015,7 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    agentId := int32(1) // int32 | ID агента
+    agentId := int32(101) // int32 | ID AI агента
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -900,7 +1034,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **id** | **int32** | ID базы знаний | 
-**agentId** | **int32** | ID агента | 
+**agentId** | **int32** | ID AI агента | 
 
 ### Other Parameters
 
@@ -934,7 +1068,7 @@ Name | Type | Description  | Notes
 
 > CreateKnowledgebase201Response UpdateKnowledgebase(ctx, id).UpdateKnowledgebase(updateKnowledgebase).Execute()
 
-Обновление базы знаний
+Изменение базы знаний
 
 
 
@@ -1002,9 +1136,157 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateKnowledgebaseAgentLink
+
+> UpdateKnowledgebaseAgentLink(ctx, id, agentId).LinkKnowledgebase(linkKnowledgebase).Execute()
+
+Изменение режима поиска по базе знаний для агента
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := int32(1) // int32 | ID базы знаний
+    agentId := int32(101) // int32 | ID AI агента
+    linkKnowledgebase := *openapiclient.NewLinkKnowledgebase() // LinkKnowledgebase |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.KnowledgeBasesAPI.UpdateKnowledgebaseAgentLink(context.Background(), id, agentId).LinkKnowledgebase(linkKnowledgebase).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.UpdateKnowledgebaseAgentLink``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | ID базы знаний | 
+**agentId** | **int32** | ID AI агента | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateKnowledgebaseAgentLinkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **linkKnowledgebase** | [**LinkKnowledgebase**](LinkKnowledgebase.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateKnowledgebaseDocument
+
+> CreateKnowledgebaseDocument201Response UpdateKnowledgebaseDocument(ctx, id, documentId).UpdateDocument(updateDocument).Execute()
+
+Изменение документа
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := int32(1) // int32 | ID базы знаний
+    documentId := int32(286071) // int32 | ID документа
+    updateDocument := *openapiclient.NewUpdateDocument() // UpdateDocument | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.KnowledgeBasesAPI.UpdateKnowledgebaseDocument(context.Background(), id, documentId).UpdateDocument(updateDocument).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.UpdateKnowledgebaseDocument``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateKnowledgebaseDocument`: CreateKnowledgebaseDocument201Response
+    fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.UpdateKnowledgebaseDocument`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | ID базы знаний | 
+**documentId** | **int32** | ID документа | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateKnowledgebaseDocumentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateDocument** | [**UpdateDocument**](UpdateDocument.md) |  | 
+
+### Return type
+
+[**CreateKnowledgebaseDocument201Response**](CreateKnowledgebaseDocument201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UploadFilesToKnowledgebase
 
-> UploadFilesToKnowledgebase200Response UploadFilesToKnowledgebase(ctx, id).Files(files).Execute()
+> UploadResult UploadFilesToKnowledgebase(ctx, id).Files(files).Execute()
 
 Загрузка файлов в базу знаний
 
@@ -1024,7 +1306,7 @@ import (
 
 func main() {
     id := int32(1) // int32 | ID базы знаний
-    files := []*os.File{"TODO"} // []*os.File | Файлы для загрузки (максимум 10 файлов, 10 МБ каждый)
+    files := []*os.File{"TODO"} // []*os.File | Файлы для загрузки
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1033,7 +1315,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `KnowledgeBasesAPI.UploadFilesToKnowledgebase``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UploadFilesToKnowledgebase`: UploadFilesToKnowledgebase200Response
+    // response from `UploadFilesToKnowledgebase`: UploadResult
     fmt.Fprintf(os.Stdout, "Response from `KnowledgeBasesAPI.UploadFilesToKnowledgebase`: %v\n", resp)
 }
 ```
@@ -1054,11 +1336,11 @@ Other parameters are passed through a pointer to a apiUploadFilesToKnowledgebase
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **files** | **[]*os.File** | Файлы для загрузки (максимум 10 файлов, 10 МБ каждый) | 
+ **files** | **[]*os.File** | Файлы для загрузки | 
 
 ### Return type
 
-[**UploadFilesToKnowledgebase200Response**](UploadFilesToKnowledgebase200Response.md)
+[**UploadResult**](UploadResult.md)
 
 ### Authorization
 

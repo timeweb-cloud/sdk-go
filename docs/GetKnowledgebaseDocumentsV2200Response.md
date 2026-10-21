@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**KnowledgebaseDocuments** | [**[]Document**](Document.md) | Список документов | 
+**KnowledgebaseDocuments** | [**[]Document**](Document.md) | Документы | 
 **Meta** | [**GetKnowledgebaseDocumentsV2200ResponseMeta**](GetKnowledgebaseDocumentsV2200ResponseMeta.md) |  | 
 
 ## Methods

@@ -6,16 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Название базы знаний | 
 **Description** | Pointer to **string** | Описание базы знаний | [optional] 
-**DbaasPresetId** | **float32** | ID пресета базы данных | 
-**NetworkId** | **string** | ID сети | 
-**TokenPackageId** | **float32** | ID пакета токенов | 
-**ProjectId** | Pointer to **float32** | ID проекта | [optional] 
+**DbaasPresetId** | **int32** | ID тарифа кластера OpenSearch, который будет создан для базы знаний. Список тарифов баз данных — &#x60;GET /api/v2/presets/dbs&#x60; | 
+**NetworkId** | **string** | ID приватной сети (VPC), в которой будет создан кластер | 
+**TokenPackageId** | **int32** | ID пакета токенов подписки. Подходят только базовые пакеты (&#x60;package_type: base&#x60;) из &#x60;GET /api/v1/cloud-ai/token-packages/knowledge-bases&#x60; | 
+**ProjectId** | Pointer to **int32** | ID проекта, в который нужно добавить базу знаний | [optional] 
 
 ## Methods
 
 ### NewCreateKnowledgebase
 
-`func NewCreateKnowledgebase(name string, dbaasPresetId float32, networkId string, tokenPackageId float32, ) *CreateKnowledgebase`
+`func NewCreateKnowledgebase(name string, dbaasPresetId int32, networkId string, tokenPackageId int32, ) *CreateKnowledgebase`
 
 NewCreateKnowledgebase instantiates a new CreateKnowledgebase object
 This constructor will assign default values to properties that have it defined,
@@ -77,20 +77,20 @@ HasDescription returns a boolean if a field has been set.
 
 ### GetDbaasPresetId
 
-`func (o *CreateKnowledgebase) GetDbaasPresetId() float32`
+`func (o *CreateKnowledgebase) GetDbaasPresetId() int32`
 
 GetDbaasPresetId returns the DbaasPresetId field if non-nil, zero value otherwise.
 
 ### GetDbaasPresetIdOk
 
-`func (o *CreateKnowledgebase) GetDbaasPresetIdOk() (*float32, bool)`
+`func (o *CreateKnowledgebase) GetDbaasPresetIdOk() (*int32, bool)`
 
 GetDbaasPresetIdOk returns a tuple with the DbaasPresetId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDbaasPresetId
 
-`func (o *CreateKnowledgebase) SetDbaasPresetId(v float32)`
+`func (o *CreateKnowledgebase) SetDbaasPresetId(v int32)`
 
 SetDbaasPresetId sets DbaasPresetId field to given value.
 
@@ -117,40 +117,40 @@ SetNetworkId sets NetworkId field to given value.
 
 ### GetTokenPackageId
 
-`func (o *CreateKnowledgebase) GetTokenPackageId() float32`
+`func (o *CreateKnowledgebase) GetTokenPackageId() int32`
 
 GetTokenPackageId returns the TokenPackageId field if non-nil, zero value otherwise.
 
 ### GetTokenPackageIdOk
 
-`func (o *CreateKnowledgebase) GetTokenPackageIdOk() (*float32, bool)`
+`func (o *CreateKnowledgebase) GetTokenPackageIdOk() (*int32, bool)`
 
 GetTokenPackageIdOk returns a tuple with the TokenPackageId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTokenPackageId
 
-`func (o *CreateKnowledgebase) SetTokenPackageId(v float32)`
+`func (o *CreateKnowledgebase) SetTokenPackageId(v int32)`
 
 SetTokenPackageId sets TokenPackageId field to given value.
 
 
 ### GetProjectId
 
-`func (o *CreateKnowledgebase) GetProjectId() float32`
+`func (o *CreateKnowledgebase) GetProjectId() int32`
 
 GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
 
 ### GetProjectIdOk
 
-`func (o *CreateKnowledgebase) GetProjectIdOk() (*float32, bool)`
+`func (o *CreateKnowledgebase) GetProjectIdOk() (*int32, bool)`
 
 GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProjectId
 
-`func (o *CreateKnowledgebase) SetProjectId(v float32)`
+`func (o *CreateKnowledgebase) SetProjectId(v int32)`
 
 SetProjectId sets ProjectId field to given value.
 

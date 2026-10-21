@@ -19,35 +19,37 @@ import (
 // checks if the KnowledgebaseV2 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &KnowledgebaseV2{}
 
-// KnowledgebaseV2 База знаний (версия API v2)
+// KnowledgebaseV2 База знаний (v2): вместо списка документов — их количество
 type KnowledgebaseV2 struct {
-	// Уникальный идентификатор базы знаний
-	Id float32 `json:"id"`
+	// ID базы знаний
+	Id int32 `json:"id"`
 	// Название базы знаний
 	Name string `json:"name"`
 	// Описание базы знаний
-	Description NullableString `json:"description,omitempty"`
-	// ID базы данных opensearch
-	DbaasId float32 `json:"dbaas_id"`
-	// Статус базы знаний
+	Description NullableString `json:"description"`
+	// ID проекта, в котором находится база знаний. Поля нет, если проект не определён
+	ProjectId *int32 `json:"project_id,omitempty"`
+	// ID кластера базы данных OpenSearch, который создан для базы знаний в вашем аккаунте
+	DbaasId int32 `json:"dbaas_id"`
+	// Статус базы знаний: - `creating` — создаётся кластер базы данных, документы будут проиндексированы после перехода в `active` - `active` — база знаний работает - `blocked` — заблокирована: закончились токены или не удалось продлить подписку - `deleted` — удалена
 	Status string `json:"status"`
-	// Дата последней синхронизации
-	LastSync NullableTime `json:"last_sync,omitempty"`
-	// Всего токенов выделено
-	TotalTokens float32 `json:"total_tokens"`
-	// Использовано токенов
-	UsedTokens float32 `json:"used_tokens"`
-	// Осталось токенов
-	RemainingTokens float32 `json:"remaining_tokens"`
-	// ID пакета токенов
-	TokenPackageId float32 `json:"token_package_id"`
-	// Дата обновления подписки
-	SubscriptionRenewalDate time.Time `json:"subscription_renewal_date"`
-	// Общее количество документов в базе знаний
-	DocumentsCount float32 `json:"documents_count"`
-	// ID агентов, связанных с базой знаний
-	AgentsIds []float32 `json:"agents_ids"`
-	// Дата создания базы знаний
+	// Дата и время последней синхронизации. `null`, если синхронизации не было
+	LastSync NullableTime `json:"last_sync"`
+	// Количество токенов, доступных в текущем периоде подписки (пакет подписки и докупленные пакеты)
+	TotalTokens int32 `json:"total_tokens"`
+	// Количество израсходованных токенов
+	UsedTokens int32 `json:"used_tokens"`
+	// Количество оставшихся токенов
+	RemainingTokens int32 `json:"remaining_tokens"`
+	// ID пакета токенов подписки базы знаний
+	TokenPackageId int32 `json:"token_package_id"`
+	// Дата следующего продления подписки (списания стоимости пакета токенов)
+	SubscriptionRenewalDate NullableTime `json:"subscription_renewal_date"`
+	// Количество документов в базе знаний
+	DocumentsCount int32 `json:"documents_count"`
+	// ID агентов, к которым привязана база знаний
+	AgentsIds []int32 `json:"agents_ids"`
+	// Дата и время создания базы знаний
 	CreatedAt time.Time `json:"created_at"`
 }
 
@@ -55,12 +57,14 @@ type KnowledgebaseV2 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKnowledgebaseV2(id float32, name string, dbaasId float32, status string, totalTokens float32, usedTokens float32, remainingTokens float32, tokenPackageId float32, subscriptionRenewalDate time.Time, documentsCount float32, agentsIds []float32, createdAt time.Time) *KnowledgebaseV2 {
+func NewKnowledgebaseV2(id int32, name string, description NullableString, dbaasId int32, status string, lastSync NullableTime, totalTokens int32, usedTokens int32, remainingTokens int32, tokenPackageId int32, subscriptionRenewalDate NullableTime, documentsCount int32, agentsIds []int32, createdAt time.Time) *KnowledgebaseV2 {
 	this := KnowledgebaseV2{}
 	this.Id = id
 	this.Name = name
+	this.Description = description
 	this.DbaasId = dbaasId
 	this.Status = status
+	this.LastSync = lastSync
 	this.TotalTokens = totalTokens
 	this.UsedTokens = usedTokens
 	this.RemainingTokens = remainingTokens
@@ -81,9 +85,9 @@ func NewKnowledgebaseV2WithDefaults() *KnowledgebaseV2 {
 }
 
 // GetId returns the Id field value
-func (o *KnowledgebaseV2) GetId() float32 {
+func (o *KnowledgebaseV2) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -92,7 +96,7 @@ func (o *KnowledgebaseV2) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetIdOk() (*float32, bool) {
+func (o *KnowledgebaseV2) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,7 +104,7 @@ func (o *KnowledgebaseV2) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *KnowledgebaseV2) SetId(v float32) {
+func (o *KnowledgebaseV2) SetId(v int32) {
 	o.Id = v
 }
 
@@ -128,16 +132,18 @@ func (o *KnowledgebaseV2) SetName(v string) {
 	o.Name = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *KnowledgebaseV2) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Description.Get()
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KnowledgebaseV2) GetDescriptionOk() (*string, bool) {
@@ -147,33 +153,47 @@ func (o *KnowledgebaseV2) GetDescriptionOk() (*string, bool) {
 	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *KnowledgebaseV2) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
+// SetDescription sets field value
+func (o *KnowledgebaseV2) SetDescription(v string) {
+	o.Description.Set(&v)
+}
+
+// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+func (o *KnowledgebaseV2) GetProjectId() int32 {
+	if o == nil || IsNil(o.ProjectId) {
+		var ret int32
+		return ret
+	}
+	return *o.ProjectId
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KnowledgebaseV2) GetProjectIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.ProjectId) {
+		return nil, false
+	}
+	return o.ProjectId, true
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *KnowledgebaseV2) HasProjectId() bool {
+	if o != nil && !IsNil(o.ProjectId) {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
-func (o *KnowledgebaseV2) SetDescription(v string) {
-	o.Description.Set(&v)
-}
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *KnowledgebaseV2) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
-
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *KnowledgebaseV2) UnsetDescription() {
-	o.Description.Unset()
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *KnowledgebaseV2) SetProjectId(v int32) {
+	o.ProjectId = &v
 }
 
 // GetDbaasId returns the DbaasId field value
-func (o *KnowledgebaseV2) GetDbaasId() float32 {
+func (o *KnowledgebaseV2) GetDbaasId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -182,7 +202,7 @@ func (o *KnowledgebaseV2) GetDbaasId() float32 {
 
 // GetDbaasIdOk returns a tuple with the DbaasId field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetDbaasIdOk() (*float32, bool) {
+func (o *KnowledgebaseV2) GetDbaasIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -190,7 +210,7 @@ func (o *KnowledgebaseV2) GetDbaasIdOk() (*float32, bool) {
 }
 
 // SetDbaasId sets field value
-func (o *KnowledgebaseV2) SetDbaasId(v float32) {
+func (o *KnowledgebaseV2) SetDbaasId(v int32) {
 	o.DbaasId = v
 }
 
@@ -218,16 +238,18 @@ func (o *KnowledgebaseV2) SetStatus(v string) {
 	o.Status = v
 }
 
-// GetLastSync returns the LastSync field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastSync returns the LastSync field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *KnowledgebaseV2) GetLastSync() time.Time {
-	if o == nil || IsNil(o.LastSync.Get()) {
+	if o == nil || o.LastSync.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.LastSync.Get()
 }
 
-// GetLastSyncOk returns a tuple with the LastSync field value if set, nil otherwise
+// GetLastSyncOk returns a tuple with the LastSync field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KnowledgebaseV2) GetLastSyncOk() (*time.Time, bool) {
@@ -237,33 +259,15 @@ func (o *KnowledgebaseV2) GetLastSyncOk() (*time.Time, bool) {
 	return o.LastSync.Get(), o.LastSync.IsSet()
 }
 
-// HasLastSync returns a boolean if a field has been set.
-func (o *KnowledgebaseV2) HasLastSync() bool {
-	if o != nil && o.LastSync.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastSync gets a reference to the given NullableTime and assigns it to the LastSync field.
+// SetLastSync sets field value
 func (o *KnowledgebaseV2) SetLastSync(v time.Time) {
 	o.LastSync.Set(&v)
 }
-// SetLastSyncNil sets the value for LastSync to be an explicit nil
-func (o *KnowledgebaseV2) SetLastSyncNil() {
-	o.LastSync.Set(nil)
-}
-
-// UnsetLastSync ensures that no value is present for LastSync, not even an explicit nil
-func (o *KnowledgebaseV2) UnsetLastSync() {
-	o.LastSync.Unset()
-}
 
 // GetTotalTokens returns the TotalTokens field value
-func (o *KnowledgebaseV2) GetTotalTokens() float32 {
+func (o *KnowledgebaseV2) GetTotalTokens() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -272,7 +276,7 @@ func (o *KnowledgebaseV2) GetTotalTokens() float32 {
 
 // GetTotalTokensOk returns a tuple with the TotalTokens field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetTotalTokensOk() (*float32, bool) {
+func (o *KnowledgebaseV2) GetTotalTokensOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -280,14 +284,14 @@ func (o *KnowledgebaseV2) GetTotalTokensOk() (*float32, bool) {
 }
 
 // SetTotalTokens sets field value
-func (o *KnowledgebaseV2) SetTotalTokens(v float32) {
+func (o *KnowledgebaseV2) SetTotalTokens(v int32) {
 	o.TotalTokens = v
 }
 
 // GetUsedTokens returns the UsedTokens field value
-func (o *KnowledgebaseV2) GetUsedTokens() float32 {
+func (o *KnowledgebaseV2) GetUsedTokens() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -296,7 +300,7 @@ func (o *KnowledgebaseV2) GetUsedTokens() float32 {
 
 // GetUsedTokensOk returns a tuple with the UsedTokens field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetUsedTokensOk() (*float32, bool) {
+func (o *KnowledgebaseV2) GetUsedTokensOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -304,14 +308,14 @@ func (o *KnowledgebaseV2) GetUsedTokensOk() (*float32, bool) {
 }
 
 // SetUsedTokens sets field value
-func (o *KnowledgebaseV2) SetUsedTokens(v float32) {
+func (o *KnowledgebaseV2) SetUsedTokens(v int32) {
 	o.UsedTokens = v
 }
 
 // GetRemainingTokens returns the RemainingTokens field value
-func (o *KnowledgebaseV2) GetRemainingTokens() float32 {
+func (o *KnowledgebaseV2) GetRemainingTokens() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -320,7 +324,7 @@ func (o *KnowledgebaseV2) GetRemainingTokens() float32 {
 
 // GetRemainingTokensOk returns a tuple with the RemainingTokens field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetRemainingTokensOk() (*float32, bool) {
+func (o *KnowledgebaseV2) GetRemainingTokensOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -328,14 +332,14 @@ func (o *KnowledgebaseV2) GetRemainingTokensOk() (*float32, bool) {
 }
 
 // SetRemainingTokens sets field value
-func (o *KnowledgebaseV2) SetRemainingTokens(v float32) {
+func (o *KnowledgebaseV2) SetRemainingTokens(v int32) {
 	o.RemainingTokens = v
 }
 
 // GetTokenPackageId returns the TokenPackageId field value
-func (o *KnowledgebaseV2) GetTokenPackageId() float32 {
+func (o *KnowledgebaseV2) GetTokenPackageId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -344,7 +348,7 @@ func (o *KnowledgebaseV2) GetTokenPackageId() float32 {
 
 // GetTokenPackageIdOk returns a tuple with the TokenPackageId field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetTokenPackageIdOk() (*float32, bool) {
+func (o *KnowledgebaseV2) GetTokenPackageIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -352,38 +356,40 @@ func (o *KnowledgebaseV2) GetTokenPackageIdOk() (*float32, bool) {
 }
 
 // SetTokenPackageId sets field value
-func (o *KnowledgebaseV2) SetTokenPackageId(v float32) {
+func (o *KnowledgebaseV2) SetTokenPackageId(v int32) {
 	o.TokenPackageId = v
 }
 
 // GetSubscriptionRenewalDate returns the SubscriptionRenewalDate field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *KnowledgebaseV2) GetSubscriptionRenewalDate() time.Time {
-	if o == nil {
+	if o == nil || o.SubscriptionRenewalDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
 
-	return o.SubscriptionRenewalDate
+	return *o.SubscriptionRenewalDate.Get()
 }
 
 // GetSubscriptionRenewalDateOk returns a tuple with the SubscriptionRenewalDate field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KnowledgebaseV2) GetSubscriptionRenewalDateOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.SubscriptionRenewalDate, true
+	return o.SubscriptionRenewalDate.Get(), o.SubscriptionRenewalDate.IsSet()
 }
 
 // SetSubscriptionRenewalDate sets field value
 func (o *KnowledgebaseV2) SetSubscriptionRenewalDate(v time.Time) {
-	o.SubscriptionRenewalDate = v
+	o.SubscriptionRenewalDate.Set(&v)
 }
 
 // GetDocumentsCount returns the DocumentsCount field value
-func (o *KnowledgebaseV2) GetDocumentsCount() float32 {
+func (o *KnowledgebaseV2) GetDocumentsCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -392,7 +398,7 @@ func (o *KnowledgebaseV2) GetDocumentsCount() float32 {
 
 // GetDocumentsCountOk returns a tuple with the DocumentsCount field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetDocumentsCountOk() (*float32, bool) {
+func (o *KnowledgebaseV2) GetDocumentsCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -400,14 +406,14 @@ func (o *KnowledgebaseV2) GetDocumentsCountOk() (*float32, bool) {
 }
 
 // SetDocumentsCount sets field value
-func (o *KnowledgebaseV2) SetDocumentsCount(v float32) {
+func (o *KnowledgebaseV2) SetDocumentsCount(v int32) {
 	o.DocumentsCount = v
 }
 
 // GetAgentsIds returns the AgentsIds field value
-func (o *KnowledgebaseV2) GetAgentsIds() []float32 {
+func (o *KnowledgebaseV2) GetAgentsIds() []int32 {
 	if o == nil {
-		var ret []float32
+		var ret []int32
 		return ret
 	}
 
@@ -416,7 +422,7 @@ func (o *KnowledgebaseV2) GetAgentsIds() []float32 {
 
 // GetAgentsIdsOk returns a tuple with the AgentsIds field value
 // and a boolean to check if the value has been set.
-func (o *KnowledgebaseV2) GetAgentsIdsOk() ([]float32, bool) {
+func (o *KnowledgebaseV2) GetAgentsIdsOk() ([]int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -424,7 +430,7 @@ func (o *KnowledgebaseV2) GetAgentsIdsOk() ([]float32, bool) {
 }
 
 // SetAgentsIds sets field value
-func (o *KnowledgebaseV2) SetAgentsIds(v []float32) {
+func (o *KnowledgebaseV2) SetAgentsIds(v []int32) {
 	o.AgentsIds = v
 }
 
@@ -464,19 +470,18 @@ func (o KnowledgebaseV2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
+	toSerialize["description"] = o.Description.Get()
+	if !IsNil(o.ProjectId) {
+		toSerialize["project_id"] = o.ProjectId
 	}
 	toSerialize["dbaas_id"] = o.DbaasId
 	toSerialize["status"] = o.Status
-	if o.LastSync.IsSet() {
-		toSerialize["last_sync"] = o.LastSync.Get()
-	}
+	toSerialize["last_sync"] = o.LastSync.Get()
 	toSerialize["total_tokens"] = o.TotalTokens
 	toSerialize["used_tokens"] = o.UsedTokens
 	toSerialize["remaining_tokens"] = o.RemainingTokens
 	toSerialize["token_package_id"] = o.TokenPackageId
-	toSerialize["subscription_renewal_date"] = o.SubscriptionRenewalDate
+	toSerialize["subscription_renewal_date"] = o.SubscriptionRenewalDate.Get()
 	toSerialize["documents_count"] = o.DocumentsCount
 	toSerialize["agents_ids"] = o.AgentsIds
 	toSerialize["created_at"] = o.CreatedAt

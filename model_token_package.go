@@ -20,23 +20,25 @@ var _ MappedNullable = &TokenPackage{}
 
 // TokenPackage Пакет токенов
 type TokenPackage struct {
-	// Уникальный идентификатор пакета
-	Id float32 `json:"id"`
-	// ID модели, к которой применяется пакет токенов
-	ModelId float32 `json:"model_id"`
-	// Название пакета токенов
+	// ID пакета
+	Id int32 `json:"id"`
+	// ID модели, к которой относится пакет
+	ModelId int32 `json:"model_id"`
+	// ID тарифа пакета в биллинге
+	ServiceTypeId int32 `json:"service_type_id"`
+	// Название пакета
 	Name string `json:"name"`
-	// Тип пакета (base - базовый, additional - дополнительный, promo - промо)
+	// Тип пакета: `base` — пакет подписки, `additional` — дополнительный пакет, `promo` — промо-пакет
 	PackageType string `json:"package_type"`
-	// Тип сущности, к которой относится пакет (agent - агент, knowledgebase - база знаний)
+	// Для чего пакет: `agent` — AI агент, `knowledgebase` — база знаний
 	Type string `json:"type"`
 	// Количество токенов в пакете
-	TokenAmount float32 `json:"token_amount"`
-	// Цена пакета в целых единицах
+	TokenAmount int32 `json:"token_amount"`
+	// Цена пакета в рублях
 	Price float32 `json:"price"`
-	// Продолжительность пакета в днях (null для дополнительных пакетов)
-	DurationDays NullableFloat32 `json:"duration_days,omitempty"`
-	// Флаг, указывающий доступность пакета
+	// Период подписки в днях. `null` для дополнительных пакетов
+	DurationDays NullableInt32 `json:"duration_days"`
+	// Пакет доступен для покупки
 	IsAvailable bool `json:"is_available"`
 }
 
@@ -44,15 +46,17 @@ type TokenPackage struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTokenPackage(id float32, modelId float32, name string, packageType string, type_ string, tokenAmount float32, price float32, isAvailable bool) *TokenPackage {
+func NewTokenPackage(id int32, modelId int32, serviceTypeId int32, name string, packageType string, type_ string, tokenAmount int32, price float32, durationDays NullableInt32, isAvailable bool) *TokenPackage {
 	this := TokenPackage{}
 	this.Id = id
 	this.ModelId = modelId
+	this.ServiceTypeId = serviceTypeId
 	this.Name = name
 	this.PackageType = packageType
 	this.Type = type_
 	this.TokenAmount = tokenAmount
 	this.Price = price
+	this.DurationDays = durationDays
 	this.IsAvailable = isAvailable
 	return &this
 }
@@ -66,9 +70,9 @@ func NewTokenPackageWithDefaults() *TokenPackage {
 }
 
 // GetId returns the Id field value
-func (o *TokenPackage) GetId() float32 {
+func (o *TokenPackage) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -77,7 +81,7 @@ func (o *TokenPackage) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *TokenPackage) GetIdOk() (*float32, bool) {
+func (o *TokenPackage) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,14 +89,14 @@ func (o *TokenPackage) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *TokenPackage) SetId(v float32) {
+func (o *TokenPackage) SetId(v int32) {
 	o.Id = v
 }
 
 // GetModelId returns the ModelId field value
-func (o *TokenPackage) GetModelId() float32 {
+func (o *TokenPackage) GetModelId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -101,7 +105,7 @@ func (o *TokenPackage) GetModelId() float32 {
 
 // GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-func (o *TokenPackage) GetModelIdOk() (*float32, bool) {
+func (o *TokenPackage) GetModelIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -109,8 +113,32 @@ func (o *TokenPackage) GetModelIdOk() (*float32, bool) {
 }
 
 // SetModelId sets field value
-func (o *TokenPackage) SetModelId(v float32) {
+func (o *TokenPackage) SetModelId(v int32) {
 	o.ModelId = v
+}
+
+// GetServiceTypeId returns the ServiceTypeId field value
+func (o *TokenPackage) GetServiceTypeId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ServiceTypeId
+}
+
+// GetServiceTypeIdOk returns a tuple with the ServiceTypeId field value
+// and a boolean to check if the value has been set.
+func (o *TokenPackage) GetServiceTypeIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ServiceTypeId, true
+}
+
+// SetServiceTypeId sets field value
+func (o *TokenPackage) SetServiceTypeId(v int32) {
+	o.ServiceTypeId = v
 }
 
 // GetName returns the Name field value
@@ -186,9 +214,9 @@ func (o *TokenPackage) SetType(v string) {
 }
 
 // GetTokenAmount returns the TokenAmount field value
-func (o *TokenPackage) GetTokenAmount() float32 {
+func (o *TokenPackage) GetTokenAmount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -197,7 +225,7 @@ func (o *TokenPackage) GetTokenAmount() float32 {
 
 // GetTokenAmountOk returns a tuple with the TokenAmount field value
 // and a boolean to check if the value has been set.
-func (o *TokenPackage) GetTokenAmountOk() (*float32, bool) {
+func (o *TokenPackage) GetTokenAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -205,7 +233,7 @@ func (o *TokenPackage) GetTokenAmountOk() (*float32, bool) {
 }
 
 // SetTokenAmount sets field value
-func (o *TokenPackage) SetTokenAmount(v float32) {
+func (o *TokenPackage) SetTokenAmount(v int32) {
 	o.TokenAmount = v
 }
 
@@ -233,46 +261,30 @@ func (o *TokenPackage) SetPrice(v float32) {
 	o.Price = v
 }
 
-// GetDurationDays returns the DurationDays field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TokenPackage) GetDurationDays() float32 {
-	if o == nil || IsNil(o.DurationDays.Get()) {
-		var ret float32
+// GetDurationDays returns the DurationDays field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *TokenPackage) GetDurationDays() int32 {
+	if o == nil || o.DurationDays.Get() == nil {
+		var ret int32
 		return ret
 	}
+
 	return *o.DurationDays.Get()
 }
 
-// GetDurationDaysOk returns a tuple with the DurationDays field value if set, nil otherwise
+// GetDurationDaysOk returns a tuple with the DurationDays field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TokenPackage) GetDurationDaysOk() (*float32, bool) {
+func (o *TokenPackage) GetDurationDaysOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
 	return o.DurationDays.Get(), o.DurationDays.IsSet()
 }
 
-// HasDurationDays returns a boolean if a field has been set.
-func (o *TokenPackage) HasDurationDays() bool {
-	if o != nil && o.DurationDays.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDurationDays gets a reference to the given NullableFloat32 and assigns it to the DurationDays field.
-func (o *TokenPackage) SetDurationDays(v float32) {
+// SetDurationDays sets field value
+func (o *TokenPackage) SetDurationDays(v int32) {
 	o.DurationDays.Set(&v)
-}
-// SetDurationDaysNil sets the value for DurationDays to be an explicit nil
-func (o *TokenPackage) SetDurationDaysNil() {
-	o.DurationDays.Set(nil)
-}
-
-// UnsetDurationDays ensures that no value is present for DurationDays, not even an explicit nil
-func (o *TokenPackage) UnsetDurationDays() {
-	o.DurationDays.Unset()
 }
 
 // GetIsAvailable returns the IsAvailable field value
@@ -311,14 +323,13 @@ func (o TokenPackage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["model_id"] = o.ModelId
+	toSerialize["service_type_id"] = o.ServiceTypeId
 	toSerialize["name"] = o.Name
 	toSerialize["package_type"] = o.PackageType
 	toSerialize["type"] = o.Type
 	toSerialize["token_amount"] = o.TokenAmount
 	toSerialize["price"] = o.Price
-	if o.DurationDays.IsSet() {
-		toSerialize["duration_days"] = o.DurationDays.Get()
-	}
+	toSerialize["duration_days"] = o.DurationDays.Get()
 	toSerialize["is_available"] = o.IsAvailable
 	return toSerialize, nil
 }

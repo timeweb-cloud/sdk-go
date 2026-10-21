@@ -19,43 +19,46 @@ import (
 // checks if the ModelV3 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ModelV3{}
 
-// ModelV3 Модель AI (v3). Идентификация и управляющие поля находятся на верхнем уровне, все сравнимые характеристики (цены, лимиты, возможности) — в словаре `parameter_values`
+// ModelV3 AI модель с характеристиками для сравнения (v3). Цены и характеристики — в `parameter_values`
 type ModelV3 struct {
-	// Уникальный идентификатор модели
-	Id float32 `json:"id"`
-	// ID провайдера, который предоставляет модель
-	ProviderId float32 `json:"provider_id"`
-	// Название модели
+	// ID модели
+	Id int32 `json:"id"`
+	// ID провайдера модели
+	ProviderId int32 `json:"provider_id"`
+	// Семейство модели
 	Name string `json:"name"`
-	// Публичное имя модели
+	// Отображаемое название модели
 	PublicName string `json:"public_name"`
-	// Идентификатор модели, который передаётся в поле `model` тела запроса
+	// Идентификатор модели с префиксом провайдера — передаётся в поле `model` запросов к AI Gateway
 	ModelName string `json:"model_name"`
-	// Тип модели (llm — языковая модель, hosted-llm — self-hosted языковая модель, embedding — модель для эмбеддингов, image — генерация изображений, audio — работа с аудио, moderation — модерация контента)
+	// Тип модели: - `llm` — языковая модель - `hosted-llm` — языковая модель, размещённая в Timeweb Cloud - `embedding` — модель эмбеддингов - `image` — генерация изображений - `audio` — работа с аудио - `video` — генерация видео - `moderation` — модерация контента - `system-one` — служебная модель с собственным API
 	Type string `json:"type"`
 	// Версия модели
 	Version string `json:"version"`
-	// Признак, что модель устарела
+	// Модель устарела и недоступна для выбора в новых агентах
 	IsDeprecated bool `json:"is_deprecated"`
-	// Признак, что поддержка модели остановлена
+	// Поддержка модели остановлена: запросы к ней не выполняются
 	IsStopped bool `json:"is_stopped"`
 	// Дата отключения модели у провайдера. `null`, если отключение не запланировано
-	DeprecationDate NullableTime `json:"deprecation_date,omitempty"`
+	DeprecationDate NullableTime `json:"deprecation_date"`
 	// Дата и время добавления модели
 	CreatedAt time.Time `json:"created_at"`
-	// Дата и время последнего обновления модели
+	// Дата и время последнего изменения модели
 	UpdatedAt time.Time `json:"updated_at"`
-	// Информация о доступных параметрах модели с их ограничениями. Ключ — название параметра, значение — его тип, ограничения и значение по умолчанию
-	ParamsInfo map[string]interface{} `json:"params_info,omitempty"`
-	// Характеристики модели. Ключ — код характеристики, значение — число, строка, булево значение или массив строк.  Основные коды: - `cost_in` — цена за 1 входной токен в рублях - `cost_out` — цена за 1 выходной токен в рублях - `context_window` — размер контекстного окна в токенах - `max_output_tokens` — максимальное количество токенов в ответе - `is_reasoning` — поддержка режима рассуждений - `supports_function_calling` — поддержка function calling - `supported_input_modalities` — поддерживаемые входные модальности (например, `text`, `image`) - `supported_output_modalities` — поддерживаемые выходные модальности - `avg_speed` — средняя скорость генерации в токенах в секунду - `aa_intelligence_index`, `aa_coding_index`, `aa_agentic_index` — индексы качества Artificial Analysis - `release_date` — дата релиза модели
-	ParameterValues map[string]interface{} `json:"parameter_values"`
+	// Параметры генерации, которые можно настроить у агента с этой моделью. Ключ — имя параметра (`temperature`, `top_p`, `max_tokens`, `reasoning_effort` и т.д.). `null`, если параметры не заданы
+	ParamsInfo map[string]ModelParamInfo `json:"params_info"`
+	// Характеристики модели. Ключ — `code` из справочника `GET /api/v3/cloud-ai/model-parameters`, значение — число, строка, булево значение или массив строк. Если значение неизвестно, ключа нет.  Основные коды: - `cost_in`, `cost_out` — цена 1 входного / выходного токена в рублях - `cost_cache_read`, `cost_cache_write` — цена 1 токена чтения / записи кэша промпта в рублях; ключа нет, если отдельной цены нет (тарифицируется по `cost_in`) - `pricing_unit` — единица тарификации: `token` (по умолчанию), `megapixel`, `credit` - `cost_per_image` — цена изображения базового размера (1 МП) в рублях - `credits_from`, `cost_per_second_from` — минимальная ставка в кредитах провайдера и цена от, в рублях, за секунду видео - `context_window`, `max_output_tokens` — размер контекста и максимум токенов в ответе - `is_reasoning`, `supports_function_calling` — поддержка рассуждений и вызова инструментов - `supported_input_modalities`, `supported_output_modalities` — входные и выходные модальности (`text`, `image`, ...) - `avg_speed` — средняя скорость генерации, токенов в секунду - `aa_intelligence_index`, `aa_coding_index`, `aa_agentic_index` — индексы Artificial Analysis - `release_date` — дата релиза (`YYYY-MM-DD`)
+	ParameterValues map[string]float32 `json:"parameter_values"`
+	// Ступени цены по размеру входного контекста, по возрастанию порога. Пустой массив — у модели одна цена при любом контексте
+	PriceTiers []ModelPriceTier `json:"price_tiers"`
+	Batch ModelBatch `json:"batch"`
 }
 
 // NewModelV3 instantiates a new ModelV3 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelV3(id float32, providerId float32, name string, publicName string, modelName string, type_ string, version string, isDeprecated bool, isStopped bool, createdAt time.Time, updatedAt time.Time, parameterValues map[string]interface{}) *ModelV3 {
+func NewModelV3(id int32, providerId int32, name string, publicName string, modelName string, type_ string, version string, isDeprecated bool, isStopped bool, deprecationDate NullableTime, createdAt time.Time, updatedAt time.Time, paramsInfo map[string]ModelParamInfo, parameterValues map[string]float32, priceTiers []ModelPriceTier, batch ModelBatch) *ModelV3 {
 	this := ModelV3{}
 	this.Id = id
 	this.ProviderId = providerId
@@ -66,9 +69,13 @@ func NewModelV3(id float32, providerId float32, name string, publicName string, 
 	this.Version = version
 	this.IsDeprecated = isDeprecated
 	this.IsStopped = isStopped
+	this.DeprecationDate = deprecationDate
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
+	this.ParamsInfo = paramsInfo
 	this.ParameterValues = parameterValues
+	this.PriceTiers = priceTiers
+	this.Batch = batch
 	return &this
 }
 
@@ -81,9 +88,9 @@ func NewModelV3WithDefaults() *ModelV3 {
 }
 
 // GetId returns the Id field value
-func (o *ModelV3) GetId() float32 {
+func (o *ModelV3) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -92,7 +99,7 @@ func (o *ModelV3) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ModelV3) GetIdOk() (*float32, bool) {
+func (o *ModelV3) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,14 +107,14 @@ func (o *ModelV3) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *ModelV3) SetId(v float32) {
+func (o *ModelV3) SetId(v int32) {
 	o.Id = v
 }
 
 // GetProviderId returns the ProviderId field value
-func (o *ModelV3) GetProviderId() float32 {
+func (o *ModelV3) GetProviderId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -116,7 +123,7 @@ func (o *ModelV3) GetProviderId() float32 {
 
 // GetProviderIdOk returns a tuple with the ProviderId field value
 // and a boolean to check if the value has been set.
-func (o *ModelV3) GetProviderIdOk() (*float32, bool) {
+func (o *ModelV3) GetProviderIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -124,7 +131,7 @@ func (o *ModelV3) GetProviderIdOk() (*float32, bool) {
 }
 
 // SetProviderId sets field value
-func (o *ModelV3) SetProviderId(v float32) {
+func (o *ModelV3) SetProviderId(v int32) {
 	o.ProviderId = v
 }
 
@@ -296,16 +303,18 @@ func (o *ModelV3) SetIsStopped(v bool) {
 	o.IsStopped = v
 }
 
-// GetDeprecationDate returns the DeprecationDate field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDeprecationDate returns the DeprecationDate field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *ModelV3) GetDeprecationDate() time.Time {
-	if o == nil || IsNil(o.DeprecationDate.Get()) {
+	if o == nil || o.DeprecationDate.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.DeprecationDate.Get()
 }
 
-// GetDeprecationDateOk returns a tuple with the DeprecationDate field value if set, nil otherwise
+// GetDeprecationDateOk returns a tuple with the DeprecationDate field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ModelV3) GetDeprecationDateOk() (*time.Time, bool) {
@@ -315,27 +324,9 @@ func (o *ModelV3) GetDeprecationDateOk() (*time.Time, bool) {
 	return o.DeprecationDate.Get(), o.DeprecationDate.IsSet()
 }
 
-// HasDeprecationDate returns a boolean if a field has been set.
-func (o *ModelV3) HasDeprecationDate() bool {
-	if o != nil && o.DeprecationDate.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDeprecationDate gets a reference to the given NullableTime and assigns it to the DeprecationDate field.
+// SetDeprecationDate sets field value
 func (o *ModelV3) SetDeprecationDate(v time.Time) {
 	o.DeprecationDate.Set(&v)
-}
-// SetDeprecationDateNil sets the value for DeprecationDate to be an explicit nil
-func (o *ModelV3) SetDeprecationDateNil() {
-	o.DeprecationDate.Set(nil)
-}
-
-// UnsetDeprecationDate ensures that no value is present for DeprecationDate, not even an explicit nil
-func (o *ModelV3) UnsetDeprecationDate() {
-	o.DeprecationDate.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -386,43 +377,36 @@ func (o *ModelV3) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
-// GetParamsInfo returns the ParamsInfo field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ModelV3) GetParamsInfo() map[string]interface{} {
+// GetParamsInfo returns the ParamsInfo field value
+// If the value is explicit nil, the zero value for map[string]ModelParamInfo will be returned
+func (o *ModelV3) GetParamsInfo() map[string]ModelParamInfo {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret map[string]ModelParamInfo
 		return ret
 	}
+
 	return o.ParamsInfo
 }
 
-// GetParamsInfoOk returns a tuple with the ParamsInfo field value if set, nil otherwise
+// GetParamsInfoOk returns a tuple with the ParamsInfo field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ModelV3) GetParamsInfoOk() (map[string]interface{}, bool) {
+func (o *ModelV3) GetParamsInfoOk() (*map[string]ModelParamInfo, bool) {
 	if o == nil || IsNil(o.ParamsInfo) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.ParamsInfo, true
+	return &o.ParamsInfo, true
 }
 
-// HasParamsInfo returns a boolean if a field has been set.
-func (o *ModelV3) HasParamsInfo() bool {
-	if o != nil && IsNil(o.ParamsInfo) {
-		return true
-	}
-
-	return false
-}
-
-// SetParamsInfo gets a reference to the given map[string]interface{} and assigns it to the ParamsInfo field.
-func (o *ModelV3) SetParamsInfo(v map[string]interface{}) {
+// SetParamsInfo sets field value
+func (o *ModelV3) SetParamsInfo(v map[string]ModelParamInfo) {
 	o.ParamsInfo = v
 }
 
 // GetParameterValues returns the ParameterValues field value
-func (o *ModelV3) GetParameterValues() map[string]interface{} {
+func (o *ModelV3) GetParameterValues() map[string]float32 {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret map[string]float32
 		return ret
 	}
 
@@ -431,16 +415,64 @@ func (o *ModelV3) GetParameterValues() map[string]interface{} {
 
 // GetParameterValuesOk returns a tuple with the ParameterValues field value
 // and a boolean to check if the value has been set.
-func (o *ModelV3) GetParameterValuesOk() (map[string]interface{}, bool) {
+func (o *ModelV3) GetParameterValuesOk() (*map[string]float32, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.ParameterValues, true
+	return &o.ParameterValues, true
 }
 
 // SetParameterValues sets field value
-func (o *ModelV3) SetParameterValues(v map[string]interface{}) {
+func (o *ModelV3) SetParameterValues(v map[string]float32) {
 	o.ParameterValues = v
+}
+
+// GetPriceTiers returns the PriceTiers field value
+func (o *ModelV3) GetPriceTiers() []ModelPriceTier {
+	if o == nil {
+		var ret []ModelPriceTier
+		return ret
+	}
+
+	return o.PriceTiers
+}
+
+// GetPriceTiersOk returns a tuple with the PriceTiers field value
+// and a boolean to check if the value has been set.
+func (o *ModelV3) GetPriceTiersOk() ([]ModelPriceTier, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PriceTiers, true
+}
+
+// SetPriceTiers sets field value
+func (o *ModelV3) SetPriceTiers(v []ModelPriceTier) {
+	o.PriceTiers = v
+}
+
+// GetBatch returns the Batch field value
+func (o *ModelV3) GetBatch() ModelBatch {
+	if o == nil {
+		var ret ModelBatch
+		return ret
+	}
+
+	return o.Batch
+}
+
+// GetBatchOk returns a tuple with the Batch field value
+// and a boolean to check if the value has been set.
+func (o *ModelV3) GetBatchOk() (*ModelBatch, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Batch, true
+}
+
+// SetBatch sets field value
+func (o *ModelV3) SetBatch(v ModelBatch) {
+	o.Batch = v
 }
 
 func (o ModelV3) MarshalJSON() ([]byte, error) {
@@ -462,15 +494,15 @@ func (o ModelV3) ToMap() (map[string]interface{}, error) {
 	toSerialize["version"] = o.Version
 	toSerialize["is_deprecated"] = o.IsDeprecated
 	toSerialize["is_stopped"] = o.IsStopped
-	if o.DeprecationDate.IsSet() {
-		toSerialize["deprecation_date"] = o.DeprecationDate.Get()
-	}
+	toSerialize["deprecation_date"] = o.DeprecationDate.Get()
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
 	if o.ParamsInfo != nil {
 		toSerialize["params_info"] = o.ParamsInfo
 	}
 	toSerialize["parameter_values"] = o.ParameterValues
+	toSerialize["price_tiers"] = o.PriceTiers
+	toSerialize["batch"] = o.Batch
 	return toSerialize, nil
 }
 

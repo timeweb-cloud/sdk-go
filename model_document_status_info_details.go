@@ -19,15 +19,36 @@ import (
 // checks if the DocumentStatusInfoDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocumentStatusInfoDetails{}
 
-// DocumentStatusInfoDetails Дополнительные детали, зависящие от типа статуса
+// DocumentStatusInfoDetails Подробности, набор полей зависит от состояния. Могут присутствовать и другие поля
 type DocumentStatusInfoDetails struct {
-	// Время начала индексации
+	// `indexing`: время начала индексации
 	StartedAt *time.Time `json:"started_at,omitempty"`
-	// Текущий этап индексации
+	// `indexing`: текущий этап
 	CurrentStage *string `json:"current_stage,omitempty"`
-	// Прогресс в процентах (0-100)
+	// `indexing`: прогресс в процентах
 	Progress *float32 `json:"progress,omitempty"`
+	// `indexed`: длительность индексации в миллисекундах
+	IndexingDurationMs *float32 `json:"indexing_duration_ms,omitempty"`
+	// `indexed`: израсходовано токенов
+	TokensUsed *float32 `json:"tokens_used,omitempty"`
+	// `indexed`: оценка количества токенов перед индексацией
+	TokensEstimated *float32 `json:"tokens_estimated,omitempty"`
+	// `indexed`: количество фрагментов, на которые разбит документ
+	ChunksCount *float32 `json:"chunks_count,omitempty"`
+	// `INSUFFICIENT_TOKENS`: сколько токенов нужно
+	Needed *float32 `json:"needed,omitempty"`
+	// `INSUFFICIENT_TOKENS`: сколько токенов доступно
+	Available *float32 `json:"available,omitempty"`
+	// `INSUFFICIENT_TOKENS`: оценка без запаса
+	Estimated *float32 `json:"estimated,omitempty"`
+	// `CRITICAL_BALANCE`, `NEGATIVE_BALANCE`: текущий остаток токенов
+	Balance *float32 `json:"balance,omitempty"`
+	// `CRITICAL_BALANCE`: минимально необходимый остаток
+	MinRequired *float32 `json:"min_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DocumentStatusInfoDetails DocumentStatusInfoDetails
 
 // NewDocumentStatusInfoDetails instantiates a new DocumentStatusInfoDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -142,6 +163,294 @@ func (o *DocumentStatusInfoDetails) SetProgress(v float32) {
 	o.Progress = &v
 }
 
+// GetIndexingDurationMs returns the IndexingDurationMs field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetIndexingDurationMs() float32 {
+	if o == nil || IsNil(o.IndexingDurationMs) {
+		var ret float32
+		return ret
+	}
+	return *o.IndexingDurationMs
+}
+
+// GetIndexingDurationMsOk returns a tuple with the IndexingDurationMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetIndexingDurationMsOk() (*float32, bool) {
+	if o == nil || IsNil(o.IndexingDurationMs) {
+		return nil, false
+	}
+	return o.IndexingDurationMs, true
+}
+
+// HasIndexingDurationMs returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasIndexingDurationMs() bool {
+	if o != nil && !IsNil(o.IndexingDurationMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndexingDurationMs gets a reference to the given float32 and assigns it to the IndexingDurationMs field.
+func (o *DocumentStatusInfoDetails) SetIndexingDurationMs(v float32) {
+	o.IndexingDurationMs = &v
+}
+
+// GetTokensUsed returns the TokensUsed field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetTokensUsed() float32 {
+	if o == nil || IsNil(o.TokensUsed) {
+		var ret float32
+		return ret
+	}
+	return *o.TokensUsed
+}
+
+// GetTokensUsedOk returns a tuple with the TokensUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetTokensUsedOk() (*float32, bool) {
+	if o == nil || IsNil(o.TokensUsed) {
+		return nil, false
+	}
+	return o.TokensUsed, true
+}
+
+// HasTokensUsed returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasTokensUsed() bool {
+	if o != nil && !IsNil(o.TokensUsed) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokensUsed gets a reference to the given float32 and assigns it to the TokensUsed field.
+func (o *DocumentStatusInfoDetails) SetTokensUsed(v float32) {
+	o.TokensUsed = &v
+}
+
+// GetTokensEstimated returns the TokensEstimated field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetTokensEstimated() float32 {
+	if o == nil || IsNil(o.TokensEstimated) {
+		var ret float32
+		return ret
+	}
+	return *o.TokensEstimated
+}
+
+// GetTokensEstimatedOk returns a tuple with the TokensEstimated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetTokensEstimatedOk() (*float32, bool) {
+	if o == nil || IsNil(o.TokensEstimated) {
+		return nil, false
+	}
+	return o.TokensEstimated, true
+}
+
+// HasTokensEstimated returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasTokensEstimated() bool {
+	if o != nil && !IsNil(o.TokensEstimated) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokensEstimated gets a reference to the given float32 and assigns it to the TokensEstimated field.
+func (o *DocumentStatusInfoDetails) SetTokensEstimated(v float32) {
+	o.TokensEstimated = &v
+}
+
+// GetChunksCount returns the ChunksCount field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetChunksCount() float32 {
+	if o == nil || IsNil(o.ChunksCount) {
+		var ret float32
+		return ret
+	}
+	return *o.ChunksCount
+}
+
+// GetChunksCountOk returns a tuple with the ChunksCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetChunksCountOk() (*float32, bool) {
+	if o == nil || IsNil(o.ChunksCount) {
+		return nil, false
+	}
+	return o.ChunksCount, true
+}
+
+// HasChunksCount returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasChunksCount() bool {
+	if o != nil && !IsNil(o.ChunksCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetChunksCount gets a reference to the given float32 and assigns it to the ChunksCount field.
+func (o *DocumentStatusInfoDetails) SetChunksCount(v float32) {
+	o.ChunksCount = &v
+}
+
+// GetNeeded returns the Needed field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetNeeded() float32 {
+	if o == nil || IsNil(o.Needed) {
+		var ret float32
+		return ret
+	}
+	return *o.Needed
+}
+
+// GetNeededOk returns a tuple with the Needed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetNeededOk() (*float32, bool) {
+	if o == nil || IsNil(o.Needed) {
+		return nil, false
+	}
+	return o.Needed, true
+}
+
+// HasNeeded returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasNeeded() bool {
+	if o != nil && !IsNil(o.Needed) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeeded gets a reference to the given float32 and assigns it to the Needed field.
+func (o *DocumentStatusInfoDetails) SetNeeded(v float32) {
+	o.Needed = &v
+}
+
+// GetAvailable returns the Available field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetAvailable() float32 {
+	if o == nil || IsNil(o.Available) {
+		var ret float32
+		return ret
+	}
+	return *o.Available
+}
+
+// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetAvailableOk() (*float32, bool) {
+	if o == nil || IsNil(o.Available) {
+		return nil, false
+	}
+	return o.Available, true
+}
+
+// HasAvailable returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasAvailable() bool {
+	if o != nil && !IsNil(o.Available) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailable gets a reference to the given float32 and assigns it to the Available field.
+func (o *DocumentStatusInfoDetails) SetAvailable(v float32) {
+	o.Available = &v
+}
+
+// GetEstimated returns the Estimated field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetEstimated() float32 {
+	if o == nil || IsNil(o.Estimated) {
+		var ret float32
+		return ret
+	}
+	return *o.Estimated
+}
+
+// GetEstimatedOk returns a tuple with the Estimated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetEstimatedOk() (*float32, bool) {
+	if o == nil || IsNil(o.Estimated) {
+		return nil, false
+	}
+	return o.Estimated, true
+}
+
+// HasEstimated returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasEstimated() bool {
+	if o != nil && !IsNil(o.Estimated) {
+		return true
+	}
+
+	return false
+}
+
+// SetEstimated gets a reference to the given float32 and assigns it to the Estimated field.
+func (o *DocumentStatusInfoDetails) SetEstimated(v float32) {
+	o.Estimated = &v
+}
+
+// GetBalance returns the Balance field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetBalance() float32 {
+	if o == nil || IsNil(o.Balance) {
+		var ret float32
+		return ret
+	}
+	return *o.Balance
+}
+
+// GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetBalanceOk() (*float32, bool) {
+	if o == nil || IsNil(o.Balance) {
+		return nil, false
+	}
+	return o.Balance, true
+}
+
+// HasBalance returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasBalance() bool {
+	if o != nil && !IsNil(o.Balance) {
+		return true
+	}
+
+	return false
+}
+
+// SetBalance gets a reference to the given float32 and assigns it to the Balance field.
+func (o *DocumentStatusInfoDetails) SetBalance(v float32) {
+	o.Balance = &v
+}
+
+// GetMinRequired returns the MinRequired field value if set, zero value otherwise.
+func (o *DocumentStatusInfoDetails) GetMinRequired() float32 {
+	if o == nil || IsNil(o.MinRequired) {
+		var ret float32
+		return ret
+	}
+	return *o.MinRequired
+}
+
+// GetMinRequiredOk returns a tuple with the MinRequired field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfoDetails) GetMinRequiredOk() (*float32, bool) {
+	if o == nil || IsNil(o.MinRequired) {
+		return nil, false
+	}
+	return o.MinRequired, true
+}
+
+// HasMinRequired returns a boolean if a field has been set.
+func (o *DocumentStatusInfoDetails) HasMinRequired() bool {
+	if o != nil && !IsNil(o.MinRequired) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinRequired gets a reference to the given float32 and assigns it to the MinRequired field.
+func (o *DocumentStatusInfoDetails) SetMinRequired(v float32) {
+	o.MinRequired = &v
+}
+
 func (o DocumentStatusInfoDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -161,7 +470,67 @@ func (o DocumentStatusInfoDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Progress) {
 		toSerialize["progress"] = o.Progress
 	}
+	if !IsNil(o.IndexingDurationMs) {
+		toSerialize["indexing_duration_ms"] = o.IndexingDurationMs
+	}
+	if !IsNil(o.TokensUsed) {
+		toSerialize["tokens_used"] = o.TokensUsed
+	}
+	if !IsNil(o.TokensEstimated) {
+		toSerialize["tokens_estimated"] = o.TokensEstimated
+	}
+	if !IsNil(o.ChunksCount) {
+		toSerialize["chunks_count"] = o.ChunksCount
+	}
+	if !IsNil(o.Needed) {
+		toSerialize["needed"] = o.Needed
+	}
+	if !IsNil(o.Available) {
+		toSerialize["available"] = o.Available
+	}
+	if !IsNil(o.Estimated) {
+		toSerialize["estimated"] = o.Estimated
+	}
+	if !IsNil(o.Balance) {
+		toSerialize["balance"] = o.Balance
+	}
+	if !IsNil(o.MinRequired) {
+		toSerialize["min_required"] = o.MinRequired
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DocumentStatusInfoDetails) UnmarshalJSON(bytes []byte) (err error) {
+	varDocumentStatusInfoDetails := _DocumentStatusInfoDetails{}
+
+	if err = json.Unmarshal(bytes, &varDocumentStatusInfoDetails); err == nil {
+		*o = DocumentStatusInfoDetails(varDocumentStatusInfoDetails)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "started_at")
+		delete(additionalProperties, "current_stage")
+		delete(additionalProperties, "progress")
+		delete(additionalProperties, "indexing_duration_ms")
+		delete(additionalProperties, "tokens_used")
+		delete(additionalProperties, "tokens_estimated")
+		delete(additionalProperties, "chunks_count")
+		delete(additionalProperties, "needed")
+		delete(additionalProperties, "available")
+		delete(additionalProperties, "estimated")
+		delete(additionalProperties, "balance")
+		delete(additionalProperties, "min_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDocumentStatusInfoDetails struct {

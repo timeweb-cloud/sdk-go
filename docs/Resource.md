@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Requested** | Pointer to **float32** | Запрошенное количество ресурса | [optional] [default to 0]
-**Allocatable** | Pointer to **float32** | Доступное количество | [optional] [default to 0]
-**Capacity** | Pointer to **float32** | Общее количество | [optional] [default to 0]
-**Used** | Pointer to **float32** | Используемое количество | [optional] [default to 0]
+**Uri** | **string** | URI ресурса | 
+**Name** | **string** | Имя ресурса | 
+**Description** | Pointer to **string** | Описание ресурса | [optional] 
+**MimeType** | Pointer to **string** | Тип содержимого | [optional] 
 
 ## Methods
 
 ### NewResource
 
-`func NewResource() *Resource`
+`func NewResource(uri string, name string, ) *Resource`
 
 NewResource instantiates a new Resource object
 This constructor will assign default values to properties that have it defined,
@@ -28,105 +28,95 @@ NewResourceWithDefaults instantiates a new Resource object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetRequested
+### GetUri
 
-`func (o *Resource) GetRequested() float32`
+`func (o *Resource) GetUri() string`
 
-GetRequested returns the Requested field if non-nil, zero value otherwise.
+GetUri returns the Uri field if non-nil, zero value otherwise.
 
-### GetRequestedOk
+### GetUriOk
 
-`func (o *Resource) GetRequestedOk() (*float32, bool)`
+`func (o *Resource) GetUriOk() (*string, bool)`
 
-GetRequestedOk returns a tuple with the Requested field if it's non-nil, zero value otherwise
+GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRequested
+### SetUri
 
-`func (o *Resource) SetRequested(v float32)`
+`func (o *Resource) SetUri(v string)`
 
-SetRequested sets Requested field to given value.
+SetUri sets Uri field to given value.
 
-### HasRequested
 
-`func (o *Resource) HasRequested() bool`
+### GetName
 
-HasRequested returns a boolean if a field has been set.
+`func (o *Resource) GetName() string`
 
-### GetAllocatable
+GetName returns the Name field if non-nil, zero value otherwise.
 
-`func (o *Resource) GetAllocatable() float32`
+### GetNameOk
 
-GetAllocatable returns the Allocatable field if non-nil, zero value otherwise.
+`func (o *Resource) GetNameOk() (*string, bool)`
 
-### GetAllocatableOk
-
-`func (o *Resource) GetAllocatableOk() (*float32, bool)`
-
-GetAllocatableOk returns a tuple with the Allocatable field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAllocatable
+### SetName
 
-`func (o *Resource) SetAllocatable(v float32)`
+`func (o *Resource) SetName(v string)`
 
-SetAllocatable sets Allocatable field to given value.
+SetName sets Name field to given value.
 
-### HasAllocatable
 
-`func (o *Resource) HasAllocatable() bool`
+### GetDescription
 
-HasAllocatable returns a boolean if a field has been set.
+`func (o *Resource) GetDescription() string`
 
-### GetCapacity
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-`func (o *Resource) GetCapacity() float32`
+### GetDescriptionOk
 
-GetCapacity returns the Capacity field if non-nil, zero value otherwise.
+`func (o *Resource) GetDescriptionOk() (*string, bool)`
 
-### GetCapacityOk
-
-`func (o *Resource) GetCapacityOk() (*float32, bool)`
-
-GetCapacityOk returns a tuple with the Capacity field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCapacity
+### SetDescription
 
-`func (o *Resource) SetCapacity(v float32)`
+`func (o *Resource) SetDescription(v string)`
 
-SetCapacity sets Capacity field to given value.
+SetDescription sets Description field to given value.
 
-### HasCapacity
+### HasDescription
 
-`func (o *Resource) HasCapacity() bool`
+`func (o *Resource) HasDescription() bool`
 
-HasCapacity returns a boolean if a field has been set.
+HasDescription returns a boolean if a field has been set.
 
-### GetUsed
+### GetMimeType
 
-`func (o *Resource) GetUsed() float32`
+`func (o *Resource) GetMimeType() string`
 
-GetUsed returns the Used field if non-nil, zero value otherwise.
+GetMimeType returns the MimeType field if non-nil, zero value otherwise.
 
-### GetUsedOk
+### GetMimeTypeOk
 
-`func (o *Resource) GetUsedOk() (*float32, bool)`
+`func (o *Resource) GetMimeTypeOk() (*string, bool)`
 
-GetUsedOk returns a tuple with the Used field if it's non-nil, zero value otherwise
+GetMimeTypeOk returns a tuple with the MimeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUsed
+### SetMimeType
 
-`func (o *Resource) SetUsed(v float32)`
+`func (o *Resource) SetMimeType(v string)`
 
-SetUsed sets Used field to given value.
+SetMimeType sets MimeType field to given value.
 
-### HasUsed
+### HasMimeType
 
-`func (o *Resource) HasUsed() bool`
+`func (o *Resource) HasMimeType() bool`
 
-HasUsed returns a boolean if a field has been set.
+HasMimeType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

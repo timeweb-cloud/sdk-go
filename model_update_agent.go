@@ -18,21 +18,31 @@ import (
 // checks if the UpdateAgent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateAgent{}
 
-// UpdateAgent Данные для обновления AI агента
+// UpdateAgent Данные для обновления AI агента. Передавайте только изменяемые поля.
 type UpdateAgent struct {
 	// Название агента
 	Name *string `json:"name,omitempty"`
 	// Описание агента
 	Description *string `json:"description,omitempty"`
-	// Тип доступа к агенту
+	// Тип доступа
 	AccessType *string `json:"access_type,omitempty"`
-	// Статус агента
+	// Статус агента: `suspended` — приостановить, `active` — возобновить. Статус заблокированного или удалённого агента изменить нельзя.
 	Status *string `json:"status,omitempty"`
-	// ID пакета токенов
-	TokenPackageId *float32 `json:"token_package_id,omitempty"`
-	Settings *UpdateAgentSettings `json:"settings,omitempty"`
-	// ID проекта
-	ProjectId *float32 `json:"project_id,omitempty"`
+	Settings *AgentSettings `json:"settings,omitempty"`
+	// Не используется: перенести агента в другой проект можно методами проектов.
+	// Deprecated
+	ProjectId *int32 `json:"project_id,omitempty"`
+	// ID дополнительных моделей агента (например, для генерации изображений). Список заменяет текущий целиком.
+	AdditionalModelIds []int32 `json:"additional_model_ids,omitempty"`
+	// Дополнительные модели вместе с настройками (для моделей генерации изображений — `width`/`height`). Если переданы и `additional_models`, и `additional_model_ids`, используется `additional_models`.
+	AdditionalModels []AgentAdditionalModel `json:"additional_models,omitempty"`
+	// Включить или выключить веб-поиск
+	IsWebSearchEnabled *bool `json:"is_web_search_enabled,omitempty"`
+	// ID ключа AI Gateway, к которому нужно привязать агента. Привязка доступна, только если в ответе агента `ai_gateway_key_id` равен `null` (агент без баз знаний, инструментов и интеграций, созданный до 9 октября 2026 года), и делается один раз. При первой привязке на аккаунт однократно начисляется временная скидка 10% на запросы через ключи AI Gateway.
+	AiGatewayKeyId *string `json:"ai_gateway_key_id,omitempty"`
+	// Новый пакет токенов. Только для агентов с пакетом токенов (устаревшая схема оплаты): пакет должен относиться к модели агента и быть не меньше текущего, его стоимость сразу списывается с баланса.
+	// Deprecated
+	TokenPackageId *int32 `json:"token_package_id,omitempty"`
 }
 
 // NewUpdateAgent instantiates a new UpdateAgent object
@@ -180,42 +190,10 @@ func (o *UpdateAgent) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetTokenPackageId returns the TokenPackageId field value if set, zero value otherwise.
-func (o *UpdateAgent) GetTokenPackageId() float32 {
-	if o == nil || IsNil(o.TokenPackageId) {
-		var ret float32
-		return ret
-	}
-	return *o.TokenPackageId
-}
-
-// GetTokenPackageIdOk returns a tuple with the TokenPackageId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAgent) GetTokenPackageIdOk() (*float32, bool) {
-	if o == nil || IsNil(o.TokenPackageId) {
-		return nil, false
-	}
-	return o.TokenPackageId, true
-}
-
-// HasTokenPackageId returns a boolean if a field has been set.
-func (o *UpdateAgent) HasTokenPackageId() bool {
-	if o != nil && !IsNil(o.TokenPackageId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTokenPackageId gets a reference to the given float32 and assigns it to the TokenPackageId field.
-func (o *UpdateAgent) SetTokenPackageId(v float32) {
-	o.TokenPackageId = &v
-}
-
 // GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *UpdateAgent) GetSettings() UpdateAgentSettings {
+func (o *UpdateAgent) GetSettings() AgentSettings {
 	if o == nil || IsNil(o.Settings) {
-		var ret UpdateAgentSettings
+		var ret AgentSettings
 		return ret
 	}
 	return *o.Settings
@@ -223,7 +201,7 @@ func (o *UpdateAgent) GetSettings() UpdateAgentSettings {
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAgent) GetSettingsOk() (*UpdateAgentSettings, bool) {
+func (o *UpdateAgent) GetSettingsOk() (*AgentSettings, bool) {
 	if o == nil || IsNil(o.Settings) {
 		return nil, false
 	}
@@ -239,15 +217,16 @@ func (o *UpdateAgent) HasSettings() bool {
 	return false
 }
 
-// SetSettings gets a reference to the given UpdateAgentSettings and assigns it to the Settings field.
-func (o *UpdateAgent) SetSettings(v UpdateAgentSettings) {
+// SetSettings gets a reference to the given AgentSettings and assigns it to the Settings field.
+func (o *UpdateAgent) SetSettings(v AgentSettings) {
 	o.Settings = &v
 }
 
 // GetProjectId returns the ProjectId field value if set, zero value otherwise.
-func (o *UpdateAgent) GetProjectId() float32 {
+// Deprecated
+func (o *UpdateAgent) GetProjectId() int32 {
 	if o == nil || IsNil(o.ProjectId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.ProjectId
@@ -255,7 +234,8 @@ func (o *UpdateAgent) GetProjectId() float32 {
 
 // GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAgent) GetProjectIdOk() (*float32, bool) {
+// Deprecated
+func (o *UpdateAgent) GetProjectIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.ProjectId) {
 		return nil, false
 	}
@@ -271,9 +251,173 @@ func (o *UpdateAgent) HasProjectId() bool {
 	return false
 }
 
-// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
-func (o *UpdateAgent) SetProjectId(v float32) {
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+// Deprecated
+func (o *UpdateAgent) SetProjectId(v int32) {
 	o.ProjectId = &v
+}
+
+// GetAdditionalModelIds returns the AdditionalModelIds field value if set, zero value otherwise.
+func (o *UpdateAgent) GetAdditionalModelIds() []int32 {
+	if o == nil || IsNil(o.AdditionalModelIds) {
+		var ret []int32
+		return ret
+	}
+	return o.AdditionalModelIds
+}
+
+// GetAdditionalModelIdsOk returns a tuple with the AdditionalModelIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAgent) GetAdditionalModelIdsOk() ([]int32, bool) {
+	if o == nil || IsNil(o.AdditionalModelIds) {
+		return nil, false
+	}
+	return o.AdditionalModelIds, true
+}
+
+// HasAdditionalModelIds returns a boolean if a field has been set.
+func (o *UpdateAgent) HasAdditionalModelIds() bool {
+	if o != nil && !IsNil(o.AdditionalModelIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalModelIds gets a reference to the given []int32 and assigns it to the AdditionalModelIds field.
+func (o *UpdateAgent) SetAdditionalModelIds(v []int32) {
+	o.AdditionalModelIds = v
+}
+
+// GetAdditionalModels returns the AdditionalModels field value if set, zero value otherwise.
+func (o *UpdateAgent) GetAdditionalModels() []AgentAdditionalModel {
+	if o == nil || IsNil(o.AdditionalModels) {
+		var ret []AgentAdditionalModel
+		return ret
+	}
+	return o.AdditionalModels
+}
+
+// GetAdditionalModelsOk returns a tuple with the AdditionalModels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAgent) GetAdditionalModelsOk() ([]AgentAdditionalModel, bool) {
+	if o == nil || IsNil(o.AdditionalModels) {
+		return nil, false
+	}
+	return o.AdditionalModels, true
+}
+
+// HasAdditionalModels returns a boolean if a field has been set.
+func (o *UpdateAgent) HasAdditionalModels() bool {
+	if o != nil && !IsNil(o.AdditionalModels) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalModels gets a reference to the given []AgentAdditionalModel and assigns it to the AdditionalModels field.
+func (o *UpdateAgent) SetAdditionalModels(v []AgentAdditionalModel) {
+	o.AdditionalModels = v
+}
+
+// GetIsWebSearchEnabled returns the IsWebSearchEnabled field value if set, zero value otherwise.
+func (o *UpdateAgent) GetIsWebSearchEnabled() bool {
+	if o == nil || IsNil(o.IsWebSearchEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsWebSearchEnabled
+}
+
+// GetIsWebSearchEnabledOk returns a tuple with the IsWebSearchEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAgent) GetIsWebSearchEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsWebSearchEnabled) {
+		return nil, false
+	}
+	return o.IsWebSearchEnabled, true
+}
+
+// HasIsWebSearchEnabled returns a boolean if a field has been set.
+func (o *UpdateAgent) HasIsWebSearchEnabled() bool {
+	if o != nil && !IsNil(o.IsWebSearchEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsWebSearchEnabled gets a reference to the given bool and assigns it to the IsWebSearchEnabled field.
+func (o *UpdateAgent) SetIsWebSearchEnabled(v bool) {
+	o.IsWebSearchEnabled = &v
+}
+
+// GetAiGatewayKeyId returns the AiGatewayKeyId field value if set, zero value otherwise.
+func (o *UpdateAgent) GetAiGatewayKeyId() string {
+	if o == nil || IsNil(o.AiGatewayKeyId) {
+		var ret string
+		return ret
+	}
+	return *o.AiGatewayKeyId
+}
+
+// GetAiGatewayKeyIdOk returns a tuple with the AiGatewayKeyId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAgent) GetAiGatewayKeyIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AiGatewayKeyId) {
+		return nil, false
+	}
+	return o.AiGatewayKeyId, true
+}
+
+// HasAiGatewayKeyId returns a boolean if a field has been set.
+func (o *UpdateAgent) HasAiGatewayKeyId() bool {
+	if o != nil && !IsNil(o.AiGatewayKeyId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiGatewayKeyId gets a reference to the given string and assigns it to the AiGatewayKeyId field.
+func (o *UpdateAgent) SetAiGatewayKeyId(v string) {
+	o.AiGatewayKeyId = &v
+}
+
+// GetTokenPackageId returns the TokenPackageId field value if set, zero value otherwise.
+// Deprecated
+func (o *UpdateAgent) GetTokenPackageId() int32 {
+	if o == nil || IsNil(o.TokenPackageId) {
+		var ret int32
+		return ret
+	}
+	return *o.TokenPackageId
+}
+
+// GetTokenPackageIdOk returns a tuple with the TokenPackageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *UpdateAgent) GetTokenPackageIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.TokenPackageId) {
+		return nil, false
+	}
+	return o.TokenPackageId, true
+}
+
+// HasTokenPackageId returns a boolean if a field has been set.
+func (o *UpdateAgent) HasTokenPackageId() bool {
+	if o != nil && !IsNil(o.TokenPackageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenPackageId gets a reference to the given int32 and assigns it to the TokenPackageId field.
+// Deprecated
+func (o *UpdateAgent) SetTokenPackageId(v int32) {
+	o.TokenPackageId = &v
 }
 
 func (o UpdateAgent) MarshalJSON() ([]byte, error) {
@@ -298,14 +442,26 @@ func (o UpdateAgent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if !IsNil(o.TokenPackageId) {
-		toSerialize["token_package_id"] = o.TokenPackageId
-	}
 	if !IsNil(o.Settings) {
 		toSerialize["settings"] = o.Settings
 	}
 	if !IsNil(o.ProjectId) {
 		toSerialize["project_id"] = o.ProjectId
+	}
+	if !IsNil(o.AdditionalModelIds) {
+		toSerialize["additional_model_ids"] = o.AdditionalModelIds
+	}
+	if !IsNil(o.AdditionalModels) {
+		toSerialize["additional_models"] = o.AdditionalModels
+	}
+	if !IsNil(o.IsWebSearchEnabled) {
+		toSerialize["is_web_search_enabled"] = o.IsWebSearchEnabled
+	}
+	if !IsNil(o.AiGatewayKeyId) {
+		toSerialize["ai_gateway_key_id"] = o.AiGatewayKeyId
+	}
+	if !IsNil(o.TokenPackageId) {
+		toSerialize["token_package_id"] = o.TokenPackageId
 	}
 	return toSerialize, nil
 }

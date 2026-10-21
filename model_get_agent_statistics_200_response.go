@@ -20,7 +20,7 @@ var _ MappedNullable = &GetAgentStatistics200Response{}
 
 // GetAgentStatistics200Response struct for GetAgentStatistics200Response
 type GetAgentStatistics200Response struct {
-	AgentStatistics []TokenStatistic `json:"agent_statistics"`
+	AgentStatistics []AgentTokenStatistic `json:"agent_statistics"`
 	Meta GetAgentStatistics200ResponseMeta `json:"meta"`
 }
 
@@ -28,7 +28,7 @@ type GetAgentStatistics200Response struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAgentStatistics200Response(agentStatistics []TokenStatistic, meta GetAgentStatistics200ResponseMeta) *GetAgentStatistics200Response {
+func NewGetAgentStatistics200Response(agentStatistics []AgentTokenStatistic, meta GetAgentStatistics200ResponseMeta) *GetAgentStatistics200Response {
 	this := GetAgentStatistics200Response{}
 	this.AgentStatistics = agentStatistics
 	this.Meta = meta
@@ -44,9 +44,9 @@ func NewGetAgentStatistics200ResponseWithDefaults() *GetAgentStatistics200Respon
 }
 
 // GetAgentStatistics returns the AgentStatistics field value
-func (o *GetAgentStatistics200Response) GetAgentStatistics() []TokenStatistic {
+func (o *GetAgentStatistics200Response) GetAgentStatistics() []AgentTokenStatistic {
 	if o == nil {
-		var ret []TokenStatistic
+		var ret []AgentTokenStatistic
 		return ret
 	}
 
@@ -55,7 +55,7 @@ func (o *GetAgentStatistics200Response) GetAgentStatistics() []TokenStatistic {
 
 // GetAgentStatisticsOk returns a tuple with the AgentStatistics field value
 // and a boolean to check if the value has been set.
-func (o *GetAgentStatistics200Response) GetAgentStatisticsOk() ([]TokenStatistic, bool) {
+func (o *GetAgentStatistics200Response) GetAgentStatisticsOk() ([]AgentTokenStatistic, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *GetAgentStatistics200Response) GetAgentStatisticsOk() ([]TokenStatistic
 }
 
 // SetAgentStatistics sets field value
-func (o *GetAgentStatistics200Response) SetAgentStatistics(v []TokenStatistic) {
+func (o *GetAgentStatistics200Response) SetAgentStatistics(v []AgentTokenStatistic) {
 	o.AgentStatistics = v
 }
 

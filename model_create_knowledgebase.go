@@ -24,21 +24,21 @@ type CreateKnowledgebase struct {
 	Name string `json:"name"`
 	// Описание базы знаний
 	Description *string `json:"description,omitempty"`
-	// ID пресета базы данных
-	DbaasPresetId float32 `json:"dbaas_preset_id"`
-	// ID сети
+	// ID тарифа кластера OpenSearch, который будет создан для базы знаний. Список тарифов баз данных — `GET /api/v2/presets/dbs`
+	DbaasPresetId int32 `json:"dbaas_preset_id"`
+	// ID приватной сети (VPC), в которой будет создан кластер
 	NetworkId string `json:"network_id"`
-	// ID пакета токенов
-	TokenPackageId float32 `json:"token_package_id"`
-	// ID проекта
-	ProjectId *float32 `json:"project_id,omitempty"`
+	// ID пакета токенов подписки. Подходят только базовые пакеты (`package_type: base`) из `GET /api/v1/cloud-ai/token-packages/knowledge-bases`
+	TokenPackageId int32 `json:"token_package_id"`
+	// ID проекта, в который нужно добавить базу знаний
+	ProjectId *int32 `json:"project_id,omitempty"`
 }
 
 // NewCreateKnowledgebase instantiates a new CreateKnowledgebase object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateKnowledgebase(name string, dbaasPresetId float32, networkId string, tokenPackageId float32) *CreateKnowledgebase {
+func NewCreateKnowledgebase(name string, dbaasPresetId int32, networkId string, tokenPackageId int32) *CreateKnowledgebase {
 	this := CreateKnowledgebase{}
 	this.Name = name
 	this.DbaasPresetId = dbaasPresetId
@@ -112,9 +112,9 @@ func (o *CreateKnowledgebase) SetDescription(v string) {
 }
 
 // GetDbaasPresetId returns the DbaasPresetId field value
-func (o *CreateKnowledgebase) GetDbaasPresetId() float32 {
+func (o *CreateKnowledgebase) GetDbaasPresetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -123,7 +123,7 @@ func (o *CreateKnowledgebase) GetDbaasPresetId() float32 {
 
 // GetDbaasPresetIdOk returns a tuple with the DbaasPresetId field value
 // and a boolean to check if the value has been set.
-func (o *CreateKnowledgebase) GetDbaasPresetIdOk() (*float32, bool) {
+func (o *CreateKnowledgebase) GetDbaasPresetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,7 +131,7 @@ func (o *CreateKnowledgebase) GetDbaasPresetIdOk() (*float32, bool) {
 }
 
 // SetDbaasPresetId sets field value
-func (o *CreateKnowledgebase) SetDbaasPresetId(v float32) {
+func (o *CreateKnowledgebase) SetDbaasPresetId(v int32) {
 	o.DbaasPresetId = v
 }
 
@@ -160,9 +160,9 @@ func (o *CreateKnowledgebase) SetNetworkId(v string) {
 }
 
 // GetTokenPackageId returns the TokenPackageId field value
-func (o *CreateKnowledgebase) GetTokenPackageId() float32 {
+func (o *CreateKnowledgebase) GetTokenPackageId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -171,7 +171,7 @@ func (o *CreateKnowledgebase) GetTokenPackageId() float32 {
 
 // GetTokenPackageIdOk returns a tuple with the TokenPackageId field value
 // and a boolean to check if the value has been set.
-func (o *CreateKnowledgebase) GetTokenPackageIdOk() (*float32, bool) {
+func (o *CreateKnowledgebase) GetTokenPackageIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -179,14 +179,14 @@ func (o *CreateKnowledgebase) GetTokenPackageIdOk() (*float32, bool) {
 }
 
 // SetTokenPackageId sets field value
-func (o *CreateKnowledgebase) SetTokenPackageId(v float32) {
+func (o *CreateKnowledgebase) SetTokenPackageId(v int32) {
 	o.TokenPackageId = v
 }
 
 // GetProjectId returns the ProjectId field value if set, zero value otherwise.
-func (o *CreateKnowledgebase) GetProjectId() float32 {
+func (o *CreateKnowledgebase) GetProjectId() int32 {
 	if o == nil || IsNil(o.ProjectId) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.ProjectId
@@ -194,7 +194,7 @@ func (o *CreateKnowledgebase) GetProjectId() float32 {
 
 // GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateKnowledgebase) GetProjectIdOk() (*float32, bool) {
+func (o *CreateKnowledgebase) GetProjectIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.ProjectId) {
 		return nil, false
 	}
@@ -210,8 +210,8 @@ func (o *CreateKnowledgebase) HasProjectId() bool {
 	return false
 }
 
-// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
-func (o *CreateKnowledgebase) SetProjectId(v float32) {
+// SetProjectId gets a reference to the given int32 and assigns it to the ProjectId field.
+func (o *CreateKnowledgebase) SetProjectId(v int32) {
 	o.ProjectId = &v
 }
 

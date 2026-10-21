@@ -18,11 +18,11 @@ import (
 // checks if the UpdateKnowledgebase type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateKnowledgebase{}
 
-// UpdateKnowledgebase Данные для обновления базы знаний
+// UpdateKnowledgebase Данные для изменения базы знаний. Передайте только поля, которые нужно изменить
 type UpdateKnowledgebase struct {
-	// Название базы знаний
+	// Новое название. Пустая строка игнорируется
 	Name *string `json:"name,omitempty"`
-	// Описание базы знаний
+	// Новое описание
 	Description *string `json:"description,omitempty"`
 }
 

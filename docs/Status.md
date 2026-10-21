@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Login** | **string** | Логин аккаунта. | 
 **IsBlocked** | **bool** | Это логическое значение, которое показывает, заблокирован ли аккаунт. | 
 **IsPermanentBlocked** | **bool** | Это логическое значение, которое показывает, заблокирован ли аккаунт навсегда. | 
 **IsSendBillLetters** | **bool** | Это логическое значение, которое показывает, требуется ли отправлять счета на почту. | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewStatus
 
-`func NewStatus(isBlocked bool, isPermanentBlocked bool, isSendBillLetters bool, companyInfo StatusCompanyInfo, lastPasswordChangedAt string, ymClientId NullableString, ) *Status`
+`func NewStatus(login string, isBlocked bool, isPermanentBlocked bool, isSendBillLetters bool, companyInfo StatusCompanyInfo, lastPasswordChangedAt string, ymClientId NullableString, ) *Status`
 
 NewStatus instantiates a new Status object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +30,26 @@ will change when the set of required properties is changed
 NewStatusWithDefaults instantiates a new Status object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetLogin
+
+`func (o *Status) GetLogin() string`
+
+GetLogin returns the Login field if non-nil, zero value otherwise.
+
+### GetLoginOk
+
+`func (o *Status) GetLoginOk() (*string, bool)`
+
+GetLoginOk returns a tuple with the Login field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogin
+
+`func (o *Status) SetLogin(v string)`
+
+SetLogin sets Login field to given value.
+
 
 ### GetIsBlocked
 

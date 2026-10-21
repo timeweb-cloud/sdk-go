@@ -18,19 +18,24 @@ import (
 // checks if the AgentModelSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AgentModelSettings{}
 
-// AgentModelSettings Настройки модели агента
+// AgentModelSettings Параметры модели агента. Допустимые параметры и их границы зависят от модели (см. параметры модели в разделе «AI Модели»): параметры, которые модель не поддерживает, отбрасываются при сохранении, а значения вне допустимых границ отклоняются с ошибкой 400.
 type AgentModelSettings struct {
-	// Контролирует случайность вывода модели.
+	// Температура: чем выше, тем случайнее ответы модели.
 	Temperature *float32 `json:"temperature,omitempty"`
-	// Контролирует разнообразие вывода модели.
+	// Nucleus sampling: доля вероятностной массы, из которой выбираются токены.
 	TopP *float32 `json:"top_p,omitempty"`
-	// Максимальное количество токенов в выводе.
-	MaxTokens *float32 `json:"max_tokens,omitempty"`
-	// Положительные значения штрафуют новые токены на основе их существующей частоты.
+	// Максимальное количество токенов в ответе модели.
+	MaxTokens *int32 `json:"max_tokens,omitempty"`
+	// Штраф за частоту: положительные значения снижают повторы уже использованных токенов.
 	FrequencyPenalty *float32 `json:"frequency_penalty,omitempty"`
-	// Положительные значения штрафуют новые токены на основе того, встречались ли они в тексте ранее.
+	// Штраф за присутствие: положительные значения поощряют новые темы.
 	PresencePenalty *float32 `json:"presence_penalty,omitempty"`
+	// Включает режим рассуждений (thinking) для моделей, которые его поддерживают.
+	EnableThinking *bool `json:"enable_thinking,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgentModelSettings AgentModelSettings
 
 // NewAgentModelSettings instantiates a new AgentModelSettings object
 // This constructor will assign default values to properties that have it defined,
@@ -114,9 +119,9 @@ func (o *AgentModelSettings) SetTopP(v float32) {
 }
 
 // GetMaxTokens returns the MaxTokens field value if set, zero value otherwise.
-func (o *AgentModelSettings) GetMaxTokens() float32 {
+func (o *AgentModelSettings) GetMaxTokens() int32 {
 	if o == nil || IsNil(o.MaxTokens) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.MaxTokens
@@ -124,7 +129,7 @@ func (o *AgentModelSettings) GetMaxTokens() float32 {
 
 // GetMaxTokensOk returns a tuple with the MaxTokens field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentModelSettings) GetMaxTokensOk() (*float32, bool) {
+func (o *AgentModelSettings) GetMaxTokensOk() (*int32, bool) {
 	if o == nil || IsNil(o.MaxTokens) {
 		return nil, false
 	}
@@ -140,8 +145,8 @@ func (o *AgentModelSettings) HasMaxTokens() bool {
 	return false
 }
 
-// SetMaxTokens gets a reference to the given float32 and assigns it to the MaxTokens field.
-func (o *AgentModelSettings) SetMaxTokens(v float32) {
+// SetMaxTokens gets a reference to the given int32 and assigns it to the MaxTokens field.
+func (o *AgentModelSettings) SetMaxTokens(v int32) {
 	o.MaxTokens = &v
 }
 
@@ -209,6 +214,38 @@ func (o *AgentModelSettings) SetPresencePenalty(v float32) {
 	o.PresencePenalty = &v
 }
 
+// GetEnableThinking returns the EnableThinking field value if set, zero value otherwise.
+func (o *AgentModelSettings) GetEnableThinking() bool {
+	if o == nil || IsNil(o.EnableThinking) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableThinking
+}
+
+// GetEnableThinkingOk returns a tuple with the EnableThinking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentModelSettings) GetEnableThinkingOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableThinking) {
+		return nil, false
+	}
+	return o.EnableThinking, true
+}
+
+// HasEnableThinking returns a boolean if a field has been set.
+func (o *AgentModelSettings) HasEnableThinking() bool {
+	if o != nil && !IsNil(o.EnableThinking) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableThinking gets a reference to the given bool and assigns it to the EnableThinking field.
+func (o *AgentModelSettings) SetEnableThinking(v bool) {
+	o.EnableThinking = &v
+}
+
 func (o AgentModelSettings) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -234,7 +271,37 @@ func (o AgentModelSettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PresencePenalty) {
 		toSerialize["presence_penalty"] = o.PresencePenalty
 	}
+	if !IsNil(o.EnableThinking) {
+		toSerialize["enable_thinking"] = o.EnableThinking
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgentModelSettings) UnmarshalJSON(bytes []byte) (err error) {
+	varAgentModelSettings := _AgentModelSettings{}
+
+	if err = json.Unmarshal(bytes, &varAgentModelSettings); err == nil {
+		*o = AgentModelSettings(varAgentModelSettings)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "temperature")
+		delete(additionalProperties, "top_p")
+		delete(additionalProperties, "max_tokens")
+		delete(additionalProperties, "frequency_penalty")
+		delete(additionalProperties, "presence_penalty")
+		delete(additionalProperties, "enable_thinking")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgentModelSettings struct {

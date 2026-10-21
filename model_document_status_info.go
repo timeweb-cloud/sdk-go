@@ -19,14 +19,18 @@ import (
 // checks if the DocumentStatusInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DocumentStatusInfo{}
 
-// DocumentStatusInfo Детальная информация о текущем состоянии документа в базе знаний
+// DocumentStatusInfo Подробности о состоянии индексации документа. `null`, если информации нет
 type DocumentStatusInfo struct {
-	// Тип статуса документа
+	// Тип состояния, совпадает со статусом документа
 	Type string `json:"type"`
-	// Время записи информации (ISO string)
+	// Время, когда записано состояние
 	Timestamp time.Time `json:"timestamp"`
-	// Код ошибки (только для type: 'error')
+	// Код ошибки, только для `type: error`: - `INSUFFICIENT_TOKENS` — недостаточно токенов для индексации - `CRITICAL_BALANCE` — критически низкий остаток токенов - `NEGATIVE_BALANCE` — отрицательный остаток токенов - `INDEXING_ERROR` — не удалось обработать документ
 	ErrorCode *string `json:"error_code,omitempty"`
+	// Этап индексации, на котором произошла ошибка
+	Stage *string `json:"stage,omitempty"`
+	// Идентификатор операции индексации — укажите его при обращении в поддержку
+	TraceId *string `json:"trace_id,omitempty"`
 	Details *DocumentStatusInfoDetails `json:"details,omitempty"`
 }
 
@@ -129,6 +133,70 @@ func (o *DocumentStatusInfo) SetErrorCode(v string) {
 	o.ErrorCode = &v
 }
 
+// GetStage returns the Stage field value if set, zero value otherwise.
+func (o *DocumentStatusInfo) GetStage() string {
+	if o == nil || IsNil(o.Stage) {
+		var ret string
+		return ret
+	}
+	return *o.Stage
+}
+
+// GetStageOk returns a tuple with the Stage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfo) GetStageOk() (*string, bool) {
+	if o == nil || IsNil(o.Stage) {
+		return nil, false
+	}
+	return o.Stage, true
+}
+
+// HasStage returns a boolean if a field has been set.
+func (o *DocumentStatusInfo) HasStage() bool {
+	if o != nil && !IsNil(o.Stage) {
+		return true
+	}
+
+	return false
+}
+
+// SetStage gets a reference to the given string and assigns it to the Stage field.
+func (o *DocumentStatusInfo) SetStage(v string) {
+	o.Stage = &v
+}
+
+// GetTraceId returns the TraceId field value if set, zero value otherwise.
+func (o *DocumentStatusInfo) GetTraceId() string {
+	if o == nil || IsNil(o.TraceId) {
+		var ret string
+		return ret
+	}
+	return *o.TraceId
+}
+
+// GetTraceIdOk returns a tuple with the TraceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentStatusInfo) GetTraceIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TraceId) {
+		return nil, false
+	}
+	return o.TraceId, true
+}
+
+// HasTraceId returns a boolean if a field has been set.
+func (o *DocumentStatusInfo) HasTraceId() bool {
+	if o != nil && !IsNil(o.TraceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTraceId gets a reference to the given string and assigns it to the TraceId field.
+func (o *DocumentStatusInfo) SetTraceId(v string) {
+	o.TraceId = &v
+}
+
 // GetDetails returns the Details field value if set, zero value otherwise.
 func (o *DocumentStatusInfo) GetDetails() DocumentStatusInfoDetails {
 	if o == nil || IsNil(o.Details) {
@@ -175,6 +243,12 @@ func (o DocumentStatusInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["timestamp"] = o.Timestamp
 	if !IsNil(o.ErrorCode) {
 		toSerialize["error_code"] = o.ErrorCode
+	}
+	if !IsNil(o.Stage) {
+		toSerialize["stage"] = o.Stage
+	}
+	if !IsNil(o.TraceId) {
+		toSerialize["trace_id"] = o.TraceId
 	}
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details

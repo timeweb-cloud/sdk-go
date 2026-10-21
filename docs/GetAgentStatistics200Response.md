@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AgentStatistics** | [**[]TokenStatistic**](TokenStatistic.md) |  | 
+**AgentStatistics** | [**[]AgentTokenStatistic**](AgentTokenStatistic.md) |  | 
 **Meta** | [**GetAgentStatistics200ResponseMeta**](GetAgentStatistics200ResponseMeta.md) |  | 
 
 ## Methods
 
 ### NewGetAgentStatistics200Response
 
-`func NewGetAgentStatistics200Response(agentStatistics []TokenStatistic, meta GetAgentStatistics200ResponseMeta, ) *GetAgentStatistics200Response`
+`func NewGetAgentStatistics200Response(agentStatistics []AgentTokenStatistic, meta GetAgentStatistics200ResponseMeta, ) *GetAgentStatistics200Response`
 
 NewGetAgentStatistics200Response instantiates a new GetAgentStatistics200Response object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAgentStatistics
 
-`func (o *GetAgentStatistics200Response) GetAgentStatistics() []TokenStatistic`
+`func (o *GetAgentStatistics200Response) GetAgentStatistics() []AgentTokenStatistic`
 
 GetAgentStatistics returns the AgentStatistics field if non-nil, zero value otherwise.
 
 ### GetAgentStatisticsOk
 
-`func (o *GetAgentStatistics200Response) GetAgentStatisticsOk() (*[]TokenStatistic, bool)`
+`func (o *GetAgentStatistics200Response) GetAgentStatisticsOk() (*[]AgentTokenStatistic, bool)`
 
 GetAgentStatisticsOk returns a tuple with the AgentStatistics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAgentStatistics
 
-`func (o *GetAgentStatistics200Response) SetAgentStatistics(v []TokenStatistic)`
+`func (o *GetAgentStatistics200Response) SetAgentStatistics(v []AgentTokenStatistic)`
 
 SetAgentStatistics sets AgentStatistics field to given value.
 

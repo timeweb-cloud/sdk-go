@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | Название базы знаний | [optional] 
-**Description** | Pointer to **string** | Описание базы знаний | [optional] 
+**Name** | Pointer to **string** | Новое название. Пустая строка игнорируется | [optional] 
+**Description** | Pointer to **string** | Новое описание | [optional] 
 
 ## Methods
 

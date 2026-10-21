@@ -19,22 +19,27 @@ import (
 // checks if the Document type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Document{}
 
-// Document Документ в базе знаний
+// Document Документ базы знаний
 type Document struct {
-	// Уникальный идентификатор документа
-	Id float32 `json:"id"`
+	// ID документа
+	Id int32 `json:"id"`
 	// Название документа
 	Name string `json:"name"`
-	// Размер документа в байтах
-	Size float32 `json:"size"`
-	// Статус индексации документа
+	// Размер в байтах. Для документа по ссылке — значение заголовка `Content-Length` на момент добавления, `0`, если сервер его не вернул
+	Size int32 `json:"size"`
+	// Статус индексации: - `new` — документ добавлен и ждёт индексации - `indexing` — индексируется - `indexed` — проиндексирован, используется в поиске - `error` — ошибка индексации, подробности в `status_info`
 	Status string `json:"status"`
-	// Версия индексации
-	IndexingVersion NullableString `json:"indexing_version,omitempty"`
-	StatusInfo NullableDocumentStatusInfo `json:"status_info,omitempty"`
-	// Дата создания документа
+	// Тип документа: `file` — загруженный файл, `link` — документ по ссылке
+	Type string `json:"type"`
+	IndexingSchedule IndexingSchedule `json:"indexing_schedule"`
+	// Версия индексации документа
+	IndexingVersion NullableString `json:"indexing_version"`
+	StatusInfo NullableDocumentStatusInfo `json:"status_info"`
+	// URL документа. Только для документов типа `link`
+	Link *string `json:"link,omitempty"`
+	// Дата и время добавления документа
 	CreatedAt time.Time `json:"created_at"`
-	// Дата обновления документа
+	// Дата и время последнего изменения документа
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -42,12 +47,16 @@ type Document struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDocument(id float32, name string, size float32, status string, createdAt time.Time, updatedAt time.Time) *Document {
+func NewDocument(id int32, name string, size int32, status string, type_ string, indexingSchedule IndexingSchedule, indexingVersion NullableString, statusInfo NullableDocumentStatusInfo, createdAt time.Time, updatedAt time.Time) *Document {
 	this := Document{}
 	this.Id = id
 	this.Name = name
 	this.Size = size
 	this.Status = status
+	this.Type = type_
+	this.IndexingSchedule = indexingSchedule
+	this.IndexingVersion = indexingVersion
+	this.StatusInfo = statusInfo
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	return &this
@@ -62,9 +71,9 @@ func NewDocumentWithDefaults() *Document {
 }
 
 // GetId returns the Id field value
-func (o *Document) GetId() float32 {
+func (o *Document) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -73,7 +82,7 @@ func (o *Document) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *Document) GetIdOk() (*float32, bool) {
+func (o *Document) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -81,7 +90,7 @@ func (o *Document) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *Document) SetId(v float32) {
+func (o *Document) SetId(v int32) {
 	o.Id = v
 }
 
@@ -110,9 +119,9 @@ func (o *Document) SetName(v string) {
 }
 
 // GetSize returns the Size field value
-func (o *Document) GetSize() float32 {
+func (o *Document) GetSize() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -121,7 +130,7 @@ func (o *Document) GetSize() float32 {
 
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
-func (o *Document) GetSizeOk() (*float32, bool) {
+func (o *Document) GetSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -129,7 +138,7 @@ func (o *Document) GetSizeOk() (*float32, bool) {
 }
 
 // SetSize sets field value
-func (o *Document) SetSize(v float32) {
+func (o *Document) SetSize(v int32) {
 	o.Size = v
 }
 
@@ -157,16 +166,66 @@ func (o *Document) SetStatus(v string) {
 	o.Status = v
 }
 
-// GetIndexingVersion returns the IndexingVersion field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Document) GetIndexingVersion() string {
-	if o == nil || IsNil(o.IndexingVersion.Get()) {
+// GetType returns the Type field value
+func (o *Document) GetType() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *Document) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *Document) SetType(v string) {
+	o.Type = v
+}
+
+// GetIndexingSchedule returns the IndexingSchedule field value
+func (o *Document) GetIndexingSchedule() IndexingSchedule {
+	if o == nil {
+		var ret IndexingSchedule
+		return ret
+	}
+
+	return o.IndexingSchedule
+}
+
+// GetIndexingScheduleOk returns a tuple with the IndexingSchedule field value
+// and a boolean to check if the value has been set.
+func (o *Document) GetIndexingScheduleOk() (*IndexingSchedule, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IndexingSchedule, true
+}
+
+// SetIndexingSchedule sets field value
+func (o *Document) SetIndexingSchedule(v IndexingSchedule) {
+	o.IndexingSchedule = v
+}
+
+// GetIndexingVersion returns the IndexingVersion field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Document) GetIndexingVersion() string {
+	if o == nil || o.IndexingVersion.Get() == nil {
+		var ret string
+		return ret
+	}
+
 	return *o.IndexingVersion.Get()
 }
 
-// GetIndexingVersionOk returns a tuple with the IndexingVersion field value if set, nil otherwise
+// GetIndexingVersionOk returns a tuple with the IndexingVersion field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetIndexingVersionOk() (*string, bool) {
@@ -176,39 +235,23 @@ func (o *Document) GetIndexingVersionOk() (*string, bool) {
 	return o.IndexingVersion.Get(), o.IndexingVersion.IsSet()
 }
 
-// HasIndexingVersion returns a boolean if a field has been set.
-func (o *Document) HasIndexingVersion() bool {
-	if o != nil && o.IndexingVersion.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIndexingVersion gets a reference to the given NullableString and assigns it to the IndexingVersion field.
+// SetIndexingVersion sets field value
 func (o *Document) SetIndexingVersion(v string) {
 	o.IndexingVersion.Set(&v)
 }
-// SetIndexingVersionNil sets the value for IndexingVersion to be an explicit nil
-func (o *Document) SetIndexingVersionNil() {
-	o.IndexingVersion.Set(nil)
-}
 
-// UnsetIndexingVersion ensures that no value is present for IndexingVersion, not even an explicit nil
-func (o *Document) UnsetIndexingVersion() {
-	o.IndexingVersion.Unset()
-}
-
-// GetStatusInfo returns the StatusInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStatusInfo returns the StatusInfo field value
+// If the value is explicit nil, the zero value for DocumentStatusInfo will be returned
 func (o *Document) GetStatusInfo() DocumentStatusInfo {
-	if o == nil || IsNil(o.StatusInfo.Get()) {
+	if o == nil || o.StatusInfo.Get() == nil {
 		var ret DocumentStatusInfo
 		return ret
 	}
+
 	return *o.StatusInfo.Get()
 }
 
-// GetStatusInfoOk returns a tuple with the StatusInfo field value if set, nil otherwise
+// GetStatusInfoOk returns a tuple with the StatusInfo field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetStatusInfoOk() (*DocumentStatusInfo, bool) {
@@ -218,27 +261,41 @@ func (o *Document) GetStatusInfoOk() (*DocumentStatusInfo, bool) {
 	return o.StatusInfo.Get(), o.StatusInfo.IsSet()
 }
 
-// HasStatusInfo returns a boolean if a field has been set.
-func (o *Document) HasStatusInfo() bool {
-	if o != nil && o.StatusInfo.IsSet() {
+// SetStatusInfo sets field value
+func (o *Document) SetStatusInfo(v DocumentStatusInfo) {
+	o.StatusInfo.Set(&v)
+}
+
+// GetLink returns the Link field value if set, zero value otherwise.
+func (o *Document) GetLink() string {
+	if o == nil || IsNil(o.Link) {
+		var ret string
+		return ret
+	}
+	return *o.Link
+}
+
+// GetLinkOk returns a tuple with the Link field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Document) GetLinkOk() (*string, bool) {
+	if o == nil || IsNil(o.Link) {
+		return nil, false
+	}
+	return o.Link, true
+}
+
+// HasLink returns a boolean if a field has been set.
+func (o *Document) HasLink() bool {
+	if o != nil && !IsNil(o.Link) {
 		return true
 	}
 
 	return false
 }
 
-// SetStatusInfo gets a reference to the given NullableDocumentStatusInfo and assigns it to the StatusInfo field.
-func (o *Document) SetStatusInfo(v DocumentStatusInfo) {
-	o.StatusInfo.Set(&v)
-}
-// SetStatusInfoNil sets the value for StatusInfo to be an explicit nil
-func (o *Document) SetStatusInfoNil() {
-	o.StatusInfo.Set(nil)
-}
-
-// UnsetStatusInfo ensures that no value is present for StatusInfo, not even an explicit nil
-func (o *Document) UnsetStatusInfo() {
-	o.StatusInfo.Unset()
+// SetLink gets a reference to the given string and assigns it to the Link field.
+func (o *Document) SetLink(v string) {
+	o.Link = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -303,11 +360,12 @@ func (o Document) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["size"] = o.Size
 	toSerialize["status"] = o.Status
-	if o.IndexingVersion.IsSet() {
-		toSerialize["indexing_version"] = o.IndexingVersion.Get()
-	}
-	if o.StatusInfo.IsSet() {
-		toSerialize["status_info"] = o.StatusInfo.Get()
+	toSerialize["type"] = o.Type
+	toSerialize["indexing_schedule"] = o.IndexingSchedule
+	toSerialize["indexing_version"] = o.IndexingVersion.Get()
+	toSerialize["status_info"] = o.StatusInfo.Get()
+	if !IsNil(o.Link) {
+		toSerialize["link"] = o.Link
 	}
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt

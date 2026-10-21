@@ -19,7 +19,6 @@ import (
 	"net/url"
 	"strings"
 	"os"
-	"time"
 )
 
 
@@ -30,11 +29,11 @@ type ApiAddAdditionalTokenPackageToKnowledgebaseRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBasesAPIService
 	id int32
-	addTokenPackage *AddTokenPackage
+	knowledgebaseAddTokenPackage *KnowledgebaseAddTokenPackage
 }
 
-func (r ApiAddAdditionalTokenPackageToKnowledgebaseRequest) AddTokenPackage(addTokenPackage AddTokenPackage) ApiAddAdditionalTokenPackageToKnowledgebaseRequest {
-	r.addTokenPackage = &addTokenPackage
+func (r ApiAddAdditionalTokenPackageToKnowledgebaseRequest) KnowledgebaseAddTokenPackage(knowledgebaseAddTokenPackage KnowledgebaseAddTokenPackage) ApiAddAdditionalTokenPackageToKnowledgebaseRequest {
+	r.knowledgebaseAddTokenPackage = &knowledgebaseAddTokenPackage
 	return r
 }
 
@@ -43,9 +42,16 @@ func (r ApiAddAdditionalTokenPackageToKnowledgebaseRequest) Execute() (*http.Res
 }
 
 /*
-AddAdditionalTokenPackageToKnowledgebase Добавление дополнительного пакета токенов
+AddAdditionalTokenPackageToKnowledgebase Покупка дополнительных пакетов токенов
 
-Чтобы добавить дополнительный пакет токенов для базы знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/add-additional-token-package`.
+Чтобы докупить токены для базы знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/add-additional-token-package`.
+
+Покупается дополнительный пакет (`package_type: additional`) из `GET /api/v1/cloud-ai/token-packages/knowledge-bases` в количестве `count`. Стоимость списывается с баланса, токены добавляются к текущему периоду подписки, заблокированная база знаний разблокируется.
+
+Возможные ошибки:
+- `400 insufficient_balance` — на балансе недостаточно средств
+- `400 subscription_expired` — база знаний заблокирована и дата продления подписки прошла: продлите подписку в панели управления
+- `404 additional_token_package_not_found` — дополнительный пакет недоступен
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
@@ -100,7 +106,7 @@ func (a *KnowledgeBasesAPIService) AddAdditionalTokenPackageToKnowledgebaseExecu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.addTokenPackage
+	localVarPostBody = r.knowledgebaseAddTokenPackage
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -214,7 +220,16 @@ CreateKnowledgebase Создание базы знаний
 
 Чтобы создать базу знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases`, задав необходимые атрибуты.
 
-База знаний будет создана с использованием предоставленной информации. Тело ответа будет содержать объект JSON с информацией о созданной базе знаний.
+Для базы знаний в вашем аккаунте создаётся кластер базы данных OpenSearch по выбранному тарифу в указанной приватной сети, а с баланса сразу списывается стоимость пакета токенов. Подписка продлевается автоматически раз в период пакета.
+
+Пока кластер создаётся, база знаний находится в статусе `creating`; документы, добавленные в это время, будут проиндексированы после перехода в `active`.
+
+Возможные ошибки:
+- `404 token_package_not_found` — пакет токенов не найден или недоступен
+- `400 invalid_token_package_type` — пакет не является базовым пакетом для баз знаний
+- `400 insufficient_balance` — на балансе недостаточно средств для оплаты пакета
+
+Тело ответа будет представлять собой объект JSON с ключом `knowledge_base`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateKnowledgebaseRequest
@@ -324,6 +339,207 @@ func (a *KnowledgeBasesAPIService) CreateKnowledgebaseExecute(r ApiCreateKnowled
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateKnowledgebaseDocumentRequest struct {
+	ctx context.Context
+	ApiService *KnowledgeBasesAPIService
+	id int32
+	createDocument *CreateDocument
+}
+
+func (r ApiCreateKnowledgebaseDocumentRequest) CreateDocument(createDocument CreateDocument) ApiCreateKnowledgebaseDocumentRequest {
+	r.createDocument = &createDocument
+	return r
+}
+
+func (r ApiCreateKnowledgebaseDocumentRequest) Execute() (*CreateKnowledgebaseDocument201Response, *http.Response, error) {
+	return r.ApiService.CreateKnowledgebaseDocumentExecute(r)
+}
+
+/*
+CreateKnowledgebaseDocument Добавление документа по ссылке
+
+Чтобы добавить в базу знаний документ по ссылке, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents`.
+
+Перед добавлением выполняется HEAD-запрос к `url`: адрес должен быть публично доступен, а ответ — содержать заголовок `Content-Type` одного из поддерживаемых форматов (текст, Markdown, HTML, XML, CSV, PDF, DOC, DOCX, XLS, XLSX; JSON не поддерживается). Документ сразу ставится в очередь на индексацию. Чтобы содержимое по ссылке переиндексировалось автоматически, задайте `indexing_schedule`.
+
+Возможные ошибки:
+- `400 url_is_not_accessible` — адрес недоступен или вернул ошибку
+- `400 unsupported_file_type` — неподдерживаемый `Content-Type`
+
+Тело ответа будет представлять собой объект JSON с ключом `document`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id ID базы знаний
+ @return ApiCreateKnowledgebaseDocumentRequest
+*/
+func (a *KnowledgeBasesAPIService) CreateKnowledgebaseDocument(ctx context.Context, id int32) ApiCreateKnowledgebaseDocumentRequest {
+	return ApiCreateKnowledgebaseDocumentRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return CreateKnowledgebaseDocument201Response
+func (a *KnowledgeBasesAPIService) CreateKnowledgebaseDocumentExecute(r ApiCreateKnowledgebaseDocumentRequest) (*CreateKnowledgebaseDocument201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateKnowledgebaseDocument201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KnowledgeBasesAPIService.CreateKnowledgebaseDocument")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/cloud-ai/knowledge-bases/{id}/documents"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.id < 1 {
+		return localVarReturnValue, nil, reportError("id must be greater than 1")
+	}
+	if r.createDocument == nil {
+		return localVarReturnValue, nil, reportError("createDocument is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createDocument
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 429 {
 			var v GetFinances429Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -375,6 +591,8 @@ func (r ApiDeleteDocumentRequest) Execute() (*http.Response, error) {
 DeleteDocument Удаление документа из базы знаний
 
 Чтобы удалить документ из базы знаний, отправьте DELETE-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}`.
+
+Документ удаляется вместе с его фрагментами в поисковом индексе.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
@@ -542,6 +760,8 @@ DeleteKnowledgebase Удаление базы знаний
 
 Чтобы удалить базу знаний, отправьте DELETE-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}`.
 
+База знаний отвязывается от всех агентов, её кластер базы данных OpenSearch удаляется, подписка закрывается.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
  @return ApiDeleteKnowledgebaseRequest
@@ -699,9 +919,11 @@ func (r ApiDownloadDocumentRequest) Execute() (*os.File, *http.Response, error) 
 }
 
 /*
-DownloadDocument Скачивание документа из базы знаний
+DownloadDocument Скачивание файла документа
 
-Чтобы скачать документ из базы знаний, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/download`.
+Чтобы скачать загруженный файл документа, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/download`.
+
+Доступно только для документов типа `file`. Файл возвращается потоком с исходным MIME-типом в заголовке `Content-Type` и именем в `Content-Disposition`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
@@ -807,6 +1029,17 @@ func (a *KnowledgeBasesAPIService) DownloadDocumentExecute(r ApiDownloadDocument
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v GetImage404Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -865,9 +1098,11 @@ func (r ApiGetKnowledgebaseRequest) Execute() (*CreateKnowledgebase201Response, 
 }
 
 /*
-GetKnowledgebase Получение базы знаний
+GetKnowledgebase Получение базы знаний со списком документов
 
-Чтобы получить информацию о базе знаний, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}`.
+Чтобы получить информацию о базе знаний вместе со всеми её документами, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}`.
+
+Тело ответа будет представлять собой объект JSON с ключом `knowledge_base`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
@@ -1033,29 +1268,36 @@ type ApiGetKnowledgebaseDocumentsV2Request struct {
 	offset *int32
 	sortBy *string
 	sortOrder *string
+	search *string
 }
 
-// Количество документов на странице (по умолчанию: 10, максимум: 100)
+// Количество документов на странице. Значения больше 100 уменьшаются до 100
 func (r ApiGetKnowledgebaseDocumentsV2Request) Limit(limit int32) ApiGetKnowledgebaseDocumentsV2Request {
 	r.limit = &limit
 	return r
 }
 
-// Количество документов для пропуска (по умолчанию: 0)
+// Количество документов, которые нужно пропустить
 func (r ApiGetKnowledgebaseDocumentsV2Request) Offset(offset int32) ApiGetKnowledgebaseDocumentsV2Request {
 	r.offset = &offset
 	return r
 }
 
-// Поле для сортировки (по умолчанию: indexing_timestamp - время последней индексации документа)
+// Поле сортировки. &#x60;indexing_timestamp&#x60; — время последнего изменения документа
 func (r ApiGetKnowledgebaseDocumentsV2Request) SortBy(sortBy string) ApiGetKnowledgebaseDocumentsV2Request {
 	r.sortBy = &sortBy
 	return r
 }
 
-// Порядок сортировки (по умолчанию: DESC)
+// Порядок сортировки
 func (r ApiGetKnowledgebaseDocumentsV2Request) SortOrder(sortOrder string) ApiGetKnowledgebaseDocumentsV2Request {
 	r.sortOrder = &sortOrder
+	return r
+}
+
+// Фильтр по подстроке в названии документа
+func (r ApiGetKnowledgebaseDocumentsV2Request) Search(search string) ApiGetKnowledgebaseDocumentsV2Request {
+	r.search = &search
 	return r
 }
 
@@ -1066,7 +1308,9 @@ func (r ApiGetKnowledgebaseDocumentsV2Request) Execute() (*GetKnowledgebaseDocum
 /*
 GetKnowledgebaseDocumentsV2 Получение списка документов базы знаний
 
-Чтобы получить список документов базы знаний, отправьте GET-запрос на `/api/v2/cloud-ai/knowledge-bases/{id}/documents`.
+Чтобы получить список документов базы знаний с пагинацией, отправьте GET-запрос на `/api/v2/cloud-ai/knowledge-bases/{id}/documents`.
+
+Некорректные значения параметров пагинации и сортировки не приводят к ошибке — вместо них применяются значения по умолчанию.
 
 Тело ответа будет представлять собой объект JSON с ключами `knowledgebase_documents` и `meta`.
 
@@ -1118,6 +1362,9 @@ func (a *KnowledgeBasesAPIService) GetKnowledgebaseDocumentsV2Execute(r ApiGetKn
 	}
 	if r.sortOrder != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1238,50 +1485,29 @@ func (a *KnowledgeBasesAPIService) GetKnowledgebaseDocumentsV2Execute(r ApiGetKn
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetKnowledgebaseStatisticsRequest struct {
+type ApiGetKnowledgebaseV3Request struct {
 	ctx context.Context
 	ApiService *KnowledgeBasesAPIService
 	id int32
-	startTime *time.Time
-	endTime *time.Time
-	interval *float32
 }
 
-// Начало временного диапазона (ISO 8601)
-func (r ApiGetKnowledgebaseStatisticsRequest) StartTime(startTime time.Time) ApiGetKnowledgebaseStatisticsRequest {
-	r.startTime = &startTime
-	return r
-}
-
-// Конец временного диапазона (ISO 8601)
-func (r ApiGetKnowledgebaseStatisticsRequest) EndTime(endTime time.Time) ApiGetKnowledgebaseStatisticsRequest {
-	r.endTime = &endTime
-	return r
-}
-
-// Интервал в минутах (по умолчанию 60)
-func (r ApiGetKnowledgebaseStatisticsRequest) Interval(interval float32) ApiGetKnowledgebaseStatisticsRequest {
-	r.interval = &interval
-	return r
-}
-
-func (r ApiGetKnowledgebaseStatisticsRequest) Execute() (*GetKnowledgebaseStatistics200Response, *http.Response, error) {
-	return r.ApiService.GetKnowledgebaseStatisticsExecute(r)
+func (r ApiGetKnowledgebaseV3Request) Execute() (*GetKnowledgebaseV3200Response, *http.Response, error) {
+	return r.ApiService.GetKnowledgebaseV3Execute(r)
 }
 
 /*
-GetKnowledgebaseStatistics Получение статистики использования токенов базы знаний
+GetKnowledgebaseV3 Получение базы знаний
 
-Чтобы получить статистику использования токенов базы знаний, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/statistic`.
+Чтобы получить информацию о базе знаний, отправьте GET-запрос на `/api/v3/cloud-ai/knowledge-bases/{id}`.
 
-Можно указать временной диапазон и интервал агрегации.
+Тело ответа будет представлять собой объект JSON с ключом `knowledge_base`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
- @return ApiGetKnowledgebaseStatisticsRequest
+ @return ApiGetKnowledgebaseV3Request
 */
-func (a *KnowledgeBasesAPIService) GetKnowledgebaseStatistics(ctx context.Context, id int32) ApiGetKnowledgebaseStatisticsRequest {
-	return ApiGetKnowledgebaseStatisticsRequest{
+func (a *KnowledgeBasesAPIService) GetKnowledgebaseV3(ctx context.Context, id int32) ApiGetKnowledgebaseV3Request {
+	return ApiGetKnowledgebaseV3Request{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -1289,21 +1515,21 @@ func (a *KnowledgeBasesAPIService) GetKnowledgebaseStatistics(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return GetKnowledgebaseStatistics200Response
-func (a *KnowledgeBasesAPIService) GetKnowledgebaseStatisticsExecute(r ApiGetKnowledgebaseStatisticsRequest) (*GetKnowledgebaseStatistics200Response, *http.Response, error) {
+//  @return GetKnowledgebaseV3200Response
+func (a *KnowledgeBasesAPIService) GetKnowledgebaseV3Execute(r ApiGetKnowledgebaseV3Request) (*GetKnowledgebaseV3200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetKnowledgebaseStatistics200Response
+		localVarReturnValue  *GetKnowledgebaseV3200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KnowledgeBasesAPIService.GetKnowledgebaseStatistics")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KnowledgeBasesAPIService.GetKnowledgebaseV3")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cloud-ai/knowledge-bases/{id}/statistic"
+	localVarPath := localBasePath + "/api/v3/cloud-ai/knowledge-bases/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1313,15 +1539,6 @@ func (a *KnowledgeBasesAPIService) GetKnowledgebaseStatisticsExecute(r ApiGetKno
 		return localVarReturnValue, nil, reportError("id must be greater than 1")
 	}
 
-	if r.startTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
-	}
-	if r.endTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
-	}
-	if r.interval != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "interval", r.interval, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1451,11 +1668,13 @@ func (r ApiGetKnowledgebasesRequest) Execute() (*GetKnowledgebases200Response, *
 }
 
 /*
-GetKnowledgebases Получение списка баз знаний
+GetKnowledgebases Получение списка баз знаний (v1)
 
-Чтобы получить список баз знаний, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases`.
+Метод устарел — используйте `GET /api/v3/cloud-ai/knowledge-bases`.
 
-Тело ответа будет представлять собой объект JSON с ключом `knowledgebases`.
+Чтобы получить список баз знаний вместе со всеми их документами, отправьте GET-запрос на `/api/v1/cloud-ai/knowledge-bases`.
+
+Тело ответа будет представлять собой объект JSON с ключами `knowledge_bases` и `meta`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetKnowledgebasesRequest
@@ -1563,17 +1782,6 @@ func (a *KnowledgeBasesAPIService) GetKnowledgebasesExecute(r ApiGetKnowledgebas
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetImage404Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 429 {
 			var v GetFinances429Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1624,9 +1832,9 @@ GetKnowledgebasesV2 Получение списка баз знаний (v2)
 
 Чтобы получить список баз знаний, отправьте GET-запрос на `/api/v2/cloud-ai/knowledge-bases`.
 
-Версия API v2 возвращает оптимизированный ответ с количеством документов вместо полного списка документов.
+Вместо списка документов возвращается их количество, привязанные агенты — списком ID. Режим поиска для каждого агента возвращает `GET /api/v3/cloud-ai/knowledge-bases`.
 
-Тело ответа будет представлять собой объект JSON с ключом `knowledgebases`.
+Тело ответа будет представлять собой объект JSON с ключами `knowledge_bases` и `meta`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetKnowledgebasesV2Request
@@ -1731,8 +1939,154 @@ func (a *KnowledgeBasesAPIService) GetKnowledgebasesV2Execute(r ApiGetKnowledgeb
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetImage404Response
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetKnowledgebasesV3Request struct {
+	ctx context.Context
+	ApiService *KnowledgeBasesAPIService
+}
+
+func (r ApiGetKnowledgebasesV3Request) Execute() (*GetKnowledgebasesV3200Response, *http.Response, error) {
+	return r.ApiService.GetKnowledgebasesV3Execute(r)
+}
+
+/*
+GetKnowledgebasesV3 Получение списка баз знаний
+
+Чтобы получить список баз знаний, отправьте GET-запрос на `/api/v3/cloud-ai/knowledge-bases`.
+
+Ответ содержит количество документов и привязанных агентов с режимом поиска. Документы базы знаний запрашивайте отдельно — `GET /api/v2/cloud-ai/knowledge-bases/{id}/documents`.
+
+Тело ответа будет представлять собой объект JSON с ключами `knowledge_bases` и `meta`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKnowledgebasesV3Request
+*/
+func (a *KnowledgeBasesAPIService) GetKnowledgebasesV3(ctx context.Context) ApiGetKnowledgebasesV3Request {
+	return ApiGetKnowledgebasesV3Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetKnowledgebasesV3200Response
+func (a *KnowledgeBasesAPIService) GetKnowledgebasesV3Execute(r ApiGetKnowledgebasesV3Request) (*GetKnowledgebasesV3200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetKnowledgebasesV3200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KnowledgeBasesAPIService.GetKnowledgebasesV3")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v3/cloud-ai/knowledge-bases"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1783,6 +2137,12 @@ type ApiLinkKnowledgebaseToAgentRequest struct {
 	ApiService *KnowledgeBasesAPIService
 	id int32
 	agentId int32
+	linkKnowledgebase *LinkKnowledgebase
+}
+
+func (r ApiLinkKnowledgebaseToAgentRequest) LinkKnowledgebase(linkKnowledgebase LinkKnowledgebase) ApiLinkKnowledgebaseToAgentRequest {
+	r.linkKnowledgebase = &linkKnowledgebase
+	return r
 }
 
 func (r ApiLinkKnowledgebaseToAgentRequest) Execute() (*http.Response, error) {
@@ -1794,9 +2154,13 @@ LinkKnowledgebaseToAgent Привязка базы знаний к агенту
 
 Чтобы привязать базу знаний к AI агенту, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id}`.
 
+Тело запроса необязательно: в нём можно выбрать режим поиска `retrievalMode` (по умолчанию `agentic`). Изменить режим для существующей привязки можно запросом PATCH на тот же адрес.
+
+Возможные ошибки: `404 knowledgebase_not_found`, `404 agent_not_found`.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
- @param agentId ID агента
+ @param agentId ID AI агента
  @return ApiLinkKnowledgebaseToAgentRequest
 */
 func (a *KnowledgeBasesAPIService) LinkKnowledgebaseToAgent(ctx context.Context, id int32, agentId int32) ApiLinkKnowledgebaseToAgentRequest {
@@ -1836,7 +2200,7 @@ func (a *KnowledgeBasesAPIService) LinkKnowledgebaseToAgentExecute(r ApiLinkKnow
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1852,6 +2216,8 @@ func (a *KnowledgeBasesAPIService) LinkKnowledgebaseToAgentExecute(r ApiLinkKnow
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.linkKnowledgebase
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -1959,7 +2325,11 @@ func (r ApiReindexDocumentRequest) Execute() (*http.Response, error) {
 /*
 ReindexDocument Переиндексация документа
 
-Чтобы переиндексировать документ в базе знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/reindex`.
+Чтобы переиндексировать документ, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}/reindex`.
+
+Документ ставится в очередь на индексацию; следите за полем `status` документа. Для документа по ссылке содержимое скачивается заново. Если база знаний не в статусе `active`, документ будет проиндексирован после активации.
+
+Возможные ошибки: `404 knowledgebase_not_found`, `404 document_not_found`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
@@ -2128,9 +2498,11 @@ UnlinkKnowledgebaseFromAgent Отвязка базы знаний от аген�
 
 Чтобы отвязать базу знаний от AI агента, отправьте DELETE-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id}`.
 
+Возможные ошибки: `404 knowledgebase_not_found`, `404 agent_not_found`.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
- @param agentId ID агента
+ @param agentId ID AI агента
  @return ApiUnlinkKnowledgebaseFromAgentRequest
 */
 func (a *KnowledgeBasesAPIService) UnlinkKnowledgebaseFromAgent(ctx context.Context, id int32, agentId int32) ApiUnlinkKnowledgebaseFromAgentRequest {
@@ -2296,9 +2668,11 @@ func (r ApiUpdateKnowledgebaseRequest) Execute() (*CreateKnowledgebase201Respons
 }
 
 /*
-UpdateKnowledgebase Обновление базы знаний
+UpdateKnowledgebase Изменение базы знаний
 
-Чтобы обновить базу знаний, отправьте PATCH-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}`.
+Чтобы изменить название или описание базы знаний, отправьте PATCH-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}`.
+
+Тело ответа будет представлять собой объект JSON с ключом `knowledge_base`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
@@ -2461,6 +2835,378 @@ func (a *KnowledgeBasesAPIService) UpdateKnowledgebaseExecute(r ApiUpdateKnowled
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateKnowledgebaseAgentLinkRequest struct {
+	ctx context.Context
+	ApiService *KnowledgeBasesAPIService
+	id int32
+	agentId int32
+	linkKnowledgebase *LinkKnowledgebase
+}
+
+func (r ApiUpdateKnowledgebaseAgentLinkRequest) LinkKnowledgebase(linkKnowledgebase LinkKnowledgebase) ApiUpdateKnowledgebaseAgentLinkRequest {
+	r.linkKnowledgebase = &linkKnowledgebase
+	return r
+}
+
+func (r ApiUpdateKnowledgebaseAgentLinkRequest) Execute() (*http.Response, error) {
+	return r.ApiService.UpdateKnowledgebaseAgentLinkExecute(r)
+}
+
+/*
+UpdateKnowledgebaseAgentLink Изменение режима поиска по базе знаний для агента
+
+Чтобы изменить режим поиска по привязанной базе знаний для AI агента, отправьте PATCH-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id}`.
+
+Если `retrievalMode` не передан, устанавливается `agentic`. Если база знаний не привязана к агенту, запрос ничего не меняет и также возвращает `204`.
+
+Возможные ошибки: `404 knowledgebase_not_found`, `404 agent_not_found`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id ID базы знаний
+ @param agentId ID AI агента
+ @return ApiUpdateKnowledgebaseAgentLinkRequest
+*/
+func (a *KnowledgeBasesAPIService) UpdateKnowledgebaseAgentLink(ctx context.Context, id int32, agentId int32) ApiUpdateKnowledgebaseAgentLinkRequest {
+	return ApiUpdateKnowledgebaseAgentLinkRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+		agentId: agentId,
+	}
+}
+
+// Execute executes the request
+func (a *KnowledgeBasesAPIService) UpdateKnowledgebaseAgentLinkExecute(r ApiUpdateKnowledgebaseAgentLinkRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KnowledgeBasesAPIService.UpdateKnowledgebaseAgentLink")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/cloud-ai/knowledge-bases/{id}/link/{agent_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"agent_id"+"}", url.PathEscape(parameterValueToString(r.agentId, "agentId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.id < 1 {
+		return nil, reportError("id must be greater than 1")
+	}
+	if r.agentId < 1 {
+		return nil, reportError("agentId must be greater than 1")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.linkKnowledgebase
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiUpdateKnowledgebaseDocumentRequest struct {
+	ctx context.Context
+	ApiService *KnowledgeBasesAPIService
+	id int32
+	documentId int32
+	updateDocument *UpdateDocument
+}
+
+func (r ApiUpdateKnowledgebaseDocumentRequest) UpdateDocument(updateDocument UpdateDocument) ApiUpdateKnowledgebaseDocumentRequest {
+	r.updateDocument = &updateDocument
+	return r
+}
+
+func (r ApiUpdateKnowledgebaseDocumentRequest) Execute() (*CreateKnowledgebaseDocument201Response, *http.Response, error) {
+	return r.ApiService.UpdateKnowledgebaseDocumentExecute(r)
+}
+
+/*
+UpdateKnowledgebaseDocument Изменение документа
+
+Чтобы изменить документ базы знаний, отправьте PATCH-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}`.
+
+Можно изменить название, расписание переиндексации и — только для документов типа `link` — адрес. После смены адреса документ переиндексируется; изменение названия и расписания переиндексацию не запускает. Новый адрес проверяется так же, как при добавлении документа.
+
+Тело ответа будет представлять собой объект JSON с ключом `document`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id ID базы знаний
+ @param documentId ID документа
+ @return ApiUpdateKnowledgebaseDocumentRequest
+*/
+func (a *KnowledgeBasesAPIService) UpdateKnowledgebaseDocument(ctx context.Context, id int32, documentId int32) ApiUpdateKnowledgebaseDocumentRequest {
+	return ApiUpdateKnowledgebaseDocumentRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+		documentId: documentId,
+	}
+}
+
+// Execute executes the request
+//  @return CreateKnowledgebaseDocument201Response
+func (a *KnowledgeBasesAPIService) UpdateKnowledgebaseDocumentExecute(r ApiUpdateKnowledgebaseDocumentRequest) (*CreateKnowledgebaseDocument201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateKnowledgebaseDocument201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KnowledgeBasesAPIService.UpdateKnowledgebaseDocument")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/cloud-ai/knowledge-bases/{id}/documents/{document_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"document_id"+"}", url.PathEscape(parameterValueToString(r.documentId, "documentId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.id < 1 {
+		return localVarReturnValue, nil, reportError("id must be greater than 1")
+	}
+	if r.documentId < 1 {
+		return localVarReturnValue, nil, reportError("documentId must be greater than 1")
+	}
+	if r.updateDocument == nil {
+		return localVarReturnValue, nil, reportError("updateDocument is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateDocument
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUploadFilesToKnowledgebaseRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBasesAPIService
@@ -2468,23 +3214,26 @@ type ApiUploadFilesToKnowledgebaseRequest struct {
 	files []*os.File
 }
 
-// Файлы для загрузки (максимум 10 файлов, 10 МБ каждый)
+// Файлы для загрузки
 func (r ApiUploadFilesToKnowledgebaseRequest) Files(files []*os.File) ApiUploadFilesToKnowledgebaseRequest {
 	r.files = files
 	return r
 }
 
-func (r ApiUploadFilesToKnowledgebaseRequest) Execute() (*UploadFilesToKnowledgebase200Response, *http.Response, error) {
+func (r ApiUploadFilesToKnowledgebaseRequest) Execute() (*UploadResult, *http.Response, error) {
 	return r.ApiService.UploadFilesToKnowledgebaseExecute(r)
 }
 
 /*
 UploadFilesToKnowledgebase Загрузка файлов в базу знаний
 
-Чтобы загрузить файлы в базу знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/upload` с файлами в формате multipart/form-data.
+Чтобы загрузить файлы в базу знаний, отправьте POST-запрос на `/api/v1/cloud-ai/knowledge-bases/{id}/upload` с файлами в поле `files` формата `multipart/form-data`. Для каждого файла создаётся документ типа `file`, после загрузки документы ставятся в очередь на индексацию (если база знаний в статусе `active`; иначе — после активации).
 
-Поддерживаемые форматы: CSV, XML, Markdown (md), HTML, TXT. JSON не поддерживается.
-Максимум 10 файлов, до 10 МБ каждый.
+Поддерживаемые форматы: TXT, Markdown (`md`, `markdown`), HTML (`html`, `htm`), XML, CSV, PDF, DOC, DOCX, XLS, XLSX, а также другие файлы с MIME-типом `text/*`. JSON (`json`, `jsonl`, `ndjson`) не поддерживается. Размер одного файла — не более 50 МБ.
+
+Если хотя бы один файл неподдерживаемого формата, запрос завершается ошибкой.
+
+Тело ответа будет представлять собой объект JSON с ключами `uploadedFiles` и `documents`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID базы знаний
@@ -2499,13 +3248,13 @@ func (a *KnowledgeBasesAPIService) UploadFilesToKnowledgebase(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return UploadFilesToKnowledgebase200Response
-func (a *KnowledgeBasesAPIService) UploadFilesToKnowledgebaseExecute(r ApiUploadFilesToKnowledgebaseRequest) (*UploadFilesToKnowledgebase200Response, *http.Response, error) {
+//  @return UploadResult
+func (a *KnowledgeBasesAPIService) UploadFilesToKnowledgebaseExecute(r ApiUploadFilesToKnowledgebaseRequest) (*UploadResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UploadFilesToKnowledgebase200Response
+		localVarReturnValue  *UploadResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KnowledgeBasesAPIService.UploadFilesToKnowledgebase")

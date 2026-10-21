@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Knowledgebase** | [**Knowledgebase**](Knowledgebase.md) |  | 
+**KnowledgeBase** | [**Knowledgebase**](Knowledgebase.md) |  | 
 
 ## Methods
 
 ### NewCreateKnowledgebase201Response
 
-`func NewCreateKnowledgebase201Response(knowledgebase Knowledgebase, ) *CreateKnowledgebase201Response`
+`func NewCreateKnowledgebase201Response(knowledgeBase Knowledgebase, ) *CreateKnowledgebase201Response`
 
 NewCreateKnowledgebase201Response instantiates a new CreateKnowledgebase201Response object
 This constructor will assign default values to properties that have it defined,
@@ -25,24 +25,24 @@ NewCreateKnowledgebase201ResponseWithDefaults instantiates a new CreateKnowledge
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetKnowledgebase
+### GetKnowledgeBase
 
-`func (o *CreateKnowledgebase201Response) GetKnowledgebase() Knowledgebase`
+`func (o *CreateKnowledgebase201Response) GetKnowledgeBase() Knowledgebase`
 
-GetKnowledgebase returns the Knowledgebase field if non-nil, zero value otherwise.
+GetKnowledgeBase returns the KnowledgeBase field if non-nil, zero value otherwise.
 
-### GetKnowledgebaseOk
+### GetKnowledgeBaseOk
 
-`func (o *CreateKnowledgebase201Response) GetKnowledgebaseOk() (*Knowledgebase, bool)`
+`func (o *CreateKnowledgebase201Response) GetKnowledgeBaseOk() (*Knowledgebase, bool)`
 
-GetKnowledgebaseOk returns a tuple with the Knowledgebase field if it's non-nil, zero value otherwise
+GetKnowledgeBaseOk returns a tuple with the KnowledgeBase field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetKnowledgebase
+### SetKnowledgeBase
 
-`func (o *CreateKnowledgebase201Response) SetKnowledgebase(v Knowledgebase)`
+`func (o *CreateKnowledgebase201Response) SetKnowledgeBase(v Knowledgebase)`
 
-SetKnowledgebase sets Knowledgebase field to given value.
+SetKnowledgeBase sets KnowledgeBase field to given value.
 
 
 

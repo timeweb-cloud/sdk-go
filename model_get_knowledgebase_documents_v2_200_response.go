@@ -20,7 +20,7 @@ var _ MappedNullable = &GetKnowledgebaseDocumentsV2200Response{}
 
 // GetKnowledgebaseDocumentsV2200Response struct for GetKnowledgebaseDocumentsV2200Response
 type GetKnowledgebaseDocumentsV2200Response struct {
-	// Список документов
+	// Документы
 	KnowledgebaseDocuments []Document `json:"knowledgebase_documents"`
 	Meta GetKnowledgebaseDocumentsV2200ResponseMeta `json:"meta"`
 }

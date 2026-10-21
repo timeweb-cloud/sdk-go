@@ -4,23 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Уникальный идентификатор модели | 
-**ProviderId** | **float32** | ID провайдера, который предоставляет модель | 
-**Name** | **string** | Название модели | 
-**PublicName** | **string** | Публичное имя модели | 
-**Type** | **string** | Тип модели (llm - языковая модель, embedding - модель для эмбеддингов) | 
-**IsDeprecated** | **bool** | Признак, что модель устарела | 
-**IsStopped** | **bool** | Признак, что поддержка модели остановлена в системе | 
-**DeprecationDate** | Pointer to **NullableTime** | Дата депрекейта модели у провайдера | [optional] 
-**IsReasoning** | **bool** | Признак поддержки режима рассуждения | 
+**Id** | **int32** | ID модели | 
+**ProviderId** | **int32** | ID провайдера модели | 
+**Name** | **string** | Семейство модели | 
+**PublicName** | **string** | Отображаемое название модели | 
+**ModelName** | **string** | Идентификатор модели с префиксом провайдера — передаётся в поле &#x60;model&#x60; запросов к AI Gateway | 
+**Type** | **string** | Тип модели: - &#x60;llm&#x60; — языковая модель - &#x60;hosted-llm&#x60; — языковая модель, размещённая в Timeweb Cloud - &#x60;embedding&#x60; — модель эмбеддингов - &#x60;image&#x60; — генерация изображений - &#x60;audio&#x60; — работа с аудио - &#x60;video&#x60; — генерация видео - &#x60;moderation&#x60; — модерация контента - &#x60;system-one&#x60; — служебная модель с собственным API | 
 **Version** | **string** | Версия модели | 
-**ParamsInfo** | Pointer to [**NullableModelParamsInfo**](ModelParamsInfo.md) |  | [optional] 
+**IsDeprecated** | **bool** | Модель устарела и недоступна для выбора в новых агентах | 
+**IsStopped** | **bool** | Поддержка модели остановлена: запросы к ней не выполняются | 
+**DeprecationDate** | **NullableTime** | Дата отключения модели у провайдера. &#x60;null&#x60;, если отключение не запланировано | 
+**IsReasoning** | **bool** | Модель поддерживает режим рассуждений | 
+**ParamsInfo** | [**map[string]ModelParamInfo**](ModelParamInfo.md) | Параметры генерации, которые можно настроить у агента с этой моделью. Ключ — имя параметра (&#x60;temperature&#x60;, &#x60;top_p&#x60;, &#x60;max_tokens&#x60;, &#x60;reasoning_effort&#x60; и т.д.). &#x60;null&#x60;, если параметры не заданы | 
 
 ## Methods
 
 ### NewModel
 
-`func NewModel(id float32, providerId float32, name string, publicName string, type_ string, isDeprecated bool, isStopped bool, isReasoning bool, version string, ) *Model`
+`func NewModel(id int32, providerId int32, name string, publicName string, modelName string, type_ string, version string, isDeprecated bool, isStopped bool, deprecationDate NullableTime, isReasoning bool, paramsInfo map[string]ModelParamInfo, ) *Model`
 
 NewModel instantiates a new Model object
 This constructor will assign default values to properties that have it defined,
@@ -37,40 +38,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *Model) GetId() float32`
+`func (o *Model) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *Model) GetIdOk() (*float32, bool)`
+`func (o *Model) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *Model) SetId(v float32)`
+`func (o *Model) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetProviderId
 
-`func (o *Model) GetProviderId() float32`
+`func (o *Model) GetProviderId() int32`
 
 GetProviderId returns the ProviderId field if non-nil, zero value otherwise.
 
 ### GetProviderIdOk
 
-`func (o *Model) GetProviderIdOk() (*float32, bool)`
+`func (o *Model) GetProviderIdOk() (*int32, bool)`
 
 GetProviderIdOk returns a tuple with the ProviderId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProviderId
 
-`func (o *Model) SetProviderId(v float32)`
+`func (o *Model) SetProviderId(v int32)`
 
 SetProviderId sets ProviderId field to given value.
 
@@ -115,6 +116,26 @@ and a boolean to check if the value has been set.
 SetPublicName sets PublicName field to given value.
 
 
+### GetModelName
+
+`func (o *Model) GetModelName() string`
+
+GetModelName returns the ModelName field if non-nil, zero value otherwise.
+
+### GetModelNameOk
+
+`func (o *Model) GetModelNameOk() (*string, bool)`
+
+GetModelNameOk returns a tuple with the ModelName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelName
+
+`func (o *Model) SetModelName(v string)`
+
+SetModelName sets ModelName field to given value.
+
+
 ### GetType
 
 `func (o *Model) GetType() string`
@@ -133,6 +154,26 @@ and a boolean to check if the value has been set.
 `func (o *Model) SetType(v string)`
 
 SetType sets Type field to given value.
+
+
+### GetVersion
+
+`func (o *Model) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *Model) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *Model) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
 
 
 ### GetIsDeprecated
@@ -194,11 +235,6 @@ and a boolean to check if the value has been set.
 
 SetDeprecationDate sets DeprecationDate field to given value.
 
-### HasDeprecationDate
-
-`func (o *Model) HasDeprecationDate() bool`
-
-HasDeprecationDate returns a boolean if a field has been set.
 
 ### SetDeprecationDateNil
 
@@ -230,50 +266,25 @@ and a boolean to check if the value has been set.
 SetIsReasoning sets IsReasoning field to given value.
 
 
-### GetVersion
-
-`func (o *Model) GetVersion() string`
-
-GetVersion returns the Version field if non-nil, zero value otherwise.
-
-### GetVersionOk
-
-`func (o *Model) GetVersionOk() (*string, bool)`
-
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersion
-
-`func (o *Model) SetVersion(v string)`
-
-SetVersion sets Version field to given value.
-
-
 ### GetParamsInfo
 
-`func (o *Model) GetParamsInfo() ModelParamsInfo`
+`func (o *Model) GetParamsInfo() map[string]ModelParamInfo`
 
 GetParamsInfo returns the ParamsInfo field if non-nil, zero value otherwise.
 
 ### GetParamsInfoOk
 
-`func (o *Model) GetParamsInfoOk() (*ModelParamsInfo, bool)`
+`func (o *Model) GetParamsInfoOk() (*map[string]ModelParamInfo, bool)`
 
 GetParamsInfoOk returns a tuple with the ParamsInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetParamsInfo
 
-`func (o *Model) SetParamsInfo(v ModelParamsInfo)`
+`func (o *Model) SetParamsInfo(v map[string]ModelParamInfo)`
 
 SetParamsInfo sets ParamsInfo field to given value.
 
-### HasParamsInfo
-
-`func (o *Model) HasParamsInfo() bool`
-
-HasParamsInfo returns a boolean if a field has been set.
 
 ### SetParamsInfoNil
 
