@@ -324,6 +324,7 @@ docs/CreateServer201Response.md
 docs/CreateServerConfiguration.md
 docs/CreateServerDisk201Response.md
 docs/CreateServerDiskBackup201Response.md
+docs/CreateServerDiskBackupDownloadUrl201Response.md
 docs/CreateServerDiskBackupRequest.md
 docs/CreateServerDiskRequest.md
 docs/CreateServerNetwork.md
@@ -806,6 +807,8 @@ docs/SchemasPresetsResponse.md
 docs/SendAiSolutionMessage.md
 docs/SendAiSolutionMessage200Response.md
 docs/ServerBackup.md
+docs/ServerBackupDownloadUrl.md
+docs/ServerBackupDownloadUrlRequest.md
 docs/ServerDisk.md
 docs/ServerIp.md
 docs/ServerLog.md
@@ -1242,6 +1245,7 @@ model_create_server_201_response.go
 model_create_server_configuration.go
 model_create_server_disk_201_response.go
 model_create_server_disk_backup_201_response.go
+model_create_server_disk_backup_download_url_201_response.go
 model_create_server_disk_backup_request.go
 model_create_server_disk_request.go
 model_create_server_network.go
@@ -1707,6 +1711,8 @@ model_schemas_presets_response.go
 model_send_ai_solution_message.go
 model_send_ai_solution_message_200_response.go
 model_server_backup.go
+model_server_backup_download_url.go
+model_server_backup_download_url_request.go
 model_server_disk.go
 model_server_ip.go
 model_server_log.go

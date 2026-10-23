@@ -690,6 +690,7 @@ Class | Method | HTTP request | Description
 *ServersAPI* | [**CreateServer**](docs/ServersAPI.md#createserver) | **Post** /api/v1/servers | Создание сервера
 *ServersAPI* | [**CreateServerDisk**](docs/ServersAPI.md#createserverdisk) | **Post** /api/v1/servers/{server_id}/disks | Создание диска сервера
 *ServersAPI* | [**CreateServerDiskBackup**](docs/ServersAPI.md#createserverdiskbackup) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups | Создание бэкапа диска сервера
+*ServersAPI* | [**CreateServerDiskBackupDownloadUrl**](docs/ServersAPI.md#createserverdiskbackupdownloadurl) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/download-url | Получение ссылки для скачивания бэкапа диска сервера
 *ServersAPI* | [**DeleteServer**](docs/ServersAPI.md#deleteserver) | **Delete** /api/v1/servers/{server_id} | Удаление сервера
 *ServersAPI* | [**DeleteServerDisk**](docs/ServersAPI.md#deleteserverdisk) | **Delete** /api/v1/servers/{server_id}/disks/{disk_id} | Удаление диска сервера
 *ServersAPI* | [**DeleteServerDiskBackup**](docs/ServersAPI.md#deleteserverdiskbackup) | **Delete** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id} | Удаление бэкапа диска сервера
@@ -1013,6 +1014,7 @@ Class | Method | HTTP request | Description
  - [CreateServerConfiguration](docs/CreateServerConfiguration.md)
  - [CreateServerDisk201Response](docs/CreateServerDisk201Response.md)
  - [CreateServerDiskBackup201Response](docs/CreateServerDiskBackup201Response.md)
+ - [CreateServerDiskBackupDownloadUrl201Response](docs/CreateServerDiskBackupDownloadUrl201Response.md)
  - [CreateServerDiskBackupRequest](docs/CreateServerDiskBackupRequest.md)
  - [CreateServerDiskRequest](docs/CreateServerDiskRequest.md)
  - [CreateServerNetwork](docs/CreateServerNetwork.md)
@@ -1478,6 +1480,8 @@ Class | Method | HTTP request | Description
  - [SendAiSolutionMessage](docs/SendAiSolutionMessage.md)
  - [SendAiSolutionMessage200Response](docs/SendAiSolutionMessage200Response.md)
  - [ServerBackup](docs/ServerBackup.md)
+ - [ServerBackupDownloadUrl](docs/ServerBackupDownloadUrl.md)
+ - [ServerBackupDownloadUrlRequest](docs/ServerBackupDownloadUrlRequest.md)
  - [ServerDisk](docs/ServerDisk.md)
  - [ServerIp](docs/ServerIp.md)
  - [ServerLog](docs/ServerLog.md)

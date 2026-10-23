@@ -29675,6 +29675,219 @@ paths:
           \t\t\t\t: httpConn.getErrorStream();\n\t\tScanner s = new Scanner(responseStream).useDelimiter(\"\
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/download-url:
+    post:
+      description: |-
+        Чтобы получить ссылку для скачивания бэкапа диска сервера, отправьте POST-запрос на `/api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/download-url`.
+
+         Скачивание бэкапов доступно для серверов в локациях `ru-1` (Санкт-Петербург) и `ru-3` (Москва). Для серверов в других локациях метод вернет ошибку со статусом `400`.
+
+         Ссылка действует 7 дней. Скачать бэкап по ней может любой, у кого она есть, поэтому не передавайте ее третьим лицам.
+
+         Тело ответа будет представлять собой объект JSON с ключом `backup_url`.
+      operationId: createServerDiskBackupDownloadUrl
+      parameters:
+      - description: ID облачного сервера.
+        explode: false
+        in: path
+        name: server_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID диска сервера.
+        explode: false
+        in: path
+        name: disk_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID бэкапа сервера.
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          example: 1051
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/server-backup-download-url-request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createServerDiskBackupDownloadUrl_201_response'
+          description: Ответ будет представлять собой объект JSON с ключом `backup_url`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateDatabaseInstance_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получение ссылки для скачивания бэкапа диска сервера
+      tags:
+      - Servers
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "filename": "backup-2024-02-02"
+          }' "https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "filename": "backup-2024-02-02"\n}',
+              body: JSON.stringify({
+                  'filename': 'backup-2024-02-02'
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url',
+              // '{\n  "filename": "backup-2024-02-02"\n}',
+              {
+                  'filename': 'backup-2024-02-02'
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'filename': 'backup-2024-02-02',
+          }
+
+          response = requests.post(
+              'https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url',
+              headers=headers,
+              json=json_data,
+          )
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "filename": "backup-2024-02-02"\n}'
+          #response = requests.post(
+          #    'https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url',
+          #    headers=headers,
+          #    data=data,
+          #)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"filename\": \"backup-2024-02-02\"\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"filename\": \"backup-2024-02-02\"\
+          \n}`)\n\treq, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v1/servers/123/disks/321/backups/123/download-url\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"POST\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());\n\
+          \t\twriter.write(\"{\\n  \\\"filename\\\": \\\"backup-2024-02-02\\\"\\n}\"\
+          );\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v1/servers/{server_id}/image-unmount:
     post:
       description: "Чтобы отмонтировать ISO образ и перезагрузить сервер, отправьт\
@@ -92405,6 +92618,35 @@ components:
       - status
       - type
       type: object
+    server-backup-download-url-request:
+      description: Параметры для получения ссылки на скачивание бэкапа диска сервера.
+      properties:
+        filename:
+          description: "Имя файла бэкапа. Допустимы буквы латиницы и кириллицы, ци\
+            фры, символ подчеркивания, а также `-`, `.`, `,`, `:` и пробел."
+          example: backup-2024-02-02
+          type: string
+      required:
+      - filename
+      type: object
+    server-backup-download-url:
+      description: Ссылка для скачивания бэкапа диска сервера.
+      example:
+        backup_id: "123"
+        download_url: https://example.com/backups/backup-2024-02-02
+      properties:
+        backup_id:
+          description: ID бэкапа.
+          example: "123"
+          type: string
+        download_url:
+          description: Ссылка для скачивания бэкапа. Действует 7 дней.
+          example: https://example.com/backups/backup-2024-02-02
+          type: string
+      required:
+      - backup_id
+      - download_url
+      type: object
     restore-point:
       example:
         account_id: aaaa1234
@@ -107737,6 +107979,17 @@ components:
           type: string
       required:
       - action
+      type: object
+    createServerDiskBackupDownloadUrl_201_response:
+      example:
+        backup_url:
+          backup_id: "123"
+          download_url: https://example.com/backups/backup-2024-02-02
+      properties:
+        backup_url:
+          $ref: '#/components/schemas/server-backup-download-url'
+      required:
+      - backup_url
       type: object
     getRestorePoints_200_response:
       example:

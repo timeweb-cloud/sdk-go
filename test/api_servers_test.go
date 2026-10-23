@@ -118,6 +118,22 @@ func Test_openapi_ServersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ServersAPIService CreateServerDiskBackupDownloadUrl", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId int32
+		var diskId int32
+		var backupId int32
+
+		resp, httpRes, err := apiClient.ServersAPI.CreateServerDiskBackupDownloadUrl(context.Background(), serverId, diskId, backupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ServersAPIService DeleteServer", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

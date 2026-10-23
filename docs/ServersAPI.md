@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**CreateServer**](ServersAPI.md#CreateServer) | **Post** /api/v1/servers | Создание сервера
 [**CreateServerDisk**](ServersAPI.md#CreateServerDisk) | **Post** /api/v1/servers/{server_id}/disks | Создание диска сервера
 [**CreateServerDiskBackup**](ServersAPI.md#CreateServerDiskBackup) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups | Создание бэкапа диска сервера
+[**CreateServerDiskBackupDownloadUrl**](ServersAPI.md#CreateServerDiskBackupDownloadUrl) | **Post** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/download-url | Получение ссылки для скачивания бэкапа диска сервера
 [**DeleteServer**](ServersAPI.md#DeleteServer) | **Delete** /api/v1/servers/{server_id} | Удаление сервера
 [**DeleteServerDisk**](ServersAPI.md#DeleteServerDisk) | **Delete** /api/v1/servers/{server_id}/disks/{disk_id} | Удаление диска сервера
 [**DeleteServerDiskBackup**](ServersAPI.md#DeleteServerDiskBackup) | **Delete** /api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id} | Удаление бэкапа диска сервера
@@ -530,6 +531,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateServerDiskBackup201Response**](CreateServerDiskBackup201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateServerDiskBackupDownloadUrl
+
+> CreateServerDiskBackupDownloadUrl201Response CreateServerDiskBackupDownloadUrl(ctx, serverId, diskId, backupId).ServerBackupDownloadUrlRequest(serverBackupDownloadUrlRequest).Execute()
+
+Получение ссылки для скачивания бэкапа диска сервера
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    serverId := int32(1051) // int32 | ID облачного сервера.
+    diskId := int32(1051) // int32 | ID диска сервера.
+    backupId := int32(1051) // int32 | ID бэкапа сервера.
+    serverBackupDownloadUrlRequest := *openapiclient.NewServerBackupDownloadUrlRequest("backup-2024-02-02") // ServerBackupDownloadUrlRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ServersAPI.CreateServerDiskBackupDownloadUrl(context.Background(), serverId, diskId, backupId).ServerBackupDownloadUrlRequest(serverBackupDownloadUrlRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ServersAPI.CreateServerDiskBackupDownloadUrl``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateServerDiskBackupDownloadUrl`: CreateServerDiskBackupDownloadUrl201Response
+    fmt.Fprintf(os.Stdout, "Response from `ServersAPI.CreateServerDiskBackupDownloadUrl`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**serverId** | **int32** | ID облачного сервера. | 
+**diskId** | **int32** | ID диска сервера. | 
+**backupId** | **int32** | ID бэкапа сервера. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateServerDiskBackupDownloadUrlRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **serverBackupDownloadUrlRequest** | [**ServerBackupDownloadUrlRequest**](ServerBackupDownloadUrlRequest.md) |  | 
+
+### Return type
+
+[**CreateServerDiskBackupDownloadUrl201Response**](CreateServerDiskBackupDownloadUrl201Response.md)
 
 ### Authorization
 

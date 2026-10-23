@@ -1283,6 +1283,219 @@ func (a *ServersAPIService) CreateServerDiskBackupExecute(r ApiCreateServerDiskB
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateServerDiskBackupDownloadUrlRequest struct {
+	ctx context.Context
+	ApiService *ServersAPIService
+	serverId int32
+	diskId int32
+	backupId int32
+	serverBackupDownloadUrlRequest *ServerBackupDownloadUrlRequest
+}
+
+func (r ApiCreateServerDiskBackupDownloadUrlRequest) ServerBackupDownloadUrlRequest(serverBackupDownloadUrlRequest ServerBackupDownloadUrlRequest) ApiCreateServerDiskBackupDownloadUrlRequest {
+	r.serverBackupDownloadUrlRequest = &serverBackupDownloadUrlRequest
+	return r
+}
+
+func (r ApiCreateServerDiskBackupDownloadUrlRequest) Execute() (*CreateServerDiskBackupDownloadUrl201Response, *http.Response, error) {
+	return r.ApiService.CreateServerDiskBackupDownloadUrlExecute(r)
+}
+
+/*
+CreateServerDiskBackupDownloadUrl Получение ссылки для скачивания бэкапа диска сервера
+
+Чтобы получить ссылку для скачивания бэкапа диска сервера, отправьте POST-запрос на `/api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/download-url`.
+
+ Скачивание бэкапов доступно для серверов в локациях `ru-1` (Санкт-Петербург) и `ru-3` (Москва). Для серверов в других локациях метод вернет ошибку со статусом `400`.
+
+ Ссылка действует 7 дней. Скачать бэкап по ней может любой, у кого она есть, поэтому не передавайте ее третьим лицам.
+
+ Тело ответа будет представлять собой объект JSON с ключом `backup_url`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param serverId ID облачного сервера.
+ @param diskId ID диска сервера.
+ @param backupId ID бэкапа сервера.
+ @return ApiCreateServerDiskBackupDownloadUrlRequest
+*/
+func (a *ServersAPIService) CreateServerDiskBackupDownloadUrl(ctx context.Context, serverId int32, diskId int32, backupId int32) ApiCreateServerDiskBackupDownloadUrlRequest {
+	return ApiCreateServerDiskBackupDownloadUrlRequest{
+		ApiService: a,
+		ctx: ctx,
+		serverId: serverId,
+		diskId: diskId,
+		backupId: backupId,
+	}
+}
+
+// Execute executes the request
+//  @return CreateServerDiskBackupDownloadUrl201Response
+func (a *ServersAPIService) CreateServerDiskBackupDownloadUrlExecute(r ApiCreateServerDiskBackupDownloadUrlRequest) (*CreateServerDiskBackupDownloadUrl201Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateServerDiskBackupDownloadUrl201Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServersAPIService.CreateServerDiskBackupDownloadUrl")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/servers/{server_id}/disks/{disk_id}/backups/{backup_id}/download-url"
+	localVarPath = strings.Replace(localVarPath, "{"+"server_id"+"}", url.PathEscape(parameterValueToString(r.serverId, "serverId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"disk_id"+"}", url.PathEscape(parameterValueToString(r.diskId, "diskId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"backup_id"+"}", url.PathEscape(parameterValueToString(r.backupId, "backupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.serverId < 1 {
+		return localVarReturnValue, nil, reportError("serverId must be greater than 1")
+	}
+	if r.diskId < 1 {
+		return localVarReturnValue, nil, reportError("diskId must be greater than 1")
+	}
+	if r.backupId < 1 {
+		return localVarReturnValue, nil, reportError("backupId must be greater than 1")
+	}
+	if r.serverBackupDownloadUrlRequest == nil {
+		return localVarReturnValue, nil, reportError("serverBackupDownloadUrlRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.serverBackupDownloadUrlRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetFinances400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GetFinances401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GetAccountStatus403Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetImage404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v UpdateDatabaseInstance409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v GetFinances429Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v GetFinances500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteServerRequest struct {
 	ctx context.Context
 	ApiService *ServersAPIService
