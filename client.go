@@ -54,8 +54,6 @@ type APIClient struct {
 
 	AIAgentSkillsAPI *AIAgentSkillsAPIService
 
-	AIAgentToolsAPI *AIAgentToolsAPIService
-
 	AIAgentsAPI *AIAgentsAPIService
 
 	AIGatewayAPI *AIGatewayAPIService
@@ -133,7 +131,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AIAgentIntegrationsAPI = (*AIAgentIntegrationsAPIService)(&c.common)
 	c.AIAgentSkillsAPI = (*AIAgentSkillsAPIService)(&c.common)
-	c.AIAgentToolsAPI = (*AIAgentToolsAPIService)(&c.common)
 	c.AIAgentsAPI = (*AIAgentsAPIService)(&c.common)
 	c.AIGatewayAPI = (*AIGatewayAPIService)(&c.common)
 	c.AIGatewayInferenceAPI = (*AIGatewayInferenceAPIService)(&c.common)

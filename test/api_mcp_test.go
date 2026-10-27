@@ -22,6 +22,44 @@ func Test_openapi_MCPAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test MCPAPIService ConnectAgentToolToAgent", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var agentId int32
+
+		httpRes, err := apiClient.MCPAPI.ConnectAgentToolToAgent(context.Background(), agentId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService CreateAgentTool", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.MCPAPI.CreateAgentTool(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService DeleteAgentTool", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		httpRes, err := apiClient.MCPAPI.DeleteAgentTool(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MCPAPIService DeleteMcpSearchSession", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -40,6 +78,110 @@ func Test_openapi_MCPAPIService(t *testing.T) {
 		httpRes, err := apiClient.MCPAPI.DeleteMcpSession(context.Background()).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService DisconnectAgentToolFromAgent", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var agentId int32
+		var toolId int32
+
+		httpRes, err := apiClient.MCPAPI.DisconnectAgentToolFromAgent(context.Background(), agentId, toolId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService GetAgentTool", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.MCPAPI.GetAgentTool(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService GetAgentToolOAuth2AuthorizeUrl", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var toolId int32
+
+		resp, httpRes, err := apiClient.MCPAPI.GetAgentToolOAuth2AuthorizeUrl(context.Background(), toolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService GetAgentToolTemplatePrices", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.MCPAPI.GetAgentToolTemplatePrices(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService GetAgentToolTemplates", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.MCPAPI.GetAgentToolTemplates(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService GetAgentTools", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.MCPAPI.GetAgentTools(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService GetAgentToolsByAgent", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var agentId int32
+
+		resp, httpRes, err := apiClient.MCPAPI.GetAgentToolsByAgent(context.Background(), agentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService InstallAgentToolFromTemplate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.MCPAPI.InstallAgentToolFromTemplate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -68,6 +210,20 @@ func Test_openapi_MCPAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test MCPAPIService RefreshAgentToolMethods", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.MCPAPI.RefreshAgentToolMethods(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MCPAPIService SendMcpMessage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -88,6 +244,34 @@ func Test_openapi_MCPAPIService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService UpdateAgentTool", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.MCPAPI.UpdateAgentTool(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MCPAPIService UpdateAgentToolConnection", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var agentId int32
+		var toolId int32
+
+		httpRes, err := apiClient.MCPAPI.UpdateAgentToolConnection(context.Background(), agentId, toolId).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

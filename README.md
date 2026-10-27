@@ -261,20 +261,6 @@ Class | Method | HTTP request | Description
 *AIAgentSkillsAPI* | [**SyncAgentSkillVersionsForAgent**](docs/AIAgentSkillsAPI.md#syncagentskillversionsforagent) | **Post** /api/v1/cloud-ai/agents/{agent_id}/skills/sync-versions | Перевод всех навыков агента на текущие версии
 *AIAgentSkillsAPI* | [**UpdateAgentSkill**](docs/AIAgentSkillsAPI.md#updateagentskill) | **Patch** /api/v1/cloud-ai/skills/{skill_id} | Изменение навыка
 *AIAgentSkillsAPI* | [**UpdateAgentSkillVersionForAgent**](docs/AIAgentSkillsAPI.md#updateagentskillversionforagent) | **Post** /api/v1/cloud-ai/agents/{agent_id}/skills/{skill_id}/update-version | Перевод агента на текущую версию навыка
-*AIAgentToolsAPI* | [**ConnectAgentToolToAgent**](docs/AIAgentToolsAPI.md#connectagenttooltoagent) | **Post** /api/v1/cloud-ai/agents/{agent_id}/tools | Подключение MCP-инструмента к агенту
-*AIAgentToolsAPI* | [**CreateAgentTool**](docs/AIAgentToolsAPI.md#createagenttool) | **Post** /api/v1/cloud-ai/tools | Подключение собственного MCP-сервера
-*AIAgentToolsAPI* | [**DeleteAgentTool**](docs/AIAgentToolsAPI.md#deleteagenttool) | **Delete** /api/v1/cloud-ai/tools/{id} | Удаление MCP-инструмента
-*AIAgentToolsAPI* | [**DisconnectAgentToolFromAgent**](docs/AIAgentToolsAPI.md#disconnectagenttoolfromagent) | **Delete** /api/v1/cloud-ai/agents/{agent_id}/tools/{tool_id} | Отключение MCP-инструмента от агента
-*AIAgentToolsAPI* | [**GetAgentTool**](docs/AIAgentToolsAPI.md#getagenttool) | **Get** /api/v1/cloud-ai/tools/{id} | Получение MCP-инструмента
-*AIAgentToolsAPI* | [**GetAgentToolOAuth2AuthorizeUrl**](docs/AIAgentToolsAPI.md#getagenttooloauth2authorizeurl) | **Get** /api/v1/cloud-ai/tools/oauth2/authorize-url/{tool_id} | Получение ссылки на OAuth2-авторизацию инструмента
-*AIAgentToolsAPI* | [**GetAgentToolTemplatePrices**](docs/AIAgentToolsAPI.md#getagenttooltemplateprices) | **Get** /api/v1/cloud-ai/tools/templates/prices | Получение цен системных инструментов
-*AIAgentToolsAPI* | [**GetAgentToolTemplates**](docs/AIAgentToolsAPI.md#getagenttooltemplates) | **Get** /api/v1/cloud-ai/tools/templates/marketplace | Получение шаблонов MCP-инструментов из маркетплейса
-*AIAgentToolsAPI* | [**GetAgentTools**](docs/AIAgentToolsAPI.md#getagenttools) | **Get** /api/v1/cloud-ai/tools | Получение списка MCP-инструментов
-*AIAgentToolsAPI* | [**GetAgentToolsByAgent**](docs/AIAgentToolsAPI.md#getagenttoolsbyagent) | **Get** /api/v1/cloud-ai/agents/{agent_id}/tools | Получение MCP-инструментов агента
-*AIAgentToolsAPI* | [**InstallAgentToolFromTemplate**](docs/AIAgentToolsAPI.md#installagenttoolfromtemplate) | **Post** /api/v1/cloud-ai/tools/install | Установка MCP-инструмента из маркетплейса
-*AIAgentToolsAPI* | [**RefreshAgentToolMethods**](docs/AIAgentToolsAPI.md#refreshagenttoolmethods) | **Post** /api/v1/cloud-ai/tools/{id}/refresh-methods | Обновление списка методов MCP-инструмента
-*AIAgentToolsAPI* | [**UpdateAgentTool**](docs/AIAgentToolsAPI.md#updateagenttool) | **Put** /api/v1/cloud-ai/tools/{id} | Изменение MCP-инструмента
-*AIAgentToolsAPI* | [**UpdateAgentToolConnection**](docs/AIAgentToolsAPI.md#updateagenttoolconnection) | **Put** /api/v1/cloud-ai/agents/{agent_id}/tools/{tool_id} | Изменение разрешённых методов MCP-инструмента у агента
 *AIAgentsAPI* | [**AddAdditionalTokenPackage**](docs/AIAgentsAPI.md#addadditionaltokenpackage) | **Post** /api/v1/cloud-ai/agents/{id}/add-additional-token-package | Добавление дополнительного пакета токенов
 *AIAgentsAPI* | [**ChangeAgentModel**](docs/AIAgentsAPI.md#changeagentmodel) | **Patch** /api/v1/cloud-ai/agents/{id}/model | Смена модели AI агента
 *AIAgentsAPI* | [**CreateAgent**](docs/AIAgentsAPI.md#createagent) | **Post** /api/v1/cloud-ai/agents | Создание AI агента
@@ -583,12 +569,26 @@ Class | Method | HTTP request | Description
 *KubernetesAPI* | [**UpdateCluster**](docs/KubernetesAPI.md#updatecluster) | **Patch** /api/v1/k8s/clusters/{cluster_id} | Обновление информации о кластере
 *KubernetesAPI* | [**UpdateClusterVersion**](docs/KubernetesAPI.md#updateclusterversion) | **Patch** /api/v1/k8s/clusters/{cluster_id}/versions/update | Обновление версии кластера
 *LocationsAPI* | [**GetLocations**](docs/LocationsAPI.md#getlocations) | **Get** /api/v2/locations | Получение списка локаций
+*MCPAPI* | [**ConnectAgentToolToAgent**](docs/MCPAPI.md#connectagenttooltoagent) | **Post** /api/v1/cloud-ai/agents/{agent_id}/tools | Подключение MCP-инструмента к агенту
+*MCPAPI* | [**CreateAgentTool**](docs/MCPAPI.md#createagenttool) | **Post** /api/v1/cloud-ai/tools | Подключение собственного MCP-сервера
+*MCPAPI* | [**DeleteAgentTool**](docs/MCPAPI.md#deleteagenttool) | **Delete** /api/v1/cloud-ai/tools/{id} | Удаление MCP-инструмента
 *MCPAPI* | [**DeleteMcpSearchSession**](docs/MCPAPI.md#deletemcpsearchsession) | **Delete** /api/v1/mcp/search | Завершение сессии сервера MCP с поиском инструментов
 *MCPAPI* | [**DeleteMcpSession**](docs/MCPAPI.md#deletemcpsession) | **Delete** /api/v1/mcp | Завершение сессии сервера MCP
+*MCPAPI* | [**DisconnectAgentToolFromAgent**](docs/MCPAPI.md#disconnectagenttoolfromagent) | **Delete** /api/v1/cloud-ai/agents/{agent_id}/tools/{tool_id} | Отключение MCP-инструмента от агента
+*MCPAPI* | [**GetAgentTool**](docs/MCPAPI.md#getagenttool) | **Get** /api/v1/cloud-ai/tools/{id} | Получение MCP-инструмента
+*MCPAPI* | [**GetAgentToolOAuth2AuthorizeUrl**](docs/MCPAPI.md#getagenttooloauth2authorizeurl) | **Get** /api/v1/cloud-ai/tools/oauth2/authorize-url/{tool_id} | Получение ссылки на OAuth2-авторизацию инструмента
+*MCPAPI* | [**GetAgentToolTemplatePrices**](docs/MCPAPI.md#getagenttooltemplateprices) | **Get** /api/v1/cloud-ai/tools/templates/prices | Получение цен системных инструментов
+*MCPAPI* | [**GetAgentToolTemplates**](docs/MCPAPI.md#getagenttooltemplates) | **Get** /api/v1/cloud-ai/tools/templates/marketplace | Получение шаблонов MCP-инструментов из маркетплейса
+*MCPAPI* | [**GetAgentTools**](docs/MCPAPI.md#getagenttools) | **Get** /api/v1/cloud-ai/tools | Получение списка MCP-инструментов
+*MCPAPI* | [**GetAgentToolsByAgent**](docs/MCPAPI.md#getagenttoolsbyagent) | **Get** /api/v1/cloud-ai/agents/{agent_id}/tools | Получение MCP-инструментов агента
+*MCPAPI* | [**InstallAgentToolFromTemplate**](docs/MCPAPI.md#installagenttoolfromtemplate) | **Post** /api/v1/cloud-ai/tools/install | Установка MCP-инструмента из маркетплейса
 *MCPAPI* | [**OpenMcpSearchStream**](docs/MCPAPI.md#openmcpsearchstream) | **Get** /api/v1/mcp/search | Открытие потока событий сервера MCP с поиском инструментов
 *MCPAPI* | [**OpenMcpStream**](docs/MCPAPI.md#openmcpstream) | **Get** /api/v1/mcp | Открытие потока событий сервера MCP
+*MCPAPI* | [**RefreshAgentToolMethods**](docs/MCPAPI.md#refreshagenttoolmethods) | **Post** /api/v1/cloud-ai/tools/{id}/refresh-methods | Обновление списка методов MCP-инструмента
 *MCPAPI* | [**SendMcpMessage**](docs/MCPAPI.md#sendmcpmessage) | **Post** /api/v1/mcp | Отправка JSON-RPC-сообщения серверу MCP
 *MCPAPI* | [**SendMcpSearchMessage**](docs/MCPAPI.md#sendmcpsearchmessage) | **Post** /api/v1/mcp/search | Отправка JSON-RPC-сообщения серверу MCP с поиском инструментов
+*MCPAPI* | [**UpdateAgentTool**](docs/MCPAPI.md#updateagenttool) | **Put** /api/v1/cloud-ai/tools/{id} | Изменение MCP-инструмента
+*MCPAPI* | [**UpdateAgentToolConnection**](docs/MCPAPI.md#updateagenttoolconnection) | **Put** /api/v1/cloud-ai/agents/{agent_id}/tools/{tool_id} | Изменение разрешённых методов MCP-инструмента у агента
 *MailAPI* | [**CreateDomainMailbox**](docs/MailAPI.md#createdomainmailbox) | **Post** /api/v1/mail/domains/{domain} | Создание почтового ящика
 *MailAPI* | [**CreateDomainMailboxV2**](docs/MailAPI.md#createdomainmailboxv2) | **Post** /api/v2/mail/domains/{domain} | Создание почтового ящика
 *MailAPI* | [**CreateMultipleDomainMailboxes**](docs/MailAPI.md#createmultipledomainmailboxes) | **Post** /api/v1/mail/domains/{domain}/batch | Множественное создание почтовых ящиков

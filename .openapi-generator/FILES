@@ -6,7 +6,6 @@ api/openapi.yaml
 api_account.go
 api_ai_agent_integrations.go
 api_ai_agent_skills.go
-api_ai_agent_tools.go
 api_ai_agents.go
 api_ai_gateway.go
 api_ai_gateway_inference.go
@@ -39,7 +38,6 @@ client.go
 configuration.go
 docs/AIAgentIntegrationsAPI.md
 docs/AIAgentSkillsAPI.md
-docs/AIAgentToolsAPI.md
 docs/AIAgentsAPI.md
 docs/AIGatewayAPI.md
 docs/AIGatewayInferenceAPI.md
@@ -1874,7 +1872,6 @@ response.go
 test/api_account_test.go
 test/api_ai_agent_integrations_test.go
 test/api_ai_agent_skills_test.go
-test/api_ai_agent_tools_test.go
 test/api_ai_agents_test.go
 test/api_ai_gateway_inference_test.go
 test/api_ai_gateway_test.go
