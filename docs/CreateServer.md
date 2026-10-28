@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **SshKeysIds** | Pointer to **[]float32** | Список SSH-ключей. | [optional] 
 **IsLocalNetwork** | Pointer to **bool** | Локальная сеть. | [optional] 
 **Network** | Pointer to [**CreateServerNetwork**](CreateServerNetwork.md) |  | [optional] 
-**CloudInit** | Pointer to **string** | Cloud-init скрипт | [optional] 
+**CloudInit** | Pointer to **string** | Cloud-init скрипт. Максимальный размер — 65 535 байт в UTF-8. | [optional] 
 **AvailabilityZone** | Pointer to [**AvailabilityZone**](AvailabilityZone.md) |  | [optional] 
 **ProjectId** | Pointer to **float32** | ID проекта. | [optional] 
 **Hostname** | Pointer to **string** | Сетевое имя сервера | [optional] 

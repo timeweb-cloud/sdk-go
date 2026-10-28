@@ -92132,7 +92132,7 @@ components:
         network:
           $ref: '#/components/schemas/create_server_network'
         cloud_init:
-          description: Cloud-init скрипт
+          description: Cloud-init скрипт. Максимальный размер — 65 535 байт в UTF-8.
           example: '#cloud-config'
           type: string
         availability_zone:
@@ -92189,7 +92189,7 @@ components:
           format: uuid
           type: string
         cloud_init:
-          description: Cloud-init скрипт
+          description: Cloud-init скрипт. Максимальный размер — 65 535 байт в UTF-8.
           example: '#cloud-config'
           type: string
     servers-statistics:

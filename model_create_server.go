@@ -46,7 +46,7 @@ type CreateServer struct {
 	// Deprecated
 	IsLocalNetwork *bool `json:"is_local_network,omitempty"`
 	Network *CreateServerNetwork `json:"network,omitempty"`
-	// Cloud-init скрипт
+	// Cloud-init скрипт. Максимальный размер — 65 535 байт в UTF-8.
 	CloudInit *string `json:"cloud_init,omitempty"`
 	AvailabilityZone *AvailabilityZone `json:"availability_zone,omitempty"`
 	// ID проекта.

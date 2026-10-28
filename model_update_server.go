@@ -37,7 +37,7 @@ type UpdateServer struct {
 	Comment *string `json:"comment,omitempty"`
 	// ID образа, который будет установлен на облачный сервер. Нельзя передавать вместе с `os_id`.
 	ImageId *string `json:"image_id,omitempty"`
-	// Cloud-init скрипт
+	// Cloud-init скрипт. Максимальный размер — 65 535 байт в UTF-8.
 	CloudInit *string `json:"cloud_init,omitempty"`
 }
 
