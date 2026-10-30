@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddProvider**](AppsAPI.md#AddProvider) | **Post** /api/v1/vcs-provider | Привязка vcs провайдера
 [**CreateApp**](AppsAPI.md#CreateApp) | **Post** /api/v1/apps | Создание приложения
+[**CreateAppV2**](AppsAPI.md#CreateAppV2) | **Post** /api/v2/apps | Создание приложения (v2)
 [**CreateDeploy**](AppsAPI.md#CreateDeploy) | **Post** /api/v1/apps/{app_id}/deploy | Запуск деплоя приложения
 [**DeleteApp**](AppsAPI.md#DeleteApp) | **Delete** /api/v1/apps/{app_id} | Удаление приложения
 [**DeleteProvider**](AppsAPI.md#DeleteProvider) | **Delete** /api/v1/vcs-provider/{provider_id} | Отвязка vcs провайдера от аккаунта
@@ -145,6 +146,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateApp201Response**](CreateApp201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateAppV2
+
+> CreateAppV2201Response CreateAppV2(ctx).CreateAppV2(createAppV2).Execute()
+
+Создание приложения (v2)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    createAppV2 := *openapiclient.NewCreateAppV2("backend", "app_example", "example comment", "node") // CreateAppV2 | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AppsAPI.CreateAppV2(context.Background()).CreateAppV2(createAppV2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.CreateAppV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateAppV2`: CreateAppV2201Response
+    fmt.Fprintf(os.Stdout, "Response from `AppsAPI.CreateAppV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateAppV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createAppV2** | [**CreateAppV2**](CreateAppV2.md) |  | 
+
+### Return type
+
+[**CreateAppV2201Response**](CreateAppV2201Response.md)
 
 ### Authorization
 

@@ -47567,6 +47567,330 @@ paths:
           \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
+  /api/v2/apps:
+    post:
+      description: |-
+        Чтобы создать приложение, отправьте POST-запрос в `/api/v2/apps`.
+
+        Создание сервера, настройка окружения и первый деплой выполняются асинхронно. Ответ `201 Created` содержит запись приложения в статусе `new` и не означает, что приложение уже готово к работе. До создания инфраструктуры в ответе могут отсутствовать `ip`, `location`, `configuration`, `disk_status`, `language`, `framework`, `envs`, `env_version`, `build_cmd`, `run_cmd` и `index_dir`. Состояние приложения можно проверять через `GET /api/v2/apps/{app_id}`.
+
+        В v2 обязательно поле `language`, а в ответе ветка репозитория называется `branch`. Для Git-репозитория передайте параметры провайдера, репозитория, ветки, коммита и сборки. Для готового Docker-образа используйте `type: backend`, `language: custom-image`, `docker_image` и `docker_image_tag`. Для frontend обязателен `preset_id`, для backend — либо `preset_id`, либо `configuration`. ID тарифа можно получить через `GET /api/v1/presets/apps`.
+      operationId: createAppV2
+      requestBody:
+        content:
+          application/json:
+            examples:
+              backend:
+                summary: Backend из Git
+                value:
+                  type: backend
+                  provider_id: b392b624-ee80-496e-8b61-47276acac2da
+                  repository_id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+                  branch_name: master
+                  commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+                  build_cmd: npm ci
+                  run_cmd: npm start
+                  is_auto_deploy: true
+                  name: app_example
+                  comment: ""
+                  preset_id: 42
+                  language: node
+                  framework: express
+                  env_version: "22"
+                  envs:
+                    NODE_ENV: production
+              frontend:
+                summary: Frontend из Git
+                value:
+                  type: frontend
+                  provider_id: b392b624-ee80-496e-8b61-47276acac2da
+                  repository_id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+                  branch_name: master
+                  commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+                  build_cmd: npm ci && npm run build
+                  is_auto_deploy: true
+                  name: app_example
+                  comment: ""
+                  preset_id: 42
+                  language: javascript
+                  framework: react
+                  env_version: "22"
+                  envs:
+                    NODE_ENV: production
+                  index_dir: /dist
+              docker:
+                summary: Backend из Docker-образа
+                value:
+                  type: backend
+                  name: nginx_app
+                  comment: ""
+                  language: custom-image
+                  docker_image: nginx
+                  docker_image_tag: stable
+                  preset_id: 42
+            schema:
+              $ref: '#/components/schemas/create-app-v2'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                app:
+                  id: 1
+                  type: backend
+                  name: app_example
+                  status: new
+                  domains: []
+                  avatar_link: null
+                  start_time: 2026-10-29T10:00:00.000Z
+                  preset_id: 42
+                  configurator_id: null
+                  provider:
+                    id: b392b624-ee80-496e-8b61-47276acac2da
+                    type: github
+                  branch: master
+                  commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+                  is_auto_deploy: true
+                  created_at: 2026-10-29T10:00:00.000Z
+                  requests_limit: null
+                  reverse_proxy: null
+                  index_dir: null
+                  comment: ""
+                response_id: 15095f25-aac3-4d60-a788-96cb5136f186
+              schema:
+                $ref: '#/components/schemas/createAppV2_201_response'
+          description: "Запись приложения создана, развёртывание продолжается асин\
+            хронно. Объект JSON с ключом app."
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAccountStatus_403_response'
+          description: Запрещено
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateDatabaseInstance_409_response'
+          description: Конфликт
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Создание приложения (v2)
+      tags:
+      - Apps
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            -d '{
+            "type": "backend",
+            "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",
+            "repository_id": "eb4e1796-78ce-4232-a824-3c3f4dfaf98f",
+            "branch_name": "master",
+            "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",
+            "build_cmd": "npm ci",
+            "run_cmd": "npm start",
+            "is_auto_deploy": true,
+            "name": "app_example",
+            "comment": "",
+            "preset_id": 42,
+            "language": "node",
+            "framework": "express",
+            "env_version": "22",
+            "envs": {
+              "NODE_ENV": "production"
+            }
+          }' \
+            "https://api.timeweb.cloud/api/v2/apps"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/apps', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              },
+              // body: '{\n  "type": "backend",\n  "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",\n  "repository_id": "eb4e1796-78ce-4232-a824-3c3f4dfaf98f",\n  "branch_name": "master",\n  "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n  "build_cmd": "npm ci",\n  "run_cmd": "npm start",\n  "is_auto_deploy": true,\n  "name": "app_example",\n  "comment": "",\n  "preset_id": 42,\n  "language": "node",\n  "framework": "express",\n  "env_version": "22",\n  "envs": {\n    "NODE_ENV": "production"\n  }\n}',
+              body: JSON.stringify({
+                  'type': 'backend',
+                  'provider_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+                  'repository_id': 'eb4e1796-78ce-4232-a824-3c3f4dfaf98f',
+                  'branch_name': 'master',
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+                  'build_cmd': 'npm ci',
+                  'run_cmd': 'npm start',
+                  'is_auto_deploy': true,
+                  'name': 'app_example',
+                  'comment': '',
+                  'preset_id': 42,
+                  'language': 'node',
+                  'framework': 'express',
+                  'env_version': '22',
+                  'envs': {
+                      'NODE_ENV': 'production'
+                  }
+              })
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.post(
+              'https://api.timeweb.cloud/api/v2/apps',
+              // '{\n  "type": "backend",\n  "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",\n  "repository_id": "eb4e1796-78ce-4232-a824-3c3f4dfaf98f",\n  "branch_name": "master",\n  "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n  "build_cmd": "npm ci",\n  "run_cmd": "npm start",\n  "is_auto_deploy": true,\n  "name": "app_example",\n  "comment": "",\n  "preset_id": 42,\n  "language": "node",\n  "framework": "express",\n  "env_version": "22",\n  "envs": {\n    "NODE_ENV": "production"\n  }\n}',
+              {
+                  'type': 'backend',
+                  'provider_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+                  'repository_id': 'eb4e1796-78ce-4232-a824-3c3f4dfaf98f',
+                  'branch_name': 'master',
+                  'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+                  'build_cmd': 'npm ci',
+                  'run_cmd': 'npm start',
+                  'is_auto_deploy': true,
+                  'name': 'app_example',
+                  'comment': '',
+                  'preset_id': 42,
+                  'language': 'node',
+                  'framework': 'express',
+                  'env_version': '22',
+                  'envs': {
+                      'NODE_ENV': 'production'
+                  }
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+                  }
+              }
+          );
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          json_data = {
+              'type': 'backend',
+              'provider_id': 'b392b624-ee80-496e-8b61-47276acac2da',
+              'repository_id': 'eb4e1796-78ce-4232-a824-3c3f4dfaf98f',
+              'branch_name': 'master',
+              'commit_sha': '7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c',
+              'build_cmd': 'npm ci',
+              'run_cmd': 'npm start',
+              'is_auto_deploy': True,
+              'name': 'app_example',
+              'comment': '',
+              'preset_id': 42,
+              'language': 'node',
+              'framework': 'express',
+              'env_version': '22',
+              'envs': {
+                  'NODE_ENV': 'production',
+              },
+          }
+
+          response = requests.post('https://api.timeweb.cloud/api/v2/apps', headers=headers, json=json_data)
+
+          # Note: json_data will not be serialized by requests
+          # exactly as it was in the original request.
+          #data = '{\n  "type": "backend",\n  "provider_id": "b392b624-ee80-496e-8b61-47276acac2da",\n  "repository_id": "eb4e1796-78ce-4232-a824-3c3f4dfaf98f",\n  "branch_name": "master",\n  "commit_sha": "7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c",\n  "build_cmd": "npm ci",\n  "run_cmd": "npm start",\n  "is_auto_deploy": true,\n  "name": "app_example",\n  "comment": "",\n  "preset_id": 42,\n  "language": "node",\n  "framework": "express",\n  "env_version": "22",\n  "envs": {\n    "NODE_ENV": "production"\n  }\n}'
+          #response = requests.post('https://api.timeweb.cloud/api/v2/apps', headers=headers, data=data)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/apps');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"type\": \"backend\",\n  \"provider_id\": \"b392b624-ee80-496e-8b61-47276acac2da\",\n  \"repository_id\": \"eb4e1796-78ce-4232-a824-3c3f4dfaf98f\",\n  \"branch_name\": \"master\",\n  \"commit_sha\": \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\",\n  \"build_cmd\": \"npm ci\",\n  \"run_cmd\": \"npm start\",\n  \"is_auto_deploy\": true,\n  \"name\": \"app_example\",\n  \"comment\": \"\",\n  \"preset_id\": 42,\n  \"language\": \"node\",\n  \"framework\": \"express\",\n  \"env_version\": \"22\",\n  \"envs\": {\n    \"NODE_ENV\": \"production\"\n  }\n}");
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\
+          \tvar data = strings.NewReader(`{\n  \"type\": \"backend\",\n  \"provider_id\"\
+          : \"b392b624-ee80-496e-8b61-47276acac2da\",\n  \"repository_id\": \"eb4e1796-78ce-4232-a824-3c3f4dfaf98f\"\
+          ,\n  \"branch_name\": \"master\",\n  \"commit_sha\": \"7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\"\
+          ,\n  \"build_cmd\": \"npm ci\",\n  \"run_cmd\": \"npm start\",\n  \"is_auto_deploy\"\
+          : true,\n  \"name\": \"app_example\",\n  \"comment\": \"\",\n  \"preset_id\"\
+          : 42,\n  \"language\": \"node\",\n  \"framework\": \"express\",\n  \"env_version\"\
+          : \"22\",\n  \"envs\": {\n    \"NODE_ENV\": \"production\"\n  }\n}`)\n\t\
+          req, err := http.NewRequest(\"POST\", \"https://api.timeweb.cloud/api/v2/apps\"\
+          , data)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.io.OutputStreamWriter;\nimport java.lang.System;\nimport java.net.HttpURLConnection;\n\
+          import java.net.URL;\nimport java.util.Scanner;\n\nclass Main {\n\n\tpublic\
+          \ static void main(String[] args) throws IOException {\n\t\tURL url = new\
+          \ URL(\"https://api.timeweb.cloud/api/v2/apps\");\n\t\tHttpURLConnection\
+          \ httpConn = (HttpURLConnection) url.openConnection();\n\t\thttpConn.setRequestMethod(\"\
+          POST\");\n\n\t\thttpConn.setRequestProperty(\"Content-Type\", \"application/json\"\
+          );\n\t\thttpConn.setRequestProperty(\"Authorization\", \"Bearer \" + System.getenv(\"\
+          TIMEWEB_CLOUD_TOKEN\"));\n\n\t\thttpConn.setDoOutput(true);\n\t\tOutputStreamWriter\
+          \ writer = new OutputStreamWriter(httpConn.getOutputStream());\n\t\twriter.write(\"\
+          {\\n  \\\"type\\\": \\\"backend\\\",\\n  \\\"provider_id\\\": \\\"b392b624-ee80-496e-8b61-47276acac2da\\\
+          \",\\n  \\\"repository_id\\\": \\\"eb4e1796-78ce-4232-a824-3c3f4dfaf98f\\\
+          \",\\n  \\\"branch_name\\\": \\\"master\\\",\\n  \\\"commit_sha\\\": \\\"\
+          7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c\\\",\\n  \\\"build_cmd\\\": \\\"\
+          npm ci\\\",\\n  \\\"run_cmd\\\": \\\"npm start\\\",\\n  \\\"is_auto_deploy\\\
+          \": true,\\n  \\\"name\\\": \\\"app_example\\\",\\n  \\\"comment\\\": \\\
+          \"\\\",\\n  \\\"preset_id\\\": 42,\\n  \\\"language\\\": \\\"node\\\",\\\
+          n  \\\"framework\\\": \\\"express\\\",\\n  \\\"env_version\\\": \\\"22\\\
+          \",\\n  \\\"envs\\\": {\\n    \\\"NODE_ENV\\\": \\\"production\\\"\\n  }\\\
+          n}\");\n\t\twriter.flush();\n\t\twriter.close();\n\t\thttpConn.getOutputStream().close();\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
   /api/v1/apps:
     get:
       description: "Чтобы получить список приложений, отправьте GET-запрос на `/api/v1/apps`."
@@ -47694,8 +48018,11 @@ paths:
           \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
     post:
-      description: "Чтобы создать приложение, отправьте POST-запрос в `/api/v1/apps`,\
-        \ задав необходимые атрибуты."
+      deprecated: true
+      description: |-
+        Метод устарел. Используйте [POST /api/v2/apps](#operation/createAppV2).
+
+        Чтобы создать приложение, отправьте POST-запрос в `/api/v1/apps`, задав необходимые атрибуты.
       operationId: createApp
       requestBody:
         content:
@@ -96025,37 +96352,252 @@ components:
       - location
       - location_code
       type: object
-    providers:
-      description: Тип провайдера.
-      enum:
-      - github
-      - gitlab
-      - bitbucket
-      - git
-      example: github
-      type: string
-    frameworks:
-      description: Фреймворк приложения.
-      enum:
-      - django
-      - express
-      - phoenix
-      - Spring
-      - laravel
-      - beego
-      - fastapi
-      - ASP.NET Core
-      - hapi
-      - celery
-      - flask
-      - gin
-      - docker
-      - fastify
-      - nest
-      - symfony
-      - yii
-      example: django
-      type: string
+    create-app-v2:
+      description: "Параметры создания приложения. Для Git-репозитория обязательны\
+        \ provider_id, repository_id, branch_name, commit_sha, build_cmd, is_auto_deploy\
+        \ и framework. Для frontend также обязательны index_dir и preset_id. Для backend\
+        \ из Git обязателен run_cmd. Для backend из готового Docker-образа передай\
+        те docker_image и docker_image_tag; Git-параметры не требуются. Для любого\
+        \ backend передайте либо preset_id, либо configuration. Эти поля нельзя пе\
+        редавать одновременно."
+      properties:
+        provider_id:
+          description: ID провайдера. Обязателен при создании из Git-репозитория.
+            Не требуется для готового Docker-образа.
+          example: b392b624-ee80-496e-8b61-47276acac2da
+          minLength: 1
+          type: string
+        type:
+          description: "Тип приложения: frontend — статический сайт, backend — сер\
+            верное приложение или Docker-образ."
+          enum:
+          - frontend
+          - backend
+          example: backend
+          type: string
+        repository_id:
+          description: ID репозитория. Обязателен при создании из Git-репозитория.
+            Не требуется для готового Docker-образа.
+          example: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+          minLength: 1
+          type: string
+        build_cmd:
+          description: "Команда сборки приложения из Git-репозитория. Обязательна\
+            \ для Git; можно передать пустую строку, если сборка не нужна."
+          example: npm run build
+          type: string
+        envs:
+          additionalProperties:
+            maxLength: 10240
+            type: string
+          description: "Переменные окружения приложения. Ключи и значения — строки\
+            . Длина ключа — не более 255 символов, значения — не более 10240. По у\
+            молчанию пустой объект."
+          example:
+            NODE_ENV: production
+          type: object
+        branch_name:
+          description: "Ветка Git-репозитория, из которой необходимо собрать прило\
+            жение. Обязательна при создании из Git."
+          example: master
+          minLength: 1
+          type: string
+        is_auto_deploy:
+          description: Автоматически запускать деплой при изменении Git-репозитория.
+            Поле обязательно при создании из Git. Для провайдера git и готового Docker-образа
+            автодеплой выключен.
+          example: true
+          type: boolean
+        commit_sha:
+          description: Хэш коммита для первого деплоя. Обязателен при создании из
+            Git.
+          example: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          minLength: 1
+          type: string
+        name:
+          description: "Имя приложения, от 1 до 255 символов. Допустимы латинские\
+            \ и русские буквы, цифры, пробелы и символы - . ( ) , & # [ ] _."
+          example: app_example
+          maxLength: 255
+          minLength: 1
+          type: string
+        comment:
+          description: "Комментарий к приложению. Обязательное поле; можно передат\
+            ь пустую строку. Допустимы те же символы, что и в имени приложения."
+          example: example comment
+          type: string
+        preset_id:
+          description: "ID тарифа приложения. Обязателен для frontend. Для backend\
+            \ передайте либо preset_id, либо configuration. Нельзя передавать вмес\
+            те с configuration. Доступные тарифы: GET /api/v1/presets/apps."
+          example: 42
+          minimum: 1
+          type: integer
+        env_version:
+          description: "Версия окружения для сборки и запуска, например версия Node.js.\
+            \ Можно передать null."
+          example: "18"
+          nullable: true
+          type: string
+        framework:
+          description: "Фреймворк приложения, строка с учётом регистра. Обязателен\
+            \ при создании из Git. Для frontend: `angular`, `astro`, `ember`, `next.js`,\
+            \ `nuxt`, `preact`, `react`, `remix`, `solid`, `solid-start`, `svelte`,\
+            \ `sveltekit`, `tanstack-start`, `vue`, `static-nobuild`, `another`. Д\
+            ля backend: `django`, `express`, `phoenix`, `Spring`, `laravel`, `beego`,\
+            \ `fastapi`, `ASP.NET Core`, `hapi`, `celery`, `flask`, `gin`, `docker`,\
+            \ `docker-compose`, `fastify`, `nest`, `symfony`, `yii`, `next.js`, `nuxt`,\
+            \ `astro`, `tanstack-start`, `solid-start`, `ktor`, `axum`, `actix`, `tornado`,\
+            \ `aiohttp`, `fiber`, `echo`, `Micronaut`, `Quarkus`, `remix`, `sveltekit`.\
+            \ Для готового Docker-образа не требуется."
+          enum:
+          - django
+          - express
+          - phoenix
+          - Spring
+          - laravel
+          - beego
+          - fastapi
+          - ASP.NET Core
+          - hapi
+          - celery
+          - flask
+          - gin
+          - docker
+          - docker-compose
+          - fastify
+          - nest
+          - symfony
+          - yii
+          - next.js
+          - nuxt
+          - astro
+          - tanstack-start
+          - solid-start
+          - ktor
+          - axum
+          - actix
+          - tornado
+          - aiohttp
+          - fiber
+          - echo
+          - Micronaut
+          - Quarkus
+          - remix
+          - sveltekit
+          - angular
+          - ember
+          - preact
+          - react
+          - solid
+          - svelte
+          - vue
+          - static-nobuild
+          - another
+          example: express
+          type: string
+        index_dir:
+          description: "Путь к каталогу с собранными статическими файлами, наприме\
+            р /dist. Обязателен для frontend. Не используется для backend."
+          example: /dist
+          type: string
+        run_cmd:
+          description: Команда запуска backend-приложения из Git. Обязательна для
+            backend из Git. Не требуется для готового Docker-образа и frontend.
+          example: npm start
+          type: string
+        system_dependencies:
+          description: "Системные пакеты для установки в окружение приложения. Доп\
+            устимы строчные латинские буквы, цифры и символы . + - =. По умолчанию\
+            \ пустой массив."
+          items:
+            example: php-mysql
+            type: string
+          type: array
+        project_id:
+          description: "ID проекта, в который необходимо добавить приложение. Прое\
+            кт должен принадлежать аккаунту."
+          example: 1
+          type: integer
+        configuration:
+          $ref: '#/components/schemas/create_app_v2_configuration'
+        language:
+          description: "Язык или способ развёртывания. Обязателен в v2. Для frontend:\
+            \ `javascript`. Для backend: `node`, `elixir`, `go`, `php`, `python`,\
+            \ `ruby`, `docker`, `docker-compose`, `dotnet`, `java`, `kotlin`, `rust`,\
+            \ `bun`, `deno`, `custom-image`. Для SSR-приложений из Git используйте\
+            \ node, для готового Docker-образа — custom-image."
+          enum:
+          - javascript
+          - node
+          - elixir
+          - go
+          - php
+          - python
+          - ruby
+          - docker
+          - docker-compose
+          - dotnet
+          - java
+          - kotlin
+          - rust
+          - bun
+          - deno
+          - custom-image
+          example: node
+          type: string
+        build_entry_path:
+          description: "Каталог приложения в Git-репозитории, относительно которог\
+            о выполняется сборка. Непустой путь начинается с /, не содержит .. или\
+            \ двойной начальный /. Допустимы латинские буквы, цифры, . - _ /. Можн\
+            о передать пустую строку."
+          example: /apps/backend
+          type: string
+        network:
+          $ref: '#/components/schemas/create_app_v2_network'
+        health_check:
+          description: HTTP-путь для проверки работоспособности backend-приложения.
+          example: /health
+          type: string
+        global_env_ids:
+          description: "ID глобальных переменных окружения аккаунта, которые необх\
+            одимо связать с приложением."
+          example:
+          - 1
+          - 2
+          items:
+            type: number
+          type: array
+        docker_image:
+          description: "Имя готового Docker-образа для backend, без тега. Передава\
+            йте вместе с docker_image_tag. При указании обоих полей Git-параметры\
+            \ не требуются."
+          example: nginx
+          minLength: 1
+          type: string
+        docker_image_tag:
+          description: Тег готового Docker-образа. Передавайте вместе с docker_image.
+          example: stable
+          minLength: 1
+          type: string
+        is_russian_trusted_ca:
+          default: false
+          description: Добавить доверенные корневые сертификаты Минцифры в окружение
+            backend-приложения. Применяется в российском регионе.
+          example: false
+          type: boolean
+        is_tci_trusted_ca:
+          default: false
+          description: Добавить доверенные корневые сертификаты ТЦИ в окружение backend-приложения.
+            Применяется в российском регионе.
+          example: false
+          type: boolean
+      required:
+      - comment
+      - language
+      - name
+      - type
+      type: object
     repository:
       example:
         is_private: false
@@ -96098,6 +96640,424 @@ components:
       - name
       - url
       type: object
+    app-v2:
+      description: "Приложение v2. Создание и первый деплой выполняются асинхронно\
+        . Поля сервера и инфраструктуры могут отсутствовать, пока соответствующие\
+        \ ресурсы не созданы."
+      example:
+        index_dir: /dist
+        configuration:
+          network_bandwidth: 1000
+          disk_type: nvme
+          cpu: 1
+          cpu_frequency: "3.3"
+          ram: 1024
+        envs:
+          NODE_ENV: production
+        created_at: 2026-10-29T10:00:00Z
+        avatar_link: https://urltoimage.com/avatars/image.png
+        language: node
+        type: backend
+        repository:
+          is_private: false
+          full_name: example-repo/app-example-express
+          name: app-example-express
+          id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+          is_allowed_webhook: true
+          url: https://github.com/example-repo/app-example-express
+        health_check: /health
+        branch: master
+        requests_limit: 100000
+        commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+        reverse_proxy: "{}"
+        provider:
+          id: 826e9a9d-40cd-49b1-b547-0c439834498b
+          type: github
+        project_id: 1
+        docker_image_tag: stable
+        is_auto_deploy: true
+        disk_status:
+          size: 15360
+          used: 4509
+          disk_id: 19769639
+        configurator_id: 1
+        id: 1
+        env_version: "18"
+        availability_zone: spb-3
+        ip: 165.23.54.161
+        is_qemu_agent: true
+        domains:
+        - fqdn: app-example.twc1.net
+          is_external: false
+          dns_record_id: 1
+          is_technical: true
+        - fqdn: app-example.twc1.net
+          is_external: false
+          dns_record_id: 1
+          is_technical: true
+        build_cmd: npm run build
+        is_tci_trusted_ca: false
+        run_cmd: npm start
+        start_time: 2024-07-24T10:38:44Z
+        system_dependencies:
+        - php-mysql
+        framework: express
+        preset_id: 42
+        is_russian_trusted_ca: false
+        name: app_example
+        location: ru-1
+        comment: example comment
+        build_entry_path: /apps/backend
+        blocked_ports:
+        - 25
+        status: new
+        docker_image: nginx
+      properties:
+        id:
+          description: ID для каждого экземпляра приложения. Автоматически генерируется
+            при создании.
+          example: 1
+          type: integer
+        type:
+          description: Тип приложения.
+          enum:
+          - backend
+          - frontend
+          example: backend
+          type: string
+        name:
+          description: "Удобочитаемое имя, установленное для приложения."
+          example: app_example
+          type: string
+        status:
+          description: Текущее состояние приложения. После принятия запроса на создание
+            — new. Ответ 201 не означает завершение развёртывания.
+          enum:
+          - active
+          - paused
+          - no_paid
+          - deploy
+          - failure
+          - startup_error
+          - new
+          - reboot
+          - blocked
+          - request_limit_exceeded
+          example: new
+          type: string
+        provider:
+          $ref: '#/components/schemas/app_v2_provider'
+        ip:
+          description: "Публичный IPv4-адрес. Отсутствует, пока сервер и IP-адрес\
+            \ не созданы."
+          example: 165.23.54.161
+          format: ipv4
+          type: string
+        domains:
+          description: Домены приложения. В начальном ответе на создание массив пуст.
+          items:
+            $ref: '#/components/schemas/app_v2_domains_inner'
+          type: array
+        framework:
+          description: Фреймворк приложения. Поле может отсутствовать до создания
+            инфраструктуры.
+          enum:
+          - django
+          - express
+          - phoenix
+          - Spring
+          - laravel
+          - beego
+          - fastapi
+          - ASP.NET Core
+          - hapi
+          - celery
+          - flask
+          - gin
+          - docker
+          - docker-compose
+          - fastify
+          - nest
+          - symfony
+          - yii
+          - next.js
+          - nuxt
+          - astro
+          - tanstack-start
+          - solid-start
+          - ktor
+          - axum
+          - actix
+          - tornado
+          - aiohttp
+          - fiber
+          - echo
+          - Micronaut
+          - Quarkus
+          - remix
+          - sveltekit
+          - angular
+          - ember
+          - preact
+          - react
+          - solid
+          - svelte
+          - vue
+          - static-nobuild
+          - another
+          example: express
+          type: string
+        location:
+          description: Локация сервера. Может отсутствовать до создания сервера.
+          enum:
+          - ru-1
+          - ru-2
+          - ru-3
+          - pl-1
+          - kz-1
+          - nl-1
+          - us-1
+          - us-2
+          - de-1
+          example: ru-1
+          type: string
+        repository:
+          $ref: '#/components/schemas/repository'
+        env_version:
+          description: Версия окружения. Поле может отсутствовать до создания инфраструктуры.
+          example: "18"
+          nullable: true
+          type: string
+        envs:
+          additionalProperties:
+            type: string
+          description: Переменные окружения приложения. Объект с ключами и значениями
+            типа string. Поле может отсутствовать до создания инфраструктуры.
+          example:
+            NODE_ENV: production
+          type: object
+        is_auto_deploy:
+          description: Включен ли автоматический деплой.
+          example: true
+          type: boolean
+        commit_sha:
+          description: "Хэш коммита, из которого собрано приложение."
+          example: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          type: string
+        comment:
+          description: Комментарий к приложению.
+          example: example comment
+          type: string
+        preset_id:
+          description: ID тарифа приложения; 0 при использовании конфигуратора.
+          example: 42
+          type: number
+        index_dir:
+          description: Каталог со статическими файлами frontend-приложения. До создания
+            инфраструктуры поле отсутствует. Для backend — null.
+          example: /dist
+          nullable: true
+          type: string
+        build_cmd:
+          description: Команда сборки приложения. Поле может отсутствовать до создания
+            инфраструктуры.
+          example: npm run build
+          type: string
+        avatar_link:
+          description: Ссылка на аватар приложения.
+          example: https://urltoimage.com/avatars/image.png
+          nullable: true
+          type: string
+        run_cmd:
+          description: Команда запуска backend-приложения. До создания инфраструктуры
+            поле отсутствует. Для frontend — null.
+          example: npm start
+          nullable: true
+          type: string
+        configuration:
+          $ref: '#/components/schemas/app_v2_configuration'
+        disk_status:
+          $ref: '#/components/schemas/app_v2_disk_status'
+        is_qemu_agent:
+          description: Включён ли агент QEMU. Для frontend — null. Для backend поле
+            отсутствует до создания сервера.
+          example: true
+          nullable: true
+          type: boolean
+        language:
+          description: Язык или способ развёртывания. Может отсутствовать до создания
+            инфраструктуры. Поле может отсутствовать до создания инфраструктуры.
+          enum:
+          - javascript
+          - node
+          - elixir
+          - go
+          - php
+          - python
+          - ruby
+          - docker
+          - docker-compose
+          - dotnet
+          - java
+          - kotlin
+          - rust
+          - bun
+          - deno
+          - custom-image
+          example: node
+          type: string
+        start_time:
+          description: Время последнего изменения записи приложения.
+          example: 2024-07-24T10:38:44Z
+          format: date-time
+          type: string
+        branch:
+          description: Ветка Git-репозитория. В ответе v2 поле называется branch.
+          example: master
+          type: string
+        configurator_id:
+          description: ID конфигуратора приложения; null при использовании готового
+            тарифа.
+          example: 1
+          nullable: true
+          type: integer
+        project_id:
+          description: "ID проекта приложения. Может отсутствовать, если проект не\
+            \ задан."
+          example: 1
+          type: integer
+        system_dependencies:
+          description: "Системные пакеты приложения. Поле отсутствует, если зависи\
+            мости не заданы."
+          example:
+          - php-mysql
+          items:
+            type: string
+          type: array
+        created_at:
+          description: Время создания записи приложения.
+          example: 2026-10-29T10:00:00Z
+          format: date-time
+          type: string
+        availability_zone:
+          description: Зона доступности сервера. Может быть null или отсутствовать
+            до создания сервера.
+          enum:
+          - spb-1
+          - spb-2
+          - spb-3
+          - spb-4
+          - nsk-1
+          - ams-1
+          - gdn-1
+          - ala-1
+          - nyc-1
+          - msk-1
+          example: spb-3
+          nullable: true
+          type: string
+        requests_limit:
+          description: "Ограничение количества запросов; null, если индивидуальный\
+            \ лимит не задан."
+          example: 100000
+          nullable: true
+          type: integer
+        build_entry_path:
+          description: "Каталог приложения в Git-репозитории, относительно которог\
+            о выполняется сборка. Может отсутствовать до создания инфраструктуры."
+          example: /apps/backend
+          type: string
+        health_check:
+          description: HTTP-путь для проверки работоспособности backend-приложения.
+            Может отсутствовать до создания инфраструктуры.
+          example: /health
+          nullable: true
+          type: string
+        docker_image:
+          description: Имя готового Docker-образа без тега. Присутствует для backend
+            из готового Docker-образа.
+          example: nginx
+          minLength: 1
+          type: string
+        docker_image_tag:
+          description: Тег готового Docker-образа. Присутствует для backend из готового
+            Docker-образа.
+          example: stable
+          minLength: 1
+          type: string
+        is_russian_trusted_ca:
+          description: Добавлены ли доверенные корневые сертификаты Минцифры в окружение
+            backend-приложения. Поле возвращается в российском регионе после создания
+            инфраструктуры.
+          example: false
+          type: boolean
+        is_tci_trusted_ca:
+          description: Добавлены ли доверенные корневые сертификаты ТЦИ в окружение
+            backend-приложения. Поле возвращается в российском регионе после создания
+            инфраструктуры.
+          example: false
+          type: boolean
+        blocked_ports:
+          description: Заблокированные порты backend-приложения. Поле может отсутствовать
+            до создания сервера.
+          example:
+          - 25
+          items:
+            type: integer
+          nullable: true
+          type: array
+        reverse_proxy:
+          description: Настройки обратного прокси. В начальном ответе на создание
+            — null.
+          nullable: true
+          type: object
+      required:
+      - avatar_link
+      - configurator_id
+      - created_at
+      - domains
+      - id
+      - is_auto_deploy
+      - name
+      - preset_id
+      - provider
+      - requests_limit
+      - reverse_proxy
+      - start_time
+      - status
+      - type
+      type: object
+    providers:
+      description: Тип провайдера.
+      enum:
+      - github
+      - gitlab
+      - bitbucket
+      - git
+      example: github
+      type: string
+    frameworks:
+      description: Фреймворк приложения.
+      enum:
+      - django
+      - express
+      - phoenix
+      - Spring
+      - laravel
+      - beego
+      - fastapi
+      - ASP.NET Core
+      - hapi
+      - celery
+      - flask
+      - gin
+      - docker
+      - fastify
+      - nest
+      - symfony
+      - yii
+      example: django
+      type: string
     app:
       description: Экземпляр приложения.
       example:
@@ -111346,6 +112306,90 @@ components:
       - locations
       - meta
       type: object
+    createAppV2_201_response:
+      example:
+        app:
+          index_dir: /dist
+          configuration:
+            network_bandwidth: 1000
+            disk_type: nvme
+            cpu: 1
+            cpu_frequency: "3.3"
+            ram: 1024
+          envs:
+            NODE_ENV: production
+          created_at: 2026-10-29T10:00:00Z
+          avatar_link: https://urltoimage.com/avatars/image.png
+          language: node
+          type: backend
+          repository:
+            is_private: false
+            full_name: example-repo/app-example-express
+            name: app-example-express
+            id: eb4e1796-78ce-4232-a824-3c3f4dfaf98f
+            is_allowed_webhook: true
+            url: https://github.com/example-repo/app-example-express
+          health_check: /health
+          branch: master
+          requests_limit: 100000
+          commit_sha: 7d3a6dcca79d2c29e3fe7456ca1598e70d484d7c
+          reverse_proxy: "{}"
+          provider:
+            id: 826e9a9d-40cd-49b1-b547-0c439834498b
+            type: github
+          project_id: 1
+          docker_image_tag: stable
+          is_auto_deploy: true
+          disk_status:
+            size: 15360
+            used: 4509
+            disk_id: 19769639
+          configurator_id: 1
+          id: 1
+          env_version: "18"
+          availability_zone: spb-3
+          ip: 165.23.54.161
+          is_qemu_agent: true
+          domains:
+          - fqdn: app-example.twc1.net
+            is_external: false
+            dns_record_id: 1
+            is_technical: true
+          - fqdn: app-example.twc1.net
+            is_external: false
+            dns_record_id: 1
+            is_technical: true
+          build_cmd: npm run build
+          is_tci_trusted_ca: false
+          run_cmd: npm start
+          start_time: 2024-07-24T10:38:44Z
+          system_dependencies:
+          - php-mysql
+          framework: express
+          preset_id: 42
+          is_russian_trusted_ca: false
+          name: app_example
+          location: ru-1
+          comment: example comment
+          build_entry_path: /apps/backend
+          blocked_ports:
+          - 25
+          status: new
+          docker_image: nginx
+        response_id: 15095f25-aac3-4d60-a788-96cb5136f186
+      properties:
+        app:
+          $ref: '#/components/schemas/app-v2'
+        response_id:
+          description: "ID запроса, который можно указывать при обращении в службу\
+            \ технической поддержки, чтобы помочь определить проблему."
+          example: 15095f25-aac3-4d60-a788-96cb5136f186
+          format: uuid
+          type: string
+      required:
+      - app
+      - response_id
+      type: object
     getApps_200_response:
       example:
         meta:
@@ -117804,6 +118848,170 @@ components:
       required:
       - id
       - name
+      type: object
+    create_app_v2_configuration:
+      description: Произвольная конфигурация backend-приложения вместо preset_id.
+        Все вложенные поля обязательны. Нельзя передавать вместе с preset_id.
+      properties:
+        configurator_id:
+          description: ID конфигуратора приложения.
+          example: 1
+          minimum: 1
+          type: integer
+        disk:
+          description: "Размер диска в МБ, положительное число, кратное 1024."
+          example: 15360
+          minimum: 1024
+          multipleOf: 1024
+          type: integer
+        cpu:
+          description: Количество ядер процессора.
+          example: 1
+          minimum: 1
+          type: integer
+        ram:
+          description: "Объём оперативной памяти в МБ, положительное число, кратно\
+            е 1024."
+          example: 2048
+          minimum: 1024
+          multipleOf: 1024
+          type: integer
+      required:
+      - configurator_id
+      - cpu
+      - disk
+      - ram
+      type: object
+    create_app_v2_network:
+      description: Настройки сети backend-приложения.
+      properties:
+        id:
+          description: "ID VPC, к которой необходимо подключить приложение."
+          example: b392b624-ee80-496e-8b61-47276acac2da
+          type: string
+        local_ip:
+          description: Локальный IP-адрес приложения в выбранной VPC.
+          example: 192.168.0.10
+          type: string
+        floating_ip:
+          description: "Публичный IPv4-адрес свободного плавающего IP аккаунта или\
+            \ create_ip для создания нового IP (оплачивается отдельно). IP остаётс\
+            я на аккаунте и привязывается к приложению. Доступно для аккаунтов, ко\
+            торым включена эта возможность; для остальных поле игнорируется. Если\
+            \ поле не передано, публичный IP выделяется автоматически."
+          example: create_ip
+          type: string
+      type: object
+    app_v2_provider:
+      example:
+        id: 826e9a9d-40cd-49b1-b547-0c439834498b
+        type: github
+      properties:
+        id:
+          description: ID провайдера Git. Для готового Docker-образа — пустая строка.
+          example: 826e9a9d-40cd-49b1-b547-0c439834498b
+          type: string
+        type:
+          description: Тип провайдера исходного кода или образа.
+          enum:
+          - github
+          - gitlab
+          - bitbucket
+          - git
+          - dockerhub
+          example: github
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    app_v2_domains_inner:
+      example:
+        fqdn: app-example.twc1.net
+        is_external: false
+        dns_record_id: 1
+        is_technical: true
+      properties:
+        fqdn:
+          description: Домен
+          example: app-example.twc1.net
+          type: string
+        is_technical:
+          description: Является ли домен техническим.
+          example: true
+          type: boolean
+        is_external:
+          description: Является ли домен внешним.
+          example: false
+          type: boolean
+        dns_record_id:
+          description: "ID DNS-записи; null, если запись отсутствует."
+          example: 1
+          nullable: true
+          type: integer
+      required:
+      - dns_record_id
+      - fqdn
+      - is_external
+      - is_technical
+      type: object
+    app_v2_configuration:
+      description: Конфигурация сервера backend-приложения. До создания сервера поле
+        отсутствует. Для frontend — null.
+      example:
+        network_bandwidth: 1000
+        disk_type: nvme
+        cpu: 1
+        cpu_frequency: "3.3"
+        ram: 1024
+      nullable: true
+      properties:
+        cpu:
+          description: Количество ядер процессора.
+          example: 1
+          type: number
+        ram:
+          description: Объем оперативной памяти (в МБ).
+          example: 1024
+          type: number
+        network_bandwidth:
+          description: Скорость сетевого канала (в Мбит/с).
+          example: 1000
+          type: number
+        cpu_frequency:
+          description: Частота процессора (в ГГц).
+          example: "3.3"
+          type: string
+        disk_type:
+          description: Тип диска.
+          enum:
+          - ssd
+          - nvme
+          - hdd
+          example: nvme
+          type: string
+      type: object
+    app_v2_disk_status:
+      description: Состояние диска backend-приложения. До создания сервера поле отсутствует.
+        Для frontend — null.
+      example:
+        size: 15360
+        used: 4509
+        disk_id: 19769639
+      nullable: true
+      properties:
+        used:
+          description: Использованное пространство диска.
+          example: 4509
+          type: number
+        size:
+          description: Размер диска.
+          example: 15360
+          type: number
+        disk_id:
+          description: ID диска.
+          example: 19769639
+          type: number
       type: object
     app_provider:
       example:

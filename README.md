@@ -358,6 +358,7 @@ Class | Method | HTTP request | Description
 *AccountAPI* | [**UpdateNotificationSettings**](docs/AccountAPI.md#updatenotificationsettings) | **Patch** /api/v1/account/notification-settings | Изменение настроек уведомлений аккаунта
 *AppsAPI* | [**AddProvider**](docs/AppsAPI.md#addprovider) | **Post** /api/v1/vcs-provider | Привязка vcs провайдера
 *AppsAPI* | [**CreateApp**](docs/AppsAPI.md#createapp) | **Post** /api/v1/apps | Создание приложения
+*AppsAPI* | [**CreateAppV2**](docs/AppsAPI.md#createappv2) | **Post** /api/v2/apps | Создание приложения (v2)
 *AppsAPI* | [**CreateDeploy**](docs/AppsAPI.md#createdeploy) | **Post** /api/v1/apps/{app_id}/deploy | Запуск деплоя приложения
 *AppsAPI* | [**DeleteApp**](docs/AppsAPI.md#deleteapp) | **Delete** /api/v1/apps/{app_id} | Удаление приложения
 *AppsAPI* | [**DeleteProvider**](docs/AppsAPI.md#deleteprovider) | **Delete** /api/v1/vcs-provider/{provider_id} | Отвязка vcs провайдера от аккаунта
@@ -846,6 +847,11 @@ Class | Method | HTTP request | Description
  - [AppDiskStatus](docs/AppDiskStatus.md)
  - [AppDomainsInner](docs/AppDomainsInner.md)
  - [AppProvider](docs/AppProvider.md)
+ - [AppV2](docs/AppV2.md)
+ - [AppV2Configuration](docs/AppV2Configuration.md)
+ - [AppV2DiskStatus](docs/AppV2DiskStatus.md)
+ - [AppV2DomainsInner](docs/AppV2DomainsInner.md)
+ - [AppV2Provider](docs/AppV2Provider.md)
  - [ApproveTelegramPairing](docs/ApproveTelegramPairing.md)
  - [AppsPresets](docs/AppsPresets.md)
  - [AppsPresetsBackendPresetsInner](docs/AppsPresetsBackendPresetsInner.md)
@@ -951,6 +957,10 @@ Class | Method | HTTP request | Description
  - [CreateAiSolution201Response](docs/CreateAiSolution201Response.md)
  - [CreateApp](docs/CreateApp.md)
  - [CreateApp201Response](docs/CreateApp201Response.md)
+ - [CreateAppV2](docs/CreateAppV2.md)
+ - [CreateAppV2201Response](docs/CreateAppV2201Response.md)
+ - [CreateAppV2Configuration](docs/CreateAppV2Configuration.md)
+ - [CreateAppV2Network](docs/CreateAppV2Network.md)
  - [CreateBalancer](docs/CreateBalancer.md)
  - [CreateBalancer200Response](docs/CreateBalancer200Response.md)
  - [CreateBalancerCertificates](docs/CreateBalancerCertificates.md)

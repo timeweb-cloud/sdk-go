@@ -150,6 +150,11 @@ docs/AppConfiguration.md
 docs/AppDiskStatus.md
 docs/AppDomainsInner.md
 docs/AppProvider.md
+docs/AppV2.md
+docs/AppV2Configuration.md
+docs/AppV2DiskStatus.md
+docs/AppV2DomainsInner.md
+docs/AppV2Provider.md
 docs/ApproveTelegramPairing.md
 docs/AppsAPI.md
 docs/AppsPresets.md
@@ -259,6 +264,10 @@ docs/CreateAiSolution.md
 docs/CreateAiSolution201Response.md
 docs/CreateApp.md
 docs/CreateApp201Response.md
+docs/CreateAppV2.md
+docs/CreateAppV2201Response.md
+docs/CreateAppV2Configuration.md
+docs/CreateAppV2Network.md
 docs/CreateBalancer.md
 docs/CreateBalancer200Response.md
 docs/CreateBalancerCertificates.md
@@ -1075,6 +1084,11 @@ model_app_configuration.go
 model_app_disk_status.go
 model_app_domains_inner.go
 model_app_provider.go
+model_app_v2.go
+model_app_v2_configuration.go
+model_app_v2_disk_status.go
+model_app_v2_domains_inner.go
+model_app_v2_provider.go
 model_approve_telegram_pairing.go
 model_apps_presets.go
 model_apps_presets_backend_presets_inner.go
@@ -1180,6 +1194,10 @@ model_create_ai_solution.go
 model_create_ai_solution_201_response.go
 model_create_app.go
 model_create_app_201_response.go
+model_create_app_v2.go
+model_create_app_v2_201_response.go
+model_create_app_v2_configuration.go
+model_create_app_v2_network.go
 model_create_balancer.go
 model_create_balancer_200_response.go
 model_create_balancer_certificates.go
