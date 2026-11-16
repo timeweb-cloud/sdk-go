@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**DeleteSubdomain**](DomainsAPI.md#DeleteSubdomain) | **Delete** /api/v1/domains/{fqdn}/subdomains/{subdomain} | Удаление поддомена
 [**GetDomain**](DomainsAPI.md#GetDomain) | **Get** /api/v1/domains/{fqdn} | Получение информации о домене
 [**GetDomainDNSRecords**](DomainsAPI.md#GetDomainDNSRecords) | **Get** /api/v1/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
+[**GetDomainDNSRecordsV2**](DomainsAPI.md#GetDomainDNSRecordsV2) | **Get** /api/v2/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
 [**GetDomainDefaultDNSRecords**](DomainsAPI.md#GetDomainDefaultDNSRecords) | **Get** /api/v1/domains/{fqdn}/default-dns-records | Получить информацию обо всех DNS-записях по умолчанию домена или поддомена
 [**GetDomainNameServers**](DomainsAPI.md#GetDomainNameServers) | **Get** /api/v1/domains/{fqdn}/name-servers | Получение списка name-серверов домена
 [**GetDomainRequest**](DomainsAPI.md#GetDomainRequest) | **Get** /api/v1/domains-requests/{request_id} | Получение заявки на регистрацию/продление/трансфер домена
@@ -1001,6 +1002,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDomainDNSRecords200Response**](GetDomainDNSRecords200Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDomainDNSRecordsV2
+
+> GetDomainDNSRecordsV2200Response GetDomainDNSRecordsV2(ctx, fqdn).Execute()
+
+Получить информацию обо всех пользовательских DNS-записях домена или поддомена
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    fqdn := "somedomain.ru" // string | Полное имя домена или поддомена.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DomainsAPI.GetDomainDNSRecordsV2(context.Background(), fqdn).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.GetDomainDNSRecordsV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetDomainDNSRecordsV2`: GetDomainDNSRecordsV2200Response
+    fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.GetDomainDNSRecordsV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**fqdn** | **string** | Полное имя домена или поддомена. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDomainDNSRecordsV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetDomainDNSRecordsV2200Response**](GetDomainDNSRecordsV2200Response.md)
 
 ### Authorization
 

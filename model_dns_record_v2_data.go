@@ -20,11 +20,11 @@ var _ MappedNullable = &DnsRecordV2Data{}
 
 // DnsRecordV2Data Данные DNS-записи. Состав полей зависит от типа записи.
 type DnsRecordV2Data struct {
-	// Приоритет DNS-записи (для MX и SRV записей).
+	// Приоритет DNS-записи (для MX, SRV, HTTPS и SVCB записей).
 	Priority *float32 `json:"priority,omitempty"`
-	// Имя поддомена (только поддомен без основного домена, например `sub` для `sub.example.com`). Для записей на основном домене это поле отсутствует в ответе.
-	Subdomain NullableString `json:"subdomain,omitempty"`
-	// Значение DNS-записи (для A, AAAA, TXT, CNAME, MX записей).
+	// Имя записи относительно `fqdn`, например `sub` для `sub.example.com` или `mail._domainkey`. Для записей самого `fqdn` это поле отсутствует в ответе.
+	Subdomain *string `json:"subdomain,omitempty"`
+	// Значение DNS-записи (для всех типов, кроме SRV: у SRV цель записи в поле `host`).
 	Value *string `json:"value,omitempty"`
 	// Каноническое имя хоста, предоставляющего сервис (для SRV записей).
 	Host *string `json:"host,omitempty"`
@@ -85,46 +85,36 @@ func (o *DnsRecordV2Data) SetPriority(v float32) {
 	o.Priority = &v
 }
 
-// GetSubdomain returns the Subdomain field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSubdomain returns the Subdomain field value if set, zero value otherwise.
 func (o *DnsRecordV2Data) GetSubdomain() string {
-	if o == nil || IsNil(o.Subdomain.Get()) {
+	if o == nil || IsNil(o.Subdomain) {
 		var ret string
 		return ret
 	}
-	return *o.Subdomain.Get()
+	return *o.Subdomain
 }
 
 // GetSubdomainOk returns a tuple with the Subdomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DnsRecordV2Data) GetSubdomainOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Subdomain) {
 		return nil, false
 	}
-	return o.Subdomain.Get(), o.Subdomain.IsSet()
+	return o.Subdomain, true
 }
 
 // HasSubdomain returns a boolean if a field has been set.
 func (o *DnsRecordV2Data) HasSubdomain() bool {
-	if o != nil && o.Subdomain.IsSet() {
+	if o != nil && !IsNil(o.Subdomain) {
 		return true
 	}
 
 	return false
 }
 
-// SetSubdomain gets a reference to the given NullableString and assigns it to the Subdomain field.
+// SetSubdomain gets a reference to the given string and assigns it to the Subdomain field.
 func (o *DnsRecordV2Data) SetSubdomain(v string) {
-	o.Subdomain.Set(&v)
-}
-// SetSubdomainNil sets the value for Subdomain to be an explicit nil
-func (o *DnsRecordV2Data) SetSubdomainNil() {
-	o.Subdomain.Set(nil)
-}
-
-// UnsetSubdomain ensures that no value is present for Subdomain, not even an explicit nil
-func (o *DnsRecordV2Data) UnsetSubdomain() {
-	o.Subdomain.Unset()
+	o.Subdomain = &v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -300,8 +290,8 @@ func (o DnsRecordV2Data) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if o.Subdomain.IsSet() {
-		toSerialize["subdomain"] = o.Subdomain.Get()
+	if !IsNil(o.Subdomain) {
+		toSerialize["subdomain"] = o.Subdomain
 	}
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value

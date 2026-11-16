@@ -40443,6 +40443,190 @@ paths:
           \\\\A\");\n\t\tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
           \t}\n}\n"
   /api/v2/domains/{fqdn}/dns-records:
+    get:
+      description: |-
+        Чтобы получить информацию обо всех пользовательских DNS-записях домена или поддомена, отправьте запрос GET на `/api/v2/domains/{fqdn}/dns-records`.
+
+        По основному домену возвращаются записи всей зоны, включая записи поддоменов: у них `fqdn` — основной домен, а `data.subdomain` — имя поддомена. По поддомену возвращаются только записи этого поддомена, без вложенных поддоменов: у них `fqdn` — сам поддомен, а поля `data.subdomain` нет. Полное имя записи — `data.subdomain` + `.` + `fqdn`.
+
+        Возвращаются все записи сразу, без пагинации.
+
+        Заменяет устаревший `GET /api/v1/domains/{fqdn}/dns-records`: тот по поддомену не возвращает его TXT-записи.
+      operationId: getDomainDNSRecordsV2
+      parameters:
+      - description: Полное имя домена или поддомена.
+        explode: false
+        in: path
+        name: fqdn
+        required: true
+        schema:
+          example: somedomain.ru
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                domain:
+                  summary: По основному домену
+                  value:
+                    meta:
+                      total: 3
+                    dns_records:
+                    - id: 123
+                      type: A
+                      data:
+                        value: 192.168.1.0
+                      fqdn: somedomain.ru
+                      ttl: 600
+                    - id: 124
+                      type: A
+                      data:
+                        value: 192.168.1.1
+                        subdomain: sub
+                      fqdn: somedomain.ru
+                      ttl: 600
+                    - id: 125
+                      type: TXT
+                      data:
+                        value: v=spf1 include:_spf.timeweb.ru ~all
+                        subdomain: sub
+                      fqdn: somedomain.ru
+                      ttl: 600
+                    response_id: 15095f25-aac3-4d60-a788-96cb5136f186
+                subdomain:
+                  summary: По поддомену
+                  value:
+                    meta:
+                      total: 2
+                    dns_records:
+                    - id: 124
+                      type: A
+                      data:
+                        value: 192.168.1.1
+                      fqdn: sub.somedomain.ru
+                      ttl: 600
+                    - id: 125
+                      type: TXT
+                      data:
+                        value: v=spf1 include:_spf.timeweb.ru ~all
+                      fqdn: sub.somedomain.ru
+                      ttl: 600
+                    response_id: 15095f25-aac3-4d60-a788-96cb5136f186
+              schema:
+                $ref: '#/components/schemas/getDomainDNSRecordsV2_200_response'
+          description: Ответ будет представлять собой объект JSON c ключом `dns_records`.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_400_response'
+          description: Некорректный запрос
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_401_response'
+          description: Не авторизован
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getImage_404_response'
+          description: Не найдено
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_429_response'
+          description: Слишком много запросов
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFinances_500_response'
+          description: Внутренняя ошибка сервера
+      summary: Получить информацию обо всех пользовательских DNS-записях домена или
+        поддомена
+      tags:
+      - Domains
+      x-codeSamples:
+      - lang: cURL
+        label: cURL
+        source: |-
+          curl -X GET \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $TIMEWEB_CLOUD_TOKEN" \
+            "https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records"
+      - lang: JavaScript
+        source: |
+          fetch('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${TIMEWEB_CLOUD_TOKEN}`
+              }
+          });
+      - lang: Node
+        source: |
+          const axios = require('axios');
+
+          const response = await axios.get('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records', {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + process.env['TIMEWEB_CLOUD_TOKEN']
+              }
+          });
+      - lang: Python
+        source: |
+          import os
+          import requests
+
+          headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + os.getenv('TIMEWEB_CLOUD_TOKEN', ''),
+          }
+
+          response = requests.get('https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records', headers=headers)
+      - lang: PHP
+        source: |
+          <?php
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+              'Content-Type: application/json',
+              'Authorization: Bearer ' . getenv('TIMEWEB_CLOUD_TOKEN') ?? '',
+          ]);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"log\"\n\t\"net/http\"\
+          \n\t\"os\"\n)\n\nfunc main() {\n\tclient := &http.Client{}\n\treq, err :=\
+          \ http.NewRequest(\"GET\", \"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records\"\
+          , nil)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\treq.Header.Set(\"\
+          Content-Type\", \"application/json\")\n\treq.Header.Set(\"Authorization\"\
+          , \"Bearer \" + os.Getenv(\"TIMEWEB_CLOUD_TOKEN\"))\n\tresp, err := client.Do(req)\n\
+          \tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer resp.Body.Close()\n\t\
+          bodyText, err := io.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\
+          \t}\n\tfmt.Printf(\"%s\\n\", bodyText)\n}\n"
+      - lang: Java
+        source: "import java.io.IOException;\nimport java.io.InputStream;\nimport\
+          \ java.lang.System;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\n\
+          import java.util.Scanner;\n\nclass Main {\n\n\tpublic static void main(String[]\
+          \ args) throws IOException {\n\t\tURL url = new URL(\"https://api.timeweb.cloud/api/v2/domains/somedomain.ru/dns-records\"\
+          );\n\t\tHttpURLConnection httpConn = (HttpURLConnection) url.openConnection();\n\
+          \t\thttpConn.setRequestMethod(\"GET\");\n\n\t\thttpConn.setRequestProperty(\"\
+          Content-Type\", \"application/json\");\n\t\thttpConn.setRequestProperty(\"\
+          Authorization\", \"Bearer \" + System.getenv(\"TIMEWEB_CLOUD_TOKEN\"));\n\
+          \n\t\tInputStream responseStream = httpConn.getResponseCode() / 100 == 2\n\
+          \t\t\t\t? httpConn.getInputStream()\n\t\t\t\t: httpConn.getErrorStream();\n\
+          \t\tScanner s = new Scanner(responseStream).useDelimiter(\"\\\\A\");\n\t\
+          \tString response = s.hasNext() ? s.next() : \"\";\n\t\tSystem.out.println(response);\n\
+          \t}\n}\n"
     post:
       description: |-
         Чтобы добавить информацию о DNS-записи для домена или поддомена, отправьте запрос POST на `/api/v2/domains/{fqdn}/dns-records`, задав необходимые атрибуты.
@@ -41100,8 +41284,11 @@ paths:
           \t}\n}\n"
   /api/v1/domains/{fqdn}/dns-records:
     get:
-      description: "Чтобы получить информацию обо всех пользовательских DNS-запися\
-        х домена или поддомена, отправьте запрос GET на `/api/v1/domains/{fqdn}/dns-records`."
+      deprecated: true
+      description: |-
+        Метод устарел. Используйте [GET /api/v2/domains/{fqdn}/dns-records](#operation/getDomainDNSRecordsV2).
+
+        Чтобы получить информацию обо всех пользовательских DNS-записях домена или поддомена, отправьте запрос GET на `/api/v1/domains/{fqdn}/dns-records`.
       operationId: getDomainDNSRecords
       parameters:
       - description: Полное имя домена или поддомена.
@@ -83383,6 +83570,16 @@ components:
         example: somedomain.ru
         type: string
       style: simple
+    domain-subdomain-fqdn:
+      description: Полное имя домена или поддомена.
+      explode: false
+      in: path
+      name: fqdn
+      required: true
+      schema:
+        example: somedomain.ru
+        type: string
+      style: simple
     domain-subdomain-fqdn-create-dns:
       description: |-
         Полное имя домена или поддомена. Для создания записи на основном домене передайте имя домена (например, `somedomain.ru`). Для создания записи на поддомене передайте полное доменное имя включая поддомен (например, `sub.somedomain.ru`).
@@ -83405,16 +83602,6 @@ components:
       schema:
         example: 123
         type: integer
-      style: simple
-    domain-subdomain-fqdn:
-      description: Полное имя домена или поддомена.
-      explode: false
-      in: path
-      name: fqdn
-      required: true
-      schema:
-        example: somedomain.ru
-        type: string
       style: simple
     subdomain:
       description: "Имя поддомена без имени домена. Например, для поддомена `sub.somedomain.ru`\
@@ -94943,6 +95130,61 @@ components:
           nullable: true
           type: string
       type: object
+    dns-record-v2:
+      description: DNS-запись.
+      example:
+        data:
+          protocol: _TCP
+          port: 993
+          service: _sip
+          host: somedomain.ru
+          subdomain: sub
+          priority: 10
+          value: 192.168.1.0
+        fqdn: somedomain.ru
+        id: 123
+        type: A
+        ttl: 600
+      properties:
+        id:
+          description: ID DNS-записи.
+          example: 123
+          type: number
+        type:
+          description: Тип DNS-записи.
+          enum:
+          - TXT
+          - SRV
+          - CNAME
+          - AAAA
+          - MX
+          - A
+          - PTR
+          - HTTPS
+          - SVCB
+          - CAA
+          example: A
+          type: string
+        data:
+          $ref: '#/components/schemas/dns_record_v2_data'
+        fqdn:
+          description: "Домен, относительно которого указано `data.subdomain`. Пол\
+            ное имя записи — `data.subdomain` + `.` + `fqdn`, а если `data.subdomain`\
+            \ нет — `fqdn`."
+          example: somedomain.ru
+          type: string
+        ttl:
+          description: Время жизни DNS-записи в секундах.
+          example: 600
+          nullable: true
+          type: number
+      required:
+      - data
+      - fqdn
+      - id
+      - ttl
+      - type
+      type: object
     create-dns-v2:
       properties:
         type:
@@ -94967,52 +95209,6 @@ components:
       - type
       - value
       title: A запись
-      type: object
-    dns-record-v2:
-      description: DNS-запись.
-      example:
-        data:
-          protocol: _TCP
-          port: 993
-          service: _sip
-          host: somedomain.ru
-          subdomain: sub
-          priority: 10
-          value: 192.168.1.0
-        fqdn: somedomain.ru
-        id: 123
-        type: A
-        ttl: 600
-      properties:
-        type:
-          description: Тип DNS-записи.
-          enum:
-          - TXT
-          - SRV
-          - CNAME
-          - AAAA
-          - MX
-          - A
-          example: A
-          type: string
-        id:
-          description: ID DNS-записи.
-          example: 123
-          nullable: true
-          type: number
-        fqdn:
-          description: Полное имя основного домена.
-          example: somedomain.ru
-          type: string
-        data:
-          $ref: '#/components/schemas/dns_record_v2_data'
-        ttl:
-          description: Время жизни DNS-записи.
-          example: 600
-          type: number
-      required:
-      - data
-      - type
       type: object
     dns-record:
       description: DNS-запись.
@@ -111610,6 +111806,46 @@ components:
       required:
       - domain
       type: object
+    getDomainDNSRecordsV2_200_response:
+      example:
+        dns_records:
+        - data:
+            protocol: _TCP
+            port: 993
+            service: _sip
+            host: somedomain.ru
+            subdomain: sub
+            priority: 10
+            value: 192.168.1.0
+          fqdn: somedomain.ru
+          id: 123
+          type: A
+          ttl: 600
+        - data:
+            protocol: _TCP
+            port: 993
+            service: _sip
+            host: somedomain.ru
+            subdomain: sub
+            priority: 10
+            value: 192.168.1.0
+          fqdn: somedomain.ru
+          id: 123
+          type: A
+          ttl: 600
+        meta:
+          total: 10
+      properties:
+        meta:
+          $ref: '#/components/schemas/meta'
+        dns_records:
+          items:
+            $ref: '#/components/schemas/dns-record-v2'
+          type: array
+      required:
+      - dns_records
+      - meta
+      type: object
     createDomainDNSRecordV2_201_response:
       example:
         dns_record:
@@ -118695,18 +118931,18 @@ components:
         value: 192.168.1.0
       properties:
         priority:
-          description: Приоритет DNS-записи (для MX и SRV записей).
+          description: "Приоритет DNS-записи (для MX, SRV, HTTPS и SVCB записей)."
           example: 10
           type: number
         subdomain:
-          description: "Имя поддомена (только поддомен без основного домена, напри\
-            мер `sub` для `sub.example.com`). Для записей на основном домене это п\
-            оле отсутствует в ответе."
+          description: "Имя записи относительно `fqdn`, например `sub` для `sub.example.com`\
+            \ или `mail._domainkey`. Для записей самого `fqdn` это поле отсутствуе\
+            т в ответе."
           example: sub
-          nullable: true
           type: string
         value:
-          description: "Значение DNS-записи (для A, AAAA, TXT, CNAME, MX записей)."
+          description: "Значение DNS-записи (для всех типов, кроме SRV: у SRV цель\
+            \ записи в поле `host`)."
           example: 192.168.1.0
           type: string
         host:

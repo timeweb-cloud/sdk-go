@@ -20,25 +20,28 @@ var _ MappedNullable = &DnsRecordV2{}
 
 // DnsRecordV2 DNS-запись.
 type DnsRecordV2 struct {
+	// ID DNS-записи.
+	Id float32 `json:"id"`
 	// Тип DNS-записи.
 	Type string `json:"type"`
-	// ID DNS-записи.
-	Id NullableFloat32 `json:"id,omitempty"`
-	// Полное имя основного домена.
-	Fqdn *string `json:"fqdn,omitempty"`
 	Data DnsRecordV2Data `json:"data"`
-	// Время жизни DNS-записи.
-	Ttl *float32 `json:"ttl,omitempty"`
+	// Домен, относительно которого указано `data.subdomain`. Полное имя записи — `data.subdomain` + `.` + `fqdn`, а если `data.subdomain` нет — `fqdn`.
+	Fqdn string `json:"fqdn"`
+	// Время жизни DNS-записи в секундах.
+	Ttl NullableFloat32 `json:"ttl"`
 }
 
 // NewDnsRecordV2 instantiates a new DnsRecordV2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDnsRecordV2(type_ string, data DnsRecordV2Data) *DnsRecordV2 {
+func NewDnsRecordV2(id float32, type_ string, data DnsRecordV2Data, fqdn string, ttl NullableFloat32) *DnsRecordV2 {
 	this := DnsRecordV2{}
+	this.Id = id
 	this.Type = type_
 	this.Data = data
+	this.Fqdn = fqdn
+	this.Ttl = ttl
 	return &this
 }
 
@@ -48,6 +51,30 @@ func NewDnsRecordV2(type_ string, data DnsRecordV2Data) *DnsRecordV2 {
 func NewDnsRecordV2WithDefaults() *DnsRecordV2 {
 	this := DnsRecordV2{}
 	return &this
+}
+
+// GetId returns the Id field value
+func (o *DnsRecordV2) GetId() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *DnsRecordV2) GetIdOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *DnsRecordV2) SetId(v float32) {
+	o.Id = v
 }
 
 // GetType returns the Type field value
@@ -74,80 +101,6 @@ func (o *DnsRecordV2) SetType(v string) {
 	o.Type = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DnsRecordV2) GetId() float32 {
-	if o == nil || IsNil(o.Id.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.Id.Get()
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DnsRecordV2) GetIdOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Id.Get(), o.Id.IsSet()
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *DnsRecordV2) HasId() bool {
-	if o != nil && o.Id.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given NullableFloat32 and assigns it to the Id field.
-func (o *DnsRecordV2) SetId(v float32) {
-	o.Id.Set(&v)
-}
-// SetIdNil sets the value for Id to be an explicit nil
-func (o *DnsRecordV2) SetIdNil() {
-	o.Id.Set(nil)
-}
-
-// UnsetId ensures that no value is present for Id, not even an explicit nil
-func (o *DnsRecordV2) UnsetId() {
-	o.Id.Unset()
-}
-
-// GetFqdn returns the Fqdn field value if set, zero value otherwise.
-func (o *DnsRecordV2) GetFqdn() string {
-	if o == nil || IsNil(o.Fqdn) {
-		var ret string
-		return ret
-	}
-	return *o.Fqdn
-}
-
-// GetFqdnOk returns a tuple with the Fqdn field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DnsRecordV2) GetFqdnOk() (*string, bool) {
-	if o == nil || IsNil(o.Fqdn) {
-		return nil, false
-	}
-	return o.Fqdn, true
-}
-
-// HasFqdn returns a boolean if a field has been set.
-func (o *DnsRecordV2) HasFqdn() bool {
-	if o != nil && !IsNil(o.Fqdn) {
-		return true
-	}
-
-	return false
-}
-
-// SetFqdn gets a reference to the given string and assigns it to the Fqdn field.
-func (o *DnsRecordV2) SetFqdn(v string) {
-	o.Fqdn = &v
-}
-
 // GetData returns the Data field value
 func (o *DnsRecordV2) GetData() DnsRecordV2Data {
 	if o == nil {
@@ -172,36 +125,54 @@ func (o *DnsRecordV2) SetData(v DnsRecordV2Data) {
 	o.Data = v
 }
 
-// GetTtl returns the Ttl field value if set, zero value otherwise.
+// GetFqdn returns the Fqdn field value
+func (o *DnsRecordV2) GetFqdn() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Fqdn
+}
+
+// GetFqdnOk returns a tuple with the Fqdn field value
+// and a boolean to check if the value has been set.
+func (o *DnsRecordV2) GetFqdnOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Fqdn, true
+}
+
+// SetFqdn sets field value
+func (o *DnsRecordV2) SetFqdn(v string) {
+	o.Fqdn = v
+}
+
+// GetTtl returns the Ttl field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *DnsRecordV2) GetTtl() float32 {
-	if o == nil || IsNil(o.Ttl) {
+	if o == nil || o.Ttl.Get() == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Ttl
+
+	return *o.Ttl.Get()
 }
 
-// GetTtlOk returns a tuple with the Ttl field value if set, nil otherwise
+// GetTtlOk returns a tuple with the Ttl field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DnsRecordV2) GetTtlOk() (*float32, bool) {
-	if o == nil || IsNil(o.Ttl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ttl, true
+	return o.Ttl.Get(), o.Ttl.IsSet()
 }
 
-// HasTtl returns a boolean if a field has been set.
-func (o *DnsRecordV2) HasTtl() bool {
-	if o != nil && !IsNil(o.Ttl) {
-		return true
-	}
-
-	return false
-}
-
-// SetTtl gets a reference to the given float32 and assigns it to the Ttl field.
+// SetTtl sets field value
 func (o *DnsRecordV2) SetTtl(v float32) {
-	o.Ttl = &v
+	o.Ttl.Set(&v)
 }
 
 func (o DnsRecordV2) MarshalJSON() ([]byte, error) {
@@ -214,17 +185,11 @@ func (o DnsRecordV2) MarshalJSON() ([]byte, error) {
 
 func (o DnsRecordV2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
-	if o.Id.IsSet() {
-		toSerialize["id"] = o.Id.Get()
-	}
-	if !IsNil(o.Fqdn) {
-		toSerialize["fqdn"] = o.Fqdn
-	}
 	toSerialize["data"] = o.Data
-	if !IsNil(o.Ttl) {
-		toSerialize["ttl"] = o.Ttl
-	}
+	toSerialize["fqdn"] = o.Fqdn
+	toSerialize["ttl"] = o.Ttl.Get()
 	return toSerialize, nil
 }
 

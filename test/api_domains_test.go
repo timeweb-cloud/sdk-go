@@ -212,6 +212,20 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DomainsAPIService GetDomainDNSRecordsV2", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var fqdn string
+
+		resp, httpRes, err := apiClient.DomainsAPI.GetDomainDNSRecordsV2(context.Background(), fqdn).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DomainsAPIService GetDomainDefaultDNSRecords", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

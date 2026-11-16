@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Priority** | Pointer to **float32** | Приоритет DNS-записи (для MX и SRV записей). | [optional] 
-**Subdomain** | Pointer to **NullableString** | Имя поддомена (только поддомен без основного домена, например &#x60;sub&#x60; для &#x60;sub.example.com&#x60;). Для записей на основном домене это поле отсутствует в ответе. | [optional] 
-**Value** | Pointer to **string** | Значение DNS-записи (для A, AAAA, TXT, CNAME, MX записей). | [optional] 
+**Priority** | Pointer to **float32** | Приоритет DNS-записи (для MX, SRV, HTTPS и SVCB записей). | [optional] 
+**Subdomain** | Pointer to **string** | Имя записи относительно &#x60;fqdn&#x60;, например &#x60;sub&#x60; для &#x60;sub.example.com&#x60; или &#x60;mail._domainkey&#x60;. Для записей самого &#x60;fqdn&#x60; это поле отсутствует в ответе. | [optional] 
+**Value** | Pointer to **string** | Значение DNS-записи (для всех типов, кроме SRV: у SRV цель записи в поле &#x60;host&#x60;). | [optional] 
 **Host** | Pointer to **string** | Каноническое имя хоста, предоставляющего сервис (для SRV записей). | [optional] 
 **Port** | Pointer to **float32** | TCP или UDP порт, на котором работает сервис (для SRV записей). | [optional] 
 **Service** | Pointer to **string** | Имя сервиса (для SRV записей). | [optional] 
@@ -81,16 +81,6 @@ SetSubdomain sets Subdomain field to given value.
 
 HasSubdomain returns a boolean if a field has been set.
 
-### SetSubdomainNil
-
-`func (o *DnsRecordV2Data) SetSubdomainNil(b bool)`
-
- SetSubdomainNil sets the value for Subdomain to be an explicit nil
-
-### UnsetSubdomain
-`func (o *DnsRecordV2Data) UnsetSubdomain()`
-
-UnsetSubdomain ensures that no value is present for Subdomain, not even an explicit nil
 ### GetValue
 
 `func (o *DnsRecordV2Data) GetValue() string`

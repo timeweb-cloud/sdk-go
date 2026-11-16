@@ -479,6 +479,7 @@ Class | Method | HTTP request | Description
 *DomainsAPI* | [**DeleteSubdomain**](docs/DomainsAPI.md#deletesubdomain) | **Delete** /api/v1/domains/{fqdn}/subdomains/{subdomain} | Удаление поддомена
 *DomainsAPI* | [**GetDomain**](docs/DomainsAPI.md#getdomain) | **Get** /api/v1/domains/{fqdn} | Получение информации о домене
 *DomainsAPI* | [**GetDomainDNSRecords**](docs/DomainsAPI.md#getdomaindnsrecords) | **Get** /api/v1/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
+*DomainsAPI* | [**GetDomainDNSRecordsV2**](docs/DomainsAPI.md#getdomaindnsrecordsv2) | **Get** /api/v2/domains/{fqdn}/dns-records | Получить информацию обо всех пользовательских DNS-записях домена или поддомена
 *DomainsAPI* | [**GetDomainDefaultDNSRecords**](docs/DomainsAPI.md#getdomaindefaultdnsrecords) | **Get** /api/v1/domains/{fqdn}/default-dns-records | Получить информацию обо всех DNS-записях по умолчанию домена или поддомена
 *DomainsAPI* | [**GetDomainNameServers**](docs/DomainsAPI.md#getdomainnameservers) | **Get** /api/v1/domains/{fqdn}/name-servers | Получение списка name-серверов домена
 *DomainsAPI* | [**GetDomainRequest**](docs/DomainsAPI.md#getdomainrequest) | **Get** /api/v1/domains-requests/{request_id} | Получение заявки на регистрацию/продление/трансфер домена
@@ -1242,6 +1243,7 @@ Class | Method | HTTP request | Description
  - [GetDeploySettings200Response](docs/GetDeploySettings200Response.md)
  - [GetDomain200Response](docs/GetDomain200Response.md)
  - [GetDomainDNSRecords200Response](docs/GetDomainDNSRecords200Response.md)
+ - [GetDomainDNSRecordsV2200Response](docs/GetDomainDNSRecordsV2200Response.md)
  - [GetDomainMailInfo200Response](docs/GetDomainMailInfo200Response.md)
  - [GetDomainNameServers200Response](docs/GetDomainNameServers200Response.md)
  - [GetDomainRequests200Response](docs/GetDomainRequests200Response.md)

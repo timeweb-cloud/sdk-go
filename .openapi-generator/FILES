@@ -554,6 +554,7 @@ docs/GetDeployLogs200Response.md
 docs/GetDeploySettings200Response.md
 docs/GetDomain200Response.md
 docs/GetDomainDNSRecords200Response.md
+docs/GetDomainDNSRecordsV2200Response.md
 docs/GetDomainMailInfo200Response.md
 docs/GetDomainNameServers200Response.md
 docs/GetDomainRequests200Response.md
@@ -1479,6 +1480,7 @@ model_get_deploy_logs_200_response.go
 model_get_deploy_settings_200_response.go
 model_get_domain_200_response.go
 model_get_domain_dns_records_200_response.go
+model_get_domain_dns_records_v2_200_response.go
 model_get_domain_mail_info_200_response.go
 model_get_domain_name_servers_200_response.go
 model_get_domain_requests_200_response.go
