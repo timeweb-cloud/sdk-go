@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Http3** | Pointer to **bool** | Раздавать контент по HTTP/3 (QUIC). | [optional] 
+**Http2** | Pointer to **bool** | Раздавать контент по HTTP/2. | [optional] 
 **Gzip** | Pointer to **bool** | Сжимать ответы алгоритмом gzip. | [optional] 
 **LargeFiles** | Pointer to **bool** | Режим раздачи больших файлов. | [optional] 
 **SliceSize** | Pointer to **NullableInt32** | Размер слайса в мегабайтах — файл забирается с источника и кэшируется частями такого размера. &#x60;null&#x60; — не использовать слайсинг. | [optional] 
@@ -54,6 +55,31 @@ SetHttp3 sets Http3 field to given value.
 `func (o *ConfigDelivery) HasHttp3() bool`
 
 HasHttp3 returns a boolean if a field has been set.
+
+### GetHttp2
+
+`func (o *ConfigDelivery) GetHttp2() bool`
+
+GetHttp2 returns the Http2 field if non-nil, zero value otherwise.
+
+### GetHttp2Ok
+
+`func (o *ConfigDelivery) GetHttp2Ok() (*bool, bool)`
+
+GetHttp2Ok returns a tuple with the Http2 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttp2
+
+`func (o *ConfigDelivery) SetHttp2(v bool)`
+
+SetHttp2 sets Http2 field to given value.
+
+### HasHttp2
+
+`func (o *ConfigDelivery) HasHttp2() bool`
+
+HasHttp2 returns a boolean if a field has been set.
 
 ### GetGzip
 

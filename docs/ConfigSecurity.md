@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Redirect** | Pointer to **bool** | Перенаправлять запросы с HTTP на HTTPS. | [optional] 
 **CertificateId** | Pointer to **NullableInt32** | ID SSL-сертификата, который используется для доменов ресурса. &#x60;null&#x60; — отвязать сертификат. | [optional] 
+**SslProtocols** | Pointer to **[]string** | Версии SSL/TLS, по которым CDN принимает HTTPS-подключения. &#x60;null&#x60; — принимать все версии. | [optional] 
 **SecureToken** | Pointer to [**NullableConfigSecuritySecureToken**](ConfigSecuritySecureToken.md) |  | [optional] 
 
 ## Methods
@@ -87,6 +88,41 @@ HasCertificateId returns a boolean if a field has been set.
 `func (o *ConfigSecurity) UnsetCertificateId()`
 
 UnsetCertificateId ensures that no value is present for CertificateId, not even an explicit nil
+### GetSslProtocols
+
+`func (o *ConfigSecurity) GetSslProtocols() []string`
+
+GetSslProtocols returns the SslProtocols field if non-nil, zero value otherwise.
+
+### GetSslProtocolsOk
+
+`func (o *ConfigSecurity) GetSslProtocolsOk() (*[]string, bool)`
+
+GetSslProtocolsOk returns a tuple with the SslProtocols field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSslProtocols
+
+`func (o *ConfigSecurity) SetSslProtocols(v []string)`
+
+SetSslProtocols sets SslProtocols field to given value.
+
+### HasSslProtocols
+
+`func (o *ConfigSecurity) HasSslProtocols() bool`
+
+HasSslProtocols returns a boolean if a field has been set.
+
+### SetSslProtocolsNil
+
+`func (o *ConfigSecurity) SetSslProtocolsNil(b bool)`
+
+ SetSslProtocolsNil sets the value for SslProtocols to be an explicit nil
+
+### UnsetSslProtocols
+`func (o *ConfigSecurity) UnsetSslProtocols()`
+
+UnsetSslProtocols ensures that no value is present for SslProtocols, not even an explicit nil
 ### GetSecureToken
 
 `func (o *ConfigSecurity) GetSecureToken() ConfigSecuritySecureToken`

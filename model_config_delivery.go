@@ -22,6 +22,8 @@ var _ MappedNullable = &ConfigDelivery{}
 type ConfigDelivery struct {
 	// Раздавать контент по HTTP/3 (QUIC).
 	Http3 *bool `json:"http3,omitempty"`
+	// Раздавать контент по HTTP/2.
+	Http2 *bool `json:"http2,omitempty"`
 	// Сжимать ответы алгоритмом gzip.
 	Gzip *bool `json:"gzip,omitempty"`
 	// Режим раздачи больших файлов.
@@ -80,6 +82,38 @@ func (o *ConfigDelivery) HasHttp3() bool {
 // SetHttp3 gets a reference to the given bool and assigns it to the Http3 field.
 func (o *ConfigDelivery) SetHttp3(v bool) {
 	o.Http3 = &v
+}
+
+// GetHttp2 returns the Http2 field value if set, zero value otherwise.
+func (o *ConfigDelivery) GetHttp2() bool {
+	if o == nil || IsNil(o.Http2) {
+		var ret bool
+		return ret
+	}
+	return *o.Http2
+}
+
+// GetHttp2Ok returns a tuple with the Http2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigDelivery) GetHttp2Ok() (*bool, bool) {
+	if o == nil || IsNil(o.Http2) {
+		return nil, false
+	}
+	return o.Http2, true
+}
+
+// HasHttp2 returns a boolean if a field has been set.
+func (o *ConfigDelivery) HasHttp2() bool {
+	if o != nil && !IsNil(o.Http2) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttp2 gets a reference to the given bool and assigns it to the Http2 field.
+func (o *ConfigDelivery) SetHttp2(v bool) {
+	o.Http2 = &v
 }
 
 // GetGzip returns the Gzip field value if set, zero value otherwise.
@@ -274,6 +308,9 @@ func (o ConfigDelivery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Http3) {
 		toSerialize["http3"] = o.Http3
+	}
+	if !IsNil(o.Http2) {
+		toSerialize["http2"] = o.Http2
 	}
 	if !IsNil(o.Gzip) {
 		toSerialize["gzip"] = o.Gzip

@@ -24,6 +24,8 @@ type ConfigSecurity struct {
 	Redirect *bool `json:"redirect,omitempty"`
 	// ID SSL-сертификата, который используется для доменов ресурса. `null` — отвязать сертификат.
 	CertificateId NullableInt32 `json:"certificate_id,omitempty"`
+	// Версии SSL/TLS, по которым CDN принимает HTTPS-подключения. `null` — принимать все версии.
+	SslProtocols []string `json:"ssl_protocols,omitempty"`
 	SecureToken NullableConfigSecuritySecureToken `json:"secure_token,omitempty"`
 }
 
@@ -118,6 +120,39 @@ func (o *ConfigSecurity) UnsetCertificateId() {
 	o.CertificateId.Unset()
 }
 
+// GetSslProtocols returns the SslProtocols field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConfigSecurity) GetSslProtocols() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.SslProtocols
+}
+
+// GetSslProtocolsOk returns a tuple with the SslProtocols field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConfigSecurity) GetSslProtocolsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SslProtocols) {
+		return nil, false
+	}
+	return o.SslProtocols, true
+}
+
+// HasSslProtocols returns a boolean if a field has been set.
+func (o *ConfigSecurity) HasSslProtocols() bool {
+	if o != nil && IsNil(o.SslProtocols) {
+		return true
+	}
+
+	return false
+}
+
+// SetSslProtocols gets a reference to the given []string and assigns it to the SslProtocols field.
+func (o *ConfigSecurity) SetSslProtocols(v []string) {
+	o.SslProtocols = v
+}
+
 // GetSecureToken returns the SecureToken field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConfigSecurity) GetSecureToken() ConfigSecuritySecureToken {
 	if o == nil || IsNil(o.SecureToken.Get()) {
@@ -175,6 +210,9 @@ func (o ConfigSecurity) ToMap() (map[string]interface{}, error) {
 	}
 	if o.CertificateId.IsSet() {
 		toSerialize["certificate_id"] = o.CertificateId.Get()
+	}
+	if o.SslProtocols != nil {
+		toSerialize["ssl_protocols"] = o.SslProtocols
 	}
 	if o.SecureToken.IsSet() {
 		toSerialize["secure_token"] = o.SecureToken.Get()

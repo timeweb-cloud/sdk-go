@@ -105392,6 +105392,7 @@ components:
       example:
         large_files: false
         slice_size: 10
+        http2: true
         gzip: true
         packaging:
           mp4:
@@ -105402,6 +105403,10 @@ components:
       properties:
         http3:
           description: Раздавать контент по HTTP/3 (QUIC).
+          example: true
+          type: boolean
+        http2:
+          description: Раздавать контент по HTTP/2.
           example: true
           type: boolean
         gzip:
@@ -105488,6 +105493,9 @@ components:
         secure_token:
           secret_key: s3cr3tKey0
           restrict_by_ip: false
+        ssl_protocols:
+        - TLSv1.2
+        - TLSv1.3
       properties:
         redirect:
           description: Перенаправлять запросы с HTTP на HTTPS.
@@ -105499,6 +105507,24 @@ components:
           example: 5678
           nullable: true
           type: integer
+        ssl_protocols:
+          description: "Версии SSL/TLS, по которым CDN принимает HTTPS-подключения\
+            . `null` — принимать все версии."
+          example:
+          - TLSv1.2
+          - TLSv1.3
+          items:
+            enum:
+            - TLSv1
+            - TLSv1.1
+            - TLSv1.2
+            - TLSv1.3
+            - SSLv3
+            type: string
+          minItems: 1
+          nullable: true
+          type: array
+          uniqueItems: true
         secure_token:
           $ref: '#/components/schemas/config_security_secure_token'
       type: object
@@ -105616,6 +105642,7 @@ components:
         delivery:
           large_files: false
           slice_size: 10
+          http2: true
           gzip: true
           packaging:
             mp4:
@@ -105644,6 +105671,9 @@ components:
           secure_token:
             secret_key: s3cr3tKey0
             restrict_by_ip: false
+          ssl_protocols:
+          - TLSv1.2
+          - TLSv1.3
         access:
           allowed_methods:
           - POST
@@ -116663,6 +116693,7 @@ components:
           delivery:
             large_files: false
             slice_size: 10
+            http2: true
             gzip: true
             packaging:
               mp4:
@@ -116691,6 +116722,9 @@ components:
             secure_token:
               secret_key: s3cr3tKey0
               restrict_by_ip: false
+            ssl_protocols:
+            - TLSv1.2
+            - TLSv1.3
           access:
             allowed_methods:
             - POST
